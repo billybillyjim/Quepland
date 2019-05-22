@@ -1,0 +1,254 @@
+﻿using System;
+using Microsoft.AspNetCore.Components;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Linq;
+
+public class Player
+{
+    public Inventory inventory;
+    public Bank bank;
+    public Follower activeFollower;
+    public bool hasLoadedSkills;
+    public int CurrentHP;
+    private List<Skill> skills;
+    private List<GameItem> equippedItems = new List<GameItem>();
+    private List<string> knownAlchemicRecipes = new List<string>();
+    private readonly int maxInventorySize = 30;
+
+	public Player()
+	{
+        inventory = new Inventory(maxInventorySize);
+        bank = new Bank();
+        skills = new List<Skill>();
+	}
+    public async void LoadSkills(HttpClient Http)
+    {
+        Console.WriteLine("Change");
+        Skill[] skillArray = await Http.GetJsonAsync<Skill[]>("data/skills.json");
+        skills = skillArray.ToList();
+        hasLoadedSkills = true;
+    }
+    public void SetSkills(List<Skill> skillList)
+    {
+        foreach(Skill s in skillList)
+        {
+            if(skills.Find(x => x.SkillName == s.SkillName) != null)
+            {
+                skills.Find(x => x.SkillName == s.SkillName).SkillExperience = s.SkillExperience;
+                skills.Find(x => x.SkillName == s.SkillName).SkillLevel = s.SkillLevel;
+            }
+        }
+
+    }
+    public void LearnNewAlchemyRecipe(GameItem metal, GameItem element, Building location, GameItem result)
+    {
+        string recipe = "" + metal.ItemName + " + " + element.ItemName + " in " + location.Name + " = " + result.ItemName;
+        bool alreadyKnown = false;
+        foreach(string r in knownAlchemicRecipes)
+        {
+            if(r == recipe)
+            {
+                alreadyKnown = true;
+            }
+        }
+        if(alreadyKnown == false)
+        {
+            knownAlchemicRecipes.Add(recipe);
+        }
+        knownAlchemicRecipes = knownAlchemicRecipes.OrderBy(x => x).ToList();
+    }
+    public List<string> GetRecipes()
+    {
+        return knownAlchemicRecipes;
+    }
+    public void LoadRecipes(List<string> recipes)
+    {
+        if(recipes != null)
+        {
+            knownAlchemicRecipes = recipes;
+        }       
+    }
+    public void EquipItem(GameItem item)
+    {
+        UnequipItem(equippedItems.Find(x => x.EquipSlot == item.EquipSlot));
+        equippedItems.Add(item);
+        item.IsEquipped = true;
+    }
+    public void UnequipItem(GameItem item)
+    {
+        if (item != null)
+        {
+            item.IsEquipped = false;
+            equippedItems.Remove(item);
+        }
+    }
+    public List<Skill> GetSkills()
+    {
+        return skills;
+    }
+    public Skill GetSkill(string skillName)
+    {
+        foreach(Skill skill in skills)
+        {
+            if(skill.SkillName == skillName)
+            {
+                return skill;
+            }
+        }
+        return null;
+    }
+    public string GetSkillString()
+    {
+        string skillString = "";
+        foreach(Skill skill in skills)
+        {
+            skillString += skill.SkillName + "," + skill.SkillExperience + "," + skill.SkillLevel + "/";
+        }
+        skillString = skillString.Remove(skillString.Length - 1);
+        return skillString;
+    }
+    public int GetLevel(string skillName)
+    {
+        foreach(Skill skill in skills)
+        {
+            if(skill.SkillName == skillName)
+            {
+                return skill.SkillLevel;
+            }
+        }
+        return 0;
+    }
+    public void GainExperience(string skill, int amount)
+    {
+        if (skills.Find(x => x.SkillName == skill) != null)
+        {
+            GainExperience(skills.Find(x => x.SkillName == skill), amount);
+        }
+    }
+    public void GainExperience(string skill)
+    {
+        if (int.TryParse(skill.Split(':')[1], out int amount))
+        {
+            GainExperience(skills.Find(x => x.SkillName == skill.Split(':')[0]), amount);
+        }
+    }
+    public void GainExperience(Skill skill, int amount)
+    {
+        skill.SkillExperience += amount;
+        if (skill.SkillExperience >= Extensions.GetExperienceRequired(skill.SkillLevel))
+        {
+            LevelUp(skill);
+        }
+    }
+    public void LevelUp(Skill skill)
+    {
+        skill.SkillLevel += 1;
+        if (skill.SkillExperience >= Extensions.GetExperienceRequired(skill.SkillLevel))
+        {
+            LevelUp(skill);
+        }
+    }
+    /// <summary>
+    /// Returns true if the player has the required skill level. Use HasRequiredLevels for multiple skills.
+    /// </summary>
+    /// <param name="skill"></param>
+    /// <returns></returns>
+    public bool HasRequiredLevel(GameItem item)
+    {
+        if(item.RequiredLevel == 0)
+        {
+            return true;
+        }
+        Skill skillToCheck = skills.Find(x => x.SkillName == item.ActionRequired);
+        if(skillToCheck != null)
+        {
+            return skillToCheck.SkillLevel >= item.RequiredLevel;
+        }
+        Console.WriteLine("Skill " + item.ActionRequired + " was not found in player's list of skills.");
+        return false;
+    }
+    public bool HasLevelForRoadblock(string skill)
+    {
+        if (skill == null || skill.Length < 1)
+        {
+            return true;
+        }
+        string skillType = skill.Split(':')[0];
+        int skillLevel = int.Parse(skill.Split(':')[1]);
+        Skill skillToCheck = skills.Find(x => x.SkillName == skillType);
+        if (skillToCheck != null)
+        {
+            return skillToCheck.SkillLevel >= skillLevel;
+        }
+        Console.WriteLine("Skill " + skillType + " was not found in player's list of skills.");
+        return false;
+    }
+    public bool HasIngredients(int[] ingredientIDs)
+    {
+        foreach(int ingredient in ingredientIDs)
+        {
+            if(inventory.HasItem(ingredient) == false)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+    public int GetDamageDealt()
+    {
+        int str = GetSkill("Strength").SkillLevel;
+        int deft = GetSkill("Deftness").SkillLevel;
+        int baseDamage = 1 + str / 2;
+
+        if (GetWeapon() != null)
+        {
+            string action = GetWeapon().ActionRequired;
+
+            if (action.Contains("Knife"))
+            {
+                baseDamage += deft * 4;
+            }
+            else if (action.Contains("Sword"))
+            {
+                baseDamage += str * 2;
+                baseDamage += deft * 2;
+            }
+            else if (action.Contains("Axe"))
+            {
+                baseDamage += str * 3;
+                baseDamage += deft;
+            }
+            else if (action.Contains("Hammer"))
+            {
+                baseDamage += str * 4;
+            }
+        }
+        int equipmentBonus = GetEquipmentBonus();
+        return Math.Max(Extensions.GetGaussianRandomInt(baseDamage + equipmentBonus, equipmentBonus), 1);
+    }
+    private int GetEquipmentBonus()
+    {
+        int total = 0;
+        foreach(GameItem item in equippedItems)
+        {
+            total += item.Damage;
+        }
+        return total;
+    }
+    public GameItem GetWeapon()
+    {
+        return equippedItems.Find(x => x.EquipSlot == "Right Hand");
+    }
+    public int GetWeaponAttackSpeed()
+    {
+        if(GetWeapon() != null)
+        {
+            return GetWeapon().AttackSpeed;
+        }
+        else
+        {
+            return 1500;
+        }
+    }
+}

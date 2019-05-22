@@ -1,0 +1,30 @@
+@inject GameState GameState
+@inject MessageManager MessageManager
+@implements IDisposable
+
+<div class="modal-footer">
+    <table>
+
+        @foreach (Message message in MessageManager.GetMessages())
+        {
+            <tr>
+                <td>@message.messageText</td>
+            </tr>
+        }
+
+
+    </table>
+</div>
+
+@functions{
+
+    protected override void OnInit()
+    {
+        MessageManager.StateChanged += OnMessageStateChanged;
+    }
+    void IDisposable.Dispose()
+    {
+        MessageManager.StateChanged -= OnMessageStateChanged;
+    }
+    void OnMessageStateChanged(object sender, EventArgs e) => StateHasChanged();
+}

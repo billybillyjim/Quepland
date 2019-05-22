@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Chicken",
+    "id": 0,
+    "level": 1,
+    "experienceGained": 10,
+    "hp": 5,
+    "weakness": "Knifesmanship",
+    "strength": "Axemanship",
+    "damage": 2,
+    "attackSpeed": 1,
+    "alwaysDrops": [ 42, 43 ],
+    "dropTable": [
+      [ 44, 100 ]
+    ]
+
+  },
+  {
+    "name": "Cow",
+    "id": 1,
+    "level": 3,
+    "experienceGained": 50,
+    "hp": 25,
+    "weakness": "Axemanship",
+    "strength": "Knifesmanship",
+    "damage": 3,
+    "attackSpeed": 3
+  },
+  {
+    "name": "Bandit",
+    "id": 2,
+    "level": 10,
+    "experienceGained": 180,
+    "hp": 100,
+    "weakness": "Swordsmanship",
+    "strength": "Hammermanship",
+    "damage": 7,
+    "attackSpeed": 1
+  },
+  {
+    "name": "Angry Tree Man",
+    "id": 3,
+    "level": 15,
+    "experienceGained": 250,
+    "hp": 250,
+    "weakness": "Axemanship",
+    "strength": "Hamermanship",
+    "damage": 12,
+    "attackSpeed": 8
+  },
+  {
+    "name": "Wild Boar",
+    "id": 4,
+    "level": 18,
+    "experienceGained": 300,
+    "hp": 150,
+    "weakness": "Hammermanship",
+    "strength": "Knifesmanship",
+    "damage": 15,
+    "attackSpeed": 1
+  }
+]

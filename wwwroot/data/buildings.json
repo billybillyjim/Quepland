@@ -1,0 +1,378 @@
+[
+  {
+    "name": "Teppas General Store",
+    "id": 0,
+    "url": "TeppasGeneralStore",
+    "items": [ 12, 13, 20, 6, 32, 14 ],
+    "description": "This general store sells a variety of items you could use on your journey.",
+    "npcIDs": [ 0 ],
+    "isShop": true
+  },
+  {
+    "name": "The Mayor's House",
+    "id": 1,
+    "url": "MayorsHouse",
+    "description": "The mayor of Teppas lives here.",
+    "npcIDs": [ 1 ]
+  },
+  {
+    "name": "Queple Cave Entrance",
+    "id": 2,
+    "url": "QuepleCaveEntrance",
+    "description": "The cave continues downward in three directions.",
+    "buildings": [ "QCDarkTunnel", "QCWetTunnel", "QCQuietTunnel" ]
+  },
+  {
+    "name": "Queple Cave Dark Tunnel",
+    "id": 3,
+    "url": "QCDarkTunnel",
+    "buttonText": "Take the dark path",
+    "description": "The tunnel is pitch black, you can see nothing. After stumbling for a while you reach a fork in the path.",
+    "buildings": [ "QCDarkTunnelW", "QCDarkTunnelE" ]
+  },
+  {
+    "name": "Queple Cave Wet Tunnel",
+    "id": 4,
+    "url": "QCWetTunnel",
+    "buttonText": "Take the wet path",
+    "description": "The tunnel is dripping wet. In the distance you can hear rushing water. After slipping along you reach a fork in the path.",
+    "buildings": [ "QCWetTunnelW", "QCWetTunnelE" ]
+  },
+  {
+    "name": "Queple Cave Quiet Tunnel",
+    "id": 5,
+    "url": "QCQuietTunnel",
+    "buttonText": "Take the quiet path",
+    "description": "The tunnel is deathly quiet. All you can hear is your own footsteps and the beat of your heart. The path splits in three up ahead.",
+    "buildings": [ "QCQuietTunnelW", "QCQuietTunnelD", "QCQuietTunnelE" ]
+  },
+  {
+    "name": "Queple Cave Dark Tunnel West",
+    "id": 6,
+    "url": "QCDarkTunnelW",
+    "buttonText": "Go West",
+    "description": "You struggle to find your way along until you trip on something squishy. It's an angry dwarf.",
+    "npcIDs": [ 2 ],
+    "buildings": [ "QCWestTunnelW" ]
+  },
+  {
+    "name": "Queple Cave Dark Tunnel East",
+    "id": 7,
+    "url": "QCDarkTunnelE",
+    "buttonText": "Go East",
+    "description": "The fork in the path has led you to another fork. You can hear a strange noise coming from the tunnel on the left.",
+    "buildings": [ "QCWestTunnel", "QCDeepTunnelW" ]
+  },
+  {
+    "name": "Queple Cave Wet Tunnel West",
+    "id": 8,
+    "url": "QCWetTunnelW",
+    "buttonText": "Go West",
+    "description": "The sound of rushing water is growing louder as you travel deeper into the cave. The path splits again.",
+    "buildings": [ "QCDeepTunnelW", "QCRiver" ]
+  },
+  {
+    "name": "Queple Cave Wet Tunnel East",
+    "id": 9,
+    "url": "QCWetTunnelE",
+    "buttonText": "Go East",
+    "description": "The sound of rushing water is growing louder as you travel deeper into the cave. The path splits three ways.",
+    "buildings": [ "QCRiver", "QCDeepTunnelE", "QCTinMotherlode" ]
+  },
+  {
+    "name": "Queple Cave Quiet Tunnel West",
+    "id": 10,
+    "url": "QCQuietTunnelW",
+    "buttonText": "Go West",
+    "description": "The complete silence continues as you approach another fork in the cave.",
+    "buildings": [ "QCTinMotherlode", "QCDarkTunnelNDead" ]
+  },
+  {
+    "name": "Queple Cave Quiet Tunnel Deep",
+    "id": 11,
+    "url": "QCQuietTunnelD",
+    "buttonText": "Go Straight",
+    "description": "The silence of the cave is broken by noises from up ahead. The cave splits in two. You hear the sound of metal clanging to the left, and of birds to the east.",
+    "buildings": [ "QCQuietDwarfHome", "QCHuntingSpot" ]
+  },
+  {
+    "name": "Queple Cave Quiet Tunnel East",
+    "id": 12,
+    "url": "QCQuietTunnelE",
+    "buttonText": "Go East",
+    "description": "The cave continues to be entirely quiet. There is yet another fork in the path ahead.",
+    "buildings": [ "QCDarkTunnelED", "QCDarkTunnelDead" ]
+  },
+  {
+    "name": "Queple Cave Quiet Tunnel East Deadend",
+    "id": 13,
+    "url": "QCDarkTunnelED",
+    "buttonText": "Go South",
+    "description": "You find the end of the cave. There is nothing here."
+  },
+  {
+    "name": "Queple Cave Quiet Tunnel Deadend",
+    "id": 14,
+    "url": "QCDarkTunnelDead",
+    "buttonText": "Go North",
+    "description": "You find the end of the cave. There is nothing here."
+  },
+  {
+    "name": "Queple Cave Quiet Tunnel Hunting Spot",
+    "id": 15,
+    "url": "QCHuntingSpot",
+    "buttonText": "Go South",
+    "description": "The sound of bird becomes clear as you step out into a massive underground jungle.",
+    "unlockableAreas": [ "Deep Cave Hunting Area, This might be a good place to hunt...,," ]
+  },
+  {
+    "name": "Queple Cave Quiet Tunnel Dwarf Home",
+    "id": 16,
+    "url": "QCQuietDwarfHome",
+    "buttonText": "Go North",
+    "description": "The sound of metal clanging becomes clear as you round a corner and find a dwarf, smashing the cave wall with a pickaxe.",
+    "npcIDs": [ 3 ]
+  },
+  {
+    "name": "Queple Cave Quiet Tunnel North Deadend",
+    "id": 17,
+    "url": "QCDarkTunnelNDead",
+    "buttonText": "Go West",
+    "description": "You find the end of the cave. There is nothing here."
+  },
+  {
+    "name": "Queple Cave Tin Motherlode",
+    "id": 18,
+    "url": "QCTinMotherlode",
+    "buttonText": "Go East",
+    "description": "You emerge from the tunnel to find an enormous lode of tin ore; you could mine here and never run out.",
+    "unlockableAreas": [ "Queple Cave Tin Mine, This would be a great place to mine ore...,," ]
+  },
+  {
+    "name": "Queple Cave Deep Tunnel East",
+    "id": 19,
+    "url": "QCDeepTunnelE",
+    "buttonText": "Go Straight",
+    "description": "You slide down some loose gravel and arrive in the deepest parts of the cave.",
+    "buildings": [ "QCIronMine", "QCDarkTunnelE" ]
+  },
+  {
+    "name": "Queple Cave Iron Motherlode",
+    "id": 20,
+    "url": "QCIronMine",
+    "buttonText": "Go West",
+    "description": "You emerge from the tunnel to find an enormous lode of iron ore; it would take years to mine it all.",
+    "unlockableAreas": [ "Queple Cave Iron Mine, This would be a great place to mine ore...,," ]
+  },
+  {
+    "name": "Queple Cave River",
+    "id": 21,
+    "url": "QCRiver",
+    "buttonText": "Go North",
+    "description": "The sound of rushing water grows to a roar as you find an underground river. Upon closer inspection, it's teeming with fish!",
+    "unlockableAreas": [ "Queple Cave River, This would be a great place to fish...,," ]
+  },
+  {
+    "name": "Queple Cave Deep Tunnel",
+    "id": 22,
+    "url": "QCDeepTunnel",
+    "buttonText": "Go North",
+    "description": "As the temperature in the cave begins to rise, you spot a light in the distance.",
+    "buildings": [ "QCSmithy" ]
+  },
+  {
+    "name": "Queple Cave Smithy",
+    "id": 23,
+    "url": "QCSmithy",
+    "buttonText": "Continue",
+    "description": "You find a decently sized smithy with no one operating it.",
+    "unlockableAreas": [ "Queple Cave Smithy, You could smith ore here...,," ]
+
+  },
+  {
+    "name": "Queple Cave Deep Tunnel West",
+    "id": 24,
+    "url": "QCDeepTunnelW",
+    "buttonText": "Go West",
+    "description": "The fork in the path has led you to the deepest part of the cave. There is only one way forward.",
+    "buildings": [ "QCDeepTunnel" ]
+  },
+  {
+    "name": "Queple Cave West Tunnel",
+    "id": 25,
+    "url": "QCWestTunnel",
+    "buttonText": "Go East",
+    "description": "The path splits in two yet again. You hear some strange noises to the path on the right.",
+    "buildings": [ "QCWestDwarfHome", "QCWestDead" ]
+  },
+  {
+    "name": "Queple Cave Western Dwarf Home",
+    "id": 26,
+    "url": "QCWestDwarfHome",
+    "buttonText": "Go East",
+    "description": "You come upon the house of a dwarf.",
+    "npcIDs": [ 4 ]
+  },
+  {
+    "name": "Queple Cave Western Deadend",
+    "id": 27,
+    "url": "QCWestDead",
+    "buttonText": "Go West",
+    "description": "You reach the end of the cave. There is nothing here."
+  },
+  {
+    "name": "Queple Cave West Tunnel West",
+    "id": 28,
+    "url": "QCWestTunnelW",
+    "buttonText": "Continue",
+    "description": "You arrive at yet another split in the path.",
+    "buildings": [ "QCWestDead", "QCCopperMine" ]
+  },
+  {
+    "name": "Queple Cave Copper Motherlode",
+    "id": 29,
+    "url": "QCCopperMine",
+    "buttonText": "Go East",
+    "description": "You find a lode of copper greater than any up on the surface. You could mine here the rest of your life.",
+    "unlockableAreas": [ "Queple Cave Copper Mine, This would be a great place to mine ore...,," ]
+  },
+  {
+    "name": "Wind Hall",
+    "id": 30,
+    "url": "WindHall",
+    "buttonText": "Enter",
+    "description": "The halls of the building surround a central courtyard. At the very center of which is a column of air gushing out of a vent in the ground.",
+    "buildings": [ "WindHallCourtyard" ]
+  },
+  {
+    "name": "Wind Hall Courtyard",
+    "id": 31,
+    "url": "WindHallCourtyard",
+    "buttonText": "Enter the Courtyard",
+    "description": "The wind almost blows you away as you approach the vent in the middle of the yard.",
+    "hasAlchemyStation": true,
+    "queplarValue": 25
+  },
+  {
+    "name": "Teppas Elemental Emporium",
+    "id": 33,
+    "url": "TeppasElementalEmporium",
+    "items": [ 62, 63, 64, 65 ],
+    "description": "You can buy all four base elements here.",
+    "isShop": true
+  },
+  {
+    "name": "Rocky Shores House of Fish",
+    "id": 34,
+    "url": "HouseOfFish",
+    "items": [ 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119 ],
+    "description": "You can buy all four base elements here.",
+    "isShop": true
+  },
+  {
+    "name": "The Lost Swamp",
+    "buttonText": "Head This Way",
+    "id": 35,
+    "url": "LostSwamp",
+    "description": "The swamp is so dark it is easy to get lost.",
+    "buildings": [ "LostSwamp24" ]
+  },
+  {
+    "name": "The Lost Swamp",
+    "buttonText": "Head This Way",
+    "id": 36,
+    "url": "LostSwamp24",
+    "description": "The swamp is so dark it is easy to get lost.",
+    "buildings": [ "LostSwamp13", "LostSwamp19", "LostSwamp" ]
+  },
+  {
+    "name": "The Lost Swamp",
+    "buttonText": "Head This Way",
+    "id": 37,
+    "url": "LostSwamp19",
+    "description": "The swamp is so dark it is easy to get lost.",
+    "buildings": [ "LostSwamp24", "LostSwamp13", "LostSwamp" ]
+  },
+  {
+    "name": "The Lost Swamp",
+    "buttonText": "Head This Way",
+    "id": 38,
+    "url": "LostSwamp13",
+    "description": "The swamp is so dark it is easy to get lost.",
+    "buildings": [ "LostSwamp24", "LostSwamp91", "LostSwamp45", "LostSwamp19", "LostSwamp" ]
+  },
+  {
+    "name": "The Lost Swamp",
+    "id": 39,
+    "buttonText": "Head This Way",
+    "url": "LostSwamp91",
+    "description": "The swamp is so dark it is easy to get lost.",
+    "buildings": [ "LostSwamp32", "LostSwamp19", "LostSwamp" ]
+  },
+  {
+    "name": "The Lost Swamp",
+    "buttonText": "Head This Way",
+    "id": 40,
+    "url": "LostSwamp31",
+    "description": "The swamp is so dark it is easy to get lost.",
+    "buildings": [ "LostSwamp","LostSwamp32","LostSwamp3" ]
+  },
+  {
+    "name": "The Lost Swamp",
+    "buttonText": "Head This Way",
+    "id": 41,
+    "url": "LostSwamp32",
+    "description": "The swamp is so dark it is easy to get lost.",
+    "buildings": [ "LostSwamp45","LostSwamp91","LostSwamp91","LostSwamp" ]
+  },
+  {
+    "name": "The Lost Swamp",
+    "buttonText": "Head This Way",
+    "id": 42,
+    "url": "LostSwamp45",
+    "description": "The swamp is so dark it is easy to get lost.",
+    "buildings": [ "LostSwamp","LostSwamp91","LostSwamp31","LostSwamp32" ]
+  },
+  {
+    "name": "The Lost Swamp",
+    "buttonText": "Head This Way",
+    "id": 43,
+    "url": "LostSwamp3",
+    "description": "The swamp is so dark it is easy to get lost.",
+    "buildings": [ "LostSwamp","LostSwamp10","LostSwamp31", "LostSwamp" ]
+  },
+  {
+    "name": "The Lost Swamp",
+    "buttonText": "Head This Way",
+    "id": 44,
+    "url": "LostSwamp10",
+    "description": "The swamp is so dark it is easy to get lost.",
+    "buildings": [ "LostSwamp","LostSwampEnd","LostSwamp" ]
+  },
+  {
+    "name": "The Lost Swamp",
+    "buttonText": "Head This Way",
+    "id": 45,
+    "url": "LostSwampEnd",
+    "description": "You reach the other side of the swamp.",
+    "buildings": [ "" ]
+  },
+  {
+    "name": "Fisherman's Shack",
+    "buttonText": "Fisherman's Shack",
+    "id": 46,
+    "url": "FishermansShack",
+    "description": "Inside the shack you find a strange old man eating rice. He reeks of swamp sludge.",
+    "npcIDs": [ 5 ]
+  },
+  {
+    "name": "The Kogoe Gym",
+    "buttonText": "Kogoe Gym",
+    "id": 47,
+    "url": "KogoeGym",
+    "descriptiong": "You enter the gym and are greeted by an old man doing paperwork. He asks to see your membership card.",
+    "npcIDs": [ 6 ],
+    "unlockableAreas": [ "Kogoe Gym,Enter the workout room,,Gym Membership" ]
+  }
+
+]

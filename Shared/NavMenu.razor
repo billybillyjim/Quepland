@@ -1,37 +1,252 @@
-﻿<div class="top-row pl-4 navbar navbar-dark">
-    <a class="navbar-brand" href="">Quepland</a>
-    <button class="navbar-toggler" onclick="@ToggleNavMenu">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-</div>
+﻿@inject GameState  GameState
+@using System.Threading
+@inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
+@implements IDisposable
 
-<div class="@NavMenuCssClass" onclick="@ToggleNavMenu">
-    <ul class="nav flex-column">
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> Home
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="oi oi-plus" aria-hidden="true"></span> Counter
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="fetchdata">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
-            </NavLink>
-        </li>
-    </ul>
-</div>
+
+
+@LoadNavbarTop()
+
+@LoadNavbar()
 
 @functions {
     bool collapseNavMenu = true;
-
+    private Timer autoSaveTimer;
+    private Area lastToggledArea;
+    string autoSaveString = "Last autosave: Never";
+    string test = "total";
     string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
 
+    private bool loadGameComplete;
+
+    private string GetURL(string areaURL)
+    {
+        return "GatherMenu/" + areaURL;
+    }
     void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;
     }
+    /*
+     * <div class="top-row pl-4 navbar navbar-dark">
+    <a class="navbar-brand" href="">Quepland Menu</a>
+    <button class="navbar-toggler" onclick="@ToggleNavMenu">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+</div>
+     */
+    private RenderFragment LoadNavbarTop()
+    {
+        return builder =>
+        {
+            builder.OpenElement(0, "div");
+            builder.AddAttribute(0, "class", "top-row pl-4 navbar navbar-dark");
+            builder.OpenElement(1, "a");
+            builder.AddAttribute(1, "class", "navbar-brand");
+            builder.AddAttribute(1, "href", "");
+            builder.AddContent(1, "Quepland Menu");
+            builder.CloseElement();
+            builder.OpenElement(1, "button");
+            builder.AddAttribute(1, "class", "navbar-toggler");
+            builder.AddAttribute(1, "onclick", () => ToggleNavMenu());
+            builder.OpenElement(2, "span");
+            builder.AddAttribute(2, "class", "navbar-toggler-icon");
+            builder.CloseElement();
+            builder.CloseElement();
+            builder.CloseElement();
+        };
+    }
+    /*
+     * <div class="@NavMenuCssClass" onclick="@ToggleNavMenu">
+    <ul class="nav flex-column">
+        @if (GameState.isHunting == false && GameState.isGathering == false && Program.areaManager != null)
+        {
+            <li class="nav-item px-3">
+                <NavLink class="nav-link" href="Bank">
+                    <span class="oi oi-dollar" aria-hidden="true"></span> Bank
+                </NavLink>
+            </li>
+            @foreach (Area area in Program.areaManager.GetAreasWithoutChildren())
+            {
+                if (area.IsUnlocked)
+                {
+                    <li class="nav-item px-3">
+                        <NavLink class="nav-link" href="@GetURL(area.AreaURL)">
+                            <span class="@area.Icon" aria-hidden="true"></span> @area.Name
+                        </NavLink>
+                    </li>
+                }
+
+            }
+        }
+
+        <li class="auto-save"><font color="white">@autoSaveString</font></li>
+    </ul>
+
+</div>
+     */
+    private RenderFragment LoadNavbar()
+    {
+        return builder =>
+        {
+            builder.OpenElement(0, "div");
+            builder.AddAttribute(1, "class", NavMenuCssClass);
+            builder.AddAttribute(2, "onclick", () => ToggleNavMenu());
+            builder.OpenElement(3, "ul");
+            builder.AddAttribute(4, "class", "nav flex-column");
+
+            if (GameState.isHunting == false && GameState.isGathering == false && Program.areaManager != null)
+            {
+                //Make the bank link
+                builder.OpenElement(5, "li");
+                builder.AddAttribute(6, "class", "nav-item px-3");
+                builder.OpenComponent<NavLink>(7);
+                builder.AddAttribute(8, "class", "nav-link");
+                builder.AddAttribute(9, "href", "/Bank");
+                builder.AddAttribute(10, "ChildContent", (RenderFragment)((builder2) =>
+                {
+                    builder2.OpenElement(11, "span");
+                    builder2.AddAttribute(12, "class", "oi oi-dollar");
+                    builder2.AddAttribute(13, "aria-hidden", "true");
+                    builder2.CloseElement();
+                    builder2.AddContent(14, "Bank");
+                }));
+                builder.CloseComponent();
+                builder.CloseElement();
+                //Make area links
+                //TODO:Make area parents not navlinks
+                foreach (Area area in Program.areaManager.GetAreasWithChildren())
+                {
+                    if (area.IsUnlocked)
+                    {
+                        builder.AddContent(15, NavButton(area, true));
+                        foreach (string child in area.Children)
+                        {
+                            Area childArea = Program.areaManager.GetAreaByURL(child);
+                            if (childArea.IsUnlocked && childArea.Hidden == false)
+                            {
+                                builder.AddContent(16, NavButton(childArea, false));
+                            }
+                        }
+                    }
+                }
+            }
+            builder.CloseElement();
+            builder.CloseElement();
+            if (loadGameComplete == false && GameState.saveDataLoaded == true)
+            {
+                HideAllChildren();
+                loadGameComplete = true;
+            }
+        };
+    }
+    private RenderFragment NavButton(Area area, bool bold)
+    {
+        return builder =>
+        {
+            builder.OpenElement(0, "li");
+            builder.AddAttribute(1, "class", "nav-item px-3");
+
+            builder.OpenComponent<NavLink>(2);
+            builder.AddAttribute(3, "class", "nav-link");
+
+            if (bold)
+            {
+                builder.AddAttribute(4, "href", "/" + area.AreaURL);
+                builder.AddAttribute(5, "style", "background-color:#FFFFFF33");
+                builder.AddAttribute(6, "onclick", () => ToggleAreaChildren(area));
+            }
+            else
+            {
+                builder.AddAttribute(4, "href", "/GatherMenu/" + area.AreaURL);
+            }
+
+            builder.AddAttribute(7, "ChildContent", (RenderFragment)((builder2) =>
+            {
+                builder2.OpenElement(8, "span");
+                builder2.AddAttribute(9, "class", area.Icon);
+                builder2.AddAttribute(10, "aria-hidden", "true");
+                builder2.CloseElement();
+                builder2.OpenElement(11, "span");
+                if (bold)
+                {
+                    builder2.AddAttribute(12, "style", "font-weight:bold");
+                }
+                builder2.AddContent(13, area.Name);
+                builder2.CloseElement();
+                bool hasRoadblock = false;
+                foreach(string a in area.UnlockableAreas ?? Enumerable.Empty<string>())
+                {
+                    if(Program.areaManager.GetAreaByName(a.Split(',')[0]).IsUnlocked == false)
+                    {
+                        hasRoadblock = true;
+                    }
+                }
+                if (hasRoadblock)
+                {
+                    builder2.OpenElement(14, "div");
+                    builder2.AddAttribute(15, "class", "oi oi-circle-x");
+                    builder2.AddAttribute(16, "aria-hidden", "true");
+                    builder2.AddAttribute(17, "style", "margin-left:3px");
+                    builder2.AddAttribute(18, "style", "color:green");
+                    builder2.CloseElement();
+                }
+
+            }));
+            builder.CloseComponent();
+            builder.CloseElement();
+        };
+
+    }
+    protected override void OnInit()
+    {
+        GameState.StateChanged += OnGameStateChanged;
+        autoSaveTimer = new Timer(new TimerCallback(_ =>
+        {
+            AutoSave();
+
+        }), null, 60000, 60000);
+        this.StateHasChanged();
+    }
+
+    public void HideAllChildren()
+    {
+        foreach (Area area in Program.areaManager.GetAreasWithoutChildren())
+        {
+            area.Hidden = true;
+        }
+        StateHasChanged();
+    }
+    public void ToggleAreaChildren(Area area)
+    {
+        HideAllChildren();
+
+        area.IsShowingChildren = !area.IsShowingChildren;
+        foreach (string child in area.Children)
+        {
+            Program.areaManager.GetAreaByURL(child).Hidden = !Program.areaManager.GetAreaByURL(child).Hidden;
+        }
+
+        StateHasChanged();
+    }
+
+    private void AutoSave()
+    {
+        if (localStorage.GetItem<bool>("SaveGameExists") == false || GameState.saveDataLoaded == true)
+        {
+            localStorage.SetItem("Bank", GameState.GetPlayerBank().GetInventory().ToString());
+            localStorage.SetItem("Skills", GameState.GetPlayer().GetSkillString());
+            localStorage.SetItem("Inventory", GameState.GetPlayerInventory().ToString());
+            localStorage.SetItem("Areas", Program.areaManager.SaveAreas());
+            localStorage.SetItem("SaveGameExists", true);
+            autoSaveString = "Last autosave: " + DateTime.Now.ToShortTimeString();
+            StateHasChanged();
+        }
+    }
+    void IDisposable.Dispose()
+    {
+        GameState.StateChanged -= OnGameStateChanged;
+    }
+
+    void OnGameStateChanged(object sender, EventArgs e) => StateHasChanged();
 }

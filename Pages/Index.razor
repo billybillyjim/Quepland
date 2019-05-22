@@ -1,7 +1,120 @@
 ﻿@page "/"
+@inject HttpClient Http
+@inject GameState GameState
+@inject MessageManager MessageManager
+@inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
+@implements IDisposable
 
-<h1>Hello, world!</h1>
 
-Welcome to your new app.
+<h1>Hello, Welcome to Quepland!</h1>
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+@if (GameState.saveDataLoaded == false && saveGameExists)
+{
+    <p><button class="btn btn-primary" onclick="@(() => LoadData())">Load Game</button></p>
+}
+else
+{
+    <p><button class="btn btn-primary" disabled onclick="@(() => LoadData())">Load Game</button></p>
+}
+@if (GameState.saveDataLoaded == true || !saveGameExists)
+{
+    <p><button class="btn btn-primary" onclick="@(() => SaveData())">Save Game</button></p>
+}
+else
+{
+    <p><button class="btn btn-primary" disabled onclick="@(() => SaveData())">Save Game</button></p>
+}
+
+<br />
+<br />
+@if (userWantsGameReset)
+{
+    <p><button class="btn btn-primary" onclick="@(() => ResetGame())">Are you sure?</button></p>
+}
+else
+{
+    <p><button class="btn btn-primary" onclick="@(() => AskForReset())">Reset Game</button></p>
+}
+
+@functions{
+    private bool saveGameExists = false;
+    private bool userWantsGameReset = false;
+
+    private void AskForReset()
+    {
+        userWantsGameReset = true;
+    }
+    private void ResetGame()
+    {
+        MessageManager.AddMessage("Save Game Reset.");
+        localStorage.Clear();
+    }
+    private string SaveData()
+    {
+        localStorage.SetItem("Bank", GameState.GetPlayerBank().GetInventory().ToString());
+        localStorage.SetItem("Skills", GameState.GetPlayer().GetSkillString());
+        localStorage.SetItem("Inventory", GameState.GetPlayerInventory().ToString());
+        localStorage.SetItem("Areas", Program.areaManager.SaveAreas());
+        localStorage.SetItem("Followers", Program.followerManager.ToString());
+        localStorage.SetItem("ActiveFollower", GameState.GetPlayer().activeFollower.id);
+        localStorage.SetItem("AlchemyRecipes", GameState.GetPlayer().GetRecipes());
+        localStorage.SetItem("SaveGameExists", true);
+        MessageManager.AddMessage("You game has been saved.");
+        return "";
+    }
+    private void LoadData()
+    {
+        Dictionary<GameItem, int> bankItems = Extensions.GetItemDicFromString(localStorage.GetItem<String>("Bank"), Program.itemDatabase);
+        Dictionary<GameItem, int> invItems = Extensions.GetItemDicFromString(localStorage.GetItem<String>("Inventory"), Program.itemDatabase);
+        List<Skill> skills = Extensions.GetSkillsFromString(localStorage.GetItem<string>("Skills"));
+
+        GameState.GetPlayerBank().GetInventory().AddItems(bankItems);
+        GameState.GetPlayerInventory().AddItems(invItems);
+        GameState.GetPlayer().SetSkills(skills);
+
+        if (Program.followerManager.GetFollowerByID(localStorage.GetItem<int>("ActiveFollower")).IsUnlocked)
+        {
+            GameState.GetPlayer().activeFollower = Program.followerManager.GetFollowerByID(localStorage.GetItem<int>("ActiveFollower"));
+        }
+
+        GameState.GetPlayer().LoadRecipes(localStorage.GetItem<List<string>>("AlchemyRecipes"));
+        Program.areaManager.LoadSaveData(localStorage.GetItem<String>("Areas"));
+        Program.followerManager.LoadSaveData(localStorage.GetItem<String>("Followers"));
+
+        MessageManager.AddMessage("Save game loaded.");
+
+        GameState.saveDataLoaded = true;
+        GameState.UpdateState();
+
+    }
+    protected override void OnInit()
+    {
+        GameState.StateChanged += OnGameStateChanged;
+        if (GameState.gameDataLoaded == false)
+        {
+            Program.gatherManager.SetGameState(GameState);
+            Program.huntingManager.SetGameState(GameState);
+
+            GameState.LoadPlayerData(Http);
+
+            Program.itemDatabase.LoadItems(Http);
+            Program.areaManager.LoadAreas(Http);
+            Program.buildingManager.LoadBuildings(Http);
+            Program.followerManager.LoadFollowers(Http);
+            Program.npcManager.LoadNPCs(Http);
+            Program.battleManager.LoadMonsters(Http);
+
+            GameState.gameDataLoaded = true;
+        }
+
+        saveGameExists = localStorage.GetItem<bool>("SaveGameExists");
+
+        this.StateHasChanged();
+    }
+
+    void IDisposable.Dispose()
+    {
+        GameState.StateChanged -= OnGameStateChanged;
+    }
+    void OnGameStateChanged(object sender, EventArgs e) => StateHasChanged();
+}

@@ -1,0 +1,71 @@
+﻿@page "/Followers"
+@inject HttpClient Http
+@inject GameState GameState
+@inject Microsoft.AspNetCore.Blazor.Services.WebAssemblyUriHelper UriHelper
+@implements IDisposable
+
+<button class="btn btn-primary" onclick="@(()=>Return())">Return</button>
+<h1>Followers</h1>
+<br />
+<div class="table table-hover">
+    <table style="width:100%">
+        <thead>
+            <tr>
+                <th align="left">Follower</th>
+                <th>Description</th>
+                <th style="text-align:right">Follow?</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Follower follower in Program.followerManager.GetFollowers())
+            {
+                if (follower.IsUnlocked)
+                {
+                    <tr>
+                        <td>@follower.Name</td>
+                        <td>@follower.Description</td>
+                        @if (GameState.GetPlayer().activeFollower != follower)
+                        {
+                            <td><button class="btn btn-primary" onclick="@(()=>Assign(follower))">Assign To Follow</button></td>
+                        }
+                        else
+                        {
+                            <td>Following</td>
+                            <td><button class="btn btn-primary" onclick="@(()=>Unassign())">Unfollow</button></td>
+                        }
+                    </tr>
+
+                }
+
+            }
+
+        </tbody>
+    </table>
+</div>
+@functions{
+
+    private void Return()
+    {
+        UriHelper.NavigateTo("/Bank/");
+    }
+    private void Assign(Follower follower)
+    {
+        GameState.GetPlayer().activeFollower = follower;
+        GameState.UpdateState();
+    }
+    private void Unassign()
+    {
+        GameState.GetPlayer().activeFollower = null;
+        GameState.UpdateState();
+    }
+    protected override void OnInit()
+    {
+        GameState.StateChanged += OnGameStateChanged;
+        this.StateHasChanged();
+    }
+    void IDisposable.Dispose()
+    {
+        GameState.StateChanged -= OnGameStateChanged;
+    }
+    void OnGameStateChanged(object sender, EventArgs e) => StateHasChanged();
+}

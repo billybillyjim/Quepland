@@ -1,0 +1,75 @@
+[
+  {
+    "name": "Lumpy the Gnome",
+    "id": 0,
+    "description": "Lumpy is just capable enough to move logs from one location to another.",
+    "autoCollectMessage": "Lumpy carrys off $ logs, stumbling the entire way.",
+    "RequiredLevels": ["Woodcutting:5"],
+    "autoCollectSkill": "Woodcutting",
+    "autoCollectLevel": 10,
+    "maxCarry": 15,
+    "autoCollectSpeed": 20000,
+    "isUnlocked": false,
+    "cost": 1
+  },
+  {
+    "name": "Dumpy the Gnome",
+    "id": 1,
+    "description": "Dumpy is more than capable enough to move logs from one location to another.",
+    "autoCollectMessage": "Dumpy slowly carrys off $ logs.",
+    "RequiredLevels": [ "Woodcutting:15" ],
+    "autoCollectSkill": "Woodcutting",
+    "autoCollectLevel": 30,
+    "maxCarry": 15,
+    "autoCollectSpeed": 15000,
+    "isUnlocked": false
+  },
+  {
+    "name": "Grumpy the Gnome",
+    "id": 2,
+    "description": "Grumpy will move logs from one location to another, but he won't be happy about it.",
+    "autoCollectMessage": "Grumpy mutters to himself while he takes $ logs to the bank.",
+    "RequiredLevels": [ "Woodcutting:30" ],
+    "autoCollectSkill": "Woodcutting",
+    "autoCollectLevel": 45,
+    "maxCarry": 19,
+    "autoCollectSpeed": 10000,
+    "isUnlocked": false
+  },
+  {
+    "name": "Slumpy the Gnome",
+    "id": 3,
+    "description": "Slumpy is quite quick at carrying logs. It's a shame you can't do anything about his posture.",
+    "autoCollectMessage": "Slumpy drags $ logs away to the bank.",
+    "RequiredLevels": [ "Woodcutting:50" ],
+    "autoCollectSkill": "Woodcutting",
+    "autoCollectLevel": 60,
+    "maxCarry": 23,
+    "autoCollectSpeed": 7500,
+    "isUnlocked": false
+  },
+  {
+    "name": "Rumpy the Gnome",
+    "id": 4,
+    "description": "Rumpy has a butt-chin which has always encouraged him to move very quickly so as to never be seen.",
+    "autoCollectMessage": "Rumpy scurries off with $ logs and quickly returns, hiding behind a large boulder.",
+    "RequiredLevels": [ "Woodcutting:65" ],
+    "autoCollectSkill": "Woodcutting",
+    "autoCollectLevel": 75,
+    "maxCarry": 26,
+    "autoCollectSpeed": 5000,
+    "isUnlocked": false
+  },
+  {
+    "name": "Jumpy the Gnome",
+    "id": 5,
+    "description": "Jumpy is full of energy and loves to move logs between locations.",
+    "autoCollectMessage": "Jumpy maneuvers the $ logs to the bank in the most uncomfortable way.",
+    "RequiredLevels": [ "Woodcutting:75" ],
+    "autoCollectSkill": "Woodcutting",
+    "autoCollectLevel": 100,
+    "maxCarry": 30,
+    "autoCollectSpeed": 2000,
+    "isUnlocked": false
+  },
+]

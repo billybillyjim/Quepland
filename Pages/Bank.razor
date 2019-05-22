@@ -1,0 +1,117 @@
+﻿@page "/Bank"
+@inject HttpClient Http
+@inject GameState GameState
+@inject MessageManager MessageManager
+
+@implements IDisposable
+
+<h1>Hello, this is your bank!</h1>
+<p><button class="btn btn-primary" onclick="@(() => DepositAll())">Deposit All</button></p>
+
+<div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Sort By
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" onclick="@(()=>SetSortStyle(0))">Name</a>
+        <a class="dropdown-item" onclick="@(()=>SetSortStyle(1))">Amount</a>
+        <a class="dropdown-item" onclick="@(()=>SetSortStyle(2))">Action Group</a>
+    </div>
+</div>
+<br />
+<div class="table table-hover">
+    <table style="width:100%">
+        <thead>
+            <tr>
+                <th align="left">Item</th>
+                <th>Description</th>
+                <th style="text-align:right">Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (GameState.GetPlayerBank() != null)
+            {
+                @foreach (KeyValuePair<GameItem, int> item in GameState.GetPlayerBank().GetInventory().GetItemsSorted(sortStyle))
+                {
+                    <tr class="buddy-top">
+                        <td align="left">@item.Key.ItemName</td>
+                        <td>@item.Key.ItemDescription</td>
+                        <td align="right">@item.Value</td>
+                    </tr>
+                    <tr class="buddy-row">
+                        <td align="left">Withdraw </td>
+                        <td align="left">
+                            <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, 1))">1</button>
+                            <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, 5))">5</button>
+                            <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, int.MaxValue))">All</button>
+                        </td>
+                        <td align="center"></td>
+                    </tr>
+                }
+
+
+            }
+        </tbody>
+    </table>
+</div>
+@functions{
+
+    public int sortStyle = 0;
+    public void SetSortStyle(int newVal)
+    {
+        sortStyle = newVal;
+    }
+    private string DepositAll()
+    {
+        GameState.GetPlayerBank().GetInventory().AddItems(GameState.GetPlayerInventory().GetUnequippedItems());
+        GameState.GetPlayerInventory().EmptyInventoryOfUnequippedItems();
+        GameState.UpdateState();
+        StateHasChanged();
+        return "";
+    }
+    private string Withdraw(GameItem item, int amount)
+    {
+        int maxWithdraw;
+        //If the item is stackable and the player has a stack in their inventory already, or the player has space for another item
+        if ((item.IsStackable && GameState.GetPlayerInventory().HasItem(item) && GameState.GetPlayerInventory().GetAvailableSpaces() == 0) ||
+             item.IsStackable && GameState.GetPlayerInventory().GetAvailableSpaces() > 0)
+        {
+            maxWithdraw = Math.Min(amount, GameState.GetPlayerBank().GetInventory().GetNumberOfItem(item));
+        }
+        else
+        {
+            //Gets the smallest of the amount, inventory space, and number in the bank.
+            maxWithdraw = Math.Min(Math.Min(amount, GameState.GetPlayerInventory().GetAvailableSpaces()), GameState.GetPlayerBank().GetInventory().GetNumberOfItem(item));
+        }
+        GameState.GetPlayerInventory().AddMultipleOfItem(item, maxWithdraw);
+        GameState.GetPlayerBank().GetInventory().RemoveItems(item, maxWithdraw);
+        GameState.UpdateState();
+        return "";
+    }
+
+    protected override void OnInit()
+    {
+
+        GameState.StateChanged += OnGameStateChanged;
+
+        GameState.canBank = true;
+        GameState.canSell = false;
+        //Give the player an axe if they have no items.
+        if (GameState.GetPlayerBank().GetInventory().GetTotalNumberOfItems() == 0 && GameState.GetPlayerInventory().GetTotalNumberOfItems() == 0)
+        {
+            GameState.GetPlayerBank().GetInventory().AddItem(Program.itemDatabase.GetItemByID(12));
+            MessageManager.AddMessage("You find a stone axe in your bank account.");
+        }
+        GameState.UpdateState();
+
+        this.StateHasChanged();
+
+    }
+    void IDisposable.Dispose()
+    {
+        GameState.canBank = false;
+        GameState.UpdateState();
+        GameState.StateChanged -= OnGameStateChanged;
+    }
+    void OnGameStateChanged(object sender, EventArgs e) => StateHasChanged();
+}

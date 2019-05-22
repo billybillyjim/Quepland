@@ -1,4 +1,6 @@
 @inherits LayoutComponentBase
+@inject GameState  GameState
+@implements IDisposable
 
 <div class="sidebar">
     <NavMenu />
@@ -6,10 +8,46 @@
 
 <div class="main">
     <div class="top-row px-4">
-        <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
+        @if (GameState.canBank)
+        {
+            <a href="/Followers">Followers</a>
+        }
+        <a href="/Help"> Help</a>
     </div>
 
     <div class="content px-4">
         @Body
+        <div class="footer navbar-fixed-bottom">
+            <MessagesMenu />
+        </div>
     </div>
+
 </div>
+
+
+<div class="col-md-3">
+    <SkillsMenu />
+</div>
+<div class="col-md-3">
+    <Inventory />
+</div>
+
+@functions{
+    private string backURL;
+
+    protected override void OnInit()
+    {
+
+        GameState.StateChanged += OnGameStateChanged;
+        GameState.UpdateState();
+
+        this.StateHasChanged();
+
+    }
+    void IDisposable.Dispose()
+    {
+        GameState.UpdateState();
+        GameState.StateChanged -= OnGameStateChanged;
+    }
+    void OnGameStateChanged(object sender, EventArgs e) => StateHasChanged();
+}

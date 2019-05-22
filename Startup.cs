@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Components.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Blazored.LocalStorage;
 
 namespace Quepland
 {
@@ -7,6 +8,9 @@ namespace Quepland
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<GameState>();
+            services.AddScoped<MessageManager>();
+            services.AddBlazoredLocalStorage();
         }
 
         public void Configure(IComponentsApplicationBuilder app)

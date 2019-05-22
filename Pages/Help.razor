@@ -1,0 +1,35 @@
+﻿@page "/Help"
+@inject HttpClient Http
+@inject GameState GameState
+@inject Microsoft.AspNetCore.Blazor.Services.WebAssemblyUriHelper UriHelper
+@implements IDisposable
+
+<p>Welcome to the world of Quepland! You probably have many questions. Hopefully some of the info here will answer anything you'd like to know.</p>
+
+<p><b>What do I do?</b></p>
+<p>You can do whatever you'd like! As you continue on your journey you'll find various roadblocks in your way. Mouse over them and they'll tell you what item or stat you need to pass through them.</p>
+
+<p><b>What does x skill do?</b></p>
+<p>Every skill in the game is explained in its own skill screen, which can be accessed by clicking on the skill in the skill menu to the right.</p>
+
+<p><b>What is the end goal?</b></p>
+<p>Uh... Working on it...</p>
+
+@functions{
+
+    private void Return()
+    {
+        UriHelper.NavigateTo("/Bank/");
+    }
+
+    protected override void OnInit()
+    {
+        GameState.StateChanged += OnGameStateChanged;
+        this.StateHasChanged();
+    }
+    void IDisposable.Dispose()
+    {
+        GameState.StateChanged -= OnGameStateChanged;
+    }
+    void OnGameStateChanged(object sender, EventArgs e) => StateHasChanged();
+}

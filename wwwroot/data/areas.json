@@ -1,0 +1,328 @@
+[
+  {
+    "name": "Quepland Fields",
+    "id": 0,
+    "actions": [ "Fish For Minnows:Minnow", "Chop White Pine Trees:White Pine Logs", "Battle" ],
+    "isUnlocked": true,
+    "description": "There is a small stream and a forest of white pine trees. A large poplar tree has fallen and blocks your path forward.",
+    "areaURL": "queplandFields",
+    "unlockableAreas": [ "Quepland Woods,Clear away Tree,Woodcutting:2,Woodcutting" ],
+    "icon": "oi oi-fire",
+    "monsterIDs": [ 0, 1, 2 ]
+  },
+  {
+    "name": "Quepland Woods",
+    "id": 1,
+    "actions": [ "Fish For Sunfish:Sunfish", "Chop Poplar Trees:Poplar Logs", "Hunting", "Battle" ],
+    "isUnlocked": false,
+    "description": "You enter a thick woods consisting of mostly poplar trees. The path meanders up the mountain along a brook full of sunfish.",
+    "areaURL": "queplandWoods",
+    "unlockableAreas": [ "The foot of Mt Queple,Continue along path,,", "Rocky Shores Beach,Head north through the trees,Woodcutting:45,Woodcutting" ],
+    "icon": "oi oi-cloud",
+    "monsterIDs": [ 2, 3, 4 ],
+    "huntingIDs": [ 14, 15, 66, 67, 68, 69, 71 ]
+  },
+  {
+    "name": "The foot of Mt Queple",
+    "id": 2,
+    "actions": [ "Gather Stone:Stone", "Gather Berries:Berry" ],
+    "isUnlocked": false,
+    "description": "You emerge from the forest at the base of the great Mount Queple. There are stones scattered about and many bushes to gather berries from. You can see a mountain village in the distance.",
+    "areaURL": "quepleFoot",
+    "unlockableAreas": [ "Teppas,Head to village,," ],
+    "icon": "oi oi-graph"
+  },
+  {
+    "name": "Teppas",
+    "id": 3,
+    "isUnlocked": false,
+    "description": "You enter the small mountain town of Teppas. There is a shop to buy and sell goods from. A winding main street continues up the mountain.",
+    "areaURL": "teppas",
+    "icon": "oi oi-home",
+    "buildings": [ "TeppasGeneralStore", "MayorsHouse", "TeppasElementalEmporium" ],
+    "unlockableAreas": [ "Lower Mt Queple Trail, Go through the village,," ]
+  },
+  {
+    "name": "Lower Mt Queple Trail",
+    "id": 4,
+    "actions": [ "Mining" ],
+    "isUnlocked": false,
+    "description": "As you begin your ascent up the mountain, you notice the mouth of a cave off to the side of the path.",
+    "areaURL": "lowerMtQuepleTrail",
+    "icon": "oi oi-fire",
+    "unlockableAreas": [ "Queple Cave Entrance,Enter the cave,,", "Upper Mt Queple Trail,Continue up the trail,," ]
+  },
+  {
+    "name": "Upper Mt Queple Trail",
+    "id": 5,
+    "isUnlocked": false,
+    "description": "Having made a good distance up the mountain, you find the only way the rest of the way up is to climb.",
+    "areaURL": "upperMTQuepleTrail",
+    "icon": "oi oi-graph",
+    "unlockableAreas": [ "The Peak of Mount Queple,Climb to the summit,,", "Eastern Trail,Continue around the mountain,," ]
+  },
+  {
+    "name": "Queple Cave Entrance",
+    "id": 6,
+    "isUnlocked": false,
+    "description": "Inside the cave you find a labyrinth of tunnels enveloped in darkness. It's probably safe to explore.",
+    "areaURL": "quepleCaveEntrance",
+    "icon": "oi oi-image",
+    "buildings": [ "QuepleCaveEntrance" ],
+    "unlockableAreas": [ "Queple Cave,Mark this cave in your journal,," ]
+  },
+  {
+    "name": "Mount Queple",
+    "id": 7,
+    "isUnlocked": true,
+    "description": "The mountain near which you began your journey.",
+    "areaURL": "MountQueple",
+    "icon": "oi oi-image",
+    "children": [ "queplandFields", "queplandWoods", "quepleFoot", "teppas", "lowerMtQuepleTrail", "upperMTQuepleTrail", "MtQueplePeak" ]
+  },
+  {
+    "name": "Queple Cave Copper Mine",
+    "id": 8,
+    "isUnlocked": false,
+    "actions": [ "Mining:Copper Ore" ],
+    "description": "There is a lot of copper here.",
+    "areaURL": "QCCopperMine",
+    "icon": "oi oi-image"
+  },
+  {
+    "name": "Queple Cave Tin Mine",
+    "id": 9,
+    "isUnlocked": false,
+    "actions": [ "Mining:Tin Ore" ],
+    "description": "There is a lot of tin here.",
+    "areaURL": "QCTinMine",
+    "icon": "oi oi-image"
+  },
+  {
+    "name": "Queple Cave Iron Mine",
+    "id": 10,
+    "isUnlocked": false,
+    "actions": [ "Mining:Iron Ore" ],
+    "description": "There is a lot of iron here.",
+    "areaURL": "QCIronMine",
+    "icon": "oi oi-image"
+  },
+  {
+    "name": "Queple Cave River",
+    "id": 11,
+    "isUnlocked": false,
+    "actions": [ "Fish:Minnow" ],
+    "description": "There are a lot of fish here.",
+    "areaURL": "QCRiver",
+    "icon": "oi oi-river"
+  },
+  {
+    "name": "Deep Cave Hunting Area",
+    "id": 12,
+    "isUnlocked": false,
+    "actions": [ "Hunting" ],
+    "description": "There are plenty of exotic animals to catch here.",
+    "areaURL": "QCHuntingCave",
+    "icon": "oi oi-river",
+    "huntingIDs": [ 69, 71, 74, 66, 67, 68 ]
+  },
+  {
+    "name": "Queple Cave",
+    "id": 13,
+    "isUnlocked": false,
+    "description": "You mark the cave in your journal. You can now quickly access parts of the cave you have already visited through the sidebar.",
+    "areaURL": "quepleCave",
+    "icon": "oi oi-network",
+    "children": [ "quepleCaveEntrance", "QCCopperMine", "QuepleCaveSmithy", "QCTinMine", "QCIronMine", "QCRiver" ]
+  },
+  {
+    "name": "The Rocky Shores",
+    "id": 14,
+    "isUnlocked": false,
+    "description": "The shores north of the great Mount Queple. There seems to be a small fishing village east of the beach. You can now quickly access the parts of the shores you have already visited through the sidebar.",
+    "areaURL": "RockyShores",
+    "icon": "oi oi-sun",
+    "children": [ "RockyShoresBeach", "UragotaTown", "DarkRiver" ]
+  },
+  {
+    "name": "Rocky Shores Beach",
+    "id": 15,
+    "isUnlocked": false,
+    "actions": [ "Fish For Rays:Manta Ray", "Fish For Crabs:Angry Crab", "Fish For Puffers:Puffer Fish", "Gather Seaweed:Seaweed" ],
+    "description": "The sprawling beach is the perfect place to catch a variety of fish.",
+    "areaURL": "RockyShoresBeach",
+    "icon": "oi oi-signpost",
+    "unlockableAreas": [ "The Rocky Shores,Mark this area in your journal,,", "Uragota Town,Walk along the beach,," ]
+  },
+  {
+    "name": "Uragota Town",
+    "id": 16,
+    "isUnlocked": false,
+    "description": "A small town sits on the water. There are a number of shops to browse.",
+    "areaURL": "UragotaTown",
+    "icon": "oi oi-house",
+    "unlockableAreas": [ "The Northern Isles Dock,Charter a ship north(1000 gold),,Pay Gold:1000", "The Dark River Bridge,Try fishing on the bridge,," ],
+    "buildings": [ "HouseOfFish", "FishermansShack" ]
+  },
+  {
+    "name": "The Dark River Bridge",
+    "id": 17,
+    "isUnlocked": false,
+    "actions": [ "Fishing:Carp" ],
+    "description": "A river darkened by runoff from the nearby farms. Shallow and wide, it's a great place to catch carp. Beyond the bridge is another wooded area.",
+    "areaURL": "DarkRiver",
+    "icon": "oi oi-river",
+    "unlockableAreas": [ "Higashi Woods,Head into the forest,," ]
+  },
+  {
+    "name": "Queple Cave Smithy",
+    "id": 18,
+    "isUnlocked": false,
+    "actions": [ "Smithing" ],
+    "description": "There is a large, working forge here.",
+    "areaURL": "QuepleCaveSmithy",
+    "icon": "oi oi-river"
+  },
+  {
+    "name": "The Peak of Mount Queple",
+    "id": 19,
+    "isUnlocked": false,
+    "description": "You arrive near the summit of the mountain to find an abandoned building. The roar of rushing wind emanates through its halls.",
+    "areaURL": "MtQueplePeak",
+    "icon": "oi oi-graph",
+    "buildings": [ "WindHall" ]
+  },
+  {
+    "name": "The Northern Isles Dock",
+    "id": 20,
+    "isUnlocked": false,
+    "description": "You step onto the dock of a small, chilly village. Ice floes surround this snowy wasteland, and all is white in every direction.",
+    "areaURL": "NorthernIslesDock",
+    "icon": "oi oi-river",
+    "unlockableAreas": [ "Kogoe Town,Go into town,,", "The Northern Isles,Mark this area in your journal,," ]
+  },
+  {
+    "name": "Eastern Trail",
+    "id": 21,
+    "isUnlocked": false,
+    "description": "You continue along the trail and pass by Mount Queple. A large swamp comes into view up ahead.",
+    "areaURL": "EasternTrail",
+    "icon": "oi oi-river",
+    "unlockableAreas": [ "Swampland,Continue Down into the Swamp,," ]
+  },
+  {
+    "name": "Swampland",
+    "id": 22,
+    "isUnlocked": false,
+    "description": "You enter an enourmous swamp. Trees entangle an overgrowth immersed in water. Rice grows wild here. Ahead you see a dark wooded region.",
+    "areaURL": "Swampland",
+    "icon": "oi oi-river",
+    "actions": [ "Gather Rice:Rice", "Chop Snakewood Trees:Snakewood Logs", "Hunting" ],
+    "unlockableAreas": [ "The Great Swamp,Mark this area in your journal,,", "Swampwood, Enter the woods,," ],
+    "huntingIDs": [ 68, 71, 72, 66, 67 ]
+  },
+  {
+    "name": "The Great Swamp",
+    "id": 23,
+    "isUnlocked": false,
+    "description": "You enter an enourmous swamp. Trees entangle an overgrowth immersed in water. Rice grows wild here.",
+    "areaURL": "GreatSwamp",
+    "icon": "oi oi-river",
+    "children": [ "Swampland", "Swampwood" ]
+  },
+  {
+    "name": "Swampwood",
+    "id": 24,
+    "isUnlocked": false,
+    "description": "The swamp grows dark under the canopy of trees. The foliage shudders with movement all around you. ",
+    "areaURL": "Swampwood",
+    "icon": "oi oi-river",
+    "actions": [ "Battle", "Chop Mahogany Trees:Mahogany Logs" ],
+    "buildings": [ "LostSwamp" ]
+  },
+  {
+    "name": "Higashi Woods",
+    "id": 25,
+    "isUnlocked": false,
+    "description": "You enter a strange forest. There are a variety of trees to chop here. The path leads deeper into the forest.",
+    "areaURL": "HigashiWoods",
+    "icon": "oi oi-river",
+    "actions": [ "Chop Oak Trees:Oak Logs", "Chop Birch Trees:Birch Logs" ],
+    "unlockableAreas": [ "Deep Higashi Woods,Enter the deep forest,," ]
+  },
+  {
+    "name": "Deep Higashi Woods",
+    "id": 26,
+    "isUnlocked": false,
+    "description": "You come around a turn in the path to find large piles of cheese and bark. The path winds around them and down a hill.",
+    "areaURL": "DeepHigashiWoods",
+    "icon": "oi oi-river",
+    "actions": [ "Gather Cheese:Cheese, Gather Bark:Bark" ],
+    "unlockableAreas": [ "Higashi Bridge,Head down the hill,," ]
+  },
+  {
+    "name": "Higashi Bridge",
+    "id": 27,
+    "isUnlocked": false,
+    "description": "At the bottom of the hill is a gorge with a bridge running across it. Or, there used to be a bridge. You'll need to repair it or jump to get across.",
+    "areaURL": "DeepHigashiWoods",
+    "icon": "oi oi-river",
+    "actions": [ "Hunting" ],
+    "unlockableAreas": [ "East Higashi Woods,Jump across the gap,Deftness:30,", "East Higashi Woods,Repair the bridge,Woodworking:30," ],
+    "huntingIDs": [ 70, 72, 73 ]
+  },
+  {
+    "name": "East Higashi Woods",
+    "id": 28,
+    "isUnlocked": false,
+    "description": "On the other side you find a number of balsa trees.",
+    "areaURL": "EastHigashiWoods",
+    "icon": "oi oi-river",
+    "actions": [ "Chop Balsa Trees:Balsa Logs" ]
+  },
+  {
+    "name": "Kogoe Town",
+    "id": 29,
+    "isUnlocked": false,
+    "description": "You enter the small fishing village. A road runs through the middle of town. You may be able to buy some supplies here.",
+    "areaURL": "KogoeTown",
+    "icon": "oi oi-home",
+    "buildings": [ "HouseOfFish", "KogoeGym" ],
+    "unlockableAreas": [ "Northern Isles Trails,Follow the road out of town,," ]
+  },
+  {
+    "name": "Northern Isles Trails",
+    "id": 30,
+    "isUnlocked": false,
+    "description": "The lightly wooded path leads into a valley. Eventually you reach a giant stone which has fallen, blocking the way forward.",
+    "areaURL": "NorthernIslesTrails",
+    "icon": "oi oi-river",
+    "unlockableAreas": [ "The Foot of Mt Yama,Destroy the rock with your strength,Strength:45,", "The Foot of Mt Yama,Destroy the rock with your mining skills,Mining:40,Mining" ]
+  },
+  {
+    "name": "The Foot of Mt Yama",
+    "id": 31,
+    "isUnlocked": false,
+    "description": "The road grows steep as you begin your ascent up Mt Yama.",
+    "areaURL": "MtYamaFoot",
+    "icon": "oi oi-river"
+  },
+  {
+    "name": "The Northern Isles",
+    "id": 32,
+    "isUnlocked": false,
+    "description": "A small, cold island north of Quepland.",
+    "areaURL": "NorthernIsles",
+    "icon": "oi oi-river",
+    "children": [ "KogoeTown", "NorthernIslesDock", "NorthernIslesTrails", "MtYamaFoot" ]
+  },
+  {
+    "name": "Kogoe Gym",
+    "id": 33,
+    "isUnlocked": false,
+    "description": "You enter the gym. You can train your strength and deftness here.",
+    "areaURL": "KogoeGym",
+    "icon": "oi oi-home"
+  }
+
+]

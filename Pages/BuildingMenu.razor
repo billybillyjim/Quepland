@@ -1,0 +1,419 @@
+﻿@page "/Inside/{buildingURL}"
+@inject GameState  GameState
+@inject MessageManager MessageManager
+@inject Microsoft.AspNetCore.Blazor.Services.WebAssemblyUriHelper UriHelper
+
+
+<button class="btn btn-primary" style="margin-bottom:10px" onclick="@(() => Return(GameState.previousURL))">Leave</button>
+<br />
+@LoadNPCs()
+@LoadShop()
+@LoadBuildings()
+@LoadRoadblocks()
+@LoadAlchemyStation()
+
+@functions{
+
+    [Parameter]
+    private string buildingURL { get; set; }
+
+    private Building thisBuilding;
+    private GameItem currentMetalBar;
+    private GameItem currentElement;
+    private int alchemyStage;
+    private string proofstring = "Not set.";
+
+    public RenderFragment LoadShop()
+    {
+
+        return builder =>
+        {
+            if (thisBuilding != null)
+            {
+                builder.OpenElement(0, "h");
+                builder.AddContent(0, "You are in " + thisBuilding.Name);
+                builder.CloseElement();
+                builder.OpenElement(0, "br");
+                builder.CloseElement();
+                builder.OpenElement(0, "p");
+                builder.AddContent(0, thisBuilding.Description);
+                builder.CloseElement();
+
+                if (thisBuilding.IsShop)
+                {
+                    builder.OpenElement(0, "table");
+                    builder.OpenElement(1, "thead");
+                    builder.OpenElement(2, "tr");
+                    builder.OpenElement(3, "th");
+                    builder.AddContent(3, "Item Name");
+                    builder.CloseElement();
+                    builder.OpenElement(3, "th");
+                    builder.AddContent(3, "Item Description");
+                    builder.CloseElement();
+                    builder.OpenElement(3, "th");
+                    builder.AddContent(3, "Cost");
+                    builder.CloseElement();
+                    builder.CloseElement();
+                    builder.CloseElement();
+                    builder.OpenElement(1, "tbody");
+
+                    foreach (int i in thisBuilding.items ?? Enumerable.Empty<int>())
+                    {
+                        GameItem item = Program.itemDatabase.GetItemByID(i);
+                        builder.OpenElement(2, "tr");
+                        builder.OpenElement(3, "td");
+                        builder.AddContent(3, item.ItemName);
+                        builder.CloseElement();
+                        builder.OpenElement(3, "td");
+                        builder.AddContent(3, item.ItemDescription);
+                        builder.CloseElement();
+                        builder.OpenElement(3, "td");
+                        builder.AddContent(3, item.Value);
+                        builder.CloseElement();
+                        builder.OpenElement(3, "td");
+                        builder.OpenElement(4, "button");
+                        builder.AddAttribute(4, "class", "btn btn-primary");
+                        builder.AddAttribute(4, "onclick", (() => BuyItem(item, 1)));
+                        builder.AddContent(4, "Buy");
+                        builder.CloseElement();
+                        builder.CloseElement();
+                        builder.CloseElement();
+                    }
+                    builder.CloseElement();
+                    builder.CloseElement();
+                }
+            }
+        };
+    }
+    public RenderFragment LoadAlchemyStation()
+    {
+        return builder =>
+        {
+            if (thisBuilding != null && thisBuilding.HasAlchemyStation)
+            {
+                if (alchemyStage == 0)
+                {
+                    foreach (GameItem item in Program.itemDatabase.GetSmithingBars())
+                    {
+                        builder.OpenElement(0, "button");
+                        builder.AddAttribute(1, "class", "btn btn-primary");
+                        builder.AddAttribute(2, "style", "margin:10px");
+                        if (GameState.GetPlayerInventory().HasItem(item) == false)
+                        {
+                            builder.AddAttribute(3, "disabled", true);
+                        }
+                        builder.AddAttribute(4, "onclick", () => SetMetal(item));
+                        builder.AddContent(4, item.ItemName);
+                        builder.CloseElement();
+                        builder.OpenElement(5, "br");
+                        builder.CloseElement();
+                    }
+                }
+                else if (alchemyStage == 1)
+                {
+                    for (int i = 0; i < 4; i++)
+                    {
+                        int temp = i;
+                        builder.OpenElement(0, "button");
+                        builder.AddAttribute(1, "class", "btn btn-primary");
+                        builder.AddAttribute(2, "style", "margin:10px");
+                    //Check for Carquen and next 3 elements.
+                    if (GameState.GetPlayerInventory().HasItem(temp + 62) == false)
+                        {
+                            builder.AddAttribute(3, "disabled", true);
+                        }
+                        builder.AddAttribute(4, "onclick", () => SetElement(Program.itemDatabase.GetItemByID(temp + 62)));
+                        builder.AddContent(4, Program.itemDatabase.GetItemByID(temp + 62).ItemName);
+                        builder.CloseElement();
+                        builder.OpenElement(5, "br");
+                        builder.CloseElement();
+                    }
+                }
+                else if (alchemyStage == 2)
+                {
+                    builder.OpenElement(0, "button");
+                    builder.AddAttribute(1, "class", "btn btn-primary");
+                    builder.AddAttribute(2, "style", "margin:10px");
+
+                    if (currentMetalBar == null || currentElement == null)
+                    {
+                        builder.AddAttribute(3, "disabled", true);
+                    }
+                    builder.AddAttribute(4, "onclick", () => Alchemize(currentMetalBar, currentElement));
+                    builder.AddContent(4, "Alchemize " + currentMetalBar.ItemName + " and " + currentElement.ItemName);
+                    builder.CloseElement();
+                    builder.OpenElement(5, "br");
+                    builder.CloseElement();
+                }
+            }
+        };
+    }
+    private void SetMetal(GameItem metal)
+    {
+        currentMetalBar = metal;
+        alchemyStage++;
+        MessageManager.AddMessage("You place the " + metal.ItemName + " in front of the vent.");
+        GameState.UpdateState();
+        this.StateHasChanged();
+    }
+    private void SetElement(GameItem element)
+    {
+        currentElement = element;
+        alchemyStage++;
+        MessageManager.AddMessage("You place the " + element.ItemName + " on the " + currentMetalBar.ItemName + ".");
+        GameState.UpdateState();
+        this.StateHasChanged();
+    }
+    private void Alchemize(GameItem metal, GameItem element)
+    {
+        int totalQueplarValue = metal.QueplarValue + element.QueplarValue + thisBuilding.QueplarValue;
+        Console.WriteLine(totalQueplarValue);
+        GameItem itemCreated = Program.itemDatabase.GetItemByQueplarValue(totalQueplarValue);
+        GameState.GetPlayerInventory().RemoveOneOfItem(metal);
+        GameState.GetPlayerInventory().RemoveOneOfItem(element);
+        GameState.GetPlayerInventory().AddItem(itemCreated);
+        GameState.GetPlayer().LearnNewAlchemyRecipe(metal, element, thisBuilding, itemCreated);
+        MessageManager.AddMessage("You merge the metal and element together and produce " + itemCreated.ItemName + ".");
+        alchemyStage = 0;
+        GameState.UpdateState();
+        StateHasChanged();
+    }
+    private void ResetAlchemy()
+    {
+        alchemyStage = 0;
+        currentMetalBar = null;
+        currentElement = null;
+    }
+    public void EnterBuilding(string buildingURL)
+    {
+        GameState.previousURL = "/Inside/" + thisBuilding.URL;
+        ResetAlchemy();
+        UriHelper.NavigateTo("/Inside/" + buildingURL);
+    }
+    public void SetBuilding(string url)
+    {
+        thisBuilding = Program.buildingManager.GetBuildingByURL(url);
+        if (thisBuilding.IsShop)
+        {
+            GameState.canSell = true;
+        }
+    }
+    public RenderFragment LoadNPCs()
+    {
+        return builder =>
+        {
+            foreach (int n in thisBuilding.NPCIDs ?? Enumerable.Empty<int>())
+            {
+                NPC npc = Program.npcManager.GetNPCByID(n);
+                proofstring = npc.Name;
+                if (npc.IsInteractable == true)
+                {
+                    builder.OpenElement(0, "button");
+                    builder.AddAttribute(0, "style", "margin-bottom:10px");
+                    builder.AddAttribute(0, "class", "btn btn-primary");
+                    builder.AddAttribute(0, "onclick", () => SpeakToNPC(npc));
+                    if (npc.UnlockAreaIDs != null && npc.UnlockAreaIDs.Length > 0)
+                    {
+                        foreach (int a in npc.UnlockAreaIDs)
+                        {
+                            builder.AddAttribute(0, "onclick", () => UnlockArea(Program.areaManager.GetAreaByID(a)));
+                        }
+                    }
+                    if (npc.UnlockBuildingIDs != null && npc.UnlockBuildingIDs.Length > 0)
+                    {
+                        foreach (int b in npc.UnlockBuildingIDs)
+                        {
+                            builder.AddAttribute(0, "onclick", () => UnlockBuilding(Program.buildingManager.GetBuildingByID(b)));
+                        }
+                    }
+                    if (npc.UnlockNPCIDs != null && npc.UnlockNPCIDs.Length > 0)
+                    {
+                        foreach (int i in npc.UnlockNPCIDs)
+                        {
+                            builder.AddAttribute(0, "onclick", () => UnlockNPC(Program.npcManager.GetNPCByID(i)));
+                        }
+                    }
+                    builder.AddContent(0, "Speak to " + npc.Name);
+                    builder.CloseElement();
+                    builder.OpenElement(0, "br");
+                    builder.CloseElement();
+                    foreach (int followerID in npc.UnlockFollowerIDs ?? Enumerable.Empty<int>())
+                    {
+                        Follower f = Program.followerManager.GetFollowerByID(followerID);
+                        if (f.IsUnlocked == false)
+                        {
+                            builder.OpenElement(0, "button");
+                            builder.AddAttribute(0, "style", "margin-bottom:10px");
+                            builder.AddAttribute(0, "class", "btn btn-primary");
+                            builder.AddAttribute(0, "onclick", () => GameState.GetPlayerInventory().RemoveItems(Program.itemDatabase.GetGold(), f.Cost));
+                            builder.AddAttribute(0, "onclick", () => UnlockFollower(followerID));
+                            if (GameState.GetPlayerInventory().GetCoins() < f.Cost)
+                            {
+                                builder.AddAttribute(0, "disabled", true);
+                            }
+                            builder.AddContent(0, "Buy " + f.Name + " for " + f.Cost + "gp");
+                            builder.CloseElement();
+                            builder.OpenElement(0, "br");
+                            builder.CloseElement();
+                        }
+
+                    }
+                    foreach (int itemID in npc.PurchaseItemIDs ?? Enumerable.Empty<int>())
+                    {
+                        GameItem item = Program.itemDatabase.GetItemByID(itemID);
+                        builder.OpenElement(0, "button");
+                        builder.AddAttribute(0, "style", "margin-bottom:10px");
+                        builder.AddAttribute(0, "class", "btn btn-primary");
+                        builder.AddAttribute(0, "onclick", () => BuyItem(item, 1));
+                        if (GameState.GetPlayerInventory().GetCoins() < item.Value || GameState.GetPlayerInventory().GetAvailableSpaces() == 0)
+                        {
+                            builder.AddAttribute(0, "disabled", true);
+                        }
+                        builder.AddContent(0, "Buy " + item.ItemName + " for " + item.Value + "gp");
+                        builder.CloseElement();
+                        builder.OpenElement(0, "br");
+                        builder.CloseElement();
+                    }
+                }
+            }
+        };
+    }
+    public RenderFragment LoadBuildings()
+    {
+        return builder =>
+        {
+            foreach (string s in thisBuilding.Buildings ?? Enumerable.Empty<string>())
+            {
+                Building building = Program.buildingManager.GetBuildingByURL(s);
+                if (building != null)
+                {
+                    builder.OpenElement(0, "button");
+                    builder.AddAttribute(1, "style", "margin-bottom:10px");
+                    builder.AddAttribute(2, "class", "btn btn-primary");
+                    builder.AddAttribute(3, "onclick", () => EnterBuilding(s));
+                    if (building.ButtonText == null || building.ButtonText.Length < 1)
+                    {
+                        builder.AddContent(4, building.Name);
+                    }
+                    else
+                    {
+                        builder.AddContent(5, building.ButtonText);
+                    }
+                    builder.CloseElement();
+                }
+
+                else
+                {
+                    Console.WriteLine(s);
+                }
+                builder.OpenElement(6, "br");
+                builder.CloseElement();
+            }
+        };
+    }
+    public RenderFragment LoadRoadblocks()
+    {
+        return builder =>
+        {
+            foreach (string s in thisBuilding.UnlockableAreas ?? Enumerable.Empty<string>())
+            {
+                string[] splitData = s.Split(',');
+                string areaToUnlock = splitData[0];
+                string buttonText = splitData[1];
+                string requiredLevel = splitData[2];
+                string requiredAction = splitData[3];
+                Area area = Program.areaManager.GetAreaByName(areaToUnlock);
+                if (area.IsUnlocked == false)
+                {
+                    builder.OpenElement(0, "button");
+                    builder.AddAttribute(0, "style", "margin-bottom:10px");
+                    builder.AddAttribute(0, "class", "btn btn-primary");
+                    builder.AddAttribute(0, "onclick", () => UnlockArea(area));
+                    if (GameState.GetPlayer().HasLevelForRoadblock(requiredLevel) == false ||
+                    GameState.GetPlayerInventory().ActionIsEnabled(requiredAction) == false)
+                    {
+                        builder.AddAttribute(0, "disabled", true);
+                    }
+                    builder.AddContent(0, buttonText);
+                    builder.CloseElement();
+                }
+                builder.OpenElement(0, "br");
+                builder.CloseElement();
+            }
+        };
+    }
+    protected override void OnParametersSet()
+    {
+        SetBuilding(buildingURL);
+
+    }
+    private void BuyItem(GameItem item, int amount)
+    {
+        if (GameState.GetPlayerInventory().GetCoins() >= item.Value * amount)
+        {
+            GameState.GetPlayerInventory().RemoveItems(Program.itemDatabase.GetGold(), item.Value * amount);
+            GameState.GetPlayerInventory().AddMultipleOfItem(item, amount);
+        }
+        GameState.UpdateState();
+        StateHasChanged();
+    }
+    private void Return(string url)
+    {
+        GameState.previousURL = "/Inside/" + thisBuilding.URL;
+        ResetAlchemy();
+        UriHelper.NavigateTo(url);
+    }
+    public void UnlockArea(string areaName)
+    {
+        Program.areaManager.GetAreaByName(areaName).IsUnlocked = true;
+        UriHelper.NavigateTo("/GatherMenu/" + Program.areaManager.GetAreaByName(areaName).AreaURL);
+    }
+    public void UnlockArea(Area area)
+    {
+        area.IsUnlocked = true;
+        UriHelper.NavigateTo("/GatherMenu/" + area.AreaURL);
+    }
+    public void UnlockBuilding(Building building)
+    {
+        building.IsUnlocked = true;
+        GameState.UpdateState();
+    }
+    public void UnlockNPC(NPC npc)
+    {
+        npc.IsInteractable = true;
+        GameState.UpdateState();
+    }
+    public void UnlockFollower(int followerID)
+    {
+
+        if (Program.followerManager.GetNumberOfUnlockedFollowers() == 0)
+        {
+            MessageManager.AddMessage(Program.followerManager.GetFollowerByID(followerID).Name + " will now follow you. Go to your bank and select \"Followers\" at the top of the screen to set them as your follower.");
+        }
+        else
+        {
+            MessageManager.AddMessage(Program.followerManager.GetFollowerByID(followerID).Name + " will now follow you.");
+        }
+        Program.followerManager.GetFollowerByID(followerID).IsUnlocked = true;
+        GameState.UpdateState();
+    }
+    public void SpeakToNPC(NPC npc)
+    {
+        MessageManager.AddMessage(npc.SpokenText);
+        GameState.UpdateState();
+    }
+    protected override void OnInit()
+    {
+        GameState.StateChanged += OnGameStateChanged;
+
+        this.StateHasChanged();
+        GameState.UpdateState();
+    }
+    public void Dispose()
+    {
+        GameState.canSell = false;
+        ResetAlchemy();
+        GameState.StateChanged -= OnGameStateChanged;
+    }
+    void OnGameStateChanged(object sender, EventArgs e) => StateHasChanged();
+}

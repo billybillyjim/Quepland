@@ -1,0 +1,46 @@
+[
+  {
+    "name": "Jumbo",
+    "id": 0,
+    "spokenText": "Feel free to browse. I'll buy anything you have on you. If you're interested in my Gnome, Lumpy is just 1000gp.",
+    "unlockFollowerIDs": [ 0 ],
+    "isInteractable": true
+  },
+  {
+    "name": "Mayor Quellando",
+    "id": 1,
+    "spokenText": "Who are you? Get out of my house.",
+    "isInteractable": true
+  },
+  {
+    "name": "Dwarf",
+    "id": 2,
+    "spokenText": "Who are you? Get out of my house.",
+    "isInteractable": true
+  },
+  {
+    "name": "Dwarf",
+    "id": 3,
+    "spokenText": "Who are you? Get out of my house.",
+    "isInteractable": true
+  },
+  {
+    "name": "Dwarf",
+    "id": 4,
+    "spokenText": "Who are you? Get out of my house.",
+    "isInteractable": true
+  },
+  {
+    "name": "Strange Man",
+    "id": 5,
+    "spokenText": "One, two, travel true, one, one, don't run, three, three, almost free, two, two, and you're through.",
+    "isInteractable": true
+  },
+  {
+    "name": "Old Man",
+    "id": 6,
+    "spokenText": "Membership card?",
+    "purchaseItemIDs": [139],
+    "isInteractable": true
+  }
+]

@@ -1,0 +1,500 @@
+@inject GameState GameState
+@inject MessageManager MessageManager
+@implements IDisposable
+@using System.Threading
+
+@LoadInventory()
+
+@functions{
+
+    private bool isUsing;
+    private GameItem currentUsedItem;
+    private int[,] usableIDs;
+    private Timer createRepeatTimer;
+
+    private RenderFragment LoadInventory()
+    {
+        return builder =>
+        {
+            builder.OpenElement(0, "div");
+            builder.AddAttribute(1, "class", "table-hover");
+
+            builder.OpenElement(2, "h1");
+            builder.AddContent(3, "Inventory");
+            builder.CloseElement();
+
+            builder.OpenElement(4, "p");
+            builder.AddContent(5, GameState.GetPlayerInventory().GetFreeSpacesString());
+            builder.CloseElement();
+
+
+            builder.OpenElement(5, "p");
+            if (GameState.GetPlayer().activeFollower == null)
+            {
+                builder.AddContent(6, "No current follower");
+            }
+            else
+            {
+                builder.AddContent(6, GameState.GetPlayer().activeFollower.ToString());
+            }
+
+            builder.CloseElement();
+
+            builder.OpenElement(7, "table");
+            builder.AddAttribute(8, "style", "width:100%");
+            builder.OpenElement(9, "thead");
+            builder.OpenElement(10, "tr");
+            builder.OpenElement(11, "th");
+            builder.AddAttribute(12, "align", "left");
+            builder.AddContent(13, "Item");
+            builder.CloseElement();
+
+            builder.OpenElement(14, "th");
+            builder.AddAttribute(15, "style", "text-align:right");
+            builder.AddContent(16, "Amount");
+            builder.CloseElement();
+
+            builder.CloseElement();
+            builder.CloseElement();
+
+            builder.OpenElement(17, "tbody");
+            if (GameState.GetPlayerInventory() != null)
+            {
+                foreach (KeyValuePair<GameItem, int> item in GameState.GetPlayerInventory().GetItems())
+                {
+
+                    builder.AddContent(18, LoadItem(item));
+
+                }
+
+            }
+            builder.CloseElement();
+            builder.CloseElement();
+            builder.CloseElement();
+        };
+    }
+    private RenderFragment LoadItem(KeyValuePair<GameItem, int> item)
+    {
+        return builder =>
+        {
+            builder.OpenElement(0, "tr");
+            builder.AddAttribute(1, "class", "buddy-top");
+            if (item.Key.IsEquipped)
+            {
+                builder.AddAttribute(2, "style", "background-color:aquamarine");
+            }
+            builder.OpenElement(3, "td");
+            builder.AddAttribute(4, "style", "text-align:left");
+            builder.AddContent(5, item.Key.ItemName);
+            builder.CloseElement();
+            builder.OpenElement(6, "td");
+            builder.AddAttribute(7, "style", "text-align:right");
+            builder.OpenElement(8, "font");
+            builder.AddAttribute(9, "size", "4");
+
+            if (item.Key.IsStackable)
+            {
+                builder.AddContent(10, "1 Stack of " + item.Value);
+            }
+            else
+            {
+                builder.AddContent(11, item.Value);
+            }
+            builder.CloseElement();
+            builder.CloseElement();
+            builder.CloseElement();
+            if (item.Key.IsUsable)
+            {
+
+                builder.OpenElement(12, "tr");
+                if (item.Key.IsEquipped)
+                {
+                    builder.AddAttribute(13, "style", "background-color:aquamarine");
+                }
+
+                builder.AddAttribute(14, "class", "buddy-mid");
+
+
+                builder.OpenElement(16, "td");
+                builder.CloseElement();
+                builder.OpenElement(17, "td");
+                builder.AddAttribute(18, "style", "text-align:right");
+                builder.OpenElement(19, "button");
+                builder.AddAttribute(20, "class", "btn btn-primary");
+                if (!isUsing)
+                {
+                    builder.AddAttribute(21, "onclick", () => Use(item.Key));
+                    builder.AddContent(22, "Use " + item.Key.ItemName);
+                }
+                else
+                {
+                    builder.AddAttribute(23, "onclick", () => CancelUse());
+                    builder.AddContent(24, "Cancel");
+                }
+                builder.CloseElement();
+                builder.CloseElement();
+
+                builder.CloseElement();
+
+
+            }
+            if (usableIDs != null)
+            {
+                for (int i = 0; i < usableIDs.GetLength(0); i++)
+                {
+                    if (usableIDs[i, 0] == item.Key.Id)
+                    {
+                        builder.AddContent(25, UseButton(i, item.Key));
+                    }
+                }
+            }
+            if (item.Key.IsUnpackable)
+            {
+                builder.AddContent(26, UnpackButton(item));
+            }
+            if (item.Key.IsEquipable)
+            {
+                builder.AddContent(27, EquipButtons(item));
+            }
+            if (GameState.canBank)
+            {
+                builder.AddContent(28, BankButtons(item));
+            }
+            if (GameState.canSell && item.Key.Id != 0)
+            {
+                builder.AddContent(29, SellButtons(item));
+            }
+        };
+    }
+    private RenderFragment UnpackButton(KeyValuePair<GameItem, int> item)
+    {
+        return builder =>
+        {
+            builder.OpenElement(0, "tr");
+            if (item.Key.IsEquipped)
+            {
+                builder.AddAttribute(1, "style", "background-color:aquamarine");
+            }
+
+            builder.AddAttribute(2, "class", "buddy-mid");
+
+
+
+            builder.OpenElement(4, "td");
+            builder.CloseElement();
+            builder.OpenElement(5, "td");
+            builder.AddAttribute(6, "style", "text-align:right");
+            builder.OpenElement(7, "button");
+            builder.AddAttribute(8, "class", "btn btn-primary");
+            builder.AddAttribute(9, "onclick", () => UnpackItem(item.Key));
+            if (GameState.GetPlayerInventory().GetAvailableSpaces() < item.Key.UnpackIDs.Length)
+            {
+                builder.AddAttribute(10, "disabled", true);
+            }
+            builder.AddContent(11, item.Key.UnpackString);
+            builder.CloseElement();
+            builder.CloseElement();
+            builder.CloseElement();
+        };
+    }
+    private RenderFragment EquipButtons(KeyValuePair<GameItem, int> item)
+    {
+        return builder =>
+        {
+            builder.OpenElement(0, "tr");
+            if (item.Key.IsEquipped)
+            {
+                builder.AddAttribute(1, "style", "background-color:aquamarine");
+            }
+
+            builder.AddAttribute(3, "class", "buddy-mid");
+
+
+            builder.OpenElement(4, "td");
+            builder.CloseElement();
+            builder.OpenElement(5, "td");
+            builder.AddAttribute(6, "style", "text-align:right");
+            builder.OpenElement(7, "button");
+            builder.AddAttribute(8, "class", "btn btn-primary");
+            if (item.Key.IsEquipped)
+            {
+                builder.AddAttribute(9, "onclick", () => Unequip(item.Key));
+                builder.AddContent(10, "Unequip");
+            }
+            else
+            {
+                builder.AddAttribute(11, "onclick", () => Equip(item.Key));
+                builder.AddContent(12, "Equip");
+            }
+
+            builder.CloseElement();
+            builder.CloseElement();
+            builder.CloseElement();
+        };
+    }
+    private RenderFragment BankButtons(KeyValuePair<GameItem, int> item)
+    {
+        return builder =>
+        {
+            builder.OpenElement(0, "tr");
+            builder.AddAttribute(1, "class", "buddy-mid");
+            if (item.Key.IsEquipped)
+            {
+                builder.AddAttribute(2, "style", "background-color:aquamarine");
+            }
+            builder.OpenElement(3, "td");
+            builder.AddContent(4, "Deposit");
+            builder.CloseElement();
+            builder.OpenElement(5, "td");
+            builder.AddAttribute(6, "style", "text-align:right");
+            builder.OpenElement(7, "button");
+            builder.AddAttribute(8, "class", "btn btn-primary");
+            builder.AddAttribute(9, "style", "margin:3px");
+            builder.AddAttribute(10, "onclick", () => Deposit(item, 1));
+            builder.AddContent(11, "1");
+            builder.CloseElement();
+            builder.OpenElement(12, "button");
+            builder.AddAttribute(13, "class", "btn btn-primary");
+            builder.AddAttribute(14, "style", "margin:3px");
+            builder.AddAttribute(15, "onclick", () => Deposit(item, 5));
+            builder.AddContent(16, "5");
+            builder.CloseElement();
+            builder.OpenElement(17, "button");
+            builder.AddAttribute(18, "class", "btn btn-primary");
+            builder.AddAttribute(19, "style", "margin:3px");
+            builder.AddAttribute(20, "onclick", () => Deposit(item, int.MaxValue));
+            builder.AddContent(21, "All");
+            builder.CloseElement();
+            builder.CloseElement();
+            builder.CloseElement();
+        };
+    }
+    private RenderFragment SellButtons(KeyValuePair<GameItem, int> item)
+    {
+        return builder =>
+        {
+            builder.OpenElement(0, "tr");
+            builder.AddAttribute(1, "class", "buddy-mid");
+            if (item.Key.IsEquipped)
+            {
+                builder.AddAttribute(2, "style", "background-color:aquamarine");
+            }
+            builder.OpenElement(3, "td");
+            builder.AddContent(4, "Sell");
+            builder.CloseElement();
+            builder.OpenElement(5, "td");
+            builder.AddAttribute(6, "style", "text-align:right");
+            builder.OpenElement(7, "button");
+            builder.AddAttribute(8, "class", "btn btn-primary");
+            builder.AddAttribute(9, "style", "margin:3px");
+            builder.AddAttribute(10, "onclick", () => Sell(item, 1));
+        //If the player has a full inventory and no place for coins, they can't sell part of a stack.
+        if (item.Key.IsStackable && item.Value > 1 && GameState.GetPlayerInventory().GetAvailableSpaces() == 0 && GameState.GetPlayerInventory().GetCoins() == 0)
+            {
+                builder.AddAttribute(11, "disabled", true);
+                builder.AddAttribute(12, "title", "You don't have inventory space for the coins you would receive.");
+            }
+            builder.AddContent(13, "1");
+            builder.CloseElement();
+            builder.OpenElement(14, "button");
+            builder.AddAttribute(15, "class", "btn btn-primary");
+            builder.AddAttribute(16, "style", "margin:3px");
+            builder.AddAttribute(17, "onclick", () => Sell(item, 5));
+        //If the player has a full inventory and no place for coins, they can't sell part of a stack.
+        if (item.Key.IsStackable && item.Value > 5 && GameState.GetPlayerInventory().GetAvailableSpaces() == 0 && GameState.GetPlayerInventory().GetCoins() == 0)
+            {
+                builder.AddAttribute(18, "disabled", true);
+                builder.AddAttribute(19, "title", "You don't have inventory space for the coins you would receive.");
+            }
+            builder.AddContent(20, "5");
+            builder.CloseElement();
+            builder.OpenElement(21, "button");
+            builder.AddAttribute(22, "class", "btn btn-primary");
+            builder.AddAttribute(23, "style", "margin:3px");
+            builder.AddAttribute(24, "onclick", () => Sell(item, int.MaxValue));
+            builder.AddContent(25, "All");
+            builder.CloseElement();
+            builder.CloseElement();
+            builder.CloseElement();
+
+        };
+    }
+    private RenderFragment UseButton(int i, GameItem item)
+    {
+        return builder =>
+        {
+            GameItem itemToMake = Program.itemDatabase.GetItemByID(usableIDs[i, 1]);
+            builder.OpenElement(0, "tr");
+            builder.AddAttribute(0, "class", "buddy-mid");
+            builder.OpenElement(1, "td");
+            builder.CloseElement();
+            builder.OpenElement(2, "td");
+            builder.AddAttribute(3, "align", "right");
+            builder.OpenElement(4, "button");
+            builder.AddAttribute(5, "class", "btn btn-primary");
+            builder.AddAttribute(6, "onclick", () => Create(item, i));
+            if (GameState.GetPlayer().HasRequiredLevel(itemToMake) == false)
+            {
+                builder.AddAttribute(7, "disabled", true);
+                builder.AddAttribute(8, "title", "You lack the " + itemToMake.ActionRequired + " level to do this. (" + itemToMake.RequiredLevel + ")");
+            }
+            builder.AddContent(7, itemToMake.ItemName);
+            builder.CloseElement();
+            builder.CloseElement();
+            builder.CloseElement();
+        };
+    }
+    private RenderFragment EatButton(GameItem item)
+    {
+        return builder =>
+        {
+
+        };
+    }
+    private string Deposit(KeyValuePair<GameItem, int> item, int amount)
+    {
+        Console.WriteLine("Depositing");
+        if (amount > item.Value)
+        {
+            amount = item.Value;
+        }
+        if (item.Key.IsEquipable && item.Key.IsEquipped)
+        {
+            Unequip(item.Key);
+        }
+        GameState.GetPlayerBank().GetInventory().AddMultipleOfItem(item.Key, amount);
+        GameState.GetPlayerInventory().RemoveItems(item.Key, amount);
+        GameState.UpdateState();
+        return "";
+    }
+    private string Sell(KeyValuePair<GameItem, int> item, int amount)
+    {
+        Console.WriteLine("Selling");
+        if (amount > item.Value)
+        {
+            amount = item.Value;
+        }
+        if (item.Key.IsEquipable && item.Key.IsEquipped)
+        {
+            Unequip(item.Key);
+        }
+        GameState.GetPlayerInventory().RemoveItems(item.Key, amount);
+        GameState.GetPlayerInventory().AddMultipleOfItem(Program.itemDatabase.GetGold(), (int)((item.Key.Value * amount) / 2d));
+        GameState.UpdateState();
+        return "";
+    }
+    private string Use(GameItem item)
+    {
+        if (currentUsedItem != item && item.IsUsable)
+        {
+            usableIDs = Extensions.To2DArray<int>(item.UsableIDs);
+            currentUsedItem = item;
+        }
+        isUsing = true;
+        GameState.UpdateState();
+        StateHasChanged();
+        return "";
+    }
+    private string CancelUse()
+    {
+        if (createRepeatTimer != null)
+        {
+            createRepeatTimer.Dispose();
+        }
+        currentUsedItem = null;
+        isUsing = false;
+        usableIDs = null;
+
+        GameState.UpdateState();
+        StateHasChanged();
+        return "";
+    }
+    private string UnpackItem(GameItem item)
+    {
+        int itemsCreated = item.UnpackIDs.Length;
+
+        if (GameState.GetPlayerInventory().GetAvailableSpaces() < itemsCreated)
+        {
+            return "";
+        }
+        GameState.GetPlayerInventory().RemoveOneOfItem(item);
+        foreach (int id in item.UnpackIDs)
+        {
+            GameState.GetPlayerInventory().AddItem(Program.itemDatabase.GetItemByID(id));
+
+        }
+
+        GameState.UpdateState();
+        this.StateHasChanged();
+        return "";
+    }
+    private string Create(GameItem itemUsed, int itemCreatedID)
+    {
+        if (createRepeatTimer != null)
+        {
+            createRepeatTimer.Dispose();
+        }
+
+        createRepeatTimer = new Timer(new TimerCallback(_ =>
+        {
+            GameItem itemCreated = Program.itemDatabase.GetItemByID(usableIDs[itemCreatedID, 1]);
+            Console.WriteLine(itemCreated);
+            GameState.GetPlayerInventory().RemoveOneOfItem(itemUsed);
+            GameState.GetPlayerInventory().AddItem(itemCreated);
+            MessageManager.AddMessage(itemCreated.GatherString);
+            GameState.GetPlayer().GainExperience(itemCreated.ExperienceGained);
+            if (currentUsedItem.DestroyOnUse)
+            {
+                GameState.GetPlayerInventory().RemoveOneOfItem(currentUsedItem);
+                if (GameState.GetPlayerInventory().HasItem(currentUsedItem) == false)
+                {
+                    MessageManager.AddMessage("You have run out of " + currentUsedItem.ItemName + ".");
+                    CancelUse();
+                }
+            }
+            if (GameState.GetPlayerInventory().HasItem(itemUsed) == false)
+            {
+                MessageManager.AddMessage("You have run out of " + itemUsed.ItemName + ".");
+                CancelUse();
+            }
+
+
+        //CancelUse();
+        GameState.UpdateState();
+            StateHasChanged();
+        }), null, 500, 1000);
+
+
+        return "";
+    }
+    public void Equip(GameItem item)
+    {
+        GameState.GetPlayer().EquipItem(item);
+        if (GameState.attackTimer != null)
+        {
+            GameState.attackTimer.Change(GameState.GetPlayer().GetWeaponAttackSpeed(), GameState.GetPlayer().GetWeaponAttackSpeed());
+        }
+        GameState.UpdateState();
+        StateHasChanged();
+    }
+    public void Unequip(GameItem item)
+    {
+        GameState.GetPlayer().UnequipItem(item);
+        if (GameState.attackTimer != null)
+        {
+            GameState.attackTimer.Change(GameState.GetPlayer().GetWeaponAttackSpeed(), GameState.GetPlayer().GetWeaponAttackSpeed());
+        }
+        GameState.UpdateState();
+        StateHasChanged();
+    }
+    protected override void OnInit()
+    {
+        GameState.StateChanged += OnInventoryStateChanged;
+    }
+    public void Dispose()
+    {
+        GameState.StateChanged -= OnInventoryStateChanged;
+    }
+    void OnInventoryStateChanged(object sender, EventArgs e) => StateHasChanged();
+}
+

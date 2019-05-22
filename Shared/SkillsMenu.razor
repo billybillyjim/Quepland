@@ -1,0 +1,239 @@
+@inject GameState GameState
+@implements IDisposable
+
+@if (currentSkill == null)
+{
+    @LoadSkillsMenu()
+}
+else
+{
+    @LoadSkillInfoMenu()
+}
+
+@functions{
+
+    private RenderFragment LoadSkillInfoMenu()
+    {
+        return builder =>
+        {
+            builder.OpenElement(0, "button");
+            builder.AddAttribute(1, "class", "btn btn-primary");
+            builder.AddAttribute(2, "style", "margin:10px");
+            builder.AddAttribute(2, "onclick", () => SetSkill(null));
+            builder.AddContent(3, "Return");
+            builder.CloseElement();
+            builder.OpenElement(4, "p");
+            builder.AddContent(5, currentSkill.SkillDescription);
+            builder.CloseElement();
+            if (currentSkill.SkillName == "Alchemy")
+            {
+                builder.OpenElement(6, "table");
+                builder.AddAttribute(6, "class", "table-bordered");
+                builder.AddAttribute(7, "style", "width:100%");
+                builder.OpenElement(8, "thead");
+                builder.OpenElement(9, "tr");
+                builder.OpenElement(10, "th");
+                builder.AddAttribute(11, "align", "left");
+                builder.AddContent(12, "Recipe");
+                builder.CloseElement();
+                builder.CloseElement();
+                builder.CloseElement();
+                builder.OpenElement(16, "tbody");
+                foreach (string recipe in GameState.GetPlayer().GetRecipes())
+                {
+                    builder.OpenElement(17, "tr");
+                    builder.OpenElement(18, "td");
+
+                    builder.AddContent(19, recipe);
+                    builder.CloseElement();
+                    builder.CloseElement();
+                }
+                builder.CloseElement();
+                builder.CloseElement();
+            }
+            else
+            {
+                builder.OpenElement(6, "table");
+                builder.AddAttribute(7, "style", "width:100%");
+                builder.OpenElement(8, "thead");
+                builder.OpenElement(9, "tr");
+                builder.OpenElement(10, "th");
+                builder.AddAttribute(11, "align", "left");
+                builder.AddContent(12, "Item");
+                builder.CloseElement();
+                builder.OpenElement(13, "th");
+                builder.AddAttribute(14, "style", "text-align:right");
+                builder.AddContent(15, "Level Required");
+                builder.CloseElement();
+                builder.CloseElement();
+                builder.CloseElement();
+                builder.OpenElement(16, "tbody");
+
+                foreach (GameItem item in Program.itemDatabase.GetItemsWithSkillRequirement(currentSkill))
+                {
+                    builder.OpenElement(17, "tr");
+
+                    builder.OpenElement(18, "td");
+                    builder.AddContent(19, item.ItemName);
+                    builder.CloseElement();
+
+                    if (item.Damage > 0)
+                    {
+                        builder.OpenElement(20, "td");
+                        builder.AddAttribute(21, "style", "text-align:right");
+                        builder.AddContent(22, item.Damage);
+                        builder.CloseElement();
+                    }
+
+                    builder.OpenElement(21, "td");
+                    builder.AddAttribute(22, "style", "text-align:right");
+                    builder.AddContent(23, item.RequiredLevel);
+                    builder.CloseElement();
+
+                   /* if (item.GatherSpeed > 0 && item.ExperienceGained != null)
+                    {
+                        int expGain = int.Parse(item.ExperienceGained.Split(':')[1]);
+                        builder.OpenElement(24, "td");
+                        builder.AddAttribute(25, "style", "text-align:right");
+                        float expHour = ((float)expGain / item.GatherSpeed) * 3600;
+                        builder.AddContent(26, "," + expHour);
+                        builder.CloseElement();
+                        builder.OpenElement(27, "td");
+                        builder.AddAttribute(28, "style", "text-align:right");
+                        float valueHour = ((float)item.Value / item.GatherSpeed) * 3600;
+                        builder.AddContent(29, "," + valueHour);
+                        builder.CloseElement();
+                        builder.OpenElement(30, "td");
+                        builder.AddAttribute(31, "style", "text-align:right");
+                        float ratio = expHour / valueHour;
+                        builder.AddContent(32, "," + ratio);
+                        builder.CloseElement();
+                    }*/
+
+                    builder.CloseElement();
+                }
+                builder.CloseElement();
+                builder.CloseElement();
+            }
+
+        };
+    }
+
+    private RenderFragment LoadSkillsMenu()
+    {
+        return builder =>
+        {
+            builder.OpenElement(0, "div");
+            builder.AddAttribute(1, "class", "table-bordered");
+
+            builder.OpenElement(2, "h1");
+            builder.AddContent(3, "Skills");
+            builder.CloseElement();
+
+            builder.OpenElement(4, "table");
+            builder.AddAttribute(5, "style", "width:100%");
+            builder.OpenElement(6, "thead");
+            builder.OpenElement(7, "tr");
+            builder.OpenElement(8, "th");
+            builder.AddAttribute(9, "align", "left");
+            builder.AddContent(10, "Skill");
+            builder.CloseElement();
+
+            builder.OpenElement(11, "th");
+            builder.AddContent(12, "Experience");
+            builder.CloseElement();
+
+            builder.OpenElement(13, "th");
+            builder.AddAttribute(14, "text-align", "right");
+            builder.AddContent(15, "Level");
+            builder.CloseElement();
+            builder.CloseElement();
+            builder.CloseElement();
+            builder.OpenElement(16, "tbody");
+            if (GameState.GetPlayer() != null)
+            {
+                foreach (Skill skill in GameState.GetPlayer().GetSkills())
+                {
+                    builder.OpenElement(17, "tr");
+                    builder.AddAttribute(17, "class", "skill-table");
+                    builder.OpenElement(18, "td");
+                    builder.AddAttribute(19, "onclick", () => SetSkill(skill));
+                    builder.AddAttribute(20, "style", "cursor:pointer");
+
+                    builder.AddContent(21, skill.SkillName);
+                    builder.CloseElement();
+
+                    builder.OpenElement(22, "td");
+                    builder.OpenElement(23, "div");
+                    builder.AddAttribute(24, "class", "progress");
+                    if (skill.SkillLevel == 1)
+                    {
+                        builder.AddAttribute(24, "title", "Exp to Next Level: " + (Extensions.GetExperienceRequired(1) - skill.SkillExperience));
+                    }
+                    else
+                    {
+                        builder.AddAttribute(24, "title", "Exp to Next Level: " + (Extensions.GetExperienceRequired(skill.SkillLevel + 1) - skill.SkillExperience));
+                    }
+
+                    builder.OpenElement(25, "div");
+
+                    builder.AddAttribute(26, "class", "progress-bar bg-success");
+                    builder.AddAttribute(27, "style", GetWidthString(skill));
+                    builder.AddAttribute(28, "role", "progressbar");
+                    builder.AddAttribute(29, "aria-valuenow", GetValueString(skill));
+                    builder.AddAttribute(30, "aria-valuemin", "0");
+                    builder.AddAttribute(31, "aria-valuemax", "100");
+
+                    builder.OpenElement(32, "font");
+                    builder.AddAttribute(33, "color", "black");
+
+                    builder.AddContent(34, skill.SkillExperience);
+                    builder.CloseElement();
+                    builder.CloseElement();
+
+                    builder.CloseElement();
+                    builder.CloseElement();
+
+                    builder.OpenElement(35, "tr");
+                    builder.AddContent(36, skill.SkillLevel);
+                    builder.CloseElement();
+
+                    builder.CloseElement();
+
+                }
+            }
+            builder.CloseElement();
+            builder.CloseElement();
+
+            builder.CloseElement();
+        };
+    }
+
+    public Skill currentSkill;
+
+    public void SetSkill(Skill skill)
+    {
+        currentSkill = skill;
+        StateHasChanged();
+    }
+    private string GetWidthString(Skill skill)
+    {
+        return "width: " + Extensions.GetProgressForLevel(skill.SkillExperience, skill.SkillLevel) + "%";
+    }
+    private string GetValueString(Skill skill)
+    {
+        return "" + Extensions.GetProgressForLevel(skill.SkillExperience, skill.SkillLevel);
+    }
+
+    protected override void OnInit()
+    {
+        GameState.StateChanged += OnInventoryStateChanged;
+        this.StateHasChanged();
+    }
+    public void Dispose()
+    {
+        GameState.StateChanged -= OnInventoryStateChanged;
+    }
+    void OnInventoryStateChanged(object sender, EventArgs e) => StateHasChanged();
+}
+

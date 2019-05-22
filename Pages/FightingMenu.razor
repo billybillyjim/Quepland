@@ -1,0 +1,241 @@
+﻿@page "/FightingMenu/{thisArea}"
+@inject GameState  GameState
+@inject MessageManager  MessageManager
+@using System.Threading;
+@inject Microsoft.AspNetCore.Blazor.Services.WebAssemblyUriHelper UriHelper
+
+@if (area != null)
+{
+    <p>You are seeking enemies to fight in @area.Name</p>
+    @winString
+    <br />
+    @LoadBattleMenu()
+    @if (battleFound)
+    {
+        @LoadBattle()
+    }
+
+}
+
+@functions{
+
+    [Parameter]
+    private string thisArea { get; set; }
+    private Area area;
+    Random rand = new Random();
+    private bool battleFound;
+    private Monster opponent;
+    private Timer monsterAttackTimer;
+    private List<Monster> possibleMonsters = new List<Monster>();
+    private string areaURL;
+    private string winString = "";
+
+    private RenderFragment LoadBattleMenu()
+    {
+        return builder =>
+        {
+            builder.OpenElement(0, "button");
+            builder.AddAttribute(0, "class", "btn btn-primary");
+            builder.AddAttribute(0, "style", "margin-bottom:10px");
+            builder.AddAttribute(0, "onclick", () => FindBattle());
+            builder.AddContent(0, "Find Battle");
+            builder.CloseElement();
+        };
+    }
+    private RenderFragment LoadBattle()
+    {
+        return builder =>
+        {
+            builder.OpenElement(0, "p");
+            builder.OpenElement(1, "span");
+            builder.AddAttribute(1, "style", "float:left");
+            builder.AddContent(1, opponent.Name);
+            builder.CloseElement();
+            builder.OpenElement(1, "span");
+            builder.AddAttribute(1, "style", "float:right");
+            builder.AddContent(1, "You");
+            builder.CloseElement();
+            builder.CloseElement();
+
+            builder.OpenElement(0, "br");
+            builder.CloseElement();
+
+            builder.OpenElement(0, "p");
+            builder.OpenElement(1, "span");
+            builder.AddAttribute(1, "style", "float:left");
+            builder.AddContent(1, opponent.CurrentHP + "/" + opponent.HP);
+            builder.CloseElement();
+
+            builder.OpenElement(1, "span");
+            builder.AddAttribute(1, "style", "float:right");
+            builder.AddContent(1, GameState.GetPlayer().CurrentHP + "/" + GameState.GetPlayer().GetSkill("HP").SkillLevel);
+            builder.CloseElement();
+            builder.CloseElement();
+
+            builder.OpenElement(0, "br");
+            builder.CloseElement();
+
+            builder.AddContent(0, LoadHPBars());
+
+            builder.OpenElement(0, "br");
+            builder.CloseElement();
+
+            builder.OpenElement(0, "button");
+            builder.AddAttribute(0, "class", "btn btn-primary");
+            builder.AddAttribute(0, "style", "margin-bottom:10px");
+            builder.AddAttribute(0, "onclick", () => StartBattle());
+            if (battleFound == false)
+            {
+                builder.AddAttribute(0, "disabled", true);
+            }
+            builder.AddContent(0, "Start Battle");
+            builder.CloseElement();
+
+        };
+    }
+    private RenderFragment LoadHPBars()
+    {
+        return builder =>
+        {
+            builder.OpenElement(0, "div");
+            builder.AddAttribute(1, "class", "progress");
+
+            builder.OpenElement(2, "div");
+            builder.AddAttribute(3, "class", "progress-bar bg-success");
+            builder.AddAttribute(4, "style", "width:" + ((float)opponent.CurrentHP / opponent.HP) * 100 + "%");
+            builder.AddAttribute(5, "role", "progressbar");
+            builder.AddAttribute(6, "aria-valuenow", "" + ((float)opponent.CurrentHP / opponent.HP) * 100);
+            builder.AddAttribute(7, "aria-valuemin", "0");
+            builder.AddAttribute(8, "aria-valuemax", "" + opponent.HP);
+            builder.CloseElement();
+            builder.CloseElement();
+        };
+    }
+    public void FindBattle()
+    {
+        opponent = possibleMonsters[rand.Next(0, possibleMonsters.Count)];
+        opponent.CurrentHP = opponent.HP;
+        battleFound = true;
+    }
+    public void StartBattle()
+    {
+        GameState.attackTimer = new Timer(new TimerCallback(_ =>
+        {
+            if (opponent.CurrentHP <= 0)
+            {
+                WinBattle();
+            }
+            else
+            {
+                Attack();
+            }
+            GameState.UpdateState();
+            this.StateHasChanged();
+
+        }), null, GameState.GetPlayer().GetWeaponAttackSpeed(), GameState.GetPlayer().GetWeaponAttackSpeed());
+        monsterAttackTimer = new Timer(new TimerCallback(_ =>
+        {
+
+            if (GameState.GetPlayer().CurrentHP <= 0)
+            {
+                LoseBattle();
+            }
+            else
+            {
+                BeAttacked();
+            }
+            GameState.UpdateState();
+            this.StateHasChanged();
+        }), null, 1000 * opponent.AttackSpeed, 1000 * opponent.AttackSpeed);
+        GameState.UpdateState();
+        this.StateHasChanged();
+    }
+    public void Attack()
+    {
+        if (battleFound)
+        {
+            int dmgDealt = Math.Min(GameState.GetPlayer().GetDamageDealt(), opponent.CurrentHP);
+            if (GameState.GetPlayer().GetWeapon() != null)
+            {
+                GameState.GetPlayer().GainExperience(GameState.GetPlayer().GetWeapon().ActionRequired.Split(':')[0], dmgDealt * 8);
+            }
+            else
+            {
+                GameState.GetPlayer().GainExperience("Strength", dmgDealt * 6);
+            }
+            opponent.CurrentHP -= dmgDealt;
+            MessageManager.AddMessage("You dealt " + dmgDealt + " damage to the " + opponent.Name);
+
+        }
+
+    }
+    public void BeAttacked()
+    {
+        if (battleFound)
+        {
+            int dmg = Math.Max(1, Extensions.GetGaussianRandomInt(opponent.Damage, opponent.Damage / 2d));
+            GameState.GetPlayer().GainExperience("HP", Math.Min(GameState.GetPlayer().CurrentHP, dmg) * 15);
+            GameState.GetPlayer().CurrentHP -= dmg;
+            MessageManager.AddMessage("You took " + dmg + " damage from the " + opponent.Name + "'s attack.");
+
+        }
+
+    }
+    public void WinBattle()
+    {
+        GameState.GetPlayerInventory().AddOneOfMultipleItems(Program.itemDatabase.GetItems(opponent.AlwaysDrops));
+        GameState.GetPlayerInventory().AddItem(Program.itemDatabase.GetItemByID(Extensions.GetDrop(opponent)));
+        battleFound = false;
+        if (GameState.attackTimer != null)
+        {
+            GameState.attackTimer.Dispose();
+        }
+        if (monsterAttackTimer != null)
+        {
+            monsterAttackTimer.Dispose();
+        }
+
+
+        MessageManager.AddMessage("You defeated " + opponent.Name);
+        winString = "You won!";
+    }
+    public void LoseBattle()
+    {
+        MessageManager.AddMessage("You died to " + opponent.Name);
+        GameState.GetPlayer().CurrentHP = GameState.GetPlayer().GetSkill("HP").SkillLevel;
+        battleFound = false;
+        if (GameState.attackTimer != null)
+        {
+            GameState.attackTimer.Dispose();
+        }
+        if (monsterAttackTimer != null)
+        {
+            monsterAttackTimer.Dispose();
+        }
+        winString = "You lost!";
+    }
+    protected override void OnParametersSet()
+    {
+        SetArea(thisArea);
+    }
+    private void SetArea(string areaString)
+    {
+        area = Program.areaManager.GetAreaByURL(areaString);
+        GameState.currentArea = area;
+        possibleMonsters = Program.battleManager.GetMonstersForArea(area);
+    }
+    protected override void OnInit()
+    {
+        GameState.StateChanged += OnGameStateChanged;
+        GameState.canSell = false;
+        GameState.GetPlayer().CurrentHP = GameState.GetPlayer().GetSkill("HP").SkillLevel;
+        this.StateHasChanged();
+        GameState.UpdateState();
+    }
+    public void Dispose()
+    {
+        GameState.attackTimer.Dispose();
+        GameState.StateChanged -= OnGameStateChanged;
+    }
+    void OnGameStateChanged(object sender, EventArgs e) => StateHasChanged();
+}
