@@ -251,4 +251,32 @@ public class Player
             return 1500;
         }
     }
+    public float GetGatherSpeed(string skill)
+    {
+        float totalBonus = 1;
+        foreach(GameItem item in equippedItems)
+        {
+            if (item.ActionsEnabled.Contains(skill))
+            {
+                totalBonus -= item.GatherSpeedBonus;
+            }
+        }
+        totalBonus = Math.Max(totalBonus, 0.1f);
+        return totalBonus;
+    }
+    public bool HasItemToAccessArea(string requirement)
+    {
+        if(requirement == null)
+        {
+            return true;
+        }
+        foreach(KeyValuePair<GameItem, int> item in inventory.GetItems())
+        {
+            if(item.Key.ActionsEnabled == requirement)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }

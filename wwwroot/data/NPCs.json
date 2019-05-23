@@ -13,22 +13,25 @@
     "isInteractable": true
   },
   {
-    "name": "Dwarf",
+    "name": "Angry Dwarf",
     "id": 2,
-    "spokenText": "Who are you? Get out of my house.",
-    "isInteractable": true
+    "spokenText": "Who are you? What do you want? Sounds pretty stupid to me.",
+    "isInteractable": true,
+    "unlockFollowerIDs": [2]
   },
   {
-    "name": "Dwarf",
+    "name": "Mining Dwarf",
     "id": 3,
-    "spokenText": "Who are you? Get out of my house.",
-    "isInteractable": true
+    "spokenText": "Yes? I'm a little busy mining here.",
+    "isInteractable": true,
+    "unlockFollowerIDs": [ 1 ]
   },
   {
-    "name": "Dwarf",
+    "name": "Ugly Dwarf",
     "id": 4,
-    "spokenText": "Who are you? Get out of my house.",
-    "isInteractable": true
+    "spokenText": "Hello. Please don't look at me.",
+    "isInteractable": true,
+    "unlockFollowerIDs": [ 4 ]
   },
   {
     "name": "Strange Man",
@@ -40,7 +43,13 @@
     "name": "Old Man",
     "id": 6,
     "spokenText": "Membership card?",
-    "purchaseItemIDs": [139],
+    "purchaseItemIDs": [ 139 ],
+    "isInteractable": true
+  },
+  {
+    "name": "Grumpy Knight",
+    "id": 7,
+    "spokenText": "I won't let anyone pass unless they're better than me at swords and stuff.",
     "isInteractable": true
   }
 ]

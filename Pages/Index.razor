@@ -72,6 +72,8 @@ else
         GameState.GetPlayerInventory().AddItems(invItems);
         GameState.GetPlayer().SetSkills(skills);
 
+        Program.followerManager.LoadSaveData(localStorage.GetItem<String>("Followers"));
+
         if (Program.followerManager.GetFollowerByID(localStorage.GetItem<int>("ActiveFollower")).IsUnlocked)
         {
             GameState.GetPlayer().activeFollower = Program.followerManager.GetFollowerByID(localStorage.GetItem<int>("ActiveFollower"));
@@ -79,7 +81,7 @@ else
 
         GameState.GetPlayer().LoadRecipes(localStorage.GetItem<List<string>>("AlchemyRecipes"));
         Program.areaManager.LoadSaveData(localStorage.GetItem<String>("Areas"));
-        Program.followerManager.LoadSaveData(localStorage.GetItem<String>("Followers"));
+
 
         MessageManager.AddMessage("Save game loaded.");
 

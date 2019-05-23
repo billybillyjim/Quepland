@@ -14,11 +14,13 @@ public class Area
     public string[] Actions { get; set; }
     public bool IsUnlocked { get; set; }
     public string[] UnlockableAreas { get; set; }
+    public string AreaToUnlockOnArrival { get; set; }
     public string[] Buildings { get; set; }
     public int[] NPCIDs { get; set; }
     public int[] MonsterIDs { get; set; }
     public int[] HuntingIDs { get; set; }
     public string[] Children { get; set; }
+    public string ActionRequiredForAccess { get; set; }
 
     [DefaultValue(true)]
     public bool Hidden { get; set; }

@@ -122,15 +122,15 @@
     "id": 15,
     "url": "QCHuntingSpot",
     "buttonText": "Go South",
-    "description": "The sound of bird becomes clear as you step out into a massive underground jungle.",
-    "unlockableAreas": [ "Deep Cave Hunting Area, This might be a good place to hunt...,," ]
+    "description": "The sounds of birds ring clear as you step out into a massive underground jungle. You'll need to find a way down.",
+    "unlockableAreas": [ "Deep Cave Hunting Area,Build a ladder,Woodworking:35,", "Deep Cave Hunting Area,Parkour the steep slope,Deftness:65," ]
   },
   {
     "name": "Queple Cave Quiet Tunnel Dwarf Home",
     "id": 16,
     "url": "QCQuietDwarfHome",
     "buttonText": "Go North",
-    "description": "The sound of metal clanging becomes clear as you round a corner and find a dwarf, smashing the cave wall with a pickaxe.",
+    "description": "The sound of metal clanging becomes clear as you round a corner and find a dwarf, smashing the cave wall with a woodcutting axe.",
     "npcIDs": [ 3 ]
   },
   {
@@ -161,8 +161,8 @@
     "id": 20,
     "url": "QCIronMine",
     "buttonText": "Go West",
-    "description": "You emerge from the tunnel to find an enormous lode of iron ore; it would take years to mine it all.",
-    "unlockableAreas": [ "Queple Cave Iron Mine, This would be a great place to mine ore...,," ]
+    "description": "At the very end of the tunnel is a small hole. On the other side appears to be a massive vein of iron.",
+    "unlockableAreas": [ "Queple Cave Iron Mine,Mine through the wall,Mining:40,Mining" ]
   },
   {
     "name": "Queple Cave River",
@@ -185,9 +185,8 @@
     "id": 23,
     "url": "QCSmithy",
     "buttonText": "Continue",
-    "description": "You find a decently sized smithy with no one operating it.",
-    "unlockableAreas": [ "Queple Cave Smithy, You could smith ore here...,," ]
-
+    "description": "You find a decently sized smithy with no one operating it. With enough skill, you could probably get it up and running!",
+    "unlockableAreas": [ "Queple Cave Smithy,You could smith ore here...,," ]
   },
   {
     "name": "Queple Cave Deep Tunnel West",
@@ -233,8 +232,8 @@
     "id": 29,
     "url": "QCCopperMine",
     "buttonText": "Go East",
-    "description": "You find a lode of copper greater than any up on the surface. You could mine here the rest of your life.",
-    "unlockableAreas": [ "Queple Cave Copper Mine, This would be a great place to mine ore...,," ]
+    "description": "You reach the end of the tunnel to find a lode of copper greater than any up on the surface. You could mine here the rest of your life. But the ore is across a ravine!",
+    "unlockableAreas": [ "Queple Cave Copper Mine,Jump across,Deftness:20," ]
   },
   {
     "name": "Wind Hall",
@@ -370,9 +369,17 @@
     "buttonText": "Kogoe Gym",
     "id": 47,
     "url": "KogoeGym",
-    "descriptiong": "You enter the gym and are greeted by an old man doing paperwork. He asks to see your membership card.",
+    "description": "You enter the gym and are greeted by an old man doing paperwork. He asks to see your membership card.",
     "npcIDs": [ 6 ],
     "unlockableAreas": [ "Kogoe Gym,Enter the workout room,,Gym Membership" ]
+  },
+  {
+    "name": "Camelpalooza",
+    "id": 48,
+    "url": "CamelShop",
+    "description": "You enter the shop and are greeted by a short man who sells camels.",
+    "isShop": true,
+    "items": [ 162 ]
   }
 
 ]

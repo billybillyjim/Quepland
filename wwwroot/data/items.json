@@ -66,7 +66,28 @@
       [ 1, 8 ],
       [ 1, 9 ],
       [ 2, 10 ],
-      [ 2, 11 ]
+      [ 2, 11 ],
+      [ 94, 142 ],
+      [ 94, 143 ],
+      [ 95, 144 ],
+      [ 95, 145 ],
+      [ 96, 146 ],
+      [ 96, 147 ],
+      [ 97, 148 ],
+      [ 97, 149 ],
+      [ 98, 150 ],
+      [ 98, 151 ],
+      [ 99, 152 ],
+      [ 99, 153 ],
+      [ 100, 154 ],
+      [ 100, 155 ],
+      [ 101, 156 ],
+      [ 101, 157 ],
+      [ 102, 158 ],
+      [ 102, 159 ],
+      [ 103, 160 ],
+      [ 103, 161 ]
+
     ]
   },
   {
@@ -128,7 +149,8 @@
     "equipSlot": "Right Hand",
     "damage": 4,
     "actionRequired": "Axemanship:0",
-    "attackSpeed": 3000
+    "attackSpeed": 3000,
+    "gatherSpeedBonus": 0.1
   },
   {
     "itemName": "Minnow Net",
@@ -330,7 +352,8 @@
     "isEquipable": true,
     "equipSlot": "Right Hand",
     "damage": 6,
-    "attackSpeed": 4000
+    "attackSpeed": 4000,
+    "gatherSpeedBonus": 0.1
   },
   {
     "itemName": "Deer Antlers",
@@ -358,6 +381,7 @@
     "id": 35,
     "value": 200,
     "actionRequired": "Swordsmanship",
+    "actionsEnabled": "Swordsmanship",
     "requiredLevel": 0,
     "ingredientIDs": [ 26 ],
     "isSmithable": true,
@@ -379,7 +403,8 @@
     "equipSlot": "Right Hand",
     "damage": 9,
     "attackSpeed": 3000,
-    "actionsEnabled": "Woodcutting"
+    "actionsEnabled": "Woodcutting",
+    "gatherSpeedBonus": 0.2
   },
   {
     "itemName": "Copper Hammer",
@@ -415,6 +440,7 @@
     "id": 39,
     "value": 300,
     "actionRequired": "Swordsmanship",
+    "actionsEnabled": "Swordsmanship",
     "requiredLevel": 12,
     "ingredientIDs": [ 31 ],
     "isSmithable": true,
@@ -429,13 +455,15 @@
     "id": 40,
     "value": 400,
     "actionRequired": "Axemanship",
+    "actionsEnabled": "Woodcutting",
     "requiredLevel": 12,
     "ingredientIDs": [ 31 ],
     "isSmithable": true,
     "isEquipable": true,
     "equipSlot": "Right Hand",
     "damage": 19,
-    "attackSpeed": 3000
+    "attackSpeed": 3000,
+    "gatherSpeedBonus": 0.25
   },
   {
     "itemName": "Bronze Hammer",
@@ -1477,5 +1505,254 @@
     "value": 1200,
     "gatherString": "You got a gym membership card.",
     "actionsEnabled": "Gym Membership"
+  },
+  {
+    "itemName": "Iron Axe",
+    "itemDescription": "An axe made out of iron.",
+    "id": 140,
+    "value": 150,
+    "actionRequired": "Axemanship",
+    "actionsEnabled": "Woodcutting",
+    "requiredLevel": 55,
+    "ingredientIDs": [ 28 ],
+    "isSmithable": true,
+    "isEquipable": true,
+    "equipSlot": "Right Hand",
+    "damage": 49,
+    "attackSpeed": 3000,
+    "gatherSpeedBonus": 0.4
+  },
+  {
+    "itemName": "Golden Axe",
+    "itemDescription": "This really shouldn't work.",
+    "id": 141,
+    "value": 1500,
+    "actionRequired": "Axemanship",
+    "actionsEnabled": "Woodcutting",
+    "requiredLevel": 75,
+    "ingredientIDs": [ 59 ],
+    "isSmithable": true,
+    "isEquipable": true,
+    "equipSlot": "Right Hand",
+    "damage": 80,
+    "attackSpeed": 3000,
+    "gatherSpeedBonus": 0.6
+  },
+    {
+    "itemName": "Balsa Art Carving",
+    "itemDescription": "You made this.",
+    "gatherString": "You make a carving from the balsa wood.",
+    "id": 142,
+    "value": 4,
+    "requiredLevel": 1,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:7"
+  },
+  {
+    "itemName": "Balsa Arrow Shafts",
+    "itemDescription": "Thin, flimsy sticks.",
+    "gatherString": "You make some arrow shafts from the balsa wood.",
+    "id": 143,
+    "value": 2,
+    "requiredLevel": 3,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:10",
+    "isStackable": true
+  },
+    {
+    "itemName": "Oak Art Carving",
+    "itemDescription": "A carving made from oak wood.",
+    "gatherString": "You make a carving from the oak wood.",
+    "id": 144,
+    "value": 25,
+    "requiredLevel": 15,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:30"
+  },
+  {
+    "itemName": "Oak Arrow Shafts",
+    "itemDescription": "They're like skinny, dead oak tree corpses.",
+    "gatherString": "You make some arrow shafts from the oak wood.",
+    "id": 145,
+    "value": 20,
+    "requiredLevel": 18,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:25",
+    "isStackable": true
+  },
+    {
+    "itemName": "Sugar Maple Art Carving",
+    "itemDescription": "A carving far less sweet than its name implies.",
+    "gatherString": "You make a carving from the sugar maple wood.",
+    "id": 146,
+    "value": 35,
+    "requiredLevel": 25,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:45"
+  },
+  {
+    "itemName": "Sugar Maple Arrow Shafts",
+    "itemDescription": "Arrow shafts for making arrows.",
+    "gatherString": "You make some arrow shafts from the sugar maple wood.",
+    "id": 147,
+    "value": 30,
+    "requiredLevel": 28,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:35",
+    "isStackable": true
+  },
+    {
+    "itemName": "Birch Art Carving",
+    "itemDescription": "A light colored carving from a light colored wood.",
+    "gatherString": "You make a carving from the birch wood.",
+    "id": 148,
+    "value": 50,
+    "requiredLevel": 32,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:55"
+  },
+  {
+    "itemName": "Birch Arrow Shafts",
+    "itemDescription": "Light colored arrow shafts from a light colored wood.",
+    "gatherString": "You make some arrow shafts from the birch wood.",
+    "id": 149,
+    "value": 40,
+    "requiredLevel": 35,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:39",
+    "isStackable": true
+  },
+  {
+    "itemName": "Mesquite Art Carving",
+    "itemDescription": "You could burn this to smoke some ham.",
+    "gatherString": "You make a carving from the mesquite wood.",
+    "id": 150,
+    "value": 75,
+    "requiredLevel": 40,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:80"
+  },
+  {
+    "itemName": "Mesquite Arrow Shafts",
+    "itemDescription": "They're like skinny, baby logs.",
+    "gatherString": "You make some arrow shafts from the mesquite wood.",
+    "id": 151,
+    "value": 60,
+    "requiredLevel": 43,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:50",
+    "isStackable": true
+  },
+    {
+    "itemName": "Mahogany Art Carving",
+    "itemDescription": "A truly fine wood carving.",
+    "gatherString": "You make a carving from the mahogany wood.",
+    "id": 152,
+    "value": 75,
+    "requiredLevel": 50,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:100"
+  },
+  {
+    "itemName": "Mahogany Arrow Shafts",
+    "itemDescription": "Decadent arrow components.",
+    "gatherString": "You make some arrow shafts from the mahogany wood.",
+    "id": 153,
+    "value": 70,
+    "requiredLevel": 53,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:70",
+    "isStackable": true
+  },
+    {
+    "itemName": "Ironwood Art Carving",
+    "itemDescription": "A very hard piece of art.",
+    "gatherString": "You make a carving from the ironwood logs.",
+    "id": 154,
+    "value": 95,
+    "requiredLevel": 60,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:130"
+  },
+  {
+    "itemName": "Ironwood Arrow Shafts",
+    "itemDescription": "Extremely strong arrow shafts.",
+    "gatherString": "You make some arrow shafts from the ironwood logs.",
+    "id": 155,
+    "value": 90,
+    "requiredLevel": 63,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:90",
+    "isStackable": true
+  },
+    {
+    "itemName": "Snakewood Art Carving",
+    "itemDescription": "A carving of a snake made from wood.",
+    "gatherString": "You make a carving from the snakewood logs.",
+    "id": 156,
+    "value": 135,
+    "requiredLevel": 70,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:200"
+  },
+  {
+    "itemName": "Snakewood Arrow Shafts",
+    "itemDescription": "Are they supposed to be so straight?",
+    "gatherString": "You make some arrow shafts from the snakewood logs.",
+    "id": 157,
+    "value": 120,
+    "requiredLevel": 73,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:150",
+    "isStackable": true
+  },
+    {
+    "itemName": "Lignum Vitae Art Carving",
+    "itemDescription": "The latin name makes them worth more.",
+    "gatherString": "You make a carving from the lignum vitae wood.",
+    "id": 158,
+    "value": 300,
+    "requiredLevel": 80,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:230"
+  },
+  {
+    "itemName": "Lignum Vitae Arrow Shafts",
+    "itemDescription": "Very strong arrow shafts.",
+    "gatherString": "You make some arrow shafts from the lignum vitae wood.",
+    "id": 159,
+    "value": 265,
+    "requiredLevel": 85,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:200",
+    "isStackable": true
+  },
+    {
+    "itemName": "Buloke Art Carving",
+    "itemDescription": "The hardest carved artwork in the world.",
+    "gatherString": "You make a carving from the buloke wood.",
+    "id": 160,
+    "value": 750,
+    "requiredLevel": 90,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:300"
+  },
+  {
+    "itemName": "Buloke Arrow Shafts",
+    "itemDescription": "The hardest arrow shafts in the world.",
+    "gatherString": "You make some arrow shafts from the buloke wood.",
+    "id": 161,
+    "value": 525,
+    "requiredLevel": 92,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:250",
+    "isStackable": true
+  },
+  {
+    "itemName": "Camel",
+    "itemDescription": "An even-toed ungulate with two large humps on its back. It doesn't fit in your inventory, but it takes up a space anyways.  ¯\\_(ツ)_/¯",
+    "id": 162,
+    "value": 20000,
+    "actionsEnabled": "Desert Travel",
   }
 ]

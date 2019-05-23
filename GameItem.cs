@@ -12,6 +12,7 @@ public class GameItem
 
     public int Value { get; set; }
     public int GatherSpeed { get; set; }
+    public float GatherSpeedBonus { get; set; }
     public int AttackSpeed { get; set; }
     public int Damage { get; set; }
     public int QueplarValue { get; set; }

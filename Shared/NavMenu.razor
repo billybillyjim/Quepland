@@ -158,21 +158,26 @@
             }
             else
             {
-                builder.AddAttribute(4, "href", "/GatherMenu/" + area.AreaURL);
+                builder.AddAttribute(7, "href", "/GatherMenu/" + area.AreaURL);
+                if (area.ActionRequiredForAccess != null &&
+                    GameState.GetPlayer().HasItemToAccessArea(area.ActionRequiredForAccess) == false)
+                {
+                    builder.AddAttribute(7, "disabled", true);
+                    builder.AddAttribute(8, "title", "You do not have the item to access this location.");
+                }
             }
-
-            builder.AddAttribute(7, "ChildContent", (RenderFragment)((builder2) =>
+            builder.AddAttribute(9, "ChildContent", (RenderFragment)((builder2) =>
             {
-                builder2.OpenElement(8, "span");
-                builder2.AddAttribute(9, "class", area.Icon);
-                builder2.AddAttribute(10, "aria-hidden", "true");
+                builder2.OpenElement(10, "span");
+                builder2.AddAttribute(11, "class", area.Icon);
+                builder2.AddAttribute(12, "aria-hidden", "true");
                 builder2.CloseElement();
-                builder2.OpenElement(11, "span");
+                builder2.OpenElement(13, "span");
                 if (bold)
                 {
-                    builder2.AddAttribute(12, "style", "font-weight:bold");
+                    builder2.AddAttribute(14, "style", "font-weight:bold");
                 }
-                builder2.AddContent(13, area.Name);
+                builder2.AddContent(15, area.Name);
                 builder2.CloseElement();
                 bool hasRoadblock = false;
                 foreach(string a in area.UnlockableAreas ?? Enumerable.Empty<string>())
@@ -184,11 +189,11 @@
                 }
                 if (hasRoadblock)
                 {
-                    builder2.OpenElement(14, "div");
-                    builder2.AddAttribute(15, "class", "oi oi-circle-x");
-                    builder2.AddAttribute(16, "aria-hidden", "true");
-                    builder2.AddAttribute(17, "style", "margin-left:3px");
-                    builder2.AddAttribute(18, "style", "color:green");
+                    builder2.OpenElement(16, "div");
+                    builder2.AddAttribute(17, "class", "oi oi-circle-x");
+                    builder2.AddAttribute(18, "aria-hidden", "true");
+                    builder2.AddAttribute(19, "style", "margin-left:3px");
+                    builder2.AddAttribute(20, "style", "color:green");
                     builder2.CloseElement();
                 }
 

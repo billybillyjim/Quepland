@@ -45,6 +45,10 @@
     {
         area = Program.areaManager.GetAreaByURL(areaURL);
         GameState.currentArea = area;
+        if(area.AreaToUnlockOnArrival != null)
+        {
+            Program.areaManager.GetAreaByName(area.AreaToUnlockOnArrival).IsUnlocked = true;
+        }
     }
     public void EnterBuilding(string buildingURL)
     {
@@ -323,50 +327,54 @@
                 string requiredLevel = splitData[2];
                 string requiredAction = splitData[3];
                 Area areaToUnlock = Program.areaManager.GetAreaByName(areaToUnlockString);
-                Area parent = Program.areaManager.GetAreaParent(areaToUnlock);
 
                 //If the area is not unlocked, or the parent area was not unlocked
-                if (requiredAction.Contains("Pay Gold") == false && area.IsMarked == false)
+                if (requiredAction.Contains("Pay Gold") == false && areaToUnlock.IsUnlocked == false)
                 {
                     builder.OpenElement(0, "button");
-                    builder.AddAttribute(0, "style", "margin-bottom:10px");
-                    builder.AddAttribute(0, "class", "btn btn-success");
-                    builder.AddAttribute(0, "onclick", () => UnlockArea(areaToUnlockString));
+                    builder.AddAttribute(1, "style", "margin-bottom:10px");
+                    builder.AddAttribute(2, "class", "btn btn-success");
+                    builder.AddAttribute(3, "onclick", () => UnlockArea(areaToUnlockString));
                     if (GameState.GetPlayer().HasLevelForRoadblock(requiredLevel) == false ||
                         GameState.GetPlayerInventory().ActionIsEnabled(requiredAction) == false ||
                         GameState.isGathering ||
-                        GameState.isHunting)
+                        GameState.isHunting ||
+                        GameState.GetPlayer().HasItemToAccessArea(areaToUnlock.ActionRequiredForAccess) == false)
                     {
-                        builder.AddAttribute(0, "disabled", true);
+                        builder.AddAttribute(4, "disabled", true);
                         if(GameState.GetPlayer().HasLevelForRoadblock(requiredLevel) == false)
                         {
-                            builder.AddAttribute(0, "title", "You lack the levels to do this." + "(" + requiredLevel + ")");
+                            builder.AddAttribute(5, "title", "You lack the levels to do this." + "(" + requiredLevel + ")");
                         }
                         else if(GameState.GetPlayerInventory().ActionIsEnabled(requiredAction) == false)
                         {
-                            builder.AddAttribute(0, "title", "You do not have an item that lets you do this." + "(" + requiredAction + ")");
+                            builder.AddAttribute(6, "title", "You do not have an item that lets you do this." + "(" + requiredAction + ")");
+                        }
+                        else if(GameState.GetPlayer().HasItemToAccessArea(areaToUnlock.ActionRequiredForAccess) == false)
+                        {
+                            builder.AddAttribute(7, "title", "You do not have an item that lets you do this." + "(" + areaToUnlock.ActionRequiredForAccess + ")");
                         }
 
                     }
-                    builder.AddContent(0, buttonText);
+                    builder.AddContent(8, buttonText);
                     builder.CloseElement();
                 }
-                else if(requiredAction.Contains("Pay Gold") && area.IsMarked == false)
+                else if(requiredAction.Contains("Pay Gold") && areaToUnlock.IsUnlocked == false)
                 {
-                    builder.OpenElement(0, "button");
-                    builder.AddAttribute(0, "style", "margin-bottom:10px");
-                    builder.AddAttribute(0, "class", "btn btn-success");
-                    builder.AddAttribute(0, "onclick", () => UnlockArea(areaToUnlock));
+                    builder.OpenElement(9, "button");
+                    builder.AddAttribute(10, "style", "margin-bottom:10px");
+                    builder.AddAttribute(11, "class", "btn btn-success");
+                    builder.AddAttribute(12, "onclick", () => UnlockArea(areaToUnlock));
                     if (GameState.GetPlayerInventory().GetCoins() < int.Parse(requiredAction.Split(':')[1]))
                     {
-                        builder.AddAttribute(0, "disabled", true);
-                        builder.AddAttribute(0, "title", "You don't have enough gold to do this." + "(" + int.Parse(requiredAction.Split(':')[1]) + ")");
+                        builder.AddAttribute(13, "disabled", true);
+                        builder.AddAttribute(14, "title", "You don't have enough gold to do this." + "(" + int.Parse(requiredAction.Split(':')[1]) + ")");
                     }
                     else if(GameState.isGathering || GameState.isHunting)
                     {
-                        builder.AddAttribute(0, "disabled", true);
+                        builder.AddAttribute(15, "disabled", true);
                     }
-                    builder.AddContent(0, buttonText);
+                    builder.AddContent(16, buttonText);
                     builder.CloseElement();
                 }
                 builder.OpenElement(0, "br");
@@ -529,7 +537,7 @@
             }
             GameState.UpdateState();
             this.StateHasChanged();
-        }), null, itemToGather.GatherSpeed, itemToGather.GatherSpeed / 2);
+        }), null, (int)(itemToGather.GatherSpeed * GameState.GetPlayer().GetGatherSpeed(itemToGather.ActionRequired)), (int)(itemToGather.GatherSpeed * GameState.GetPlayer().GetGatherSpeed(itemToGather.ActionRequired) / 2f));
         GameState.UpdateState();
         this.StateHasChanged();
     }

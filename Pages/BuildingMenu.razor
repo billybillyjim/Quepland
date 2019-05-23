@@ -354,6 +354,7 @@
             GameState.GetPlayerInventory().RemoveItems(Program.itemDatabase.GetGold(), item.Value * amount);
             GameState.GetPlayerInventory().AddMultipleOfItem(item, amount);
         }
+        MessageManager.AddMessage("You bought " + amount + " " + item.ItemName);
         GameState.UpdateState();
         StateHasChanged();
     }
@@ -385,7 +386,6 @@
     }
     public void UnlockFollower(int followerID)
     {
-
         if (Program.followerManager.GetNumberOfUnlockedFollowers() == 0)
         {
             MessageManager.AddMessage(Program.followerManager.GetFollowerByID(followerID).Name + " will now follow you. Go to your bank and select \"Followers\" at the top of the screen to set them as your follower.");

@@ -10,7 +10,7 @@
     "maxCarry": 15,
     "autoCollectSpeed": 20000,
     "isUnlocked": false,
-    "cost": 1
+    "cost": 1000
   },
   {
     "name": "Dumpy the Gnome",
@@ -22,7 +22,8 @@
     "autoCollectLevel": 30,
     "maxCarry": 15,
     "autoCollectSpeed": 15000,
-    "isUnlocked": false
+    "isUnlocked": false,
+    "cost": 5000
   },
   {
     "name": "Grumpy the Gnome",
@@ -34,7 +35,8 @@
     "autoCollectLevel": 45,
     "maxCarry": 19,
     "autoCollectSpeed": 10000,
-    "isUnlocked": false
+    "isUnlocked": false,
+    "cost": 15000
   },
   {
     "name": "Slumpy the Gnome",
@@ -46,7 +48,8 @@
     "autoCollectLevel": 60,
     "maxCarry": 23,
     "autoCollectSpeed": 7500,
-    "isUnlocked": false
+    "isUnlocked": false,
+    "cost": 25000
   },
   {
     "name": "Rumpy the Gnome",
@@ -58,7 +61,8 @@
     "autoCollectLevel": 75,
     "maxCarry": 26,
     "autoCollectSpeed": 5000,
-    "isUnlocked": false
+    "isUnlocked": false,
+    "cost": 50000
   },
   {
     "name": "Jumpy the Gnome",
@@ -70,6 +74,7 @@
     "autoCollectLevel": 100,
     "maxCarry": 30,
     "autoCollectSpeed": 2000,
-    "isUnlocked": false
+    "isUnlocked": false,
+    "cost": 100000
   },
 ]
