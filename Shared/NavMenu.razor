@@ -154,6 +154,7 @@
             {
                 builder.AddAttribute(4, "href", "/" + area.AreaURL);
                 builder.AddAttribute(5, "style", "background-color:#FFFFFF33");
+                builder.AddAttribute(5, "style", "font-size:4");
                 builder.AddAttribute(6, "onclick", () => ToggleAreaChildren(area));
             }
             else
@@ -180,20 +181,21 @@
                 builder2.AddContent(15, area.Name);
                 builder2.CloseElement();
                 bool hasRoadblock = false;
+                int numOfRoadblocks = 0;
                 foreach(string a in area.UnlockableAreas ?? Enumerable.Empty<string>())
                 {
                     if(Program.areaManager.GetAreaByName(a.Split(',')[0]).IsUnlocked == false)
                     {
                         hasRoadblock = true;
+                        numOfRoadblocks++;
                     }
                 }
                 if (hasRoadblock)
                 {
                     builder2.OpenElement(16, "div");
-                    builder2.AddAttribute(17, "class", "oi oi-circle-x");
-                    builder2.AddAttribute(18, "aria-hidden", "true");
-                    builder2.AddAttribute(19, "style", "margin-left:3px");
-                    builder2.AddAttribute(20, "style", "color:green");
+                    builder2.AddAttribute(17, "class", "badge badge-pill badge-success");
+                    builder2.AddAttribute(18, "style", "margin-left:3px");
+                    builder2.AddContent(19, "" + numOfRoadblocks);
                     builder2.CloseElement();
                 }
 

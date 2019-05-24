@@ -500,7 +500,7 @@
         }
         else if(GameState.GetPlayer().activeFollower != null && Extensions.FollowerCanAutoCollect(GameState.GetPlayer().activeFollower, itemToGather) == false)
         {
-            MessageManager.AddMessage(GameState.GetPlayer().activeFollower.Name + " is too weak to collect " + itemToGather.ItemName + " for you.");
+            MessageManager.AddMessage(GameState.GetPlayer().activeFollower.Name + " is cannot collect " + itemToGather.ItemName + " for you.");
         }
         gatherTimer = new Timer(new TimerCallback(_ =>
         {

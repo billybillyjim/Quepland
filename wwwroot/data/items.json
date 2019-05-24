@@ -276,7 +276,7 @@
     "value": 35,
     "actionRequired": "Smithing",
     "requiredLevel": 0,
-    "experienceGained": "Smithing:100",
+    "experienceGained": "Smithing:50",
     "gatherSpeed": 7000,
     "ingredientIDs": [ 22 ],
     "queplarValue": 0
@@ -288,7 +288,7 @@
     "value": 40,
     "actionRequired": "Smithing",
     "requiredLevel": 4,
-    "experienceGained": "Smithing:150",
+    "experienceGained": "Smithing:75",
     "gatherSpeed": 7500,
     "ingredientIDs": [ 23 ],
     "queplarValue": 35
@@ -300,7 +300,7 @@
     "value": 90,
     "actionRequired": "Smithing",
     "requiredLevel": 35,
-    "experienceGained": "Smithing:350",
+    "experienceGained": "Smithing:175",
     "gatherSpeed": 15000,
     "ingredientIDs": [ 24 ],
     "queplarValue": 80
@@ -312,7 +312,7 @@
     "value": 60,
     "actionRequired": "Smithing",
     "requiredLevel": 20,
-    "experienceGained": "Smithing:200",
+    "experienceGained": "Smithing:100",
     "gatherSpeed": 9000,
     "ingredientIDs": [ 25 ],
     "queplarValue": 20
@@ -324,7 +324,7 @@
     "value": 85,
     "actionRequired": "Smithing",
     "requiredLevel": 9,
-    "experienceGained": "Smithing:95",
+    "experienceGained": "Smithing:45",
     "gatherSpeed": 9500,
     "ingredientIDs": [ 22, 25 ],
     "queplarValue": 10
@@ -336,7 +336,7 @@
     "value": 75,
     "actionRequired": "Smithing",
     "requiredLevel": 15,
-    "experienceGained": "Smithing:175",
+    "experienceGained": "Smithing:90",
     "gatherSpeed": 7500,
     "ingredientIDs": [ 22, 23 ],
     "queplarValue": 15
@@ -615,7 +615,7 @@
     "value": 65,
     "actionRequired": "Smithing",
     "requiredLevel": 25,
-    "experienceGained": "Smithing:255",
+    "experienceGained": "Smithing:125",
     "gatherSpeed": 9000,
     "ingredientIDs": [ 49 ],
     "queplarValue": 45
@@ -627,7 +627,7 @@
     "value": 150,
     "actionRequired": "Smithing",
     "requiredLevel": 45,
-    "experienceGained": "Smithing:350",
+    "experienceGained": "Smithing:200",
     "gatherSpeed": 6000,
     "ingredientIDs": [ 50 ],
     "queplarValue": 110
@@ -639,7 +639,7 @@
     "value": 250,
     "actionRequired": "Smithing",
     "requiredLevel": 55,
-    "experienceGained": "Smithing:550",
+    "experienceGained": "Smithing:350",
     "gatherSpeed": 9000,
     "ingredientIDs": [ 51 ],
     "queplarValue": 155
@@ -651,7 +651,7 @@
     "value": 180,
     "actionRequired": "Smithing",
     "requiredLevel": 75,
-    "experienceGained": "Smithing:300",
+    "experienceGained": "Smithing:400",
     "gatherSpeed": 2000,
     "ingredientIDs": [ 52 ],
     "queplarValue": 205
@@ -663,7 +663,7 @@
     "value": 1000,
     "actionRequired": "Smithing",
     "requiredLevel": 85,
-    "experienceGained": "Smithing:1350",
+    "experienceGained": "Smithing:850",
     "gatherSpeed": 6000,
     "ingredientIDs": [ 53 ],
     "queplarValue": 290
@@ -675,7 +675,7 @@
     "value": 1500,
     "actionRequired": "Smithing",
     "requiredLevel": 94,
-    "experienceGained": "Smithing:2500",
+    "experienceGained": "Smithing:1200",
     "gatherSpeed": 9000,
     "ingredientIDs": [ 54 ],
     "queplarValue": 385

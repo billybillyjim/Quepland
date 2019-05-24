@@ -145,6 +145,10 @@ public class Inventory
 
     public bool AddItems(Dictionary<GameItem, int> itemsToAdd)
     {
+        if(itemsToAdd == null)
+        {
+            return false;
+        }
         foreach(KeyValuePair<GameItem, int> itemToAdd in itemsToAdd)
         {
             for(int i = 0; i < itemToAdd.Value; i++)

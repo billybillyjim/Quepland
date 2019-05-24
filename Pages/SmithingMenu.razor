@@ -186,6 +186,7 @@
                 if (smithingStage == 2)
                 {
                     GameState.GetPlayerInventory().AddItem(currentSmithingBar);
+                    GameState.GetPlayer().GainExperience(currentSmithingBar.ExperienceGained);
                 }
                 smithingTimer.Dispose();
                 smithingStage++;
