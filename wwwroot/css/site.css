@@ -15,7 +15,12 @@ app {
     display: flex;
     align-items: center;
 }
-
+.not-active {
+    pointer-events: none;
+    cursor: default;
+    text-decoration: none;
+    color: black;
+}
 ​
 .main {
     flex: 1;

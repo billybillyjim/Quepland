@@ -363,7 +363,8 @@
     "icon": "oi oi fire",
     "id": 37,
     "actionRequiredForAccess": "Desert Travel",
-    "unlockableAreas": ["Route 7 Crossroads,Continue Southward,,"]
+    "unlockableAreas": [ "Route 7 Crossroads,Continue Southward,," ],
+    "redirectAreaURL": "Route7"
   },
   {
     "name": "Route 7 Crossroads",
@@ -371,7 +372,8 @@
     "areaURL": "Route7Crossroads",
     "icon": "oi oi fire",
     "id": 38,
-    "actionRequiredForAccess": "Desert Travel"
+    "actionRequiredForAccess": "Desert Travel",
+    "redirectAreaURL": "Route7"
   }
 
 

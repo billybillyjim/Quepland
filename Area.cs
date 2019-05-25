@@ -21,6 +21,7 @@ public class Area
     public int[] HuntingIDs { get; set; }
     public string[] Children { get; set; }
     public string ActionRequiredForAccess { get; set; }
+    public string RedirectAreaURL { get; set; }
 
     [DefaultValue(true)]
     public bool Hidden { get; set; }

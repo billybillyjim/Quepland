@@ -2,22 +2,36 @@
 @inject MessageManager MessageManager
 @implements IDisposable
 
-<div class="modal-footer">
-    <table>
-
-        @foreach (Message message in MessageManager.GetMessages())
-        {
-            <tr>
-                <td>@message.messageText</td>
-            </tr>
-        }
-
-
-    </table>
-</div>
+@ShowMessages()
 
 @functions{
 
+    public RenderFragment ShowMessages()
+    {
+        return builder =>
+        {
+            builder.OpenElement(0, "div");
+            builder.AddAttribute(1, "class", "modal-footer");
+            builder.OpenElement(2, "table");
+
+            foreach(Message message in MessageManager.GetMessages())
+            {
+                builder.OpenElement(3, "tr");
+                builder.OpenElement(4, "td");
+                if(message.color != null)
+                {
+                    builder.AddAttribute(5, "style", "color:" + message.color);
+                }
+                builder.AddContent(6, message.messageText);
+                builder.CloseElement();
+                builder.CloseElement();
+            }
+
+            builder.CloseElement();
+
+            builder.CloseElement();
+        };
+    }
     protected override void OnInit()
     {
         MessageManager.StateChanged += OnMessageStateChanged;

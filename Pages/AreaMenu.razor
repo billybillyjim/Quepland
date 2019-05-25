@@ -47,8 +47,11 @@
         GameState.currentArea = area;
         if(area.AreaToUnlockOnArrival != null)
         {
-            Program.areaManager.GetAreaByName(area.AreaToUnlockOnArrival).IsUnlocked = true;
-            MessageManager.AddMessage("You add this new area to your journal.");
+            if(Program.areaManager.GetAreaByName(area.AreaToUnlockOnArrival).IsUnlocked == false)
+            {
+                 MessageManager.AddMessage("You add this new area to your journal.");
+            }
+            Program.areaManager.GetAreaByName(area.AreaToUnlockOnArrival).IsUnlocked = true;        
         }
     }
     public void EnterBuilding(string buildingURL)

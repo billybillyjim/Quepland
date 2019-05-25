@@ -7,7 +7,8 @@
 
 
 <h1>Hello, Welcome to Quepland!</h1>
-
+@loadedInvString
+@original
 @if (GameState.saveDataLoaded == false && saveGameExists)
 {
     <p><button class="btn btn-primary" onclick="@(() => LoadData())">Load Game</button></p>
@@ -39,7 +40,8 @@ else
 @functions{
     private bool saveGameExists = false;
     private bool userWantsGameReset = false;
-
+    private string loadedInvString = "Not Loaded";
+    private string original = "Not Loaded";
     private void AskForReset()
     {
         userWantsGameReset = true;
@@ -56,7 +58,10 @@ else
         localStorage.SetItem("Inventory", GameState.GetPlayerInventory().ToString());
         localStorage.SetItem("Areas", Program.areaManager.SaveAreas());
         localStorage.SetItem("Followers", Program.followerManager.ToString());
-        localStorage.SetItem("ActiveFollower", GameState.GetPlayer().activeFollower.id);
+        if (GameState.GetPlayer().activeFollower != null)
+        {
+            localStorage.SetItem("ActiveFollower", GameState.GetPlayer().activeFollower.id);
+        }
         localStorage.SetItem("AlchemyRecipes", GameState.GetPlayer().GetRecipes());
         localStorage.SetItem("SaveGameExists", true);
         MessageManager.AddMessage("You game has been saved.");
@@ -71,6 +76,12 @@ else
         GameState.GetPlayerBank().GetInventory().AddItems(bankItems);
         GameState.GetPlayerInventory().AddItems(invItems);
         GameState.GetPlayer().SetSkills(skills);
+
+        foreach(KeyValuePair<GameItem, int> pair in invItems)
+        {
+            loadedInvString += pair.Key.ItemName + " " + pair.Value + ", ";
+        }
+        original = "Original: " + localStorage.GetItem<String>("Inventory");
 
         Program.followerManager.LoadSaveData(localStorage.GetItem<String>("Followers"));
 

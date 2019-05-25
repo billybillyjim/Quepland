@@ -18,6 +18,16 @@ public class MessageManager
         }
         StateHasChanged();
     }
+    public void AddMessage(string newMessageString, string color)
+    {
+        Message newMessage = new Message(newMessageString, color);
+        messages.Add(newMessage);
+        if (messages.Count >= maxMessages)
+        {
+            messages.Remove(messages[0]);
+        }
+        StateHasChanged();
+    }
     public List<Message> GetMessages()
     {
         return messages;

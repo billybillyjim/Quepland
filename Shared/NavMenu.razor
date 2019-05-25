@@ -1,4 +1,5 @@
 ﻿@inject GameState  GameState
+@inject MessageManager  MessageManager
 @using System.Threading
 @inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
 @implements IDisposable
@@ -27,14 +28,7 @@
     {
         collapseNavMenu = !collapseNavMenu;
     }
-    /*
-     * <div class="top-row pl-4 navbar navbar-dark">
-    <a class="navbar-brand" href="">Quepland Menu</a>
-    <button class="navbar-toggler" onclick="@ToggleNavMenu">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-</div>
-     */
+
     private RenderFragment LoadNavbarTop()
     {
         return builder =>
@@ -56,35 +50,7 @@
             builder.CloseElement();
         };
     }
-    /*
-     * <div class="@NavMenuCssClass" onclick="@ToggleNavMenu">
-    <ul class="nav flex-column">
-        @if (GameState.isHunting == false && GameState.isGathering == false && Program.areaManager != null)
-        {
-            <li class="nav-item px-3">
-                <NavLink class="nav-link" href="Bank">
-                    <span class="oi oi-dollar" aria-hidden="true"></span> Bank
-                </NavLink>
-            </li>
-            @foreach (Area area in Program.areaManager.GetAreasWithoutChildren())
-            {
-                if (area.IsUnlocked)
-                {
-                    <li class="nav-item px-3">
-                        <NavLink class="nav-link" href="@GetURL(area.AreaURL)">
-                            <span class="@area.Icon" aria-hidden="true"></span> @area.Name
-                        </NavLink>
-                    </li>
-                }
 
-            }
-        }
-
-        <li class="auto-save"><font color="white">@autoSaveString</font></li>
-    </ul>
-
-</div>
-     */
     private RenderFragment LoadNavbar()
     {
         return builder =>
@@ -119,7 +85,7 @@
                 {
                     if (area.IsUnlocked)
                     {
-                        builder.AddContent(15, NavButton(area, true));
+                        builder.AddContent(15, ParentButton(area));
                         foreach (string child in area.Children)
                         {
                             Area childArea = Program.areaManager.GetAreaByURL(child);
@@ -146,45 +112,36 @@
         {
             builder.OpenElement(0, "li");
             builder.AddAttribute(1, "class", "nav-item px-3");
-
             builder.OpenComponent<NavLink>(2);
             builder.AddAttribute(3, "class", "nav-link");
 
-            if (bold)
+            if (area.ActionRequiredForAccess != null &&
+                GameState.GetPlayer().HasItemToAccessArea(area.ActionRequiredForAccess) == false)
             {
-                builder.AddAttribute(4, "href", "/" + area.AreaURL);
-                builder.AddAttribute(5, "style", "background-color:#FFFFFF33");
-                builder.AddAttribute(5, "style", "font-size:4");
-                builder.AddAttribute(6, "onclick", () => ToggleAreaChildren(area));
+                builder.AddAttribute(4, "href", "/GatherMenu/" + area.RedirectAreaURL);
+                builder.AddAttribute(5, "onclick", () => MessageManager.AddMessage("You don't have the item to access this location.", "red"));
+                builder.AddAttribute(6, "title", "You do not have the item to access this location.");
+                builder.AddAttribute(7, "style", "background-color:#EC565650");
             }
             else
             {
                 builder.AddAttribute(7, "href", "/GatherMenu/" + area.AreaURL);
-                if (area.ActionRequiredForAccess != null &&
-                    GameState.GetPlayer().HasItemToAccessArea(area.ActionRequiredForAccess) == false)
-                {
-                    builder.AddAttribute(7, "disabled", true);
-                    builder.AddAttribute(8, "title", "You do not have the item to access this location.");
-                }
             }
-            builder.AddAttribute(9, "ChildContent", (RenderFragment)((builder2) =>
+
+            builder.AddAttribute(12, "ChildContent", (RenderFragment)((builder2) =>
             {
-                builder2.OpenElement(10, "span");
-                builder2.AddAttribute(11, "class", area.Icon);
-                builder2.AddAttribute(12, "aria-hidden", "true");
-                builder2.CloseElement();
                 builder2.OpenElement(13, "span");
-                if (bold)
-                {
-                    builder2.AddAttribute(14, "style", "font-weight:bold");
-                }
-                builder2.AddContent(15, area.Name);
+                builder2.AddAttribute(14, "class", area.Icon);
+                builder2.AddAttribute(15, "aria-hidden", "true");
+                builder2.CloseElement();
+                builder2.OpenElement(16, "span");
+                builder2.AddContent(18, area.Name);
                 builder2.CloseElement();
                 bool hasRoadblock = false;
                 int numOfRoadblocks = 0;
-                foreach(string a in area.UnlockableAreas ?? Enumerable.Empty<string>())
+                foreach (string a in area.UnlockableAreas ?? Enumerable.Empty<string>())
                 {
-                    if(Program.areaManager.GetAreaByName(a.Split(',')[0]).IsUnlocked == false)
+                    if (Program.areaManager.GetAreaByName(a.Split(',')[0]).IsUnlocked == false)
                     {
                         hasRoadblock = true;
                         numOfRoadblocks++;
@@ -192,15 +149,41 @@
                 }
                 if (hasRoadblock)
                 {
-                    builder2.OpenElement(16, "div");
-                    builder2.AddAttribute(17, "class", "badge badge-pill badge-success");
-                    builder2.AddAttribute(18, "style", "margin-left:3px");
-                    builder2.AddContent(19, "" + numOfRoadblocks);
+                    builder2.OpenElement(19, "div");
+                    builder2.AddAttribute(20, "class", "badge badge-pill badge-success");
+                    builder2.AddAttribute(21, "style", "margin-left:3px");
+                    builder2.AddContent(22, "" + numOfRoadblocks);
                     builder2.CloseElement();
                 }
 
             }));
             builder.CloseComponent();
+            builder.CloseElement();
+        };
+
+    }
+    private RenderFragment ParentButton(Area area)
+    {
+        return builder =>
+        {
+            builder.OpenElement(0, "li");
+            builder.AddAttribute(1, "class", "nav-item px-3");
+
+            builder.AddAttribute(2, "style", "background-color:#FFFFFF33; padding-top:10px");
+            builder.AddAttribute(4, "onclick", () => ToggleAreaChildren(area));
+
+            builder.OpenElement(5, "span");
+            builder.AddAttribute(6, "class", area.Icon);
+            builder.AddAttribute(7, "aria-hidden", "true");
+            builder.AddAttribute(8, "style", "color:white");
+            builder.CloseElement();
+            builder.OpenElement(8, "span");
+
+            builder.AddAttribute(9, "style", "font-size: large; font-weight: bold; color:white");
+            builder.AddContent(12, area.Name);
+            builder.CloseElement();
+
+
             builder.CloseElement();
         };
 
@@ -245,6 +228,12 @@
             localStorage.SetItem("Skills", GameState.GetPlayer().GetSkillString());
             localStorage.SetItem("Inventory", GameState.GetPlayerInventory().ToString());
             localStorage.SetItem("Areas", Program.areaManager.SaveAreas());
+            localStorage.SetItem("Followers", Program.followerManager.ToString());
+            if(GameState.GetPlayer().activeFollower != null)
+            {
+                localStorage.SetItem("ActiveFollower", GameState.GetPlayer().activeFollower.id);
+            }            
+            localStorage.SetItem("AlchemyRecipes", GameState.GetPlayer().GetRecipes());
             localStorage.SetItem("SaveGameExists", true);
             autoSaveString = "Last autosave: " + DateTime.Now.ToShortTimeString();
             StateHasChanged();
