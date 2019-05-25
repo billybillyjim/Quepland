@@ -6,6 +6,7 @@
 
 <h1>Inside the Smithy</h1>
 <p>An entire working forge lays before you. Pick any metal to begin.</p>
+@progress
 <div class="progress">
     <div class="progress-bar bg-success" style="@GetWidthString();transition:none;" role="progressbar" aria-valuenow=@GetValueString() aria-valuemin="0" aria-valuemax="100"></div>
 </div>
@@ -76,6 +77,14 @@
                 builder.AddAttribute(0, "class", "btn btn-primary");
                 builder.AddAttribute(0, "style", "margin-bottom:10px");
                 builder.AddAttribute(0, "onclick", () => IncrementSmithingStage());
+                if (progress == 0 || progress >= 100)
+                {
+
+                }
+                else
+                {
+                    builder.AddAttribute(0, "disabled", true);
+                }
                 builder.AddContent(0, "Insert " + Extensions.GetIngredientsAsString(currentSmithingBar, Program.itemDatabase) + " into furnace");
                 builder.CloseElement();
 
@@ -89,6 +98,14 @@
                 builder.AddAttribute(0, "class", "btn btn-primary");
                 builder.AddAttribute(0, "style", "margin-bottom:10px");
                 builder.AddAttribute(0, "onclick", () => IncrementSmithingStage());
+                if (progress == 0 || progress >= 100)
+                {
+
+                }
+                else
+                {
+                    builder.AddAttribute(0, "disabled", true);
+                }
                 builder.AddContent(0, "Remove " + currentSmithingBar.ItemName + " from furnace");
 
                 builder.CloseElement();
@@ -104,6 +121,14 @@
                 builder.AddAttribute(0, "style", "margin-bottom:10px");
 
                 builder.AddAttribute(0, "onclick", () => ResetSmithingStage());
+                if (progress == 0 || progress >= 100)
+                {
+
+                }
+                else
+                {
+                    builder.AddAttribute(0, "disabled", true);
+                }
                 builder.AddContent(0, "Smith another bar");
                 builder.CloseElement();
                 builder.OpenElement(0, "p");
@@ -120,6 +145,14 @@
                         builder.AddAttribute(0, "style", "margin-bottom:10px");
 
                         builder.AddAttribute(0, "onclick", () => SetCurrentSmithingItem(i));
+                        if (progress == 0 || progress >= 100)
+                        {
+
+                        }
+                        else
+                        {
+                            builder.AddAttribute(0, "disabled", true);
+                        }
                         builder.AddContent(0, i.ItemName);
                         builder.CloseElement();
 
@@ -137,6 +170,14 @@
                 builder.AddAttribute(0, "style", "margin-bottom:10px");
 
                 builder.AddAttribute(0, "onclick", () => IncrementSmithingStage());
+                if (progress == 0 || progress >= 100)
+                {
+
+                }
+                else
+                {
+                    builder.AddAttribute(0, "disabled", true);
+                }
                 builder.AddContent(0, "Cool " + currentSmithingItem.ItemName + " in water");
                 builder.CloseElement();
 
@@ -151,6 +192,14 @@
                 builder.AddAttribute(0, "style", "margin-bottom:10px");
 
                 builder.AddAttribute(0, "onclick", () => CollectItem());
+                if (progress == 0 || progress >= 100)
+                {
+
+                }
+                else
+                {
+                    builder.AddAttribute(0, "disabled", true);
+                }
                 builder.AddContent(0, "Withdraw " + currentSmithingItem.ItemName);
                 builder.CloseElement();
 
@@ -177,8 +226,13 @@
     }
     private void IncrementSmithingStage()
     {
+        if(smithingTimer != null)
+        {
+            smithingTimer.Dispose();
+        }
         progress = 0;
         SendMessage();
+
         smithingTimer = new Timer(new TimerCallback(_ =>
         {
             if (progress >= 100)

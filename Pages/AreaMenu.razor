@@ -48,6 +48,7 @@
         if(area.AreaToUnlockOnArrival != null)
         {
             Program.areaManager.GetAreaByName(area.AreaToUnlockOnArrival).IsUnlocked = true;
+            MessageManager.AddMessage("You add this new area to your journal.");
         }
     }
     public void EnterBuilding(string buildingURL)

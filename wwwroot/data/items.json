@@ -14,7 +14,7 @@
     "value": 3,
     "gatherSpeed": 1000,
     "requiredLevel": 1,
-    "experienceGained": "Woodcutting:8",
+    "experienceGained": "Woodcutting:8000",
     "actionRequired": "Woodcutting"
   },
   {
@@ -54,7 +54,10 @@
     "itemName": "Cheese",
     "itemDescription": "It's cheese.",
     "id": 5,
-    "value": 15
+    "value": 15,
+    "actionRequired": "Gather",
+    "gatherSpeed": 1000,
+    "gatherString": "You pick up some cheese. Probably shouldn't eat it."
   },
   {
     "itemName": "Carving Knife",
@@ -86,7 +89,17 @@
       [ 102, 158 ],
       [ 102, 159 ],
       [ 103, 160 ],
-      [ 103, 161 ]
+      [ 103, 161 ],
+      [ 94, 165 ],
+      [ 95, 166 ],
+      [ 96, 167 ],
+      [ 97, 168 ],
+      [ 98, 169 ],
+      [ 99, 170 ],
+      [ 100, 171 ],
+      [ 101, 172 ],
+      [ 102, 173 ],
+      [ 103, 174 ]
 
     ]
   },
@@ -95,7 +108,9 @@
     "itemDescription": "It's the outside of wood.",
     "gatherString": "You scrape some bark off the wood.",
     "id": 7,
-    "value": 1
+    "value": 1,
+    "actionRequired": "Gather",
+    "gatherSpeed": 1000
   },
   {
     "itemName": "White Pine Art Carving",
@@ -1325,7 +1340,7 @@
       [ 118, 137 ],
       [ 119, 138 ]
     ]
-  },  
+  },
   {
     "itemName": "Icefish Roll",
     "id": 123,
@@ -1538,7 +1553,7 @@
     "attackSpeed": 3000,
     "gatherSpeedBonus": 0.6
   },
-    {
+  {
     "itemName": "Balsa Art Carving",
     "itemDescription": "You made this.",
     "gatherString": "You make a carving from the balsa wood.",
@@ -1546,7 +1561,8 @@
     "value": 4,
     "requiredLevel": 1,
     "actionRequired": "Woodworking",
-    "experienceGained": "Woodworking:7"
+    "experienceGained": "Woodworking:7",
+    "GatherSpeed": -100
   },
   {
     "itemName": "Balsa Arrow Shafts",
@@ -1557,9 +1573,10 @@
     "requiredLevel": 3,
     "actionRequired": "Woodworking",
     "experienceGained": "Woodworking:10",
-    "isStackable": true
+    "isStackable": true,
+    "GatherSpeed": -50
   },
-    {
+  {
     "itemName": "Oak Art Carving",
     "itemDescription": "A carving made from oak wood.",
     "gatherString": "You make a carving from the oak wood.",
@@ -1567,7 +1584,8 @@
     "value": 25,
     "requiredLevel": 15,
     "actionRequired": "Woodworking",
-    "experienceGained": "Woodworking:30"
+    "experienceGained": "Woodworking:30",
+    "GatherSpeed": 100
   },
   {
     "itemName": "Oak Arrow Shafts",
@@ -1578,9 +1596,10 @@
     "requiredLevel": 18,
     "actionRequired": "Woodworking",
     "experienceGained": "Woodworking:25",
-    "isStackable": true
+    "isStackable": true,
+    "GatherSpeed": 150
   },
-    {
+  {
     "itemName": "Sugar Maple Art Carving",
     "itemDescription": "A carving far less sweet than its name implies.",
     "gatherString": "You make a carving from the sugar maple wood.",
@@ -1588,7 +1607,8 @@
     "value": 35,
     "requiredLevel": 25,
     "actionRequired": "Woodworking",
-    "experienceGained": "Woodworking:45"
+    "experienceGained": "Woodworking:45",
+    "GatherSpeed": 300
   },
   {
     "itemName": "Sugar Maple Arrow Shafts",
@@ -1599,9 +1619,10 @@
     "requiredLevel": 28,
     "actionRequired": "Woodworking",
     "experienceGained": "Woodworking:35",
-    "isStackable": true
+    "isStackable": true,
+    "GatherSpeed": 200
   },
-    {
+  {
     "itemName": "Birch Art Carving",
     "itemDescription": "A light colored carving from a light colored wood.",
     "gatherString": "You make a carving from the birch wood.",
@@ -1609,7 +1630,8 @@
     "value": 50,
     "requiredLevel": 32,
     "actionRequired": "Woodworking",
-    "experienceGained": "Woodworking:55"
+    "experienceGained": "Woodworking:55",
+    "GatherSpeed": 400
   },
   {
     "itemName": "Birch Arrow Shafts",
@@ -1620,7 +1642,8 @@
     "requiredLevel": 35,
     "actionRequired": "Woodworking",
     "experienceGained": "Woodworking:39",
-    "isStackable": true
+    "isStackable": true,
+    "GatherSpeed": 300
   },
   {
     "itemName": "Mesquite Art Carving",
@@ -1630,7 +1653,8 @@
     "value": 75,
     "requiredLevel": 40,
     "actionRequired": "Woodworking",
-    "experienceGained": "Woodworking:80"
+    "experienceGained": "Woodworking:80",
+    "GatherSpeed": 500
   },
   {
     "itemName": "Mesquite Arrow Shafts",
@@ -1641,9 +1665,10 @@
     "requiredLevel": 43,
     "actionRequired": "Woodworking",
     "experienceGained": "Woodworking:50",
-    "isStackable": true
+    "isStackable": true,
+    "GatherSpeed": 400
   },
-    {
+  {
     "itemName": "Mahogany Art Carving",
     "itemDescription": "A truly fine wood carving.",
     "gatherString": "You make a carving from the mahogany wood.",
@@ -1651,7 +1676,8 @@
     "value": 75,
     "requiredLevel": 50,
     "actionRequired": "Woodworking",
-    "experienceGained": "Woodworking:100"
+    "experienceGained": "Woodworking:100",
+    "GatherSpeed": 600
   },
   {
     "itemName": "Mahogany Arrow Shafts",
@@ -1662,9 +1688,10 @@
     "requiredLevel": 53,
     "actionRequired": "Woodworking",
     "experienceGained": "Woodworking:70",
-    "isStackable": true
+    "isStackable": true,
+    "GatherSpeed": 500
   },
-    {
+  {
     "itemName": "Ironwood Art Carving",
     "itemDescription": "A very hard piece of art.",
     "gatherString": "You make a carving from the ironwood logs.",
@@ -1672,7 +1699,8 @@
     "value": 95,
     "requiredLevel": 60,
     "actionRequired": "Woodworking",
-    "experienceGained": "Woodworking:130"
+    "experienceGained": "Woodworking:130",
+    "GatherSpeed": 800
   },
   {
     "itemName": "Ironwood Arrow Shafts",
@@ -1683,9 +1711,10 @@
     "requiredLevel": 63,
     "actionRequired": "Woodworking",
     "experienceGained": "Woodworking:90",
-    "isStackable": true
+    "isStackable": true,
+    "GatherSpeed": 700
   },
-    {
+  {
     "itemName": "Snakewood Art Carving",
     "itemDescription": "A carving of a snake made from wood.",
     "gatherString": "You make a carving from the snakewood logs.",
@@ -1693,7 +1722,8 @@
     "value": 135,
     "requiredLevel": 70,
     "actionRequired": "Woodworking",
-    "experienceGained": "Woodworking:200"
+    "experienceGained": "Woodworking:200",
+    "GatherSpeed": 1000
   },
   {
     "itemName": "Snakewood Arrow Shafts",
@@ -1704,9 +1734,10 @@
     "requiredLevel": 73,
     "actionRequired": "Woodworking",
     "experienceGained": "Woodworking:150",
-    "isStackable": true
+    "isStackable": true,
+    "GatherSpeed": 900
   },
-    {
+  {
     "itemName": "Lignum Vitae Art Carving",
     "itemDescription": "The latin name makes them worth more.",
     "gatherString": "You make a carving from the lignum vitae wood.",
@@ -1714,7 +1745,8 @@
     "value": 300,
     "requiredLevel": 80,
     "actionRequired": "Woodworking",
-    "experienceGained": "Woodworking:230"
+    "experienceGained": "Woodworking:230",
+    "GatherSpeed": 1300
   },
   {
     "itemName": "Lignum Vitae Arrow Shafts",
@@ -1725,9 +1757,10 @@
     "requiredLevel": 85,
     "actionRequired": "Woodworking",
     "experienceGained": "Woodworking:200",
-    "isStackable": true
+    "isStackable": true,
+    "GatherSpeed": 1100
   },
-    {
+  {
     "itemName": "Buloke Art Carving",
     "itemDescription": "The hardest carved artwork in the world.",
     "gatherString": "You make a carving from the buloke wood.",
@@ -1735,7 +1768,8 @@
     "value": 750,
     "requiredLevel": 90,
     "actionRequired": "Woodworking",
-    "experienceGained": "Woodworking:300"
+    "experienceGained": "Woodworking:300",
+    "GatherSpeed": 1500
   },
   {
     "itemName": "Buloke Arrow Shafts",
@@ -1746,13 +1780,246 @@
     "requiredLevel": 92,
     "actionRequired": "Woodworking",
     "experienceGained": "Woodworking:250",
-    "isStackable": true
+    "isStackable": true,
+    "GatherSpeed": 1250
   },
   {
     "itemName": "Camel",
     "itemDescription": "An even-toed ungulate with two large humps on its back. It doesn't fit in your inventory, but it takes up a space anyways.  ¯\\_(ツ)_/¯",
     "id": 162,
-    "value": 20000,
+    "value": 2,
     "actionsEnabled": "Desert Travel"
+  },
+  {
+    "itemName": "Hemp",
+    "itemDescription": "A fast-growing weed useful for turning into fiber.",
+    "id": 163,
+    "value": 10,
+    "isStackable": true,
+    "isUnpackable": true,
+    "unpackIDs": [ 164 ],
+    "unpackString": "Decortitate",
+    "actionRequired": "Gather",
+    "gatherSpeed": 4000,
+    "gatherString": "You gather some hemp."
+  },
+  {
+    "itemName": "Bow String",
+    "itemDescription": "A string you can attach to a bow.",
+    "id": 164,
+    "value": 10,
+    "isStackable": true,
+    "usableIDs": [
+      [ 165, 175 ],
+      [ 166, 176 ],
+      [ 167, 177 ],
+      [ 168, 178 ],
+      [ 169, 179 ],
+      [ 170, 180 ],
+      [ 171, 181 ],
+      [ 172, 182 ],
+      [ 173, 183 ],
+      [ 174, 184 ]
+    ]
+  },
+  {
+    "itemName": "Balsa Bow (Unstrung)",
+    "itemDescription": "A very flimsy bow with no string.",
+    "id": 165,
+    "value": 2,
+    "requiredLevel": 1,
+    "experienceGained": "Woodworking:10",
+    "actionRequired": "Woodworking",
+    "GatherSpeed": -100
+  },
+  {
+    "itemName": "Oak Bow (Unstrung)",
+    "itemDescription": "One of the most common types of bow, but it lacks a string.",
+    "id": 166,
+    "value": 18,
+    "requiredLevel": 15,
+    "experienceGained": "Woodworking:35",
+    "actionRequired": "Woodworking",
+    "GatherSpeed": 200
+  },
+  {
+    "itemName": "Sugar Maple Bow (Unstrung)",
+    "itemDescription": "A delicious bow with no string.",
+    "id": 167,
+    "value": 30,
+    "requiredLevel": 25,
+    "experienceGained": "Woodworking:55",
+    "actionRequired": "Woodworking",
+    "GatherSpeed": 500
+  },
+  {
+    "itemName": "Birch Bow (Unstrung)",
+    "itemDescription": "A white barked stringless bow.",
+    "id": 168,
+    "value": 50,
+    "requiredLevel": 25,
+    "experienceGained": "Woodworking:45",
+    "actionRequired": "Woodworking",
+    "GatherSpeed": 700
+  },
+  {
+    "itemName": "Mesquite Bow (Unstrung)",
+    "itemDescription": "A bow from a mesquite tree with no string.",
+    "id": 169,
+    "value": 65,
+    "requiredLevel": 40,
+    "experienceGained": "Woodworking:75",
+    "actionRequired": "Woodworking",
+    "GatherSpeed": 1000
+  },
+  {
+    "itemName": "Mahogany Bow (Unstrung)",
+    "itemDescription": "A fancy bow for a fancy adventurer. It needs a string, though.",
+    "id": 170,
+    "value": 130,
+    "requiredLevel": 50,
+    "experienceGained": "Woodworking:75",
+    "actionRequired": "Woodworking",
+    "GatherSpeed": 1200
+  },
+  {
+    "itemName": "Ironwood Bow (Unstrung)",
+    "itemDescription": "A very hard bow with no string.",
+    "id": 171,
+    "value": 110,
+    "requiredLevel": 65,
+    "experienceGained": "Woodworking:125",
+    "actionRequired": "Woodworking",
+    "GatherSpeed": 1400
+  },
+  {
+    "itemName": "Snakewood Bow (Unstrung)",
+    "itemDescription": "A very dense bow with no string.",
+    "id": 172,
+    "value": 155,
+    "requiredLevel": 75,
+    "experienceGained": "Woodworking:155",
+    "actionRequired": "Woodworking",
+    "GatherSpeed": 1600
+  },
+  {
+    "itemName": "Lignum Vitae Bow (Unstrung)",
+    "itemDescription": "A powerful bow if it had a string. It's very heavy.",
+    "id": 173,
+    "value": 450,
+    "requiredLevel": 83,
+    "experienceGained": "Woodworking:285",
+    "actionRequired": "Woodworking",
+    "GatherSpeed": 1800
+  },
+  {
+    "itemName": "Buloke Bow (Unstrung)",
+    "itemDescription": "The hardest bow in the world. It lacks a string.",
+    "id": 174,
+    "value": 800,
+    "requiredLevel": 91,
+    "experienceGained": "Woodworking:580",
+    "actionRequired": "Woodworking",
+    "GatherSpeed": 2000
+  },
+  {
+    "itemName": "Balsa Bow",
+    "itemDescription": "A very flimsy bow.",
+    "id": 175,
+    "value": 15,
+    "requiredLevel": 1,
+    "experienceGained": "Woodworking:10",
+    "actionRequired": "Woodworking",
+    "GatherSpeed": -100
+  },
+  {
+    "itemName": "Oak Bow",
+    "itemDescription": "One of the most common types of bow.",
+    "id": 176,
+    "value": 38,
+    "requiredLevel": 15,
+    "experienceGained": "Woodworking:35",
+    "actionRequired": "Woodworking",
+    "GatherSpeed": 200
+  },
+  {
+    "itemName": "Sugar Maple Bow",
+    "itemDescription": "A delicious bow.",
+    "id": 177,
+    "value": 55,
+    "requiredLevel": 25,
+    "experienceGained": "Woodworking:55",
+    "actionRequired": "Woodworking",
+    "GatherSpeed": 500
+  },
+  {
+    "itemName": "Birch Bow",
+    "itemDescription": "A white barked bow.",
+    "id": 178,
+    "value": 70,
+    "requiredLevel": 25,
+    "experienceGained": "Woodworking:45",
+    "actionRequired": "Woodworking",
+    "GatherSpeed": 700
+  },
+  {
+    "itemName": "Mesquite Bow",
+    "itemDescription": "A bow from a mesquite tree.",
+    "id": 179,
+    "value": 90,
+    "requiredLevel": 40,
+    "experienceGained": "Woodworking:75",
+    "actionRequired": "Woodworking",
+    "GatherSpeed": 1000
+  },
+  {
+    "itemName": "Mahogany Bow",
+    "itemDescription": "A fancy bow for a fancy adventurer.",
+    "id": 180,
+    "value": 180,
+    "requiredLevel": 50,
+    "experienceGained": "Woodworking:75",
+    "actionRequired": "Woodworking",
+    "GatherSpeed": 1200
+  },
+  {
+    "itemName": "Ironwood Bow",
+    "itemDescription": "A very hard bow.",
+    "id": 181,
+    "value": 130,
+    "requiredLevel": 65,
+    "experienceGained": "Woodworking:125",
+    "actionRequired": "Woodworking",
+    "GatherSpeed": 1400
+  },
+  {
+    "itemName": "Snakewood Bow",
+    "itemDescription": "A very dense bow.",
+    "id": 182,
+    "value": 195,
+    "requiredLevel": 75,
+    "experienceGained": "Woodworking:155",
+    "actionRequired": "Woodworking",
+    "GatherSpeed": 1600
+  },
+  {
+    "itemName": "Lignum Vitae Bow",
+    "itemDescription": "A powerful bow. It's very heavy.",
+    "id": 183,
+    "value": 650,
+    "requiredLevel": 83,
+    "experienceGained": "Woodworking:285",
+    "actionRequired": "Woodworking",
+    "GatherSpeed": 1800
+  },
+  {
+    "itemName": "Buloke Bow",
+    "itemDescription": "The hardest bow in the world.",
+    "id": 184,
+    "value": 1200,
+    "requiredLevel": 91,
+    "experienceGained": "Woodworking:580",
+    "actionRequired": "Woodworking",
+    "GatherSpeed": 2000
   }
 ]

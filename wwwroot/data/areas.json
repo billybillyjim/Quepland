@@ -142,7 +142,7 @@
     "description": "The shores north of the great Mount Queple. There seems to be a small fishing village east of the beach. You can now quickly access the parts of the shores you have already visited through the sidebar.",
     "areaURL": "RockyShores",
     "icon": "oi oi-sun",
-    "children": [ "RockyShoresBeach", "UragotaTown", "DarkRiver" ]
+    "children": [ "RockyShoresBeach", "UragotaTown", "DarkRiver", "HigashiWoods","DeepHigashiWoods", "HigashiBridge", "EastHigashiWoods"]
   },
   {
     "name": "Rocky Shores Beach",
@@ -152,7 +152,8 @@
     "description": "The sprawling beach is the perfect place to catch a variety of fish.",
     "areaURL": "RockyShoresBeach",
     "icon": "oi oi-signpost",
-    "unlockableAreas": [ "The Rocky Shores,Mark this area in your journal,,", "Uragota Town,Walk along the beach,," ]
+    "unlockableAreas": [ "Uragota Town,Walk along the beach,," ],
+    "areaToUnlockOnArrival": "The Rocky Shores"
   },
   {
     "name": "Uragota Town",
@@ -199,7 +200,8 @@
     "description": "You step onto the dock of a small, chilly village. Ice floes surround this snowy wasteland, and all is white in every direction.",
     "areaURL": "NorthernIslesDock",
     "icon": "oi oi-river",
-    "unlockableAreas": [ "Kogoe Town,Go into town,,", "The Northern Isles,Mark this area in your journal,," ]
+    "unlockableAreas": [ "Kogoe Town,Go into town,," ],
+    "areaToUnlockOnArrival": "The Northern Isles"
   },
   {
     "name": "Eastern Trail",
@@ -259,7 +261,7 @@
     "description": "You come around a turn in the path to find large piles of cheese and bark. The path winds around them and down a hill.",
     "areaURL": "DeepHigashiWoods",
     "icon": "oi oi-river",
-    "actions": [ "Gather Cheese:Cheese, Gather Bark:Bark" ],
+    "actions": [ "Gather Cheese:Cheese", "Gather Bark:Bark" ],
     "unlockableAreas": [ "Higashi Bridge,Head down the hill,," ]
   },
   {
@@ -267,7 +269,7 @@
     "id": 27,
     "isUnlocked": false,
     "description": "At the bottom of the hill is a gorge with a bridge running across it. Or, there used to be a bridge. You'll need to repair it or jump to get across.",
-    "areaURL": "DeepHigashiWoods",
+    "areaURL": "HigashiBridge",
     "icon": "oi oi-river",
     "actions": [ "Hunting" ],
     "unlockableAreas": [ "East Higashi Woods,Jump across the gap,Deftness:30,", "East Higashi Woods,Repair the bridge,Woodworking:30," ],
@@ -280,7 +282,7 @@
     "description": "On the other side you find a number of balsa trees. The road leads south.",
     "areaURL": "EastHigashiWoods",
     "icon": "oi oi-river",
-    "actions": [ "Chop Balsa Trees:Balsa Logs" ],
+    "actions": [ "Chop Balsa Trees:Balsa Logs", "Gather Hemp:Hemp" ],
     "unlockableAreas": [ "The Southern Trail,Take the road out of the forest,," ]
   },
   {
@@ -334,7 +336,8 @@
     "areaURL": "SouthernTrail",
     "icon": "oi oi-fire",
     "unlockableAreas": [ "Route 7,Show the knight your skill with the sword,Swordsmanship:55,Swordsmanship" ],
-    "npcIDs": [ 7 ]
+    "npcIDs": [ 7 ],
+    "areaToUnlockOnArrival": "The Wasteland"
   },
   {
     "name": "The Wasteland",

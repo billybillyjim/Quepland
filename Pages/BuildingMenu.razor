@@ -31,58 +31,70 @@
             if (thisBuilding != null)
             {
                 builder.OpenElement(0, "h");
-                builder.AddContent(0, "You are in " + thisBuilding.Name);
+                builder.AddContent(1, "You are in " + thisBuilding.Name);
                 builder.CloseElement();
-                builder.OpenElement(0, "br");
+                builder.OpenElement(2, "br");
                 builder.CloseElement();
-                builder.OpenElement(0, "p");
-                builder.AddContent(0, thisBuilding.Description);
+                builder.OpenElement(3, "p");
+                builder.AddContent(4, thisBuilding.Description);
                 builder.CloseElement();
 
                 if (thisBuilding.IsShop)
                 {
-                    builder.OpenElement(0, "table");
-                    builder.OpenElement(1, "thead");
-                    builder.OpenElement(2, "tr");
-                    builder.OpenElement(3, "th");
-                    builder.AddContent(3, "Item Name");
+                    builder.OpenElement(5, "table");
+                    builder.OpenElement(6, "thead");
+                    builder.OpenElement(7, "tr");
+                    builder.OpenElement(8, "th");
+                    builder.AddContent(9, "Item Name");
                     builder.CloseElement();
-                    builder.OpenElement(3, "th");
-                    builder.AddContent(3, "Item Description");
+                    builder.OpenElement(10, "th");
+                    builder.AddContent(11, "Item Description");
                     builder.CloseElement();
-                    builder.OpenElement(3, "th");
-                    builder.AddContent(3, "Cost");
+                    builder.OpenElement(12, "th");
+                    builder.AddContent(13, "Cost");
                     builder.CloseElement();
                     builder.CloseElement();
                     builder.CloseElement();
-                    builder.OpenElement(1, "tbody");
+                    builder.OpenElement(14, "tbody");
 
                     foreach (int i in thisBuilding.items ?? Enumerable.Empty<int>())
                     {
-                        GameItem item = Program.itemDatabase.GetItemByID(i);
-                        builder.OpenElement(2, "tr");
-                        builder.OpenElement(3, "td");
-                        builder.AddContent(3, item.ItemName);
-                        builder.CloseElement();
-                        builder.OpenElement(3, "td");
-                        builder.AddContent(3, item.ItemDescription);
-                        builder.CloseElement();
-                        builder.OpenElement(3, "td");
-                        builder.AddContent(3, item.Value);
-                        builder.CloseElement();
-                        builder.OpenElement(3, "td");
-                        builder.OpenElement(4, "button");
-                        builder.AddAttribute(4, "class", "btn btn-primary");
-                        builder.AddAttribute(4, "onclick", (() => BuyItem(item, 1)));
-                        builder.AddContent(4, "Buy");
-                        builder.CloseElement();
-                        builder.CloseElement();
-                        builder.CloseElement();
+                        builder.AddContent(15, ShopItem(i));
                     }
                     builder.CloseElement();
                     builder.CloseElement();
                 }
             }
+        };
+    }
+    public RenderFragment ShopItem(int i)
+    {
+        return builder =>
+        {
+            GameItem item = Program.itemDatabase.GetItemByID(i);
+            builder.OpenElement(0, "tr");
+            builder.OpenElement(1, "td");
+            builder.AddContent(2, item.ItemName);
+            builder.CloseElement();
+            builder.OpenElement(3, "td");
+            builder.AddContent(4, item.ItemDescription);
+            builder.CloseElement();
+            builder.OpenElement(5, "td");
+            builder.AddContent(6, item.Value);
+            builder.CloseElement();
+            builder.OpenElement(7, "td");
+            builder.OpenElement(8, "button");
+            builder.AddAttribute(9, "class", "btn btn-primary");
+            builder.AddAttribute(10, "onclick", (() => BuyItem(item, 1)));
+            if (item.Value > GameState.GetPlayerInventory().GetCoins())
+            {
+                builder.AddAttribute(11, "disabled", true);
+                builder.AddAttribute(12, "title", "You don't have enough money to buy this.");
+            }
+            builder.AddContent(13, "Buy");
+            builder.CloseElement();
+            builder.CloseElement();
+            builder.CloseElement();
         };
     }
     public RenderFragment LoadAlchemyStation()
@@ -117,8 +129,8 @@
                         builder.OpenElement(0, "button");
                         builder.AddAttribute(1, "class", "btn btn-primary");
                         builder.AddAttribute(2, "style", "margin:10px");
-                    //Check for Carquen and next 3 elements.
-                    if (GameState.GetPlayerInventory().HasItem(temp + 62) == false)
+                        //Check for Carquen and next 3 elements.
+                        if (GameState.GetPlayerInventory().HasItem(temp + 62) == false)
                         {
                             builder.AddAttribute(3, "disabled", true);
                         }
@@ -353,8 +365,13 @@
         {
             GameState.GetPlayerInventory().RemoveItems(Program.itemDatabase.GetGold(), item.Value * amount);
             GameState.GetPlayerInventory().AddMultipleOfItem(item, amount);
+            MessageManager.AddMessage("You bought " + amount + " " + item.ItemName);
         }
-        MessageManager.AddMessage("You bought " + amount + " " + item.ItemName);
+        else
+        {
+            MessageManager.AddMessage("You can't afford that.");
+        }
+
         GameState.UpdateState();
         StateHasChanged();
     }
@@ -386,6 +403,7 @@
     }
     public void UnlockFollower(int followerID)
     {
+        GameState.GetPlayerInventory().RemoveItems(Program.itemDatabase.GetGold(), Program.followerManager.GetFollowerByID(followerID).Cost);
         if (Program.followerManager.GetNumberOfUnlockedFollowers() == 0)
         {
             MessageManager.AddMessage(Program.followerManager.GetFollowerByID(followerID).Name + " will now follow you. Go to your bank and select \"Followers\" at the top of the screen to set them as your follower.");

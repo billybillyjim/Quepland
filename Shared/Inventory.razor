@@ -288,8 +288,8 @@
             builder.AddAttribute(8, "class", "btn btn-primary");
             builder.AddAttribute(9, "style", "margin:3px");
             builder.AddAttribute(10, "onclick", () => Sell(item, 1));
-        //If the player has a full inventory and no place for coins, they can't sell part of a stack.
-        if (item.Key.IsStackable && item.Value > 1 && GameState.GetPlayerInventory().GetAvailableSpaces() == 0 && GameState.GetPlayerInventory().GetCoins() == 0)
+            //If the player has a full inventory and no place for coins, they can't sell part of a stack.
+            if (item.Key.IsStackable && item.Value > 1 && GameState.GetPlayerInventory().GetAvailableSpaces() == 0 && GameState.GetPlayerInventory().GetCoins() == 0)
             {
                 builder.AddAttribute(11, "disabled", true);
                 builder.AddAttribute(12, "title", "You don't have inventory space for the coins you would receive.");
@@ -300,8 +300,8 @@
             builder.AddAttribute(15, "class", "btn btn-primary");
             builder.AddAttribute(16, "style", "margin:3px");
             builder.AddAttribute(17, "onclick", () => Sell(item, 5));
-        //If the player has a full inventory and no place for coins, they can't sell part of a stack.
-        if (item.Key.IsStackable && item.Value > 5 && GameState.GetPlayerInventory().GetAvailableSpaces() == 0 && GameState.GetPlayerInventory().GetCoins() == 0)
+            //If the player has a full inventory and no place for coins, they can't sell part of a stack.
+            if (item.Key.IsStackable && item.Value > 5 && GameState.GetPlayerInventory().GetAvailableSpaces() == 0 && GameState.GetPlayerInventory().GetCoins() == 0)
             {
                 builder.AddAttribute(18, "disabled", true);
                 builder.AddAttribute(19, "title", "You don't have inventory space for the coins you would receive.");
@@ -434,7 +434,7 @@
         {
             createRepeatTimer.Dispose();
         }
-
+        int creationTime = Program.itemDatabase.GetItemByID(usableIDs[itemCreatedID, 1]).GatherSpeed;
         createRepeatTimer = new Timer(new TimerCallback(_ =>
         {
             GameItem itemCreated = Program.itemDatabase.GetItemByID(usableIDs[itemCreatedID, 1]);
@@ -459,10 +459,10 @@
             }
 
 
-        //CancelUse();
-        GameState.UpdateState();
+            //CancelUse();
+            GameState.UpdateState();
             StateHasChanged();
-        }), null, 500, 1000);
+        }), null, (500 + (creationTime / 2)), (1000 + creationTime));
 
 
         return "";

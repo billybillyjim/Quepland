@@ -141,6 +141,31 @@ public class Player
             LevelUp(skill);
         }
     }
+    public void GainExperienceFromWeapon(GameItem weapon, int damageDealt)
+    {
+        if (weapon.ActionRequired == null)
+        {
+            return;
+        }
+        if (weapon.ActionRequired.Contains("Knife"))
+        {
+            GainExperience("Deftness", (int)(damageDealt * 1.5));
+        }
+        else if (weapon.ActionRequired.Contains("Sword"))
+        {
+            GainExperience("Deftness", (int)(damageDealt * 0.5));
+            GainExperience("Strength", damageDealt);
+        }
+        else if (weapon.ActionRequired.Contains("Axe"))
+        {
+            GainExperience("Deftness", (int)(damageDealt * 0.5));
+            GainExperience("Strength", damageDealt);
+        }
+        else if (weapon.ActionRequired.Contains("Hammer"))
+        {
+            GainExperience("Strength", (int)(damageDealt * 1.5));
+        }
+    }
     public void LevelUp(Skill skill)
     {
         skill.SkillLevel += 1;
