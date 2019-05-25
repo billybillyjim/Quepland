@@ -17,6 +17,9 @@ public class GameItem
     public int Damage { get; set; }
     public int QueplarValue { get; set; }
     public int RequiredLevel { get; set; }
+    public int HealAmount { get; set; }
+    public int BuffAmount { get; set; }
+    public int HealDuration { get; set; }
 
     public bool IsUsable { get; set; }
     public bool IsEquipable { get; set; }
@@ -36,6 +39,8 @@ public class GameItem
 
     public string ActionsEnabled { get; set; }
     public string ActionRequired { get; set; }
+    public string BuffedSkill { get; set; }
+
 
     public override string ToString()
     {

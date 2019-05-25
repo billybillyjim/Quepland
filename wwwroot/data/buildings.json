@@ -353,8 +353,8 @@
     "buttonText": "Head This Way",
     "id": 45,
     "url": "LostSwampEnd",
-    "description": "You reach the other side of the swamp.",
-    "buildings": [ "" ]
+    "description": "You reach the other side of the lost swamp. You can see a light in the distance.",
+    "unlockableAreas": [ "Strange Old Hut,Go see what it is,," ]
   },
   {
     "name": "Fisherman's Shack",

@@ -231,7 +231,7 @@
     "description": "You enter an enourmous swamp. Trees entangle an overgrowth immersed in water. Rice grows wild here.",
     "areaURL": "GreatSwamp",
     "icon": "oi oi-river",
-    "children": [ "Swampland", "Swampwood" ],
+    "children": [ "Swampland", "Swampwood", "StrangeOldHut" ],
     "isMarked": false
   },
   {
@@ -351,7 +351,7 @@
     "name": "Route 7",
     "description": "A lone sign names the road 'Route 7'. It seems to continue southward as far as you can see. The air is so warm you won't be able to travel any further by just walking.",
     "areaURL": "Route7",
-    "icon": "oi oi fire",
+    "icon": "oi oi-fire",
     "id": 36,
     "buildings": [ "CamelShop" ],
     "unlockableAreas": [ "Route 7 South,Continue past the shop,," ]
@@ -360,7 +360,7 @@
     "name": "Route 7 South",
     "description": "The camel shop is out of sight. The only things visible are shrubs and sand.",
     "areaURL": "Route7South",
-    "icon": "oi oi fire",
+    "icon": "oi oi-fire",
     "id": 37,
     "actionRequiredForAccess": "Desert Travel",
     "unlockableAreas": [ "Route 7 Crossroads,Continue Southward,," ],
@@ -370,12 +370,19 @@
     "name": "Route 7 Crossroads",
     "description": "You reach an intersection in the middle of the wasteland. You can continue south, or head east or west.",
     "areaURL": "Route7Crossroads",
-    "icon": "oi oi fire",
+    "icon": "oi oi-fire",
     "id": 38,
     "actionRequiredForAccess": "Desert Travel",
     "redirectAreaURL": "Route7"
+  },
+  {
+    "name": "Strange Old Hut",
+    "description": "You arrive at a decrepit shack with the lights on. A large totem pole stands out in the front lawn. The hill nearby is teeming with coal.",
+    "areaURL": "StrangeOldHut",
+    "icon": "oi oi-house",
+    "id": 39,
+    "actions": [ "Mining:Coal" ]
   }
-
 
 
 ]

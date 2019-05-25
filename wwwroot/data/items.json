@@ -1349,7 +1349,12 @@
     "gatherString": "You make an icefish roll.",
     "requiredLevel": 3,
     "experienceGained": "Culinary Arts:20",
-    "actionRequired": "Culinary Arts"
+    "actionRequired": "Culinary Arts",
+    "isEdible": true,
+    "healAmount": 1,
+    "healDuration": 60,
+    "buffedSkill": "Knifesmanship",
+    "buffAmount": 5
   },
   {
     "itemName": "Shrimp Roll",
@@ -1359,7 +1364,12 @@
     "gatherString": "You make a shrimp roll.",
     "requiredLevel": 6,
     "experienceGained": "Culinary Arts:40",
-    "actionRequired": "Culinary Arts"
+    "actionRequired": "Culinary Arts",
+    "isEdible": true,
+    "healAmount": 1,
+    "healDuration": 120,
+    "buffedSkill": "Swordsmanship",
+    "buffAmount": 5
   },
   {
     "itemName": "Scallop Roll",
@@ -1369,7 +1379,12 @@
     "gatherString": "You make a scallop roll.",
     "requiredLevel": 9,
     "experienceGained": "Culinary Arts:50",
-    "actionRequired": "Culinary Arts"
+    "actionRequired": "Culinary Arts",
+    "isEdible": true,
+    "healAmount": 2,
+    "healDuration": 60,
+    "buffedSkill": "Deftness",
+    "buffAmount": 5
   },
   {
     "itemName": "Sardine Roll",
@@ -1380,7 +1395,12 @@
     "gatherSpeed": 2500,
     "requiredLevel": 25,
     "experienceGained": "Culinary Arts:40",
-    "actionRequired": "Culinary Arts"
+    "actionRequired": "Culinary Arts",
+    "isEdible": true,
+    "healAmount": 2,
+    "healDuration": 60,
+    "buffedSkill": "Hammermanship",
+    "buffAmount": 5
   },
   {
     "itemName": "Abalone Roll",
@@ -1390,7 +1410,12 @@
     "gatherString": "You make an abalone roll.",
     "requiredLevel": 40,
     "experienceGained": "Culinary Arts:60",
-    "actionRequired": "Culinary Arts"
+    "actionRequired": "Culinary Arts",
+    "isEdible": true,
+    "healAmount": 1,
+    "healDuration": 300,
+    "buffedSkill": "Axemanship",
+    "buffAmount": 5
   },
   {
     "itemName": "Saury Roll",
@@ -1401,7 +1426,12 @@
     "gatherSpeed": 4000,
     "requiredLevel": 42,
     "experienceGained": "Culinary Arts:85",
-    "actionRequired": "Culinary Arts"
+    "actionRequired": "Culinary Arts",
+    "isEdible": true,
+    "healAmount": 2,
+    "healDuration": 300,
+    "buffedSkill": "Archery",
+    "buffAmount": 5
   },
   {
     "itemName": "Butterfish Roll",
@@ -1412,7 +1442,12 @@
     "gatherSpeed": 4500,
     "requiredLevel": 50,
     "experienceGained": "Culinary Arts:90",
-    "actionRequired": "Culinary Arts"
+    "actionRequired": "Culinary Arts",
+    "isEdible": true,
+    "healAmount": 3,
+    "healDuration": 300,
+    "buffedSkill": "Culinary Arts",
+    "buffAmount": 5
   },
   {
     "itemName": "Shad Roll",
@@ -1423,7 +1458,12 @@
     "gatherSpeed": 5000,
     "requiredLevel": 52,
     "experienceGained": "Culinary Arts:150",
-    "actionRequired": "Culinary Arts"
+    "actionRequired": "Culinary Arts",
+    "isEdible": true,
+    "healAmount": 3,
+    "healDuration": 300,
+    "buffedSkill": "Alchemy",
+    "buffAmount": 5
   },
   {
     "itemName": "Squid Roll",
@@ -1434,7 +1474,12 @@
     "gatherSpeed": 6000,
     "requiredLevel": 56,
     "experienceGained": "Culinary Arts:170",
-    "actionRequired": "Culinary Arts"
+    "actionRequired": "Culinary Arts",
+    "isEdible": true,
+    "healAmount": 3,
+    "healDuration": 300,
+    "buffedSkill": "Strength",
+    "buffAmount": 5
   },
   {
     "itemName": "Salmon Roll",
@@ -1445,7 +1490,12 @@
     "gatherSpeed": 8000,
     "requiredLevel": 60,
     "experienceGained": "Culinary Arts:250",
-    "actionRequired": "Culinary Arts"
+    "actionRequired": "Culinary Arts",
+    "isEdible": true,
+    "healAmount": 3,
+    "healDuration": 500,
+    "buffedSkill": "Mining",
+    "buffAmount": 5
   },
   {
     "itemName": "Tuna Roll",
@@ -1456,7 +1506,12 @@
     "gatherSpeed": 15000,
     "requiredLevel": 70,
     "experienceGained": "Culinary Arts:500",
-    "actionRequired": "Culinary Arts"
+    "actionRequired": "Culinary Arts",
+    "isEdible": true,
+    "healAmount": 3,
+    "healDuration": 500,
+    "buffedSkill": "Smithing",
+    "buffAmount": 5
   },
   {
     "itemName": "Yellowtail Roll",
@@ -1467,7 +1522,12 @@
     "gatherSpeed": 12000,
     "requiredLevel": 70,
     "experienceGained": "Culinary Arts:435",
-    "actionRequired": "Culinary Arts"
+    "actionRequired": "Culinary Arts",
+    "isEdible": true,
+    "healAmount": 3,
+    "healDuration": 500,
+    "buffedSkill": "Woodcutting",
+    "buffAmount": 5
   },
   {
     "itemName": "Giant Clam Roll",
@@ -1478,7 +1538,12 @@
     "gatherSpeed": 18000,
     "requiredLevel": 80,
     "experienceGained": "Culinary Arts:1000",
-    "actionRequired": "Culinary Arts"
+    "actionRequired": "Culinary Arts",
+    "isEdible": true,
+    "healAmount": 4,
+    "healDuration": 500,
+    "buffedSkill": "Woodworking",
+    "buffAmount": 5
   },
   {
     "itemName": "Big Tuna Roll",
@@ -1489,7 +1554,12 @@
     "gatherSpeed": 20000,
     "requiredLevel": 83,
     "experienceGained": "Culinary Arts:1800",
-    "actionRequired": "Culinary Arts"
+    "actionRequired": "Culinary Arts",
+    "isEdible": true,
+    "healAmount": 5,
+    "healDuration": 900,
+    "buffedSkill": "Axemanship",
+    "buffAmount": 10
   },
   {
     "itemName": "Swordfish Roll",
@@ -1500,7 +1570,12 @@
     "gatherSpeed": 20000,
     "requiredLevel": 81,
     "experienceGained": "Culinary Arts:2000",
-    "actionRequired": "Culinary Arts"
+    "actionRequired": "Culinary Arts",
+    "isEdible": true,
+    "healAmount": 5,
+    "healDuration": 900,
+    "buffedSkill": "Swordsmanship",
+    "buffAmount": 10
   },
   {
     "itemName": "Flounder Roll",
@@ -1511,7 +1586,12 @@
     "gatherSpeed": 15000,
     "requiredLevel": 85,
     "experienceGained": "Culinary Arts:1800",
-    "actionRequired": "Culinary Arts"
+    "actionRequired": "Culinary Arts",
+    "isEdible": true,
+    "healAmount": 5,
+    "healDuration": 900,
+    "buffedSkill": "Hammermanship",
+    "buffAmount": 10
   },
   {
     "itemName": "Kogoe Gym Membership Card",
@@ -2021,5 +2101,16 @@
     "experienceGained": "Woodworking:580",
     "actionRequired": "Woodworking",
     "GatherSpeed": 2000
-  }
+  },
+  {
+    "itemName": "Coal",
+    "itemDescription": "A present from santa.",
+    "id": 185,
+    "value": 55,
+    "actionRequired": "Mining",
+    "gatherSpeed": 3000,
+    "requiredLevel": 35,
+    "experienceGained": "Mining:80",
+    "gatherString": "You mine some coal."
+  },
 ]
