@@ -75,6 +75,19 @@ public class Player
         equippedItems.Add(item);
         item.IsEquipped = true;
     }
+    public void EquipItems(List<int> ids)
+    {
+        foreach (KeyValuePair<GameItem, int> pair in inventory.GetItems())
+        {
+            foreach (int i in ids)
+            {
+                if (pair.Key.Id == i)
+                {
+                    EquipItem(pair.Key);
+                }
+            }
+        }
+    }
     public void UnequipItem(GameItem item)
     {
         if (item != null)

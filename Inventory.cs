@@ -10,11 +10,11 @@ public class Inventory
     private readonly int maxSize;
     private readonly int maxValue = int.MaxValue - 1000000;
     private int totalItems;
-	public Inventory(int max)
-	{
+    public Inventory(int max)
+    {
         items = new Dictionary<GameItem, int>();
         maxSize = max;
-	}
+    }
     /// <summary>
     /// Returns the amount of that specific item in the inventory.
     /// </summary>
@@ -48,39 +48,51 @@ public class Inventory
     public List<KeyValuePair<GameItem, int>> GetItemsSorted(int sortedBy)
     {
         sortedItems = new List<KeyValuePair<GameItem, int>>();
-        foreach(KeyValuePair<GameItem, int> i in items)
+        foreach (KeyValuePair<GameItem, int> i in items)
         {
             sortedItems.Add(i);
         }
-        if(sortedBy == 0)
+        if (sortedBy == 0)
         {
             sortedItems = sortedItems.OrderBy(x => x.Key.ItemName).ToList();
         }
-        else if(sortedBy == 1)
+        else if (sortedBy == 1)
         {
             sortedItems = sortedItems.OrderBy(x => x.Value).Reverse().ToList();
         }
-        else if(sortedBy == 2)
+        else if (sortedBy == 2)
         {
             sortedItems = sortedItems.OrderBy(x => x.Key.ActionRequired).ToList();
         }
         return sortedItems;
     }
-    public Dictionary<GameItem,int> GetUnequippedItems()
+    public Dictionary<GameItem, int> GetUnequippedItems()
     {
         Dictionary<GameItem, int> unequippedItems = new Dictionary<GameItem, int>();
-        foreach(KeyValuePair<GameItem, int> item in items)
+        foreach (KeyValuePair<GameItem, int> item in items)
         {
-            if(item.Key.IsEquipped == false)
+            if (item.Key.IsEquipped == false)
             {
                 unequippedItems[item.Key] = item.Value;
             }
         }
         return unequippedItems;
     }
+    public Dictionary<GameItem, int> GetEquippedItems()
+    {
+        Dictionary<GameItem, int> equippedItems = new Dictionary<GameItem, int>();
+        foreach (KeyValuePair<GameItem, int> item in items)
+        {
+            if (item.Key.IsEquipped)
+            {
+                equippedItems[item.Key] = item.Value;
+            }
+        }
+        return equippedItems;
+    }
     public bool HasItem(GameItem item)
     {
-        if(items.TryGetValue(item, out int temp))
+        if (items.TryGetValue(item, out int temp))
         {
             return true;
         }
@@ -88,9 +100,9 @@ public class Inventory
     }
     public bool HasItem(int itemID)
     {
-        foreach(KeyValuePair<GameItem, int> pair in items)
+        foreach (KeyValuePair<GameItem, int> pair in items)
         {
-            if(pair.Key.Id == itemID)
+            if (pair.Key.Id == itemID)
             {
                 return true;
             }
@@ -99,9 +111,9 @@ public class Inventory
     }
     public int GetCoins()
     {
-        foreach(KeyValuePair<GameItem, int> pair in items)
+        foreach (KeyValuePair<GameItem, int> pair in items)
         {
-            if(pair.Key.Id == 0)
+            if (pair.Key.Id == 0)
             {
                 return pair.Value;
             }
@@ -113,30 +125,30 @@ public class Inventory
     {
         //If the added item is null, the inventory is full and the item is not stackable, 
         //or the inventory is full and the item is stackable, but not already in the inventory
-        if(item == null ||
+        if (item == null ||
           (totalItems == maxSize && item.IsStackable == false) ||
           (totalItems == maxSize && item.IsStackable == true && HasItem(item) == false))
         {
             return false;
         }
-        if(items.TryGetValue(item, out int amount))
+        if (items.TryGetValue(item, out int amount))
         {
             items[item] = Math.Min(amount + 1, maxValue);
-            if(item.IsStackable == false)
+            if (item.IsStackable == false)
             {
                 totalItems++;
-            }          
+            }
         }
         else
         {
             items[item] = 1;
             totalItems++;
-        }      
+        }
         return true;
     }
     public int GetAmountOfItem(GameItem item)
     {
-        if(items.TryGetValue(item, out int amount))
+        if (items.TryGetValue(item, out int amount))
         {
             return amount;
         }
@@ -145,15 +157,15 @@ public class Inventory
 
     public bool AddItems(Dictionary<GameItem, int> itemsToAdd)
     {
-        if(itemsToAdd == null)
+        if (itemsToAdd == null)
         {
             return false;
         }
-        foreach(KeyValuePair<GameItem, int> itemToAdd in itemsToAdd)
+        foreach (KeyValuePair<GameItem, int> itemToAdd in itemsToAdd)
         {
-            for(int i = 0; i < itemToAdd.Value; i++)
+            for (int i = 0; i < itemToAdd.Value; i++)
             {
-                if(AddItem(itemToAdd.Key) == false)
+                if (AddItem(itemToAdd.Key) == false)
                 {
                     return false;
                 }
@@ -163,21 +175,21 @@ public class Inventory
     }
     public bool AddMultipleOfItem(GameItem item, int amount)
     {
-            for (int i = 0; i < amount; i++)
+        for (int i = 0; i < amount; i++)
+        {
+            if (AddItem(item) == false)
             {
-                if (AddItem(item) == false)
-                {
-                    return false;
-                }
+                return false;
             }
-        
+        }
+
         return true;
     }
     public bool AddOneOfMultipleItems(List<GameItem> itemList)
     {
-        foreach(GameItem item in itemList)
+        foreach (GameItem item in itemList)
         {
-            if(AddItem(item) == false)
+            if (AddItem(item) == false)
             {
                 return false;
             }
@@ -188,16 +200,16 @@ public class Inventory
     {
         if (items.TryGetValue(item, out int amount))
         {
-            if(amount >= 1)
+            if (amount >= 1)
             {
                 items[item] = amount - 1;
-                if(item.IsStackable == false)
+                if (item.IsStackable == false)
                 {
                     totalItems--;
-                }           
+                }
                 amount -= 1;
             }
-            if(amount == 0)
+            if (amount == 0)
             {
                 items.Remove(item);
             }
@@ -205,16 +217,16 @@ public class Inventory
     }
     public int RemoveItems(GameItem item, int amount)
     {
-        if(items.TryGetValue(item, out int currentAmount))
+        if (items.TryGetValue(item, out int currentAmount))
         {
-            if(currentAmount >= amount)
+            if (currentAmount >= amount)
             {
                 items[item] = currentAmount - amount;
-                if(item.IsStackable == false)
+                if (item.IsStackable == false)
                 {
                     totalItems -= amount;
-                }             
-                if(items[item] == 0)
+                }
+                if (items[item] == 0)
                 {
                     items.Remove(item);
                     if (item.IsStackable)
@@ -224,7 +236,7 @@ public class Inventory
                 }
                 return amount;
             }
-            
+
         }
         return 0;
     }
@@ -242,7 +254,7 @@ public class Inventory
     }
     public void RemoveItemsByID(int[] ids)
     {
-        foreach(int i in ids)
+        foreach (int i in ids)
         {
             RemoveItemByID(i);
         }
@@ -250,11 +262,11 @@ public class Inventory
     public bool ActionIsEnabled(string skillName)
     {
         Console.WriteLine("Skill: " + skillName);
-        if(skillName.Contains("Gather") || skillName.Length < 1)
+        if (skillName.Contains("Gather") || skillName.Length < 1)
         {
             return true;
         }
-        foreach(GameItem i in items.Keys)
+        foreach (GameItem i in items.Keys)
         {
             if (i.ActionsEnabled != null && i.ActionsEnabled.Contains(skillName))
             {
@@ -271,7 +283,7 @@ public class Inventory
     public void EmptyInventoryOfUnequippedItems()
     {
         Dictionary<GameItem, int> equippedItems = new Dictionary<GameItem, int>();
-        foreach(KeyValuePair<GameItem, int> item in items)
+        foreach (KeyValuePair<GameItem, int> item in items)
         {
             if (item.Key.IsEquipped)
             {
