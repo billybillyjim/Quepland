@@ -157,8 +157,8 @@
             int dmgDealt = Math.Min(GameState.GetPlayer().GetDamageDealt(), opponent.CurrentHP);
             if (GameState.GetPlayer().GetWeapon() != null)
             {
-                GameState.GetPlayer().GainExperience(GameState.GetPlayer().GetWeapon().ActionRequired.Split(':')[0], dmgDealt * 2000);
-                GameState.GetPlayer().GainExperienceFromWeapon(GameState.GetPlayer().GetWeapon(), dmgDealt * 1000);
+                GameState.GetPlayer().GainExperience(GameState.GetPlayer().GetWeapon().ActionRequired.Split(':')[0], dmgDealt * 2);
+                GameState.GetPlayer().GainExperienceFromWeapon(GameState.GetPlayer().GetWeapon(), dmgDealt * 2);
                 MessageManager.AddMessage("You dealt " + dmgDealt + " damage to the " + opponent.Name);
             }
             else
@@ -180,7 +180,7 @@
         if (battleFound)
         {
             int dmg = Math.Max(1, Extensions.GetGaussianRandomInt(opponent.Damage, opponent.Damage / 2d));
-            GameState.GetPlayer().GainExperience("HP", Math.Min(GameState.GetPlayer().CurrentHP, dmg) * 15);
+            GameState.GetPlayer().GainExperience("HP", Math.Min(GameState.GetPlayer().CurrentHP, dmg) * 8);
             GameState.GetPlayer().CurrentHP -= dmg;
             MessageManager.AddMessage("You took " + dmg + " damage from the " + opponent.Name + "'s attack.");
             if(GameState.GetPlayer().CurrentHP <= 0)
