@@ -6,6 +6,7 @@
 
 @functions{
 
+    Message mostRecent;
     public RenderFragment ShowMessages()
     {
         return builder =>
@@ -13,15 +14,26 @@
             builder.OpenElement(0, "div");
             builder.AddAttribute(1, "class", "modal-footer");
             builder.OpenElement(2, "table");
+            if(MessageManager != null && MessageManager.GetMessages().Count > 0)
+            {
+                mostRecent = MessageManager.GetMessages().Last();
+            }
 
             foreach(Message message in MessageManager.GetMessages())
             {
                 builder.OpenElement(3, "tr");
                 builder.OpenElement(4, "td");
-                if(message.color != null)
+                string style = "";
+                if(message == mostRecent)
                 {
-                    builder.AddAttribute(5, "style", "color:" + message.color);
+                    style += "font-weight:bold;";
                 }
+                if (message.color != null)
+                {
+                    style +=  "color:" + message.color + ";";
+                }
+
+                builder.AddAttribute(5, "style", style);
                 builder.AddContent(6, message.messageText);
                 builder.CloseElement();
                 builder.CloseElement();

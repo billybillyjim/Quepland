@@ -2,13 +2,12 @@
   {
     "name": "Quepland Fields",
     "id": 0,
-    "actions": [ "Fish For Minnows:Minnow", "Chop White Pine Trees:White Pine Logs", "Battle" ],
+    "actions": [ "Fish For Minnows:Minnow", "Chop White Pine Trees:White Pine Logs"],
     "isUnlocked": true,
     "description": "There is a small stream and a forest of white pine trees. A large poplar tree has fallen and blocks your path forward.",
     "areaURL": "queplandFields",
     "unlockableAreas": [ "Quepland Woods,Clear away Tree,Woodcutting:2,Woodcutting" ],
-    "icon": "oi oi-fire",
-    "monsterIDs": [ 0, 1, 2 ]
+    "icon": "oi oi-fire"
   },
   {
     "name": "Quepland Woods",
@@ -45,12 +44,13 @@
   {
     "name": "Lower Mt Queple Trail",
     "id": 4,
-    "actions": [ "Mining" ],
+    "actions": [ "Mining", "Battle" ],
     "isUnlocked": false,
     "description": "As you begin your ascent up the mountain, you notice the mouth of a cave off to the side of the path.",
     "areaURL": "lowerMtQuepleTrail",
     "icon": "oi oi-fire",
-    "unlockableAreas": [ "Queple Cave Entrance,Enter the cave,,", "Upper Mt Queple Trail,Continue up the trail,," ]
+    "unlockableAreas": [ "Queple Cave Entrance,Enter the cave,,", "Upper Mt Queple Trail,Continue up the trail,," ],
+    "monsterIDs": [ 0, 1, 2 ]
   },
   {
     "name": "Upper Mt Queple Trail",

@@ -79,8 +79,6 @@
                 }));
                 builder.CloseComponent();
                 builder.CloseElement();
-                //Make area links
-                //TODO:Make area parents not navlinks
                 foreach (Area area in Program.areaManager.GetAreasWithChildren())
                 {
                     if (area.IsUnlocked)
@@ -169,7 +167,7 @@
             builder.OpenElement(0, "li");
             builder.AddAttribute(1, "class", "nav-item px-3");
 
-            builder.AddAttribute(2, "style", "background-color:#FFFFFF33; padding-top:10px");
+            builder.AddAttribute(2, "style", "background-color:#FFFFFF33; padding-top:10px; cursor:pointer");
             builder.AddAttribute(4, "onclick", () => ToggleAreaChildren(area));
 
             builder.OpenElement(5, "span");
