@@ -121,7 +121,7 @@ public class Player
         string skillString = "";
         foreach(Skill skill in skills)
         {
-            skillString += skill.SkillName + "," + skill.SkillExperience + "," + skill.GetSkillLevel() + "/";
+            skillString += skill.SkillName + "," + skill.SkillExperience + "," + skill.GetSkillLevelUnboosted() + "/";
         }
         skillString = skillString.Remove(skillString.Length - 1);
         return skillString;

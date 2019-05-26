@@ -148,7 +148,7 @@
                         }
                         else
                         {
-                            builder.AddContent(14, Program.areaManager.BuildDisabledButtons(playerHasLevels, actionIsEnabled, action));
+                            builder.AddContent(14, BuildDisabledButtons(playerHasLevels, actionIsEnabled, action, item));
 
                         }
 
@@ -486,6 +486,36 @@
                 builder.CloseElement();
             }
 
+        };
+    }
+        public RenderFragment BuildDisabledButtons(bool playerHasLevels, bool actionIsEnabled, string action, GameItem item)
+    {
+        return builder =>
+        {
+            builder.OpenElement(0, "span");
+            builder.AddAttribute(0, "class", "d-inline-block");
+            builder.AddAttribute(0, "tabindex", "0");
+            builder.AddAttribute(0, "data-toggle", "tooltip");
+
+            if (playerHasLevels)
+            {
+                builder.AddAttribute(0, "title", "You lack the tool to do this." + "(" +item.ActionRequired + ")");
+            }
+            else if (actionIsEnabled)
+            {
+                builder.AddAttribute(0, "title", "You lack the levels to do this." + item.ActionRequired + "(" + item.RequiredLevel + ")");
+            }
+            else
+            {
+                builder.AddAttribute(0, "title", "You lack the tool and levels to do this." + item.ActionRequired + "(" + item.RequiredLevel + ")");
+            }
+            builder.OpenElement(1, "button");
+            builder.AddAttribute(1, "style", "margin-bottom:10px");
+            builder.AddAttribute(1, "class", "btn btn-primary");
+            builder.AddAttribute(1, "disabled", true);
+            builder.AddContent(1, action);
+            builder.CloseElement();
+            builder.CloseElement();
         };
     }
     public void Gather(GameItem itemToGather)

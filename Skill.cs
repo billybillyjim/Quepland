@@ -12,6 +12,10 @@ public class Skill
     {
         return SkillLevel + Boost;
     }
+    public int GetSkillLevelUnboosted()
+    {
+        return SkillLevel;
+    }
     public void SetSkillLevel(int level)
     {
         SkillLevel = level;

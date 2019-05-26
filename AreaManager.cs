@@ -98,36 +98,7 @@ public class AreaManager
         }
         return areaList;
     }
-    public RenderFragment BuildDisabledButtons(bool playerHasLevels, bool actionIsEnabled, string action)
-    {
-        return builder =>
-        {
-            builder.OpenElement(0, "span");
-            builder.AddAttribute(0, "class", "d-inline-block");
-            builder.AddAttribute(0, "tabindex", "0");
-            builder.AddAttribute(0, "data-toggle", "tooltip");
 
-            if (playerHasLevels)
-            {
-                builder.AddAttribute(0, "title", "you lack the tool to do this.");
-            }
-            else if (actionIsEnabled)
-            {
-                builder.AddAttribute(0, "title", "you lack the levels to do this.");
-            }
-            else
-            {
-                builder.AddAttribute(0, "title", "you lack the tool and levels to do this.");
-            }
-            builder.OpenElement(1, "button");
-            builder.AddAttribute(1, "style", "margin-bottom:10px");
-            builder.AddAttribute(1, "class", "btn btn-primary");
-            builder.AddAttribute(1, "disabled", true);
-            builder.AddContent(1, action);
-            builder.CloseElement();
-            builder.CloseElement();
-        };
-    }
    
 }
 

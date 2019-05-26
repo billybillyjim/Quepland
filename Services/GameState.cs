@@ -21,6 +21,9 @@ public class GameState
     
     public GameItem currentUsedItem;
     public GameItem currentGatherItem;
+    public GameItem currentBuffItem;
+
+    public int buffSecondsLeft;
     private Player player = new Player();
 
     public Area currentArea;
@@ -55,5 +58,10 @@ public class GameState
     public void LoadPlayerData(HttpClient Http)
     {
         player.LoadSkills(Http);
+    }
+    public void SetBuffItem(GameItem item)
+    {
+        currentBuffItem = item;
+        buffSecondsLeft = item.HealDuration;
     }
 }

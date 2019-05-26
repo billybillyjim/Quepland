@@ -1347,7 +1347,7 @@
     "itemDescription": "A sushi roll with icefish on top.",
     "value": 35,
     "gatherString": "You make an icefish roll.",
-    "requiredLevel": 3,
+    "requiredLevel": 1,
     "experienceGained": "Culinary Arts:20",
     "actionRequired": "Culinary Arts",
     "isEdible": true,

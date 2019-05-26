@@ -28,42 +28,49 @@
             builder.CloseElement();
 
 
-            builder.OpenElement(5, "p");
+            builder.OpenElement(6, "p");
             if (GameState.GetPlayer().activeFollower == null)
             {
-                builder.AddContent(6, "No current follower");
+                builder.AddContent(7, "No current follower");
             }
             else
             {
-                builder.AddContent(6, GameState.GetPlayer().activeFollower.ToString());
+                builder.AddContent(8, GameState.GetPlayer().activeFollower.ToString());
+            }
+
+            builder.CloseElement();
+            builder.OpenElement(9, "p");
+            if (GameState.buffSecondsLeft > 0)
+            {
+                builder.AddContent(10, GameState.currentBuffItem.BuffedSkill + " +" + GameState.currentBuffItem.BuffAmount + ", " + GameState.buffSecondsLeft);
             }
 
             builder.CloseElement();
 
-            builder.OpenElement(7, "table");
-            builder.AddAttribute(8, "style", "width:100%");
-            builder.OpenElement(9, "thead");
-            builder.OpenElement(10, "tr");
-            builder.OpenElement(11, "th");
-            builder.AddAttribute(12, "align", "left");
-            builder.AddContent(13, "Item");
+            builder.OpenElement(11, "table");
+            builder.AddAttribute(12, "style", "width:100%");
+            builder.OpenElement(13, "thead");
+            builder.OpenElement(14, "tr");
+            builder.OpenElement(15, "th");
+            builder.AddAttribute(16, "align", "left");
+            builder.AddContent(17, "Item");
             builder.CloseElement();
 
-            builder.OpenElement(14, "th");
-            builder.AddAttribute(15, "style", "text-align:right");
-            builder.AddContent(16, "Amount");
+            builder.OpenElement(18, "th");
+            builder.AddAttribute(19, "style", "text-align:right");
+            builder.AddContent(20, "Amount");
             builder.CloseElement();
 
             builder.CloseElement();
             builder.CloseElement();
 
-            builder.OpenElement(17, "tbody");
+            builder.OpenElement(21, "tbody");
             if (GameState.GetPlayerInventory() != null)
             {
                 foreach (KeyValuePair<GameItem, int> item in GameState.GetPlayerInventory().GetItems())
                 {
 
-                    builder.AddContent(18, LoadItem(item));
+                    builder.AddContent(22, LoadItem(item));
 
                 }
 
@@ -152,18 +159,23 @@
             {
                 builder.AddContent(26, UnpackButton(item));
             }
+            if (item.Key.IsEdible)
+            {
+                builder.AddContent(27, EatButton(item.Key));
+            }
             if (item.Key.IsEquipable)
             {
-                builder.AddContent(27, EquipButtons(item));
+                builder.AddContent(28, EquipButtons(item));
             }
             if (GameState.canBank)
             {
-                builder.AddContent(28, BankButtons(item));
+                builder.AddContent(29, BankButtons(item));
             }
             if (GameState.canSell && item.Key.Id != 0)
             {
-                builder.AddContent(29, SellButtons(item));
+                builder.AddContent(30, SellButtons(item));
             }
+
         };
     }
     private RenderFragment UnpackButton(KeyValuePair<GameItem, int> item)
@@ -423,7 +435,26 @@
     }
     public void Eat(GameItem item)
     {
-
+        EndBoostTimer();
+        GameState.SetBuffItem(item);
+        GameState.GetPlayer().GetSkill(GameState.currentBuffItem.BuffedSkill).Boost = GameState.currentBuffItem.BuffAmount;
+        GameState.foodTimer = new Timer(new TimerCallback(_ =>
+        {
+            GameState.buffSecondsLeft--;
+            GameState.GetPlayer().CurrentHP = Math.Min(GameState.GetPlayer().CurrentHP + GameState.currentBuffItem.HealAmount, GameState.GetPlayer().GetSkill("HP").GetSkillLevel());
+            if(GameState.buffSecondsLeft <= 0)
+            {
+                GameState.GetPlayer().GetSkill(GameState.currentBuffItem.BuffedSkill).Boost = 0;
+                MessageManager.AddMessage("Your buff has expired.");
+                EndBoostTimer();
+            }
+            GameState.UpdateState();
+            StateHasChanged();
+        }),null,1000,1000);
+        MessageManager.AddMessage("You eat a " + item.ItemName + " healing " + item.HealAmount + " and  boosting your " + item.BuffedSkill + " by " + item.BuffAmount + ".");
+        GameState.GetPlayerInventory().RemoveOneOfItem(item);
+        GameState.UpdateState();
+        StateHasChanged();
     }
     private string UnpackItem(GameItem item)
     {
@@ -502,6 +533,15 @@
         }
         GameState.UpdateState();
         StateHasChanged();
+    }
+    private void EndBoostTimer()
+    {
+        if (GameState.foodTimer != null)
+        {
+            
+            GameState.foodTimer.Dispose();
+            GameState.foodTimer = null;
+        }
     }
     protected override void OnInit()
     {
