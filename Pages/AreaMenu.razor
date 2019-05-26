@@ -665,19 +665,11 @@
     public void UnlockArea(string areaName)
     {
         UnlockArea(Program.areaManager.GetAreaByName(areaName));
-        if(Program.areaManager.GetAreaByName(areaName).Children != null)
-        {
-            Program.areaManager.GetAreaByName(areaName).IsMarked = true;
-        }
         GameState.UpdateState();
     }
     public void UnlockArea(Area a)
     {
         a.IsUnlocked = true;
-        if(a.Children != null)
-        {
-            a.IsMarked = true;
-        }
         UriHelper.NavigateTo("/GatherMenu/" + a.AreaURL);
     }
     public void UnlockBuilding(Building building)

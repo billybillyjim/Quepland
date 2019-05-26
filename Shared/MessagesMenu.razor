@@ -13,7 +13,8 @@
         {
             builder.OpenElement(0, "div");
             builder.AddAttribute(1, "class", "modal-footer");
-            builder.OpenElement(2, "table");
+            builder.AddAttribute(2, "style", "display:contents");
+            builder.OpenElement(3, "table");
             if(MessageManager != null && MessageManager.GetMessages().Count > 0)
             {
                 mostRecent = MessageManager.GetMessages().Last();
@@ -21,8 +22,8 @@
 
             foreach(Message message in MessageManager.GetMessages())
             {
-                builder.OpenElement(3, "tr");
-                builder.OpenElement(4, "td");
+                builder.OpenElement(4, "tr");
+                builder.OpenElement(5, "td");
                 string style = "";
                 if(message == mostRecent)
                 {
@@ -33,8 +34,8 @@
                     style +=  "color:" + message.color + ";";
                 }
 
-                builder.AddAttribute(5, "style", style);
-                builder.AddContent(6, message.messageText);
+                builder.AddAttribute(6, "style", style);
+                builder.AddContent(7, message.messageText);
                 builder.CloseElement();
                 builder.CloseElement();
             }

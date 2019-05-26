@@ -73,7 +73,7 @@
 
             builder.OpenElement(1, "span");
             builder.AddAttribute(1, "style", "float:right");
-            builder.AddContent(1, GameState.GetPlayer().CurrentHP + "/" + GameState.GetPlayer().GetSkill("HP").SkillLevel);
+            builder.AddContent(1, GameState.GetPlayer().CurrentHP + "/" + GameState.GetPlayer().GetSkill("HP").GetSkillLevel());
             builder.CloseElement();
             builder.CloseElement();
 
@@ -207,7 +207,7 @@
     public void LoseBattle()
     {
         MessageManager.AddMessage("You died to " + opponent.Name);
-        GameState.GetPlayer().CurrentHP = GameState.GetPlayer().GetSkill("HP").SkillLevel;
+        GameState.GetPlayer().CurrentHP = GameState.GetPlayer().GetSkill("HP").GetSkillLevel();
         battleFound = false;
         battleStarted = false;
         EndTimers();
@@ -239,7 +239,7 @@
     {
         GameState.StateChanged += OnGameStateChanged;
         GameState.canSell = false;
-        GameState.GetPlayer().CurrentHP = GameState.GetPlayer().GetSkill("HP").SkillLevel;
+        GameState.GetPlayer().CurrentHP = GameState.GetPlayer().GetSkill("HP").GetSkillLevel();
         this.StateHasChanged();
         GameState.UpdateState();
     }

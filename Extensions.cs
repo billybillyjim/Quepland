@@ -49,7 +49,7 @@ public static class Extensions
                 Skill skill = new Skill();
                 skill.SkillName = s[0];
                 skill.SkillExperience = int.Parse(s[1]);
-                skill.SkillLevel = int.Parse(s[2]);
+                skill.SetSkillLevel(int.Parse(s[2]));
                 Console.WriteLine(s[0] + ", " + s[1] + ", " + s[2]);
                 skills.Add(skill);
             }

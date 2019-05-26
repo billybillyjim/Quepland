@@ -26,6 +26,7 @@ public class GameState
     public Area currentArea;
 
     public Timer attackTimer;
+    public Timer foodTimer;
 
     private void StateHasChanged()
     {

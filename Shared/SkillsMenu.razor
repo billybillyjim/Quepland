@@ -166,13 +166,13 @@ else
                     builder.OpenElement(22, "td");
                     builder.OpenElement(23, "div");
                     builder.AddAttribute(24, "class", "progress");
-                    if (skill.SkillLevel == 1)
+                    if (skill.GetSkillLevel() == 1)
                     {
                         builder.AddAttribute(24, "title", "Exp to Next Level: " + (Extensions.GetExperienceRequired(1) - skill.SkillExperience));
                     }
                     else
                     {
-                        builder.AddAttribute(24, "title", "Exp to Next Level: " + (Extensions.GetExperienceRequired(skill.SkillLevel + 1) - skill.SkillExperience));
+                        builder.AddAttribute(24, "title", "Exp to Next Level: " + (Extensions.GetExperienceRequired(skill.GetSkillLevel() + 1) - skill.SkillExperience));
                     }
 
                     builder.OpenElement(25, "div");
@@ -195,7 +195,7 @@ else
                     builder.CloseElement();
 
                     builder.OpenElement(35, "tr");
-                    builder.AddContent(36, skill.SkillLevel);
+                    builder.AddContent(36, skill.GetSkillLevel());
                     builder.CloseElement();
 
                     builder.CloseElement();
@@ -218,11 +218,11 @@ else
     }
     private string GetWidthString(Skill skill)
     {
-        return "width: " + Extensions.GetProgressForLevel(skill.SkillExperience, skill.SkillLevel) + "%";
+        return "width: " + Extensions.GetProgressForLevel(skill.SkillExperience, skill.GetSkillLevel()) + "%";
     }
     private string GetValueString(Skill skill)
     {
-        return "" + Extensions.GetProgressForLevel(skill.SkillExperience, skill.SkillLevel);
+        return "" + Extensions.GetProgressForLevel(skill.SkillExperience, skill.GetSkillLevel());
     }
 
     protected override void OnInit()

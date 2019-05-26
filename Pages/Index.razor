@@ -125,7 +125,7 @@ else
             Program.followerManager.LoadFollowers(Http);
             Program.npcManager.LoadNPCs(Http);
             Program.battleManager.LoadMonsters(Http);
-
+            GameState.GetPlayer().SetMessageManager(MessageManager);
             GameState.gameDataLoaded = true;
         }
 

@@ -15,6 +15,7 @@ public class Player
     private List<GameItem> equippedItems = new List<GameItem>();
     private List<string> knownAlchemicRecipes = new List<string>();
     private readonly int maxInventorySize = 30;
+    private MessageManager messageManager;
 
 	public Player()
 	{
@@ -36,10 +37,14 @@ public class Player
             if(skills.Find(x => x.SkillName == s.SkillName) != null)
             {
                 skills.Find(x => x.SkillName == s.SkillName).SkillExperience = s.SkillExperience;
-                skills.Find(x => x.SkillName == s.SkillName).SkillLevel = s.SkillLevel;
+                skills.Find(x => x.SkillName == s.SkillName).SetSkillLevel(s.GetSkillLevel());
             }
         }
 
+    }
+    public void SetMessageManager(MessageManager m)
+    {
+        messageManager = m;
     }
     public void LearnNewAlchemyRecipe(GameItem metal, GameItem element, Building location, GameItem result)
     {
@@ -116,7 +121,7 @@ public class Player
         string skillString = "";
         foreach(Skill skill in skills)
         {
-            skillString += skill.SkillName + "," + skill.SkillExperience + "," + skill.SkillLevel + "/";
+            skillString += skill.SkillName + "," + skill.SkillExperience + "," + skill.GetSkillLevel() + "/";
         }
         skillString = skillString.Remove(skillString.Length - 1);
         return skillString;
@@ -127,7 +132,7 @@ public class Player
         {
             if(skill.SkillName == skillName)
             {
-                return skill.SkillLevel;
+                return skill.GetSkillLevel();
             }
         }
         return 0;
@@ -149,7 +154,7 @@ public class Player
     public void GainExperience(Skill skill, int amount)
     {
         skill.SkillExperience += amount;
-        if (skill.SkillExperience >= Extensions.GetExperienceRequired(skill.SkillLevel))
+        if (skill.SkillExperience >= Extensions.GetExperienceRequired(skill.GetSkillLevel()))
         {
             LevelUp(skill);
         }
@@ -181,10 +186,12 @@ public class Player
     }
     public void LevelUp(Skill skill)
     {
-        skill.SkillLevel += 1;
-        if (skill.SkillExperience >= Extensions.GetExperienceRequired(skill.SkillLevel))
-        {
+        skill.SetSkillLevel(skill.GetSkillLevel() + 1);
+        messageManager.AddMessage("You leveled up! Your " + skill.SkillName + " level is now " + skill.GetSkillLevel() + ".");
+        if (skill.SkillExperience >= Extensions.GetExperienceRequired(skill.GetSkillLevel()))
+        {         
             LevelUp(skill);
+            
         }
     }
     /// <summary>
@@ -201,7 +208,7 @@ public class Player
         Skill skillToCheck = skills.Find(x => x.SkillName == item.ActionRequired);
         if(skillToCheck != null)
         {
-            return skillToCheck.SkillLevel >= item.RequiredLevel;
+            return skillToCheck.GetSkillLevel() >= item.RequiredLevel;
         }
         Console.WriteLine("Skill " + item.ActionRequired + " was not found in player's list of skills.");
         return false;
@@ -217,7 +224,7 @@ public class Player
         Skill skillToCheck = skills.Find(x => x.SkillName == skillType);
         if (skillToCheck != null)
         {
-            return skillToCheck.SkillLevel >= skillLevel;
+            return skillToCheck.GetSkillLevel() >= skillLevel;
         }
         Console.WriteLine("Skill " + skillType + " was not found in player's list of skills.");
         return false;
@@ -235,8 +242,8 @@ public class Player
     }
     public int GetDamageDealt()
     {
-        int str = GetSkill("Strength").SkillLevel;
-        int deft = GetSkill("Deftness").SkillLevel;
+        int str = GetSkill("Strength").GetSkillLevel();
+        int deft = GetSkill("Deftness").GetSkillLevel();
         int baseDamage = 1 + str / 2;
 
         if (GetWeapon() != null)
