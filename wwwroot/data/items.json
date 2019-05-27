@@ -1811,7 +1811,7 @@
     "requiredLevel": 60,
     "actionRequired": "Woodworking",
     "experienceGained": "Woodworking:130",
-    "GatherSpeed": 800,
+    "GatherSpeed": 800
 
   },
   {
@@ -1939,7 +1939,9 @@
       [ 171, 181 ],
       [ 172, 182 ],
       [ 173, 183 ],
-      [ 174, 184 ]
+      [ 174, 184 ],
+      [ 222, 224 ],
+      [ 223, 225 ]
     ]
   },
   {
@@ -2049,8 +2051,12 @@
     "value": 15,
     "requiredLevel": 1,
     "experienceGained": "Woodworking:10",
-    "actionRequired": "Woodworking",
-    "GatherSpeed": -100
+    "actionRequired": "Archery",
+    "GatherSpeed": -100,
+    "attackSpeed": 2000,
+    "isEquipable": true,
+    "damage": 3,
+    "equipSlot": "Right Hand"
   },
   {
     "itemName": "Oak Bow",
@@ -2059,8 +2065,12 @@
     "value": 38,
     "requiredLevel": 15,
     "experienceGained": "Woodworking:35",
-    "actionRequired": "Woodworking",
-    "GatherSpeed": 200
+    "actionRequired": "Archery",
+    "GatherSpeed": 200,
+    "attackSpeed": 2000,
+    "isEquipable": true,
+    "damage": 6,
+    "equipSlot": "Right Hand"
   },
   {
     "itemName": "Sugar Maple Bow",
@@ -2069,8 +2079,12 @@
     "value": 55,
     "requiredLevel": 25,
     "experienceGained": "Woodworking:55",
-    "actionRequired": "Woodworking",
-    "GatherSpeed": 500
+    "actionRequired": "Archery",
+    "GatherSpeed": 500,
+    "attackSpeed": 2000,
+    "isEquipable": true,
+    "damage": 9,
+    "equipSlot": "Right Hand"
   },
   {
     "itemName": "Birch Bow",
@@ -2079,8 +2093,12 @@
     "value": 70,
     "requiredLevel": 25,
     "experienceGained": "Woodworking:45",
-    "actionRequired": "Woodworking",
-    "GatherSpeed": 700
+    "actionRequired": "Archery",
+    "GatherSpeed": 700,
+    "attackSpeed": 2000,
+    "isEquipable": true,
+    "damage": 12,
+    "equipSlot": "Right Hand"
   },
   {
     "itemName": "Mesquite Bow",
@@ -2089,8 +2107,12 @@
     "value": 90,
     "requiredLevel": 40,
     "experienceGained": "Woodworking:75",
-    "actionRequired": "Woodworking",
-    "GatherSpeed": 1000
+    "actionRequired": "Archery",
+    "GatherSpeed": 1000,
+    "attackSpeed": 2000,
+    "isEquipable": true,
+    "damage": 15,
+    "equipSlot": "Right Hand"
   },
   {
     "itemName": "Mahogany Bow",
@@ -2099,8 +2121,12 @@
     "value": 180,
     "requiredLevel": 50,
     "experienceGained": "Woodworking:75",
-    "actionRequired": "Woodworking",
-    "GatherSpeed": 1200
+    "actionRequired": "Archery",
+    "GatherSpeed": 1200,
+    "attackSpeed": 2000,
+    "isEquipable": true,
+    "damage": 20,
+    "equipSlot": "Right Hand"
   },
   {
     "itemName": "Ironwood Bow",
@@ -2109,8 +2135,12 @@
     "value": 130,
     "requiredLevel": 65,
     "experienceGained": "Woodworking:125",
-    "actionRequired": "Woodworking",
-    "GatherSpeed": 1400
+    "actionRequired": "Archery",
+    "GatherSpeed": 1400,
+    "attackSpeed": 2000,
+    "isEquipable": true,
+    "damage": 25,
+    "equipSlot": "Right Hand"
   },
   {
     "itemName": "Snakewood Bow",
@@ -2119,8 +2149,12 @@
     "value": 195,
     "requiredLevel": 75,
     "experienceGained": "Woodworking:155",
-    "actionRequired": "Woodworking",
-    "GatherSpeed": 1600
+    "actionRequired": "Archery",
+    "GatherSpeed": 1600,
+    "attackSpeed": 2000,
+    "isEquipable": true,
+    "damage": 30,
+    "equipSlot": "Right Hand"
   },
   {
     "itemName": "Lignum Vitae Bow",
@@ -2129,8 +2163,12 @@
     "value": 650,
     "requiredLevel": 83,
     "experienceGained": "Woodworking:285",
-    "actionRequired": "Woodworking",
-    "GatherSpeed": 1800
+    "actionRequired": "Archery",
+    "GatherSpeed": 1800,
+    "attackSpeed": 2000,
+    "isEquipable": true,
+    "damage": 45,
+    "equipSlot": "Right Hand"
   },
   {
     "itemName": "Buloke Bow",
@@ -2139,8 +2177,12 @@
     "value": 1200,
     "requiredLevel": 91,
     "experienceGained": "Woodworking:580",
-    "actionRequired": "Woodworking",
-    "GatherSpeed": 2000
+    "actionRequired": "Archery",
+    "GatherSpeed": 2000,
+    "attackSpeed": 2000,
+    "isEquipable": true,
+    "damage": 70,
+    "equipSlot": "Right Hand"
   },
   {
     "itemName": "Coal",
@@ -2193,7 +2235,7 @@
     "isStackable": true,
     "GatherSpeed": -50,
     "usableIDs": [
-      [211, 200]
+      [ 211, 200 ]
     ]
   },
   {
@@ -2479,7 +2521,7 @@
     "requiredLevel": 65,
     "experienceGained": "Smithing:75",
     "gatherSpeed": 15000,
-    "ingredientIDs": [ 24, 185 ],
+    "ingredientIDs": [ 24, 185 ]
   },
   {
     "itemName": "Copper Arrowtips",
@@ -2490,9 +2532,10 @@
     "ingredientIDs": [ 26 ],
     "gatherSpeed": 1000,
     "requiredLevel": 5,
-    "experienceGained": "Smithing:25",
-    "actionRequired": "Smithing",
+    "experienceGained": "Woodworking:25",
+    "actionRequired": "Woodworking",
     "isStackable": true,
+    "isSmithable": true,
     "madeOnCreation": 5
   },
   {
@@ -2504,11 +2547,12 @@
     "ingredientIDs": [ 27 ],
     "gatherSpeed": 1500,
     "requiredLevel": 10,
-    "experienceGained": "Smithing:35",
-    "actionRequired": "Smithing",
+    "experienceGained": "Woodworking:35",
+    "actionRequired": "Woodworking",
     "isStackable": true,
+    "isSmithable": true,
     "madeOnCreation": 5
-  }
+  },
   {
     "itemName": "Zinc Arrowtips",
     "itemDescription": "The tip of an arrow.",
@@ -2518,11 +2562,12 @@
     "ingredientIDs": [ 29 ],
     "gatherSpeed": 1500,
     "requiredLevel": 20,
-    "experienceGained": "Smithing:45",
-    "actionRequired": "Smithing",
+    "experienceGained": "Woodworking:45",
+    "actionRequired": "Woodworking",
     "isStackable": true,
+    "isSmithable": true,
     "madeOnCreation": 5
-  }
+  },
   {
     "itemName": "Brass Arrowtips",
     "itemDescription": "The tip of an arrow.",
@@ -2532,25 +2577,27 @@
     "ingredientIDs": [ 30 ],
     "gatherSpeed": 1500,
     "requiredLevel": 30,
-    "experienceGained": "Smithing:55",
-    "actionRequired": "Smithing",
+    "experienceGained": "Woodworking:55",
+    "actionRequired": "Woodworking",
     "isStackable": true,
+    "isSmithable": true,
     "madeOnCreation": 5
-  }
+  },
   {
     "itemName": "Bronze Arrowtips",
     "itemDescription": "The tip of an arrow.",
     "id": 215,
-    "value":28,
+    "value": 28,
     "gatherString": "You forge some bronze arrowtips.",
     "ingredientIDs": [ 31 ],
     "gatherSpeed": 1500,
     "requiredLevel": 35,
-    "experienceGained": "Smithing:65",
-    "actionRequired": "Smithing",
+    "experienceGained": "Woodworking:65",
+    "actionRequired": "Woodworking",
     "isStackable": true,
+    "isSmithable": true,
     "madeOnCreation": 5
-  }
+  },
   {
     "itemName": "Nickel Arrowtips",
     "itemDescription": "The tip of an arrow.",
@@ -2560,11 +2607,12 @@
     "ingredientIDs": [ 55 ],
     "gatherSpeed": 1500,
     "requiredLevel": 38,
-    "experienceGained": "Smithing:75",
-    "actionRequired": "Smithing",
+    "experienceGained": "Woodworking:75",
+    "actionRequired": "Woodworking",
     "isStackable": true,
+    "isSmithable": true,
     "madeOnCreation": 5
-  }
+  },
   {
     "itemName": "Gold Arrowtips",
     "itemDescription": "The tip of an arrow.",
@@ -2574,11 +2622,12 @@
     "ingredientIDs": [ 59 ],
     "gatherSpeed": 1500,
     "requiredLevel": 45,
-    "experienceGained": "Smithing:85",
-    "actionRequired": "Smithing",
+    "experienceGained": "Woodworking:85",
+    "actionRequired": "Woodworking",
     "isStackable": true,
+    "isSmithable": true,
     "madeOnCreation": 5
-  }
+  },
   {
     "itemName": "Iron Arrowtips",
     "itemDescription": "The tip of an arrow.",
@@ -2588,11 +2637,12 @@
     "ingredientIDs": [ 28 ],
     "gatherSpeed": 1500,
     "requiredLevel": 50,
-    "experienceGained": "Smithing:95",
-    "actionRequired": "Smithing",
+    "experienceGained": "Woodworking:95",
+    "actionRequired": "Woodworking",
     "isStackable": true,
+    "isSmithable": true,
     "madeOnCreation": 5
-  }
+  },
   {
     "itemName": "Lead Arrowtips",
     "itemDescription": "The tip of an arrow.",
@@ -2602,11 +2652,12 @@
     "ingredientIDs": [ 56 ],
     "gatherSpeed": 1500,
     "requiredLevel": 58,
-    "experienceGained": "Smithing:100",
-    "actionRequired": "Smithing",
+    "experienceGained": "Woodworking:100",
+    "actionRequired": "Woodworking",
     "isStackable": true,
+    "isSmithable": true,
     "madeOnCreation": 5
-  }
+  },
   {
     "itemName": "Aluminum Arrowtips",
     "itemDescription": "The tip of an arrow.",
@@ -2616,11 +2667,12 @@
     "ingredientIDs": [ 58 ],
     "gatherSpeed": 1500,
     "requiredLevel": 75,
-    "experienceGained": "Smithing:110",
-    "actionRequired": "Smithing",
+    "experienceGained": "Woodworking:110",
+    "actionRequired": "Woodworking",
     "isStackable": true,
+    "isSmithable": true,
     "madeOnCreation": 5
-  }
+  },
   {
     "itemName": "Steel Arrowtips",
     "itemDescription": "The tip of an arrow.",
@@ -2630,10 +2682,59 @@
     "ingredientIDs": [ 210 ],
     "gatherSpeed": 1500,
     "requiredLevel": 65,
-    "experienceGained": "Smithing:120",
-    "actionRequired": "Smithing",
+    "experienceGained": "Woodworking:120",
+    "actionRequired": "Woodworking",
     "isStackable": true,
+    "isSmithable": true,
     "madeOnCreation": 5
+  },
+  {
+    "itemName": "White Pine Bow (Unstrung)",
+    "itemDescription": "A flimsy bow with no string.",
+    "id": 222,
+    "value": 2,
+    "requiredLevel": 1,
+    "experienceGained": "Woodworking:20",
+    "actionRequired": "Woodworking",
+    "GatherSpeed": 100
+  },
+  {
+    "itemName": "Poplar Bow (Unstrung)",
+    "itemDescription": "A flimsy bow with no string.",
+    "id": 223,
+    "value": 10,
+    "requiredLevel": 10,
+    "experienceGained": "Woodworking:30",
+    "actionRequired": "Woodworking",
+    "GatherSpeed": 300
+  },
+  {
+    "itemName": "White Pine Bow",
+    "itemDescription": "A flimsy bow.",
+    "id": 224,
+    "value": 15,
+    "requiredLevel": 1,
+    "experienceGained": "Woodworking:20",
+    "actionRequired": "Archery",
+    "GatherSpeed": 300,
+    "attackSpeed": 2000,
+    "isEquipable": true,
+    "damage": 4,
+    "equipSlot": "Right Hand"
+  },
+  {
+    "itemName": "Poplar Bow",
+    "itemDescription": "A flimsy bow.",
+    "id": 225,
+    "value": 15,
+    "requiredLevel": 1,
+    "experienceGained": "Woodworking:30",
+    "actionRequired": "Archery",
+    "GatherSpeed": 300,
+    "attackSpeed": 2000,
+    "isEquipable": true,
+    "damage": 5,
+    "equipSlot": "Right Hand"
   }
 
 ]
