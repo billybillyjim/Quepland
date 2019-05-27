@@ -183,6 +183,10 @@ public class Player
         {
             GainExperience("Strength", (int)(damageDealt * 1.5));
         }
+        else if (weapon.ActionRequired.Contains("Archery"))
+        {
+            GainExperience("Archery", (int)(damageDealt * 1.5));
+        }
     }
     public void LevelUp(Skill skill)
     {
@@ -267,6 +271,15 @@ public class Player
             else if (action.Contains("Hammer"))
             {
                 baseDamage += str * 4;
+            }
+            else if (action.Contains("Archery"))
+            {
+                baseDamage = GetSkill("Archery").GetSkillLevel() * 4;
+                if (inventory.HasArrows())
+                {
+                    baseDamage += inventory.GetStrongestArrows().Damage;
+                }
+
             }
         }
         int equipmentBonus = GetEquipmentBonus();

@@ -20,6 +20,7 @@ public class GameItem
     public int HealAmount { get; set; }
     public int BuffAmount { get; set; }
     public int HealDuration { get; set; }
+    public int MadeOnCreation { get; set; }
 
     public bool IsUsable { get; set; }
     public bool IsEquipable { get; set; }
@@ -28,6 +29,7 @@ public class GameItem
     public bool IsSmithable { get; set; }
     public bool IsEquipped { get; set; }
     public bool IsEdible { get; set; }
+    public bool IsArrow { get; set; }
     public bool DestroyOnUse { get; set; }
 
     public int[][] UsableIDs { get; set; }

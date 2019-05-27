@@ -131,7 +131,8 @@
     "requiredLevel": 3,
     "actionRequired": "Woodworking",
     "experienceGained": "Woodworking:30",
-    "isStackable": true
+    "isStackable": true,
+    "madeOnCreation": 10
   },
   {
     "itemName": "Poplar Art Carving",
@@ -152,7 +153,9 @@
     "requiredLevel": 11,
     "actionRequired": "Woodworking",
     "experienceGained": "Woodworking:60",
-    "isStackable": true
+    "isStackable": true,
+    "madeOnCreation": 10
+
   },
   {
     "itemName": "Stone Axe",
@@ -163,7 +166,7 @@
     "isEquipable": true,
     "equipSlot": "Right Hand",
     "damage": 4,
-    "actionRequired": "Axemanship:0",
+    "actionRequired": "Axemanship",
     "attackSpeed": 3000,
     "gatherSpeedBonus": 0.1
   },
@@ -302,7 +305,7 @@
     "id": 27,
     "value": 40,
     "actionRequired": "Smithing",
-    "requiredLevel": 4,
+    "requiredLevel": 5,
     "experienceGained": "Smithing:75",
     "gatherSpeed": 7500,
     "ingredientIDs": [ 23 ],
@@ -314,7 +317,7 @@
     "id": 28,
     "value": 90,
     "actionRequired": "Smithing",
-    "requiredLevel": 35,
+    "requiredLevel": 45,
     "experienceGained": "Smithing:175",
     "gatherSpeed": 15000,
     "ingredientIDs": [ 24 ],
@@ -326,7 +329,7 @@
     "id": 29,
     "value": 60,
     "actionRequired": "Smithing",
-    "requiredLevel": 20,
+    "requiredLevel": 15,
     "experienceGained": "Smithing:100",
     "gatherSpeed": 9000,
     "ingredientIDs": [ 25 ],
@@ -338,7 +341,7 @@
     "id": 30,
     "value": 85,
     "actionRequired": "Smithing",
-    "requiredLevel": 9,
+    "requiredLevel": 25,
     "experienceGained": "Smithing:45",
     "gatherSpeed": 9500,
     "ingredientIDs": [ 22, 25 ],
@@ -350,7 +353,7 @@
     "id": 31,
     "value": 75,
     "actionRequired": "Smithing",
-    "requiredLevel": 15,
+    "requiredLevel": 30,
     "experienceGained": "Smithing:90",
     "gatherSpeed": 7500,
     "ingredientIDs": [ 22, 23 ],
@@ -505,7 +508,23 @@
     "isStackable": true,
     "id": 43,
     "value": 1,
-    "itemDescription": "A feather from a bird."
+    "itemDescription": "A feather from a bird.",
+    "madeOnCreation": 15,
+    "usableIDs": [
+      [ 9, 186 ],
+      [ 11, 187 ],
+      [ 94, 143 ],
+      [ 95, 145 ],
+      [ 96, 147 ],
+      [ 97, 149 ],
+      [ 98, 151 ],
+      [ 99, 153 ],
+      [ 100, 155 ],
+      [ 101, 157 ],
+      [ 102, 159 ],
+      [ 103, 161 ]
+
+    ]
   },
   {
     "itemName": "Chicken Egg",
@@ -629,7 +648,7 @@
     "id": 55,
     "value": 65,
     "actionRequired": "Smithing",
-    "requiredLevel": 25,
+    "requiredLevel": 35,
     "experienceGained": "Smithing:125",
     "gatherSpeed": 9000,
     "ingredientIDs": [ 49 ],
@@ -641,7 +660,7 @@
     "id": 56,
     "value": 150,
     "actionRequired": "Smithing",
-    "requiredLevel": 45,
+    "requiredLevel": 55,
     "experienceGained": "Smithing:200",
     "gatherSpeed": 6000,
     "ingredientIDs": [ 50 ],
@@ -653,7 +672,7 @@
     "id": 57,
     "value": 250,
     "actionRequired": "Smithing",
-    "requiredLevel": 55,
+    "requiredLevel": 60,
     "experienceGained": "Smithing:350",
     "gatherSpeed": 9000,
     "ingredientIDs": [ 51 ],
@@ -689,7 +708,7 @@
     "id": 60,
     "value": 1500,
     "actionRequired": "Smithing",
-    "requiredLevel": 94,
+    "requiredLevel": 93,
     "experienceGained": "Smithing:1200",
     "gatherSpeed": 9000,
     "ingredientIDs": [ 54 ],
@@ -1654,7 +1673,9 @@
     "actionRequired": "Woodworking",
     "experienceGained": "Woodworking:10",
     "isStackable": true,
-    "GatherSpeed": -50
+    "GatherSpeed": -50,
+    "madeOnCreation": 10
+
   },
   {
     "itemName": "Oak Art Carving",
@@ -1677,7 +1698,9 @@
     "actionRequired": "Woodworking",
     "experienceGained": "Woodworking:25",
     "isStackable": true,
-    "GatherSpeed": 150
+    "GatherSpeed": 150,
+    "madeOnCreation": 10
+
   },
   {
     "itemName": "Sugar Maple Art Carving",
@@ -1700,7 +1723,9 @@
     "actionRequired": "Woodworking",
     "experienceGained": "Woodworking:35",
     "isStackable": true,
-    "GatherSpeed": 200
+    "GatherSpeed": 200,
+    "madeOnCreation": 10
+
   },
   {
     "itemName": "Birch Art Carving",
@@ -1723,7 +1748,9 @@
     "actionRequired": "Woodworking",
     "experienceGained": "Woodworking:39",
     "isStackable": true,
-    "GatherSpeed": 300
+    "GatherSpeed": 300,
+    "madeOnCreation": 10
+
   },
   {
     "itemName": "Mesquite Art Carving",
@@ -1746,7 +1773,9 @@
     "actionRequired": "Woodworking",
     "experienceGained": "Woodworking:50",
     "isStackable": true,
-    "GatherSpeed": 400
+    "GatherSpeed": 400,
+    "madeOnCreation": 10
+
   },
   {
     "itemName": "Mahogany Art Carving",
@@ -1769,7 +1798,9 @@
     "actionRequired": "Woodworking",
     "experienceGained": "Woodworking:70",
     "isStackable": true,
-    "GatherSpeed": 500
+    "GatherSpeed": 500,
+    "madeOnCreation": 5
+
   },
   {
     "itemName": "Ironwood Art Carving",
@@ -1780,7 +1811,8 @@
     "requiredLevel": 60,
     "actionRequired": "Woodworking",
     "experienceGained": "Woodworking:130",
-    "GatherSpeed": 800
+    "GatherSpeed": 800,
+
   },
   {
     "itemName": "Ironwood Arrow Shafts",
@@ -1792,7 +1824,9 @@
     "actionRequired": "Woodworking",
     "experienceGained": "Woodworking:90",
     "isStackable": true,
-    "GatherSpeed": 700
+    "GatherSpeed": 700,
+    "madeOnCreation": 5
+
   },
   {
     "itemName": "Snakewood Art Carving",
@@ -1815,7 +1849,9 @@
     "actionRequired": "Woodworking",
     "experienceGained": "Woodworking:150",
     "isStackable": true,
-    "GatherSpeed": 900
+    "GatherSpeed": 900,
+    "madeOnCreation": 5
+
   },
   {
     "itemName": "Lignum Vitae Art Carving",
@@ -1827,6 +1863,7 @@
     "actionRequired": "Woodworking",
     "experienceGained": "Woodworking:230",
     "GatherSpeed": 1300
+
   },
   {
     "itemName": "Lignum Vitae Arrow Shafts",
@@ -1838,7 +1875,9 @@
     "actionRequired": "Woodworking",
     "experienceGained": "Woodworking:200",
     "isStackable": true,
-    "GatherSpeed": 1100
+    "GatherSpeed": 1100,
+    "madeOnCreation": 2
+
   },
   {
     "itemName": "Buloke Art Carving",
@@ -1861,7 +1900,8 @@
     "actionRequired": "Woodworking",
     "experienceGained": "Woodworking:250",
     "isStackable": true,
-    "GatherSpeed": 1250
+    "GatherSpeed": 1250,
+    "madeOnCreation": 2
   },
   {
     "itemName": "Camel",
@@ -2113,4 +2153,487 @@
     "experienceGained": "Mining:80",
     "gatherString": "You mine some coal."
   },
+  {
+    "itemName": "White Pine Arrows (Unfinished)",
+    "itemDescription": "Cheap and light arrows with no tip.",
+    "gatherString": "You attach a feather to the back of the arrow.",
+    "id": 186,
+    "value": 5,
+    "requiredLevel": 3,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:30",
+    "isStackable": true,
+    "usableIDs": [
+      [ 213, 198 ]
+    ]
+  },
+  {
+    "itemName": "Poplar Arrows (Unfinished)",
+    "itemDescription": "Cheap and light arrows with no tip.",
+    "gatherString": "You attach a feather to the back of the arrow.",
+    "id": 187,
+    "value": 15,
+    "requiredLevel": 11,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:60",
+    "isStackable": true,
+    "usableIDs": [
+      [ 212, 199 ]
+    ]
+  },
+  {
+    "itemName": "Balsa Arrows (Unfinished)",
+    "itemDescription": "Thin, flimsy sticks with feathers attached at the end.",
+    "gatherString": "You attach a feather to the back of the arrow.",
+    "id": 188,
+    "value": 4,
+    "requiredLevel": 3,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:10",
+    "isStackable": true,
+    "GatherSpeed": -50,
+    "usableIDs": [
+      [211, 200]
+    ]
+  },
+  {
+    "itemName": "Oak Arrows (Unfinished)",
+    "itemDescription": "They're like skinny, dead oak tree corpses with feathers attached at the end.",
+    "gatherString": "You attach a feather to the back of the arrow.",
+    "id": 189,
+    "value": 25,
+    "requiredLevel": 18,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:25",
+    "isStackable": true,
+    "GatherSpeed": 150
+  },
+  {
+    "itemName": "Sugar Maple Arrows (Unfinished)",
+    "itemDescription": "Arrow shafts for making arrows with feathers attached at the end.",
+    "gatherString": "You attach a feather to the back of the arrow.",
+    "id": 190,
+    "value": 35,
+    "requiredLevel": 28,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:35",
+    "isStackable": true,
+    "GatherSpeed": 200
+  },
+  {
+    "itemName": "Birch Arrows (Unfinished)",
+    "itemDescription": "Light colored arrow shafts from a light colored wood with feathers attached at the end.",
+    "gatherString": "You attach a feather to the back of the arrow.",
+    "id": 191,
+    "value": 45,
+    "requiredLevel": 35,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:39",
+    "isStackable": true,
+    "GatherSpeed": 300
+  },
+  {
+    "itemName": "Mesquite Arrows (Unfinished)",
+    "itemDescription": "They're like skinny, baby logs with feathers attached at the end.",
+    "gatherString": "You attach a feather to the back of the arrow.",
+    "id": 192,
+    "value": 65,
+    "requiredLevel": 43,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:50",
+    "isStackable": true,
+    "GatherSpeed": 400
+  },
+  {
+    "itemName": "Mahogany Arrows (Unfinished)",
+    "itemDescription": "Decadent arrow components with feathers attached at the end.",
+    "gatherString": "You attach a feather to the back of the arrow.",
+    "id": 193,
+    "value": 75,
+    "requiredLevel": 53,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:70",
+    "isStackable": true,
+    "GatherSpeed": 500
+  },
+  {
+    "itemName": "Ironwood Arrows (Unfinished)",
+    "itemDescription": "Extremely strong arrow shafts with feathers attached at the end.",
+    "gatherString": "You attach a feather to the back of the arrow.",
+    "id": 194,
+    "value": 100,
+    "requiredLevel": 63,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:90",
+    "isStackable": true,
+    "GatherSpeed": 700
+  },
+  {
+    "itemName": "Snakewood Arrows (Unfinished)",
+    "itemDescription": "Are they supposed to be so straight?",
+    "gatherString": "You attach a feather to the back of the arrow.",
+    "id": 195,
+    "value": 130,
+    "requiredLevel": 73,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:150",
+    "isStackable": true,
+    "GatherSpeed": 900
+  },
+  {
+    "itemName": "Lignum Vitae Arrows (Unfinished)",
+    "itemDescription": "Very strong arrow shafts with feathers attached at the end.",
+    "gatherString": "You attach a feather to the back of the arrow.",
+    "id": 196,
+    "value": 275,
+    "requiredLevel": 85,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:200",
+    "isStackable": true,
+    "GatherSpeed": 1100
+  },
+  {
+    "itemName": "Buloke Arrows (Unfinished)",
+    "itemDescription": "The hardest arrow shafts in the world with feathers attached at the end.",
+    "gatherString": "You attach a feather to the back of the arrow.",
+    "id": 197,
+    "value": 550,
+    "requiredLevel": 92,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:250",
+    "isStackable": true,
+    "GatherSpeed": 1250
+  },
+  {
+    "itemName": "White Pine Arrows",
+    "itemDescription": "Cheap and light arrows.",
+    "gatherString": "You attach a feather to the back of the arrow.",
+    "id": 198,
+    "value": 10,
+    "requiredLevel": 3,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:30",
+    "isStackable": true,
+    "isArrow": true,
+    "damage": 2
+  },
+  {
+    "itemName": "Poplar Arrows",
+    "itemDescription": "Cheap and light arrows.",
+    "gatherString": "You attach a feather to the back of the arrow.",
+    "id": 199,
+    "value": 25,
+    "requiredLevel": 11,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:60",
+    "isStackable": true,
+    "isArrow": true,
+    "damage": 3
+  },
+  {
+    "itemName": "Balsa Arrows",
+    "itemDescription": "Thin, flimsy sticks with feathers and metal attached at either end.",
+    "gatherString": "You attach a feather to the back of the arrow.",
+    "id": 200,
+    "value": 8,
+    "requiredLevel": 3,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:10",
+    "isStackable": true,
+    "GatherSpeed": -50,
+    "isArrow": true,
+    "damage": 1
+  },
+  {
+    "itemName": "Oak Arrows",
+    "itemDescription": "They're like skinny, deadly oak tree corpses.",
+    "gatherString": "You attach a feather to the back of the arrow.",
+    "id": 201,
+    "value": 45,
+    "requiredLevel": 18,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:25",
+    "isStackable": true,
+    "GatherSpeed": 150,
+    "isArrow": true,
+    "damage": 3
+  },
+  {
+    "itemName": "Sugar Maple Arrows",
+    "itemDescription": "Sweet arrows.",
+    "gatherString": "You attach a feather to the back of the arrow.",
+    "id": 202,
+    "value": 65,
+    "requiredLevel": 28,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:35",
+    "isStackable": true,
+    "GatherSpeed": 200,
+    "isArrow": true,
+    "damage": 5
+  },
+  {
+    "itemName": "Birch Arrows",
+    "itemDescription": "Light colored arrows.",
+    "gatherString": "You attach a feather to the back of the arrow.",
+    "id": 203,
+    "value": 65,
+    "requiredLevel": 35,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:39",
+    "isStackable": true,
+    "GatherSpeed": 300,
+    "isArrow": true,
+    "damage": 7
+  },
+  {
+    "itemName": "Mesquite Arrows",
+    "itemDescription": "They're quite useful.",
+    "gatherString": "You attach a feather to the back of the arrow.",
+    "id": 204,
+    "value": 95,
+    "requiredLevel": 43,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:50",
+    "isStackable": true,
+    "GatherSpeed": 400,
+    "isArrow": true,
+    "damage": 8
+  },
+  {
+    "itemName": "Mahogany Arrows",
+    "itemDescription": "Decadent arrows.",
+    "gatherString": "You attach a feather to the back of the arrow.",
+    "id": 205,
+    "value": 200,
+    "requiredLevel": 53,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:70",
+    "isStackable": true,
+    "GatherSpeed": 500,
+    "isArrow": true,
+    "damage": 8
+  },
+  {
+    "itemName": "Ironwood Arrows",
+    "itemDescription": "Extremely strong arrows.",
+    "gatherString": "You attach a feather to the back of the arrow.",
+    "id": 206,
+    "value": 160,
+    "requiredLevel": 63,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:90",
+    "isStackable": true,
+    "GatherSpeed": 700,
+    "isArrow": true,
+    "damage": 12
+  },
+  {
+    "itemName": "Snakewood Arrows",
+    "itemDescription": "Are they supposed to be so straight?",
+    "gatherString": "You attach a feather to the back of the arrow.",
+    "id": 207,
+    "value": 180,
+    "requiredLevel": 73,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:150",
+    "isStackable": true,
+    "GatherSpeed": 900,
+    "isArrow": true,
+    "damage": 15
+  },
+  {
+    "itemName": "Lignum Vitae Arrows",
+    "itemDescription": "Very strong arrows.",
+    "gatherString": "You attach a feather to the back of the arrow.",
+    "id": 208,
+    "value": 350,
+    "requiredLevel": 85,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:200",
+    "isStackable": true,
+    "GatherSpeed": 1100,
+    "isArrow": true,
+    "damage": 19
+  },
+  {
+    "itemName": "Buloke Arrows",
+    "itemDescription": "The hardest arrows in the world.",
+    "gatherString": "You attach a feather to the back of the arrow.",
+    "id": 209,
+    "value": 750,
+    "requiredLevel": 92,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:250",
+    "isStackable": true,
+    "GatherSpeed": 1250,
+    "isArrow": true,
+    "damage": 25
+  },
+  {
+    "itemName": "Steel Bar",
+    "itemDescription": "An extremely hard metal",
+    "id": 210,
+    "value": 250,
+    "actionRequired": "Smithing",
+    "requiredLevel": 65,
+    "experienceGained": "Smithing:75",
+    "gatherSpeed": 15000,
+    "ingredientIDs": [ 24, 185 ],
+  },
+  {
+    "itemName": "Copper Arrowtips",
+    "itemDescription": "The tip of an arrow.",
+    "id": 211,
+    "value": 8,
+    "gatherString": "You forge some copper arrowtips.",
+    "ingredientIDs": [ 26 ],
+    "gatherSpeed": 1000,
+    "requiredLevel": 5,
+    "experienceGained": "Smithing:25",
+    "actionRequired": "Smithing",
+    "isStackable": true,
+    "madeOnCreation": 5
+  },
+  {
+    "itemName": "Tin Arrowtips",
+    "itemDescription": "The tip of an arrow.",
+    "id": 212,
+    "value": 12,
+    "gatherString": "You forge some tin arrowtips.",
+    "ingredientIDs": [ 27 ],
+    "gatherSpeed": 1500,
+    "requiredLevel": 10,
+    "experienceGained": "Smithing:35",
+    "actionRequired": "Smithing",
+    "isStackable": true,
+    "madeOnCreation": 5
+  }
+  {
+    "itemName": "Zinc Arrowtips",
+    "itemDescription": "The tip of an arrow.",
+    "id": 213,
+    "value": 15,
+    "gatherString": "You forge some zinc arrowtips.",
+    "ingredientIDs": [ 29 ],
+    "gatherSpeed": 1500,
+    "requiredLevel": 20,
+    "experienceGained": "Smithing:45",
+    "actionRequired": "Smithing",
+    "isStackable": true,
+    "madeOnCreation": 5
+  }
+  {
+    "itemName": "Brass Arrowtips",
+    "itemDescription": "The tip of an arrow.",
+    "id": 214,
+    "value": 20,
+    "gatherString": "You forge some brass arrowtips.",
+    "ingredientIDs": [ 30 ],
+    "gatherSpeed": 1500,
+    "requiredLevel": 30,
+    "experienceGained": "Smithing:55",
+    "actionRequired": "Smithing",
+    "isStackable": true,
+    "madeOnCreation": 5
+  }
+  {
+    "itemName": "Bronze Arrowtips",
+    "itemDescription": "The tip of an arrow.",
+    "id": 215,
+    "value":28,
+    "gatherString": "You forge some bronze arrowtips.",
+    "ingredientIDs": [ 31 ],
+    "gatherSpeed": 1500,
+    "requiredLevel": 35,
+    "experienceGained": "Smithing:65",
+    "actionRequired": "Smithing",
+    "isStackable": true,
+    "madeOnCreation": 5
+  }
+  {
+    "itemName": "Nickel Arrowtips",
+    "itemDescription": "The tip of an arrow.",
+    "id": 216,
+    "value": 18,
+    "gatherString": "You forge some nickel arrowtips.",
+    "ingredientIDs": [ 55 ],
+    "gatherSpeed": 1500,
+    "requiredLevel": 38,
+    "experienceGained": "Smithing:75",
+    "actionRequired": "Smithing",
+    "isStackable": true,
+    "madeOnCreation": 5
+  }
+  {
+    "itemName": "Gold Arrowtips",
+    "itemDescription": "The tip of an arrow.",
+    "id": 217,
+    "value": 205,
+    "gatherString": "You forge some gold arrowtips.",
+    "ingredientIDs": [ 59 ],
+    "gatherSpeed": 1500,
+    "requiredLevel": 45,
+    "experienceGained": "Smithing:85",
+    "actionRequired": "Smithing",
+    "isStackable": true,
+    "madeOnCreation": 5
+  }
+  {
+    "itemName": "Iron Arrowtips",
+    "itemDescription": "The tip of an arrow.",
+    "id": 218,
+    "value": 20,
+    "gatherString": "You forge some iron arrowtips.",
+    "ingredientIDs": [ 28 ],
+    "gatherSpeed": 1500,
+    "requiredLevel": 50,
+    "experienceGained": "Smithing:95",
+    "actionRequired": "Smithing",
+    "isStackable": true,
+    "madeOnCreation": 5
+  }
+  {
+    "itemName": "Lead Arrowtips",
+    "itemDescription": "The tip of an arrow.",
+    "id": 219,
+    "value": 33,
+    "gatherString": "You forge some lead arrowtips.",
+    "ingredientIDs": [ 56 ],
+    "gatherSpeed": 1500,
+    "requiredLevel": 58,
+    "experienceGained": "Smithing:100",
+    "actionRequired": "Smithing",
+    "isStackable": true,
+    "madeOnCreation": 5
+  }
+  {
+    "itemName": "Aluminum Arrowtips",
+    "itemDescription": "The tip of an arrow.",
+    "id": 220,
+    "value": 40,
+    "gatherString": "You forge some aluminum arrowtips.",
+    "ingredientIDs": [ 58 ],
+    "gatherSpeed": 1500,
+    "requiredLevel": 75,
+    "experienceGained": "Smithing:110",
+    "actionRequired": "Smithing",
+    "isStackable": true,
+    "madeOnCreation": 5
+  }
+  {
+    "itemName": "Steel Arrowtips",
+    "itemDescription": "The tip of an arrow.",
+    "id": 221,
+    "value": 55,
+    "gatherString": "You forge some steel arrowtips.",
+    "ingredientIDs": [ 210 ],
+    "gatherSpeed": 1500,
+    "requiredLevel": 65,
+    "experienceGained": "Smithing:120",
+    "actionRequired": "Smithing",
+    "isStackable": true,
+    "madeOnCreation": 5
+  }
+
 ]

@@ -487,7 +487,8 @@
             GameItem itemCreated = Program.itemDatabase.GetItemByID(usableIDs[itemCreatedID, 1]);
             Console.WriteLine(itemCreated);
             GameState.GetPlayerInventory().RemoveOneOfItem(itemUsed);
-            GameState.GetPlayerInventory().AddItem(itemCreated);
+            int numToMake = Math.Max(itemCreated.MadeOnCreation, 1);
+            GameState.GetPlayerInventory().AddMultipleOfItem(itemCreated, numToMake);
             MessageManager.AddMessage(itemCreated.GatherString);
             GameState.GetPlayer().GainExperience(itemCreated.ExperienceGained);
             if (currentUsedItem.DestroyOnUse)

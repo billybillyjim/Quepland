@@ -120,7 +120,33 @@ public class Inventory
         }
         return 0;
     }
-
+    public bool HasArrows()
+    {
+        foreach (KeyValuePair<GameItem, int> pair in items)
+        {
+            if (pair.Key.IsArrow)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    public GameItem GetStrongestArrows()
+    {
+        GameItem strongestArrow = null;
+        foreach (KeyValuePair<GameItem, int> pair in items)
+        {
+            if (pair.Key.IsArrow && strongestArrow == null)
+            {
+                strongestArrow = pair.Key;
+            }
+            else if(pair.Key.IsArrow && strongestArrow.Damage < pair.Key.Damage)
+            {
+                strongestArrow = pair.Key;
+            }
+        }
+        return strongestArrow;
+    }
     public bool AddItem(GameItem item)
     {
         //If the added item is null, the inventory is full and the item is not stackable, 
@@ -183,6 +209,15 @@ public class Inventory
             }
         }
 
+        return true;
+    }
+    public bool AddMultiplesOfItems(List<GameItem> itemList)
+    {
+        foreach(GameItem item in itemList)
+        {
+            AddMultipleOfItem(item, Math.Max(1, item.MadeOnCreation));
+
+        }
         return true;
     }
     public bool AddOneOfMultipleItems(List<GameItem> itemList)

@@ -258,7 +258,8 @@
     private void CollectItem()
     {
         smithingStage = 0;
-        GameState.GetPlayerInventory().AddItem(currentSmithingItem);
+        int numToMake = Math.Max(currentSmithingItem.MadeOnCreation, 1);
+        GameState.GetPlayerInventory().AddMultipleOfItem(currentSmithingItem, numToMake);
         GameState.GetPlayer().GainExperience(currentSmithingBar.ExperienceGained);
         currentSmithingItem = null;
         currentSmithingBar = null;
