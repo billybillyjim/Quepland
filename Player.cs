@@ -244,11 +244,11 @@ public class Player
         }
         return true;
     }
-    public int GetDamageDealt()
+    public int GetDamageDealt(Monster opponent)
     {
         int str = GetSkill("Strength").GetSkillLevel();
         int deft = GetSkill("Deftness").GetSkillLevel();
-        int baseDamage = 1 + str / 2;
+        float baseDamage = 1 + str / 2;
 
         if (GetWeapon() != null)
         {
@@ -281,7 +281,16 @@ public class Player
                 }
 
             }
+            if (action.Contains(opponent.Weakness))
+            {
+                baseDamage *= 2;
+            }
+            else if (action.Contains(opponent.Strength))
+            {
+                baseDamage /= 2;
+            }
         }
+
         int equipmentBonus = GetEquipmentBonus();
         return Math.Max(Extensions.GetGaussianRandomInt(baseDamage + equipmentBonus, equipmentBonus), 1);
     }
