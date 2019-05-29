@@ -343,7 +343,7 @@
     "name": "The Wasteland",
     "id": 35,
     "description": "The wasteland is a sizeable desert east of Mt Queple. Most of it is uninhabited and requires a camel to cross.",
-    "areaURL": "SouthernTrail",
+    "areaURL": "Wasteland",
     "icon": "oi oi-fire",
     "children": [ "SouthernTrail", "Route7", "Route7South","Route7Crossroads" ]
   },
@@ -381,7 +381,22 @@
     "areaURL": "StrangeOldHut",
     "icon": "oi oi-house",
     "id": 39,
-    "actions": [ "Mining:Coal" ]
+    "actions": [ "Mine Coal:Coal" ],
+    "buildings": [ "EarthHall" ]
+  },
+  {
+    "name": "Mt Yama Cave",
+    "description": "The path leads you up the mountain until you reach an opening into the mountain itself.",
+    "id": 40,
+    "icon": "oi oi-house",
+    "buildings": [ "FireHall" ]
+  },
+  {
+    "name": "Abandoned Desert Shack",
+    "description": "Out in the middle of the wasteland you find an abandonded shack. Its front door is swinging open in the wind.",
+    "id": 41,
+    "icon": "oi oi-house",
+    "buildings": ["AbandonedDesertShack"]
   }
 
 

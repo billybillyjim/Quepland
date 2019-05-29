@@ -6,6 +6,8 @@
 
 @if (area != null)
 {
+
+
 <h1>You are in @area.Name</h1>
 <p>@area.Description</p>
 @LoadNPCs()
@@ -49,10 +51,14 @@
         {
             if(Program.areaManager.GetAreaByName(area.AreaToUnlockOnArrival).IsUnlocked == false)
             {
-                 MessageManager.AddMessage("You add this new area to your journal.");
+                MessageManager.AddMessage("You add this new area to your journal.");
             }
-            Program.areaManager.GetAreaByName(area.AreaToUnlockOnArrival).IsUnlocked = true;        
+            Program.areaManager.GetAreaByName(area.AreaToUnlockOnArrival).IsUnlocked = true;
         }
+    }
+    public void DebugGoToNextArea()
+    {
+        UriHelper.NavigateTo("/GatherMenu/" + Program.areaManager.GetAreaByID(area.ID + 1).AreaURL);
     }
     public void EnterBuilding(string buildingURL)
     {
@@ -488,7 +494,7 @@
 
         };
     }
-        public RenderFragment BuildDisabledButtons(bool playerHasLevels, bool actionIsEnabled, string action, GameItem item)
+    public RenderFragment BuildDisabledButtons(bool playerHasLevels, bool actionIsEnabled, string action, GameItem item)
     {
         return builder =>
         {

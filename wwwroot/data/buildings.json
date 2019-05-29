@@ -250,7 +250,7 @@
     "buttonText": "Enter the Courtyard",
     "description": "The wind almost blows you away as you approach the vent in the middle of the yard.",
     "hasAlchemyStation": true,
-    "queplarValue": 25
+    "queplarValue": 75
   },
   {
     "name": "Teppas Elemental Emporium",
@@ -314,7 +314,7 @@
     "id": 40,
     "url": "LostSwamp31",
     "description": "The swamp is so dark it is easy to get lost.",
-    "buildings": [ "LostSwamp","LostSwamp32","LostSwamp3" ]
+    "buildings": [ "LostSwamp", "LostSwamp32", "LostSwamp3" ]
   },
   {
     "name": "The Lost Swamp",
@@ -322,7 +322,7 @@
     "id": 41,
     "url": "LostSwamp32",
     "description": "The swamp is so dark it is easy to get lost.",
-    "buildings": [ "LostSwamp45","LostSwamp91","LostSwamp91","LostSwamp" ]
+    "buildings": [ "LostSwamp45", "LostSwamp91", "LostSwamp91", "LostSwamp" ]
   },
   {
     "name": "The Lost Swamp",
@@ -330,7 +330,7 @@
     "id": 42,
     "url": "LostSwamp45",
     "description": "The swamp is so dark it is easy to get lost.",
-    "buildings": [ "LostSwamp","LostSwamp91","LostSwamp31","LostSwamp32" ]
+    "buildings": [ "LostSwamp", "LostSwamp91", "LostSwamp31", "LostSwamp32" ]
   },
   {
     "name": "The Lost Swamp",
@@ -338,7 +338,7 @@
     "id": 43,
     "url": "LostSwamp3",
     "description": "The swamp is so dark it is easy to get lost.",
-    "buildings": [ "LostSwamp","LostSwamp10","LostSwamp31", "LostSwamp" ]
+    "buildings": [ "LostSwamp", "LostSwamp10", "LostSwamp31", "LostSwamp" ]
   },
   {
     "name": "The Lost Swamp",
@@ -346,7 +346,7 @@
     "id": 44,
     "url": "LostSwamp10",
     "description": "The swamp is so dark it is easy to get lost.",
-    "buildings": [ "LostSwamp","LostSwampEnd","LostSwamp" ]
+    "buildings": [ "LostSwamp", "LostSwampEnd", "LostSwamp" ]
   },
   {
     "name": "The Lost Swamp",
@@ -388,6 +388,64 @@
     "description": "You enter the shop to find all kinds of bows, arrows, and more.",
     "isShop": true,
     "items": [ 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209 ]
+  },
+  {
+    "name": "Fire Hall",
+    "id": 50,
+    "url": "FireHall",
+    "buttonText": "Enter",
+    "description": "The halls of the building surround a central courtyard. At the very center of which is a column of flames gushing out of the earth.",
+    "buildings": [ "FireHallCourtyard" ]
+  },
+  {
+    "name": "Fire Hall Courtyard",
+    "id": 51,
+    "url": "FireHallCourtyard",
+    "buttonText": "Enter the Courtyard",
+    "description": "The heat is almost unbearable as you approach the central pillar of fire.",
+    "hasAlchemyStation": true,
+    "queplarValue": 100
+  },
+  {
+    "name": "Earth Hall",
+    "id": 52,
+    "url": "EarthHall",
+    "buttonText": "Enter",
+    "description": "The halls of the building surround a central courtyard. At the very center of which is a large, rotating sphere of dirt.",
+    "buildings": [ "EarthHallCourtyard" ]
+  },
+  {
+    "name": "Earth Hall Courtyard",
+    "id": 53,
+    "url": "EarthHallCourtyard",
+    "buttonText": "Enter the Courtyard",
+    "description": "Your body feels heavy as you approach the sphere.",
+    "hasAlchemyStation": true,
+    "queplarValue": 25
+  },
+  {
+    "name": "Water Hall",
+    "id": 54,
+    "url": "WaterHall",
+    "buttonText": "Enter the trapdoor",
+    "description": "Under the shack you find a long, winding staircase. After a while you reach the bottom to find a large courtyard. At the very center of which is a waterfall pouring from above. Its source is hidden by the mist.",
+    "buildings": [ "WaterHallCourtyard" ]
+  },
+  {
+    "name": "Water Hall Courtyard",
+    "id": 55,
+    "url": "WaterHallCourtyard",
+    "buttonText": "Enter the Courtyard",
+    "description": "The mist is so thick you can barely see. The sound of rushing water consumes your mind.",
+    "hasAlchemyStation": true,
+    "queplarValue": 50
+  },
+  {
+    "name": "Abandoned Desert Shack",
+    "id": 56,
+    "url": "AbandonedDesertShack",
+    "description": "Inside you find a single room with a bed in the corner. A layer of dust and sand covers everything. After a little searching you find a trapdoor under the bedframe.",
+    "buildings": ["WaterHall"]
   }
 
 ]

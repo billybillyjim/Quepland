@@ -5,6 +5,7 @@
 
 
 <button class="btn btn-primary" style="margin-bottom:10px" onclick="@(() => Return(GameState.previousURL))">Leave</button>
+<button onclick="@(() => DebugGoToNextBuilding())">Check Next Area</button>
 <br />
 @LoadNPCs()
 @LoadShop()
@@ -282,18 +283,19 @@
                     foreach (int followerID in npc.UnlockFollowerIDs ?? Enumerable.Empty<int>())
                     {
                         Follower f = Program.followerManager.GetFollowerByID(followerID);
+                        GameItem itemToPay = Program.itemDatabase.GetItemByID(f.CostItemID);
                         if (f.IsUnlocked == false)
                         {
                             builder.OpenElement(0, "button");
                             builder.AddAttribute(0, "style", "margin-bottom:10px");
                             builder.AddAttribute(0, "class", "btn btn-primary");
-                            builder.AddAttribute(0, "onclick", () => GameState.GetPlayerInventory().RemoveItems(Program.itemDatabase.GetGold(), f.Cost));
+                            builder.AddAttribute(0, "onclick", () => GameState.GetPlayerInventory().RemoveItems(itemToPay, f.Cost));
                             builder.AddAttribute(0, "onclick", () => UnlockFollower(followerID));
-                            if (GameState.GetPlayerInventory().GetCoins() < f.Cost)
+                            if (GameState.GetPlayerInventory().GetNumberOfItem(itemToPay) < f.Cost)
                             {
                                 builder.AddAttribute(0, "disabled", true);
                             }
-                            builder.AddContent(0, "Buy " + f.Name + " for " + f.Cost + "gp");
+                            builder.AddContent(0, "Buy " + f.Name + " for " + f.Cost + " " + itemToPay.ItemName);
                             builder.CloseElement();
                             builder.OpenElement(0, "br");
                             builder.CloseElement();
@@ -311,7 +313,7 @@
                         {
                             builder.AddAttribute(0, "disabled", true);
                         }
-                        builder.AddContent(0, "Buy " + item.ItemName + " for " + item.Value + "gp");
+                        builder.AddContent(0, "Buy " + item.ItemName + " for " + item.Value + " gp");
                         builder.CloseElement();
                         builder.OpenElement(0, "br");
                         builder.CloseElement();
@@ -438,7 +440,7 @@
     }
     public void UnlockFollower(int followerID)
     {
-        GameState.GetPlayerInventory().RemoveItems(Program.itemDatabase.GetGold(), Program.followerManager.GetFollowerByID(followerID).Cost);
+        GameState.GetPlayerInventory().RemoveItems(Program.itemDatabase.GetItemByID(Program.followerManager.GetFollowerByID(followerID).CostItemID), Program.followerManager.GetFollowerByID(followerID).Cost);
         if (Program.followerManager.GetNumberOfUnlockedFollowers() == 0)
         {
             MessageManager.AddMessage(Program.followerManager.GetFollowerByID(followerID).Name + " will now follow you. Go to your bank and select \"Followers\" at the top of the screen to set them as your follower.");
@@ -461,6 +463,10 @@
 
         this.StateHasChanged();
         GameState.UpdateState();
+    }
+        public void DebugGoToNextBuilding()
+    {
+        UriHelper.NavigateTo("/Inside/" + Program.buildingManager.GetBuildingByID(thisBuilding.ID + 1).URL);
     }
     public void Dispose()
     {

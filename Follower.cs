@@ -6,6 +6,7 @@ public class Follower
     public string Description { get; set; }
     public string AutoCollectMessage { get; set; }
     public int Cost { get; set; }
+    public int CostItemID { get; set; }
     public int id { get; set; }
     public string[] RequiredLevels { get; set; }
     public string AutoCollectSkill { get; set; }
