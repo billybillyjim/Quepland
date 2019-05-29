@@ -15,7 +15,7 @@ public class Player
     private List<GameItem> equippedItems = new List<GameItem>();
     private List<string> knownAlchemicRecipes = new List<string>();
     //DEBUG Value!
-    private readonly int maxInventorySize = 300;
+    private readonly int maxInventorySize = 30;
     private MessageManager messageManager;
 
 	public Player()
@@ -186,7 +186,14 @@ public class Player
         }
         else if (weapon.ActionRequired.Contains("Archery"))
         {
-            GainExperience("Archery", (int)(damageDealt * 1.5));
+            if (inventory.HasArrows())
+            {
+                GainExperience("Archery", (int)(damageDealt * 1.5));
+            }
+            else
+            {
+                GainExperience("Strength", (int)(damageDealt * 0.5));
+            }
         }
     }
     public void LevelUp(Skill skill)
@@ -275,7 +282,7 @@ public class Player
             }
             else if (action.Contains("Archery"))
             {
-                baseDamage = GetSkill("Archery").GetSkillLevel() * 4;
+                baseDamage = 1 + GetSkill("Archery").GetSkillLevel() * 2;
                 if (inventory.HasArrows())
                 {
                     baseDamage += inventory.GetStrongestArrows().Damage;
@@ -300,7 +307,14 @@ public class Player
         int total = 0;
         foreach(GameItem item in equippedItems)
         {
-            total += item.Damage;
+            if(item.ActionRequired == "Archery" && inventory.HasArrows() == false)
+            {
+                total += item.Damage / 4;
+            }
+            else
+            {
+                total += item.Damage;
+            }          
         }
         return total;
     }

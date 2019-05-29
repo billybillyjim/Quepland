@@ -120,6 +120,17 @@ public class Inventory
         }
         return 0;
     }
+    public GameItem GetAnyBar()
+    {
+        foreach (KeyValuePair<GameItem, int> pair in items)
+        {
+            if (pair.Key.ActionRequired == "Smithing")
+            {
+                return pair.Key;
+            }
+        }
+        return null;
+    }
     public bool HasArrows()
     {
         foreach (KeyValuePair<GameItem, int> pair in items)

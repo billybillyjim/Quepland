@@ -3,7 +3,6 @@
 @implements IDisposable
 @using System.Threading
 
-<button onclick="@(() => DebugGetNextItem())">Get Next Item</button>
 @LoadInventory()
 @sellAmount
 
@@ -14,7 +13,6 @@
     private int[,] usableIDs;
     private Timer createRepeatTimer;
     public int sellAmount = 20;
-    private int debugCurrentItemID = 160;
 
     private RenderFragment LoadInventory()
     {
@@ -234,6 +232,20 @@
 
 
             builder.OpenElement(4, "td");
+            string infoString = "";
+            if(item.Key.Damage > 0)
+            {
+                infoString += "Damage: " + item.Key.Damage;
+            }
+            if(item.Key.GatherSpeedBonus > 0)
+            {
+                if(item.Key.Damage > 0)
+                {
+                    infoString += ", ";
+                }
+                infoString += "Gather Efficiency: " + (item.Key.GatherSpeedBonus * 100) + "%";
+            }
+            builder.AddContent(4, infoString);
             builder.CloseElement();
             builder.OpenElement(5, "td");
             builder.AddAttribute(6, "style", "text-align:right");
@@ -537,25 +549,25 @@
             Console.WriteLine(itemCreated);
 
             GameState.GetPlayerInventory().RemoveOneOfItem(itemUsed);
-            
-                int numToMake = Math.Max(itemCreated.MadeOnCreation, 1);
-                GameState.GetPlayerInventory().AddMultipleOfItem(itemCreated, numToMake);
-                MessageManager.AddMessage(itemCreated.GatherString);
-                GameState.GetPlayer().GainExperience(itemCreated.ExperienceGained);
-                if (currentUsedItem.DestroyOnUse)
+
+            int numToMake = Math.Max(itemCreated.MadeOnCreation, 1);
+            GameState.GetPlayerInventory().AddMultipleOfItem(itemCreated, numToMake);
+            MessageManager.AddMessage(itemCreated.GatherString);
+            GameState.GetPlayer().GainExperience(itemCreated.ExperienceGained);
+            if (currentUsedItem.DestroyOnUse)
+            {
+                GameState.GetPlayerInventory().RemoveOneOfItem(currentUsedItem);
+                if (GameState.GetPlayerInventory().HasItem(currentUsedItem) == false)
                 {
-                    GameState.GetPlayerInventory().RemoveOneOfItem(currentUsedItem);
-                    if (GameState.GetPlayerInventory().HasItem(currentUsedItem) == false)
-                    {
-                        MessageManager.AddMessage("You have run out of " + currentUsedItem.ItemName + ".");
-                        CancelUse();
-                    }
-                }
-                if (GameState.GetPlayerInventory().HasItem(itemUsed) == false)
-                {
-                    MessageManager.AddMessage("You have run out of " + itemUsed.ItemName + ".");
+                    MessageManager.AddMessage("You have run out of " + currentUsedItem.ItemName + ".");
                     CancelUse();
-                }          
+                }
+            }
+            if (GameState.GetPlayerInventory().HasItem(itemUsed) == false)
+            {
+                MessageManager.AddMessage("You have run out of " + itemUsed.ItemName + ".");
+                CancelUse();
+            }
             //CancelUse();
             GameState.UpdateState();
             StateHasChanged();

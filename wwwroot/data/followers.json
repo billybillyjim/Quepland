@@ -118,7 +118,7 @@
     "isUnlocked": false,
     "cost": 500000,
     "costItemID": 0
-  },,  
+  },
   {
     "name": "Dwarny the Dwarf",
     "id": 9,
@@ -129,6 +129,20 @@
     "autoCollectLevel": 100,
     "maxCarry": 30,
     "autoCollectSpeed": 10000,
+    "isUnlocked": false,
+    "cost": 1000000,
+    "costItemID": 0
+  },
+  {
+    "name": "Skia the Monopod",
+    "id": 10,
+    "description": "Skia is exceptionally fast for only having one foot.",
+    "autoCollectMessage": "Skia takes your finished items away and returns with more bars.",
+    "RequiredLevels": [ "Smithing:30" ],
+    "autoCollectSkill": "Smithing",
+    "autoCollectLevel": 50,
+    "maxCarry": 20,
+    "autoCollectSpeed": 20000,
     "isUnlocked": false,
     "cost": 1000000,
     "costItemID": 0
