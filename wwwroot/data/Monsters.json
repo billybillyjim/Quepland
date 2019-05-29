@@ -35,28 +35,134 @@
     "weakness": "Swordsmanship",
     "strength": "Hammermanship",
     "damage": 4,
-    "attackSpeed": 1
+    "attackSpeed": 1,
+    "dropTable": [
+      [ 226, 100 ],
+      [ 227, 50 ],
+      [ 228, 10 ]
+    ]
   },
   {
     "name": "Angry Tree Man",
     "id": 3,
     "level": 15,
     "experienceGained": 250,
-    "hp": 250,
+    "hp": 100,
     "weakness": "Axemanship",
     "strength": "Hamermanship",
     "damage": 12,
-    "attackSpeed": 8
+    "attackSpeed": 8,
+    "dropTable": [
+      [ 227, 200 ],
+      [ 228, 100 ],
+      [ 229, 50 ]
+    ]
   },
   {
     "name": "Wild Boar",
     "id": 4,
     "level": 18,
     "experienceGained": 300,
-    "hp": 150,
+    "hp": 100,
     "weakness": "Hammermanship",
     "strength": "Knifesmanship",
-    "damage": 15,
+    "damage": 6,
     "attackSpeed": 1
-  }
+  },
+  {
+    "name": "Ground Grupper",
+    "id": 5,
+    "level": 18,
+    "experienceGained": 300,
+    "hp": 60,
+    "weakness": "Hammermanship",
+    "strength": "Knifesmanship",
+    "damage": 8,
+    "attackSpeed": 3,
+    "dropTable": [
+      [ 227, 200 ],
+      [ 228, 100 ],
+      [ 229, 50 ]
+    ]
+  },
+  {
+    "name": "Swamp Creature",
+    "id": 6,
+    "level": 18,
+    "experienceGained": 300,
+    "hp": 90,
+    "weakness": "Axemanship",
+    "strength": "Hammermanship",
+    "damage": 3,
+    "attackSpeed": 2,
+    "dropTable": [
+      [ 227, 200 ],
+      [ 228, 100 ],
+      [ 229, 50 ]
+    ]
+  },
+  {
+    "name": "Mercurial Knight",
+    "id": 7,
+    "level": 18,
+    "experienceGained": 300,
+    "hp": 190,
+    "weakness": "Hammermanship",
+    "strength": "Knifesmanship",
+    "damage": 25,
+    "attackSpeed": 2,
+    "dropTable": [
+      [ 228, 200 ],
+      [ 229, 100 ],
+      [ 230, 50 ]
+    ]
+  },
+  {
+    "name": "Mercurial Warrior",
+    "id": 8,
+    "level": 18,
+    "experienceGained": 300,
+    "hp": 250,
+    "weakness": "Knifesmanship",
+    "strength": "Hammermanship",
+    "damage": 40,
+    "attackSpeed": 3,
+    "dropTable": [
+      [ 228, 300 ],
+      [ 229, 200 ],
+      [ 230, 100 ]
+    ]
+  },
+  {
+    "name": "Mercurial Beast",
+    "id": 9,
+    "level": 18,
+    "experienceGained": 300,
+    "hp": 350,
+    "weakness": "None",
+    "strength": "Knifesmanship",
+    "damage": 75,
+    "attackSpeed": 5,
+    "dropTable": [
+      [ 228, 300 ],
+      [ 229, 300 ],
+      [ 230, 200 ]
+    ]
+  },
+  {
+    "name": "Mercurial Giant",
+    "id": 10,
+    "level": 18,
+    "experienceGained": 300,
+    "hp": 500,
+    "weakness": "Swordsmanship",
+    "strength": "Axemanship",
+    "damage": 100,
+    "attackSpeed": 6,
+    "dropTable": [
+      [ 228, 300 ],
+      [ 229, 300 ],
+      [ 230, 300 ]
+    ]
+  },
 ]

@@ -4,6 +4,7 @@
 @using System.Threading
 
 @LoadInventory()
+@sellAmount
 
 @functions{
 
@@ -11,6 +12,7 @@
     private GameItem currentUsedItem;
     private int[,] usableIDs;
     private Timer createRepeatTimer;
+    public int sellAmount = 20;
 
     private RenderFragment LoadInventory()
     {
@@ -27,50 +29,57 @@
             builder.AddContent(5, GameState.GetPlayerInventory().GetFreeSpacesString());
             builder.CloseElement();
 
-
             builder.OpenElement(6, "p");
+            builder.AddContent(6, "Sell X: ");
+            builder.OpenElement(7, "input");
+            builder.AddAttribute(8, "value", Microsoft.AspNetCore.Components.BindMethods.GetValue(sellAmount));
+            builder.AddAttribute(9, "onchange", Microsoft.AspNetCore.Components.EventCallback.Factory.CreateBinder(this, __value => sellAmount = __value, sellAmount));
+            builder.CloseElement();
+            builder.CloseElement();
+
+            builder.OpenElement(10, "p");
             if (GameState.GetPlayer().activeFollower == null)
             {
-                builder.AddContent(7, "No current follower");
+                builder.AddContent(11, "No current follower");
             }
             else
             {
-                builder.AddContent(8, GameState.GetPlayer().activeFollower.ToString());
+                builder.AddContent(12, GameState.GetPlayer().activeFollower.ToString());
             }
 
             builder.CloseElement();
-            builder.OpenElement(9, "p");
+            builder.OpenElement(13, "p");
             if (GameState.buffSecondsLeft > 0)
             {
-                builder.AddContent(10, GameState.currentBuffItem.BuffedSkill + " +" + GameState.currentBuffItem.BuffAmount + ", " + GameState.buffSecondsLeft);
+                builder.AddContent(14, GameState.currentBuffItem.BuffedSkill + " +" + GameState.currentBuffItem.BuffAmount + ", " + GameState.buffSecondsLeft);
             }
 
             builder.CloseElement();
 
-            builder.OpenElement(11, "table");
-            builder.AddAttribute(12, "style", "width:100%");
-            builder.OpenElement(13, "thead");
-            builder.OpenElement(14, "tr");
-            builder.OpenElement(15, "th");
-            builder.AddAttribute(16, "align", "left");
-            builder.AddContent(17, "Item");
+            builder.OpenElement(15, "table");
+            builder.AddAttribute(16, "style", "width:100%");
+            builder.OpenElement(17, "thead");
+            builder.OpenElement(18, "tr");
+            builder.OpenElement(19, "th");
+            builder.AddAttribute(20, "align", "left");
+            builder.AddContent(21, "Item");
             builder.CloseElement();
 
-            builder.OpenElement(18, "th");
-            builder.AddAttribute(19, "style", "text-align:right");
-            builder.AddContent(20, "Amount");
+            builder.OpenElement(22, "th");
+            builder.AddAttribute(23, "style", "text-align:right");
+            builder.AddContent(24, "Amount");
             builder.CloseElement();
 
             builder.CloseElement();
             builder.CloseElement();
 
-            builder.OpenElement(21, "tbody");
+            builder.OpenElement(25, "tbody");
             if (GameState.GetPlayerInventory() != null)
             {
                 foreach (KeyValuePair<GameItem, int> item in GameState.GetPlayerInventory().GetItems())
                 {
 
-                    builder.AddContent(22, LoadItem(item));
+                    builder.AddContent(26, LoadItem(item));
 
                 }
 
@@ -320,6 +329,18 @@
             }
             builder.AddContent(20, "5");
             builder.CloseElement();
+            builder.OpenElement(14, "button");
+            builder.AddAttribute(15, "class", "btn btn-primary");
+            builder.AddAttribute(16, "style", "margin:3px");
+            builder.AddAttribute(17, "onclick", () => Sell(item, sellAmount));
+            //If the player has a full inventory and no place for coins, they can't sell part of a stack.
+            if (item.Key.IsStackable && item.Value > sellAmount && GameState.GetPlayerInventory().GetAvailableSpaces() == 0 && GameState.GetPlayerInventory().GetCoins() == 0)
+            {
+                builder.AddAttribute(18, "disabled", true);
+                builder.AddAttribute(19, "title", "You don't have inventory space for the coins you would receive.");
+            }
+            builder.AddContent(20, sellAmount);
+            builder.CloseElement();
             builder.OpenElement(21, "button");
             builder.AddAttribute(22, "class", "btn btn-primary");
             builder.AddAttribute(23, "style", "margin:3px");
@@ -374,6 +395,11 @@
             builder.CloseElement();
             builder.CloseElement();
         };
+    }
+    public string SetSellAmount(int value)
+    {
+        sellAmount = value;
+        return "";
     }
     private string Deposit(KeyValuePair<GameItem, int> item, int amount)
     {
@@ -467,7 +493,7 @@
         GameState.GetPlayerInventory().RemoveOneOfItem(item);
         foreach (int id in item.UnpackIDs)
         {
-            GameState.GetPlayerInventory().AddItem(Program.itemDatabase.GetItemByID(id));
+            GameState.GetPlayerInventory().AddMultipleOfItem(Program.itemDatabase.GetItemByID(id), Math.Max(1,item.MadeOnCreation));
 
         }
 
@@ -539,7 +565,7 @@
     {
         if (GameState.foodTimer != null)
         {
-            
+
             GameState.foodTimer.Dispose();
             GameState.foodTimer = null;
         }

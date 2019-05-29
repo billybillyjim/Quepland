@@ -223,7 +223,7 @@
         GameItem drop = Program.itemDatabase.GetItemByID(Extensions.GetDrop(opponent));
         if(drop != null)
         {
-            GameState.GetPlayerInventory().AddMultipleOfItem(drop, Math.Max(1, drop.MadeOnCreation));
+            GameState.GetPlayerInventory().AddMultipleOfItem(drop, 1);
         }
 
         battleFound = false;

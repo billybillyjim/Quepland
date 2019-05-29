@@ -21,6 +21,7 @@
     private GameItem currentMetalBar;
     private GameItem currentElement;
     private int alchemyStage;
+    private int buyAmount;
     private string proofstring = "Not set.";
 
     public RenderFragment LoadShop()
@@ -41,25 +42,32 @@
 
                 if (thisBuilding.IsShop)
                 {
-                    builder.OpenElement(5, "table");
-                    builder.OpenElement(6, "thead");
-                    builder.OpenElement(7, "tr");
-                    builder.OpenElement(8, "th");
-                    builder.AddContent(9, "Item Name");
-                    builder.CloseElement();
-                    builder.OpenElement(10, "th");
-                    builder.AddContent(11, "Item Description");
-                    builder.CloseElement();
-                    builder.OpenElement(12, "th");
-                    builder.AddContent(13, "Cost");
+                    builder.OpenElement(5, "p");
+                    builder.AddContent(6, "Buy X: ");
+                    builder.OpenElement(7, "input");
+                    builder.AddAttribute(8, "value", Microsoft.AspNetCore.Components.BindMethods.GetValue(buyAmount));
+                    builder.AddAttribute(9, "onchange", Microsoft.AspNetCore.Components.EventCallback.Factory.CreateBinder(this, __value => buyAmount = __value, buyAmount));
                     builder.CloseElement();
                     builder.CloseElement();
+                    builder.OpenElement(10, "table");
+                    builder.OpenElement(11, "thead");
+                    builder.OpenElement(12, "tr");
+                    builder.OpenElement(13, "th");
+                    builder.AddContent(14, "Item Name");
                     builder.CloseElement();
-                    builder.OpenElement(14, "tbody");
+                    builder.OpenElement(15, "th");
+                    builder.AddContent(16, "Item Description");
+                    builder.CloseElement();
+                    builder.OpenElement(17, "th");
+                    builder.AddContent(18, "Cost");
+                    builder.CloseElement();
+                    builder.CloseElement();
+                    builder.CloseElement();
+                    builder.OpenElement(19, "tbody");
 
                     foreach (int i in thisBuilding.items ?? Enumerable.Empty<int>())
                     {
-                        builder.AddContent(15, ShopItem(i));
+                        builder.AddContent(20, ShopItem(i));
                     }
                     builder.CloseElement();
                     builder.CloseElement();
@@ -83,6 +91,7 @@
             builder.AddContent(6, item.Value);
             builder.CloseElement();
             builder.OpenElement(7, "td");
+            builder.AddAttribute(8, "style", "text-align: center");
             builder.OpenElement(8, "button");
             builder.AddAttribute(9, "class", "btn btn-primary");
             builder.AddAttribute(10, "onclick", (() => BuyItem(item, 1)));
@@ -91,8 +100,29 @@
                 builder.AddAttribute(11, "disabled", true);
                 builder.AddAttribute(12, "title", "You don't have enough money to buy this.");
             }
-            builder.AddContent(13, "Buy");
+            builder.AddContent(13, "Buy 1");
             builder.CloseElement();
+            builder.OpenElement(14, "button");
+            builder.AddAttribute(15, "class", "btn btn-primary");
+            builder.AddAttribute(16, "onclick", (() => BuyItem(item, 5)));
+            if (item.Value > GameState.GetPlayerInventory().GetCoins() * 5)
+            {
+                builder.AddAttribute(17, "disabled", true);
+                builder.AddAttribute(18, "title", "You don't have enough money to buy this.");
+            }
+            builder.AddContent(19, "5");
+            builder.CloseElement();
+            builder.OpenElement(20, "button");
+            builder.AddAttribute(21, "class", "btn btn-primary");
+            builder.AddAttribute(22, "onclick", (() => BuyItem(item, buyAmount)));
+            if (item.Value > GameState.GetPlayerInventory().GetCoins() * buyAmount)
+            {
+                builder.AddAttribute(23, "disabled", true);
+                builder.AddAttribute(24, "title", "You don't have enough money to buy this.");
+            }
+            builder.AddContent(25, buyAmount);
+            builder.CloseElement();
+
             builder.CloseElement();
             builder.CloseElement();
         };
@@ -361,6 +391,11 @@
     }
     private void BuyItem(GameItem item, int amount)
     {
+        if(amount < 0)
+        {
+            amount = 0;
+            buyAmount = 0;
+        }
         if (GameState.GetPlayerInventory().GetCoins() >= item.Value * amount)
         {
             GameState.GetPlayerInventory().RemoveItems(Program.itemDatabase.GetGold(), item.Value * amount);

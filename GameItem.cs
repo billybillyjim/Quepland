@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.ComponentModel;
 public class GameItem
 {
     public string ItemName { get; set; }
@@ -35,6 +35,7 @@ public class GameItem
     public int[][] UsableIDs { get; set; }
     public int[] UnpackIDs { get; set; }
     public int[] IngredientIDs { get; set; }
+    [DefaultValue("Open")]
     public string UnpackString { get; set; }
 
     public string ExperienceGained { get; set; }

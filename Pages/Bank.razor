@@ -8,6 +8,9 @@
 <h1>Hello, this is your bank!</h1>
 <p><button class="btn btn-primary" onclick="@(() => DepositAll())">Deposit All</button></p>
 
+<p>Withdraw X:<input type="number" bind=@withdrawAmount /></p>
+
+
 <div class="dropdown">
     <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Sort By
@@ -43,6 +46,7 @@
                         <td align="left">
                             <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, 1))">1</button>
                             <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, 5))">5</button>
+                            <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, withdrawAmount))">@withdrawAmount</button>
                             <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, int.MaxValue))">All</button>
                         </td>
                         <td align="center"></td>
@@ -57,6 +61,8 @@
 @functions{
 
     public int sortStyle = 0;
+    public int withdrawAmount = 1;
+
     public void SetSortStyle(int newVal)
     {
         sortStyle = newVal;
@@ -71,6 +77,11 @@
     }
     private string Withdraw(GameItem item, int amount)
     {
+        if(amount < 0)
+        {
+            amount = 0;
+            withdrawAmount = 0;
+        }
         int maxWithdraw;
         //If the item is stackable and the player has a stack in their inventory already, or the player has space for another item
         if ((item.IsStackable && GameState.GetPlayerInventory().HasItem(item) && GameState.GetPlayerInventory().GetAvailableSpaces() == 0) ||

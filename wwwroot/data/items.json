@@ -807,7 +807,7 @@
     "id": 70,
     "value": 10,
     "isUnpackable": true,
-    "unpackIDs": [ 43, 81 ],
+    "unpackIDs": [ 231, 81 ],
     "unpackString": "Gut",
     "actionRequired": "Hunting",
     "requiredLevel": 1,
@@ -831,7 +831,7 @@
     "id": 72,
     "value": 55,
     "isUnpackable": true,
-    "unpackIDs": [ 43, 82 ],
+    "unpackIDs": [ 233, 82 ],
     "unpackString": "Gut",
     "actionRequired": "Hunting",
     "requiredLevel": 30,
@@ -843,7 +843,7 @@
     "id": 73,
     "value": 30,
     "isUnpackable": true,
-    "unpackIDs": [ 43, 83 ],
+    "unpackIDs": [ 231, 83 ],
     "unpackString": "Gut",
     "actionRequired": "Hunting",
     "requiredLevel": 14,
@@ -2207,7 +2207,9 @@
     "isStackable": true,
     "usableIDs": [
       [ 213, 198 ]
-    ]
+    ],
+    "isUsable": true,
+    "destroyOnUse": true
   },
   {
     "itemName": "Poplar Arrows (Unfinished)",
@@ -2221,7 +2223,9 @@
     "isStackable": true,
     "usableIDs": [
       [ 212, 199 ]
-    ]
+    ],
+    "isUsable": true,
+    "destroyOnUse": true
   },
   {
     "itemName": "Balsa Arrows (Unfinished)",
@@ -2236,7 +2240,9 @@
     "GatherSpeed": -50,
     "usableIDs": [
       [ 211, 200 ]
-    ]
+    ],
+    "isUsable": true,
+    "destroyOnUse": true
   },
   {
     "itemName": "Oak Arrows (Unfinished)",
@@ -2248,7 +2254,9 @@
     "actionRequired": "Woodworking",
     "experienceGained": "Woodworking:25",
     "isStackable": true,
-    "GatherSpeed": 150
+    "GatherSpeed": 150,
+    "isUsable": true,
+    "destroyOnUse": true
   },
   {
     "itemName": "Sugar Maple Arrows (Unfinished)",
@@ -2260,7 +2268,9 @@
     "actionRequired": "Woodworking",
     "experienceGained": "Woodworking:35",
     "isStackable": true,
-    "GatherSpeed": 200
+    "GatherSpeed": 200,
+    "isUsable": true,
+    "destroyOnUse": true
   },
   {
     "itemName": "Birch Arrows (Unfinished)",
@@ -2272,7 +2282,9 @@
     "actionRequired": "Woodworking",
     "experienceGained": "Woodworking:39",
     "isStackable": true,
-    "GatherSpeed": 300
+    "GatherSpeed": 300,
+    "isUsable": true,
+    "destroyOnUse": true
   },
   {
     "itemName": "Mesquite Arrows (Unfinished)",
@@ -2284,7 +2296,9 @@
     "actionRequired": "Woodworking",
     "experienceGained": "Woodworking:50",
     "isStackable": true,
-    "GatherSpeed": 400
+    "GatherSpeed": 400,
+    "isUsable": true,
+    "destroyOnUse": true
   },
   {
     "itemName": "Mahogany Arrows (Unfinished)",
@@ -2296,7 +2310,9 @@
     "actionRequired": "Woodworking",
     "experienceGained": "Woodworking:70",
     "isStackable": true,
-    "GatherSpeed": 500
+    "GatherSpeed": 500,
+    "isUsable": true,
+    "destroyOnUse": true
   },
   {
     "itemName": "Ironwood Arrows (Unfinished)",
@@ -2308,7 +2324,9 @@
     "actionRequired": "Woodworking",
     "experienceGained": "Woodworking:90",
     "isStackable": true,
-    "GatherSpeed": 700
+    "GatherSpeed": 700,
+    "isUsable": true,
+    "destroyOnUse": true
   },
   {
     "itemName": "Snakewood Arrows (Unfinished)",
@@ -2320,7 +2338,9 @@
     "actionRequired": "Woodworking",
     "experienceGained": "Woodworking:150",
     "isStackable": true,
-    "GatherSpeed": 900
+    "GatherSpeed": 900,
+    "isUsable": true,
+    "destroyOnUse": true
   },
   {
     "itemName": "Lignum Vitae Arrows (Unfinished)",
@@ -2332,7 +2352,9 @@
     "actionRequired": "Woodworking",
     "experienceGained": "Woodworking:200",
     "isStackable": true,
-    "GatherSpeed": 1100
+    "GatherSpeed": 1100,
+    "isUsable": true,
+    "destroyOnUse": true
   },
   {
     "itemName": "Buloke Arrows (Unfinished)",
@@ -2344,7 +2366,9 @@
     "actionRequired": "Woodworking",
     "experienceGained": "Woodworking:250",
     "isStackable": true,
-    "GatherSpeed": 1250
+    "GatherSpeed": 1250,
+    "isUsable": true,
+    "destroyOnUse": true
   },
   {
     "itemName": "White Pine Arrows",
@@ -2536,7 +2560,8 @@
     "actionRequired": "Woodworking",
     "isStackable": true,
     "isSmithable": true,
-    "madeOnCreation": 5
+    "madeOnCreation": 5,
+    "isUsable": true
   },
   {
     "itemName": "Tin Arrowtips",
@@ -2551,7 +2576,8 @@
     "actionRequired": "Woodworking",
     "isStackable": true,
     "isSmithable": true,
-    "madeOnCreation": 5
+    "madeOnCreation": 5,
+    "isUsable": true
   },
   {
     "itemName": "Zinc Arrowtips",
@@ -2566,7 +2592,8 @@
     "actionRequired": "Woodworking",
     "isStackable": true,
     "isSmithable": true,
-    "madeOnCreation": 5
+    "madeOnCreation": 5,
+    "isUsable": true
   },
   {
     "itemName": "Brass Arrowtips",
@@ -2581,7 +2608,8 @@
     "actionRequired": "Woodworking",
     "isStackable": true,
     "isSmithable": true,
-    "madeOnCreation": 5
+    "madeOnCreation": 5,
+    "isUsable": true
   },
   {
     "itemName": "Bronze Arrowtips",
@@ -2596,7 +2624,8 @@
     "actionRequired": "Woodworking",
     "isStackable": true,
     "isSmithable": true,
-    "madeOnCreation": 5
+    "madeOnCreation": 5,
+    "isUsable": true
   },
   {
     "itemName": "Nickel Arrowtips",
@@ -2611,7 +2640,8 @@
     "actionRequired": "Woodworking",
     "isStackable": true,
     "isSmithable": true,
-    "madeOnCreation": 5
+    "madeOnCreation": 5,
+    "isUsable": true
   },
   {
     "itemName": "Gold Arrowtips",
@@ -2626,7 +2656,8 @@
     "actionRequired": "Woodworking",
     "isStackable": true,
     "isSmithable": true,
-    "madeOnCreation": 5
+    "madeOnCreation": 5,
+    "isUsable": true
   },
   {
     "itemName": "Iron Arrowtips",
@@ -2641,7 +2672,8 @@
     "actionRequired": "Woodworking",
     "isStackable": true,
     "isSmithable": true,
-    "madeOnCreation": 5
+    "madeOnCreation": 5,
+    "isUsable": true
   },
   {
     "itemName": "Lead Arrowtips",
@@ -2656,7 +2688,8 @@
     "actionRequired": "Woodworking",
     "isStackable": true,
     "isSmithable": true,
-    "madeOnCreation": 5
+    "madeOnCreation": 5,
+    "isUsable": true
   },
   {
     "itemName": "Aluminum Arrowtips",
@@ -2665,13 +2698,15 @@
     "value": 40,
     "gatherString": "You forge some aluminum arrowtips.",
     "ingredientIDs": [ 58 ],
+    "usableIDs": [],
     "gatherSpeed": 1500,
     "requiredLevel": 75,
     "experienceGained": "Woodworking:110",
     "actionRequired": "Woodworking",
     "isStackable": true,
     "isSmithable": true,
-    "madeOnCreation": 5
+    "madeOnCreation": 5,
+    "isUsable": true
   },
   {
     "itemName": "Steel Arrowtips",
@@ -2686,7 +2721,8 @@
     "actionRequired": "Woodworking",
     "isStackable": true,
     "isSmithable": true,
-    "madeOnCreation": 5
+    "madeOnCreation": 5,
+    "isUsable": true
   },
   {
     "itemName": "White Pine Bow (Unstrung)",
@@ -2735,6 +2771,85 @@
     "isEquipable": true,
     "damage": 5,
     "equipSlot": "Right Hand"
+  },
+  {
+    "itemName": "Coin Pouch (25)",
+    "itemDescription": "25 coins in a pouch.",
+    "id": 226,
+    "value": 25,
+    "unpackIDs": [ 0 ],
+    "madeOnCreation": 25,
+    "isUnpackable": true,
+    "unpackString": "Open"
+  },
+  {
+    "itemName": "Coin Pouch (50)",
+    "itemDescription": "50 coins in a pouch.",
+    "id": 227,
+    "value": 50,
+    "unpackIDs": [ 0 ],
+    "madeOnCreation": 50,
+    "isUnpackable": true,
+    "unpackString": "Open"
+  },
+  {
+    "itemName": "Coin Pouch (100)",
+    "itemDescription": "100 coins in a pouch.",
+    "id": 228,
+    "value": 100,
+    "unpackIDs": [ 0 ],
+    "madeOnCreation": 100,
+    "isUnpackable": true,
+    "unpackString": "Open"
+  },
+  {
+    "itemName": "Coin Pouch (250)",
+    "itemDescription": "250 coins in a pouch.",
+    "id": 229,
+    "value": 250,
+    "unpackIDs": [ 0 ],
+    "madeOnCreation": 250,
+    "isUnpackable": true,
+    "unpackString": "Open"
+  },
+  {
+    "itemName": "Coin Pouch (500)",
+    "itemDescription": "500 coins in a pouch.",
+    "id": 230,
+    "value": 500,
+    "unpackIDs": [ 0 ],
+    "madeOnCreation": 500,
+    "isUnpackable": true,
+    "unpackString": "Open"
+  },
+  {
+    "itemName": "Tuft of Feathers",
+    "itemDescription": "A few feathers attached together.",
+    "id": 231,
+    "value": 10,
+    "unpackIDs": [ 43 ],
+    "isUnpackable": true,
+    "madeOnCreation": 5,
+    "unpackString": "Pull Apart"
+  },
+  {
+    "itemName": "Plume of Feathers",
+    "itemDescription": "Quite a few feathers attached together.",
+    "id": 232,
+    "value": 30,
+    "unpackIDs": [ 43 ],
+    "isUnpackable": true,
+    "madeOnCreation": 25,
+    "unpackString": "Pull Apart"
+  },
+  {
+    "itemName": "Pile of Feathers",
+    "itemDescription": "A large number of feathers piled together.",
+    "id": 233,
+    "value": 70,
+    "unpackIDs": [ 43 ],
+    "isUnpackable": true,
+    "madeOnCreation": 50,
+    "unpackString": "Pull Apart"
   }
-
 ]
