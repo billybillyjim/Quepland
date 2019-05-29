@@ -418,8 +418,8 @@
 
     public string DebugGetNextItem()
     {
-        debugCurrentItemID++;
-        GameItem item = Program.itemDatabase.GetItemByID(debugCurrentItemID);
+        
+
         GameState.GetPlayerInventory().AddItem(item);
         if (item.IsUsable)
         {
