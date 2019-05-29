@@ -759,7 +759,7 @@
     "id": 66,
     "value": 150,
     "isUnpackable": true,
-    "unpackIDs": [ 17, 19, 33 ],
+    "unpackIDs": [ 16, 18, 33 ],
     "unpackString": "Gut",
     "actionRequired": "Hunting",
     "requiredLevel": 20,
@@ -1929,6 +1929,8 @@
     "id": 164,
     "value": 10,
     "isStackable": true,
+    "isUsable": true,
+    "destroyOnUse": true,
     "usableIDs": [
       [ 165, 175 ],
       [ 166, 176 ],

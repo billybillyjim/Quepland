@@ -14,7 +14,7 @@
     private int[,] usableIDs;
     private Timer createRepeatTimer;
     public int sellAmount = 20;
-    private int debugCurrentItemID = -1;
+    private int debugCurrentItemID = 160;
 
     private RenderFragment LoadInventory()
     {
@@ -422,6 +422,7 @@
 
     private string Deposit(KeyValuePair<GameItem, int> item, int amount)
     {
+        CancelUse();
         Console.WriteLine("Depositing");
         if (amount > item.Value)
         {
@@ -438,6 +439,7 @@
     }
     private string Sell(KeyValuePair<GameItem, int> item, int amount)
     {
+        CancelUse();
         Console.WriteLine("Selling");
         if (amount > item.Value)
         {
@@ -480,6 +482,7 @@
     }
     public void Eat(GameItem item)
     {
+        CancelUse();
         EndBoostTimer();
         GameState.SetBuffItem(item);
         GameState.GetPlayer().GetSkill(GameState.currentBuffItem.BuffedSkill).Boost = GameState.currentBuffItem.BuffAmount;
@@ -503,6 +506,7 @@
     }
     private string UnpackItem(GameItem item)
     {
+        CancelUse();
         int itemsCreated = item.UnpackIDs.Length;
 
         if (GameState.GetPlayerInventory().GetAvailableSpaces() < itemsCreated)
@@ -531,27 +535,27 @@
         {
             GameItem itemCreated = Program.itemDatabase.GetItemByID(usableIDs[itemCreatedID, 1]);
             Console.WriteLine(itemCreated);
+
             GameState.GetPlayerInventory().RemoveOneOfItem(itemUsed);
-            int numToMake = Math.Max(itemCreated.MadeOnCreation, 1);
-            GameState.GetPlayerInventory().AddMultipleOfItem(itemCreated, numToMake);
-            MessageManager.AddMessage(itemCreated.GatherString);
-            GameState.GetPlayer().GainExperience(itemCreated.ExperienceGained);
-            if (currentUsedItem.DestroyOnUse)
-            {
-                GameState.GetPlayerInventory().RemoveOneOfItem(currentUsedItem);
-                if (GameState.GetPlayerInventory().HasItem(currentUsedItem) == false)
+            
+                int numToMake = Math.Max(itemCreated.MadeOnCreation, 1);
+                GameState.GetPlayerInventory().AddMultipleOfItem(itemCreated, numToMake);
+                MessageManager.AddMessage(itemCreated.GatherString);
+                GameState.GetPlayer().GainExperience(itemCreated.ExperienceGained);
+                if (currentUsedItem.DestroyOnUse)
                 {
-                    MessageManager.AddMessage("You have run out of " + currentUsedItem.ItemName + ".");
-                    CancelUse();
+                    GameState.GetPlayerInventory().RemoveOneOfItem(currentUsedItem);
+                    if (GameState.GetPlayerInventory().HasItem(currentUsedItem) == false)
+                    {
+                        MessageManager.AddMessage("You have run out of " + currentUsedItem.ItemName + ".");
+                        CancelUse();
+                    }
                 }
-            }
-            if (GameState.GetPlayerInventory().HasItem(itemUsed) == false)
-            {
-                MessageManager.AddMessage("You have run out of " + itemUsed.ItemName + ".");
-                CancelUse();
-            }
-
-
+                if (GameState.GetPlayerInventory().HasItem(itemUsed) == false)
+                {
+                    MessageManager.AddMessage("You have run out of " + itemUsed.ItemName + ".");
+                    CancelUse();
+                }          
             //CancelUse();
             GameState.UpdateState();
             StateHasChanged();
@@ -562,6 +566,7 @@
     }
     public void Equip(GameItem item)
     {
+        CancelUse();
         GameState.GetPlayer().EquipItem(item);
         if (GameState.attackTimer != null)
         {
@@ -572,6 +577,7 @@
     }
     public void Unequip(GameItem item)
     {
+        CancelUse();
         GameState.GetPlayer().UnequipItem(item);
         if (GameState.attackTimer != null)
         {
@@ -584,7 +590,7 @@
     {
         if (GameState.foodTimer != null)
         {
-
+            GameState.GetPlayer().GetSkill(GameState.currentBuffItem.BuffedSkill).Boost = 0;
             GameState.foodTimer.Dispose();
             GameState.foodTimer = null;
         }

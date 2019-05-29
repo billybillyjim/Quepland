@@ -231,7 +231,7 @@ public class Inventory
         }
         return true;
     }
-    public void RemoveOneOfItem(GameItem item)
+    public bool RemoveOneOfItem(GameItem item)
     {
         if (items.TryGetValue(item, out int amount))
         {
@@ -246,9 +246,11 @@ public class Inventory
             }
             if (amount == 0)
             {
-                items.Remove(item);
+                items.Remove(item);             
             }
+            return true;
         }
+        return false;
     }
     public int RemoveItems(GameItem item, int amount)
     {
