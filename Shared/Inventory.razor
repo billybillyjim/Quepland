@@ -416,22 +416,6 @@
         return "";
     }
 
-    public string DebugGetNextItem()
-    {
-        
-
-        GameState.GetPlayerInventory().AddItem(item);
-        if (item.IsUsable)
-        {
-            foreach(int id in Extensions.To2DArray<int>(item.UsableIDs))
-            {
-                GameState.GetPlayerInventory().AddItem(Program.itemDatabase.GetItemByID(id));
-            }
-        }
-
-        return "";
-    }
-
     private string Deposit(KeyValuePair<GameItem, int> item, int amount)
     {
         CancelUse();
