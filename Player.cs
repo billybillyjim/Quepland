@@ -14,7 +14,8 @@ public class Player
     private List<Skill> skills;
     private List<GameItem> equippedItems = new List<GameItem>();
     private List<string> knownAlchemicRecipes = new List<string>();
-    private readonly int maxInventorySize = 30;
+    //DEBUG Value!
+    private readonly int maxInventorySize = 300;
     private MessageManager messageManager;
 
 	public Player()

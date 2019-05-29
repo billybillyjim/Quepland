@@ -13,21 +13,21 @@
     "isInteractable": true
   },
   {
-    "name": "Angry Dwarf",
+    "name": "Angry Gnome",
     "id": 2,
     "spokenText": "Who are you? What do you want? Sounds pretty stupid to me.",
     "isInteractable": true,
-    "unlockFollowerIDs": [2]
+    "unlockFollowerIDs": [ 2 ]
   },
   {
-    "name": "Mining Dwarf",
+    "name": "Mining Gnome",
     "id": 3,
     "spokenText": "Yes? I'm a little busy mining here.",
     "isInteractable": true,
     "unlockFollowerIDs": [ 1 ]
   },
   {
-    "name": "Ugly Dwarf",
+    "name": "Ugly Gnome",
     "id": 4,
     "spokenText": "Hello. Please don't look at me.",
     "isInteractable": true,
@@ -51,5 +51,33 @@
     "id": 7,
     "spokenText": "I won't let anyone pass unless they're better than me at swords and stuff.",
     "isInteractable": true
+  },
+  {
+    "name": "Stupid Dwarf",
+    "id": 8,
+    "spokenText": "Hello. Do you have any cheese? I'd be eternally grateful.",
+    "isInteractable": true,
+    "unlockFollowerIDs": [ 6 ]
+  },
+  {
+    "name": "Friendly Dwarf",
+    "id": 9,
+    "spokenText": "Hello. I'd love a job, if you could give me one.",
+    "isInteractable": true,
+    "unlockFollowerIDs": [ 7 ]
+  },
+  {
+    "name": "Tholdbur the Dwarf",
+    "id": 10,
+    "spokenText": "Hello. I hear you are looking for a useful helper.",
+    "isInteractable": true,
+    "unlockFollowerIDs": [ 8 ]
+  },
+  {
+    "name": "Dwarny",
+    "id": 11,
+    "spokenText": "Hello. I am a true dwarf, capable of carrying untold amounts of ore faster than any other. For a one time fee, I'll work for you.",
+    "isInteractable": true,
+    "unlockFollowerIDs": [ 9 ]
   }
 ]

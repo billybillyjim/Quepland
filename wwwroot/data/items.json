@@ -124,7 +124,7 @@
   },
   {
     "itemName": "White Pine Arrow Shafts",
-    "itemDescription": "They're like skinny, baby logs.",
+    "itemDescription": "They're like skinny, baby logs. Feathers can be attached to the end.",
     "gatherString": "You make some arrow shafts from the white pine wood.",
     "id": 9,
     "value": 3,
@@ -146,7 +146,7 @@
   },
   {
     "itemName": "Poplar Arrow Shafts",
-    "itemDescription": "They're like skinny, baby logs.",
+    "itemDescription": "They're like skinny, baby logs. Feathers can be attached to the end.",
     "gatherString": "You make some arrow shafts from the white pine wood.",
     "id": 11,
     "value": 9,
@@ -1666,7 +1666,7 @@
   {
     "itemName": "Balsa Arrow Shafts",
     "itemDescription": "Thin, flimsy sticks.",
-    "gatherString": "You make some arrow shafts from the balsa wood.",
+    "gatherString": "You make some arrow shafts from the balsa wood. Feathers can be attached to the end.",
     "id": 143,
     "value": 2,
     "requiredLevel": 3,
@@ -1690,7 +1690,7 @@
   },
   {
     "itemName": "Oak Arrow Shafts",
-    "itemDescription": "They're like skinny, dead oak tree corpses.",
+    "itemDescription": "They're like skinny, dead oak tree corpses. Feathers can be attached to the end.",
     "gatherString": "You make some arrow shafts from the oak wood.",
     "id": 145,
     "value": 20,
@@ -1715,7 +1715,7 @@
   },
   {
     "itemName": "Sugar Maple Arrow Shafts",
-    "itemDescription": "Arrow shafts for making arrows.",
+    "itemDescription": "Arrow shafts for making arrows. Feathers can be attached to the end.",
     "gatherString": "You make some arrow shafts from the sugar maple wood.",
     "id": 147,
     "value": 30,
@@ -1740,7 +1740,7 @@
   },
   {
     "itemName": "Birch Arrow Shafts",
-    "itemDescription": "Light colored arrow shafts from a light colored wood.",
+    "itemDescription": "Light colored arrow shafts from a light colored wood. Feathers can be attached to the end.",
     "gatherString": "You make some arrow shafts from the birch wood.",
     "id": 149,
     "value": 40,
@@ -1765,7 +1765,7 @@
   },
   {
     "itemName": "Mesquite Arrow Shafts",
-    "itemDescription": "They're like skinny, baby logs.",
+    "itemDescription": "They're like skinny, baby logs. Feathers can be attached to the end.",
     "gatherString": "You make some arrow shafts from the mesquite wood.",
     "id": 151,
     "value": 60,
@@ -1790,7 +1790,7 @@
   },
   {
     "itemName": "Mahogany Arrow Shafts",
-    "itemDescription": "Decadent arrow components.",
+    "itemDescription": "Decadent arrow components. Feathers can be attached to the end.",
     "gatherString": "You make some arrow shafts from the mahogany wood.",
     "id": 153,
     "value": 70,
@@ -1816,7 +1816,7 @@
   },
   {
     "itemName": "Ironwood Arrow Shafts",
-    "itemDescription": "Extremely strong arrow shafts.",
+    "itemDescription": "Extremely strong arrow shafts. Feathers can be attached to the end.",
     "gatherString": "You make some arrow shafts from the ironwood logs.",
     "id": 155,
     "value": 90,
@@ -1841,7 +1841,7 @@
   },
   {
     "itemName": "Snakewood Arrow Shafts",
-    "itemDescription": "Are they supposed to be so straight?",
+    "itemDescription": "Are they supposed to be so straight? Feathers can be attached to the end.",
     "gatherString": "You make some arrow shafts from the snakewood logs.",
     "id": 157,
     "value": 120,
@@ -1867,7 +1867,7 @@
   },
   {
     "itemName": "Lignum Vitae Arrow Shafts",
-    "itemDescription": "Very strong arrow shafts.",
+    "itemDescription": "Very strong arrow shafts. Feathers can be attached to the end.",
     "gatherString": "You make some arrow shafts from the lignum vitae wood.",
     "id": 159,
     "value": 265,
@@ -1892,7 +1892,7 @@
   },
   {
     "itemName": "Buloke Arrow Shafts",
-    "itemDescription": "The hardest arrow shafts in the world.",
+    "itemDescription": "The hardest arrow shafts in the world. Feathers can be attached to the end.",
     "gatherString": "You make some arrow shafts from the buloke wood.",
     "id": 161,
     "value": 525,
@@ -2197,7 +2197,7 @@
   },
   {
     "itemName": "White Pine Arrows (Unfinished)",
-    "itemDescription": "Cheap and light arrows with no tip.",
+    "itemDescription": "Cheap and light arrows with no tip. Requires zinc or better tips.",
     "gatherString": "You attach a feather to the back of the arrow.",
     "id": 186,
     "value": 5,
@@ -2206,14 +2206,22 @@
     "experienceGained": "Woodworking:30",
     "isStackable": true,
     "usableIDs": [
-      [ 213, 198 ]
+      [ 213, 198 ],
+      [ 214, 198 ],
+      [ 215, 198 ],
+      [ 216, 198 ],
+      [ 217, 198 ],
+      [ 218, 198 ],
+      [ 219, 198 ],
+      [ 220, 198 ],
+      [ 221, 198 ]
     ],
     "isUsable": true,
     "destroyOnUse": true
   },
   {
     "itemName": "Poplar Arrows (Unfinished)",
-    "itemDescription": "Cheap and light arrows with no tip.",
+    "itemDescription": "Cheap and light arrows with no tip. Requires tin or better tips.",
     "gatherString": "You attach a feather to the back of the arrow.",
     "id": 187,
     "value": 15,
@@ -2222,14 +2230,23 @@
     "experienceGained": "Woodworking:60",
     "isStackable": true,
     "usableIDs": [
-      [ 212, 199 ]
+      [ 212, 199 ],
+      [ 213, 199 ],
+      [ 214, 199 ],
+      [ 215, 199 ],
+      [ 216, 199 ],
+      [ 217, 199 ],
+      [ 218, 199 ],
+      [ 219, 199 ],
+      [ 220, 199 ],
+      [ 221, 199 ]
     ],
     "isUsable": true,
     "destroyOnUse": true
   },
   {
     "itemName": "Balsa Arrows (Unfinished)",
-    "itemDescription": "Thin, flimsy sticks with feathers attached at the end.",
+    "itemDescription": "Thin, flimsy sticks with feathers attached at the end. Takes any tip.",
     "gatherString": "You attach a feather to the back of the arrow.",
     "id": 188,
     "value": 4,
@@ -2239,14 +2256,24 @@
     "isStackable": true,
     "GatherSpeed": -50,
     "usableIDs": [
-      [ 211, 200 ]
+      [ 211, 200 ],
+      [ 212, 200 ],
+      [ 213, 200 ],
+      [ 214, 200 ],
+      [ 215, 200 ],
+      [ 216, 200 ],
+      [ 217, 200 ],
+      [ 218, 200 ],
+      [ 219, 200 ],
+      [ 220, 200 ],
+      [ 221, 200 ]
     ],
     "isUsable": true,
     "destroyOnUse": true
   },
   {
     "itemName": "Oak Arrows (Unfinished)",
-    "itemDescription": "They're like skinny, dead oak tree corpses with feathers attached at the end.",
+    "itemDescription": "They're like skinny, dead oak tree corpses with feathers attached at the end. Requires brass or better tips.",
     "gatherString": "You attach a feather to the back of the arrow.",
     "id": 189,
     "value": 25,
@@ -2256,11 +2283,21 @@
     "isStackable": true,
     "GatherSpeed": 150,
     "isUsable": true,
-    "destroyOnUse": true
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 214, 201 ],
+      [ 215, 201 ],
+      [ 216, 201 ],
+      [ 217, 201 ],
+      [ 218, 201 ],
+      [ 219, 201 ],
+      [ 220, 201 ],
+      [ 221, 201 ]
+    ]
   },
   {
     "itemName": "Sugar Maple Arrows (Unfinished)",
-    "itemDescription": "Arrow shafts for making arrows with feathers attached at the end.",
+    "itemDescription": "Arrow shafts for making arrows with feathers attached at the end. Requires bronze or better tips.",
     "gatherString": "You attach a feather to the back of the arrow.",
     "id": 190,
     "value": 35,
@@ -2270,11 +2307,20 @@
     "isStackable": true,
     "GatherSpeed": 200,
     "isUsable": true,
-    "destroyOnUse": true
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 215, 202 ],
+      [ 216, 202 ],
+      [ 217, 202 ],
+      [ 218, 202 ],
+      [ 219, 202 ],
+      [ 220, 202 ],
+      [ 221, 202 ]
+    ]
   },
   {
     "itemName": "Birch Arrows (Unfinished)",
-    "itemDescription": "Light colored arrow shafts from a light colored wood with feathers attached at the end.",
+    "itemDescription": "Light colored arrow shafts from a light colored wood with feathers attached at the end. Requires bronze or better tips.",
     "gatherString": "You attach a feather to the back of the arrow.",
     "id": 191,
     "value": 45,
@@ -2284,11 +2330,21 @@
     "isStackable": true,
     "GatherSpeed": 300,
     "isUsable": true,
-    "destroyOnUse": true
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 215, 203 ],
+      [ 216, 203 ],
+      [ 217, 203 ],
+      [ 218, 203 ],
+      [ 219, 203 ],
+      [ 220, 203 ],
+      [ 221, 203 ],
+      [ 222, 203 ]
+    ]
   },
   {
     "itemName": "Mesquite Arrows (Unfinished)",
-    "itemDescription": "They're like skinny, baby logs with feathers attached at the end.",
+    "itemDescription": "They're like skinny, baby logs with feathers attached at the end. Requires nickel or better tips.",
     "gatherString": "You attach a feather to the back of the arrow.",
     "id": 192,
     "value": 65,
@@ -2298,11 +2354,19 @@
     "isStackable": true,
     "GatherSpeed": 400,
     "isUsable": true,
-    "destroyOnUse": true
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 216, 204 ],
+      [ 217, 204 ],
+      [ 218, 204 ],
+      [ 219, 204 ],
+      [ 220, 204 ],
+      [ 221, 204 ]
+    ]
   },
   {
     "itemName": "Mahogany Arrows (Unfinished)",
-    "itemDescription": "Decadent arrow components with feathers attached at the end.",
+    "itemDescription": "Decadent arrow components with feathers attached at the end. Requires gold tips.",
     "gatherString": "You attach a feather to the back of the arrow.",
     "id": 193,
     "value": 75,
@@ -2312,11 +2376,14 @@
     "isStackable": true,
     "GatherSpeed": 500,
     "isUsable": true,
-    "destroyOnUse": true
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 217, 205 ]
+    ]
   },
   {
     "itemName": "Ironwood Arrows (Unfinished)",
-    "itemDescription": "Extremely strong arrow shafts with feathers attached at the end.",
+    "itemDescription": "Extremely strong arrow shafts with feathers attached at the end. Requires iron or better tips.",
     "gatherString": "You attach a feather to the back of the arrow.",
     "id": 194,
     "value": 100,
@@ -2326,11 +2393,17 @@
     "isStackable": true,
     "GatherSpeed": 700,
     "isUsable": true,
-    "destroyOnUse": true
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 218, 206 ],
+      [ 219, 206 ],
+      [ 220, 206 ],
+      [ 221, 206 ]
+    ]
   },
   {
     "itemName": "Snakewood Arrows (Unfinished)",
-    "itemDescription": "Are they supposed to be so straight?",
+    "itemDescription": "Are they supposed to be so straight? Requires lead or better tips.",
     "gatherString": "You attach a feather to the back of the arrow.",
     "id": 195,
     "value": 130,
@@ -2340,11 +2413,16 @@
     "isStackable": true,
     "GatherSpeed": 900,
     "isUsable": true,
-    "destroyOnUse": true
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 219, 207 ],
+      [ 220, 207 ],
+      [221,207]
+    ]
   },
   {
     "itemName": "Lignum Vitae Arrows (Unfinished)",
-    "itemDescription": "Very strong arrow shafts with feathers attached at the end.",
+    "itemDescription": "Very strong arrow shafts with feathers attached at the end. Requires aluminum or steel tips.",
     "gatherString": "You attach a feather to the back of the arrow.",
     "id": 196,
     "value": 275,
@@ -2354,11 +2432,15 @@
     "isStackable": true,
     "GatherSpeed": 1100,
     "isUsable": true,
-    "destroyOnUse": true
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 220, 208 ],
+      [221, 208]
+    ]
   },
   {
     "itemName": "Buloke Arrows (Unfinished)",
-    "itemDescription": "The hardest arrow shafts in the world with feathers attached at the end.",
+    "itemDescription": "The hardest arrow shafts in the world with feathers attached at the end. Requires steel tips.",
     "gatherString": "You attach a feather to the back of the arrow.",
     "id": 197,
     "value": 550,
@@ -2368,7 +2450,10 @@
     "isStackable": true,
     "GatherSpeed": 1250,
     "isUsable": true,
-    "destroyOnUse": true
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 221, 209 ]
+    ]
   },
   {
     "itemName": "White Pine Arrows",
