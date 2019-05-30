@@ -4,7 +4,6 @@
 @using System.Threading
 
 @LoadInventory()
-@sellAmount
 
 @functions{
 
@@ -29,13 +28,17 @@
             builder.AddContent(5, GameState.GetPlayerInventory().GetFreeSpacesString());
             builder.CloseElement();
 
-            builder.OpenElement(6, "p");
-            builder.AddContent(6, "Sell X: ");
-            builder.OpenElement(7, "input");
-            builder.AddAttribute(8, "value", Microsoft.AspNetCore.Components.BindMethods.GetValue(sellAmount));
-            builder.AddAttribute(9, "onchange", Microsoft.AspNetCore.Components.EventCallback.Factory.CreateBinder(this, __value => sellAmount = __value, sellAmount));
-            builder.CloseElement();
-            builder.CloseElement();
+            if (GameState.canSell)
+            {
+                builder.OpenElement(6, "p");
+                builder.AddContent(6, "Sell X: ");
+                builder.OpenElement(7, "input");
+                builder.AddAttribute(8, "value", Microsoft.AspNetCore.Components.BindMethods.GetValue(sellAmount));
+                builder.AddAttribute(9, "onchange", Microsoft.AspNetCore.Components.EventCallback.Factory.CreateBinder(this, __value => sellAmount = __value, sellAmount));
+                builder.CloseElement();
+                builder.CloseElement();
+            }
+
 
             builder.OpenElement(10, "p");
             if (GameState.GetPlayer().activeFollower == null)

@@ -2648,7 +2648,10 @@
     "isStackable": true,
     "isSmithable": true,
     "madeOnCreation": 5,
-    "isUsable": true
+    "isUsable": true,
+    "usableIDs": [
+      [188, 200]
+    ]
   },
   {
     "itemName": "Tin Arrowtips",
@@ -2664,7 +2667,11 @@
     "isStackable": true,
     "isSmithable": true,
     "madeOnCreation": 5,
-    "isUsable": true
+    "isUsable": true,
+    "usableIDs": [
+      [ 188, 200 ],
+      [ 186, 198 ]
+    ]
   },
   {
     "itemName": "Zinc Arrowtips",
@@ -2680,7 +2687,12 @@
     "isStackable": true,
     "isSmithable": true,
     "madeOnCreation": 5,
-    "isUsable": true
+    "isUsable": true,
+    "usableIDs": [
+      [ 188, 200 ],
+      [ 186, 198 ],
+      [ 187, 199 ]
+    ]
   },
   {
     "itemName": "Brass Arrowtips",
@@ -2696,7 +2708,13 @@
     "isStackable": true,
     "isSmithable": true,
     "madeOnCreation": 5,
-    "isUsable": true
+    "isUsable": true,
+    "usableIDs": [
+      [ 188, 200 ],
+      [ 186, 198 ],
+      [ 187, 199 ],
+      [ 189, 201 ]
+    ]
   },
   {
     "itemName": "Bronze Arrowtips",
@@ -2712,7 +2730,15 @@
     "isStackable": true,
     "isSmithable": true,
     "madeOnCreation": 5,
-    "isUsable": true
+    "isUsable": true,
+    "usableIDs": [
+      [ 188, 200 ],
+      [ 186, 198 ],
+      [ 187, 199 ],
+      [ 189, 201 ],
+      [ 190, 202 ],
+      [ 191, 203 ]
+    ]
   },
   {
     "itemName": "Nickel Arrowtips",
@@ -2728,7 +2754,16 @@
     "isStackable": true,
     "isSmithable": true,
     "madeOnCreation": 5,
-    "isUsable": true
+    "isUsable": true,
+    "usableIDs": [
+      [ 188, 200 ],
+      [ 186, 198 ],
+      [ 187, 199 ],
+      [ 189, 201 ],
+      [ 190, 202 ],
+      [ 191, 203 ],
+      [ 192, 204 ]
+    ]
   },
   {
     "itemName": "Gold Arrowtips",
@@ -2744,7 +2779,10 @@
     "isStackable": true,
     "isSmithable": true,
     "madeOnCreation": 5,
-    "isUsable": true
+    "isUsable": true,
+    "usableIDs": [
+      [ 193, 205 ]
+    ]
   },
   {
     "itemName": "Iron Arrowtips",
@@ -2760,7 +2798,17 @@
     "isStackable": true,
     "isSmithable": true,
     "madeOnCreation": 5,
-    "isUsable": true
+    "isUsable": true,
+    "usableIDs": [
+      [ 188, 200 ],
+      [ 186, 198 ],
+      [ 187, 199 ],
+      [ 189, 201 ],
+      [ 190, 202 ],
+      [ 191, 203 ],
+      [ 192, 204 ],
+      [ 194, 206 ]
+    ]
   },
   {
     "itemName": "Lead Arrowtips",
@@ -2776,7 +2824,18 @@
     "isStackable": true,
     "isSmithable": true,
     "madeOnCreation": 5,
-    "isUsable": true
+    "isUsable": true,
+    "usableIDs": [
+      [ 188, 200 ],
+      [ 186, 198 ],
+      [ 187, 199 ],
+      [ 189, 201 ],
+      [ 190, 202 ],
+      [ 191, 203 ],
+      [ 192, 204 ],
+      [ 194, 206 ],
+      [ 195, 207 ]
+    ]
   },
   {
     "itemName": "Aluminum Arrowtips",
@@ -2785,7 +2844,6 @@
     "value": 40,
     "gatherString": "You forge some aluminum arrowtips.",
     "ingredientIDs": [ 58 ],
-    "usableIDs": [],
     "gatherSpeed": 1500,
     "requiredLevel": 75,
     "experienceGained": "Woodworking:110",
@@ -2793,7 +2851,19 @@
     "isStackable": true,
     "isSmithable": true,
     "madeOnCreation": 5,
-    "isUsable": true
+    "isUsable": true,
+    "usableIDs": [
+      [ 188, 200 ],
+      [ 186, 198 ],
+      [ 187, 199 ],
+      [ 189, 201 ],
+      [ 190, 202 ],
+      [ 191, 203 ],
+      [ 192, 204 ],
+      [ 194, 206 ],
+      [ 195, 207 ],
+      [ 196, 208 ]
+    ]
   },
   {
     "itemName": "Steel Arrowtips",
@@ -2809,7 +2879,20 @@
     "isStackable": true,
     "isSmithable": true,
     "madeOnCreation": 5,
-    "isUsable": true
+    "isUsable": true,
+    "usableIDs": [
+      [ 188, 200 ],
+      [ 186, 198 ],
+      [ 187, 199 ],
+      [ 189, 201 ],
+      [ 190, 202 ],
+      [ 191, 203 ],
+      [ 192, 204 ],
+      [ 194, 206 ],
+      [ 195, 207 ],
+      [ 196, 208 ],
+      [ 197, 209 ]
+    ]
   },
   {
     "itemName": "White Pine Bow (Unstrung)",

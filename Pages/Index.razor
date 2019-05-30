@@ -84,19 +84,15 @@ else
         Dictionary<GameItem, int> bankItems = Extensions.GetItemDicFromString(localStorage.GetItem<String>("Bank"), Program.itemDatabase);
         Dictionary<GameItem, int> invItems = Extensions.GetItemDicFromString(localStorage.GetItem<String>("Inventory"), Program.itemDatabase);
         List<Skill> skills = Extensions.GetSkillsFromString(localStorage.GetItem<string>("Skills"));
-
+        List<int> equippedItems = localStorage.GetItem<List<int>>("EquippedItems");
         GameState.GetPlayerBank().GetInventory().AddItems(bankItems);
         GameState.GetPlayerInventory().AddItems(invItems);
         GameState.GetPlayer().SetSkills(skills);
 
-        GameState.GetPlayer().EquipItems(localStorage.GetItem<List<int>>("EquippedItems"));
-
-        foreach(KeyValuePair<GameItem, int> pair in invItems)
+        if(equippedItems != null)
         {
-            loadedInvString += pair.Key.ItemName + " " + pair.Value + ", ";
+            GameState.GetPlayer().EquipItems(equippedItems);
         }
-
-        original = "Original: " + localStorage.GetItem<String>("Inventory");
 
         Program.followerManager.LoadSaveData(localStorage.GetItem<String>("Followers"));
 

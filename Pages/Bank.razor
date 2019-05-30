@@ -92,7 +92,7 @@
         else
         {
             //Gets the smallest of the amount, inventory space, and number in the bank.
-            maxWithdraw = Math.Min(Math.Min(amount, GameState.GetPlayerInventory().GetAvailableSpaces()), GameState.GetPlayerBank().GetInventory().GetNumberOfItem(item));
+            maxWithdraw = Math.Min(Math.Min(amount, GameState.GetPlayerInventory().GetAvailableSpaces()), GameState.GetPlayerBank().GetInventory().GetAmountOfItem(item));
         }
         GameState.GetPlayerInventory().AddMultipleOfItem(item, maxWithdraw);
         GameState.GetPlayerBank().GetInventory().RemoveItems(item, maxWithdraw);

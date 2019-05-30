@@ -16,7 +16,7 @@
     "isUnlocked": false,
     "description": "You enter a thick woods consisting of mostly poplar trees. The path meanders up the mountain along a brook full of sunfish.",
     "areaURL": "queplandWoods",
-    "unlockableAreas": [ "The foot of Mt Queple,Continue along path,,", "Rocky Shores Beach,Head north through the trees,Woodcutting:45,Woodcutting" ],
+    "unlockableAreas": [ "The foot of Mt Queple,Continue along path,,", "Rocky Shores Beach,Head north through the trees,Woodcutting:25,Woodcutting" ],
     "icon": "oi oi-cloud",
     "monsterIDs": [ 2, 3, 4 ],
     "huntingIDs": [ 14, 15, 66, 67, 68, 69, 71 ]
@@ -69,7 +69,7 @@
     "areaURL": "quepleCaveEntrance",
     "icon": "oi oi-image",
     "buildings": [ "QuepleCaveEntrance" ],
-    "unlockableAreas": [ "Queple Cave,Mark this cave in your journal,," ]
+    "areaToUnlockOnArrival": "Queple Cave"
   },
   {
     "name": "Mount Queple",
@@ -242,7 +242,8 @@
     "areaURL": "Swampwood",
     "icon": "oi oi-river",
     "actions": [ "Battle", "Chop Mahogany Trees:Mahogany Logs" ],
-    "buildings": [ "LostSwamp" ]
+    "buildings": [ "LostSwamp" ],
+    "monsterIDs": [ 2, 3, 4 ]
   },
   {
     "name": "Higashi Woods",
@@ -386,10 +387,12 @@
   },
   {
     "name": "Mt Yama Cave",
-    "description": "The path leads you up the mountain until you reach an opening into the mountain itself.",
+    "description": "The path leads you up the mountain until you reach an opening into the mountain itself. Strange metallic creatures are roaming around the entrance.",
     "id": 40,
     "icon": "oi oi-house",
-    "buildings": [ "FireHall" ]
+    "buildings": [ "FireHall" ],
+    "actions": [ "Battle" ],
+    "monsterIDs": [ 7, 8, 9, 10 ]
   },
   {
     "name": "Abandoned Desert Shack",
