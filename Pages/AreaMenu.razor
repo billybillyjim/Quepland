@@ -141,37 +141,42 @@
                             if (gatherItem != itemString)
                             {
                                 builder.AddAttribute(12, "onclick", () => Gather(item));
-                                builder.AddContent(13, action);
+                                if(GameState.GetPlayerInventory().GetAvailableSpaces() == 0)
+                                {
+                                    builder.AddAttribute(13, "title", "Your inventory is full.");
+                                    builder.AddAttribute(14, "disabled", true);
+                                }
+                                builder.AddContent(15, action);
 
                             }
                             else
                             {
-                                builder.AddAttribute(12, "onclick", () => StopGathering());
-                                builder.AddContent(13, "Stop");
+                                builder.AddAttribute(16, "onclick", () => StopGathering());
+                                builder.AddContent(17, "Stop");
 
                             }
                             builder.CloseElement();
                         }
                         else
                         {
-                            builder.AddContent(14, BuildDisabledButtons(playerHasLevels, actionIsEnabled, action, item));
+                            builder.AddContent(18, BuildDisabledButtons(playerHasLevels, actionIsEnabled, action, item));
 
                         }
 
-                        builder.OpenElement(0, "br");
+                        builder.OpenElement(19, "br");
                         builder.CloseElement();
                     }
                 }
             }
             else if(area == null)
             {
-                builder.OpenElement(15, "h");
-                builder.AddContent(16, "Area is null");
+                builder.OpenElement(20, "h");
+                builder.AddContent(21, "Area is null");
                 builder.CloseElement();
             }
             else
             {
-                builder.AddContent(17, LoadHuntingButtons());
+                builder.AddContent(22, LoadHuntingButtons());
             }
         };
     }
@@ -595,6 +600,10 @@
     }
     public void StopGathering()
     {
+        if(GameState.GetPlayerInventory().GetAvailableSpaces() == 0)
+        {
+            MessageManager.AddMessage("Your inventory is full.");
+        }
         isAutoCollecting = false;
         if (autoCollectTimer != null)
         {

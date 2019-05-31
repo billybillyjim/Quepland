@@ -445,7 +445,16 @@
     "id": 56,
     "url": "AbandonedDesertShack",
     "description": "Inside you find a single room with a bed in the corner. A layer of dust and sand covers everything. After a little searching you find a trapdoor under the bedframe.",
-    "buildings": ["WaterHall"]
+    "buildings": [ "WaterHall" ]
+  },
+  {
+    "name": "Sushi Shack",
+    "id": 57,
+    "url": "SushiShack",
+    "description": "Inside the owner greets you. He seems knowledgeable in the culinary arts.",
+    "isShop": true,
+    "items": [ 123, 124, 125, 126, 127, 128 ],
+    "npcIDs": [ 12 ]
   }
 
 ]

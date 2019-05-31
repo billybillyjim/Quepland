@@ -93,38 +93,33 @@
             builder.CloseElement();
             builder.OpenElement(7, "td");
             builder.AddAttribute(8, "style", "text-align: center");
+            builder.AddContent(9, BuyButton(item, 1));
+            builder.AddContent(10, BuyButton(item, 5));
+            builder.AddContent(11, BuyButton(item, buyAmount));
+            builder.CloseElement();
+            builder.CloseElement();
+        };
+    }
+    public RenderFragment BuyButton(GameItem item, int amount)
+    {
+        return builder =>
+        {
             builder.OpenElement(8, "button");
             builder.AddAttribute(9, "class", "btn btn-primary");
-            builder.AddAttribute(10, "onclick", (() => BuyItem(item, 1)));
-            if (item.Value > GameState.GetPlayerInventory().GetCoins())
+            builder.AddAttribute(10, "onclick", (() => BuyItem(item, amount)));
+            if (item.Value * amount > GameState.GetPlayerInventory().GetCoins() || amount <= 0)
             {
                 builder.AddAttribute(11, "disabled", true);
-                builder.AddAttribute(12, "title", "You don't have enough money to buy this.");
+                if (amount > 0)
+                {
+                    builder.AddAttribute(12, "title", "You don't have enough money to buy this.");
+                }
+                else
+                {
+                    builder.AddAttribute(12, "title", "There's no point in buying none or less than none of something.");
+                }
             }
-            builder.AddContent(13, "Buy 1");
-            builder.CloseElement();
-            builder.OpenElement(14, "button");
-            builder.AddAttribute(15, "class", "btn btn-primary");
-            builder.AddAttribute(16, "onclick", (() => BuyItem(item, 5)));
-            if (item.Value > GameState.GetPlayerInventory().GetCoins() * 5)
-            {
-                builder.AddAttribute(17, "disabled", true);
-                builder.AddAttribute(18, "title", "You don't have enough money to buy this.");
-            }
-            builder.AddContent(19, "5");
-            builder.CloseElement();
-            builder.OpenElement(20, "button");
-            builder.AddAttribute(21, "class", "btn btn-primary");
-            builder.AddAttribute(22, "onclick", (() => BuyItem(item, buyAmount)));
-            if (item.Value > GameState.GetPlayerInventory().GetCoins() * buyAmount)
-            {
-                builder.AddAttribute(23, "disabled", true);
-                builder.AddAttribute(24, "title", "You don't have enough money to buy this.");
-            }
-            builder.AddContent(25, buyAmount);
-            builder.CloseElement();
-
-            builder.CloseElement();
+            builder.AddContent(13, "" + amount);
             builder.CloseElement();
         };
     }
@@ -253,7 +248,7 @@
                 {
                     builder.OpenElement(0, "button");
                     builder.AddAttribute(0, "style", "margin-bottom:10px");
-                    builder.AddAttribute(0, "class", "btn btn-primary");
+                    builder.AddAttribute(0, "class", "btn btn-warning");
                     builder.AddAttribute(0, "onclick", () => SpeakToNPC(npc));
                     if (npc.UnlockAreaIDs != null && npc.UnlockAreaIDs.Length > 0)
                     {
@@ -371,7 +366,7 @@
                 {
                     builder.OpenElement(0, "button");
                     builder.AddAttribute(0, "style", "margin-bottom:10px");
-                    builder.AddAttribute(0, "class", "btn btn-primary");
+                    builder.AddAttribute(0, "class", "btn btn-success");
                     builder.AddAttribute(0, "onclick", () => UnlockArea(area));
                     if (GameState.GetPlayer().HasLevelForRoadblock(requiredLevel) == false ||
                     GameState.GetPlayerInventory().ActionIsEnabled(requiredAction) == false)
@@ -464,7 +459,7 @@
         this.StateHasChanged();
         GameState.UpdateState();
     }
-        public void DebugGoToNextBuilding()
+    public void DebugGoToNextBuilding()
     {
         UriHelper.NavigateTo("/Inside/" + Program.buildingManager.GetBuildingByID(thisBuilding.ID + 1).URL);
     }

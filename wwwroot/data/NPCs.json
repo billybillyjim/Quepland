@@ -79,5 +79,53 @@
     "spokenText": "Hello. I am a true dwarf, capable of carrying untold amounts of ore faster than any other. For a one time fee, I'll work for you.",
     "isInteractable": true,
     "unlockFollowerIDs": [ 9 ]
-  }
+  },
+  {
+    "name": "Jeplomi",
+    "id": 12,
+    "spokenText": "You want to know about the culinary arts? All great culinary artists make sushi rolls by combining rice with seaweed, then adding a raw fish on top. The easiest sushi to make uses icefish. You can catch those up in the north sea.",
+    "isInteractable": true
+  },
+  {
+    "name": "Yondo-Mondo II",
+    "id": 13,
+    "spokenText": "You're interested in smithing? You'll need to find a smithy to smelt your ores into bars and hammer your bars into items. I've heard rumors of a smithy in Queple Cave, but I've never seen one myself.",
+    "isInteractable": true
+  },
+  {
+    "name": "Gish Garn",
+    "id": 14,
+    "spokenText": "See all these stones and berries? Worthless. Don't waste your time.",
+    "isInteractable": true
+  },
+  {
+    "name": "Traveller",
+    "id": 15,
+    "spokenText": "Beyond here is the great swamp. You won't make it to the other side without knowledge from someone who already has. Apparently a guy from Kogoe Town made it out alive, but he's crazy now.",
+    "isInteractable": true
+  },
+  {
+    "name": "Man by Campfire",
+    "id": 16,
+    "spokenText": "I've heard of a place to the south that's so warm you can't travel across it without riding an animal. Don't believe a word of it, to be honest.",
+    "isInteractable": true
+  },
+  {
+    "name": "Strange Fish Man",
+    "id": 17,
+    "spokenText": "You won't get any further than here without a camel. Trust me, I would know.",
+    "isInteractable": true
+  },
+  {
+    "name": "Sign Post",
+    "id": 18,
+    "spokenText": "You speak to the sign post. It doesn't respond. Instead it says, 'East:The Great City of Chickenpull, West:The Great Swamp, South:More Wasteland, North:Higashi Woods'",
+    "isInteractable": true
+  },
+  {
+    "name": "Mr. Tote M Poll",
+    "id": 19,
+    "spokenText": "You see that totem pole? I put it there. Once you've learned the basics, feel free to use it to practice your woodworking. I've put a few of these things around the area for people to improve. Let's enjoy learning together!",
+    "isInteractable": true
+  },
 ]

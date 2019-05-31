@@ -2,7 +2,7 @@
   {
     "name": "Quepland Fields",
     "id": 0,
-    "actions": [ "Fish For Minnows:Minnow", "Chop White Pine Trees:White Pine Logs"],
+    "actions": [ "Fish For Minnows:Minnow", "Chop White Pine Trees:White Pine Logs" ],
     "isUnlocked": true,
     "description": "There is a small stream and a forest of white pine trees. A large poplar tree has fallen and blocks your path forward.",
     "areaURL": "queplandFields",
@@ -29,7 +29,8 @@
     "description": "You emerge from the forest at the base of the great Mount Queple. There are stones scattered about and many bushes to gather berries from. You can see a mountain village in the distance.",
     "areaURL": "quepleFoot",
     "unlockableAreas": [ "Teppas,Head to village,," ],
-    "icon": "oi oi-graph"
+    "icon": "oi oi-graph",
+    "npcIDs": [ 14 ]
   },
   {
     "name": "Teppas",
@@ -39,18 +40,21 @@
     "areaURL": "teppas",
     "icon": "oi oi-home",
     "buildings": [ "TeppasGeneralStore", "MayorsHouse", "TeppasElementalEmporium", "ArcheryShop" ],
-    "unlockableAreas": [ "Lower Mt Queple Trail, Go through the village,," ]
+    "unlockableAreas": [ "Lower Mt Queple Trail, Go through the village,," ],
+    "npcIDs": [ 13 ]
   },
   {
     "name": "Lower Mt Queple Trail",
     "id": 4,
-    "actions": [ "Mining", "Battle" ],
+    "actions": [ "Mining", "Battle", "Carve totem pole:Cheap Wood Shavings" ],
     "isUnlocked": false,
-    "description": "As you begin your ascent up the mountain, you notice the mouth of a cave off to the side of the path.",
+    "description": "As you begin your ascent up the mountain, you notice the mouth of a cave off to the side of the path. A large totem pole stands near its entrance.",
     "areaURL": "lowerMtQuepleTrail",
     "icon": "oi oi-fire",
     "unlockableAreas": [ "Queple Cave Entrance,Enter the cave,,", "Upper Mt Queple Trail,Continue up the trail,," ],
-    "monsterIDs": [ 0, 1, 2 ]
+    "buildings": [ "SushiShack" ],
+    "monsterIDs": [ 0, 1, 2 ],
+    "npcIDs": [ 19 ]
   },
   {
     "name": "Upper Mt Queple Trail",
@@ -78,13 +82,13 @@
     "description": "The mountain near which you began your journey.",
     "areaURL": "MountQueple",
     "icon": "oi oi-image",
-    "children": [ "queplandFields", "queplandWoods", "quepleFoot", "teppas", "lowerMtQuepleTrail", "upperMTQuepleTrail", "MtQueplePeak" ]
+    "children": [ "queplandFields", "queplandWoods", "quepleFoot", "teppas", "lowerMtQuepleTrail", "upperMTQuepleTrail", "MtQueplePeak", "EasternTrail" ]
   },
   {
     "name": "Queple Cave Copper Mine",
     "id": 8,
     "isUnlocked": false,
-    "actions": [ "Mining:Copper Ore" ],
+    "actions": [ "Mine Copper:Copper Ore" ],
     "description": "There is a lot of copper here.",
     "areaURL": "QCCopperMine",
     "icon": "oi oi-image"
@@ -93,7 +97,7 @@
     "name": "Queple Cave Tin Mine",
     "id": 9,
     "isUnlocked": false,
-    "actions": [ "Mining:Tin Ore" ],
+    "actions": [ "Mine Tin:Tin Ore" ],
     "description": "There is a lot of tin here.",
     "areaURL": "QCTinMine",
     "icon": "oi oi-image"
@@ -102,7 +106,7 @@
     "name": "Queple Cave Iron Mine",
     "id": 10,
     "isUnlocked": false,
-    "actions": [ "Mining:Iron Ore" ],
+    "actions": [ "Mine Iron:Iron Ore" ],
     "description": "There is a lot of iron here.",
     "areaURL": "QCIronMine",
     "icon": "oi oi-image"
@@ -142,7 +146,7 @@
     "description": "The shores north of the great Mount Queple. There seems to be a small fishing village east of the beach. You can now quickly access the parts of the shores you have already visited through the sidebar.",
     "areaURL": "RockyShores",
     "icon": "oi oi-sun",
-    "children": [ "RockyShoresBeach", "UragotaTown", "DarkRiver", "HigashiWoods","DeepHigashiWoods", "HigashiBridge", "EastHigashiWoods"]
+    "children": [ "RockyShoresBeach", "UragotaTown", "DarkRiver", "HigashiWoods", "DeepHigashiWoods", "HigashiBridge", "EastHigashiWoods" ]
   },
   {
     "name": "Rocky Shores Beach",
@@ -210,7 +214,8 @@
     "description": "You continue along the trail and pass by Mount Queple. A large swamp comes into view up ahead.",
     "areaURL": "EasternTrail",
     "icon": "oi oi-river",
-    "unlockableAreas": [ "Swampland,Continue Down into the Swamp,," ]
+    "unlockableAreas": [ "Swampland,Continue Down into the Swamp,," ],
+    "npcIDs": [ 15 ]
   },
   {
     "name": "Swampland",
@@ -294,16 +299,18 @@
     "areaURL": "KogoeTown",
     "icon": "oi oi-home",
     "buildings": [ "HouseOfFish", "KogoeGym" ],
-    "unlockableAreas": [ "Northern Isles Trails,Follow the road out of town,," ]
+    "unlockableAreas": [ "Northern Isles Trails,Follow the road out of town,," ],
+    "npcIDs": [ 16 ]
   },
   {
     "name": "Northern Isles Trails",
     "id": 30,
     "isUnlocked": false,
-    "description": "The lightly wooded path leads into a valley. Eventually you reach a giant stone which has fallen, blocking the way forward.",
+    "description": "The lightly wooded path leads into a valley. Eventually you reach a giant stone which has fallen, blocking the way forward. A large totem pole stands nearby.",
     "areaURL": "NorthernIslesTrails",
     "icon": "oi oi-river",
-    "unlockableAreas": [ "The Foot of Mt Yama,Destroy the rock with your strength,Strength:45,", "The Foot of Mt Yama,Destroy the rock with your mining skills,Mining:40,Mining" ]
+    "unlockableAreas": [ "The Foot of Mt Yama,Destroy the rock with your strength,Strength:45,", "The Foot of Mt Yama,Destroy the rock with your mining skills,Mining:40,Mining" ],
+    "actions": ["Carve Totem Pole:Nice Wood Shavings"]
   },
   {
     "name": "The Foot of Mt Yama",
@@ -311,7 +318,8 @@
     "isUnlocked": false,
     "description": "The road grows steep as you begin your ascent up Mt Yama.",
     "areaURL": "MtYamaFoot",
-    "icon": "oi oi-river"
+    "icon": "oi oi-river",
+    "npcIDs": [ 8 ]
   },
   {
     "name": "The Northern Isles",
@@ -320,7 +328,7 @@
     "description": "A small, cold island north of Quepland.",
     "areaURL": "NorthernIsles",
     "icon": "oi oi-river",
-    "children": [ "KogoeTown", "NorthernIslesDock", "NorthernIslesTrails", "MtYamaFoot" ]
+    "children": [ "KogoeTown", "NorthernIslesDock", "NorthernIslesTrails", "MtYamaFoot", "MtYamaCave", "MtYamaMine", "MtYamaUpperMine" ]
   },
   {
     "name": "Kogoe Gym",
@@ -346,7 +354,7 @@
     "description": "The wasteland is a sizeable desert east of Mt Queple. Most of it is uninhabited and requires a camel to cross.",
     "areaURL": "Wasteland",
     "icon": "oi oi-fire",
-    "children": [ "SouthernTrail", "Route7", "Route7South","Route7Crossroads" ]
+    "children": [ "SouthernTrail", "Route7", "Route7South", "Route7Crossroads" ]
   },
   {
     "name": "Route 7",
@@ -355,7 +363,8 @@
     "icon": "oi oi-fire",
     "id": 36,
     "buildings": [ "CamelShop" ],
-    "unlockableAreas": [ "Route 7 South,Continue past the shop,," ]
+    "unlockableAreas": [ "Route 7 South,Continue past the shop,," ],
+    "npcIDs": [ 17 ]
   },
   {
     "name": "Route 7 South",
@@ -369,12 +378,14 @@
   },
   {
     "name": "Route 7 Crossroads",
-    "description": "You reach an intersection in the middle of the wasteland. You can continue south, or head east or west.",
+    "description": "You reach an intersection in the middle of the wasteland. You can continue south, or head east or west. A giant sign stands on one corner, and a giant totem pole on the other.",
     "areaURL": "Route7Crossroads",
     "icon": "oi oi-fire",
     "id": 38,
     "actionRequiredForAccess": "Desert Travel",
-    "redirectAreaURL": "Route7"
+    "actions": [ "Carve Totem Pole:Exquisite Wood Shavings"]
+    "redirectAreaURL": "Route7",
+    "npcIDs": [ 18 ]
   },
   {
     "name": "Strange Old Hut",
@@ -382,13 +393,14 @@
     "areaURL": "StrangeOldHut",
     "icon": "oi oi-house",
     "id": 39,
-    "actions": [ "Mine Coal:Coal" ],
+    "actions": [ "Mine Coal:Coal", "Carve Totem:Wood Shavings" ],
     "buildings": [ "EarthHall" ]
   },
   {
     "name": "Mt Yama Cave",
     "description": "The path leads you up the mountain until you reach an opening into the mountain itself. Strange metallic creatures are roaming around the entrance.",
     "id": 40,
+    "areaURL": "MtYamaCave",
     "icon": "oi oi-house",
     "buildings": [ "FireHall" ],
     "actions": [ "Battle" ],
@@ -399,7 +411,24 @@
     "description": "Out in the middle of the wasteland you find an abandonded shack. Its front door is swinging open in the wind.",
     "id": 41,
     "icon": "oi oi-house",
-    "buildings": ["AbandonedDesertShack"]
+    "buildings": [ "AbandonedDesertShack" ]
+  },
+  {
+    "name": "Mt Yama Mine",
+    "description": "You find a few different large ore veins here. Up higher on the walls appear to be some gold and bauxite, but you can't reach that high.",
+    "id": 42,
+    "areaURL": "MtYamaMine",
+    "icon": "oi oi-house",
+    "actions": [ "Mine Cinnabar:Cinnabar", "Mine Galena:Galena" ],
+    "unlockableAreas": [ "Upper Mt Yama Mine, Build a ladder,Woodworking:60," ]
+  },
+  {
+    "name": "Upper Mt Yama Mine",
+    "areaURL": "MtYamaUpperMine",
+    "description": "You reach high enough to begin mining the gold and bauxite.",
+    "id": 43,
+    "icon": "oi oi-house",
+    "actions": [ "Mine Gold:Gold Ore", "Mine Bauxite:Bauxite" ]
   }
 
 

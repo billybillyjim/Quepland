@@ -2419,7 +2419,7 @@
     "usableIDs": [
       [ 219, 207 ],
       [ 220, 207 ],
-      [221,207]
+      [ 221, 207 ]
     ]
   },
   {
@@ -2437,7 +2437,7 @@
     "destroyOnUse": true,
     "usableIDs": [
       [ 220, 208 ],
-      [221, 208]
+      [ 221, 208 ]
     ]
   },
   {
@@ -2650,7 +2650,7 @@
     "madeOnCreation": 5,
     "isUsable": true,
     "usableIDs": [
-      [188, 200]
+      [ 188, 200 ]
     ]
   },
   {
@@ -3021,5 +3021,53 @@
     "isUnpackable": true,
     "madeOnCreation": 50,
     "unpackString": "Pull Apart"
+  },
+  {
+    "itemName": "Cheap Wood Shavings",
+    "itemDescription": "Low quality, worthless leftovers from something probably not worthless.",
+    "id": 234,
+    "value": 1,
+    "isStackable": true,
+    "experienceGained": "Woodworking:15",
+    "actionRequired": "Woodworking",
+    "requiredLevel": 10,
+    "gatherSpeed": 2500,
+    "gatherString": "You carve away some of the pole."
+  },
+  {
+    "itemName": "Wood Shavings",
+    "itemDescription": "Worthless leftovers from something probably not worthless.",
+    "id": 235,
+    "value": 1,
+    "isStackable": true,
+    "experienceGained": "Woodworking:30",
+    "actionRequired": "Woodworking",
+    "requiredLevel": 20,
+    "gatherSpeed": 4000,
+    "gatherString": "You carve away some of the pole."
+  },
+  {
+    "itemName": "Nice Wood Shavings",
+    "itemDescription": "Nice, but worthless leftovers from something probably not worthless.",
+    "id": 236,
+    "value": 1,
+    "isStackable": true,
+    "experienceGained": "Woodworking:65",
+    "actionRequired": "Woodworking",
+    "requiredLevel": 40,
+    "gatherSpeed": 7000,
+    "gatherString": "You carve away some of the pole."
+  },
+  {
+    "itemName": "Exquisite Wood Shavings",
+    "itemDescription": "Worthless leftovers from exceptional wood.",
+    "id": 237,
+    "value": 1,
+    "isStackable": true,
+    "experienceGained": "Woodworking:130",
+    "actionRequired": "Woodworking",
+    "requiredLevel": 60,
+    "gatherSpeed": 12000,
+    "gatherString": "You carve away some of the pole."
   }
 ]

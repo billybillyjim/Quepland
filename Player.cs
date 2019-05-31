@@ -169,20 +169,24 @@ public class Player
         if (weapon.ActionRequired.Contains("Knife"))
         {
             GainExperience("Deftness", (int)(damageDealt * 1.5));
+            GainExperience("Knifesmanship", (int)(damageDealt));
         }
         else if (weapon.ActionRequired.Contains("Sword"))
         {
             GainExperience("Deftness", (int)(damageDealt * 0.5));
             GainExperience("Strength", damageDealt);
+            GainExperience("Swordsmanship", (int)(damageDealt));
         }
         else if (weapon.ActionRequired.Contains("Axe"))
         {
             GainExperience("Deftness", (int)(damageDealt * 0.5));
             GainExperience("Strength", damageDealt);
+            GainExperience("Axemanship", (int)(damageDealt));
         }
         else if (weapon.ActionRequired.Contains("Hammer"))
         {
             GainExperience("Strength", (int)(damageDealt * 1.5));
+            GainExperience("Hammermanship", (int)(damageDealt));
         }
         else if (weapon.ActionRequired.Contains("Archery"))
         {
