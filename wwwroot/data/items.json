@@ -64,6 +64,7 @@
     "itemDescription": "You can cut things with it.",
     "id": 6,
     "value": 1,
+    "actionsEnabled": "Woodworking",
     "isUsable": true,
     "usableIDs": [
       [ 1, 8 ],
@@ -3028,7 +3029,7 @@
     "id": 234,
     "value": 1,
     "isStackable": true,
-    "experienceGained": "Woodworking:15",
+    "experienceGained": "Woodworking:7",
     "actionRequired": "Woodworking",
     "requiredLevel": 10,
     "gatherSpeed": 2500,
@@ -3040,7 +3041,7 @@
     "id": 235,
     "value": 1,
     "isStackable": true,
-    "experienceGained": "Woodworking:30",
+    "experienceGained": "Woodworking:15",
     "actionRequired": "Woodworking",
     "requiredLevel": 20,
     "gatherSpeed": 4000,
@@ -3052,7 +3053,7 @@
     "id": 236,
     "value": 1,
     "isStackable": true,
-    "experienceGained": "Woodworking:65",
+    "experienceGained": "Woodworking:40",
     "actionRequired": "Woodworking",
     "requiredLevel": 40,
     "gatherSpeed": 7000,
@@ -3064,10 +3065,10 @@
     "id": 237,
     "value": 1,
     "isStackable": true,
-    "experienceGained": "Woodworking:130",
+    "experienceGained": "Woodworking:90",
     "actionRequired": "Woodworking",
     "requiredLevel": 60,
-    "gatherSpeed": 12000,
+    "gatherSpeed": 10000,
     "gatherString": "You carve away some of the pole."
   }
 ]

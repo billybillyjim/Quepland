@@ -8,8 +8,8 @@
 <h1>Hello, this is your bank!</h1>
 <p><button class="btn btn-primary" onclick="@(() => DepositAll())">Deposit All</button></p>
 
-<p>Withdraw X:<input type="number" bind=@withdrawAmount /></p>
-
+<p>Withdraw X:<input type="number" bind-value-oninput=@withdrawAmount /></p>
+<p>Search:<input type="text"  bind-value-oninput=@searchString /></p>
 
 <div class="dropdown">
     <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -34,23 +34,51 @@
         <tbody>
             @if (GameState.GetPlayerBank() != null)
             {
-                @foreach (KeyValuePair<GameItem, int> item in GameState.GetPlayerBank().GetInventory().GetItemsSorted(sortStyle))
+                @if (searchString == null || searchString == "")
                 {
-                    <tr class="buddy-top">
-                        <td align="left">@item.Key.ItemName</td>
-                        <td>@item.Key.ItemDescription</td>
-                        <td align="right">@item.Value</td>
-                    </tr>
-                    <tr class="buddy-row">
-                        <td align="left">Withdraw </td>
-                        <td align="left">
-                            <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, 1))">1</button>
-                            <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, 5))">5</button>
-                            <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, withdrawAmount))">@withdrawAmount</button>
-                            <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, int.MaxValue))">All</button>
-                        </td>
-                        <td align="center"></td>
-                    </tr>
+                    @foreach (KeyValuePair<GameItem, int> item in GameState.GetPlayerBank().GetInventory().GetItemsSorted(sortStyle))
+                    {
+                        <tr class="buddy-top">
+                            <td align="left">@item.Key.ItemName</td>
+                            <td>@item.Key.ItemDescription</td>
+                            <td align="right">@item.Value</td>
+                        </tr>
+                        <tr class="buddy-row">
+                            <td align="left">Withdraw </td>
+                            <td align="left">
+                                <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, 1))">1</button>
+                                <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, 5))">5</button>
+                                <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, withdrawAmount))">@withdrawAmount</button>
+                                <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, int.MaxValue))">All</button>
+                            </td>
+                            <td align="center"></td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    @foreach (KeyValuePair<GameItem, int> item in GameState.GetPlayerBank().GetInventory().GetItemsSorted(sortStyle))
+                    {
+                        if (item.Key.ItemName.ToLower().Contains(searchString.ToLower()))
+                        {
+                            <tr class="buddy-top">
+                                <td align="left">@item.Key.ItemName</td>
+                                <td>@item.Key.ItemDescription</td>
+                                <td align="right">@item.Value</td>
+                            </tr>
+                            <tr class="buddy-row">
+                                <td align="left">Withdraw </td>
+                                <td align="left">
+                                    <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, 1))">1</button>
+                                    <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, 5))">5</button>
+                                    <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, withdrawAmount))">@withdrawAmount</button>
+                                    <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, int.MaxValue))">All</button>
+                                </td>
+                                <td align="center"></td>
+                            </tr>
+                        }
+
+                    }
                 }
 
 
@@ -62,6 +90,7 @@
 
     public int sortStyle = 0;
     public int withdrawAmount = 1;
+    public string searchString = "";
 
     public void SetSortStyle(int newVal)
     {
