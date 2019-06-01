@@ -57,7 +57,8 @@
     "id": 8,
     "spokenText": "Hello. Do you have any cheese? I'd be eternally grateful.",
     "isInteractable": true,
-    "unlockFollowerIDs": [ 6 ]
+    "unlockFollowerIDs": [ 6 ],
+    "hideOnFollow": true
   },
   {
     "name": "Friendly Dwarf",

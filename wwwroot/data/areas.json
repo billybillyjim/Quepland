@@ -319,7 +319,8 @@
     "description": "The road grows steep as you begin your ascent up Mt Yama.",
     "areaURL": "MtYamaFoot",
     "icon": "oi oi-river",
-    "npcIDs": [ 8 ]
+    "npcIDs": [ 8 ],
+    "unlockableAreas": ["Mt Yama Cave,Continue up the path,,"]
   },
   {
     "name": "The Northern Isles",
@@ -400,13 +401,14 @@
   },
   {
     "name": "Mt Yama Cave",
-    "description": "The path leads you up the mountain until you reach an opening into the mountain itself. Strange metallic creatures are roaming around the entrance.",
+    "description": "The path leads you up the mountain until you reach an opening into the mountain itself. Strange metallic creatures are roaming around the entrance. There's a big crack in wall.",
     "id": 40,
     "areaURL": "MtYamaCave",
     "icon": "oi oi-house",
     "buildings": [ "FireHall" ],
     "actions": [ "Battle" ],
-    "monsterIDs": [ 7, 8, 9, 10 ]
+    "monsterIDs": [ 7, 8, 9, 10 ],
+    "unlockableAreas": ["Mt Yama Mine,Smash open the wall,Hammermanship:45,Hammermanship"]
   },
   {
     "name": "Abandoned Desert Shack",

@@ -3,6 +3,7 @@
 public class NPC
 {
 	public bool IsInteractable { get; set; }
+    public bool HideOnFollow { get; set; }
     public string Name { get; set; }
     public string SpokenText { get; set; }
     public int[] UnlockFollowerIDs { get; set; }

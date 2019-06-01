@@ -404,7 +404,14 @@
             foreach (int n in area.NPCIDs ?? Enumerable.Empty<int>())
             {
                 NPC npc = Program.npcManager.GetNPCByID(n);
+                if(npc.UnlockFollowerIDs != null && npc.HideOnFollow == true)
+                {
+                    if (Program.followerManager.GetFollowerByID(npc.UnlockFollowerIDs[0]).IsUnlocked)
+                    {
+                        continue;
+                    }
 
+                }
                 if (npc.IsInteractable == true)
                 {
                     builder.OpenElement(0, "button");
@@ -437,18 +444,21 @@
                     foreach(int followerID in npc.UnlockFollowerIDs ?? Enumerable.Empty<int>())
                     {
                         Follower f = Program.followerManager.GetFollowerByID(followerID);
-
-                        builder.OpenElement(0, "button");
-                        builder.AddAttribute(0, "style", "margin-bottom:10px");
-                        builder.AddAttribute(0, "class", "btn btn-warning");
-                        builder.AddAttribute(0, "onclick", () => GameState.GetPlayerInventory().RemoveItems(Program.itemDatabase.GetGold(), f.Cost));
-                        builder.AddAttribute(0, "onclick", () => UnlockFollower(followerID));
-                        if(GameState.GetPlayerInventory().GetCoins() < f.Cost)
+                        if(f.IsUnlocked == false)
                         {
-                            builder.AddAttribute(0, "disabled", true);
+                            builder.OpenElement(0, "button");
+                            builder.AddAttribute(0, "style", "margin-bottom:10px");
+                            builder.AddAttribute(0, "class", "btn btn-warning");
+                            builder.AddAttribute(0, "onclick", () => GameState.GetPlayerInventory().RemoveItems(Program.itemDatabase.GetGold(), f.Cost));
+                            builder.AddAttribute(0, "onclick", () => UnlockFollower(followerID));
+                            if(GameState.GetPlayerInventory().GetCoins() < f.Cost)
+                            {
+                                builder.AddAttribute(0, "disabled", true);
+                            }
+                            builder.AddContent(0, "Buy " + f.Name + " for " + f.Cost + "gp");
+                            builder.CloseElement();
                         }
-                        builder.AddContent(0, "Buy " + f.Name + " for " + f.Cost + "gp");
-                        builder.CloseElement();
+
                     }
                     builder.OpenElement(0, "br");
                     builder.CloseElement();
@@ -703,9 +713,10 @@
     }
     public void AutoCollect(GameItem item)
     {
-        int amountTaken = GameState.GetPlayerInventory().RemoveItems(item, GameState.GetPlayer().activeFollower.MaxCarry);
-        GameState.GetPlayerBank().GetInventory().AddMultipleOfItem(item, amountTaken);
-        MessageManager.AddMessage(GameState.GetPlayer().activeFollower.AutoCollectMessage.Replace("$",amountTaken.ToString()));
+        int amountToTake = Math.Min(GameState.GetPlayerInventory().GetNumberOfItem(item), GameState.GetPlayer().activeFollower.MaxCarry);
+        GameState.GetPlayerInventory().RemoveItems(item, amountToTake);
+        GameState.GetPlayerBank().GetInventory().AddMultipleOfItem(item, amountToTake);
+        MessageManager.AddMessage(GameState.GetPlayer().activeFollower.AutoCollectMessage.Replace("$",amountToTake.ToString()));
     }
     public void UnlockArea(string areaName)
     {

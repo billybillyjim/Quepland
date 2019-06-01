@@ -7,7 +7,8 @@
 
 
 <h1>Hello, Welcome to Quepland!</h1>
-
+<p><button class="btn btn-primary" onclick="@(() => DebugAll99s())">Max Account</button></p>
+<p><button class="btn btn-primary" onclick="@(() => DebugUnlockAllFollowers())">Unlock Followers</button></p>
 @if (GameState.saveDataLoaded == false && saveGameExists)
 {
     <p><button class="btn btn-primary" onclick="@(() => LoadData())">Load Game</button></p>
@@ -46,6 +47,13 @@ else
         foreach(Follower f in Program.followerManager.GetFollowers())
         {
             f.IsUnlocked = true;
+        }
+    }
+    public void DebugAll99s()
+    {
+        foreach(Skill s in GameState.GetPlayer().GetSkills())
+        {
+            GameState.GetPlayer().GainExperience(s.SkillName, 15000000);
         }
     }
     private void AskForReset()
