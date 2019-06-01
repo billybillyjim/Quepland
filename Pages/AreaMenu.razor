@@ -35,6 +35,7 @@
 
     private bool isAutoCollecting;
     private bool waitingForAutoCollectMessage = true;
+    private bool limitedOre;
 
     private int currentMiningVeinID = -1;
     private double speedMulti = 1;
@@ -310,6 +311,7 @@
         StopGathering();
         mineSearchStartTime = DateTime.UtcNow;
         currentMiningVeinID = -1;
+        limitedOre = true;
         miningVeinSearchTimer = new Timer(new TimerCallback(_ =>
         {
             if(DateTime.UtcNow.Subtract(mineSearchStartTime).TotalSeconds >= 5)
@@ -563,7 +565,7 @@
             {
                 MessageManager.AddMessage(itemToGather.GatherString);
                 GameState.GetPlayer().GainExperience(itemToGather.ExperienceGained);
-                if(GameState.currentGatherItem.ActionRequired == "Mining")
+                if(GameState.currentGatherItem.ActionRequired == "Mining" && limitedOre)
                 {
                     speedMulti += 0.05;
                     gatherTimer.Change((int)(itemToGather.GatherSpeed * speedMulti), (int)((itemToGather.GatherSpeed / 2) * speedMulti));
@@ -717,6 +719,8 @@
         GameState.GetPlayerInventory().RemoveItems(item, amountToTake);
         GameState.GetPlayerBank().GetInventory().AddMultipleOfItem(item, amountToTake);
         MessageManager.AddMessage(GameState.GetPlayer().activeFollower.AutoCollectMessage.Replace("$",amountToTake.ToString()));
+        StateHasChanged();
+        GameState.UpdateState();
     }
     public void UnlockArea(string areaName)
     {
