@@ -388,7 +388,13 @@
                 builder.AddAttribute(7, "disabled", true);
                 builder.AddAttribute(8, "title", "You lack the " + itemToMake.ActionRequired + " level to do this. (" + itemToMake.RequiredLevel + ")");
             }
-            builder.AddContent(7, itemToMake.ItemName);
+            else if(GameState.isGathering || GameState.isHunting)
+            {
+                builder.AddAttribute(9, "disabled", true);
+                builder.AddAttribute(10, "title", "You can't make things while doing what you're doing.");
+            }
+
+            builder.AddContent(11, itemToMake.ItemName);
             builder.CloseElement();
             builder.CloseElement();
             builder.CloseElement();
