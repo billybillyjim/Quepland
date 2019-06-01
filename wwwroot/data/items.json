@@ -3070,5 +3070,21 @@
     "requiredLevel": 60,
     "gatherSpeed": 10000,
     "gatherString": "You carve away some of the pole."
-  }
+  },  
+  {
+    "itemName": "Steel Axe",
+    "itemDescription": "An incredibly durable and sharp axe for woodcutting.",
+    "id": 238,
+    "value": 2500,
+    "actionRequired": "Axemanship",
+    "actionsEnabled": "Woodcutting",
+    "requiredLevel": 85,
+    "ingredientIDs": [ 210 ],
+    "isSmithable": true,
+    "isEquipable": true,
+    "equipSlot": "Right Hand",
+    "damage": 100,
+    "attackSpeed": 3000,
+    "gatherSpeedBonus": 0.8
+  },
 ]

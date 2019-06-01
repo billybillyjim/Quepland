@@ -310,7 +310,7 @@
     "areaURL": "NorthernIslesTrails",
     "icon": "oi oi-river",
     "unlockableAreas": [ "The Foot of Mt Yama,Destroy the rock with your strength,Strength:45,", "The Foot of Mt Yama,Destroy the rock with your mining skills,Mining:40,Mining" ],
-    "actions": ["Carve Totem Pole:Nice Wood Shavings"]
+    "actions": [ "Carve Totem Pole:Nice Wood Shavings", "Chop Maple Trees:Sugar Maple Logs" ]
   },
   {
     "name": "The Foot of Mt Yama",
@@ -346,7 +346,8 @@
     "icon": "oi oi-fire",
     "unlockableAreas": [ "Route 7,Show the knight your skill with the sword,Swordsmanship:55,Swordsmanship" ],
     "npcIDs": [ 7 ],
-    "areaToUnlockOnArrival": "The Wasteland"
+    "areaToUnlockOnArrival": "The Wasteland",
+    "actions": [ "Chop Mesquite Trees:Mesquite Logs" ]
   },
   {
     "name": "The Wasteland",
@@ -383,7 +384,8 @@
     "icon": "oi oi-fire",
     "id": 38,
     "actionRequiredForAccess": "Desert Travel",
-    "actions": [ "Carve Totem Pole:Exquisite Wood Shavings"]
+    "actions": [ "Carve Totem Pole:Exquisite Wood Shavings" ],
+    "unlockableAreas": [ "Oasis,Continue Southward,,", "Leupp,Go West,," ],
     "redirectAreaURL": "Route7",
     "npcIDs": [ 18 ]
   },
@@ -429,7 +431,35 @@
     "id": 43,
     "icon": "oi oi-house",
     "actions": [ "Mine Gold:Gold Ore", "Mine Bauxite:Bauxite" ]
+  },
+  {
+    "name": "Oasis",
+    "areaURL": "Oasis",
+    "description": "There is a pool of water supporting a small number of very rare trees here.",
+    "redirectAreaURL": "Route7",
+    "actionRequiredForAccess": "Desert Travel",
+    "id": 44,
+    "actions": [ "Chop Lignum Vitae Trees:Lignum Vitae Logs" ]
+  },
+  {
+    "name": "Leupp",
+    "areaURL": "Leupp",
+    "description": "You find a small village out in the wasteland. A large fence surrounds the northern half of the city.",
+    "redirectAreaURL": "Route7",
+    "actionRequiredForAccess": "Desert Travel",
+    "id": 45,
+    "unlockableAreas": [ "North Leupp,Pass through the gate north,Woodcutting:60,Pay Gold:50000" ],
+    "npcIDs": [ 20 ]
+  },
+  {
+    "name": "North Leupp",
+    "areaURL": "NorthLeupp",
+    "description": "Inside the fence is a large assortment of trees and a shop to buy woodcutting supplies from.",
+    "redirectAreaURL": "Route7",
+    "actionRequiredForAccess": "Desert Travel",
+    "id": 46,
+    "actions": [ "Chop Buloke Trees:Buloke Logs", "Chop Mahogany Trees:Mahogany Logs", "Chop Balsa Trees:Balsa Logs", "Chop Ironwood Trees:Ironwood Logs" ],
+    "buildings": ["WoodcutNut"]
   }
-
 
 ]

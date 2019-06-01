@@ -128,4 +128,22 @@
     "spokenText": "You see that totem pole? I put it there. Once you've learned the basics, feel free to use it to practice your woodworking. I've put a few of these things around the area for people to improve. Let's enjoy learning together!",
     "isInteractable": true
   },
+  {
+    "name": "Fence Guard",
+    "id": 20,
+    "spokenText": "If you want to get inside, you'll need to pay the entrance fee. The money all goes to supporting the town, so it's for a good cause!",
+    "isInteractable": true
+  },
+  {
+    "name": "Man at Register",
+    "id": 21,
+    "spokenText": "Don't mind old Weesun over there. He's just excited about chopping trees.",
+    "isInteractable": true
+  },
+  {
+    "name": "Shelf Stocker",
+    "id": 22,
+    "spokenText": "Chop Chop!",
+    "isInteractable": true
+  }
 ]

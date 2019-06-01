@@ -455,6 +455,15 @@
     "isShop": true,
     "items": [ 123, 124, 125, 126, 127, 128 ],
     "npcIDs": [ 12 ]
+  },
+  {
+    "name": "The Woodcut Nut",
+    "id": 58,
+    "url": "WoodcutNut",
+    "description": "You find all sorts of woodcutting supplies in the shop. A peculiar man is stocking the shelves while another tends the register.",
+    "isShop": true,
+    "items": [ 12, 36, 40, 140, 141, 238, 134 ],
+    "npcIDs": [ 21, 22 ]
   }
 
 ]
