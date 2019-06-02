@@ -318,51 +318,51 @@
                 builder.AddAttribute(2, "style", "background-color:aquamarine");
             }
             builder.OpenElement(3, "td");
-            builder.AddContent(4, "Sell");
+            builder.AddContent(4, "Sell for " + Math.Round(item.Key.Value / 2f) + " each");
             builder.CloseElement();
             builder.OpenElement(5, "td");
-            builder.AddAttribute(6, "style", "text-align:right");
-            builder.OpenElement(7, "button");
-            builder.AddAttribute(8, "class", "btn btn-primary");
-            builder.AddAttribute(9, "style", "margin:3px");
-            builder.AddAttribute(10, "onclick", () => Sell(item, 1));
+            builder.AddAttribute(8, "style", "text-align:right");
+            builder.OpenElement(9, "button");
+            builder.AddAttribute(10, "class", "btn btn-primary");
+            builder.AddAttribute(11, "style", "margin:3px");
+            builder.AddAttribute(12, "onclick", () => Sell(item, 1));
             //If the player has a full inventory and no place for coins, they can't sell part of a stack.
             if (item.Key.IsStackable && item.Value > 1 && GameState.GetPlayerInventory().GetAvailableSpaces() == 0 && GameState.GetPlayerInventory().GetCoins() == 0)
             {
-                builder.AddAttribute(11, "disabled", true);
-                builder.AddAttribute(12, "title", "You don't have inventory space for the coins you would receive.");
+                builder.AddAttribute(13, "disabled", true);
+                builder.AddAttribute(14, "title", "You don't have inventory space for the coins you would receive.");
             }
-            builder.AddContent(13, "1");
+            builder.AddContent(15, "1");
             builder.CloseElement();
-            builder.OpenElement(14, "button");
-            builder.AddAttribute(15, "class", "btn btn-primary");
-            builder.AddAttribute(16, "style", "margin:3px");
-            builder.AddAttribute(17, "onclick", () => Sell(item, 5));
+            builder.OpenElement(16, "button");
+            builder.AddAttribute(17, "class", "btn btn-primary");
+            builder.AddAttribute(18, "style", "margin:3px");
+            builder.AddAttribute(19, "onclick", () => Sell(item, 5));
             //If the player has a full inventory and no place for coins, they can't sell part of a stack.
             if (item.Key.IsStackable && item.Value > 5 && GameState.GetPlayerInventory().GetAvailableSpaces() == 0 && GameState.GetPlayerInventory().GetCoins() == 0)
             {
-                builder.AddAttribute(18, "disabled", true);
-                builder.AddAttribute(19, "title", "You don't have inventory space for the coins you would receive.");
+                builder.AddAttribute(20, "disabled", true);
+                builder.AddAttribute(21, "title", "You don't have inventory space for the coins you would receive.");
             }
-            builder.AddContent(20, "5");
+            builder.AddContent(22, "5");
             builder.CloseElement();
-            builder.OpenElement(14, "button");
-            builder.AddAttribute(15, "class", "btn btn-primary");
-            builder.AddAttribute(16, "style", "margin:3px");
-            builder.AddAttribute(17, "onclick", () => Sell(item, sellAmount));
+            builder.OpenElement(23, "button");
+            builder.AddAttribute(24, "class", "btn btn-primary");
+            builder.AddAttribute(25, "style", "margin:3px");
+            builder.AddAttribute(26, "onclick", () => Sell(item, sellAmount));
             //If the player has a full inventory and no place for coins, they can't sell part of a stack.
             if (item.Key.IsStackable && item.Value > sellAmount && GameState.GetPlayerInventory().GetAvailableSpaces() == 0 && GameState.GetPlayerInventory().GetCoins() == 0)
             {
-                builder.AddAttribute(18, "disabled", true);
-                builder.AddAttribute(19, "title", "You don't have inventory space for the coins you would receive.");
+                builder.AddAttribute(27, "disabled", true);
+                builder.AddAttribute(28, "title", "You don't have inventory space for the coins you would receive.");
             }
-            builder.AddContent(20, sellAmount);
+            builder.AddContent(29, sellAmount);
             builder.CloseElement();
-            builder.OpenElement(21, "button");
-            builder.AddAttribute(22, "class", "btn btn-primary");
-            builder.AddAttribute(23, "style", "margin:3px");
-            builder.AddAttribute(24, "onclick", () => Sell(item, int.MaxValue));
-            builder.AddContent(25, "All");
+            builder.OpenElement(30, "button");
+            builder.AddAttribute(31, "class", "btn btn-primary");
+            builder.AddAttribute(32, "style", "margin:3px");
+            builder.AddAttribute(33, "onclick", () => Sell(item, int.MaxValue));
+            builder.AddContent(34, "All");
             builder.CloseElement();
             builder.CloseElement();
             builder.CloseElement();

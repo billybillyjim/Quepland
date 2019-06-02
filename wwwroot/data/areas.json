@@ -339,7 +339,8 @@
     "isUnlocked": false,
     "description": "You enter the gym. You can train your strength and deftness here.",
     "areaURL": "KogoeGym",
-    "icon": "oi oi-home"
+    "icon": "oi oi-home",
+    "actions": ["Strength", "Deftness"]
   },
   {
     "name": "The Southern Trail",
@@ -406,7 +407,7 @@
     "description": "The path leads you up the mountain until you reach an opening into the mountain itself. Strange metallic creatures are roaming around the entrance. There's a big crack in wall.",
     "id": 40,
     "areaURL": "MtYamaCave",
-    "icon": "oi oi-house",
+    "icon": "oi oi-home",
     "buildings": [ "FireHall" ],
     "actions": [ "Battle" ],
     "monsterIDs": [ 7, 8, 9, 10 ],
@@ -416,7 +417,7 @@
     "name": "Abandoned Desert Shack",
     "description": "Out in the middle of the wasteland you find an abandonded shack. Its front door is swinging open in the wind.",
     "id": 41,
-    "icon": "oi oi-house",
+    "icon": "oi oi-home",
     "buildings": [ "AbandonedDesertShack" ]
   },
   {

@@ -9,7 +9,7 @@
 <h1>Hello, Welcome to Quepland!</h1>
 <p><button class="btn btn-primary" onclick="@(() => DebugAll99s())">Max Account</button></p>
 <p><button class="btn btn-primary" onclick="@(() => DebugUnlockAllFollowers())">Unlock Followers</button></p>
-@if (GameState.saveDataLoaded == false && saveGameExists)
+@if (GameState.saveDataLoaded == false && saveGameExists && gameHasBeenSaved == false)
 {
     <p><button class="btn btn-primary" onclick="@(() => LoadData())">Load Game</button></p>
 }
@@ -17,7 +17,7 @@ else
 {
     <p><button class="btn btn-primary" disabled onclick="@(() => LoadData())">Load Game</button></p>
 }
-@if (GameState.saveDataLoaded == true || !saveGameExists)
+@if (saveGameExists == false || (saveGameExists == true && GameState.saveDataLoaded == true))
 {
     <p><button class="btn btn-primary" onclick="@(() => SaveData())">Save Game</button></p>
 }
@@ -40,6 +40,7 @@ else
 @functions{
     private bool saveGameExists = false;
     private bool userWantsGameReset = false;
+    private bool gameHasBeenSaved = false;
     private string loadedInvString = "Not Loaded";
     private string original = "Not Loaded";
     public void DebugUnlockAllFollowers()
@@ -62,8 +63,9 @@ else
     }
     private void ResetGame()
     {
-        MessageManager.AddMessage("Save Game Reset.");
+        MessageManager.AddMessage("Save Game Reset. Please reload the page to avoid errors.");
         localStorage.Clear();
+        StateHasChanged();
     }
     private string SaveData()
     {
@@ -85,6 +87,8 @@ else
         localStorage.SetItem("AlchemyRecipes", GameState.GetPlayer().GetRecipes());
         localStorage.SetItem("SaveGameExists", true);
         MessageManager.AddMessage("You game has been saved.");
+        gameHasBeenSaved = true;
+        GameState.saveDataLoaded = true;
         return "";
     }
     private void LoadData()
