@@ -27,6 +27,8 @@
     private bool battleStarted;
     private Monster opponent;
     private Timer monsterAttackTimer;
+    private Timer autoFightTimer;
+    private bool autoFight;
     private List<Monster> possibleMonsters = new List<Monster>();
     private string areaURL;
     private string winString = "";
@@ -39,12 +41,42 @@
             builder.AddAttribute(0, "class", "btn btn-primary");
             builder.AddAttribute(0, "style", "margin-bottom:10px");
             builder.AddAttribute(0, "onclick", () => FindBattle());
-            if (battleStarted)
+            if (battleStarted || autoFight)
             {
                 builder.AddAttribute(0, "disabled", true);
             }
             builder.AddContent(0, "Find Battle");
             builder.CloseElement();
+
+            builder.OpenElement(0, "br");
+            builder.CloseElement();
+
+            builder.OpenElement(0, "button");
+            builder.AddAttribute(0, "class", "btn btn-primary");
+            builder.AddAttribute(0, "style", "margin-bottom:10px");
+            builder.AddAttribute(0, "onclick", () => StartAutoFighting());
+            //If there is a battle, the player has no follower, or the player's follower is not a fighter, or is already auto fighting.
+            if (battleStarted ||
+            (GameState.GetPlayer().activeFollower == null) ||
+            (GameState.GetPlayer().activeFollower != null && GameState.GetPlayer().activeFollower.AutoCollectSkill != "Fighting") ||
+            autoFight)
+            {
+                builder.AddAttribute(0, "disabled", true);
+            }
+            builder.AddContent(0, "Auto Battle");
+            builder.CloseElement();
+            if (autoFight)
+            {
+                builder.OpenElement(0, "br");
+                builder.CloseElement();
+
+                builder.OpenElement(0, "button");
+                builder.AddAttribute(0, "class", "btn btn-primary");
+                builder.AddAttribute(0, "style", "margin-bottom:10px");
+                builder.AddAttribute(0, "onclick", () => EndTimers());
+                builder.AddContent(0, "Stop Battling");
+                builder.CloseElement();
+            }
         };
     }
     private RenderFragment LoadBattle()
@@ -116,9 +148,37 @@
             builder.CloseElement();
         };
     }
+    public void StartAutoFighting()
+    {
+        autoFight = true;
+        if(autoFightTimer != null)
+        {
+            autoFightTimer.Dispose();
+            autoFightTimer = null;
+        }
+        MessageManager.AddMessage(GameState.GetPlayer().activeFollower.Name + " looks for an enemy for you to fight.");
+        autoFightTimer = new Timer(new TimerCallback(_ =>
+        {
+            AutoBattle();
+        }), null, 10000, 10000);
+    }
+    public void AutoBattle()
+    {
+        if(GameState.GetPlayer().activeFollower != null & GameState.GetPlayer().activeFollower.AutoCollectSkill == "Fighting")
+        {
+            if (battleFound == false)
+            {
+                MessageManager.AddMessage(GameState.GetPlayer().activeFollower.Name + " found a battle!");
+                FindBattle();
+                StartBattle();
+            }
+        }
+
+    }
     public void FindBattle()
     {
         opponent = possibleMonsters[rand.Next(0, possibleMonsters.Count)];
+        MessageManager.AddMessage("You encounter a " + opponent.Name);
         opponent.CurrentHP = opponent.HP;
         battleFound = true;
     }
@@ -231,6 +291,10 @@
         battleStarted = false;
         MessageManager.AddMessage("You defeated " + opponent.Name);
         winString = "You won!";
+        if (autoFight)
+        {
+            StartAutoFighting();
+        }
     }
     public void LoseBattle()
     {
@@ -238,6 +302,7 @@
         GameState.GetPlayer().CurrentHP = GameState.GetPlayer().GetSkill("HP").GetSkillLevel();
         battleFound = false;
         battleStarted = false;
+        autoFight = false;
         EndTimers();
         winString = "You lost!";
     }
@@ -251,7 +316,15 @@
         if (monsterAttackTimer != null)
         {
             monsterAttackTimer.Dispose();
+            monsterAttackTimer = null;
         }
+        if(autoFightTimer != null)
+        {
+            autoFightTimer.Dispose();
+            autoFightTimer = null;
+        }
+        GameState.UpdateState();
+        this.StateHasChanged();
     }
     protected override void OnParametersSet()
     {
@@ -273,7 +346,8 @@
     }
     public void Dispose()
     {
-        GameState.attackTimer.Dispose();
+        autoFight = false;
+        EndTimers();
         GameState.StateChanged -= OnGameStateChanged;
     }
     void OnGameStateChanged(object sender, EventArgs e) => StateHasChanged();

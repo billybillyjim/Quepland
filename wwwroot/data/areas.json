@@ -205,7 +205,8 @@
     "areaURL": "NorthernIslesDock",
     "icon": "oi oi-river",
     "unlockableAreas": [ "Kogoe Town,Go into town,," ],
-    "areaToUnlockOnArrival": "The Northern Isles"
+    "areaToUnlockOnArrival": "The Northern Isles",
+    "actions": ["Fish for Icefish:Icefish"]
   },
   {
     "name": "Eastern Trail",

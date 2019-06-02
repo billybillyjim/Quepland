@@ -13,6 +13,7 @@
             <tr>
                 <th align="left">Follower</th>
                 <th>Description</th>
+                <th>Assisting Stat</th>
                 <th style="text-align:right">Follow?</th>
             </tr>
         </thead>
@@ -24,6 +25,7 @@
                     <tr>
                         <td>@follower.Name</td>
                         <td>@follower.Description</td>
+                        <td>@follower.AutoCollectSkill</td>
                         @if (GameState.GetPlayer().activeFollower != follower)
                         {
                             <td><button class="btn btn-primary" onclick="@(()=>Assign(follower))">Assign To Follow</button></td>

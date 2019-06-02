@@ -4,7 +4,7 @@
     "id": 0,
     "description": "Lumpy is just capable enough to move logs from one location to another.",
     "autoCollectMessage": "Lumpy carrys off $ logs, stumbling the entire way.",
-    "RequiredLevels": ["Woodcutting:5"],
+    "RequiredLevels": [ "Woodcutting:5" ],
     "autoCollectSkill": "Woodcutting",
     "autoCollectLevel": 10,
     "maxCarry": 15,
@@ -90,7 +90,7 @@
     "isUnlocked": false,
     "cost": 3,
     "costItemID": 5
-  },  
+  },
   {
     "name": "Badthur the Dwarf",
     "id": 7,
@@ -104,7 +104,8 @@
     "isUnlocked": false,
     "cost": 30000,
     "costItemID": 0
-  },,  
+  },
+  ,
   {
     "name": "Tholdbur the Dwarf",
     "id": 8,
@@ -147,4 +148,16 @@
     "cost": 1000000,
     "costItemID": 0
   },
+  {
+    "name": "Tolani Seba the Scout",
+    "id": 11,
+    "description": "Tolani is always eager to find things.",
+    "autoCollectMessage": "Tolani carries your loot away and returns to help find new prey.",
+    "requiredLevels": [ "Strength:15" ],
+    "maxCarry": 5,
+    "isUnlocked": false,
+    "cost": 10000000,
+    "costItemID": 0,
+    "autoCollectSkill": "Fighting"
+  }
 ]
