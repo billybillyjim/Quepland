@@ -146,7 +146,7 @@
     "description": "The shores north of the great Mount Queple. There seems to be a small fishing village east of the beach. You can now quickly access the parts of the shores you have already visited through the sidebar.",
     "areaURL": "RockyShores",
     "icon": "oi oi-sun",
-    "children": [ "RockyShoresBeach", "UragotaTown", "DarkRiver", "HigashiWoods", "DeepHigashiWoods", "HigashiBridge", "EastHigashiWoods" ]
+    "children": [ "RockyShoresBeach", "UragotaTown", "DarkRiver", "WestUragotaDocks", "EastUragotaDocks" ]
   },
   {
     "name": "Rocky Shores Beach",
@@ -166,7 +166,7 @@
     "description": "A small town sits on the water. There are a number of shops to browse.",
     "areaURL": "UragotaTown",
     "icon": "oi oi-house",
-    "unlockableAreas": [ "The Northern Isles Dock,Charter a ship north(1000 gold),,Pay Gold:1000", "The Dark River Bridge,Try fishing on the bridge,," ],
+    "unlockableAreas": [ "The Northern Isles Dock,Charter a ship north(1000 gold),,Pay Gold:1000", "The Dark River Bridge,Try fishing on the bridge,,", "West Uragota Docks,Go to the docks,," ],
     "buildings": [ "HouseOfFish", "FishermansShack" ]
   },
   {
@@ -177,7 +177,7 @@
     "description": "A river darkened by runoff from the nearby farms. Shallow and wide, it's a great place to catch carp. Beyond the bridge is another wooded area.",
     "areaURL": "DarkRiver",
     "icon": "oi oi-river",
-    "unlockableAreas": [ "Higashi Woods,Head into the forest,," ]
+    "unlockableAreas": [ "Higashi Woods Entrance,Head into the forest,," ]
   },
   {
     "name": "Queple Cave Smithy",
@@ -206,7 +206,7 @@
     "icon": "oi oi-river",
     "unlockableAreas": [ "Kogoe Town,Go into town,," ],
     "areaToUnlockOnArrival": "The Northern Isles",
-    "actions": ["Fish for Icefish:Icefish"]
+    "actions": [ "Fish for Icefish:Icefish", "Fish for Scallops:Scallop" ]
   },
   {
     "name": "Eastern Trail",
@@ -252,14 +252,15 @@
     "monsterIDs": [ 2, 3, 4 ]
   },
   {
-    "name": "Higashi Woods",
+    "name": "Higashi Woods Entrance",
     "id": 25,
     "isUnlocked": false,
     "description": "You enter a strange forest. There are a variety of trees to chop here. The path leads deeper into the forest.",
-    "areaURL": "HigashiWoods",
+    "areaURL": "HigashiWoodsEntrance",
     "icon": "oi oi-river",
     "actions": [ "Chop Oak Trees:Oak Logs", "Chop Birch Trees:Birch Logs" ],
-    "unlockableAreas": [ "Deep Higashi Woods,Enter the deep forest,," ]
+    "unlockableAreas": [ "Deep Higashi Woods,Enter the deep forest,," ],
+    "areaToUnlockOnArrival": "Higashi Woods"
   },
   {
     "name": "Deep Higashi Woods",
@@ -321,7 +322,7 @@
     "areaURL": "MtYamaFoot",
     "icon": "oi oi-river",
     "npcIDs": [ 8 ],
-    "unlockableAreas": ["Mt Yama Cave,Continue up the path,,"]
+    "unlockableAreas": [ "Mt Yama Cave,Continue up the path,," ]
   },
   {
     "name": "The Northern Isles",
@@ -409,7 +410,7 @@
     "buildings": [ "FireHall" ],
     "actions": [ "Battle" ],
     "monsterIDs": [ 7, 8, 9, 10 ],
-    "unlockableAreas": ["Mt Yama Mine,Smash open the wall,Hammermanship:45,Hammermanship"]
+    "unlockableAreas": [ "Mt Yama Mine,Smash open the wall,Hammermanship:45,Hammermanship" ]
   },
   {
     "name": "Abandoned Desert Shack",
@@ -462,7 +463,51 @@
     "actionRequiredForAccess": "Desert Travel",
     "id": 46,
     "actions": [ "Chop Buloke Trees:Buloke Logs", "Chop Mahogany Trees:Mahogany Logs", "Chop Balsa Trees:Balsa Logs", "Chop Ironwood Trees:Ironwood Logs" ],
-    "buildings": ["WoodcutNut"]
+    "buildings": [ "WoodcutNut" ]
+  },
+  {
+    "name": "West Uragota Docks",
+    "areaURL": "WestUragotaDocks",
+    "id": 47,
+    "description": "There are a number of large and small boats anchored here. A small kiosk with the words 'Boats for Sale' painted poorly on the front stands near the entrance.",
+    "buildings": [ "MoundsBoats" ],
+    "unlockableAreas": [ "East Uragota Docks,Go to the east docks,," ],
+    "actions": [ "Fish for Saury:Saury", "Fish For Sardines:Sardine", "Fish for Abalone:Abalone" ]
+  },
+  {
+    "name": "East Uragota Docks",
+    "areaURL": "EastUragotaDocks",
+    "id": 47,
+    "description": "There are a number of fisherman here. You haven't seen them catch anything, though.",
+    "actions": [ "Fish for Shrimp:Shrimp", "Fish For Butterfish:Butterfish" ],
+    "unlockableAreas": [ "Ocean Fishing Platform,Sail to the Ocean Fishing Platform,,", "Deep Ocean Waters,Sail to Deep Ocean Waters,," ]
+  },
+  {
+    "name": "Ocean Fishing Platform",
+    "areaURL": "OceanFishingPlatform",
+    "id": 48,
+    "description": "You arrive at the ocean fishing platform. You can catch a number of large ocean fish here.",
+    "actions": [ "Fish for Squid:Squid", "Fish for Tuna:Tuna", "Fish for Yellowtail:Yellowtail" ],
+    "actionRequiredForAccess": "Shallow Ocean Travel",
+    "redirectAreaURL": "EastUragotaDocks"
+  },
+  {
+    "name": "Deep Ocean Waters",
+    "areaURL": "DeepOcean",
+    "id": 49,
+    "description": "You sail out to sea. All you can see in any direction is water. There will be some very large fish to catch here.",
+    "actions": [ "Fish for Big Tuna:Big Tuna", "Fish for Swordfish:Swordfish", "Fish for Flounder:Flounder" ],
+    "actionRequiredForAccess": "Deep Ocean Travel",
+    "redirectAreaURL": "EastUragotaDocks"
+  },
+  {
+    "name": "Higashi Woods",
+    "id": 50,
+    "isUnlocked": false,
+    "description": "A large and varied woodland area.",
+    "areaURL": "HigashiWoods",
+    "icon": "oi oi-sun",
+    "children": [ "HigashiWoodsEntrance", "DeepHigashiWoods", "HigashiBridge", "EastHigashiWoods" ]
   }
 
 ]

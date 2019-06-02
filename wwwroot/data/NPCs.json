@@ -146,5 +146,11 @@
     "id": 22,
     "spokenText": "Chop Chop!",
     "isInteractable": true
+  },
+  {
+    "name": "Mound",
+    "id": 23,
+    "spokenText": "Well I got some big boats, and some little ones. Which do you want?",
+    "isInteractable": true
   }
 ]

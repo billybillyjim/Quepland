@@ -464,6 +464,15 @@
     "isShop": true,
     "items": [ 12, 36, 40, 140, 141, 238, 134 ],
     "npcIDs": [ 21, 22 ]
+  },
+  {
+    "name": "Mound's Boats",
+    "id": 58,
+    "url": "MoundsBoats",
+    "description": "At the kiosk you meet Mound, who sells two different sized boats.",
+    "isShop": true,
+    "items": [ 245, 246 ],
+    "npcIDs": [ 23 ]
   }
 
 ]

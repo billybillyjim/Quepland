@@ -3166,7 +3166,7 @@
     "healDuration": 240,
     "buffedSkill": "HP",
     "buffAmount": 10
-  },  
+  },
   {
     "itemName": "Carp Roll",
     "id": 244,
@@ -3183,4 +3183,18 @@
     "buffedSkill": "Swordsmanship",
     "buffAmount": 5
   },
+  {
+    "itemName": "Small Boat",
+    "id": 245,
+    "itemDescription": "A small boat you can sail the seas with.",
+    "value": 25000,
+    "actionsEnabled": "Shallow Ocean Travel"
+  },
+  {
+    "itemName": "Large Boat",
+    "id": 246,
+    "itemDescription": "A large boat you can sail the seas with.",
+    "value": 500000,
+    "actionsEnabled": "Shallow Ocean Travel, Deep Ocean Travel"
+  }
 ]
