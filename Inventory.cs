@@ -174,12 +174,14 @@ public class Inventory
             if (item.IsStackable == false)
             {
                 totalItems++;
+                totalItems.Clamp(0, maxSize);
             }
         }
         else
         {
             items[item] = 1;
             totalItems++;
+            totalItems.Clamp(0, maxSize);
         }
         return true;
     }
@@ -210,6 +212,18 @@ public class Inventory
         }
         return true;
     }
+    public void LoadItems(Dictionary<GameItem, int> itemsToAdd)
+    {
+
+        if (itemsToAdd == null)
+        {
+            return;
+        }
+        foreach (KeyValuePair<GameItem, int> itemToAdd in itemsToAdd)
+        {
+            items.Add(itemToAdd.Key, itemToAdd.Value);
+        }
+    }
     public bool AddMultipleOfItem(GameItem item, int amount)
     {
         for (int i = 0; i < amount; i++)
@@ -221,6 +235,17 @@ public class Inventory
         }
 
         return true;
+    }
+    public void AddMultipleOfItemUnlimited(GameItem item, int amount)
+    {
+        if (items.ContainsKey(item))
+        {
+            items[item] = amount + items[item];
+        }
+        else
+        {
+            items[item] = amount;
+        }
     }
     public bool AddMultiplesOfItems(List<GameItem> itemList)
     {
@@ -252,6 +277,7 @@ public class Inventory
                 if (item.IsStackable == false)
                 {
                     totalItems--;
+                    totalItems.Clamp(0, maxSize);
                 }
                 amount -= 1;
             }
@@ -273,6 +299,7 @@ public class Inventory
                 if (item.IsStackable == false)
                 {
                     totalItems -= amount;
+                    totalItems.Clamp(0, maxSize);
                 }
                 if (items[item] == 0)
                 {
@@ -280,6 +307,7 @@ public class Inventory
                     if (item.IsStackable)
                     {
                         totalItems -= 1;
+                        totalItems.Clamp(0, maxSize);
                     }
                 }
                 return amount;
@@ -354,4 +382,5 @@ public class Inventory
     {
         return "Free Spaces: " + GetAvailableSpaces() + "/" + maxSize;
     }
+
 }

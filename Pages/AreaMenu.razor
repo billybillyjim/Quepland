@@ -6,10 +6,9 @@
 
 @if (area != null)
 {
-
-
 <h1>You are in @area.Name</h1>
 <p>@area.Description</p>
+
 @LoadNPCs()
 @LoadActions()
 @LoadBuildings()
@@ -23,7 +22,6 @@
     [Parameter]
     private string thisArea { get; set; }
     private Area area;
-    private string proofstring = "Not set.";
 
     public string gatherItem;
     private Timer gatherTimer;
@@ -36,6 +34,7 @@
     private bool isAutoCollecting;
     private bool waitingForAutoCollectMessage = true;
     private bool limitedOre;
+    int tiredLevel = 0;
 
     private int currentMiningVeinID = -1;
     private double speedMulti = 1;
@@ -105,6 +104,8 @@
                         {
                             builder.AddAttribute(6,"disabled",true);
                         }
+                        builder.AddContent(7, "Lift Weights");
+                        builder.CloseElement();
                         builder.OpenElement(8, "br");
                         builder.CloseElement();
                     }
@@ -118,6 +119,8 @@
                         {
                             builder.AddAttribute(6,"disabled",true);
                         }
+                        builder.AddContent(7, "Run on Track");
+                        builder.CloseElement();
                         builder.OpenElement(8, "br");
                         builder.CloseElement();
                     }
@@ -140,7 +143,10 @@
                     {
                         string itemString = actionString.Split(':')[1];
                         string action = actionString.Split(':')[0];
-
+                        if(itemString == null || itemString.Length < 2)
+                        {
+                            continue;
+                        }
                         GameItem item = Program.itemDatabase.GetItemByName(itemString);
                         bool actionIsEnabled = GameState.GetPlayerInventory().ActionIsEnabled(item.ActionRequired);
                         bool playerHasLevels = GameState.GetPlayer().HasRequiredLevel(item);
@@ -612,28 +618,36 @@
     public void TrainStrength()
     {
         speedMulti = 1;
+        tiredLevel = 0;
         StopGathering();
         if(workoutTimer != null)
         {
             workoutTimer.Dispose();
+            workoutTimer = null;
         }
+        MessageManager.AddMessage("You begin lifting weights.");
         workoutTimer = new Timer(new TimerCallback(_ =>
         {
-            GameState.GetPlayer().GainExperience("Strength:10");
+            GameState.GetPlayer().GainExperience("Strength:6");
             workoutTimer.Change((int)(1000 * speedMulti), (int)(1000 * speedMulti));
-            speedMulti += 0.0001 * Math.Max(1, 100-GameState.GetPlayer().GetLevel("Strength"));
-            if (speedMulti > 1.5)
+            speedMulti += 0.0005 * Math.Max(1, 100-GameState.GetPlayer().GetLevel("Strength")) * (tiredLevel + 1);
+            if (speedMulti > 1.5 && speedMulti < 1.6 && tiredLevel == 0)
             {
                 MessageManager.AddMessage("You begin to feel tired.");
+                tiredLevel = 1;
             }
-            if(speedMulti > 3)
+            else if(speedMulti > 3 && speedMulti < 3.1 && tiredLevel == 1)
             {
                 MessageManager.AddMessage("You begin to feel very tired.");
+                tiredLevel = 2;
             }
-            if(speedMulti > 10)
+            else if(speedMulti > 10 && speedMulti < 10.1 && tiredLevel == 2)
             {
                 MessageManager.AddMessage("You begin to feel extremely tired.");
+                tiredLevel = 3;
             }
+            GameState.UpdateState();
+            StateHasChanged();
         }), null, 1000, 1000);
     }
     public void TrainDeftness()
@@ -643,12 +657,15 @@
         if(workoutTimer != null)
         {
             workoutTimer.Dispose();
+            workoutTimer = null;
         }
+        MessageManager.AddMessage("You begin running.");
         workoutTimer = new Timer(new TimerCallback(_ =>
         {
-            GameState.GetPlayer().GainExperience("Deftness:10");
+            GameState.GetPlayer().GainExperience("Deftness:6");
             workoutTimer.Change((int)(1000 * speedMulti), (int)(1000 * speedMulti));
-            speedMulti += 0.0001 * Math.Max(1, 100-GameState.GetPlayer().GetLevel("Deftness"));
+            speedMulti += 0.0005 * Math.Max(1, 100-GameState.GetPlayer().GetLevel("Deftness"));
+
             if(speedMulti > 1.5)
             {
                 MessageManager.AddMessage("You begin to feel tired.");
@@ -661,6 +678,8 @@
             {
                 MessageManager.AddMessage("You begin to feel extremely tired.");
             }
+            GameState.UpdateState();
+            StateHasChanged();
         }), null, 1000, 1000);
     }
     public void StopGathering()
@@ -685,6 +704,7 @@
         if(workoutTimer != null)
         {
             workoutTimer.Dispose();
+            workoutTimer = null;
         }
     }
     private void Hunt(int length)

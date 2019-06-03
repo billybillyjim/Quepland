@@ -63,7 +63,8 @@
     "description": "Having made a good distance up the mountain, you find the only way the rest of the way up is to climb.",
     "areaURL": "upperMTQuepleTrail",
     "icon": "oi oi-graph",
-    "unlockableAreas": [ "The Peak of Mount Queple,Climb to the summit,,", "Eastern Trail,Continue around the mountain,," ]
+    "unlockableAreas": [ "The Peak of Mount Queple,Climb to the summit,,", "Eastern Trail,Continue around the mountain,," ],
+    "actions": [ "Chop Oak Trees:Oak Logs"]
   },
   {
     "name": "Queple Cave Entrance",
@@ -331,7 +332,7 @@
     "description": "A small, cold island north of Quepland.",
     "areaURL": "NorthernIsles",
     "icon": "oi oi-river",
-    "children": [ "KogoeTown", "NorthernIslesDock", "NorthernIslesTrails", "MtYamaFoot", "MtYamaCave", "MtYamaMine", "MtYamaUpperMine" ]
+    "children": [ "KogoeTown", "KogoeGym", "NorthernIslesDock", "NorthernIslesTrails", "MtYamaFoot", "MtYamaCave", "MtYamaMine", "MtYamaUpperMine" ]
   },
   {
     "name": "Kogoe Gym",
@@ -340,7 +341,9 @@
     "description": "You enter the gym. You can train your strength and deftness here.",
     "areaURL": "KogoeGym",
     "icon": "oi oi-home",
-    "actions": ["Strength", "Deftness"]
+    "actionRequiredForAccess": "Gym Membership",
+    "actions": [ "Strength", "Deftness" ],
+    "redirectAreaURL": "KogoeTown"
   },
   {
     "name": "The Southern Trail",
@@ -478,7 +481,7 @@
   {
     "name": "East Uragota Docks",
     "areaURL": "EastUragotaDocks",
-    "id": 47,
+    "id": 48,
     "description": "There are a number of fisherman here. You haven't seen them catch anything, though.",
     "actions": [ "Fish for Shrimp:Shrimp", "Fish For Butterfish:Butterfish" ],
     "unlockableAreas": [ "Ocean Fishing Platform,Sail to the Ocean Fishing Platform,,", "Deep Ocean Waters,Sail to Deep Ocean Waters,," ]
@@ -486,7 +489,7 @@
   {
     "name": "Ocean Fishing Platform",
     "areaURL": "OceanFishingPlatform",
-    "id": 48,
+    "id": 49,
     "description": "You arrive at the ocean fishing platform. You can catch a number of large ocean fish here.",
     "actions": [ "Fish for Squid:Squid", "Fish for Tuna:Tuna", "Fish for Yellowtail:Yellowtail" ],
     "actionRequiredForAccess": "Shallow Ocean Travel",
@@ -495,7 +498,7 @@
   {
     "name": "Deep Ocean Waters",
     "areaURL": "DeepOcean",
-    "id": 49,
+    "id": 50,
     "description": "You sail out to sea. All you can see in any direction is water. There will be some very large fish to catch here.",
     "actions": [ "Fish for Big Tuna:Big Tuna", "Fish for Swordfish:Swordfish", "Fish for Flounder:Flounder" ],
     "actionRequiredForAccess": "Deep Ocean Travel",
@@ -503,11 +506,11 @@
   },
   {
     "name": "Higashi Woods",
-    "id": 50,
+    "id": 51,
     "isUnlocked": false,
     "description": "A large and varied woodland area.",
     "areaURL": "HigashiWoods",
-    "icon": "oi oi-sun",
+    "icon": "oi oi-home",
     "children": [ "HigashiWoodsEntrance", "DeepHigashiWoods", "HigashiBridge", "EastHigashiWoods" ]
   }
 

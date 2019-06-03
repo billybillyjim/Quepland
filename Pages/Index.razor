@@ -7,8 +7,13 @@
 
 
 <h1>Hello, Welcome to Quepland!</h1>
-<p><button class="btn btn-primary" onclick="@(() => DebugAll99s())">Max Account</button></p>
-<p><button class="btn btn-primary" onclick="@(() => DebugUnlockAllFollowers())">Unlock Followers</button></p>
+@if (debugMode)
+{
+    <p><button class="btn btn-primary" onclick="@(() => DebugAll99s())">Max Account</button></p>
+    <p><button class="btn btn-primary" onclick="@(() => DebugUnlockAllFollowers())">Unlock Followers</button></p>
+    <p><button class="btn btn-primary" onclick="@(() => DebugGetMoney())">Gain Money</button></p>
+}
+
 @if (GameState.saveDataLoaded == false && saveGameExists && gameHasBeenSaved == false)
 {
     <p><button class="btn btn-primary" onclick="@(() => LoadData())">Load Game</button></p>
@@ -41,21 +46,25 @@ else
     private bool saveGameExists = false;
     private bool userWantsGameReset = false;
     private bool gameHasBeenSaved = false;
-    private string loadedInvString = "Not Loaded";
-    private string original = "Not Loaded";
+    private bool debugMode = false;
+
     public void DebugUnlockAllFollowers()
     {
-        foreach(Follower f in Program.followerManager.GetFollowers())
+        foreach (Follower f in Program.followerManager.GetFollowers())
         {
             f.IsUnlocked = true;
         }
     }
     public void DebugAll99s()
     {
-        foreach(Skill s in GameState.GetPlayer().GetSkills())
+        foreach (Skill s in GameState.GetPlayer().GetSkills())
         {
             GameState.GetPlayer().GainExperience(s.SkillName, 15000000);
         }
+    }
+    public void DebugGetMoney()
+    {
+        GameState.GetPlayerBank().GetInventory().AddMultipleOfItemUnlimited(Program.itemDatabase.GetGold(), 100000);
     }
     private void AskForReset()
     {
@@ -79,7 +88,7 @@ else
             localStorage.SetItem("ActiveFollower", GameState.GetPlayer().activeFollower.id);
         }
         List<int> ids = new List<int>();
-        foreach(KeyValuePair<GameItem, int> pair in GameState.GetPlayerInventory().GetEquippedItems())
+        foreach (KeyValuePair<GameItem, int> pair in GameState.GetPlayerInventory().GetEquippedItems())
         {
             ids.Add(pair.Key.Id);
         }
@@ -97,11 +106,11 @@ else
         Dictionary<GameItem, int> invItems = Extensions.GetItemDicFromString(localStorage.GetItem<String>("Inventory"), Program.itemDatabase);
         List<Skill> skills = Extensions.GetSkillsFromString(localStorage.GetItem<string>("Skills"));
         List<int> equippedItems = localStorage.GetItem<List<int>>("EquippedItems");
-        GameState.GetPlayerBank().GetInventory().AddItems(bankItems);
-        GameState.GetPlayerInventory().AddItems(invItems);
+        GameState.GetPlayerBank().GetInventory().LoadItems(bankItems);
+        GameState.GetPlayerInventory().LoadItems(invItems);
         GameState.GetPlayer().SetSkills(skills);
 
-        if(equippedItems != null)
+        if (equippedItems != null)
         {
             GameState.GetPlayer().EquipItems(equippedItems);
         }

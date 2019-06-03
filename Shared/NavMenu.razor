@@ -117,8 +117,8 @@
                 GameState.GetPlayer().HasItemToAccessArea(area.ActionRequiredForAccess) == false)
             {
                 builder.AddAttribute(4, "href", "/GatherMenu/" + area.RedirectAreaURL);
-                builder.AddAttribute(5, "onclick", () => MessageManager.AddMessage("You don't have the item to access this location.", "red"));
-                builder.AddAttribute(6, "title", "You do not have the item to access this location.");
+                builder.AddAttribute(5, "onclick", () => MessageManager.AddMessage("You don't have the item to access this location.(" + area.ActionRequiredForAccess + ")", "red"));
+                builder.AddAttribute(6, "title", "You do not have the item to access this location.(" + area.ActionRequiredForAccess + ")");
                 builder.AddAttribute(7, "style", "background-color:#EC565650");
             }
             else

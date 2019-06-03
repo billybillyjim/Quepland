@@ -358,7 +358,7 @@ public class Player
         }
         foreach(KeyValuePair<GameItem, int> item in inventory.GetItems())
         {
-            if(item.Key.ActionsEnabled.Contains(requirement))
+            if(item.Key.ActionsEnabled != null && item.Key.ActionsEnabled.Contains(requirement))
             {
                 return true;
             }

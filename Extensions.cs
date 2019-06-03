@@ -14,6 +14,10 @@ public static class Extensions
         }
         return exp;
     }
+    public static int Clamp(this int value, int min, int max)
+    {
+        return (value < min) ? min : (value > max) ? max : value;
+    }
     public static int GetProgressForLevel(int exp, int level)
     {
         int expToLevel = GetExperienceRequired(level) - GetExperienceRequired(level - 1);
