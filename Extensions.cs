@@ -36,7 +36,9 @@ public static class Extensions
                 string[] i = line.Split('-');
                 int id = int.Parse(i[0]);
                 int amount = int.Parse(i[1]);
-                items.Add(itemDB.GetItemByID(id), amount);
+                items[itemDB.GetItemByID(id)] = amount;
+                
+                
             }
         }
         return items;

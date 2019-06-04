@@ -235,21 +235,21 @@
                     MessageManager.AddMessage("You dealt " + dmgDealt + " damage to the " + opponent.Name);
                 }
                 //GameState.GetPlayer().GainExperience(GameState.GetPlayer().GetWeapon().ActionRequired, dmgDealt * 2);
-
+                if (GameState.GetPlayer().GetWeapon().ActionRequired.Contains(opponent.Weakness))
+                {
+                    MessageManager.AddMessage("It seemed to be very effective!");
+                }
+                else if (GameState.GetPlayer().GetWeapon().ActionRequired.Contains(opponent.Strength))
+                {
+                    MessageManager.AddMessage("It didn't seem to be very effective...");
+                }
             }
             else
             {
                 GameState.GetPlayer().GainExperience("Strength", dmgDealt * 3);
                 MessageManager.AddMessage("You punch the " + opponent.Name + " for " + dmgDealt + " damage.");
             }
-            if (GameState.GetPlayer().GetWeapon().ActionRequired.Contains(opponent.Weakness))
-            {
-                MessageManager.AddMessage("It seemed to be very effective!");
-            }
-            else if (GameState.GetPlayer().GetWeapon().ActionRequired.Contains(opponent.Strength))
-            {
-                MessageManager.AddMessage("It didn't seem to be very effective...");
-            }
+
             opponent.CurrentHP -= dmgDealt;
 
             if(opponent.CurrentHP <= 0)

@@ -247,6 +247,20 @@ public class Inventory
             items[item] = amount;
         }
     }
+    public void AddOneOfMultipleItemsUnlimited(List<GameItem> itemList)
+    {
+        foreach(GameItem item in itemList)
+        {
+            if (items.ContainsKey(item))
+            {
+                items[item] = 1 + items[item];
+            }
+            else
+            {
+                items[item] = 1;
+            }
+        }
+    }
     public bool AddMultiplesOfItems(List<GameItem> itemList)
     {
         foreach(GameItem item in itemList)

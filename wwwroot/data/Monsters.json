@@ -165,4 +165,123 @@
       [ 230, 300 ]
     ]
   },
+  {
+    "name": "Small Tree Man",
+    "id": 11,
+    "level": 7,
+    "experienceGained": 250,
+    "hp": 30,
+    "weakness": "Axemanship",
+    "strength": "Hammermanship",
+    "damage": 3,
+    "attackSpeed": 5,
+    "alwaysDrops": [ 7 ],
+    "dropTable": [
+      [ 1, 200 ],
+      [ 2, 100 ],
+      [ 95, 50 ]
+    ]
+  },
+  {
+    "name": "Tree Man",
+    "id": 12,
+    "level": 7,
+    "experienceGained": 250,
+    "hp": 70,
+    "weakness": "Axemanship",
+    "strength": "Hammermanship",
+    "damage": 5,
+    "attackSpeed": 6,
+    "alwaysDrops": [ 95 ],
+    "dropTable": [
+      [ 95, 200 ],
+      [ 96, 100 ],
+      [ 97, 50 ]
+    ]
+  },
+  {
+    "name": "Mapinguari",
+    "id": 13,
+    "level": 70,
+    "experienceGained": 250,
+    "hp": 700,
+    "weakness": "Swordsmanship",
+    "strength": "Knifesmanship",
+    "damage": 25,
+    "attackSpeed": 10,
+    "alwaysDrops": [ 95 ],
+    "dropTable": [
+      [ 95, 200 ],
+      [ 96, 100 ],
+      [ 97, 50 ]
+    ]
+  },
+  {
+    "name": "Tokeloshe",
+    "id": 14,
+    "level": 50,
+    "experienceGained": 250,
+    "hp": 125,
+    "weakness": "Hammermanship",
+    "strength": "Axemanship",
+    "damage": 20,
+    "attackSpeed": 7,
+    "alwaysDrops": [ 95 ],
+    "dropTable": [
+      [ 95, 200 ],
+      [ 96, 100 ],
+      [ 97, 50 ]
+    ]
+  },
+  {
+    "name": "Kappa",
+    "id": 15,
+    "level": 7,
+    "experienceGained": 250,
+    "hp": 90,
+    "weakness": "Archery",
+    "strength": "Hamermanship",
+    "damage": 3,
+    "attackSpeed": 3,
+    "alwaysDrops": [ 95 ],
+    "dropTable": [
+      [ 95, 200 ],
+      [ 96, 100 ],
+      [ 97, 50 ]
+    ]
+  },
+  {
+    "name": "Gashadokuro",
+    "id": 16,
+    "level": 90,
+    "experienceGained": 250,
+    "hp": 1200,
+    "weakness": "Hammermanship",
+    "strength": "Swordsmanship",
+    "damage": 35,
+    "attackSpeed": 10,
+    "alwaysDrops": [ 95 ],
+    "dropTable": [
+      [ 95, 200 ],
+      [ 96, 100 ],
+      [ 97, 50 ]
+    ]
+  },
+  {
+    "name": "Manananggal",
+    "id": 17,
+    "level": 65,
+    "experienceGained": 250,
+    "hp": 400,
+    "weakness": "Swordsmanship",
+    "strength": "Archery",
+    "damage": 5,
+    "attackSpeed": 6,
+    "alwaysDrops": [ 95 ],
+    "dropTable": [
+      [ 95, 200 ],
+      [ 96, 100 ],
+      [ 97, 50 ]
+    ]
+  }
 ]

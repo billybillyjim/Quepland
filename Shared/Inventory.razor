@@ -230,7 +230,11 @@
             {
                 builder.AddAttribute(1, "style", "background-color:aquamarine");
             }
-
+            if(item.Key.AttackSpeed != 0)
+            {
+                builder.AddAttribute(2, "title", "DPS: " + (float)item.Key.Damage / (item.Key.AttackSpeed / 1000f));
+            }
+            
             builder.AddAttribute(3, "class", "buddy-mid");
 
 

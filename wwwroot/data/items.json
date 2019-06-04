@@ -163,13 +163,13 @@
     "itemDescription": "It's an axe made of stone.",
     "id": 12,
     "value": 25,
-    "actionsEnabled": "Woodcutting",
+    "actionsEnabled": "Axemanship Woodcutting",
     "isEquipable": true,
     "equipSlot": "Right Hand",
     "damage": 4,
     "actionRequired": "Axemanship",
     "attackSpeed": 3000,
-    "gatherSpeedBonus": 1
+    "gatherSpeedBonus": 0.1
   },
   {
     "itemName": "Minnow Net",
@@ -422,7 +422,7 @@
     "equipSlot": "Right Hand",
     "damage": 9,
     "attackSpeed": 3000,
-    "actionsEnabled": "Woodcutting",
+    "actionsEnabled": "Axemanship Woodcutting",
     "gatherSpeedBonus": 0.2
   },
   {
@@ -474,7 +474,7 @@
     "id": 40,
     "value": 400,
     "actionRequired": "Axemanship",
-    "actionsEnabled": "Woodcutting",
+    "actionsEnabled": "Axemanship Woodcutting",
     "requiredLevel": 12,
     "ingredientIDs": [ 31 ],
     "isSmithable": true,
@@ -1627,7 +1627,7 @@
     "id": 140,
     "value": 150,
     "actionRequired": "Axemanship",
-    "actionsEnabled": "Woodcutting",
+    "actionsEnabled": "Axemanship Woodcutting",
     "requiredLevel": 55,
     "ingredientIDs": [ 28 ],
     "isSmithable": true,
@@ -1643,7 +1643,7 @@
     "id": 141,
     "value": 1500,
     "actionRequired": "Axemanship",
-    "actionsEnabled": "Woodcutting",
+    "actionsEnabled": "Axemanship Woodcutting",
     "requiredLevel": 75,
     "ingredientIDs": [ 59 ],
     "isSmithable": true,
@@ -3089,7 +3089,7 @@
     "id": 238,
     "value": 2500,
     "actionRequired": "Axemanship",
-    "actionsEnabled": "Woodcutting",
+    "actionsEnabled": "Axemanship Woodcutting",
     "requiredLevel": 85,
     "ingredientIDs": [ 210 ],
     "isSmithable": true,
@@ -3208,5 +3208,174 @@
     "itemDescription": "A large boat you can sail the seas with.",
     "value": 500000,
     "actionsEnabled": "Shallow Ocean Travel, Deep Ocean Travel"
+  },
+  {
+    "itemName": "Mercurice Sword Grip",
+    "id": 247,
+    "value": 500,
+    "itemDescription": "The grip of an ice sword. Needs a guard and pommel to complete it.",
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 249, 252 ],
+      [ 250, 251 ]
+    ]
+  },
+  {
+    "itemName": "Mercurice Sword Blade",
+    "id": 248,
+    "value": 1000,
+    "itemDescription": "The blade of an ice sword. Needs a hilt to complete it.",
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 254, 255 ]
+    ]
+  },
+  {
+    "itemName": "Mercurice Sword Guard",
+    "id": 249,
+    "value": 450,
+    "itemDescription": "The guard of an ice sword. Needs a grip and pommel to complete it.",
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 247, 252 ],
+      [ 250, 253 ]
+    ]
+  },
+  {
+    "itemName": "Mercurice Sword Pommel",
+    "id": 250,
+    "value": 600,
+    "itemDescription": "The pommel of an ice sword. Needs a guard and grip to complete it.",
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 247, 251 ],
+      [ 249, 253 ]
+    ]
+  },
+  {
+    "itemName": "Incomplete Mercurice Sword Hilt",
+    "id": 251,
+    "value": 1150,
+    "itemDescription": "An incomplete sword hilt. Needs a guard to complete it.",
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 249, 254 ]
+    ]
+  },
+  {
+    "itemName": "Incomplete Mercurice Sword Hilt",
+    "id": 252,
+    "value": 1000,
+    "itemDescription": "An incomplete sword hilt. Needs a pommel to complete it.",
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 250, 254 ]
+    ]
+  },
+  {
+    "itemName": "Incomplete Mercurice Sword Hilt",
+    "id": 253,
+    "value": 1100,
+    "itemDescription": "An incomplete sword hilt. Needs a grip to complete it.",
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 247, 254 ]
+    ]
+  },
+  {
+    "itemName": "Mercurice Sword Hilt",
+    "id": 254,
+    "value": 1600,
+    "itemDescription": "An incomplete sword. Needs a blade to complete it.",
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 248, 255 ]
+    ]
+  },
+  {
+    "itemName": "Mercurice Sword",
+    "id": 255,
+    "value": 3000,
+    "itemDescription": "An extremely powerful sword made from frozen mercury. It is somehow eternally frozen.",
+    "isEquipable": true,
+    "damage": 50,
+    "attackSpeed": 1750,
+    "actionRequired": "Swordsmanship",
+    "actionsEnabled": "Swordsmanship",
+    "equipSlot": "Right Hand"
+
+  },
+  {
+    "itemName": "Steelflame Axe Handle",
+      "id": 256
+  },
+  {
+    "itemName": "Steelflame Axe Blade",
+    "id": 257
+  },
+  {
+    "itemName": "Steelflame Axe",
+    "id": 258,
+    "value": 3000,
+    "itemDescription": "An extremely powerful Axe made from flaming steel. It is somehow eternally burning.",
+    "isEquipable": true,
+    "damage": 130,
+    "attackSpeed": 2500,
+    "actionRequired": "Axemanship",
+    "actionsEnabled": "Axemanship Woodcutting",
+    "equipSlot": "Right Hand",
+    "gatherSpeedBonus": 0.9
+  },
+  {
+    "itemName": "Earthen Hammer Head",
+    "id": 259
+  },
+  {
+    "itemName": "Earthen Hammer Handle",
+    "id": 260
+  },
+  {
+    "itemName": "Earthen Hammer Grip",
+    "id": 261
+  },
+  {
+    "itemName": "Unfinished Earthen Hammer",
+    "id": 262
+  },
+  {
+    "itemName": "Unfinished Earthen Hammer",
+    "id": 263
+  },
+  {
+    "itemName": "Earthen Hammer",
+    "id": 264,
+    "value": 3000,
+    "itemDescription": "An extremely powerful hammer made from dirt. It must be imbued with magical properties.",
+    "isEquipable": true,
+    "damage": 100,
+    "attackSpeed": 3250,
+    "actionRequired": "Hammermanship",
+    "actionsEnabled": "Hammermanship",
+    "equipSlot": "Right Hand"
+  },
+  {
+    "itemName": "Platisteel Knife",
+    "id": 265,
+    "value": 5000,
+    "itemDescription": "An extremely powerful knife made from platinum and steel combined. It is somehow stronger than a regular steel knife.",
+    "isEquipable": true,
+    "damage": 25,
+    "attackSpeed": 850,
+    "actionRequired": "Knifesmanship",
+    "actionsEnabled": "Knifesmanship",
+    "equipSlot": "Right Hand"
   }
 ]

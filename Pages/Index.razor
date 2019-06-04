@@ -12,9 +12,10 @@
     <p><button class="btn btn-primary" onclick="@(() => DebugAll99s())">Max Account</button></p>
     <p><button class="btn btn-primary" onclick="@(() => DebugUnlockAllFollowers())">Unlock Followers</button></p>
     <p><button class="btn btn-primary" onclick="@(() => DebugGetMoney())">Gain Money</button></p>
+    <p><button class="btn btn-primary" onclick="@(() => DebugOneOfEveryItem())">Get All Items</button></p>
 }
 
-@if (GameState.saveDataLoaded == false && saveGameExists && gameHasBeenSaved == false)
+@if ((GameState.saveDataLoaded == false || saveGameExists || gameHasBeenSaved == false) && loadBegun == false)
 {
     <p><button class="btn btn-primary" onclick="@(() => LoadData())">Load Game</button></p>
 }
@@ -29,7 +30,7 @@ else
 else
 {
     <p><button class="btn btn-primary" disabled onclick="@(() => SaveData())">Save Game</button></p>
-}
+    }
 
 <br />
 <br />
@@ -44,9 +45,11 @@ else
 
 @functions{
     private bool saveGameExists = false;
+    private bool loadBegun = false;
     private bool userWantsGameReset = false;
     private bool gameHasBeenSaved = false;
-    private bool debugMode = false;
+    private bool gameIsRendered = false;
+    private bool debugMode = true;
 
     public void DebugUnlockAllFollowers()
     {
@@ -54,6 +57,12 @@ else
         {
             f.IsUnlocked = true;
         }
+    }
+    public void DebugOneOfEveryItem()
+    {
+
+        GameState.GetPlayerBank().GetInventory().AddOneOfMultipleItemsUnlimited(Program.itemDatabase.GetAllItems());
+
     }
     public void DebugAll99s()
     {
@@ -102,6 +111,7 @@ else
     }
     private void LoadData()
     {
+        loadBegun = true;
         Dictionary<GameItem, int> bankItems = Extensions.GetItemDicFromString(localStorage.GetItem<String>("Bank"), Program.itemDatabase);
         Dictionary<GameItem, int> invItems = Extensions.GetItemDicFromString(localStorage.GetItem<String>("Inventory"), Program.itemDatabase);
         List<Skill> skills = Extensions.GetSkillsFromString(localStorage.GetItem<string>("Skills"));
@@ -156,7 +166,10 @@ else
 
         this.StateHasChanged();
     }
+    protected override void OnAfterRender()
+    {
 
+    }
     void IDisposable.Dispose()
     {
         GameState.StateChanged -= OnGameStateChanged;

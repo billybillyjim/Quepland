@@ -3,7 +3,9 @@ using System.ComponentModel;
 public class GameItem
 {
     public string ItemName { get; set; }
+    [DefaultValue("Whoops. The dev forgot to add a description to this item...")]
     public string ItemDescription { get; set; }
+    [DefaultValue("You get an item")]
     public string GatherString { get; set; }
     public string EquipSlot { get; set; }
 

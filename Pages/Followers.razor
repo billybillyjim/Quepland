@@ -14,6 +14,7 @@
                 <th align="left">Follower</th>
                 <th>Description</th>
                 <th>Assisting Stat</th>
+                <th>Level</th>
                 <th style="text-align:right">Follow?</th>
             </tr>
         </thead>
@@ -22,22 +23,32 @@
             {
                 if (follower.IsUnlocked)
                 {
-                    <tr>
-                        <td>@follower.Name</td>
-                        <td>@follower.Description</td>
-                        <td>@follower.AutoCollectSkill</td>
-                        @if (GameState.GetPlayer().activeFollower != follower)
-                        {
-                            <td><button class="btn btn-primary" onclick="@(()=>Assign(follower))">Assign To Follow</button></td>
-                        }
-                        else
-                        {
-                            <td>Following</td>
-                            <td><button class="btn btn-primary" onclick="@(()=>Unassign())">Unfollow</button></td>
-                        }
-                    </tr>
+                    @if (GameState.GetPlayer().activeFollower != follower)
+                    {
+                        <tr>
+                            <td>@follower.Name</td>
+                            <td>@follower.Description</td>
+                            <td>@follower.AutoCollectSkill</td>
+                            <td>@follower.AutoCollectLevel</td>
 
-                }
+                            <td><button class="btn btn-primary" onclick="@(()=>Assign(follower))">Assign</button></td>
+                        </tr>
+                    }
+                    else
+                    {
+                        <tr style="background-color:aquamarine">
+                            <td>@follower.Name</td>
+                            <td>@follower.Description</td>
+                            <td>@follower.AutoCollectSkill</td>
+                            <td>@follower.AutoCollectLevel</td>
+
+                            <td><button class="btn btn-primary" onclick="@(()=>Unassign())">Unfollow</button></td>
+                        </tr>
+
+                            }
+                        
+
+                    }
 
             }
 

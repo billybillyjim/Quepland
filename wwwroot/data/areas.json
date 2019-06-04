@@ -362,7 +362,7 @@
     "description": "The wasteland is a sizeable desert east of Mt Queple. Most of it is uninhabited and requires a camel to cross.",
     "areaURL": "Wasteland",
     "icon": "oi oi-fire",
-    "children": [ "SouthernTrail", "Route7", "Route7South", "Route7Crossroads" ]
+    "children": [ "SouthernTrail", "Route7", "Route7South", "Route7Crossroads", "Oasis", "AbandonedDesertShack" ]
   },
   {
     "name": "Route 7",
@@ -418,6 +418,7 @@
   },
   {
     "name": "Abandoned Desert Shack",
+    "areaURL": "AbandonedDesertShack",
     "description": "Out in the middle of the wasteland you find an abandonded shack. Its front door is swinging open in the wind.",
     "id": 41,
     "icon": "oi oi-home",

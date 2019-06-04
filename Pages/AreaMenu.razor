@@ -402,7 +402,7 @@
                     if (GameState.GetPlayerInventory().GetCoins() < int.Parse(requiredAction.Split(':')[1]))
                     {
                         builder.AddAttribute(13, "disabled", true);
-                        builder.AddAttribute(14, "title", "You don't have enough gold to do this." + "(" + int.Parse(requiredAction.Split(':')[1]) + ")");
+                        builder.AddAttribute(14, "title", "You don't have enough gold to do this." + "(" + int.Parse(requiredAction.Split(':')[1]) + ")" + GameState.GetPlayerInventory().GetCoins());
                     }
                     else if(GameState.isGathering || GameState.isHunting)
                     {
