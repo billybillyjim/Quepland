@@ -226,6 +226,14 @@ public class Inventory
         foreach (KeyValuePair<GameItem, int> itemToAdd in itemsToAdd)
         {
             items.Add(itemToAdd.Key, itemToAdd.Value);
+            if (itemToAdd.Key.IsStackable)
+            {
+                totalItems++;
+            }
+            else
+            {
+                totalItems += itemToAdd.Value;
+            }
         }
     }
     public bool AddMultipleOfItem(GameItem item, int amount)

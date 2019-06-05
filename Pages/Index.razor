@@ -7,6 +7,7 @@
 
 
 <h1>Hello, Welcome to Quepland!</h1>
+
 @if (debugMode)
 {
     <p><button class="btn btn-primary" onclick="@(() => DebugAll99s())">Max Account</button></p>
@@ -15,12 +16,13 @@
     <p><button class="btn btn-primary" onclick="@(() => DebugOneOfEveryItem())">Get All Items</button></p>
 }
 
-@if ((GameState.saveDataLoaded == false || saveGameExists || gameHasBeenSaved == false) && loadBegun == false)
+@if (GameState.saveDataLoaded == false && saveGameExists && gameHasBeenSaved == false && loadBegun == false)
 {
     <p><button class="btn btn-primary" onclick="@(() => LoadData())">Load Game</button></p>
 }
 else
 {
+    <p>Click the bank on your left to begin your journey. You'll find an axe to start off.</p>
     <p><button class="btn btn-primary" disabled onclick="@(() => LoadData())">Load Game</button></p>
 }
 @if (saveGameExists == false || (saveGameExists == true && GameState.saveDataLoaded == true))
@@ -30,7 +32,7 @@ else
 else
 {
     <p><button class="btn btn-primary" disabled onclick="@(() => SaveData())">Save Game</button></p>
-    }
+}
 
 <br />
 <br />
@@ -140,7 +142,7 @@ else
 
         GameState.saveDataLoaded = true;
         GameState.UpdateState();
-
+        this.StateHasChanged();
     }
     protected override void OnInit()
     {

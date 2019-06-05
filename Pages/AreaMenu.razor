@@ -283,42 +283,58 @@
         {
             if (GameState.isHunting == false)
             {
+                bool canHunt = GameState.GetPlayerInventory().ActionIsEnabled("Hunting");
                 builder.OpenElement(0, "p");
-                builder.AddContent(0, "Hunt:");
+                builder.AddContent(1, "Hunt:");
 
-                builder.OpenElement(0, "button");
-                builder.AddAttribute(0, "style", "margin:10px");
-                builder.AddAttribute(0, "class", "btn btn-primary");
-                builder.AddAttribute(0, "onclick", () => Hunt(1));
-                builder.AddContent(0, "1 Hour");
+                builder.OpenElement(2, "button");
+                builder.AddAttribute(3, "style", "margin:10px");
+                builder.AddAttribute(4, "class", "btn btn-primary");
+                builder.AddAttribute(5, "onclick", () => Hunt(1));
+                if(canHunt == false)
+                {
+                    builder.AddAttribute(6, "disabled", true);
+                    builder.AddAttribute(7, "title", "You need a bow in order to hunt.");
+                }
+                builder.AddContent(8, "1 Hour");
                 builder.CloseElement();
-                builder.OpenElement(0, "button");
-                builder.AddAttribute(0, "style", "margin:10px");
-                builder.AddAttribute(0, "class", "btn btn-primary");
-                builder.AddAttribute(0, "onclick", () => Hunt(4));
-                builder.AddContent(0, "4 Hours");
+                builder.OpenElement(9, "button");
+                builder.AddAttribute(10, "style", "margin:10px");
+                builder.AddAttribute(11, "class", "btn btn-primary");
+                builder.AddAttribute(12, "onclick", () => Hunt(4));
+                if (canHunt == false)
+                {
+                    builder.AddAttribute(13, "disabled", true);
+                    builder.AddAttribute(14, "title", "You need a bow in order to hunt.");
+                }
+                builder.AddContent(15, "4 Hours");
                 builder.CloseElement();
-                builder.OpenElement(0, "button");
-                builder.AddAttribute(0, "style", "margin:10px");
-                builder.AddAttribute(0, "class", "btn btn-primary");
-                builder.AddAttribute(0, "onclick", () => Hunt(8));
-                builder.AddContent(0, "8 Hours");
+                builder.OpenElement(16, "button");
+                builder.AddAttribute(17, "style", "margin:10px");
+                builder.AddAttribute(18, "class", "btn btn-primary");
+                builder.AddAttribute(19, "onclick", () => Hunt(8));
+                if (canHunt == false)
+                {
+                    builder.AddAttribute(20, "disabled", true);
+                    builder.AddAttribute(21, "title", "You need a bow in order to hunt.");
+                }
+                builder.AddContent(22, "8 Hours");
                 builder.CloseElement();
                 builder.CloseElement();
 
             }
             else
             {
-                builder.OpenElement(0, "p");
-                builder.AddContent(0, "Hunt ends in " + Program.huntingManager.GetTimeUntilDoneString());
+                builder.OpenElement(23, "p");
+                builder.AddContent(24, "Hunt ends in " + Program.huntingManager.GetTimeUntilDoneString());
                 builder.CloseElement();
-                builder.OpenElement(0, "button");
-                builder.AddAttribute(0, "style", "margin:10px");
-                builder.AddAttribute(0, "class", "btn btn-primary");
-                builder.AddAttribute(0, "onclick", () => EndHunt());
-                builder.AddContent(0, "End Hunt Early");
+                builder.OpenElement(25, "button");
+                builder.AddAttribute(26, "style", "margin:10px");
+                builder.AddAttribute(27, "class", "btn btn-primary");
+                builder.AddAttribute(28, "onclick", () => EndHunt());
+                builder.AddContent(29, "End Hunt Early");
                 builder.CloseElement();
-                builder.OpenElement(0, "br");
+                builder.OpenElement(30, "br");
                 builder.CloseElement();
             }
         };
