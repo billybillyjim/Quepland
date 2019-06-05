@@ -12,6 +12,7 @@
 @LoadBuildings()
 @LoadRoadblocks()
 @LoadAlchemyStation()
+@LoadInn();
 
 @functions{
 
@@ -27,7 +28,6 @@
 
     public RenderFragment LoadShop()
     {
-
         return builder =>
         {
             if (thisBuilding != null)
@@ -185,6 +185,31 @@
                 }
             }
         };
+    }
+    public RenderFragment LoadInn()
+    {
+        return builder =>
+        {
+            if (thisBuilding.IsInn)
+            {
+                builder.OpenElement(0, "button");
+                builder.AddAttribute(1, "class", "btn btn-primary");
+                builder.AddAttribute(2, "onclick", () => StayAtInn());
+                if(GameState.GetPlayerInventory().GetCoins() < 100)
+                {
+                    builder.AddAttribute(3, "disabled", true);
+                    builder.AddAttribute(4, "title", "You don't have enough money to do that.");
+                }
+                builder.AddContent(5, "Rest here for 100 coins");
+                builder.CloseElement();
+            }
+        };
+    }
+    private void StayAtInn()
+    {
+        GameState.GetPlayer().CurrentHP = GameState.GetPlayer().GetSkill("HP").GetSkillLevelUnboosted();
+        GameState.GetPlayerInventory().RemoveItems(Program.itemDatabase.GetGold(), 100);
+        MessageManager.AddMessage("You stay at the inn for a night.");
     }
     private void SetMetal(GameItem metal)
     {

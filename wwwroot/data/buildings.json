@@ -473,6 +473,13 @@
     "isShop": true,
     "items": [ 245, 246 ],
     "npcIDs": [ 23 ]
+  },
+  {
+    "name": "Teppas Inn",
+    "id": 59,
+    "url": "TeppasInn",
+    "description": "You enter a small inn where you can rest to restore your health.",
+    "isInn": true
   }
 
 ]

@@ -12,6 +12,7 @@ public class Building
     public string Description { get; set; }
     public int[] NPCIDs { get; set; }
     public bool IsShop { get; set; }
+    public bool IsInn { get; set; }
     public string[] UnlockableAreas { get; set; }
     public string[] Buildings { get; set; }
     public bool HasAlchemyStation { get; set; }

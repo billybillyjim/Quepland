@@ -19,6 +19,7 @@
         <a class="dropdown-item" onclick="@(()=>SetSortStyle(0))">Name</a>
         <a class="dropdown-item" onclick="@(()=>SetSortStyle(1))">Amount</a>
         <a class="dropdown-item" onclick="@(()=>SetSortStyle(2))">Action Group</a>
+        <a class="dropdown-item" onclick="@(()=>SetSortStyle(3))">Damage</a>
     </div>
 </div>
 <br />
@@ -43,6 +44,14 @@
                             <td>@item.Key.ItemDescription</td>
                             <td align="right">@item.Value</td>
                         </tr>
+                        if (item.Key.IsEquipable)
+                        {
+                            <tr title="DPS:@((float)item.Key.Damage  / (item.Key.AttackSpeed / 1000f))">
+                                <td>Damage:@item.Key.Damage</td>
+                                <td>Attack Speed:@(item.Key.AttackSpeed / 1000f)</td>
+                                <td>Gather Speed Bonus:@item.Key.GatherSpeedBonus</td>
+                            </tr>
+                        }
                         <tr class="buddy-row">
                             <td align="left">Withdraw </td>
                             <td align="left">
@@ -66,6 +75,14 @@
                                 <td>@item.Key.ItemDescription</td>
                                 <td align="right">@item.Value</td>
                             </tr>
+                            if (item.Key.IsEquipable)
+                            {
+                                <tr>
+                                    <td>Damage:@item.Key.Damage</td>
+                                    <td>Attack Speed:@item.Key.AttackSpeed</td>
+                                    <td>Gather Speed Bonus:@item.Key.GatherSpeedBonus</td>
+                                </tr>
+                            }
                             <tr class="buddy-row">
                                 <td align="left">Withdraw </td>
                                 <td align="left">

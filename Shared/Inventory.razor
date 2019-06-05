@@ -28,6 +28,14 @@
             builder.AddContent(5, GameState.GetPlayerInventory().GetFreeSpacesString());
             builder.CloseElement();
 
+            if(GameState.GetPlayer().GetSkill("HP") != null)
+            {
+                builder.OpenElement(4, "p");
+                builder.AddContent(5, "HP:" + GameState.GetPlayer().CurrentHP + "/" + GameState.GetPlayer().GetSkill("HP").GetSkillLevel());
+                builder.CloseElement();
+            }
+
+
             if (GameState.canSell)
             {
                 builder.OpenElement(6, "p");
@@ -234,7 +242,7 @@
             {
                 builder.AddAttribute(2, "title", "DPS: " + (float)item.Key.Damage / (item.Key.AttackSpeed / 1000f));
             }
-            
+
             builder.AddAttribute(3, "class", "buddy-mid");
 
 

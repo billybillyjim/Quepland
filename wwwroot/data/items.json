@@ -1013,7 +1013,7 @@
     "isSmithable": true,
     "isEquipable": true,
     "equipSlot": "Right Hand",
-    "damage": 20,
+    "damage": 27,
     "attackSpeed": 500
   },
   {
@@ -3306,7 +3306,7 @@
     "value": 3000,
     "itemDescription": "An extremely powerful sword made from frozen mercury. It is somehow eternally frozen.",
     "isEquipable": true,
-    "damage": 50,
+    "damage": 110,
     "attackSpeed": 1750,
     "actionRequired": "Swordsmanship",
     "actionsEnabled": "Swordsmanship",
@@ -3315,11 +3315,25 @@
   },
   {
     "itemName": "Steelflame Axe Handle",
-      "id": 256
+    "id": 256,
+    "description": "The handle of an axe that is always burning. It needs a blade.",
+    "value": 1200,
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 257, 258 ]
+    ]
   },
   {
     "itemName": "Steelflame Axe Blade",
-    "id": 257
+    "id": 257,
+    "description": "The blade of an axe that is always burning. It needs a handle.",
+    "value": 1100,
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 256, 258 ]
+    ]
   },
   {
     "itemName": "Steelflame Axe",
@@ -3327,7 +3341,7 @@
     "value": 3000,
     "itemDescription": "An extremely powerful Axe made from flaming steel. It is somehow eternally burning.",
     "isEquipable": true,
-    "damage": 130,
+    "damage": 150,
     "attackSpeed": 2500,
     "actionRequired": "Axemanship",
     "actionsEnabled": "Axemanship Woodcutting",
@@ -3336,31 +3350,80 @@
   },
   {
     "itemName": "Earthen Hammer Head",
-    "id": 259
+    "id": 259,
+    "description": "The head of a magical hammer. It needs a grip and handle to complete it.",
+    "value": 700,
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 260, 264 ],
+      [ 261, 263 ]
+    ]
   },
   {
     "itemName": "Earthen Hammer Handle",
-    "id": 260
+    "id": 260,
+    "description": "The handle of a magical hammer. It needs a grip and head to complete it.",
+    "value": 600,
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 259, 264 ],
+      [ 261, 262 ]
+    ]
   },
   {
     "itemName": "Earthen Hammer Grip",
-    "id": 261
+    "id": 261,
+    "description": "The grip of a magical hammer. It needs a head and handle to complete it.",
+    "value": 800,
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 259, 263 ],
+      [ 260, 262 ]
+    ]
   },
   {
     "itemName": "Unfinished Earthen Hammer",
-    "id": 262
+    "id": 262,
+    "description": "An unfinished magical hammer. It needs a head to complete it.",
+    "value": 800,
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 259, 265 ]
+    ]
   },
   {
     "itemName": "Unfinished Earthen Hammer",
-    "id": 263
+    "id": 263,
+    "description": "An unfinished magical hammer. It needs a handle to complete it.",
+    "value": 800,
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 260, 265 ]
+    ]
+  },
+  {
+    "itemName": "Unfinished Earthen Hammer",
+    "id": 264,
+    "description": "An unfinished magical hammer. It needs a grip to complete it.",
+    "value": 800,
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 261, 265 ]
+    ]
   },
   {
     "itemName": "Earthen Hammer",
-    "id": 264,
+    "id": 265,
     "value": 3000,
     "itemDescription": "An extremely powerful hammer made from dirt. It must be imbued with magical properties.",
     "isEquipable": true,
-    "damage": 100,
+    "damage": 200,
     "attackSpeed": 3250,
     "actionRequired": "Hammermanship",
     "actionsEnabled": "Hammermanship",
@@ -3368,11 +3431,11 @@
   },
   {
     "itemName": "Platisteel Knife",
-    "id": 265,
+    "id": 266,
     "value": 5000,
     "itemDescription": "An extremely powerful knife made from platinum and steel combined. It is somehow stronger than a regular steel knife.",
     "isEquipable": true,
-    "damage": 25,
+    "damage": 50,
     "attackSpeed": 850,
     "actionRequired": "Knifesmanship",
     "actionsEnabled": "Knifesmanship",

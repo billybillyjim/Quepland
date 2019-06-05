@@ -39,7 +39,7 @@
     "description": "You enter the small mountain town of Teppas. There is a shop to buy and sell goods from. A winding main street continues up the mountain.",
     "areaURL": "teppas",
     "icon": "oi oi-home",
-    "buildings": [ "TeppasGeneralStore", "MayorsHouse", "TeppasElementalEmporium", "ArcheryShop" ],
+    "buildings": [ "TeppasGeneralStore", "MayorsHouse", "TeppasElementalEmporium", "ArcheryShop", "TeppasInn" ],
     "unlockableAreas": [ "Lower Mt Queple Trail, Go through the village,," ],
     "npcIDs": [ 13 ]
   },

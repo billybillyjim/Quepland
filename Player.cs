@@ -147,6 +147,10 @@ public class Player
     }
     public void GainExperience(string skill)
     {
+        if(skill == null || skill == "")
+        {
+            return;
+        }
         if (int.TryParse(skill.Split(':')[1], out int amount))
         {
             GainExperience(skills.Find(x => x.SkillName == skill.Split(':')[0]), amount);
