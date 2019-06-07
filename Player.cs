@@ -266,6 +266,8 @@ public class Player
         int deft = GetSkill("Deftness").GetSkillLevel();
         float baseDamage = 1 + str / 2;
 
+        int equipmentBonus = GetEquipmentBonus();
+
         if (GetWeapon() != null)
         {
             string action = GetWeapon().ActionRequired;
@@ -305,10 +307,11 @@ public class Player
             {
                 baseDamage /= 2;
             }
+            
+            return Math.Max(Extensions.GetGaussianRandomInt(baseDamage + equipmentBonus, equipmentBonus), 1);
         }
-
-        int equipmentBonus = GetEquipmentBonus();
-        return Math.Max(Extensions.GetGaussianRandomInt(baseDamage + equipmentBonus, equipmentBonus), 1);
+        
+        return Math.Max(Extensions.GetGaussianRandomInt(baseDamage + equipmentBonus, baseDamage + equipmentBonus), 1);
     }
     private int GetEquipmentBonus()
     {

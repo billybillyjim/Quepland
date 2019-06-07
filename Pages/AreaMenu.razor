@@ -6,6 +6,7 @@
 
 @if (area != null)
 {
+    <button onclick="@(() => DebugGoToNextArea())">Go To Next Area</button>
 <h1>You are in @area.Name</h1>
 <p>@area.Description</p>
 
@@ -58,7 +59,8 @@
     }
     public void DebugGoToNextArea()
     {
-        UriHelper.NavigateTo("/GatherMenu/" + Program.areaManager.GetAreaByID(area.ID + 1).AreaURL);
+        UnlockArea(Program.areaManager.GetAreaByID(area.ID + 1));
+        //UriHelper.NavigateTo("/GatherMenu/" + Program.areaManager.GetAreaByID(area.ID + 1).AreaURL);
     }
     public void EnterBuilding(string buildingURL)
     {

@@ -17,8 +17,8 @@
     "description": "You enter a thick woods consisting of mostly poplar trees. The path meanders up the mountain along a brook full of sunfish.",
     "areaURL": "queplandWoods",
     "unlockableAreas": [ "The foot of Mt Queple,Continue along path,,", "Rocky Shores Beach,Head north through the trees,Woodcutting:25,Woodcutting" ],
-    "icon": "oi oi-cloud",
-    "monsterIDs": [ 2, 3, 4 ],
+    "icon": "oi oi-rain",
+    "monsterIDs": [ 2, 11, 4 ],
     "huntingIDs": [ 14, 15, 66, 67, 68, 69, 71 ]
   },
   {
@@ -38,7 +38,7 @@
     "isUnlocked": false,
     "description": "You enter the small mountain town of Teppas. There is a shop to buy and sell goods from. A winding main street continues up the mountain.",
     "areaURL": "teppas",
-    "icon": "oi oi-home",
+    "icon": "oi oi-basket",
     "buildings": [ "TeppasGeneralStore", "MayorsHouse", "TeppasElementalEmporium", "ArcheryShop", "TeppasInn" ],
     "unlockableAreas": [ "Lower Mt Queple Trail, Go through the village,," ],
     "npcIDs": [ 13 ]
@@ -50,7 +50,7 @@
     "isUnlocked": false,
     "description": "As you begin your ascent up the mountain, you notice the mouth of a cave off to the side of the path. A large totem pole stands near its entrance.",
     "areaURL": "lowerMtQuepleTrail",
-    "icon": "oi oi-fire",
+    "icon": "oi oi-compass",
     "unlockableAreas": [ "Queple Cave Entrance,Enter the cave,,", "Upper Mt Queple Trail,Continue up the trail,," ],
     "buildings": [ "SushiShack" ],
     "monsterIDs": [ 0, 1, 2 ],
@@ -62,9 +62,9 @@
     "isUnlocked": false,
     "description": "Having made a good distance up the mountain, you find the only way the rest of the way up is to climb.",
     "areaURL": "upperMTQuepleTrail",
-    "icon": "oi oi-graph",
+    "icon": "oi oi-compass",
     "unlockableAreas": [ "The Peak of Mount Queple,Climb to the summit,,", "Eastern Trail,Continue around the mountain,," ],
-    "actions": [ "Chop Oak Trees:Oak Logs"]
+    "actions": [ "Chop Oak Trees:Oak Logs" ]
   },
   {
     "name": "Queple Cave Entrance",
@@ -72,7 +72,7 @@
     "isUnlocked": false,
     "description": "Inside the cave you find a labyrinth of tunnels enveloped in darkness. It's probably safe to explore.",
     "areaURL": "quepleCaveEntrance",
-    "icon": "oi oi-image",
+    "icon": "oi oi-pulse",
     "buildings": [ "QuepleCaveEntrance" ],
     "areaToUnlockOnArrival": "Queple Cave"
   },
@@ -92,7 +92,7 @@
     "actions": [ "Mine Copper:Copper Ore" ],
     "description": "There is a lot of copper here.",
     "areaURL": "QCCopperMine",
-    "icon": "oi oi-image"
+    "icon": "oi oi-euro"
   },
   {
     "name": "Queple Cave Tin Mine",
@@ -101,7 +101,7 @@
     "actions": [ "Mine Tin:Tin Ore" ],
     "description": "There is a lot of tin here.",
     "areaURL": "QCTinMine",
-    "icon": "oi oi-image"
+    "icon": "oi oi-euro"
   },
   {
     "name": "Queple Cave Iron Mine",
@@ -110,16 +110,17 @@
     "actions": [ "Mine Iron:Iron Ore" ],
     "description": "There is a lot of iron here.",
     "areaURL": "QCIronMine",
-    "icon": "oi oi-image"
+    "icon": "oi oi-euro"
   },
   {
     "name": "Queple Cave River",
     "id": 11,
     "isUnlocked": false,
-    "actions": [ "Fish for shad:Shad", "Fish for salmon:Salmon" ],
+    "actions": [ "Fish for shad:Shad", "Fish for salmon:Salmon", "Battle" ],
     "description": "There are a lot of fish here.",
     "areaURL": "QCRiver",
-    "icon": "oi oi-river"
+    "icon": "oi oi-droplet",
+    "monsterIDs": [ 15, 24, 25, 26, 27 ]
   },
   {
     "name": "Deep Cave Hunting Area",
@@ -128,7 +129,7 @@
     "actions": [ "Hunting" ],
     "description": "There are plenty of exotic animals to catch here.",
     "areaURL": "QCHuntingCave",
-    "icon": "oi oi-river",
+    "icon": "oi oi-dial",
     "huntingIDs": [ 69, 71, 74, 66, 67, 68 ]
   },
   {
@@ -137,7 +138,7 @@
     "isUnlocked": false,
     "description": "You mark the cave in your journal. You can now quickly access parts of the cave you have already visited through the sidebar.",
     "areaURL": "quepleCave",
-    "icon": "oi oi-network",
+    "icon": "oi oi-random",
     "children": [ "quepleCaveEntrance", "QCCopperMine", "QuepleCaveSmithy", "QCTinMine", "QCIronMine", "QCRiver" ]
   },
   {
@@ -146,7 +147,7 @@
     "isUnlocked": false,
     "description": "The shores north of the great Mount Queple. There seems to be a small fishing village east of the beach. You can now quickly access the parts of the shores you have already visited through the sidebar.",
     "areaURL": "RockyShores",
-    "icon": "oi oi-sun",
+    "icon": "oi oi-script",
     "children": [ "RockyShoresBeach", "UragotaTown", "DarkRiver", "WestUragotaDocks", "EastUragotaDocks" ]
   },
   {
@@ -156,7 +157,7 @@
     "actions": [ "Fish For Rays:Manta Ray", "Fish For Crabs:Angry Crab", "Fish For Puffers:Puffer Fish", "Gather Seaweed:Seaweed" ],
     "description": "The sprawling beach is the perfect place to catch a variety of fish.",
     "areaURL": "RockyShoresBeach",
-    "icon": "oi oi-signpost",
+    "icon": "oi oi-script",
     "unlockableAreas": [ "Uragota Town,Walk along the beach,," ],
     "areaToUnlockOnArrival": "The Rocky Shores"
   },
@@ -166,7 +167,7 @@
     "isUnlocked": false,
     "description": "A small town sits on the water. There are a number of shops to browse.",
     "areaURL": "UragotaTown",
-    "icon": "oi oi-house",
+    "icon": "oi oi-basket",
     "unlockableAreas": [ "The Northern Isles Dock,Charter a ship north(1000 gold),,Pay Gold:1000", "The Dark River Bridge,Try fishing on the bridge,,", "West Uragota Docks,Go to the docks,," ],
     "buildings": [ "HouseOfFish", "FishermansShack" ]
   },
@@ -177,7 +178,7 @@
     "actions": [ "Fish for carp:Carp", "Fish for salmon:Salmon" ],
     "description": "A river darkened by runoff from the nearby farms. Shallow and wide, it's a great place to catch carp. Beyond the bridge is another wooded area.",
     "areaURL": "DarkRiver",
-    "icon": "oi oi-river",
+    "icon": "oi oi-align-center",
     "unlockableAreas": [ "Higashi Woods Entrance,Head into the forest,," ]
   },
   {
@@ -187,7 +188,7 @@
     "actions": [ "Smithing" ],
     "description": "There is a large, working forge here.",
     "areaURL": "QuepleCaveSmithy",
-    "icon": "oi oi-river"
+    "icon": "oi oi-aperture"
   },
   {
     "name": "The Peak of Mount Queple",
@@ -195,7 +196,7 @@
     "isUnlocked": false,
     "description": "You arrive near the summit of the mountain to find an abandoned building. The roar of rushing wind emanates through its halls.",
     "areaURL": "MtQueplePeak",
-    "icon": "oi oi-graph",
+    "icon": "oi oi-chevron-top",
     "buildings": [ "WindHall" ]
   },
   {
@@ -204,7 +205,7 @@
     "isUnlocked": false,
     "description": "You step onto the dock of a small, chilly village. Ice floes surround this snowy wasteland, and all is white in every direction.",
     "areaURL": "NorthernIslesDock",
-    "icon": "oi oi-river",
+    "icon": "oi oi-cloud-upload",
     "unlockableAreas": [ "Kogoe Town,Go into town,," ],
     "areaToUnlockOnArrival": "The Northern Isles",
     "actions": [ "Fish for Icefish:Icefish", "Fish for Scallops:Scallop" ]
@@ -215,7 +216,7 @@
     "isUnlocked": false,
     "description": "You continue along the trail and pass by Mount Queple. A large swamp comes into view up ahead.",
     "areaURL": "EasternTrail",
-    "icon": "oi oi-river",
+    "icon": "oi oi-flag",
     "unlockableAreas": [ "Swampland,Continue Down into the Swamp,," ],
     "npcIDs": [ 15 ]
   },
@@ -225,7 +226,7 @@
     "isUnlocked": false,
     "description": "You enter an enourmous swamp. Trees entangle an overgrowth immersed in water. Rice grows wild here. Ahead you see a dark wooded region.",
     "areaURL": "Swampland",
-    "icon": "oi oi-river",
+    "icon": "oi oi-inbox",
     "actions": [ "Gather Rice:Rice", "Chop Snakewood Trees:Snakewood Logs", "Hunting" ],
     "unlockableAreas": [ "Swampwood, Enter the woods,," ],
     "huntingIDs": [ 68, 71, 72, 66, 67 ],
@@ -237,8 +238,8 @@
     "isUnlocked": false,
     "description": "You enter an enourmous swamp. Trees entangle an overgrowth immersed in water. Rice grows wild here.",
     "areaURL": "GreatSwamp",
-    "icon": "oi oi-river",
-    "children": [ "Swampland", "Swampwood", "StrangeOldHut" ],
+    "icon": "oi oi-inbox",
+    "children": [ "Swampland", "Swampwood", "StrangeOldHut", "Swamplake" ],
     "isMarked": false
   },
   {
@@ -247,10 +248,10 @@
     "isUnlocked": false,
     "description": "The swamp grows dark under the canopy of trees. The foliage shudders with movement all around you. ",
     "areaURL": "Swampwood",
-    "icon": "oi oi-river",
+    "icon": "oi oi-rain",
     "actions": [ "Battle", "Chop Mahogany Trees:Mahogany Logs" ],
     "buildings": [ "LostSwamp" ],
-    "monsterIDs": [ 2, 3, 4 ]
+    "monsterIDs": [ 3, 4, 5, 6, 12, 13 ]
   },
   {
     "name": "Higashi Woods Entrance",
@@ -258,7 +259,7 @@
     "isUnlocked": false,
     "description": "You enter a strange forest. There are a variety of trees to chop here. The path leads deeper into the forest.",
     "areaURL": "HigashiWoodsEntrance",
-    "icon": "oi oi-river",
+    "icon": "oi oi-signpost",
     "actions": [ "Chop Oak Trees:Oak Logs", "Chop Birch Trees:Birch Logs" ],
     "unlockableAreas": [ "Deep Higashi Woods,Enter the deep forest,," ],
     "areaToUnlockOnArrival": "Higashi Woods"
@@ -269,7 +270,7 @@
     "isUnlocked": false,
     "description": "You come around a turn in the path to find large piles of cheese and bark. The path winds around them and down a hill.",
     "areaURL": "DeepHigashiWoods",
-    "icon": "oi oi-river",
+    "icon": "oi oi-rain",
     "actions": [ "Gather Cheese:Cheese", "Gather Bark:Bark" ],
     "unlockableAreas": [ "Higashi Bridge,Head down the hill,," ]
   },
@@ -279,10 +280,11 @@
     "isUnlocked": false,
     "description": "At the bottom of the hill is a gorge with a bridge running across it. Or, there used to be a bridge. You'll need to repair it or jump to get across.",
     "areaURL": "HigashiBridge",
-    "icon": "oi oi-river",
-    "actions": [ "Hunting" ],
+    "icon": "oi oi-transfer",
+    "actions": [ "Hunting", "Battle" ],
     "unlockableAreas": [ "East Higashi Woods,Jump across the gap,Deftness:30,", "East Higashi Woods,Repair the bridge,Woodworking:30," ],
-    "huntingIDs": [ 70, 72, 73 ]
+    "huntingIDs": [ 70, 72, 73 ],
+    "monsterIDs": [ 16, 18, 19, 20 ]
   },
   {
     "name": "East Higashi Woods",
@@ -290,7 +292,7 @@
     "isUnlocked": false,
     "description": "On the other side you find a number of balsa trees. The road leads south.",
     "areaURL": "EastHigashiWoods",
-    "icon": "oi oi-river",
+    "icon": "oi oi-trash",
     "actions": [ "Chop Balsa Trees:Balsa Logs", "Gather Hemp:Hemp" ],
     "unlockableAreas": [ "The Southern Trail,Take the road out of the forest,," ]
   },
@@ -300,7 +302,7 @@
     "isUnlocked": false,
     "description": "You enter the small fishing village. A road runs through the middle of town. You may be able to buy some supplies here.",
     "areaURL": "KogoeTown",
-    "icon": "oi oi-home",
+    "icon": "oi oi-vertical-align-bottom",
     "buildings": [ "HouseOfFish", "KogoeGym" ],
     "unlockableAreas": [ "Northern Isles Trails,Follow the road out of town,," ],
     "npcIDs": [ 16 ]
@@ -311,7 +313,7 @@
     "isUnlocked": false,
     "description": "The lightly wooded path leads into a valley. Eventually you reach a giant stone which has fallen, blocking the way forward. A large totem pole stands nearby.",
     "areaURL": "NorthernIslesTrails",
-    "icon": "oi oi-river",
+    "icon": "oi oi-fire",
     "unlockableAreas": [ "The Foot of Mt Yama,Destroy the rock with your strength,Strength:45,", "The Foot of Mt Yama,Destroy the rock with your mining skills,Mining:40,Mining" ],
     "actions": [ "Carve Totem Pole:Nice Wood Shavings", "Chop Maple Trees:Sugar Maple Logs" ]
   },
@@ -321,7 +323,7 @@
     "isUnlocked": false,
     "description": "The road grows steep as you begin your ascent up Mt Yama.",
     "areaURL": "MtYamaFoot",
-    "icon": "oi oi-river",
+    "icon": "oi oi-graph",
     "npcIDs": [ 8 ],
     "unlockableAreas": [ "Mt Yama Cave,Continue up the path,," ]
   },
@@ -331,7 +333,7 @@
     "isUnlocked": false,
     "description": "A small, cold island north of Quepland.",
     "areaURL": "NorthernIsles",
-    "icon": "oi oi-river",
+    "icon": "oi oi-globe",
     "children": [ "KogoeTown", "KogoeGym", "NorthernIslesDock", "NorthernIslesTrails", "MtYamaFoot", "MtYamaCave", "MtYamaMine", "MtYamaUpperMine" ]
   },
   {
@@ -340,7 +342,7 @@
     "isUnlocked": false,
     "description": "You enter the gym. You can train your strength and deftness here.",
     "areaURL": "KogoeGym",
-    "icon": "oi oi-home",
+    "icon": "oi oi-document",
     "actionRequiredForAccess": "Gym Membership",
     "actions": [ "Strength", "Deftness" ],
     "redirectAreaURL": "KogoeTown"
@@ -350,7 +352,7 @@
     "id": 34,
     "description": "You follow the trail and emerge from the forest into an empty plain. A lone knight stands in the center of the road.",
     "areaURL": "SouthernTrail",
-    "icon": "oi oi-fire",
+    "icon": "oi oi-compass",
     "unlockableAreas": [ "Route 7,Show the knight your skill with the sword,Swordsmanship:55,Swordsmanship" ],
     "npcIDs": [ 7 ],
     "areaToUnlockOnArrival": "The Wasteland",
@@ -361,24 +363,26 @@
     "id": 35,
     "description": "The wasteland is a sizeable desert east of Mt Queple. Most of it is uninhabited and requires a camel to cross.",
     "areaURL": "Wasteland",
-    "icon": "oi oi-fire",
+    "icon": "oi oi-sun",
     "children": [ "SouthernTrail", "Route7", "Route7South", "Route7Crossroads", "Oasis", "AbandonedDesertShack" ]
   },
   {
     "name": "Route 7",
     "description": "A lone sign names the road 'Route 7'. It seems to continue southward as far as you can see. The air is so warm you won't be able to travel any further by just walking.",
     "areaURL": "Route7",
-    "icon": "oi oi-fire",
+    "icon": "oi oi-badge",
     "id": 36,
+    "actions": [ "Battle" ],
     "buildings": [ "CamelShop" ],
     "unlockableAreas": [ "Route 7 South,Continue past the shop,," ],
-    "npcIDs": [ 17 ]
+    "npcIDs": [ 17 ],
+    "monsterIDs": [ 17, 21, 22, 23 ]
   },
   {
     "name": "Route 7 South",
     "description": "The camel shop is out of sight. The only things visible are shrubs and sand.",
     "areaURL": "Route7South",
-    "icon": "oi oi-fire",
+    "icon": "oi oi-sun",
     "id": 37,
     "actionRequiredForAccess": "Desert Travel",
     "unlockableAreas": [ "Route 7 Crossroads,Continue Southward,," ],
@@ -388,7 +392,7 @@
     "name": "Route 7 Crossroads",
     "description": "You reach an intersection in the middle of the wasteland. You can continue south, or head east or west. A giant sign stands on one corner, and a giant totem pole on the other.",
     "areaURL": "Route7Crossroads",
-    "icon": "oi oi-fire",
+    "icon": "oi oi-signpost",
     "id": 38,
     "actionRequiredForAccess": "Desert Travel",
     "actions": [ "Carve Totem Pole:Exquisite Wood Shavings" ],
@@ -400,9 +404,10 @@
     "name": "Strange Old Hut",
     "description": "You arrive at a decrepit shack with the lights on. A large totem pole stands out in the front lawn. The hill nearby is teeming with coal.",
     "areaURL": "StrangeOldHut",
-    "icon": "oi oi-house",
+    "icon": "oi oi-bug",
     "id": 39,
     "actions": [ "Mine Coal:Coal", "Carve Totem:Wood Shavings" ],
+    "unlockableAreas": [ "Swamplake,Go around the hill,," ],
     "buildings": [ "EarthHall" ]
   },
   {
@@ -410,7 +415,7 @@
     "description": "The path leads you up the mountain until you reach an opening into the mountain itself. Strange metallic creatures are roaming around the entrance. There's a big crack in wall.",
     "id": 40,
     "areaURL": "MtYamaCave",
-    "icon": "oi oi-home",
+    "icon": "oi oi-audio",
     "buildings": [ "FireHall" ],
     "actions": [ "Battle" ],
     "monsterIDs": [ 7, 8, 9, 10 ],
@@ -421,7 +426,7 @@
     "areaURL": "AbandonedDesertShack",
     "description": "Out in the middle of the wasteland you find an abandonded shack. Its front door is swinging open in the wind.",
     "id": 41,
-    "icon": "oi oi-home",
+    "icon": "oi oi-credit-card",
     "buildings": [ "AbandonedDesertShack" ]
   },
   {
@@ -429,7 +434,7 @@
     "description": "You find a few different large ore veins here. Up higher on the walls appear to be some gold and bauxite, but you can't reach that high.",
     "id": 42,
     "areaURL": "MtYamaMine",
-    "icon": "oi oi-house",
+    "icon": "oi oi-euro",
     "actions": [ "Mine Cinnabar:Cinnabar", "Mine Galena:Galena" ],
     "unlockableAreas": [ "Upper Mt Yama Mine, Build a ladder,Woodworking:60," ]
   },
@@ -438,7 +443,7 @@
     "areaURL": "MtYamaUpperMine",
     "description": "You reach high enough to begin mining the gold and bauxite.",
     "id": 43,
-    "icon": "oi oi-house",
+    "icon": "oi oi-euro",
     "actions": [ "Mine Gold:Gold Ore", "Mine Bauxite:Bauxite" ]
   },
   {
@@ -448,7 +453,8 @@
     "redirectAreaURL": "Route7",
     "actionRequiredForAccess": "Desert Travel",
     "id": 44,
-    "actions": [ "Chop Lignum Vitae Trees:Lignum Vitae Logs" ]
+    "actions": [ "Chop Lignum Vitae Trees:Lignum Vitae Logs" ],
+    "icon": "oi oi-droplet"
   },
   {
     "name": "Leupp",
@@ -458,7 +464,8 @@
     "actionRequiredForAccess": "Desert Travel",
     "id": 45,
     "unlockableAreas": [ "North Leupp,Pass through the gate north,Woodcutting:60,Pay Gold:50000" ],
-    "npcIDs": [ 20 ]
+    "npcIDs": [ 20 ],
+    "icon": "oi oi-calendar"
   },
   {
     "name": "North Leupp",
@@ -468,7 +475,8 @@
     "actionRequiredForAccess": "Desert Travel",
     "id": 46,
     "actions": [ "Chop Buloke Trees:Buloke Logs", "Chop Mahogany Trees:Mahogany Logs", "Chop Balsa Trees:Balsa Logs", "Chop Ironwood Trees:Ironwood Logs" ],
-    "buildings": [ "WoodcutNut" ]
+    "buildings": [ "WoodcutNut" ],
+    "icon": "oi oi-rain"
   },
   {
     "name": "West Uragota Docks",
@@ -476,6 +484,7 @@
     "id": 47,
     "description": "There are a number of large and small boats anchored here. A small kiosk with the words 'Boats for Sale' painted poorly on the front stands near the entrance.",
     "buildings": [ "MoundsBoats" ],
+    "icon": "oi oi-sort-ascending",
     "unlockableAreas": [ "East Uragota Docks,Go to the east docks,," ],
     "actions": [ "Fish for Saury:Saury", "Fish For Sardines:Sardine", "Fish for Abalone:Abalone" ]
   },
@@ -483,6 +492,7 @@
     "name": "East Uragota Docks",
     "areaURL": "EastUragotaDocks",
     "id": 48,
+    "icon": "oi oi-sort-descending",
     "description": "There are a number of fisherman here. You haven't seen them catch anything, though.",
     "actions": [ "Fish for Shrimp:Shrimp", "Fish For Butterfish:Butterfish" ],
     "unlockableAreas": [ "Ocean Fishing Platform,Sail to the Ocean Fishing Platform,,", "Deep Ocean Waters,Sail to Deep Ocean Waters,," ]
@@ -494,7 +504,8 @@
     "description": "You arrive at the ocean fishing platform. You can catch a number of large ocean fish here.",
     "actions": [ "Fish for Squid:Squid", "Fish for Tuna:Tuna", "Fish for Yellowtail:Yellowtail" ],
     "actionRequiredForAccess": "Shallow Ocean Travel",
-    "redirectAreaURL": "EastUragotaDocks"
+    "redirectAreaURL": "EastUragotaDocks",
+    "icon": "oi oi-tag"
   },
   {
     "name": "Deep Ocean Waters",
@@ -503,7 +514,8 @@
     "description": "You sail out to sea. All you can see in any direction is water. There will be some very large fish to catch here.",
     "actions": [ "Fish for Big Tuna:Big Tuna", "Fish for Swordfish:Swordfish", "Fish for Flounder:Flounder" ],
     "actionRequiredForAccess": "Deep Ocean Travel",
-    "redirectAreaURL": "EastUragotaDocks"
+    "redirectAreaURL": "EastUragotaDocks",
+    "icon": "oi oi-globe"
   },
   {
     "name": "Higashi Woods",
@@ -511,8 +523,18 @@
     "isUnlocked": false,
     "description": "A large and varied woodland area.",
     "areaURL": "HigashiWoods",
-    "icon": "oi oi-home",
+    "icon": "oi oi-rain",
     "children": [ "HigashiWoodsEntrance", "DeepHigashiWoods", "HigashiBridge", "EastHigashiWoods" ]
+  },
+  {
+    "name": "Swamplake",
+    "id": 52,
+    "areaURL": "Swamplake",
+    "isUnlocked": false,
+    "description": "Despite its name, it appears to be more of a bog than a lake. You can't catch any fish here, but monsters lurk beneath the surface.",
+    "actions": [ "Battle" ],
+    "icon": "oi oi-vertical-align-center",
+    "monsterIDs": [ 5, 6, 12, 13, 14, 15 ]
   }
 
 ]

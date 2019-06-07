@@ -212,7 +212,7 @@
     "alwaysDrops": [ 95 ],
     "dropTable": [
       [ 207, 200 ],
-      [ 208, 150],
+      [ 208, 150 ],
       [ 262, 5 ],
       [ 261, 10 ]
     ]
@@ -278,6 +278,176 @@
     "strength": "Archery",
     "damage": 5,
     "attackSpeed": 6,
+    "alwaysDrops": [ 95 ],
+    "dropTable": [
+      [ 95, 200 ],
+      [ 96, 100 ],
+      [ 97, 50 ]
+    ]
+  },
+  {
+    "name": "Bat",
+    "id": 18,
+    "level": 20,
+    "experienceGained": 250,
+    "hp": 40,
+    "weakness": "Archery",
+    "strength": "Hammermanship",
+    "damage": 2,
+    "attackSpeed": 2,
+    "alwaysDrops": [ 95 ],
+    "dropTable": [
+      [ 95, 200 ],
+      [ 96, 100 ],
+      [ 97, 50 ]
+    ]
+  },
+  {
+    "name": "Giant Bat",
+    "id": 19,
+    "level": 65,
+    "experienceGained": 250,
+    "hp": 100,
+    "weakness": "Archery",
+    "strength": "Hammermanship",
+    "damage": 5,
+    "attackSpeed": 4,
+    "alwaysDrops": [ 95 ],
+    "dropTable": [
+      [ 95, 200 ],
+      [ 96, 100 ],
+      [ 97, 50 ]
+    ]
+  },
+  {
+    "name": "Bandit Lord",
+    "id": 20,
+    "level": 65,
+    "experienceGained": 250,
+    "hp": 130,
+    "weakness": "Swordsmanship",
+    "strength": "Archery",
+    "damage": 7,
+    "attackSpeed": 3,
+    "alwaysDrops": [ 95 ],
+    "dropTable": [
+      [ 95, 200 ],
+      [ 96, 100 ],
+      [ 97, 50 ]
+    ]
+  },
+  {
+    "name": "Living Cactus",
+    "id": 21,
+    "level": 65,
+    "experienceGained": 250,
+    "hp": 250,
+    "weakness": "Axemanship",
+    "strength": "Hammermanship",
+    "damage": 1,
+    "attackSpeed": 1,
+    "alwaysDrops": [ 95 ],
+    "dropTable": [
+      [ 95, 200 ],
+      [ 96, 100 ],
+      [ 97, 50 ]
+    ]
+  },
+  {
+    "name": "Sand Worm",
+    "id": 22,
+    "level": 65,
+    "experienceGained": 250,
+    "hp": 300,
+    "weakness": "Swordsmanship",
+    "strength": "Knifesmanship",
+    "damage": 8,
+    "attackSpeed": 5,
+    "alwaysDrops": [ 95 ],
+    "dropTable": [
+      [ 95, 200 ],
+      [ 96, 100 ],
+      [ 97, 50 ]
+    ]
+  },
+  {
+    "name": "Giant Sand Worm",
+    "id": 23,
+    "level": 65,
+    "experienceGained": 250,
+    "hp": 450,
+    "weakness": "Swordsmanship",
+    "strength": "Knifesmanship",
+    "damage": 30,
+    "attackSpeed": 10,
+    "alwaysDrops": [ 95 ],
+    "dropTable": [
+      [ 95, 200 ],
+      [ 96, 100 ],
+      [ 97, 50 ]
+    ]
+  },
+  {
+    "name": "Fishman",
+    "id": 24,
+    "level": 65,
+    "experienceGained": 250,
+    "hp": 130,
+    "weakness": "Knifesmanship",
+    "strength": "Hammermanship",
+    "damage": 3,
+    "attackSpeed": 5,
+    "alwaysDrops": [ 95 ],
+    "dropTable": [
+      [ 95, 200 ],
+      [ 96, 100 ],
+      [ 97, 50 ]
+    ]
+  },
+  {
+    "name": "Manfish",
+    "id": 25,
+    "level": 65,
+    "experienceGained": 250,
+    "hp": 150,
+    "weakness": "Hammermanship",
+    "strength": "Knifesmanship",
+    "damage": 4,
+    "attackSpeed": 5,
+    "alwaysDrops": [ 95 ],
+    "dropTable": [
+      [ 95, 200 ],
+      [ 96, 100 ],
+      [ 97, 50 ]
+    ]
+  },
+  {
+    "name": "Slime",
+    "id": 26,
+    "level": 65,
+    "experienceGained": 250,
+    "hp": 10,
+    "weakness": "Axemanship",
+    "strength": "Hammermanship",
+    "damage": 1,
+    "attackSpeed": 3,
+    "alwaysDrops": [ 95 ],
+    "dropTable": [
+      [ 95, 200 ],
+      [ 96, 100 ],
+      [ 97, 50 ]
+    ]
+  },
+  {
+    "name": "Evil Snail",
+    "id": 27,
+    "level": 65,
+    "experienceGained": 250,
+    "hp": 40,
+    "weakness": "Hammermanship",
+    "strength": "Axemanship",
+    "damage": 2,
+    "attackSpeed": 2,
     "alwaysDrops": [ 95 ],
     "dropTable": [
       [ 95, 200 ],
