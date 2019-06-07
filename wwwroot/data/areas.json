@@ -364,7 +364,7 @@
     "description": "The wasteland is a sizeable desert east of Mt Queple. Most of it is uninhabited and requires a camel to cross.",
     "areaURL": "Wasteland",
     "icon": "oi oi-sun",
-    "children": [ "SouthernTrail", "Route7", "Route7South", "Route7Crossroads", "Oasis", "AbandonedDesertShack" ]
+    "children": [ "SouthernTrail", "Route7", "Route7South", "Route7Crossroads", "Oasis", "AbandonedDesertShack", "Leupp", "NorthLeupp" ]
   },
   {
     "name": "Route 7",

@@ -173,10 +173,16 @@
   },
   {
     "itemName": "Minnow Net",
-    "itemDescription": "It's a net made for minnows.",
+    "itemDescription": "It's a net made for minnows, but you can catch any fish with it, probably.",
     "id": 13,
     "value": 10,
-    "actionsEnabled": "Fishing"
+    "actionsEnabled": "Fishing",
+    "damage": 1,
+    "isEquipable": true,
+    "actionRequired": "Fishing",
+    "equipSlot": "Right Hand",
+    "attackSpeed": 7000,
+    "gatherSpeedBonus": 0.1
   },
   {
     "itemName": "Deer",
@@ -1013,7 +1019,7 @@
     "isSmithable": true,
     "isEquipable": true,
     "equipSlot": "Right Hand",
-    "damage": 27,
+    "damage": 15,
     "attackSpeed": 500
   },
   {
@@ -3452,5 +3458,102 @@
     "actionRequired": "Knifesmanship",
     "actionsEnabled": "Knifesmanship",
     "equipSlot": "Right Hand"
-  }
+  },
+  {
+    "itemName": "Small Net",
+    "itemDescription": "A small fishing net.",
+    "id": 267,
+    "value": 30,
+    "actionsEnabled": "Fishing",
+    "damage": 2,
+    "isEquipable": true,
+    "actionRequired": "Fishing",
+    "equipSlot": "Right Hand",
+    "attackSpeed": 7000,
+    "gatherSpeedBonus": 0.2
+  },
+  {
+    "itemName": "Medium Net",
+    "itemDescription": "A decently sized fishing net.",
+    "id": 268,
+    "value": 80,
+    "actionsEnabled": "Fishing",
+    "damage": 4,
+    "isEquipable": true,
+    "actionRequired": "Fishing",
+    "equipSlot": "Right Hand",
+    "attackSpeed": 7000,
+    "gatherSpeedBonus": 0.4
+  },
+  {
+    "itemName": "Large Net",
+    "itemDescription": "A large net.",
+    "id": 269,
+    "value": 300,
+    "actionsEnabled": "Fishing",
+    "damage": 7,
+    "isEquipable": true,
+    "actionRequired": "Fishing",
+    "equipSlot": "Right Hand",
+    "attackSpeed": 7000,
+    "gatherSpeedBonus": 0.6
+  },
+  {
+    "itemName": "Magic Net",
+    "itemDescription": "A magical net imbued with some strange power. It emits a soft green light.",
+    "id": 270,
+    "value": 2500,
+    "actionsEnabled": "Fishing",
+    "damage": 12,
+    "isEquipable": true,
+    "actionRequired": "Fishing",
+    "equipSlot": "Right Hand",
+    "attackSpeed": 7000,
+    "gatherSpeedBonus": 0.8
+  },
+  {
+    "itemName": "Steel Sword",
+    "itemDescription": "An incredibly durable and sharp sword.",
+    "id": 271,
+    "value": 2800,
+    "actionRequired": "Swordsmanship",
+    "actionsEnabled": "Swordsmanship",
+    "requiredLevel": 85,
+    "ingredientIDs": [ 210 ],
+    "isSmithable": true,
+    "isEquipable": true,
+    "equipSlot": "Right Hand",
+    "damage": 60,
+    "attackSpeed": 2000
+  },
+  {
+    "itemName": "Steel Hammer",
+    "itemDescription": "An incredibly durable and heavy hammer.",
+    "id": 272,
+    "value": 2800,
+    "actionRequired": "Hammermanship",
+    "actionsEnabled": "Hammermanship",
+    "requiredLevel": 85,
+    "ingredientIDs": [ 210 ],
+    "isSmithable": true,
+    "isEquipable": true,
+    "equipSlot": "Right Hand",
+    "damage": 130,
+    "attackSpeed": 4000
+  },
+    {
+    "itemName": "Steel Knife",
+    "itemDescription": "An incredibly durable and sharp knife.",
+    "id": 273,
+    "value": 2200,
+    "actionRequired": "Knifesmanship",
+    "actionsEnabled": "Knifesmanship",
+    "requiredLevel": 85,
+    "ingredientIDs": [ 210 ],
+    "isSmithable": true,
+    "isEquipable": true,
+    "equipSlot": "Right Hand",
+    "damage": 25,
+    "attackSpeed": 1000
+  },
 ]

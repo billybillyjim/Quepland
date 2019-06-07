@@ -203,6 +203,10 @@ public class Player
                 GainExperience("Strength", (int)(damageDealt * 0.5));
             }
         }
+        else if (weapon.ActionRequired.Contains("Fishing"))
+        {
+            GainExperience("Fishing", (int)(damageDealt * 0.1));
+        }
     }
     public void LevelUp(Skill skill)
     {

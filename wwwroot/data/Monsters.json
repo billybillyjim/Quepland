@@ -109,12 +109,15 @@
     "hp": 190,
     "weakness": "Hammermanship",
     "strength": "Knifesmanship",
-    "damage": 25,
+    "damage": 10,
     "attackSpeed": 2,
+    "alwaysDrops": [ 57 ],
     "dropTable": [
-      [ 228, 200 ],
-      [ 229, 100 ],
-      [ 230, 50 ]
+      [ 226, 100 ],
+      [ 227, 100 ],
+      [ 228, 50 ],
+      [ 249, 1 ],
+      [ 250, 1 ]
     ]
   },
   {
@@ -125,12 +128,15 @@
     "hp": 250,
     "weakness": "Knifesmanship",
     "strength": "Hammermanship",
-    "damage": 40,
-    "attackSpeed": 3,
+    "damage": 25,
+    "attackSpeed": 4,
+    "alwaysDrops": [ 57 ],
     "dropTable": [
-      [ 228, 300 ],
-      [ 229, 200 ],
-      [ 230, 100 ]
+      [ 225, 200 ],
+      [ 226, 200 ],
+      [ 227, 100 ],
+      [ 247, 1 ],
+      [ 248, 1 ]
     ]
   },
   {
@@ -141,12 +147,17 @@
     "hp": 350,
     "weakness": "None",
     "strength": "Knifesmanship",
-    "damage": 75,
+    "damage": 45,
     "attackSpeed": 5,
+    "alwaysDrops": [ 57 ],
     "dropTable": [
-      [ 228, 300 ],
-      [ 229, 300 ],
-      [ 230, 200 ]
+      [ 226, 200 ],
+      [ 227, 200 ],
+      [ 228, 100 ],
+      [ 247, 1 ],
+      [ 248, 1 ],
+      [ 249, 1 ],
+      [ 250, 1 ]
     ]
   },
   {
@@ -157,12 +168,17 @@
     "hp": 500,
     "weakness": "Swordsmanship",
     "strength": "Axemanship",
-    "damage": 100,
+    "damage": 75,
     "attackSpeed": 6,
+    "alwaysDrops": [ 57 ],
     "dropTable": [
-      [ 228, 300 ],
-      [ 229, 300 ],
-      [ 230, 300 ]
+      [ 228, 200 ],
+      [ 229, 200 ],
+      [ 230, 100 ],
+      [ 247, 2 ],
+      [ 248, 2 ],
+      [ 249, 2 ],
+      [ 250, 2 ]
     ]
   },
   {
@@ -209,12 +225,12 @@
     "strength": "Knifesmanship",
     "damage": 25,
     "attackSpeed": 10,
-    "alwaysDrops": [ 95 ],
     "dropTable": [
       [ 207, 200 ],
       [ 208, 150 ],
-      [ 262, 5 ],
-      [ 261, 10 ]
+      [ 259, 1 ],
+      [ 260, 1 ],
+      [ 261, 1 ]
     ]
   },
   {
@@ -227,11 +243,14 @@
     "strength": "Axemanship",
     "damage": 20,
     "attackSpeed": 7,
-    "alwaysDrops": [ 95 ],
     "dropTable": [
-      [ 95, 200 ],
-      [ 96, 100 ],
-      [ 97, 50 ]
+      [ 259, 3 ],
+      [ 49, 100 ],
+      [ 50, 50 ],
+      [ 62, 200 ],
+      [ 63, 100 ],
+      [ 64, 50 ],
+      [ 65, 20 ]
     ]
   },
   {
@@ -244,11 +263,15 @@
     "strength": "Hamermanship",
     "damage": 3,
     "attackSpeed": 3,
-    "alwaysDrops": [ 95 ],
     "dropTable": [
-      [ 95, 200 ],
-      [ 96, 100 ],
-      [ 97, 50 ]
+      [ 109, 200 ],
+      [ 110, 100 ],
+      [ 111, 50 ],
+      [ 113, 10 ],
+      [ 120, 10 ],
+      [ 121, 10 ],
+      [ 269, 5 ],
+      [ 270, 1]
     ]
   },
   {
@@ -261,11 +284,19 @@
     "strength": "Swordsmanship",
     "damage": 35,
     "attackSpeed": 10,
-    "alwaysDrops": [ 95 ],
     "dropTable": [
-      [ 95, 200 ],
-      [ 96, 100 ],
-      [ 97, 50 ]
+      [ 238, 5 ],
+      [ 266, 2 ],
+      [ 34, 50 ],
+      [ 35, 50 ],
+      [ 36, 50 ],
+      [ 37, 50 ],
+      [ 40, 20 ],
+      [ 41, 20 ],
+      [ 62, 100 ],
+      [ 63, 100 ],
+      [ 64, 50 ],
+      [ 65, 20 ]
     ]
   },
   {
@@ -278,11 +309,11 @@
     "strength": "Archery",
     "damage": 5,
     "attackSpeed": 6,
-    "alwaysDrops": [ 95 ],
     "dropTable": [
-      [ 95, 200 ],
-      [ 96, 100 ],
-      [ 97, 50 ]
+      [ 62, 200 ],
+      [ 63, 100 ],
+      [ 64, 50 ],
+      [ 65, 20 ]
     ]
   },
   {
@@ -295,11 +326,10 @@
     "strength": "Hammermanship",
     "damage": 2,
     "attackSpeed": 2,
-    "alwaysDrops": [ 95 ],
     "dropTable": [
-      [ 95, 200 ],
-      [ 96, 100 ],
-      [ 97, 50 ]
+      [ 163, 200 ],
+      [ 176, 20 ],
+      [ 177, 10 ]
     ]
   },
   {
@@ -314,9 +344,10 @@
     "attackSpeed": 4,
     "alwaysDrops": [ 95 ],
     "dropTable": [
-      [ 95, 200 ],
-      [ 96, 100 ],
-      [ 97, 50 ]
+      [ 163, 200 ],
+      [ 178, 50 ],
+      [ 179, 30 ],
+      [ 268, 5 ]
     ]
   },
   {
@@ -331,9 +362,12 @@
     "attackSpeed": 3,
     "alwaysDrops": [ 95 ],
     "dropTable": [
-      [ 95, 200 ],
-      [ 96, 100 ],
-      [ 97, 50 ]
+      [ 226, 200 ],
+      [ 227, 100 ],
+      [ 228, 50 ],
+      [ 229, 20 ],
+      [ 230, 10 ],
+      [ 238, 2 ]
     ]
   },
   {
