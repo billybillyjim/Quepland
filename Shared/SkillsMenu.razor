@@ -90,25 +90,34 @@ else
                     builder.AddContent(23, item.RequiredLevel);
                     builder.CloseElement();
 
-                   /* if (item.GatherSpeed > 0 && item.ExperienceGained != null)
+                    if(item.Damage > 0 && item.AttackSpeed > 0)
                     {
-                        int expGain = int.Parse(item.ExperienceGained.Split(':')[1]);
                         builder.OpenElement(24, "td");
                         builder.AddAttribute(25, "style", "text-align:right");
-                        float expHour = ((float)expGain / item.GatherSpeed) * 3600;
-                        builder.AddContent(26, "," + expHour);
+                        float DPS = item.Damage / (item.AttackSpeed / 1000f);
+                        builder.AddContent(26, "" + DPS);
                         builder.CloseElement();
-                        builder.OpenElement(27, "td");
-                        builder.AddAttribute(28, "style", "text-align:right");
-                        float valueHour = ((float)item.Value / item.GatherSpeed) * 3600;
-                        builder.AddContent(29, "," + valueHour);
-                        builder.CloseElement();
-                        builder.OpenElement(30, "td");
-                        builder.AddAttribute(31, "style", "text-align:right");
-                        float ratio = expHour / valueHour;
-                        builder.AddContent(32, "," + ratio);
-                        builder.CloseElement();
-                    }*/
+
+                    }
+                    /* if (item.GatherSpeed > 0 && item.ExperienceGained != null)
+                     {
+                         int expGain = int.Parse(item.ExperienceGained.Split(':')[1]);
+                         builder.OpenElement(24, "td");
+                         builder.AddAttribute(25, "style", "text-align:right");
+                         float expHour = ((float)expGain / item.GatherSpeed) * 3600;
+                         builder.AddContent(26, "," + expHour);
+                         builder.CloseElement();
+                         builder.OpenElement(27, "td");
+                         builder.AddAttribute(28, "style", "text-align:right");
+                         float valueHour = ((float)item.Value / item.GatherSpeed) * 3600;
+                         builder.AddContent(29, "," + valueHour);
+                         builder.CloseElement();
+                         builder.OpenElement(30, "td");
+                         builder.AddAttribute(31, "style", "text-align:right");
+                         float ratio = expHour / valueHour;
+                         builder.AddContent(32, "," + ratio);
+                         builder.CloseElement();
+                     }*/
 
                     builder.CloseElement();
                 }

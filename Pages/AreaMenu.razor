@@ -1,20 +1,20 @@
 ﻿@page "/GatherMenu/{thisArea}"
 @inject GameState  GameState
-@inject  MessageManager  MessageManager
+@inject MessageManager  MessageManager
 @using System.Threading;
 @inject Microsoft.AspNetCore.Blazor.Services.WebAssemblyUriHelper UriHelper
 
 @if (area != null)
 {
     <button onclick="@(() => DebugGoToNextArea())">Go To Next Area</button>
-<h1>You are in @area.Name</h1>
-<p>@area.Description</p>
+    <h1>You are in @area.Name</h1>
+    <p>@area.Description</p>
 
-@LoadNPCs()
-@LoadActions()
-@LoadBuildings()
-@LoadRoadblocks()
-@LoadSmithingButton();
+    @LoadNPCs()
+    @LoadActions()
+    @LoadBuildings()
+    @LoadRoadblocks()
+    @LoadSmithingButton();
 
 }
 
@@ -48,9 +48,9 @@
     {
         area = Program.areaManager.GetAreaByURL(areaURL);
         GameState.currentArea = area;
-        if(area.AreaToUnlockOnArrival != null)
+        if (area.AreaToUnlockOnArrival != null)
         {
-            if(Program.areaManager.GetAreaByName(area.AreaToUnlockOnArrival).IsUnlocked == false)
+            if (Program.areaManager.GetAreaByName(area.AreaToUnlockOnArrival).IsUnlocked == false)
             {
                 MessageManager.AddMessage("You add this new area to your journal.");
             }
@@ -92,49 +92,49 @@
                     {
                         builder.AddContent(1, LoadHuntingButtons());
                     }
-                    else if(actionString == "Smithing")
+                    else if (actionString == "Smithing")
                     {
 
                     }
-                    else if(actionString == "Strength")
+                    else if (actionString == "Strength")
                     {
                         builder.OpenElement(2, "button");
                         builder.AddAttribute(3, "style", "margin-bottom:10px");
                         builder.AddAttribute(4, "class", "btn btn-primary");
                         builder.AddAttribute(5, "onclick", () => TrainStrength());
-                        if(GameState.isGathering || GameState.isHunting)
+                        if (GameState.isGathering || GameState.isHunting)
                         {
-                            builder.AddAttribute(6,"disabled",true);
+                            builder.AddAttribute(6, "disabled", true);
                         }
                         builder.AddContent(7, "Lift Weights");
                         builder.CloseElement();
                         builder.OpenElement(8, "br");
                         builder.CloseElement();
                     }
-                    else if(actionString == "Deftness")
+                    else if (actionString == "Deftness")
                     {
                         builder.OpenElement(2, "button");
                         builder.AddAttribute(3, "style", "margin-bottom:10px");
                         builder.AddAttribute(4, "class", "btn btn-primary");
                         builder.AddAttribute(5, "onclick", () => TrainDeftness());
-                        if(GameState.isGathering || GameState.isHunting)
+                        if (GameState.isGathering || GameState.isHunting)
                         {
-                            builder.AddAttribute(6,"disabled",true);
+                            builder.AddAttribute(6, "disabled", true);
                         }
                         builder.AddContent(7, "Run on Track");
                         builder.CloseElement();
                         builder.OpenElement(8, "br");
                         builder.CloseElement();
                     }
-                    else if(actionString == "Battle")
+                    else if (actionString == "Battle")
                     {
                         builder.OpenElement(2, "button");
                         builder.AddAttribute(3, "style", "margin-bottom:10px");
                         builder.AddAttribute(4, "class", "btn btn-primary");
                         builder.AddAttribute(5, "onclick", () => EnterFightingMenu());
-                        if(GameState.isGathering || GameState.isHunting)
+                        if (GameState.isGathering || GameState.isHunting)
                         {
-                            builder.AddAttribute(6,"disabled",true);
+                            builder.AddAttribute(6, "disabled", true);
                         }
                         builder.AddContent(7, "Battle");
                         builder.CloseElement();
@@ -145,7 +145,7 @@
                     {
                         string itemString = actionString.Split(':')[1];
                         string action = actionString.Split(':')[0];
-                        if(itemString == null || itemString.Length < 2)
+                        if (itemString == null || itemString.Length < 2)
                         {
                             continue;
                         }
@@ -161,7 +161,7 @@
                             if (gatherItem != itemString)
                             {
                                 builder.AddAttribute(12, "onclick", () => Gather(item));
-                                if(GameState.GetPlayerInventory().GetAvailableSpaces() == 0)
+                                if (GameState.GetPlayerInventory().GetAvailableSpaces() == 0)
                                 {
                                     builder.AddAttribute(13, "title", "Your inventory is full.");
                                     builder.AddAttribute(14, "disabled", true);
@@ -188,7 +188,7 @@
                     }
                 }
             }
-            else if(area == null)
+            else if (area == null)
             {
                 builder.OpenElement(20, "h");
                 builder.AddContent(21, "Area is null");
@@ -211,10 +211,10 @@
             builder.AddContent(0, "Find Ore Vein");
             builder.CloseElement();
 
-            if(miningVeinSearchTimer != null && currentMiningVeinID == -1)
+            if (miningVeinSearchTimer != null && currentMiningVeinID == -1)
             {
                 builder.OpenElement(0, "p");
-                builder.AddContent(0,"Searching... " + (5 - (int)DateTime.UtcNow.Subtract(mineSearchStartTime).TotalSeconds));
+                builder.AddContent(0, "Searching... " + (5 - (int)DateTime.UtcNow.Subtract(mineSearchStartTime).TotalSeconds));
                 builder.CloseElement();
             }
             else
@@ -225,7 +225,7 @@
             builder.OpenElement(0, "button");
             builder.AddAttribute(0, "style", "margin-bottom:10px");
             builder.AddAttribute(0, "class", "btn btn-primary");
-            if(currentMiningVeinID == -1)
+            if (currentMiningVeinID == -1)
             {
                 builder.AddAttribute(0, "disabled", true);
                 builder.AddContent(0, "Mine");
@@ -238,7 +238,7 @@
                 Console.WriteLine("Action Req:" + item.ActionRequired);
                 bool actionIsEnabled = GameState.GetPlayerInventory().ActionIsEnabled(item.ActionRequired);
                 bool playerHasLevels = GameState.GetPlayer().HasRequiredLevel(item);
-                if(actionIsEnabled && playerHasLevels)
+                if (actionIsEnabled && playerHasLevels)
                 {
                     if (gatherItem != item.ItemName)
                     {
@@ -293,7 +293,7 @@
                 builder.AddAttribute(3, "style", "margin:10px");
                 builder.AddAttribute(4, "class", "btn btn-primary");
                 builder.AddAttribute(5, "onclick", () => Hunt(1));
-                if(canHunt == false)
+                if (canHunt == false)
                 {
                     builder.AddAttribute(6, "disabled", true);
                     builder.AddAttribute(7, "title", "You need a bow in order to hunt.");
@@ -349,14 +349,14 @@
         limitedOre = true;
         miningVeinSearchTimer = new Timer(new TimerCallback(_ =>
         {
-            if(DateTime.UtcNow.Subtract(mineSearchStartTime).TotalSeconds >= 5)
+            if (DateTime.UtcNow.Subtract(mineSearchStartTime).TotalSeconds >= 5)
             {
                 SetCurrentMiningID(rand.Next(22, 26));
                 GameState.UpdateState();
                 StateHasChanged();
             }
             StateHasChanged();
-        }),null,1000,1000);
+        }), null, 1000, 1000);
 
         MessageManager.AddMessage("You begin looking for a new vein to mine");
     }
@@ -380,8 +380,8 @@
                 string requiredAction = splitData[3];
                 Area areaToUnlock = Program.areaManager.GetAreaByName(areaToUnlockString);
 
-                //If the area is not unlocked, or the parent area was not unlocked
-                if (requiredAction.Contains("Pay Gold") == false && areaToUnlock.IsUnlocked == false)
+            //If the area is not unlocked, or the parent area was not unlocked
+            if (requiredAction.Contains("Pay Gold") == false && areaToUnlock.IsUnlocked == false)
                 {
                     builder.OpenElement(0, "button");
                     builder.AddAttribute(1, "style", "margin-bottom:10px");
@@ -394,15 +394,15 @@
                         GameState.GetPlayer().HasItemToAccessArea(areaToUnlock.ActionRequiredForAccess) == false)
                     {
                         builder.AddAttribute(4, "disabled", true);
-                        if(GameState.GetPlayer().HasLevelForRoadblock(requiredLevel) == false)
+                        if (GameState.GetPlayer().HasLevelForRoadblock(requiredLevel) == false)
                         {
                             builder.AddAttribute(5, "title", "You lack the levels to do this." + "(" + requiredLevel + ")");
                         }
-                        else if(GameState.GetPlayerInventory().ActionIsEnabled(requiredAction) == false)
+                        else if (GameState.GetPlayerInventory().ActionIsEnabled(requiredAction) == false)
                         {
                             builder.AddAttribute(6, "title", "You do not have an item that lets you do this." + "(" + requiredAction + ")");
                         }
-                        else if(GameState.GetPlayer().HasItemToAccessArea(areaToUnlock.ActionRequiredForAccess) == false)
+                        else if (GameState.GetPlayer().HasItemToAccessArea(areaToUnlock.ActionRequiredForAccess) == false)
                         {
                             builder.AddAttribute(7, "title", "You do not have an item that lets you do this." + "(" + areaToUnlock.ActionRequiredForAccess + ")");
                         }
@@ -411,7 +411,7 @@
                     builder.AddContent(8, buttonText);
                     builder.CloseElement();
                 }
-                else if(requiredAction.Contains("Pay Gold") && areaToUnlock.IsUnlocked == false)
+                else if (requiredAction.Contains("Pay Gold") && areaToUnlock.IsUnlocked == false)
                 {
                     builder.OpenElement(9, "button");
                     builder.AddAttribute(10, "style", "margin-bottom:10px");
@@ -422,7 +422,7 @@
                         builder.AddAttribute(13, "disabled", true);
                         builder.AddAttribute(14, "title", "You don't have enough gold to do this." + "(" + int.Parse(requiredAction.Split(':')[1]) + ")" + GameState.GetPlayerInventory().GetCoins());
                     }
-                    else if(GameState.isGathering || GameState.isHunting)
+                    else if (GameState.isGathering || GameState.isHunting)
                     {
                         builder.AddAttribute(15, "disabled", true);
                     }
@@ -441,7 +441,7 @@
             foreach (int n in area.NPCIDs ?? Enumerable.Empty<int>())
             {
                 NPC npc = Program.npcManager.GetNPCByID(n);
-                if(npc.UnlockFollowerIDs != null && npc.HideOnFollow == true)
+                if (npc.UnlockFollowerIDs != null && npc.HideOnFollow == true)
                 {
                     if (Program.followerManager.GetFollowerByID(npc.UnlockFollowerIDs[0]).IsUnlocked)
                     {
@@ -455,16 +455,16 @@
                     builder.AddAttribute(0, "style", "margin-bottom:10px");
                     builder.AddAttribute(0, "class", "btn btn-warning");
                     builder.AddAttribute(0, "onclick", () => SpeakToNPC(npc));
-                    if(npc.UnlockAreaIDs != null && npc.UnlockAreaIDs.Length > 0)
+                    if (npc.UnlockAreaIDs != null && npc.UnlockAreaIDs.Length > 0)
                     {
-                        foreach(int a in npc.UnlockAreaIDs)
+                        foreach (int a in npc.UnlockAreaIDs)
                         {
                             builder.AddAttribute(0, "onclick", () => UnlockArea(Program.areaManager.GetAreaByID(a)));
                         }
                     }
-                    if(npc.UnlockBuildingIDs != null && npc.UnlockBuildingIDs.Length > 0)
+                    if (npc.UnlockBuildingIDs != null && npc.UnlockBuildingIDs.Length > 0)
                     {
-                        foreach(int b in npc.UnlockBuildingIDs)
+                        foreach (int b in npc.UnlockBuildingIDs)
                         {
                             builder.AddAttribute(0, "onclick", () => UnlockBuilding(Program.buildingManager.GetBuildingByID(b)));
                         }
@@ -478,17 +478,17 @@
                     }
                     builder.AddContent(0, "Speak to " + npc.Name);
                     builder.CloseElement();
-                    foreach(int followerID in npc.UnlockFollowerIDs ?? Enumerable.Empty<int>())
+                    foreach (int followerID in npc.UnlockFollowerIDs ?? Enumerable.Empty<int>())
                     {
                         Follower f = Program.followerManager.GetFollowerByID(followerID);
-                        if(f.IsUnlocked == false)
+                        if (f.IsUnlocked == false)
                         {
                             builder.OpenElement(0, "button");
                             builder.AddAttribute(0, "style", "margin-bottom:10px");
                             builder.AddAttribute(0, "class", "btn btn-warning");
                             builder.AddAttribute(0, "onclick", () => GameState.GetPlayerInventory().RemoveItems(Program.itemDatabase.GetGold(), f.Cost));
                             builder.AddAttribute(0, "onclick", () => UnlockFollower(followerID));
-                            if(GameState.GetPlayerInventory().GetCoins() < f.Cost)
+                            if (GameState.GetPlayerInventory().GetCoins() < f.Cost)
                             {
                                 builder.AddAttribute(0, "disabled", true);
                             }
@@ -510,7 +510,7 @@
             foreach (string s in area.Buildings ?? Enumerable.Empty<string>())
             {
                 Building building = Program.buildingManager.GetBuildingByURL(s);
-                if(building != null)
+                if (building != null)
                 {
                     builder.OpenElement(0, "button");
                     builder.AddAttribute(0, "style", "margin-bottom:10px");
@@ -557,7 +557,7 @@
 
             if (playerHasLevels)
             {
-                builder.AddAttribute(0, "title", "You lack the tool to do this." + "(" +item.ActionRequired + ")");
+                builder.AddAttribute(0, "title", "You lack the tool to do this." + "(" + item.ActionRequired + ")");
             }
             else if (actionIsEnabled)
             {
@@ -590,39 +590,40 @@
                 waitingForAutoCollectMessage = true;
             }), null, GameState.GetPlayer().activeFollower.AutoCollectSpeed, GameState.GetPlayer().activeFollower.AutoCollectSpeed);
         }
-        else if(GameState.GetPlayer().activeFollower != null && Extensions.FollowerCanAutoCollect(GameState.GetPlayer().activeFollower, itemToGather) == false)
+        else if (GameState.GetPlayer().activeFollower != null && Extensions.FollowerCanAutoCollect(GameState.GetPlayer().activeFollower, itemToGather) == false)
         {
             MessageManager.AddMessage(GameState.GetPlayer().activeFollower.Name + " cannot collect " + itemToGather.ItemName + " for you.");
         }
+        
         gatherTimer = new Timer(new TimerCallback(_ =>
         {
             if (Program.gatherManager.Gather(itemToGather))
             {
                 MessageManager.AddMessage(itemToGather.GatherString);
                 GameState.GetPlayer().GainExperience(itemToGather.ExperienceGained);
-                if(GameState.currentGatherItem.ActionRequired == "Mining" && limitedOre)
+                if (GameState.currentGatherItem.ActionRequired == "Mining" && limitedOre)
                 {
                     speedMulti += 0.05;
                     gatherTimer.Change((int)(itemToGather.GatherSpeed * speedMulti), (int)((itemToGather.GatherSpeed / 2) * speedMulti));
-                    if(Math.Abs(speedMulti - 2) < 0.01)
+                    if (Math.Abs(speedMulti - 2) < 0.01)
                     {
                         MessageManager.AddMessage("The vein you are mining appears to be running low.");
                     }
-                    else if(Math.Abs(speedMulti - 5) < 0.01)
+                    else if (Math.Abs(speedMulti - 5) < 0.01)
                     {
                         MessageManager.AddMessage("The vein you are mining appears to be running extremely low.");
                     }
-                    else if(Math.Abs(speedMulti - 10) < 0.01)
+                    else if (Math.Abs(speedMulti - 10) < 0.01)
                     {
                         MessageManager.AddMessage("The vein you are mining appears to have almost nothing left.");
                     }
                 }
             }
-            else if(!isAutoCollecting)
+            else if (!isAutoCollecting)
             {
                 StopGathering();
             }
-            else if(waitingForAutoCollectMessage)
+            else if (waitingForAutoCollectMessage)
             {
                 MessageManager.AddMessage("You wait for " + GameState.GetPlayer().activeFollower.Name + " to gather up " + gatherItem + " for banking.");
                 waitingForAutoCollectMessage = false;
@@ -638,7 +639,7 @@
         speedMulti = 1;
         tiredLevel = 0;
         StopGathering();
-        if(workoutTimer != null)
+        if (workoutTimer != null)
         {
             workoutTimer.Dispose();
             workoutTimer = null;
@@ -648,18 +649,18 @@
         {
             GameState.GetPlayer().GainExperience("Strength:6");
             workoutTimer.Change((int)(1000 * speedMulti), (int)(1000 * speedMulti));
-            speedMulti += 0.0005 * Math.Max(1, 100-GameState.GetPlayer().GetLevel("Strength")) * (tiredLevel + 1);
+            speedMulti += 0.0005 * Math.Max(1, 100 - GameState.GetPlayer().GetLevel("Strength")) * (tiredLevel + 1);
             if (speedMulti > 1.5 && speedMulti < 1.6 && tiredLevel == 0)
             {
                 MessageManager.AddMessage("You begin to feel tired.");
                 tiredLevel = 1;
             }
-            else if(speedMulti > 3 && speedMulti < 3.1 && tiredLevel == 1)
+            else if (speedMulti > 3 && speedMulti < 3.1 && tiredLevel == 1)
             {
                 MessageManager.AddMessage("You begin to feel very tired.");
                 tiredLevel = 2;
             }
-            else if(speedMulti > 10 && speedMulti < 10.1 && tiredLevel == 2)
+            else if (speedMulti > 10 && speedMulti < 10.1 && tiredLevel == 2)
             {
                 MessageManager.AddMessage("You begin to feel extremely tired.");
                 tiredLevel = 3;
@@ -672,7 +673,7 @@
     {
         speedMulti = 1;
         StopGathering();
-        if(workoutTimer != null)
+        if (workoutTimer != null)
         {
             workoutTimer.Dispose();
             workoutTimer = null;
@@ -682,9 +683,9 @@
         {
             GameState.GetPlayer().GainExperience("Deftness:6");
             workoutTimer.Change((int)(1000 * speedMulti), (int)(1000 * speedMulti));
-            speedMulti += 0.0005 * Math.Max(1, 100-GameState.GetPlayer().GetLevel("Deftness"));
+            speedMulti += 0.0005 * Math.Max(1, 100 - GameState.GetPlayer().GetLevel("Deftness"));
 
-            if(speedMulti > 1.5)
+            if (speedMulti > 1.5)
             {
                 MessageManager.AddMessage("You begin to feel tired.");
             }
@@ -702,7 +703,7 @@
     }
     public void StopGathering()
     {
-        if(GameState.GetPlayerInventory().GetAvailableSpaces() == 0)
+        if (GameState.GetPlayerInventory().GetAvailableSpaces() == 0)
         {
             MessageManager.AddMessage("Your inventory is full.");
         }
@@ -719,7 +720,7 @@
             GameState.UpdateState();
             this.StateHasChanged();
         }
-        if(workoutTimer != null)
+        if (workoutTimer != null)
         {
             workoutTimer.Dispose();
             workoutTimer = null;
@@ -728,7 +729,7 @@
     private void Hunt(int length)
     {
 
-        if(GameState.GetPlayerInventory().GetAvailableSpaces() < 3)
+        if (GameState.GetPlayerInventory().GetAvailableSpaces() < 3)
         {
             MessageManager.AddMessage("Your inventory is too full to go on a hunt.");
             return;
@@ -763,25 +764,25 @@
     {
         if (huntCountdownTimer != null)
         {
-            int caught = Program.huntingManager.GetNumberCaught();
+            int caught = Math.Min(Program.huntingManager.GetNumberCaught(), GameState.GetPlayerInventory().GetAvailableSpaces());
 
             List<GameItem> possibleCaughtAnimals = new List<GameItem>();
-            foreach(GameItem i in Program.itemDatabase.GetHuntedAnimals())
+            foreach (GameItem i in Program.itemDatabase.GetHuntedAnimals())
             {
-                if(area.HuntingIDs.Contains(i.Id) && GameState.GetPlayer().HasRequiredLevel(i))
+                if (area.HuntingIDs.Contains(i.Id) && GameState.GetPlayer().HasRequiredLevel(i))
                 {
                     possibleCaughtAnimals.Add(i);
                 }
             }
-            if(possibleCaughtAnimals.Count > 0)
+            if (possibleCaughtAnimals.Count > 0)
             {
                 for (int i = 0; i < caught; i++)
                 {
                     int nextRand = rand.Next(possibleCaughtAnimals.Count);
                     int temp = nextRand;
-                    for(int j = 0; j < temp; j++)
+                    for (int j = 0; j < temp; j++)
                     {
-                        if(rand.Next(2) == 0)
+                        if (rand.Next(2) == 0)
                         {
                             nextRand -= 1;
                             if (nextRand < 0)
@@ -809,7 +810,7 @@
         int amountToTake = Math.Min(GameState.GetPlayerInventory().GetNumberOfItem(item), GameState.GetPlayer().activeFollower.MaxCarry);
         GameState.GetPlayerInventory().RemoveItems(item, amountToTake);
         GameState.GetPlayerBank().GetInventory().AddMultipleOfItem(item, amountToTake);
-        MessageManager.AddMessage(GameState.GetPlayer().activeFollower.AutoCollectMessage.Replace("$",amountToTake.ToString()));
+        MessageManager.AddMessage(GameState.GetPlayer().activeFollower.AutoCollectMessage.Replace("$", amountToTake.ToString()));
         StateHasChanged();
         GameState.UpdateState();
     }

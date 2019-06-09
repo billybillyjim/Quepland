@@ -274,7 +274,12 @@
             else
             {
                 builder.AddAttribute(11, "onclick", () => Equip(item.Key));
-                builder.AddContent(12, "Equip");
+                if(GameState.GetPlayer().GetLevel(item.Key.ActionRequired) < item.Key.RequiredLevel)
+                {
+                    builder.AddAttribute(12, "disabled", true);
+                    builder.AddAttribute(13, "title", "You don't have the " + item.Key.ActionRequired + " level to equip this item. (" + item.Key.RequiredLevel + ")");
+                }
+                builder.AddContent(14, "Equip");
             }
 
             builder.CloseElement();

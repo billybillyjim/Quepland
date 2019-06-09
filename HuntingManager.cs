@@ -5,7 +5,7 @@ public class HuntingManager
     private DateTime currentHuntStartTime;
     private DateTime currentHuntEndTime;
     private GameState gameState;
-    private readonly double catchOdds = 1 / 15600d;
+    private readonly double catchOdds = 1 / 3600d;
 
     public HuntingManager()
     {
@@ -47,8 +47,8 @@ public class HuntingManager
     }
     public int GetNumberCaught()
     {
-        int totalTimeHunting = currentHuntEndTime.Subtract(currentHuntStartTime).Seconds;
-        double caughtBase = (double)totalTimeHunting * catchOdds * (double)(gameState.GetPlayer().GetLevel("Hunting") + 1);
+        double totalTimeHunting = currentHuntEndTime.Subtract(currentHuntStartTime).TotalSeconds;
+        double caughtBase = totalTimeHunting * catchOdds * (double)(gameState.GetPlayer().GetLevel("Hunting") + 1);
         double caught = Extensions.GetGaussianRandom(caughtBase, caughtBase / 2);
         if(caught < 1)
         {
@@ -56,4 +56,5 @@ public class HuntingManager
         }
         return (int)caught;
     }
+    
 }
