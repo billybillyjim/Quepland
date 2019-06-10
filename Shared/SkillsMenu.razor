@@ -77,20 +77,20 @@ else
                     builder.AddContent(19, item.ItemName);
                     builder.CloseElement();
 
-                    if (item.Damage > 0)
+                   /* if (item.Damage > 0)
                     {
                         builder.OpenElement(20, "td");
                         builder.AddAttribute(21, "style", "text-align:right");
                         builder.AddContent(22, item.Damage);
                         builder.CloseElement();
-                    }
+                    }*/
 
                     builder.OpenElement(21, "td");
                     builder.AddAttribute(22, "style", "text-align:right");
                     builder.AddContent(23, item.RequiredLevel);
                     builder.CloseElement();
 
-                    if(item.Damage > 0 && item.AttackSpeed > 0)
+                   /* if(item.Damage > 0 && item.AttackSpeed > 0)
                     {
                         builder.OpenElement(24, "td");
                         builder.AddAttribute(25, "style", "text-align:right");
@@ -99,7 +99,7 @@ else
                         builder.CloseElement();
 
                     }
-                    /* if (item.GatherSpeed > 0 && item.ExperienceGained != null)
+                     if (item.GatherSpeed > 0 && item.ExperienceGained != null)
                      {
                          int expGain = int.Parse(item.ExperienceGained.Split(':')[1]);
                          builder.OpenElement(24, "td");

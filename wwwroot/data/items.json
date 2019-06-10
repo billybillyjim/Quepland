@@ -183,7 +183,8 @@
     "damage": 4,
     "actionRequired": "Axemanship",
     "attackSpeed": 3000,
-    "gatherSpeedBonus": 0.1
+    "gatherSpeedBonus": 0.1,
+    "icon": "Axe"
   },
   {
     "itemName": "Minnow Net",
@@ -270,7 +271,8 @@
     "id": 21,
     "value": 2,
     "actionRequired": "Gather",
-    "gatherSpeed": 750
+    "gatherSpeed": 750,
+    "icon": "Plant"
   },
   {
     "itemName": "Copper Ore",
@@ -280,7 +282,7 @@
     "actionRequired": "Mining",
     "gatherSpeed": 2000,
     "requiredLevel": 0,
-    "experienceGained": "Mining:50",
+    "experienceGained": "Mining:20",
     "gatherString": "You mine some copper ore.",
     "icon": "Ore"
   },
@@ -292,7 +294,7 @@
     "actionRequired": "Mining",
     "gatherSpeed": 2500,
     "requiredLevel": 3,
-    "experienceGained": "Mining:75",
+    "experienceGained": "Mining:30",
     "gatherString": "You mine some tin ore.",
     "icon": "Ore"
   },
@@ -304,7 +306,7 @@
     "actionRequired": "Mining",
     "gatherSpeed": 4000,
     "requiredLevel": 25,
-    "experienceGained": "Mining:150",
+    "experienceGained": "Mining:50",
     "gatherString": "You mine some iron ore.",
     "icon": "Ore"
   },
@@ -316,7 +318,7 @@
     "actionRequired": "Mining",
     "gatherSpeed": 3000,
     "requiredLevel": 15,
-    "experienceGained": "Mining:100",
+    "experienceGained": "Mining:70",
     "gatherString": "You mine some calamine.",
     "icon": "Ore"
   },
@@ -410,7 +412,8 @@
     "equipSlot": "Right Hand",
     "damage": 6,
     "attackSpeed": 4000,
-    "gatherSpeedBonus": 0.1
+    "gatherSpeedBonus": 0.1,
+    "icon": "Mining"
   },
   {
     "itemName": "Deer Antlers",
@@ -511,7 +514,8 @@
     "isEquipable": true,
     "equipSlot": "Right Hand",
     "damage": 14,
-    "attackSpeed": 2000
+    "attackSpeed": 2000,
+    "icon": "Sword"
   },
   {
     "itemName": "Bronze Axe",
@@ -574,13 +578,15 @@
       [ 102, 159 ],
       [ 103, 161 ]
 
-    ]
+    ],
+    "icon": "Feather"
   },
   {
     "itemName": "Chicken Egg",
     "id": 44,
     "itemDescription": "If you could incubate this it might grow into a chicken.",
-    "value": 10
+    "value": 10,
+    "icon": "Food"
   },
   {
     "itemName": "Manta Ray",
@@ -638,7 +644,7 @@
     "actionRequired": "Mining",
     "gatherSpeed": 3500,
     "requiredLevel": 25,
-    "experienceGained": "Mining:130",
+    "experienceGained": "Mining:90",
     "gatherString": "You mine some pentlandite.",
     "icon": "Ore"
   },
@@ -650,7 +656,7 @@
     "actionRequired": "Mining",
     "gatherSpeed": 7000,
     "requiredLevel": 55,
-    "experienceGained": "Mining:530",
+    "experienceGained": "Mining:140",
     "gatherString": "You mine some galena.",
     "icon": "Ore"
   },
@@ -662,7 +668,7 @@
     "actionRequired": "Mining",
     "gatherSpeed": 9000,
     "requiredLevel": 65,
-    "experienceGained": "Mining:900",
+    "experienceGained": "Mining:200",
     "gatherString": "You mine some cinnabar.",
     "icon": "Ore"
   },
@@ -674,7 +680,7 @@
     "actionRequired": "Mining",
     "gatherSpeed": 7000,
     "requiredLevel": 75,
-    "experienceGained": "Mining:1300",
+    "experienceGained": "Mining:180",
     "gatherString": "You mine some bauxite.",
     "icon": "Ore"
   },
@@ -686,7 +692,7 @@
     "actionRequired": "Mining",
     "gatherSpeed": 8000,
     "requiredLevel": 85,
-    "experienceGained": "Mining:1200",
+    "experienceGained": "Mining:240",
     "gatherString": "You mine some gold ore.",
     "icon": "Ore"
   },
@@ -698,7 +704,7 @@
     "actionRequired": "Mining",
     "gatherSpeed": 10000,
     "requiredLevel": 92,
-    "experienceGained": "Mining:1500",
+    "experienceGained": "Mining:280",
     "gatherString": "You mine some platinum ore.",
     "icon": "Ore"
   },
@@ -980,7 +986,8 @@
     "itemName": "Moose Antlers",
     "itemDescription": "The antlers of a moose.",
     "id": 80,
-    "value": 100
+    "value": 100,
+    "icon": "Deer"
   },
   {
     "itemName": "Pigeon Meat",
@@ -1035,7 +1042,8 @@
     "itemName": "Wild Boar Tusk",
     "itemDescription": "The tusk of a wild boar.",
     "id": 88,
-    "value": 375
+    "value": 375,
+    "icon": "Pelt"
   },
   {
     "itemName": "Lesser Lead Hammer",
@@ -1765,7 +1773,8 @@
     "itemDescription": "A proof of membership to an exclusive club.",
     "value": 1200,
     "gatherString": "You got a gym membership card.",
-    "actionsEnabled": "Gym Membership"
+    "actionsEnabled": "Gym Membership",
+    "icon": "Card"
   },
   {
     "itemName": "Iron Axe",
@@ -3458,14 +3467,17 @@
     "id": 245,
     "itemDescription": "A small boat you can sail the seas with.",
     "value": 25000,
-    "actionsEnabled": "Shallow Ocean Travel"
+    "actionsEnabled": "Shallow Ocean Travel",
+    "icon": "Transport"
+
   },
   {
     "itemName": "Large Boat",
     "id": 246,
     "itemDescription": "A large boat you can sail the seas with.",
     "value": 500000,
-    "actionsEnabled": "Shallow Ocean Travel, Deep Ocean Travel"
+    "actionsEnabled": "Shallow Ocean Travel, Deep Ocean Travel",
+    "icon": "Transport"
   },
   {
     "itemName": "Mercurice Sword Grip",
