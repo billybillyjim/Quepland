@@ -152,5 +152,97 @@
     "id": 23,
     "spokenText": "Well I got some big boats, and some little ones. Which do you want?",
     "isInteractable": true
+  },
+  {
+    "name": "Old Man",
+    "id": 24,
+    "spokenText": "You're not from around here, are you? Up ahead is Tsu City, the capital of the Rising Hills. You can buy almost anything you want there.",
+    "isInteractable": true
+  },
+  {
+    "name": "Old Woman",
+    "id": 25,
+    "spokenText": "Oh, you're headed to Tsu City? They have a lovely garden there. It's just north of the castle.",
+    "isInteractable": true
+  },
+  {
+    "name": "Nursery Guard",
+    "id": 26,
+    "spokenText": "These trees are the property of Tsu City. You can't cut them down without permission!",
+    "isInteractable": true
+  },
+  {
+    "name": "Shady Hooded Person",
+    "id": 27,
+    "spokenText": "Would you like to learn more about alchemy? Visit the alchemic emporium on the east side of town. The information isn't free, of course.",
+    "isInteractable": true
+  },
+  {
+    "name": "Mr. Meat",
+    "id": 28,
+    "spokenText": "Hi there! I'm Mr. Meat. I love meat! Come to my shop and sell me your meat! Okay? See you there! Hahahaha!",
+    "isInteractable": true
+  },
+  {
+    "name": "Town Crier",
+    "id": 29,
+    "spokenText": "The crier ignores you as he cries out, 'The warriors guild is looking for new entrants! See the admissions counselor at the Settled Sea Horse for more information!'",
+    "isInteractable": true
+  },
+  {
+    "name": "Castle Archer Captain",
+    "id": 30,
+    "spokenText": "These training dummies are for our guards to practice on, but I suppose I could let you use them as well. They're specifically built to be good for shooting, so you won't get experience as quickly if you just try to beat them with melee weapons.",
+    "isInteractable": true
+  },
+  {
+    "name": "Untrustworthy-looking Salesman",
+    "id": 31,
+    "spokenText": "Wanna buy some art?",
+    "isInteractable": true,
+    "purchaseItemIDs": [ 8, 10 ]
+  },
+  {
+    "name": "Food Stall Operator",
+    "id": 32,
+    "spokenText": "I've got all kinds of sushi rolls! Buy somethin' will ya?",
+    "isInteractable": true,
+    "purchaseItemIDs": [ 128, 130, 132 ]
+  },
+  {
+    "name": "Garden Guard",
+    "id": 33,
+    "spokenText": "It costs 200 gold coins for entry.",
+    "isInteractable": true
+  },
+  {
+    "name": "Doooligan Quellop",
+    "id": 34,
+    "spokenText": "Alchemy is built around an intrinsic property of metals, elements, and areas of strong elemental power. We call it a queplar value, and all metals, elements, and elemental halls have one. Elements have a negative queplar value, while metals and elemental halls have a positive value.",
+    "isInteractable": true
+  },
+  {
+    "name": "Goranjio Quellop",
+    "id": 35,
+    "spokenText": "Alchemy is still a new field, so we don't know the queplar values of very many things. What we can say for certain, is that Carquen has a value of -5.",
+    "isInteractable": true
+  },
+  {
+    "name": "Old Alchemist",
+    "id": 36,
+    "spokenText": "You seek information about alchemy? Do you know of queplar values? The alchemists in Tsu City south of the wasteland can tell you more, but I can tell you what I know. Copper is the only metal with a queplar value of 0, and the great hall here has a value of 25.",
+    "isInteractable": true
+  },
+  {
+    "name": "Excited Gnome",
+    "id": 37,
+    "spokenText": "You got a job for me? Yeah? Sure, I'll do it. I'm in. Just let me know. Yessir. Right away! Oh, but you'll need to pay me. Up front. Deal?",
+    "unlockFollowerIDs": [ 5 ]
+  },
+  {
+    "name": "Slouching Gnome",
+    "id": 38,
+    "spokenText": "I'll work for you. Just show me the money!",
+    "unlockFollowerIDs": [3]
   }
 ]

@@ -488,5 +488,17 @@
       [ 96, 100 ],
       [ 97, 50 ]
     ]
+  },
+  {
+    "name": "Archery Training Dummy",
+    "id": 28,
+    "level": 0,
+    "experienceGained": 10,
+    "hp": 25,
+    "weakness": "Archery",
+    "strength": "Knifesmanship Swordsmanship Axemanship Hammermanship Strength",
+    "damage": 0,
+    "attackSpeed": 50
+    
   }
 ]

@@ -23,7 +23,7 @@
     "maxCarry": 15,
     "autoCollectSpeed": 15000,
     "isUnlocked": false,
-    "cost": 5000
+    "cost": 50000
   },
   {
     "name": "Grumpy the Gnome",
@@ -36,7 +36,7 @@
     "maxCarry": 19,
     "autoCollectSpeed": 10000,
     "isUnlocked": false,
-    "cost": 15000
+    "cost": 150000
   },
   {
     "name": "Slumpy the Gnome",
@@ -49,7 +49,7 @@
     "maxCarry": 23,
     "autoCollectSpeed": 7500,
     "isUnlocked": false,
-    "cost": 25000
+    "cost": 250000
   },
   {
     "name": "Rumpy the Gnome",
@@ -62,7 +62,7 @@
     "maxCarry": 26,
     "autoCollectSpeed": 5000,
     "isUnlocked": false,
-    "cost": 50000
+    "cost": 5000000
   },
   {
     "name": "Jumpy the Gnome",
@@ -75,7 +75,7 @@
     "maxCarry": 30,
     "autoCollectSpeed": 2000,
     "isUnlocked": false,
-    "cost": 100000
+    "cost": 10000000
   },
   {
     "name": "Thurgood the Dwarf",
@@ -102,7 +102,7 @@
     "maxCarry": 15,
     "autoCollectSpeed": 15000,
     "isUnlocked": false,
-    "cost": 30000,
+    "cost": 300000,
     "costItemID": 0
   },
   ,
@@ -117,7 +117,7 @@
     "maxCarry": 18,
     "autoCollectSpeed": 12000,
     "isUnlocked": false,
-    "cost": 500000,
+    "cost": 5000000,
     "costItemID": 0
   },
   {
@@ -131,7 +131,7 @@
     "maxCarry": 30,
     "autoCollectSpeed": 10000,
     "isUnlocked": false,
-    "cost": 1000000,
+    "cost": 10000000,
     "costItemID": 0
   },
   {
@@ -145,7 +145,7 @@
     "maxCarry": 20,
     "autoCollectSpeed": 20000,
     "isUnlocked": false,
-    "cost": 1000000,
+    "cost": 10000000,
     "costItemID": 0
   },
   {
@@ -159,5 +159,83 @@
     "cost": 10000000,
     "costItemID": 0,
     "autoCollectSkill": "Fighting"
-  }
+  },
+  {
+    "name": "Raka the Kushtaka",
+    "id": 12,
+    "description": "Raka is a very simple Kushtaka. She'll take your fish to the bank, slowly.",
+    "autoCollectMessage": "Raka bags up $ fish and carries them away, slowly.",
+    "RequiredLevels": [ "Fishing:5" ],
+    "autoCollectSkill": "Fishing",
+    "autoCollectLevel": 10,
+    "maxCarry": 15,
+    "autoCollectSpeed": 20000,
+    "isUnlocked": false,
+    "cost": 1000
+  },
+  {
+    "name": "Al the Kushtaka",
+    "id": 13,
+    "description": "Al is a beginner at carrying things to the bank, but he tries his best.",
+    "autoCollectMessage": "Al carries off $ fish to the bank.",
+    "RequiredLevels": [ "Fishing:15" ],
+    "autoCollectSkill": "Fishing",
+    "autoCollectLevel": 30,
+    "maxCarry": 15,
+    "autoCollectSpeed": 15000,
+    "isUnlocked": false,
+    "cost": 50000
+  },
+  {
+    "name": "Krim the Kushtaka",
+    "id": 14,
+    "description": "Krim is an average Kushtaka. Don't expect too much and you won't be disappointed.",
+    "autoCollectMessage": "Krim bags up $ fish and hurries off to the bank.",
+    "RequiredLevels": [ "Fishing:30" ],
+    "autoCollectSkill": "Fishing",
+    "autoCollectLevel": 45,
+    "maxCarry": 19,
+    "autoCollectSpeed": 10000,
+    "isUnlocked": false,
+    "cost": 150000
+  },
+  {
+    "name": "Sloodle the Kushtaka",
+    "id": 15,
+    "description": "Sloodle is an exceptional helper. Her eagerness is only surpassed by her work ethic.",
+    "autoCollectMessage": "Sloodle happily bags up $ fish and dutifully takes them to the bank.",
+    "RequiredLevels": [ "Fishing:50" ],
+    "autoCollectSkill": "Fishing",
+    "autoCollectLevel": 60,
+    "maxCarry": 23,
+    "autoCollectSpeed": 7500,
+    "isUnlocked": false,
+    "cost": 250000
+  },
+  {
+    "name": "Wenshoop the Kushtaka",
+    "id": 16,
+    "description": "Wenshoop is one of the greatest Kushtaka to ever live. You should feel grateful he'll even work for you, he says.",
+    "autoCollectMessage": "Wenshoop haughtily bags up $ fish, and carries them off to the bank, despite being so beneath him.",
+    "RequiredLevels": [ "Fishing:65" ],
+    "autoCollectSkill": "Fishing",
+    "autoCollectLevel": 75,
+    "maxCarry": 26,
+    "autoCollectSpeed": 5000,
+    "isUnlocked": false,
+    "cost": 5000000
+  },
+  {
+    "name": "Glindrear the Kushtaka",
+    "id": 17,
+    "description": "Glindrear is a master bank carry-er. He's been doing this kind of thing for years.",
+    "autoCollectMessage": "Glindrear carries off $ fish, using nothing but his bare hands.",
+    "RequiredLevels": [ "Fishing:75" ],
+    "autoCollectSkill": "Fishing",
+    "autoCollectLevel": 100,
+    "maxCarry": 30,
+    "autoCollectSpeed": 2000,
+    "isUnlocked": false,
+    "cost": 10000000
+  },
 ]

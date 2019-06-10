@@ -380,8 +380,8 @@
                 string requiredAction = splitData[3];
                 Area areaToUnlock = Program.areaManager.GetAreaByName(areaToUnlockString);
 
-            //If the area is not unlocked, or the parent area was not unlocked
-            if (requiredAction.Contains("Pay Gold") == false && areaToUnlock.IsUnlocked == false)
+                //If the area is not unlocked, or the parent area was not unlocked
+                if (requiredAction.Contains("Pay Gold") == false && areaToUnlock.IsUnlocked == false)
                 {
                     builder.OpenElement(0, "button");
                     builder.AddAttribute(1, "style", "margin-bottom:10px");
@@ -452,53 +452,71 @@
                 if (npc.IsInteractable == true)
                 {
                     builder.OpenElement(0, "button");
-                    builder.AddAttribute(0, "style", "margin-bottom:10px");
-                    builder.AddAttribute(0, "class", "btn btn-warning");
-                    builder.AddAttribute(0, "onclick", () => SpeakToNPC(npc));
+                    builder.AddAttribute(1, "style", "margin-bottom:10px");
+                    builder.AddAttribute(2, "class", "btn btn-warning");
+                    builder.AddAttribute(3, "onclick", () => SpeakToNPC(npc));
                     if (npc.UnlockAreaIDs != null && npc.UnlockAreaIDs.Length > 0)
                     {
                         foreach (int a in npc.UnlockAreaIDs)
                         {
-                            builder.AddAttribute(0, "onclick", () => UnlockArea(Program.areaManager.GetAreaByID(a)));
+                            builder.AddAttribute(4, "onclick", () => UnlockArea(Program.areaManager.GetAreaByID(a)));
                         }
                     }
                     if (npc.UnlockBuildingIDs != null && npc.UnlockBuildingIDs.Length > 0)
                     {
                         foreach (int b in npc.UnlockBuildingIDs)
                         {
-                            builder.AddAttribute(0, "onclick", () => UnlockBuilding(Program.buildingManager.GetBuildingByID(b)));
+                            builder.AddAttribute(5, "onclick", () => UnlockBuilding(Program.buildingManager.GetBuildingByID(b)));
                         }
                     }
                     if (npc.UnlockNPCIDs != null && npc.UnlockNPCIDs.Length > 0)
                     {
                         foreach (int i in npc.UnlockNPCIDs)
                         {
-                            builder.AddAttribute(0, "onclick", () => UnlockNPC(Program.npcManager.GetNPCByID(i)));
+                            builder.AddAttribute(6, "onclick", () => UnlockNPC(Program.npcManager.GetNPCByID(i)));
                         }
                     }
-                    builder.AddContent(0, "Speak to " + npc.Name);
+                    builder.AddContent(7, "Speak to " + npc.Name);
+                    builder.CloseElement();
+                    builder.OpenElement(8, "br");
                     builder.CloseElement();
                     foreach (int followerID in npc.UnlockFollowerIDs ?? Enumerable.Empty<int>())
                     {
                         Follower f = Program.followerManager.GetFollowerByID(followerID);
                         if (f.IsUnlocked == false)
                         {
-                            builder.OpenElement(0, "button");
-                            builder.AddAttribute(0, "style", "margin-bottom:10px");
-                            builder.AddAttribute(0, "class", "btn btn-warning");
-                            builder.AddAttribute(0, "onclick", () => GameState.GetPlayerInventory().RemoveItems(Program.itemDatabase.GetGold(), f.Cost));
-                            builder.AddAttribute(0, "onclick", () => UnlockFollower(followerID));
+                            builder.OpenElement(9, "button");
+                            builder.AddAttribute(10, "style", "margin-bottom:10px");
+                            builder.AddAttribute(11, "class", "btn btn-warning");
+                            builder.AddAttribute(12, "onclick", () => GameState.GetPlayerInventory().RemoveItems(Program.itemDatabase.GetGold(), f.Cost));
+                            builder.AddAttribute(13, "onclick", () => UnlockFollower(followerID));
                             if (GameState.GetPlayerInventory().GetCoins() < f.Cost)
                             {
-                                builder.AddAttribute(0, "disabled", true);
+                                builder.AddAttribute(14, "disabled", true);
                             }
-                            builder.AddContent(0, "Buy " + f.Name + " for " + f.Cost + "gp");
+                            builder.AddContent(15, "Buy " + f.Name + " for " + f.Cost + "gp");
                             builder.CloseElement();
                         }
 
                     }
-                    builder.OpenElement(0, "br");
-                    builder.CloseElement();
+                    foreach (int itemID in npc.PurchaseItemIDs ?? Enumerable.Empty<int>())
+                    {
+                        GameItem item = Program.itemDatabase.GetItemByID(itemID);
+                        builder.OpenElement(16, "button");
+                        builder.AddAttribute(17, "style", "margin-bottom:10px");
+                        builder.AddAttribute(18, "class", "btn btn-primary");
+                        builder.AddAttribute(19, "onclick", () => BuyItem(item, 1));
+                        if (GameState.GetPlayerInventory().GetCoins() < item.Value || GameState.GetPlayerInventory().GetAvailableSpaces() == 0)
+                        {
+                            builder.AddAttribute(20, "disabled", true);
+                            builder.AddAttribute(21, "title", "You don't have enough coins with you to buy this.");
+                        }
+                        builder.AddContent(22, "Buy " + item.ItemName + " for " + item.Value + " gp");
+                        builder.CloseElement();
+                        builder.OpenElement(23, "br");
+                        builder.CloseElement();
+                    }
+
                 }
             }
         };
@@ -594,7 +612,7 @@
         {
             MessageManager.AddMessage(GameState.GetPlayer().activeFollower.Name + " cannot collect " + itemToGather.ItemName + " for you.");
         }
-        
+
         gatherTimer = new Timer(new TimerCallback(_ =>
         {
             if (Program.gatherManager.Gather(itemToGather))
@@ -842,6 +860,27 @@
     {
         MessageManager.AddMessage(npc.SpokenText);
         GameState.UpdateState();
+    }
+    private void BuyItem(GameItem item, int amount)
+    {
+        if(amount < 0)
+        {
+            amount = 0;
+        }
+        int price = item.Value * amount;
+        if (GameState.GetPlayerInventory().GetCoins() >= price)
+        {
+            GameState.GetPlayerInventory().RemoveItems(Program.itemDatabase.GetGold(), price);
+            GameState.GetPlayerInventory().AddMultipleOfItem(item, amount);
+            MessageManager.AddMessage("You bought " + amount + " " + item.ItemName);
+        }
+        else
+        {
+            MessageManager.AddMessage("You can't afford that.");
+        }
+
+        GameState.UpdateState();
+        StateHasChanged();
     }
     protected override void OnInit()
     {

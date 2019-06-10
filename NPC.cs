@@ -1,5 +1,5 @@
 ﻿using System;
-
+using System.ComponentModel;
 public class NPC
 {
 	public bool IsInteractable { get; set; }
@@ -11,4 +11,6 @@ public class NPC
     public int[] UnlockBuildingIDs { get; set; }
     public int[] UnlockNPCIDs { get; set; }
     public int[] PurchaseItemIDs { get; set; }
+    [DefaultValue(1.0d)]
+    public double PriceDiscount { get; set; }
 }

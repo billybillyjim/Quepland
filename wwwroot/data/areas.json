@@ -449,12 +449,13 @@
   {
     "name": "Oasis",
     "areaURL": "Oasis",
-    "description": "There is a pool of water supporting a small number of very rare trees here.",
+    "description": "There is a pool of water supporting a small number of very rare trees here. Far in the distance you can see a mountain range.",
     "redirectAreaURL": "Route7",
     "actionRequiredForAccess": "Desert Travel",
     "id": 44,
     "actions": [ "Chop Lignum Vitae Trees:Lignum Vitae Logs" ],
-    "icon": "oi oi-droplet"
+    "icon": "oi oi-droplet",
+    "unlockableAreas": [ "Great Shoe Lake,Travel south to the mountains,," ]
   },
   {
     "name": "Leupp",
@@ -535,6 +536,95 @@
     "actions": [ "Battle" ],
     "icon": "oi oi-vertical-align-center",
     "monsterIDs": [ 5, 6, 12, 13, 14, 15 ]
+  },
+  {
+    "name": "The Rising Hills",
+    "id": 53,
+    "areaURL": "RisingHills",
+    "isUnlocked": false,
+    "description": "A mountain range.",
+    "icon": "oi oi-graph",
+    "children": [ "ShoeLake", "TsuValley", "TreeNursery", "WestTsuCity", "CentralTsuCity", "TsuCastle", "EastTsuCity", "NorthTsuCity" ]
+  },
+  {
+    "name": "Great Shoe Lake",
+    "id": 54,
+    "areaURL": "ShoeLake",
+    "isUnlocked": false,
+    "description": "You reach the Rising hills. The lake sits at the foot of a huge mountain range. It may have once looked like a shoe. Legends tell of monsters beneath the surface of the water.",
+    "actions": [ "Battle" ],
+    "icon": "oi oi-vertical-align-center",
+    "monsterIDs": [ 15, 24, 25 ],
+    "areaToUnlockOnArrival": "The Rising Hills",
+    "unlockableAreas": [ "Tsu Valley,Hike the mountain trail,," ]
+  },
+  {
+    "name": "Tsu Valley",
+    "id": 55,
+    "areaURL": "TsuValley",
+    "isUnlocked": false,
+    "description": "You follow the path down to an open field. Up ahead you see a large castle town.",
+    "icon": "oi oi-chevron-bottom",
+    "unlockableAreas": [ "Tree Nursery,Continue toward the castle town,," ],
+    "npcIDs": [24, 25]
+  },
+  {
+    "name": "Tree Nursery",
+    "id": 56,
+    "areaURL": "TreeNursery",
+    "isUnlocked": false,
+    "description": "The road leads you through a tree nursery. There are plenty of trees to chop down here, but it looks like someone else owns them.",
+    "icon": "oi oi-rain",
+    "unlockableAreas": [ "West Tsu City,Follow the road into town,," ],
+    "npcIDs": [ 26 ]
+  },
+  {
+    "name": "West Tsu City",
+    "id": 57,
+    "areaURL": "WestTsuCity",
+    "isUnlocked": false,
+    "description": "You pass through the gate into the large city of Tsu. There are a good number of shops here, as well as a main road which leads up to the castle.",
+    "icon": "oi oi-credit-card",
+    "unlockableAreas": [ "Central Tsu City,Go to the heart of the city,," ],
+    "npcIDs": [ 27, 28 ]
+  },
+  {
+    "name": "Central Tsu City",
+    "id": 58,
+    "areaURL": "CentralTsuCity",
+    "isUnlocked": false,
+    "description": "You reach the center of the city. The area is mostly residential, but the castle grounds are open to the public.",
+    "icon": "oi oi-document",
+    "unlockableAreas": [ "Tsu Castle,Enter the castle courtyard,,", "East Tsu City,Go east to the shopping district,,", "North Tsu City,Go north,," ],
+    "npcIDs": [ 29 ]
+  },
+  {
+    "name": "Tsu Castle",
+    "id": 59,
+    "areaURL": "TsuCastle",
+    "isUnlocked": false,
+    "description": "Arriving in the castle courtyard, you find a number of bowmen training their archery skills on dummies.",
+    "icon": "oi oi-laptop",
+    "actions": [ "Battle" ],
+    "monsterIDs": [ 28 ],
+    "npcIDs": [ 30 ]
+  },
+  {
+    "name": "East Tsu City",
+    "id": 60,
+    "areaURL": "EastTsuCity",
+    "isUnlocked": false,
+    "description": "You enter the main shopping center of Tsu City. Malls and stalls line the road on either side.",
+    "icon": "oi oi-lock-locked",
+    "npcIDs": [ 31,32 ]
+  },
+  {
+    "name": "North Tsu City",
+    "id": 61,
+    "areaURL": "NorthTsuCity",
+    "isUnlocked": false,
+    "description": "You pass by the castle heading north and reach a quiet residential area. You can see the entrance to a massive garden up ahead.",
+    "icon": "oi oi-link-intact",
+    "npcIDs": [ 33 ]
   }
-
 ]

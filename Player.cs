@@ -303,11 +303,11 @@ public class Player
                 }
 
             }
-            if (action.Contains(opponent.Weakness))
+            if (opponent.Weakness.Contains(action))
             {
                 baseDamage *= 2;
             }
-            else if (action.Contains(opponent.Strength))
+            else if (opponent.Strength.Contains(action))
             {
                 baseDamage /= 2;
             }
