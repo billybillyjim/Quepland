@@ -39,7 +39,7 @@
     "description": "You enter the small mountain town of Teppas. There is a shop to buy and sell goods from. A winding main street continues up the mountain.",
     "areaURL": "teppas",
     "icon": "oi oi-basket",
-    "buildings": [ "TeppasGeneralStore", "MayorsHouse", "TeppasElementalEmporium", "ArcheryShop", "TeppasInn" ],
+    "buildings": [ "TeppasGeneralStore", "MayorsHouse", "TeppasInn" ],
     "unlockableAreas": [ "Lower Mt Queple Trail, Go through the village,," ],
     "npcIDs": [ 13 ]
   },
@@ -607,7 +607,8 @@
     "icon": "oi oi-laptop",
     "actions": [ "Battle" ],
     "monsterIDs": [ 28 ],
-    "npcIDs": [ 30 ]
+    "npcIDs": [ 30 ],
+    "buildings": ["ArcheryShop" ]
   },
   {
     "name": "East Tsu City",
@@ -616,7 +617,8 @@
     "isUnlocked": false,
     "description": "You enter the main shopping center of Tsu City. Malls and stalls line the road on either side.",
     "icon": "oi oi-lock-locked",
-    "npcIDs": [ 31,32 ]
+    "npcIDs": [ 31, 32 ],
+    "buildings": [ "ElementalEmporium" ]
   },
   {
     "name": "North Tsu City",

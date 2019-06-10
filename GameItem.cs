@@ -46,6 +46,8 @@ public class GameItem
     public string ActionRequired { get; set; }
     public string BuffedSkill { get; set; }
 
+    [DefaultValue("Unknown.png")]
+    public string Icon { get; set; }
 
     public override string ToString()
     {

@@ -111,21 +111,25 @@
                 builder.AddAttribute(2, "style", "background-color:aquamarine");
             }
             builder.OpenElement(3, "td");
-            builder.AddAttribute(4, "style", "text-align:left");
-            builder.AddContent(5, item.Key.ItemName);
+            builder.AddAttribute(4, "style", "text-align:left;font-weight:bold");
+            builder.OpenElement(5, "img");
+            builder.AddAttribute(6, "src", "data/ItemIcons/" + item.Key.Icon + ".png");
+            builder.AddAttribute(6, "style", "width:50px;opacity:0.3;");
             builder.CloseElement();
-            builder.OpenElement(6, "td");
-            builder.AddAttribute(7, "style", "text-align:right");
-            builder.OpenElement(8, "font");
-            builder.AddAttribute(9, "size", "4");
+            builder.AddContent(7, item.Key.ItemName);
+            builder.CloseElement();
+            builder.OpenElement(8, "td");
+            builder.AddAttribute(9, "style", "text-align:right");
+            builder.OpenElement(10, "font");
+            builder.AddAttribute(11, "size", "4");
 
             if (item.Key.IsStackable)
             {
-                builder.AddContent(10, "1 Stack of " + item.Value);
+                builder.AddContent(12, "1 Stack of " + item.Value);
             }
             else
             {
-                builder.AddContent(11, item.Value);
+                builder.AddContent(13, item.Value);
             }
             builder.CloseElement();
             builder.CloseElement();
@@ -133,30 +137,30 @@
             if (item.Key.IsUsable)
             {
 
-                builder.OpenElement(12, "tr");
+                builder.OpenElement(14, "tr");
                 if (item.Key.IsEquipped)
                 {
-                    builder.AddAttribute(13, "style", "background-color:aquamarine");
+                    builder.AddAttribute(15, "style", "background-color:aquamarine");
                 }
 
-                builder.AddAttribute(14, "class", "buddy-mid");
+                builder.AddAttribute(16, "class", "buddy-mid");
 
 
-                builder.OpenElement(16, "td");
-                builder.CloseElement();
                 builder.OpenElement(17, "td");
-                builder.AddAttribute(18, "style", "text-align:right");
-                builder.OpenElement(19, "button");
-                builder.AddAttribute(20, "class", "btn btn-primary");
+                builder.CloseElement();
+                builder.OpenElement(18, "td");
+                builder.AddAttribute(19, "style", "text-align:right");
+                builder.OpenElement(20, "button");
+                builder.AddAttribute(21, "class", "btn btn-primary");
                 if (!isUsing)
                 {
-                    builder.AddAttribute(21, "onclick", () => Use(item.Key));
-                    builder.AddContent(22, "Use " + item.Key.ItemName);
+                    builder.AddAttribute(22, "onclick", () => Use(item.Key));
+                    builder.AddContent(23, "Use " + item.Key.ItemName);
                 }
                 else
                 {
-                    builder.AddAttribute(23, "onclick", () => CancelUse());
-                    builder.AddContent(24, "Cancel");
+                    builder.AddAttribute(24, "onclick", () => CancelUse());
+                    builder.AddContent(25, "Cancel");
                 }
                 builder.CloseElement();
                 builder.CloseElement();
@@ -171,29 +175,29 @@
                 {
                     if (usableIDs[i, 0] == item.Key.Id)
                     {
-                        builder.AddContent(25, UseButton(i, item.Key));
+                        builder.AddContent(26, UseButton(i, item.Key));
                     }
                 }
             }
             if (item.Key.IsUnpackable)
             {
-                builder.AddContent(26, UnpackButton(item));
+                builder.AddContent(27, UnpackButton(item));
             }
             if (item.Key.IsEdible)
             {
-                builder.AddContent(27, EatButton(item.Key));
+                builder.AddContent(28, EatButton(item.Key));
             }
             if (item.Key.IsEquipable)
             {
-                builder.AddContent(28, EquipButtons(item));
+                builder.AddContent(29, EquipButtons(item));
             }
             if (GameState.canBank)
             {
-                builder.AddContent(29, BankButtons(item));
+                builder.AddContent(30, BankButtons(item));
             }
             if (GameState.canSell && item.Key.Id != 0)
             {
-                builder.AddContent(30, SellButtons(item));
+                builder.AddContent(31, SellButtons(item));
             }
 
         };

@@ -253,12 +253,13 @@
     "queplarValue": 75
   },
   {
-    "name": "Teppas Elemental Emporium",
+    "name": "Elemental Emporium",
     "id": 33,
-    "url": "TeppasElementalEmporium",
+    "url": "ElementalEmporium",
     "items": [ 62, 63, 64, 65 ],
     "description": "You can buy all four base elements here.",
-    "isShop": true
+    "isShop": true,
+    "npcIDs": [34,35]
   },
   {
     "name": "Rocky Shores House of Fish",
@@ -387,7 +388,7 @@
     "url": "ArcheryShop",
     "description": "You enter the shop to find all kinds of bows, arrows, and more.",
     "isShop": true,
-    "items": [ 174, 175, 176, 177, 178, 179, 180, 181, 182, 183, 185, 186, 187, 188, 189, 190, 191, 192, 193, 194, 195, 196, 197, 198, 199, 200, 201, 202, 203, 204, 205, 206, 207, 208, 209 ]
+    "items": [ 175, 176, 177, 178, 179, 180, 181, 198, 199, 200, 201, 202, 203, 204 ]
   },
   {
     "name": "Fire Hall",

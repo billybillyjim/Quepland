@@ -4,7 +4,8 @@
     "itemDescription": "Cash Money.",
     "id": 0,
     "value": 1,
-    "isStackable": true
+    "isStackable": true,
+    "icon": "Gold"
   },
   {
     "itemName": "White Pine Logs",
@@ -12,10 +13,11 @@
     "gatherString": "You chop some white pine logs.",
     "id": 1,
     "value": 3,
-    "gatherSpeed": 1000,
+    "gatherSpeed": 1500,
     "requiredLevel": 1,
     "experienceGained": "Woodcutting:8",
-    "actionRequired": "Woodcutting"
+    "actionRequired": "Woodcutting",
+    "icon": "Wood"
   },
   {
     "itemName": "Poplar Logs",
@@ -23,10 +25,11 @@
     "gatherString": "You chop some poplar logs.",
     "id": 2,
     "value": 9,
-    "gatherSpeed": 2000,
+    "gatherSpeed": 3000,
     "requiredLevel": 8,
     "experienceGained": "Woodcutting:24",
-    "actionRequired": "Woodcutting"
+    "actionRequired": "Woodcutting",
+    "icon": "Wood"
   },
   {
     "itemName": "Minnow",
@@ -34,10 +37,11 @@
     "gatherString": "You catch some minnows.",
     "id": 3,
     "value": 2,
-    "gatherSpeed": 1000,
+    "gatherSpeed": 1200,
     "requiredLevel": 0,
     "experienceGained": "Fishing:8",
-    "actionRequired": "Fishing"
+    "actionRequired": "Fishing",
+    "icon": "Fish"
   },
   {
     "itemName": "Sunfish",
@@ -48,7 +52,8 @@
     "gatherSpeed": 2500,
     "requiredLevel": 6,
     "experienceGained": "Fishing:22",
-    "actionRequired": "Fishing"
+    "actionRequired": "Fishing",
+    "icon": "Fish"
   },
   {
     "itemName": "Cheese",
@@ -57,7 +62,8 @@
     "value": 15,
     "actionRequired": "Gather",
     "gatherSpeed": 1000,
-    "gatherString": "You pick up some cheese. Probably shouldn't eat it."
+    "gatherString": "You pick up some cheese. Probably shouldn't eat it.",
+    "icon": "Cheese"
   },
   {
     "itemName": "Carving Knife",
@@ -69,6 +75,8 @@
     "usableIDs": [
       [ 1, 8 ],
       [ 1, 9 ],
+      [ 1, 222 ],
+      [ 2, 223],
       [ 2, 10 ],
       [ 2, 11 ],
       [ 94, 142 ],
@@ -102,7 +110,8 @@
       [ 102, 173 ],
       [ 103, 174 ]
 
-    ]
+    ],
+    "icon": "Knife"
   },
   {
     "itemName": "Bark",
@@ -111,7 +120,8 @@
     "id": 7,
     "value": 1,
     "actionRequired": "Gather",
-    "gatherSpeed": 1000
+    "gatherSpeed": 1000,
+    "icon": "Wood"
   },
   {
     "itemName": "White Pine Art Carving",
@@ -121,7 +131,8 @@
     "value": 5,
     "requiredLevel": 1,
     "actionRequired": "Woodworking",
-    "experienceGained": "Woodworking:10"
+    "experienceGained": "Woodworking:10",
+    "icon": "Carving"
   },
   {
     "itemName": "White Pine Arrow Shafts",
@@ -133,7 +144,8 @@
     "actionRequired": "Woodworking",
     "experienceGained": "Woodworking:30",
     "isStackable": true,
-    "madeOnCreation": 10
+    "madeOnCreation": 10,
+    "icon": "ArrowShaft"
   },
   {
     "itemName": "Poplar Art Carving",
@@ -143,7 +155,8 @@
     "value": 15,
     "requiredLevel": 8,
     "actionRequired": "Woodworking",
-    "experienceGained": "Woodworking:45"
+    "experienceGained": "Woodworking:45",
+    "icon": "Carving"
   },
   {
     "itemName": "Poplar Arrow Shafts",
@@ -155,7 +168,8 @@
     "actionRequired": "Woodworking",
     "experienceGained": "Woodworking:60",
     "isStackable": true,
-    "madeOnCreation": 10
+    "madeOnCreation": 10,
+    "icon": "ArrowShaft"
 
   },
   {
@@ -182,7 +196,8 @@
     "actionRequired": "Fishing",
     "equipSlot": "Right Hand",
     "attackSpeed": 7000,
-    "gatherSpeedBonus": 0.1
+    "gatherSpeedBonus": 0.1,
+    "icon": "Net"
   },
   {
     "itemName": "Deer",
@@ -194,7 +209,8 @@
     "unpackString": "Gut",
     "actionRequired": "Hunting",
     "requiredLevel": 5,
-    "experienceGained": "Hunting:100"
+    "experienceGained": "Hunting:100",
+    "icon": "Deer"
   },
   {
     "itemName": "Rabbit",
@@ -206,31 +222,36 @@
     "unpackString": "Gut",
     "actionRequired": "Hunting",
     "requiredLevel": 1,
-    "experienceGained": "Hunting:60"
+    "experienceGained": "Hunting:60",
+    "icon": "Deer"
   },
   {
     "itemName": "Deer Pelt",
     "itemDescription": "The pelt of a deer.",
     "id": 16,
-    "value": 150
+    "value": 150,
+    "icon": "Pelt"
   },
   {
     "itemName": "Rabbit Pelt",
     "itemDescription": "The pelt of a rabbit.",
     "id": 17,
-    "value": 90
+    "value": 90,
+    "icon": "Pelt"
   },
   {
     "itemName": "Deer Meat",
     "itemDescription": "The meat of a deer.",
     "id": 18,
-    "value": 30
+    "value": 30,
+    "icon": "Meat"
   },
   {
     "itemName": "Rabbit Meat",
     "itemDescription": "The meat of a rabbit.",
     "id": 19,
-    "value": 15
+    "value": 15,
+    "icon": "Meat"
   },
   {
     "itemName": "Stone",
@@ -239,7 +260,8 @@
     "id": 20,
     "value": 1,
     "actionRequired": "Gather",
-    "gatherSpeed": 500
+    "gatherSpeed": 500,
+    "icon": "Ore"
   },
   {
     "itemName": "Berry",
@@ -259,7 +281,8 @@
     "gatherSpeed": 2000,
     "requiredLevel": 0,
     "experienceGained": "Mining:50",
-    "gatherString": "You mine some copper ore."
+    "gatherString": "You mine some copper ore.",
+    "icon": "Ore"
   },
   {
     "itemName": "Tin Ore",
@@ -270,7 +293,8 @@
     "gatherSpeed": 2500,
     "requiredLevel": 3,
     "experienceGained": "Mining:75",
-    "gatherString": "You mine some tin ore."
+    "gatherString": "You mine some tin ore.",
+    "icon": "Ore"
   },
   {
     "itemName": "Iron Ore",
@@ -281,7 +305,8 @@
     "gatherSpeed": 4000,
     "requiredLevel": 25,
     "experienceGained": "Mining:150",
-    "gatherString": "You mine some iron ore."
+    "gatherString": "You mine some iron ore.",
+    "icon": "Ore"
   },
   {
     "itemName": "Calamine",
@@ -292,7 +317,8 @@
     "gatherSpeed": 3000,
     "requiredLevel": 15,
     "experienceGained": "Mining:100",
-    "gatherString": "You mine some calamine."
+    "gatherString": "You mine some calamine.",
+    "icon": "Ore"
   },
   {
     "itemName": "Copper Bar",
@@ -304,7 +330,8 @@
     "experienceGained": "Smithing:50",
     "gatherSpeed": 7000,
     "ingredientIDs": [ 22 ],
-    "queplarValue": 0
+    "queplarValue": 0,
+    "icon": "Bar"
   },
   {
     "itemName": "Tin Bar",
@@ -316,7 +343,8 @@
     "experienceGained": "Smithing:75",
     "gatherSpeed": 7500,
     "ingredientIDs": [ 23 ],
-    "queplarValue": 35
+    "queplarValue": 35,
+    "icon": "Bar"
   },
   {
     "itemName": "Iron Bar",
@@ -328,7 +356,8 @@
     "experienceGained": "Smithing:175",
     "gatherSpeed": 15000,
     "ingredientIDs": [ 24 ],
-    "queplarValue": 80
+    "queplarValue": 80,
+    "icon": "Bar"
   },
   {
     "itemName": "Zinc Bar",
@@ -340,7 +369,8 @@
     "experienceGained": "Smithing:100",
     "gatherSpeed": 9000,
     "ingredientIDs": [ 25 ],
-    "queplarValue": 20
+    "queplarValue": 20,
+    "icon": "Bar"
   },
   {
     "itemName": "Brass Bar",
@@ -352,7 +382,8 @@
     "experienceGained": "Smithing:45",
     "gatherSpeed": 9500,
     "ingredientIDs": [ 22, 25 ],
-    "queplarValue": 10
+    "queplarValue": 10,
+    "icon": "Bar"
   },
   {
     "itemName": "Bronze Bar",
@@ -364,7 +395,8 @@
     "experienceGained": "Smithing:90",
     "gatherSpeed": 7500,
     "ingredientIDs": [ 22, 23 ],
-    "queplarValue": 15
+    "queplarValue": 15,
+    "icon": "Bar"
   },
   {
     "itemName": "Stone Pickaxe",
@@ -399,7 +431,8 @@
     "isEquipable": true,
     "equipSlot": "Right Hand",
     "damage": 3,
-    "attackSpeed": 1000
+    "attackSpeed": 1000,
+    "icon": "Knife"
   },
   {
     "itemName": "Copper Sword",
@@ -430,7 +463,8 @@
     "damage": 9,
     "attackSpeed": 3000,
     "actionsEnabled": "Axemanship Woodcutting",
-    "gatherSpeedBonus": 0.2
+    "gatherSpeedBonus": 0.2,
+    "icon": "Axe"
   },
   {
     "itemName": "Copper Hammer",
@@ -445,7 +479,8 @@
     "isEquipable": true,
     "equipSlot": "Right Hand",
     "damage": 25,
-    "attackSpeed": 4000
+    "attackSpeed": 4000,
+    "icon": "Hammer"
   },
   {
     "itemName": "Bronze Knife",
@@ -460,7 +495,8 @@
     "isEquipable": true,
     "equipSlot": "Right Hand",
     "damage": 15,
-    "attackSpeed": 1000
+    "attackSpeed": 1000,
+    "icon": "Knife"
   },
   {
     "itemName": "Bronze Sword",
@@ -491,7 +527,8 @@
     "equipSlot": "Right Hand",
     "damage": 45,
     "attackSpeed": 3000,
-    "gatherSpeedBonus": 0.25
+    "gatherSpeedBonus": 0.25,
+    "icon": "Axe"
   },
   {
     "itemName": "Bronze Hammer",
@@ -506,13 +543,15 @@
     "isEquipable": true,
     "equipSlot": "Right Hand",
     "damage": 90,
-    "attackSpeed": 4000
+    "attackSpeed": 4000,
+    "icon": "Hammer"
   },
   {
     "itemName": "Chicken Meat",
     "itemDescription": "The meat off a chicken.",
     "id": 42,
-    "value": 10
+    "value": 10,
+    "icon": "Bird"
   },
   {
     "itemName": "Feather",
@@ -552,7 +591,8 @@
     "gatherSpeed": 5000,
     "requiredLevel": 75,
     "experienceGained": "Fishing:180",
-    "actionRequired": "Fishing"
+    "actionRequired": "Fishing",
+    "icon": "Fish"
   },
   {
     "itemName": "Angry Crab",
@@ -563,7 +603,8 @@
     "gatherSpeed": 800,
     "requiredLevel": 11,
     "experienceGained": "Fishing:11",
-    "actionRequired": "Fishing"
+    "actionRequired": "Fishing",
+    "icon": "Crab"
   },
   {
     "itemName": "Puffer Fish",
@@ -574,7 +615,8 @@
     "gatherSpeed": 1500,
     "requiredLevel": 3,
     "experienceGained": "Fishing:16",
-    "actionRequired": "Fishing"
+    "actionRequired": "Fishing",
+    "icon": "Fish"
   },
   {
     "itemName": "Carp",
@@ -585,7 +627,8 @@
     "gatherSpeed": 7000,
     "requiredLevel": 50,
     "experienceGained": "Fishing:200",
-    "actionRequired": "Fishing"
+    "actionRequired": "Fishing",
+    "icon": "Fish"
   },
   {
     "itemName": "Pentlandite",
@@ -596,7 +639,8 @@
     "gatherSpeed": 3500,
     "requiredLevel": 25,
     "experienceGained": "Mining:130",
-    "gatherString": "You mine some pentlandite."
+    "gatherString": "You mine some pentlandite.",
+    "icon": "Ore"
   },
   {
     "itemName": "Galena",
@@ -607,7 +651,8 @@
     "gatherSpeed": 7000,
     "requiredLevel": 55,
     "experienceGained": "Mining:530",
-    "gatherString": "You mine some galena."
+    "gatherString": "You mine some galena.",
+    "icon": "Ore"
   },
   {
     "itemName": "Cinnabar",
@@ -618,7 +663,8 @@
     "gatherSpeed": 9000,
     "requiredLevel": 65,
     "experienceGained": "Mining:900",
-    "gatherString": "You mine some cinnabar."
+    "gatherString": "You mine some cinnabar.",
+    "icon": "Ore"
   },
   {
     "itemName": "Bauxite",
@@ -629,7 +675,8 @@
     "gatherSpeed": 7000,
     "requiredLevel": 75,
     "experienceGained": "Mining:1300",
-    "gatherString": "You mine some bauxite."
+    "gatherString": "You mine some bauxite.",
+    "icon": "Ore"
   },
   {
     "itemName": "Gold Ore",
@@ -640,7 +687,8 @@
     "gatherSpeed": 8000,
     "requiredLevel": 85,
     "experienceGained": "Mining:1200",
-    "gatherString": "You mine some gold ore."
+    "gatherString": "You mine some gold ore.",
+    "icon": "Ore"
   },
   {
     "itemName": "Platinum Ore",
@@ -651,7 +699,8 @@
     "gatherSpeed": 10000,
     "requiredLevel": 92,
     "experienceGained": "Mining:1500",
-    "gatherString": "You mine some platinum ore."
+    "gatherString": "You mine some platinum ore.",
+    "icon": "Ore"
   },
   {
     "itemName": "Nickel Bar",
@@ -663,7 +712,8 @@
     "experienceGained": "Smithing:125",
     "gatherSpeed": 9000,
     "ingredientIDs": [ 49 ],
-    "queplarValue": 45
+    "queplarValue": 45,
+    "icon": "Bar"
   },
   {
     "itemName": "Lead Bar",
@@ -675,7 +725,8 @@
     "experienceGained": "Smithing:200",
     "gatherSpeed": 6000,
     "ingredientIDs": [ 50 ],
-    "queplarValue": 110
+    "queplarValue": 110,
+    "icon": "Bar"
   },
   {
     "itemName": "Bucket of Mercury",
@@ -687,7 +738,8 @@
     "experienceGained": "Smithing:350",
     "gatherSpeed": 9000,
     "ingredientIDs": [ 51 ],
-    "queplarValue": 155
+    "queplarValue": 155,
+    "icon": "Bar"
   },
   {
     "itemName": "Aluminum Bar",
@@ -699,7 +751,8 @@
     "experienceGained": "Smithing:400",
     "gatherSpeed": 2000,
     "ingredientIDs": [ 52 ],
-    "queplarValue": 205
+    "queplarValue": 205,
+    "icon": "Bar"
   },
   {
     "itemName": "Gold Bar",
@@ -711,7 +764,8 @@
     "experienceGained": "Smithing:850",
     "gatherSpeed": 6000,
     "ingredientIDs": [ 53 ],
-    "queplarValue": 290
+    "queplarValue": 290,
+    "icon": "Bar"
   },
   {
     "itemName": "Platinum Bar",
@@ -723,14 +777,16 @@
     "experienceGained": "Smithing:1200",
     "gatherSpeed": 9000,
     "ingredientIDs": [ 54 ],
-    "queplarValue": 385
+    "queplarValue": 385,
+    "icon": "Bar"
   },
   {
     "itemName": "Alchemic Dust",
     "itemDescription": "A pile of dust from a failed alchemy attempt.",
     "id": 61,
     "value": 0,
-    "queplarValue": -1
+    "queplarValue": -1,
+    "icon": "Gold"
   },
   {
     "itemName": "Carquen",
@@ -738,7 +794,8 @@
     "id": 62,
     "queplarValue": -5,
     "value": 10,
-    "isStackable": true
+    "isStackable": true,
+    "icon": "Element"
   },
   {
     "itemName": "Quencium",
@@ -746,7 +803,8 @@
     "id": 63,
     "queplarValue": -10,
     "value": 35,
-    "isStackable": true
+    "isStackable": true,
+    "icon": "Element"
   },
   {
     "itemName": "Oxyquen",
@@ -754,6 +812,7 @@
     "id": 64,
     "queplarValue": -15,
     "value": 90,
+    "icon": "Element",
     "isStackable": true
   },
   {
@@ -762,7 +821,8 @@
     "id": 65,
     "queplarValue": -20,
     "value": 180,
-    "isStackable": true
+    "isStackable": true,
+    "icon": "Element"
   },
   {
     "itemName": "Buck",
@@ -774,7 +834,8 @@
     "unpackString": "Gut",
     "actionRequired": "Hunting",
     "requiredLevel": 20,
-    "experienceGained": "Hunting:200"
+    "experienceGained": "Hunting:200",
+    "icon": "Deer"
   },
   {
     "itemName": "Black Bear",
@@ -786,7 +847,8 @@
     "unpackString": "Gut",
     "actionRequired": "Hunting",
     "requiredLevel": 55,
-    "experienceGained": "Hunting:500"
+    "experienceGained": "Hunting:500",
+    "icon": "Deer"
   },
   {
     "itemName": "Moose",
@@ -798,7 +860,8 @@
     "unpackString": "Gut",
     "actionRequired": "Hunting",
     "requiredLevel": 65,
-    "experienceGained": "Hunting:800"
+    "experienceGained": "Hunting:800",
+    "icon": "Deer"
   },
   {
     "itemName": "Grizzly Bear",
@@ -810,7 +873,8 @@
     "unpackString": "Gut",
     "actionRequired": "Hunting",
     "requiredLevel": 80,
-    "experienceGained": "Hunting:1300"
+    "experienceGained": "Hunting:1300",
+    "icon": "Deer"
   },
   {
     "itemName": "Pigeon",
@@ -822,7 +886,8 @@
     "unpackString": "Gut",
     "actionRequired": "Hunting",
     "requiredLevel": 1,
-    "experienceGained": "Hunting:20"
+    "experienceGained": "Hunting:20",
+    "icon": "Deer"
   },
   {
     "itemName": "Wild Boar",
@@ -834,7 +899,8 @@
     "unpackString": "Gut",
     "actionRequired": "Hunting",
     "requiredLevel": 43,
-    "experienceGained": "Hunting:240"
+    "experienceGained": "Hunting:240",
+    "icon": "Deer"
   },
   {
     "itemName": "Turkey",
@@ -846,7 +912,8 @@
     "unpackString": "Gut",
     "actionRequired": "Hunting",
     "requiredLevel": 30,
-    "experienceGained": "Hunting:150"
+    "experienceGained": "Hunting:150",
+    "icon": "Deer"
   },
   {
     "itemName": "Pheasant",
@@ -858,7 +925,8 @@
     "unpackString": "Gut",
     "actionRequired": "Hunting",
     "requiredLevel": 14,
-    "experienceGained": "Hunting:90"
+    "experienceGained": "Hunting:90",
+    "icon": "Deer"
   },
   {
     "itemName": "Bison",
@@ -870,37 +938,43 @@
     "unpackString": "Gut",
     "actionRequired": "Hunting",
     "requiredLevel": 91,
-    "experienceGained": "Hunting:4000"
+    "experienceGained": "Hunting:4000",
+    "icon": "Deer"
   },
   {
     "itemName": "Black Bear Pelt",
     "itemDescription": "The pelt of a black bear.",
     "id": 75,
-    "value": 290
+    "value": 290,
+    "icon": "Pelt"
   },
   {
     "itemName": "Bear Meat",
     "itemDescription": "The meat of a bear.",
     "id": 76,
-    "value": 100
+    "value": 100,
+    "icon": "Meat"
   },
   {
     "itemName": "Grizzly Bear Pelt",
     "itemDescription": "The pelt of a grizzly bear.",
     "id": 77,
-    "value": 550
+    "value": 550,
+    "icon": "Pelt"
   },
   {
     "itemName": "Moose Meat",
     "itemDescription": "The meat of a moose.",
     "id": 78,
-    "value": 100
+    "value": 100,
+    "icon": "Meat"
   },
   {
     "itemName": "Moose Pelt",
     "itemDescription": "The pelt of a moose.",
     "id": 79,
-    "value": 550
+    "value": 550,
+    "icon": "Pelt"
   },
   {
     "itemName": "Moose Antlers",
@@ -912,43 +986,50 @@
     "itemName": "Pigeon Meat",
     "itemDescription": "The meat of a pigeon. Probably shouldn't eat it...",
     "id": 81,
-    "value": 5
+    "value": 5,
+    "icon": "Bird"
   },
   {
     "itemName": "Turkey Meat",
     "itemDescription": "The meat of a turkey.",
     "id": 82,
-    "value": 75
+    "value": 75,
+    "icon": "Bird"
   },
   {
     "itemName": "Pheasant Meat",
     "itemDescription": "The meat of a pheasant.",
     "id": 83,
-    "value": 40
+    "value": 40,
+    "icon": "Bird"
   },
   {
     "itemName": "Bison Meat",
     "itemDescription": "The meat of a bison.",
     "id": 84,
-    "value": 150
+    "value": 150,
+    "icon": "Meat"
   },
   {
     "itemName": "Bison Pelt",
     "itemDescription": "The pelt of a bison.",
     "id": 85,
+    "icon": "Pelt",
     "value": 700
   },
   {
     "itemName": "Wild Boar Meat",
     "itemDescription": "The meat of a wild boar.",
     "id": 86,
-    "value": 100
+    "value": 100,
+    "icon": "Meat"
   },
   {
     "itemName": "Wild Boar Pelt",
     "itemDescription": "The pelt of a wild boar.",
     "id": 87,
-    "value": 55
+    "value": 55,
+    "icon": "Pelt"
   },
   {
     "itemName": "Wild Boar Tusk",
@@ -969,7 +1050,8 @@
     "isEquipable": true,
     "equipSlot": "Right Hand",
     "damage": 140,
-    "attackSpeed": 5000
+    "attackSpeed": 5000,
+    "icon": "Hammer"
   },
   {
     "itemName": "Greater Lead Hammer",
@@ -984,7 +1066,8 @@
     "isEquipable": true,
     "equipSlot": "Right Hand",
     "damage": 280,
-    "attackSpeed": 5500
+    "attackSpeed": 5500,
+    "icon": "Hammer"
   },
   {
     "itemName": "Brass Hammer",
@@ -999,7 +1082,8 @@
     "isEquipable": true,
     "equipSlot": "Right Hand",
     "damage": 50,
-    "attackSpeed": 4000
+    "attackSpeed": 4000,
+    "icon": "Hammer"
   },
   {
     "itemName": "Aluminum Hammer",
@@ -1014,7 +1098,8 @@
     "isEquipable": true,
     "equipSlot": "Right Hand",
     "damage": 150,
-    "attackSpeed": 3000
+    "attackSpeed": 3000,
+    "icon": "Hammer"
   },
   {
     "itemName": "Aluminum Knife",
@@ -1029,7 +1114,8 @@
     "isEquipable": true,
     "equipSlot": "Right Hand",
     "damage": 23,
-    "attackSpeed": 500
+    "attackSpeed": 500,
+    "icon": "Knife"
   },
   {
     "itemName": "Balsa Logs",
@@ -1040,7 +1126,8 @@
     "gatherSpeed": 500,
     "requiredLevel": 1,
     "experienceGained": "Woodcutting:10",
-    "actionRequired": "Woodcutting"
+    "actionRequired": "Woodcutting",
+    "icon": "Wood"
   },
   {
     "itemName": "Oak Logs",
@@ -1051,7 +1138,8 @@
     "gatherSpeed": 3000,
     "requiredLevel": 15,
     "experienceGained": "Woodcutting:35",
-    "actionRequired": "Woodcutting"
+    "actionRequired": "Woodcutting",
+    "icon": "Wood"
   },
   {
     "itemName": "Sugar Maple Logs",
@@ -1062,7 +1150,8 @@
     "gatherSpeed": 4000,
     "requiredLevel": 25,
     "experienceGained": "Woodcutting:55",
-    "actionRequired": "Woodcutting"
+    "actionRequired": "Woodcutting",
+    "icon": "Wood"
   },
   {
     "itemName": "Birch Logs",
@@ -1073,7 +1162,8 @@
     "gatherSpeed": 4000,
     "requiredLevel": 25,
     "experienceGained": "Woodcutting:45",
-    "actionRequired": "Woodcutting"
+    "actionRequired": "Woodcutting",
+    "icon": "Wood"
   },
   {
     "itemName": "Mesquite Logs",
@@ -1084,7 +1174,8 @@
     "gatherSpeed": 5000,
     "requiredLevel": 40,
     "experienceGained": "Woodcutting:75",
-    "actionRequired": "Woodcutting"
+    "actionRequired": "Woodcutting",
+    "icon": "Wood"
   },
   {
     "itemName": "Mahogany Logs",
@@ -1095,7 +1186,8 @@
     "gatherSpeed": 7000,
     "requiredLevel": 50,
     "experienceGained": "Woodcutting:75",
-    "actionRequired": "Woodcutting"
+    "actionRequired": "Woodcutting",
+    "icon": "Wood"
   },
   {
     "itemName": "Ironwood Logs",
@@ -1106,7 +1198,8 @@
     "gatherSpeed": 8000,
     "requiredLevel": 65,
     "experienceGained": "Woodcutting:125",
-    "actionRequired": "Woodcutting"
+    "actionRequired": "Woodcutting",
+    "icon": "Wood"
   },
   {
     "itemName": "Snakewood Logs",
@@ -1117,7 +1210,8 @@
     "gatherSpeed": 9000,
     "requiredLevel": 75,
     "experienceGained": "Woodcutting:155",
-    "actionRequired": "Woodcutting"
+    "actionRequired": "Woodcutting",
+    "icon": "Wood"
   },
   {
     "itemName": "Lignum Vitae Logs",
@@ -1128,7 +1222,8 @@
     "gatherSpeed": 12000,
     "requiredLevel": 83,
     "experienceGained": "Woodcutting:285",
-    "actionRequired": "Woodcutting"
+    "actionRequired": "Woodcutting",
+    "icon": "Wood"
   },
   {
     "itemName": "Buloke Logs",
@@ -1139,7 +1234,8 @@
     "gatherSpeed": 20000,
     "requiredLevel": 91,
     "experienceGained": "Woodcutting:580",
-    "actionRequired": "Woodcutting"
+    "actionRequired": "Woodcutting",
+    "icon": "Wood"
   },
   {
     "itemName": "Icefish",
@@ -1150,7 +1246,8 @@
     "gatherSpeed": 500,
     "requiredLevel": 20,
     "experienceGained": "Fishing:10",
-    "actionRequired": "Fishing"
+    "actionRequired": "Fishing",
+    "icon": "Fish"
   },
   {
     "itemName": "Shrimp",
@@ -1161,7 +1258,8 @@
     "gatherSpeed": 1500,
     "requiredLevel": 1,
     "experienceGained": "Fishing:20",
-    "actionRequired": "Fishing"
+    "actionRequired": "Fishing",
+    "icon": "Fish"
   },
   {
     "itemName": "Scallop",
@@ -1172,7 +1270,8 @@
     "gatherSpeed": 3000,
     "requiredLevel": 20,
     "experienceGained": "Fishing:50",
-    "actionRequired": "Fishing"
+    "actionRequired": "Fishing",
+    "icon": "Fish"
   },
   {
     "itemName": "Sardine",
@@ -1183,7 +1282,8 @@
     "gatherSpeed": 2500,
     "requiredLevel": 25,
     "experienceGained": "Fishing:40",
-    "actionRequired": "Fishing"
+    "actionRequired": "Fishing",
+    "icon": "Fish"
   },
   {
     "itemName": "Abalone",
@@ -1194,7 +1294,8 @@
     "gatherSpeed": 4000,
     "requiredLevel": 40,
     "experienceGained": "Fishing:60",
-    "actionRequired": "Fishing"
+    "actionRequired": "Fishing",
+    "icon": "Fish"
   },
   {
     "itemName": "Saury",
@@ -1205,7 +1306,8 @@
     "gatherSpeed": 4000,
     "requiredLevel": 42,
     "experienceGained": "Fishing:85",
-    "actionRequired": "Fishing"
+    "actionRequired": "Fishing",
+    "icon": "Fish"
   },
   {
     "itemName": "Butterfish",
@@ -1216,7 +1318,8 @@
     "gatherSpeed": 4500,
     "requiredLevel": 50,
     "experienceGained": "Fishing:90",
-    "actionRequired": "Fishing"
+    "actionRequired": "Fishing",
+    "icon": "Fish"
   },
   {
     "itemName": "Shad",
@@ -1227,7 +1330,8 @@
     "gatherSpeed": 5000,
     "requiredLevel": 52,
     "experienceGained": "Fishing:150",
-    "actionRequired": "Fishing"
+    "actionRequired": "Fishing",
+    "icon": "Fish"
   },
   {
     "itemName": "Squid",
@@ -1238,7 +1342,8 @@
     "gatherSpeed": 6000,
     "requiredLevel": 56,
     "experienceGained": "Fishing:170",
-    "actionRequired": "Fishing"
+    "actionRequired": "Fishing",
+    "icon": "Fish"
   },
   {
     "itemName": "Salmon",
@@ -1249,7 +1354,8 @@
     "gatherSpeed": 8000,
     "requiredLevel": 60,
     "experienceGained": "Fishing:250",
-    "actionRequired": "Fishing"
+    "actionRequired": "Fishing",
+    "icon": "Fish"
   },
   {
     "itemName": "Tuna",
@@ -1260,7 +1366,8 @@
     "gatherSpeed": 15000,
     "requiredLevel": 70,
     "experienceGained": "Fishing:450",
-    "actionRequired": "Fishing"
+    "actionRequired": "Fishing",
+    "icon": "Fish"
   },
   {
     "itemName": "Yellowtail",
@@ -1271,7 +1378,8 @@
     "gatherSpeed": 12000,
     "requiredLevel": 70,
     "experienceGained": "Fishing:485",
-    "actionRequired": "Fishing"
+    "actionRequired": "Fishing",
+    "icon": "Fish"
   },
   {
     "itemName": "Giant Clam",
@@ -1282,7 +1390,8 @@
     "gatherSpeed": 18000,
     "requiredLevel": 80,
     "experienceGained": "Fishing:1000",
-    "actionRequired": "Fishing"
+    "actionRequired": "Fishing",
+    "icon": "Fish"
   },
   {
     "itemName": "Big Tuna",
@@ -1293,7 +1402,8 @@
     "gatherSpeed": 20000,
     "requiredLevel": 83,
     "experienceGained": "Fishing:1800",
-    "actionRequired": "Fishing"
+    "actionRequired": "Fishing",
+    "icon": "Fish"
   },
   {
     "itemName": "Swordfish",
@@ -1304,7 +1414,8 @@
     "gatherSpeed": 20000,
     "requiredLevel": 81,
     "experienceGained": "Fishing:2000",
-    "actionRequired": "Fishing"
+    "actionRequired": "Fishing",
+    "icon": "Fish"
   },
   {
     "itemName": "Flounder",
@@ -1315,7 +1426,8 @@
     "gatherSpeed": 15000,
     "requiredLevel": 85,
     "experienceGained": "Fishing:1800",
-    "actionRequired": "Fishing"
+    "actionRequired": "Fishing",
+    "icon": "Fish"
   },
   {
     "itemName": "Seaweed",
@@ -1329,7 +1441,8 @@
     "destroyOnUse": true,
     "usableIDs": [
       [ 121, 122 ]
-    ]
+    ],
+    "icon": "Food"
   },
   {
     "itemName": "Rice",
@@ -1343,7 +1456,8 @@
     "destroyOnUse": true,
     "usableIDs": [
       [ 120, 122 ]
-    ]
+    ],
+    "icon": "Food"
   },
   {
     "itemName": "Rice Roll",
@@ -1374,7 +1488,8 @@
       [ 117, 136 ],
       [ 118, 137 ],
       [ 119, 138 ]
-    ]
+    ],
+    "icon": "Roll"
   },
   {
     "itemName": "Icefish Roll",
@@ -1389,7 +1504,8 @@
     "healAmount": 1,
     "healDuration": 60,
     "buffedSkill": "Knifesmanship",
-    "buffAmount": 5
+    "buffAmount": 5,
+    "icon": "Roll"
   },
   {
     "itemName": "Shrimp Roll",
@@ -1404,7 +1520,8 @@
     "healAmount": 1,
     "healDuration": 120,
     "buffedSkill": "Swordsmanship",
-    "buffAmount": 5
+    "buffAmount": 5,
+    "icon": "Roll"
   },
   {
     "itemName": "Scallop Roll",
@@ -1419,7 +1536,8 @@
     "healAmount": 2,
     "healDuration": 60,
     "buffedSkill": "Deftness",
-    "buffAmount": 5
+    "buffAmount": 5,
+    "icon": "Roll"
   },
   {
     "itemName": "Sardine Roll",
@@ -1435,7 +1553,8 @@
     "healAmount": 2,
     "healDuration": 60,
     "buffedSkill": "Hammermanship",
-    "buffAmount": 5
+    "buffAmount": 5,
+    "icon": "Roll"
   },
   {
     "itemName": "Abalone Roll",
@@ -1450,7 +1569,8 @@
     "healAmount": 1,
     "healDuration": 300,
     "buffedSkill": "Axemanship",
-    "buffAmount": 5
+    "buffAmount": 5,
+    "icon": "Roll"
   },
   {
     "itemName": "Saury Roll",
@@ -1466,7 +1586,8 @@
     "healAmount": 2,
     "healDuration": 300,
     "buffedSkill": "Archery",
-    "buffAmount": 5
+    "buffAmount": 5,
+    "icon": "Roll"
   },
   {
     "itemName": "Butterfish Roll",
@@ -1482,7 +1603,8 @@
     "healAmount": 3,
     "healDuration": 300,
     "buffedSkill": "Culinary Arts",
-    "buffAmount": 5
+    "buffAmount": 5,
+    "icon": "Roll"
   },
   {
     "itemName": "Shad Roll",
@@ -1498,7 +1620,8 @@
     "healAmount": 3,
     "healDuration": 300,
     "buffedSkill": "Alchemy",
-    "buffAmount": 5
+    "buffAmount": 5,
+    "icon": "Roll"
   },
   {
     "itemName": "Squid Roll",
@@ -1514,7 +1637,8 @@
     "healAmount": 3,
     "healDuration": 300,
     "buffedSkill": "Strength",
-    "buffAmount": 5
+    "buffAmount": 5,
+    "icon": "Roll"
   },
   {
     "itemName": "Salmon Roll",
@@ -1530,7 +1654,8 @@
     "healAmount": 3,
     "healDuration": 500,
     "buffedSkill": "Mining",
-    "buffAmount": 5
+    "buffAmount": 5,
+    "icon": "Roll"
   },
   {
     "itemName": "Tuna Roll",
@@ -1546,7 +1671,8 @@
     "healAmount": 3,
     "healDuration": 500,
     "buffedSkill": "Smithing",
-    "buffAmount": 5
+    "buffAmount": 5,
+    "icon": "Roll"
   },
   {
     "itemName": "Yellowtail Roll",
@@ -1562,7 +1688,8 @@
     "healAmount": 3,
     "healDuration": 500,
     "buffedSkill": "Woodcutting",
-    "buffAmount": 5
+    "buffAmount": 5,
+    "icon": "Roll"
   },
   {
     "itemName": "Giant Clam Roll",
@@ -1578,7 +1705,8 @@
     "healAmount": 4,
     "healDuration": 500,
     "buffedSkill": "Woodworking",
-    "buffAmount": 5
+    "buffAmount": 5,
+    "icon": "Roll"
   },
   {
     "itemName": "Big Tuna Roll",
@@ -1594,7 +1722,8 @@
     "healAmount": 5,
     "healDuration": 900,
     "buffedSkill": "Axemanship",
-    "buffAmount": 10
+    "buffAmount": 10,
+    "icon": "Roll"
   },
   {
     "itemName": "Swordfish Roll",
@@ -1610,7 +1739,8 @@
     "healAmount": 5,
     "healDuration": 900,
     "buffedSkill": "Swordsmanship",
-    "buffAmount": 10
+    "buffAmount": 10,
+    "icon": "Roll"
   },
   {
     "itemName": "Flounder Roll",
@@ -1626,7 +1756,8 @@
     "healAmount": 5,
     "healDuration": 900,
     "buffedSkill": "Hammermanship",
-    "buffAmount": 10
+    "buffAmount": 10,
+    "icon": "Roll"
   },
   {
     "itemName": "Kogoe Gym Membership Card",
@@ -1650,7 +1781,8 @@
     "equipSlot": "Right Hand",
     "damage": 90,
     "attackSpeed": 3000,
-    "gatherSpeedBonus": 0.4
+    "gatherSpeedBonus": 0.4,
+    "icon": "Axe"
   },
   {
     "itemName": "Golden Axe",
@@ -1666,7 +1798,8 @@
     "equipSlot": "Right Hand",
     "damage": 58,
     "attackSpeed": 3000,
-    "gatherSpeedBonus": 0.8
+    "gatherSpeedBonus": 0.8,
+    "icon": "Axe"
   },
   {
     "itemName": "Balsa Art Carving",
@@ -1677,7 +1810,8 @@
     "requiredLevel": 1,
     "actionRequired": "Woodworking",
     "experienceGained": "Woodworking:7",
-    "GatherSpeed": -100
+    "GatherSpeed": -100,
+    "icon": "Carving"
   },
   {
     "itemName": "Balsa Arrow Shafts",
@@ -1690,7 +1824,8 @@
     "experienceGained": "Woodworking:10",
     "isStackable": true,
     "GatherSpeed": -50,
-    "madeOnCreation": 10
+    "madeOnCreation": 10,
+    "icon": "ArrowShaft"
 
   },
   {
@@ -1702,7 +1837,8 @@
     "requiredLevel": 15,
     "actionRequired": "Woodworking",
     "experienceGained": "Woodworking:30",
-    "GatherSpeed": 100
+    "GatherSpeed": 100,
+    "icon": "Carving"
   },
   {
     "itemName": "Oak Arrow Shafts",
@@ -1715,7 +1851,8 @@
     "experienceGained": "Woodworking:25",
     "isStackable": true,
     "GatherSpeed": 150,
-    "madeOnCreation": 10
+    "madeOnCreation": 10,
+    "icon": "ArrowShaft"
 
   },
   {
@@ -1727,7 +1864,8 @@
     "requiredLevel": 25,
     "actionRequired": "Woodworking",
     "experienceGained": "Woodworking:45",
-    "GatherSpeed": 300
+    "GatherSpeed": 300,
+    "icon": "Carving"
   },
   {
     "itemName": "Sugar Maple Arrow Shafts",
@@ -1740,7 +1878,8 @@
     "experienceGained": "Woodworking:35",
     "isStackable": true,
     "GatherSpeed": 200,
-    "madeOnCreation": 10
+    "madeOnCreation": 10,
+    "icon": "ArrowShaft"
 
   },
   {
@@ -1752,7 +1891,8 @@
     "requiredLevel": 32,
     "actionRequired": "Woodworking",
     "experienceGained": "Woodworking:55",
-    "GatherSpeed": 400
+    "GatherSpeed": 400,
+    "icon": "Carving"
   },
   {
     "itemName": "Birch Arrow Shafts",
@@ -1765,7 +1905,8 @@
     "experienceGained": "Woodworking:39",
     "isStackable": true,
     "GatherSpeed": 300,
-    "madeOnCreation": 10
+    "madeOnCreation": 10,
+    "icon": "ArrowShaft"
 
   },
   {
@@ -1777,7 +1918,8 @@
     "requiredLevel": 40,
     "actionRequired": "Woodworking",
     "experienceGained": "Woodworking:80",
-    "GatherSpeed": 500
+    "GatherSpeed": 500,
+    "icon": "Carving"
   },
   {
     "itemName": "Mesquite Arrow Shafts",
@@ -1790,8 +1932,8 @@
     "experienceGained": "Woodworking:50",
     "isStackable": true,
     "GatherSpeed": 400,
-    "madeOnCreation": 10
-
+    "madeOnCreation": 10,
+    "icon": "ArrowShaft"
   },
   {
     "itemName": "Mahogany Art Carving",
@@ -1802,7 +1944,8 @@
     "requiredLevel": 50,
     "actionRequired": "Woodworking",
     "experienceGained": "Woodworking:100",
-    "GatherSpeed": 600
+    "GatherSpeed": 600,
+    "icon": "Carving"
   },
   {
     "itemName": "Mahogany Arrow Shafts",
@@ -1815,8 +1958,8 @@
     "experienceGained": "Woodworking:70",
     "isStackable": true,
     "GatherSpeed": 500,
-    "madeOnCreation": 5
-
+    "madeOnCreation": 5,
+    "icon": "ArrowShaft"
   },
   {
     "itemName": "Ironwood Art Carving",
@@ -1827,7 +1970,8 @@
     "requiredLevel": 60,
     "actionRequired": "Woodworking",
     "experienceGained": "Woodworking:130",
-    "GatherSpeed": 800
+    "GatherSpeed": 800,
+    "icon": "Carving"
 
   },
   {
@@ -1841,8 +1985,8 @@
     "experienceGained": "Woodworking:90",
     "isStackable": true,
     "GatherSpeed": 700,
-    "madeOnCreation": 5
-
+    "madeOnCreation": 5,
+    "icon": "ArrowShaft"
   },
   {
     "itemName": "Snakewood Art Carving",
@@ -1853,7 +1997,8 @@
     "requiredLevel": 70,
     "actionRequired": "Woodworking",
     "experienceGained": "Woodworking:200",
-    "GatherSpeed": 1000
+    "GatherSpeed": 1000,
+    "icon": "Carving"
   },
   {
     "itemName": "Snakewood Arrow Shafts",
@@ -1866,8 +2011,8 @@
     "experienceGained": "Woodworking:150",
     "isStackable": true,
     "GatherSpeed": 900,
-    "madeOnCreation": 5
-
+    "madeOnCreation": 5,
+    "icon": "ArrowShaft"
   },
   {
     "itemName": "Lignum Vitae Art Carving",
@@ -1878,7 +2023,8 @@
     "requiredLevel": 80,
     "actionRequired": "Woodworking",
     "experienceGained": "Woodworking:230",
-    "GatherSpeed": 1300
+    "GatherSpeed": 1300,
+    "icon": "Carving"
 
   },
   {
@@ -1892,8 +2038,8 @@
     "experienceGained": "Woodworking:200",
     "isStackable": true,
     "GatherSpeed": 1100,
-    "madeOnCreation": 2
-
+    "madeOnCreation": 2,
+    "icon": "ArrowShaft"
   },
   {
     "itemName": "Buloke Art Carving",
@@ -1904,7 +2050,8 @@
     "requiredLevel": 90,
     "actionRequired": "Woodworking",
     "experienceGained": "Woodworking:300",
-    "GatherSpeed": 1500
+    "GatherSpeed": 1500,
+    "icon": "Carving"
   },
   {
     "itemName": "Buloke Arrow Shafts",
@@ -1917,14 +2064,16 @@
     "experienceGained": "Woodworking:250",
     "isStackable": true,
     "GatherSpeed": 1250,
-    "madeOnCreation": 2
+    "madeOnCreation": 2,
+    "icon": "ArrowShaft"
   },
   {
     "itemName": "Camel",
     "itemDescription": "An even-toed ungulate with two large humps on its back. It doesn't fit in your inventory, but it takes up a space anyways.  ¯\\_(ツ)_/¯",
     "id": 162,
     "value": 2,
-    "actionsEnabled": "Desert Travel"
+    "actionsEnabled": "Desert Travel",
+    "icon": "Transport"
   },
   {
     "itemName": "Hemp",
@@ -1937,7 +2086,8 @@
     "unpackString": "Decortitate",
     "actionRequired": "Gather",
     "gatherSpeed": 4000,
-    "gatherString": "You gather some hemp."
+    "gatherString": "You gather some hemp.",
+    "icon": "Plant"
   },
   {
     "itemName": "Bow String",
@@ -1960,7 +2110,8 @@
       [ 174, 184 ],
       [ 222, 224 ],
       [ 223, 225 ]
-    ]
+    ],
+    "icon": "String"
   },
   {
     "itemName": "Balsa Bow (Unstrung)",
@@ -1971,7 +2122,8 @@
     "experienceGained": "Woodworking:10",
     "actionRequired": "Woodworking",
     "GatherSpeed": -100,
-    "gatherString": "You craft a bow."
+    "gatherString": "You craft a bow.",
+    "icon": "BowUnstrung"
   },
   {
     "itemName": "Oak Bow (Unstrung)",
@@ -1982,7 +2134,8 @@
     "experienceGained": "Woodworking:35",
     "actionRequired": "Woodworking",
     "GatherSpeed": 200,
-    "gatherString": "You craft a bow."
+    "gatherString": "You craft a bow.",
+    "icon": "BowUnstrung"
   },
   {
     "itemName": "Sugar Maple Bow (Unstrung)",
@@ -1993,7 +2146,8 @@
     "experienceGained": "Woodworking:55",
     "actionRequired": "Woodworking",
     "GatherSpeed": 500,
-    "gatherString": "You craft a bow."
+    "gatherString": "You craft a bow.",
+    "icon": "BowUnstrung"
   },
   {
     "itemName": "Birch Bow (Unstrung)",
@@ -2004,7 +2158,8 @@
     "experienceGained": "Woodworking:45",
     "actionRequired": "Woodworking",
     "GatherSpeed": 700,
-    "gatherString": "You craft a bow."
+    "gatherString": "You craft a bow.",
+    "icon": "BowUnstrung"
   },
   {
     "itemName": "Mesquite Bow (Unstrung)",
@@ -2015,7 +2170,8 @@
     "experienceGained": "Woodworking:75",
     "actionRequired": "Woodworking",
     "GatherSpeed": 1000,
-    "gatherString": "You craft a bow."
+    "gatherString": "You craft a bow.",
+    "icon": "BowUnstrung"
   },
   {
     "itemName": "Mahogany Bow (Unstrung)",
@@ -2026,7 +2182,8 @@
     "experienceGained": "Woodworking:75",
     "actionRequired": "Woodworking",
     "GatherSpeed": 1200,
-    "gatherString": "You craft a bow."
+    "gatherString": "You craft a bow.",
+    "icon": "BowUnstrung"
   },
   {
     "itemName": "Ironwood Bow (Unstrung)",
@@ -2037,7 +2194,8 @@
     "experienceGained": "Woodworking:125",
     "actionRequired": "Woodworking",
     "GatherSpeed": 1400,
-    "gatherString": "You craft a bow."
+    "gatherString": "You craft a bow.",
+    "icon": "BowUnstrung"
   },
   {
     "itemName": "Snakewood Bow (Unstrung)",
@@ -2048,7 +2206,8 @@
     "experienceGained": "Woodworking:155",
     "actionRequired": "Woodworking",
     "GatherSpeed": 1600,
-    "gatherString": "You craft a bow."
+    "gatherString": "You craft a bow.",
+    "icon": "BowUnstrung"
   },
   {
     "itemName": "Lignum Vitae Bow (Unstrung)",
@@ -2059,7 +2218,8 @@
     "experienceGained": "Woodworking:285",
     "actionRequired": "Woodworking",
     "GatherSpeed": 1800,
-    "gatherString": "You craft a bow."
+    "gatherString": "You craft a bow.",
+    "icon": "BowUnstrung"
   },
   {
     "itemName": "Buloke Bow (Unstrung)",
@@ -2070,7 +2230,8 @@
     "experienceGained": "Woodworking:580",
     "actionRequired": "Woodworking",
     "GatherSpeed": 2000,
-    "gatherString": "You craft a bow."
+    "gatherString": "You craft a bow.",
+    "icon": "BowUnstrung"
   },
   {
     "itemName": "Balsa Bow",
@@ -2085,7 +2246,8 @@
     "attackSpeed": 2000,
     "isEquipable": true,
     "damage": 3,
-    "equipSlot": "Right Hand"
+    "equipSlot": "Right Hand",
+    "icon": "Bow"
   },
   {
     "itemName": "Oak Bow",
@@ -2100,7 +2262,8 @@
     "attackSpeed": 2000,
     "isEquipable": true,
     "damage": 6,
-    "equipSlot": "Right Hand"
+    "equipSlot": "Right Hand",
+    "icon": "Bow"
   },
   {
     "itemName": "Sugar Maple Bow",
@@ -2115,7 +2278,8 @@
     "attackSpeed": 2000,
     "isEquipable": true,
     "damage": 9,
-    "equipSlot": "Right Hand"
+    "equipSlot": "Right Hand",
+    "icon": "Bow"
   },
   {
     "itemName": "Birch Bow",
@@ -2130,7 +2294,8 @@
     "attackSpeed": 2000,
     "isEquipable": true,
     "damage": 12,
-    "equipSlot": "Right Hand"
+    "equipSlot": "Right Hand",
+    "icon": "Bow"
   },
   {
     "itemName": "Mesquite Bow",
@@ -2145,7 +2310,8 @@
     "attackSpeed": 2000,
     "isEquipable": true,
     "damage": 15,
-    "equipSlot": "Right Hand"
+    "equipSlot": "Right Hand",
+    "icon": "Bow"
   },
   {
     "itemName": "Mahogany Bow",
@@ -2160,7 +2326,8 @@
     "attackSpeed": 2000,
     "isEquipable": true,
     "damage": 20,
-    "equipSlot": "Right Hand"
+    "equipSlot": "Right Hand",
+    "icon": "Bow"
   },
   {
     "itemName": "Ironwood Bow",
@@ -2175,7 +2342,8 @@
     "attackSpeed": 2000,
     "isEquipable": true,
     "damage": 25,
-    "equipSlot": "Right Hand"
+    "equipSlot": "Right Hand",
+    "icon": "Bow"
   },
   {
     "itemName": "Snakewood Bow",
@@ -2190,7 +2358,8 @@
     "attackSpeed": 2000,
     "isEquipable": true,
     "damage": 30,
-    "equipSlot": "Right Hand"
+    "equipSlot": "Right Hand",
+    "icon": "Bow"
   },
   {
     "itemName": "Lignum Vitae Bow",
@@ -2205,7 +2374,8 @@
     "attackSpeed": 2000,
     "isEquipable": true,
     "damage": 45,
-    "equipSlot": "Right Hand"
+    "equipSlot": "Right Hand",
+    "icon": "Bow"
   },
   {
     "itemName": "Buloke Bow",
@@ -2220,7 +2390,8 @@
     "attackSpeed": 2000,
     "isEquipable": true,
     "damage": 70,
-    "equipSlot": "Right Hand"
+    "equipSlot": "Right Hand",
+    "icon": "Bow"
   },
   {
     "itemName": "Coal",
@@ -2231,7 +2402,8 @@
     "gatherSpeed": 3000,
     "requiredLevel": 35,
     "experienceGained": "Mining:80",
-    "gatherString": "You mine some coal."
+    "gatherString": "You mine some coal.",
+    "icon": "Ore"
   },
   {
     "itemName": "White Pine Arrows (Unfinished)",
@@ -2255,7 +2427,8 @@
       [ 221, 198 ]
     ],
     "isUsable": true,
-    "destroyOnUse": true
+    "destroyOnUse": true,
+    "icon": "ArrowHeadless"
   },
   {
     "itemName": "Poplar Arrows (Unfinished)",
@@ -2280,7 +2453,8 @@
       [ 221, 199 ]
     ],
     "isUsable": true,
-    "destroyOnUse": true
+    "destroyOnUse": true,
+    "icon": "ArrowHeadless"
   },
   {
     "itemName": "Balsa Arrows (Unfinished)",
@@ -2307,7 +2481,8 @@
       [ 221, 200 ]
     ],
     "isUsable": true,
-    "destroyOnUse": true
+    "destroyOnUse": true,
+    "icon": "ArrowHeadless"
   },
   {
     "itemName": "Oak Arrows (Unfinished)",
@@ -2331,7 +2506,8 @@
       [ 219, 201 ],
       [ 220, 201 ],
       [ 221, 201 ]
-    ]
+    ],
+    "icon": "ArrowHeadless"
   },
   {
     "itemName": "Sugar Maple Arrows (Unfinished)",
@@ -2354,7 +2530,8 @@
       [ 219, 202 ],
       [ 220, 202 ],
       [ 221, 202 ]
-    ]
+    ],
+    "icon": "ArrowHeadless"
   },
   {
     "itemName": "Birch Arrows (Unfinished)",
@@ -2378,7 +2555,8 @@
       [ 220, 203 ],
       [ 221, 203 ],
       [ 222, 203 ]
-    ]
+    ],
+    "icon": "ArrowHeadless"
   },
   {
     "itemName": "Mesquite Arrows (Unfinished)",
@@ -2400,7 +2578,8 @@
       [ 219, 204 ],
       [ 220, 204 ],
       [ 221, 204 ]
-    ]
+    ],
+    "icon": "ArrowHeadless"
   },
   {
     "itemName": "Mahogany Arrows (Unfinished)",
@@ -2417,7 +2596,8 @@
     "destroyOnUse": true,
     "usableIDs": [
       [ 217, 205 ]
-    ]
+    ],
+    "icon": "ArrowHeadless"
   },
   {
     "itemName": "Ironwood Arrows (Unfinished)",
@@ -2437,7 +2617,8 @@
       [ 219, 206 ],
       [ 220, 206 ],
       [ 221, 206 ]
-    ]
+    ],
+    "icon": "ArrowHeadless"
   },
   {
     "itemName": "Snakewood Arrows (Unfinished)",
@@ -2456,7 +2637,8 @@
       [ 219, 207 ],
       [ 220, 207 ],
       [ 221, 207 ]
-    ]
+    ],
+    "icon": "ArrowHeadless"
   },
   {
     "itemName": "Lignum Vitae Arrows (Unfinished)",
@@ -2474,7 +2656,8 @@
     "usableIDs": [
       [ 220, 208 ],
       [ 221, 208 ]
-    ]
+    ],
+    "icon": "ArrowHeadless"
   },
   {
     "itemName": "Buloke Arrows (Unfinished)",
@@ -2491,7 +2674,8 @@
     "destroyOnUse": true,
     "usableIDs": [
       [ 221, 209 ]
-    ]
+    ],
+    "icon": "ArrowHeadless"
   },
   {
     "itemName": "White Pine Arrows",
@@ -2504,7 +2688,8 @@
     "experienceGained": "Woodworking:30",
     "isStackable": true,
     "isArrow": true,
-    "damage": 2
+    "damage": 2,
+    "icon": "Arrow"
   },
   {
     "itemName": "Poplar Arrows",
@@ -2517,7 +2702,8 @@
     "experienceGained": "Woodworking:60",
     "isStackable": true,
     "isArrow": true,
-    "damage": 3
+    "damage": 3,
+    "icon": "Arrow"
   },
   {
     "itemName": "Balsa Arrows",
@@ -2531,7 +2717,8 @@
     "isStackable": true,
     "GatherSpeed": -50,
     "isArrow": true,
-    "damage": 1
+    "damage": 1,
+    "icon": "Arrow"
   },
   {
     "itemName": "Oak Arrows",
@@ -2545,7 +2732,8 @@
     "isStackable": true,
     "GatherSpeed": 150,
     "isArrow": true,
-    "damage": 3
+    "damage": 3,
+    "icon": "Arrow"
   },
   {
     "itemName": "Sugar Maple Arrows",
@@ -2559,7 +2747,8 @@
     "isStackable": true,
     "GatherSpeed": 200,
     "isArrow": true,
-    "damage": 5
+    "damage": 5,
+    "icon": "Arrow"
   },
   {
     "itemName": "Birch Arrows",
@@ -2573,7 +2762,8 @@
     "isStackable": true,
     "GatherSpeed": 300,
     "isArrow": true,
-    "damage": 7
+    "damage": 7,
+    "icon": "Arrow"
   },
   {
     "itemName": "Mesquite Arrows",
@@ -2587,7 +2777,8 @@
     "isStackable": true,
     "GatherSpeed": 400,
     "isArrow": true,
-    "damage": 8
+    "damage": 8,
+    "icon": "Arrow"
   },
   {
     "itemName": "Mahogany Arrows",
@@ -2601,7 +2792,8 @@
     "isStackable": true,
     "GatherSpeed": 500,
     "isArrow": true,
-    "damage": 8
+    "damage": 8,
+    "icon": "Arrow"
   },
   {
     "itemName": "Ironwood Arrows",
@@ -2615,7 +2807,8 @@
     "isStackable": true,
     "GatherSpeed": 700,
     "isArrow": true,
-    "damage": 12
+    "damage": 12,
+    "icon": "Arrow"
   },
   {
     "itemName": "Snakewood Arrows",
@@ -2629,7 +2822,8 @@
     "isStackable": true,
     "GatherSpeed": 900,
     "isArrow": true,
-    "damage": 15
+    "damage": 15,
+    "icon": "Arrow"
   },
   {
     "itemName": "Lignum Vitae Arrows",
@@ -2643,7 +2837,8 @@
     "isStackable": true,
     "GatherSpeed": 1100,
     "isArrow": true,
-    "damage": 19
+    "damage": 19,
+    "icon": "Arrow"
   },
   {
     "itemName": "Buloke Arrows",
@@ -2657,7 +2852,8 @@
     "isStackable": true,
     "GatherSpeed": 1250,
     "isArrow": true,
-    "damage": 25
+    "damage": 25,
+    "icon": "Arrow"
   },
   {
     "itemName": "Steel Bar",
@@ -2668,7 +2864,8 @@
     "requiredLevel": 65,
     "experienceGained": "Smithing:75",
     "gatherSpeed": 15000,
-    "ingredientIDs": [ 24, 185 ]
+    "ingredientIDs": [ 24, 185 ],
+    "icon": "Bar"
   },
   {
     "itemName": "Copper Arrowtips",
@@ -2687,7 +2884,8 @@
     "isUsable": true,
     "usableIDs": [
       [ 188, 200 ]
-    ]
+    ],
+    "icon": "ArrowTips"
   },
   {
     "itemName": "Tin Arrowtips",
@@ -2707,7 +2905,8 @@
     "usableIDs": [
       [ 188, 200 ],
       [ 186, 198 ]
-    ]
+    ],
+    "icon": "ArrowTips"
   },
   {
     "itemName": "Zinc Arrowtips",
@@ -2728,7 +2927,8 @@
       [ 188, 200 ],
       [ 186, 198 ],
       [ 187, 199 ]
-    ]
+    ],
+    "icon": "ArrowTips"
   },
   {
     "itemName": "Brass Arrowtips",
@@ -2750,7 +2950,8 @@
       [ 186, 198 ],
       [ 187, 199 ],
       [ 189, 201 ]
-    ]
+    ],
+    "icon": "ArrowTips"
   },
   {
     "itemName": "Bronze Arrowtips",
@@ -2774,7 +2975,8 @@
       [ 189, 201 ],
       [ 190, 202 ],
       [ 191, 203 ]
-    ]
+    ],
+    "icon": "ArrowTips"
   },
   {
     "itemName": "Nickel Arrowtips",
@@ -2799,7 +3001,8 @@
       [ 190, 202 ],
       [ 191, 203 ],
       [ 192, 204 ]
-    ]
+    ],
+    "icon": "ArrowTips"
   },
   {
     "itemName": "Gold Arrowtips",
@@ -2818,7 +3021,8 @@
     "isUsable": true,
     "usableIDs": [
       [ 193, 205 ]
-    ]
+    ],
+    "icon": "ArrowTips"
   },
   {
     "itemName": "Iron Arrowtips",
@@ -2844,7 +3048,8 @@
       [ 191, 203 ],
       [ 192, 204 ],
       [ 194, 206 ]
-    ]
+    ],
+    "icon": "ArrowTips"
   },
   {
     "itemName": "Lead Arrowtips",
@@ -2871,7 +3076,8 @@
       [ 192, 204 ],
       [ 194, 206 ],
       [ 195, 207 ]
-    ]
+    ],
+    "icon": "ArrowTips"
   },
   {
     "itemName": "Aluminum Arrowtips",
@@ -2899,7 +3105,8 @@
       [ 194, 206 ],
       [ 195, 207 ],
       [ 196, 208 ]
-    ]
+    ],
+    "icon": "ArrowTips"
   },
   {
     "itemName": "Steel Arrowtips",
@@ -2928,7 +3135,8 @@
       [ 195, 207 ],
       [ 196, 208 ],
       [ 197, 209 ]
-    ]
+    ],
+    "icon": "ArrowTips"
   },
   {
     "itemName": "White Pine Bow (Unstrung)",
@@ -2939,7 +3147,8 @@
     "experienceGained": "Woodworking:20",
     "actionRequired": "Woodworking",
     "GatherSpeed": 100,
-    "gatherString": "You craft a bow."
+    "gatherString": "You craft a bow.",
+    "icon": "BowUnstrung"
   },
   {
     "itemName": "Poplar Bow (Unstrung)",
@@ -2950,7 +3159,8 @@
     "experienceGained": "Woodworking:30",
     "actionRequired": "Woodworking",
     "GatherSpeed": 300,
-    "gatherString": "You craft a bow."
+    "gatherString": "You craft a bow.",
+    "icon": "BowUnstrung"
   },
   {
     "itemName": "White Pine Bow",
@@ -2965,7 +3175,8 @@
     "attackSpeed": 2000,
     "isEquipable": true,
     "damage": 4,
-    "equipSlot": "Right Hand"
+    "equipSlot": "Right Hand",
+    "icon": "Bow"
   },
   {
     "itemName": "Poplar Bow",
@@ -2980,7 +3191,8 @@
     "attackSpeed": 2000,
     "isEquipable": true,
     "damage": 5,
-    "equipSlot": "Right Hand"
+    "equipSlot": "Right Hand",
+    "icon": "Bow"
   },
   {
     "itemName": "Coin Pouch (25)",
@@ -2990,7 +3202,8 @@
     "unpackIDs": [ 0 ],
     "madeOnCreation": 25,
     "isUnpackable": true,
-    "unpackString": "Open"
+    "unpackString": "Open",
+    "icon": "Bag"
   },
   {
     "itemName": "Coin Pouch (50)",
@@ -3000,7 +3213,8 @@
     "unpackIDs": [ 0 ],
     "madeOnCreation": 50,
     "isUnpackable": true,
-    "unpackString": "Open"
+    "unpackString": "Open",
+    "icon": "Bag"
   },
   {
     "itemName": "Coin Pouch (100)",
@@ -3010,7 +3224,8 @@
     "unpackIDs": [ 0 ],
     "madeOnCreation": 100,
     "isUnpackable": true,
-    "unpackString": "Open"
+    "unpackString": "Open",
+    "icon": "Bag"
   },
   {
     "itemName": "Coin Pouch (250)",
@@ -3020,7 +3235,8 @@
     "unpackIDs": [ 0 ],
     "madeOnCreation": 250,
     "isUnpackable": true,
-    "unpackString": "Open"
+    "unpackString": "Open",
+    "icon": "Bag"
   },
   {
     "itemName": "Coin Pouch (500)",
@@ -3030,7 +3246,8 @@
     "unpackIDs": [ 0 ],
     "madeOnCreation": 500,
     "isUnpackable": true,
-    "unpackString": "Open"
+    "unpackString": "Open",
+    "icon": "Bag"
   },
   {
     "itemName": "Tuft of Feathers",
@@ -3040,7 +3257,8 @@
     "unpackIDs": [ 43 ],
     "isUnpackable": true,
     "madeOnCreation": 5,
-    "unpackString": "Pull Apart"
+    "unpackString": "Pull Apart",
+    "icon": "Feather"
   },
   {
     "itemName": "Plume of Feathers",
@@ -3050,7 +3268,8 @@
     "unpackIDs": [ 43 ],
     "isUnpackable": true,
     "madeOnCreation": 25,
-    "unpackString": "Pull Apart"
+    "unpackString": "Pull Apart",
+    "icon": "Feather"
   },
   {
     "itemName": "Pile of Feathers",
@@ -3060,7 +3279,8 @@
     "unpackIDs": [ 43 ],
     "isUnpackable": true,
     "madeOnCreation": 50,
-    "unpackString": "Pull Apart"
+    "unpackString": "Pull Apart",
+    "icon": "Feather"
   },
   {
     "itemName": "Cheap Wood Shavings",
@@ -3072,7 +3292,8 @@
     "actionRequired": "Woodworking",
     "requiredLevel": 10,
     "gatherSpeed": 2500,
-    "gatherString": "You carve away some of the pole."
+    "gatherString": "You carve away some of the pole.",
+    "icon": "Wood"
   },
   {
     "itemName": "Wood Shavings",
@@ -3084,7 +3305,8 @@
     "actionRequired": "Woodworking",
     "requiredLevel": 20,
     "gatherSpeed": 4000,
-    "gatherString": "You carve away some of the pole."
+    "gatherString": "You carve away some of the pole.",
+    "icon": "Wood"
   },
   {
     "itemName": "Nice Wood Shavings",
@@ -3096,7 +3318,8 @@
     "actionRequired": "Woodworking",
     "requiredLevel": 40,
     "gatherSpeed": 7000,
-    "gatherString": "You carve away some of the pole."
+    "gatherString": "You carve away some of the pole.",
+    "icon": "Wood"
   },
   {
     "itemName": "Exquisite Wood Shavings",
@@ -3108,7 +3331,8 @@
     "actionRequired": "Woodworking",
     "requiredLevel": 60,
     "gatherSpeed": 10000,
-    "gatherString": "You carve away some of the pole."
+    "gatherString": "You carve away some of the pole.",
+    "icon": "Wood"
   },
   {
     "itemName": "Steel Axe",
@@ -3124,7 +3348,8 @@
     "equipSlot": "Right Hand",
     "damage": 130,
     "attackSpeed": 3000,
-    "gatherSpeedBonus": 0.65
+    "gatherSpeedBonus": 0.65,
+    "icon": "Axe"
   },
   {
     "itemName": "Minnow Roll",
@@ -3140,7 +3365,8 @@
     "healAmount": 1,
     "healDuration": 60,
     "buffedSkill": "Strength",
-    "buffAmount": 3
+    "buffAmount": 3,
+    "icon": "Roll"
   },
   {
     "itemName": "Sunfish Roll",
@@ -3156,7 +3382,8 @@
     "healAmount": 1,
     "healDuration": 60,
     "buffedSkill": "Deftness",
-    "buffAmount": 3
+    "buffAmount": 3,
+    "icon": "Roll"
   },
   {
     "itemName": "Manta Ray Roll",
@@ -3172,7 +3399,8 @@
     "healAmount": 3,
     "healDuration": 500,
     "buffedSkill": "Fishing",
-    "buffAmount": 5
+    "buffAmount": 5,
+    "icon": "Roll"
   },
   {
     "itemName": "Angry Crab Roll",
@@ -3188,7 +3416,8 @@
     "healAmount": 1,
     "healDuration": 110,
     "buffedSkill": "Knifesmanship",
-    "buffAmount": 6
+    "buffAmount": 6,
+    "icon": "Roll"
   },
   {
     "itemName": "Puffer Fish Roll",
@@ -3204,7 +3433,8 @@
     "healAmount": 1,
     "healDuration": 240,
     "buffedSkill": "HP",
-    "buffAmount": 10
+    "buffAmount": 10,
+    "icon": "Roll"
   },
   {
     "itemName": "Carp Roll",
@@ -3220,7 +3450,8 @@
     "healAmount": 5,
     "healDuration": 90,
     "buffedSkill": "Swordsmanship",
-    "buffAmount": 5
+    "buffAmount": 5,
+    "icon": "Roll"
   },
   {
     "itemName": "Small Boat",
@@ -3246,7 +3477,8 @@
     "usableIDs": [
       [ 249, 252 ],
       [ 250, 251 ]
-    ]
+    ],
+    "icon": "Sword"
   },
   {
     "itemName": "Mercurice Sword Blade",
@@ -3257,7 +3489,8 @@
     "destroyOnUse": true,
     "usableIDs": [
       [ 254, 255 ]
-    ]
+    ],
+    "icon": "Sword"
   },
   {
     "itemName": "Mercurice Sword Guard",
@@ -3269,7 +3502,8 @@
     "usableIDs": [
       [ 247, 252 ],
       [ 250, 253 ]
-    ]
+    ],
+    "icon": "Sword"
   },
   {
     "itemName": "Mercurice Sword Pommel",
@@ -3281,7 +3515,8 @@
     "usableIDs": [
       [ 247, 251 ],
       [ 249, 253 ]
-    ]
+    ],
+    "icon": "Sword"
   },
   {
     "itemName": "Incomplete Mercurice Sword Hilt",
@@ -3292,7 +3527,8 @@
     "destroyOnUse": true,
     "usableIDs": [
       [ 249, 254 ]
-    ]
+    ],
+    "icon": "Sword"
   },
   {
     "itemName": "Incomplete Mercurice Sword Hilt",
@@ -3303,7 +3539,8 @@
     "destroyOnUse": true,
     "usableIDs": [
       [ 250, 254 ]
-    ]
+    ],
+    "icon": "Sword"
   },
   {
     "itemName": "Incomplete Mercurice Sword Hilt",
@@ -3314,7 +3551,8 @@
     "destroyOnUse": true,
     "usableIDs": [
       [ 247, 254 ]
-    ]
+    ],
+    "icon": "Sword"
   },
   {
     "itemName": "Mercurice Sword Hilt",
@@ -3325,7 +3563,8 @@
     "destroyOnUse": true,
     "usableIDs": [
       [ 248, 255 ]
-    ]
+    ],
+    "icon": "Sword"
   },
   {
     "itemName": "Mercurice Sword",
@@ -3338,8 +3577,8 @@
     "actionRequired": "Swordsmanship",
     "actionsEnabled": "Swordsmanship",
     "equipSlot": "Right Hand",
-    "requiredLevel": 80
-
+    "requiredLevel": 80,
+    "icon": "FlameSword"
   },
   {
     "itemName": "Steelflame Axe Handle",
@@ -3350,7 +3589,8 @@
     "destroyOnUse": true,
     "usableIDs": [
       [ 257, 258 ]
-    ]
+    ],
+    "icon": "BigAxe"
   },
   {
     "itemName": "Steelflame Axe Blade",
@@ -3361,7 +3601,8 @@
     "destroyOnUse": true,
     "usableIDs": [
       [ 256, 258 ]
-    ]
+    ],
+    "icon": "BigAxe"
   },
   {
     "itemName": "Steelflame Axe",
@@ -3375,7 +3616,8 @@
     "actionsEnabled": "Axemanship Woodcutting",
     "equipSlot": "Right Hand",
     "gatherSpeedBonus": 0.9,
-    "requiredLevel": 80
+    "requiredLevel": 80,
+    "icon": "BigAxe"
   },
   {
     "itemName": "Earthen Hammer Head",
@@ -3387,7 +3629,8 @@
     "usableIDs": [
       [ 260, 264 ],
       [ 261, 263 ]
-    ]
+    ],
+    "icon": "Hammer"
   },
   {
     "itemName": "Earthen Hammer Handle",
@@ -3399,7 +3642,8 @@
     "usableIDs": [
       [ 259, 264 ],
       [ 261, 262 ]
-    ]
+    ],
+    "icon": "Hammer"
   },
   {
     "itemName": "Earthen Hammer Grip",
@@ -3411,7 +3655,8 @@
     "usableIDs": [
       [ 259, 263 ],
       [ 260, 262 ]
-    ]
+    ],
+    "icon": "Hammer"
   },
   {
     "itemName": "Unfinished Earthen Hammer",
@@ -3422,7 +3667,8 @@
     "destroyOnUse": true,
     "usableIDs": [
       [ 259, 265 ]
-    ]
+    ],
+    "icon": "Hammer"
   },
   {
     "itemName": "Unfinished Earthen Hammer",
@@ -3433,7 +3679,8 @@
     "destroyOnUse": true,
     "usableIDs": [
       [ 260, 265 ]
-    ]
+    ],
+    "icon": "Hammer"
   },
   {
     "itemName": "Unfinished Earthen Hammer",
@@ -3444,7 +3691,8 @@
     "destroyOnUse": true,
     "usableIDs": [
       [ 261, 265 ]
-    ]
+    ],
+    "icon": "Hammer"
   },
   {
     "itemName": "Earthen Hammer",
@@ -3457,7 +3705,8 @@
     "actionRequired": "Hammermanship",
     "actionsEnabled": "Hammermanship",
     "equipSlot": "Right Hand",
-    "requiredLevel": 80
+    "requiredLevel": 80,
+    "icon": "Hammer"
   },
   {
     "itemName": "Platisteel Knife",
@@ -3470,7 +3719,8 @@
     "actionRequired": "Knifesmanship",
     "actionsEnabled": "Knifesmanship",
     "equipSlot": "Right Hand",
-    "requiredLevel": 80
+    "requiredLevel": 80,
+    "icon": "BigKnife"
   },
   {
     "itemName": "Small Net",
@@ -3483,7 +3733,8 @@
     "actionRequired": "Fishing",
     "equipSlot": "Right Hand",
     "attackSpeed": 7000,
-    "gatherSpeedBonus": 0.2
+    "gatherSpeedBonus": 0.2,
+    "icon": "Net"
   },
   {
     "itemName": "Medium Net",
@@ -3496,7 +3747,8 @@
     "actionRequired": "Fishing",
     "equipSlot": "Right Hand",
     "attackSpeed": 7000,
-    "gatherSpeedBonus": 0.4
+    "gatherSpeedBonus": 0.4,
+    "icon": "Net"
   },
   {
     "itemName": "Large Net",
@@ -3509,7 +3761,8 @@
     "actionRequired": "Fishing",
     "equipSlot": "Right Hand",
     "attackSpeed": 7000,
-    "gatherSpeedBonus": 0.6
+    "gatherSpeedBonus": 0.6,
+    "icon": "Net"
   },
   {
     "itemName": "Magic Net",
@@ -3522,7 +3775,8 @@
     "actionRequired": "Fishing",
     "equipSlot": "Right Hand",
     "attackSpeed": 7000,
-    "gatherSpeedBonus": 0.8
+    "gatherSpeedBonus": 0.8,
+    "icon": "Net"
   },
   {
     "itemName": "Steel Sword",
@@ -3537,7 +3791,8 @@
     "isEquipable": true,
     "equipSlot": "Right Hand",
     "damage": 76,
-    "attackSpeed": 2000
+    "attackSpeed": 2000,
+    "icon": "Sword"
   },
   {
     "itemName": "Steel Hammer",
@@ -3552,7 +3807,8 @@
     "isEquipable": true,
     "equipSlot": "Right Hand",
     "damage": 171,
-    "attackSpeed": 4000
+    "attackSpeed": 4000,
+    "icon": "Hammer"
   },
   {
     "itemName": "Steel Knife",
@@ -3567,7 +3823,8 @@
     "isEquipable": true,
     "equipSlot": "Right Hand",
     "damage": 25,
-    "attackSpeed": 1000
+    "attackSpeed": 1000,
+    "icon": "Knife"
   },
   {
     "itemName": "Brass Axe",
@@ -3582,7 +3839,8 @@
     "isEquipable": true,
     "equipSlot": "Right Hand",
     "damage": 30,
-    "attackSpeed": 3000
+    "attackSpeed": 3000,
+    "icon": "Axe"
   },
   {
     "itemName": "Lead Knife",
@@ -3597,7 +3855,8 @@
     "isEquipable": true,
     "equipSlot": "Right Hand",
     "damage": 40,
-    "attackSpeed": 1500
+    "attackSpeed": 1500,
+    "icon": "Knife"
   },
   {
     "itemName": "Golden Knife",
@@ -3612,7 +3871,8 @@
     "isEquipable": true,
     "equipSlot": "Right Hand",
     "damage": 18,
-    "attackSpeed": 1000
+    "attackSpeed": 1000,
+    "icon": "Knife"
   },
   {
     "itemName": "Nickel Knife",
@@ -3627,7 +3887,8 @@
     "isEquipable": true,
     "equipSlot": "Right Hand",
     "damage": 22,
-    "attackSpeed": 1000
+    "attackSpeed": 1000,
+    "icon": "Knife"
   },
   {
     "itemName": "Brass Knife",
@@ -3642,7 +3903,8 @@
     "isEquipable": true,
     "equipSlot": "Right Hand",
     "damage": 10,
-    "attackSpeed": 1000
+    "attackSpeed": 1000,
+    "icon": "Knife"
   },
   {
     "itemName": "Golden Sword",
@@ -3657,7 +3919,8 @@
     "isEquipable": true,
     "equipSlot": "Right Hand",
     "damage": 40,
-    "attackSpeed": 2000
+    "attackSpeed": 2000,
+    "icon": "Sword"
   },
   {
     "itemName": "Nickel Sword",
@@ -3672,7 +3935,8 @@
     "isEquipable": true,
     "equipSlot": "Right Hand",
     "damage": 44,
-    "attackSpeed": 2000
+    "attackSpeed": 2000,
+    "icon": "Sword"
   },
   {
     "itemName": "Brass Sword",
@@ -3687,7 +3951,8 @@
     "isEquipable": true,
     "equipSlot": "Right Hand",
     "damage": 20,
-    "attackSpeed": 2000
+    "attackSpeed": 2000,
+    "icon": "Sword"
   },
   {
     "itemName": "Aluminum Sword",
@@ -3702,7 +3967,8 @@
     "isEquipable": true,
     "equipSlot": "Right Hand",
     "damage": 50,
-    "attackSpeed": 1000
+    "attackSpeed": 1000,
+    "icon": "Sword"
   },
   {
     "itemName": "Lead Sword",
@@ -3717,7 +3983,8 @@
     "isEquipable": true,
     "equipSlot": "Right Hand",
     "damage": 100,
-    "attackSpeed": 2800
+    "attackSpeed": 2800,
+    "icon": "Sword"
   },
   {
     "itemName": "Aluminum Axe",
@@ -3733,7 +4000,8 @@
     "damage": 125,
     "attackSpeed": 2500,
     "actionsEnabled": "Axemanship Woodcutting",
-    "gatherSpeedBonus": 0.2
+    "gatherSpeedBonus": 0.2,
+    "icon": "Axe"
   },
   {
     "itemName": "Lead Axe",
@@ -3749,7 +4017,8 @@
     "damage": 120,
     "attackSpeed": 3750,
     "actionsEnabled": "Axemanship Woodcutting",
-    "gatherSpeedBonus": 0.2
+    "gatherSpeedBonus": 0.2,
+    "icon": "Axe"
   },
   {
     "itemName": "Nickel Axe",
@@ -3765,8 +4034,9 @@
     "damage": 65,
     "attackSpeed": 3000,
     "actionsEnabled": "Axemanship Woodcutting",
-    "gatherSpeedBonus": 0.2
-  },  
+    "gatherSpeedBonus": 0.2,
+    "icon": "Axe"
+  },
   {
     "itemName": "Nickel Hammer",
     "itemDescription": "Nickel is a soft, ductile metal. Perfect for hammering with.",
@@ -3780,6 +4050,7 @@
     "isEquipable": true,
     "equipSlot": "Right Hand",
     "damage": 95,
-    "attackSpeed": 4000
+    "attackSpeed": 4000,
+    "icon": "Hammer"
   },
 ]
