@@ -288,5 +288,11 @@
     "id": 45,
     "spokenText": "Glindrear says nothing. The sign laying by his feet says, 'Will Work For Money'.",
     "unlockFollowerIDs": [ 17 ]
+  },
+  {
+    "name": "Tolani Seba the Scout",
+    "id": 46,
+    "spokenText": "If you need someone to scout out enemies for you to fight, I'd love to help.",
+    "unlockFollowerIDs": [11]
   }
 ]

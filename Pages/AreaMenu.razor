@@ -618,6 +618,7 @@
             {
                 MessageManager.AddMessage(itemToGather.GatherString);
                 GameState.GetPlayer().GainExperience(itemToGather.ExperienceGained);
+                gatherTimer.Change(Extensions.GetGaussianRandomInt(itemToGather.GatherSpeed, itemToGather.GatherSpeed / 2), Extensions.GetGaussianRandomInt(itemToGather.GatherSpeed, itemToGather.GatherSpeed / 2));
                 if (GameState.currentGatherItem.ActionRequired == "Mining" && limitedOre)
                 {
                     speedMulti += 0.05;

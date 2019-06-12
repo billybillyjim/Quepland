@@ -94,6 +94,7 @@ else
         localStorage.SetItem("Inventory", GameState.GetPlayerInventory().ToString());
         localStorage.SetItem("Areas", Program.areaManager.SaveAreas());
         localStorage.SetItem("Followers", Program.followerManager.ToString());
+        localStorage.SetItem("HP", GameState.GetPlayer().CurrentHP);
         if (GameState.GetPlayer().activeFollower != null)
         {
             localStorage.SetItem("ActiveFollower", GameState.GetPlayer().activeFollower.id);
@@ -121,6 +122,7 @@ else
         GameState.GetPlayerBank().GetInventory().LoadItems(bankItems);
         GameState.GetPlayerInventory().LoadItems(invItems);
         GameState.GetPlayer().SetSkills(skills);
+        GameState.GetPlayer().CurrentHP = localStorage.GetItem<int>("HP");
 
         if (equippedItems != null)
         {
@@ -161,6 +163,7 @@ else
             Program.npcManager.LoadNPCs(Http);
             Program.battleManager.LoadMonsters(Http);
             GameState.GetPlayer().SetMessageManager(MessageManager);
+            GameState.GetPlayer().CurrentHP = 50;
             GameState.gameDataLoaded = true;
         }
 

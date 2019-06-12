@@ -6,14 +6,6 @@
 
 <h1>Inside the Smithy</h1>
 <p>An entire working forge lays before you. Pick any metal to begin.</p>
-@if (GameState.GetPlayer().activeFollower != null && GameState.GetPlayer().activeFollower.AutoCollectSkill == "Smithing")
-{
-    <p><button onclick="@(() => BeginAutoForging())">Auto Forge</button></p>
-}
-else
-{
-    <p><button onclick="@(() => BeginAutoForging())" disabled title="You'll need someone's help to do this.">Auto Forge</button></p>
-}
 
 <div class="progress">
     <div class="progress-bar bg-success" style="@GetWidthString();transition:none;" role="progressbar" aria-valuenow=@GetValueString() aria-valuemin="0" aria-valuemax="100"></div>

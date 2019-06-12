@@ -63,7 +63,12 @@
     "actionRequired": "Gather",
     "gatherSpeed": 1000,
     "gatherString": "You pick up some cheese. Probably shouldn't eat it.",
-    "icon": "Cheese"
+    "icon": "Cheese",
+    "isEdible": true,
+    "healAmount": 3,
+    "healDuration": 3,
+    "buffedSkill": "Strength",
+    "buffAmount": 2
   },
   {
     "itemName": "Carving Knife",
@@ -272,7 +277,12 @@
     "value": 2,
     "actionRequired": "Gather",
     "gatherSpeed": 750,
-    "icon": "Plant"
+    "icon": "Plant",
+    "isEdible": true,
+    "healAmount": 3,
+    "healDuration": 3,
+    "buffedSkill": "Deftness",
+    "buffAmount": 2
   },
   {
     "itemName": "Copper Ore",

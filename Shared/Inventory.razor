@@ -510,8 +510,10 @@
     {
         CancelUse();
         EndBoostTimer();
+
         GameState.SetBuffItem(item);
         GameState.GetPlayer().GetSkill(GameState.currentBuffItem.BuffedSkill).Boost = GameState.currentBuffItem.BuffAmount;
+
         GameState.foodTimer = new Timer(new TimerCallback(_ =>
         {
             GameState.buffSecondsLeft--;
