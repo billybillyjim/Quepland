@@ -120,7 +120,7 @@
   {
     "name": "Sign Post",
     "id": 18,
-    "spokenText": "You speak to the sign post. It doesn't respond. Instead it says, 'East:The Great City of Chickenpull, West:The Great Swamp, South:More Wasteland, North:Higashi Woods'",
+    "spokenText": "You speak to the sign post. It doesn't respond. Instead it says, 'East:The Great City of Chickenpull(ROAD CLOSED), West:The Great Swamp, South:More Wasteland, North:Higashi Woods'",
     "isInteractable": true
   },
   {
@@ -212,7 +212,7 @@
   {
     "name": "Garden Guard",
     "id": 33,
-    "spokenText": "It costs 200 gold coins for entry.",
+    "spokenText": "The garden is currently under development.",
     "isInteractable": true
   },
   {
@@ -237,12 +237,56 @@
     "name": "Excited Gnome",
     "id": 37,
     "spokenText": "You got a job for me? Yeah? Sure, I'll do it. I'm in. Just let me know. Yessir. Right away! Oh, but you'll need to pay me. Up front. Deal?",
-    "unlockFollowerIDs": [ 5 ]
+    "unlockFollowerIDs": [ 5 ],
+    "isInteractable": true
   },
   {
     "name": "Slouching Gnome",
     "id": 38,
     "spokenText": "I'll work for you. Just show me the money!",
-    "unlockFollowerIDs": [3]
+    "unlockFollowerIDs": [ 3 ],
+    "isInteractable": true
+  },
+  {
+    "name": "Excited Traveller",
+    "id": 39,
+    "spokenText": "Did you see it?? All this cheese fell right out of the sky! This is the best day of my life!",
+    "isInteractable": true
+  },
+  {
+    "name": "Raka the Kushtaka",
+    "id": 40,
+    "spokenText": "I'll gladly help you bank your fish, if you pay me, of course.",
+    "unlockFollowerIDs": [ 12 ]
+  },
+  {
+    "name": "Al the Kushtaka",
+    "id": 41,
+    "spokenText": "Need any help banking your fish?",
+    "unlockFollowerIDs": [ 13 ]
+  },
+  {
+    "name": "Krim the Kushtaka",
+    "id": 42,
+    "spokenText": "I'm always available for hire. Just let me know when to start.",
+    "unlockFollowerIDs": [ 14 ]
+  },
+  {
+    "name": "Sloodle the Kushtaka",
+    "id": 43,
+    "spokenText": "I love hard work and doing a good job. Need any help with fishing?",
+    "unlockFollowerIDs": [ 15 ]
+  },
+  {
+    "name": "Wenshoop the Kushtaka",
+    "id": 44,
+    "spokenText": "I don't offer my services to just anyone, seeing how I'm the greatest fish-banker there ever was. But for a fee I suppose I could lend you a hand. You look like you need it...",
+    "unlockFollowerIDs": [ 16 ]
+  },
+  {
+    "name": "Glindrear the Kushtaka",
+    "id": 45,
+    "spokenText": "Glindrear says nothing. The sign laying by his feet says, 'Will Work For Money'.",
+    "unlockFollowerIDs": [ 17 ]
   }
 ]

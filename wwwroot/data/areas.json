@@ -169,7 +169,8 @@
     "areaURL": "UragotaTown",
     "icon": "oi oi-basket",
     "unlockableAreas": [ "The Northern Isles Dock,Charter a ship north(1000 gold),,Pay Gold:1000", "The Dark River Bridge,Try fishing on the bridge,,", "West Uragota Docks,Go to the docks,," ],
-    "buildings": [ "HouseOfFish", "FishermansShack" ]
+    "buildings": [ "HouseOfFish", "FishermansShack" ],
+    "npcIDs": [ 40 ]
   },
   {
     "name": "The Dark River Bridge",
@@ -272,7 +273,8 @@
     "areaURL": "DeepHigashiWoods",
     "icon": "oi oi-rain",
     "actions": [ "Gather Cheese:Cheese", "Gather Bark:Bark" ],
-    "unlockableAreas": [ "Higashi Bridge,Head down the hill,," ]
+    "unlockableAreas": [ "Higashi Bridge,Head down the hill,," ],
+    "npcIDs": [39]
   },
   {
     "name": "Higashi Bridge",
@@ -282,7 +284,7 @@
     "areaURL": "HigashiBridge",
     "icon": "oi oi-transfer",
     "actions": [ "Hunting", "Battle" ],
-    "unlockableAreas": [ "East Higashi Woods,Jump across the gap,Deftness:30,", "East Higashi Woods,Repair the bridge,Woodworking:30," ],
+    "unlockableAreas": [ "East Higashi Woods,Jump across the gap,Deftness:35,", "East Higashi Woods,Repair the bridge,Woodworking:35," ],
     "huntingIDs": [ 70, 72, 73 ],
     "monsterIDs": [ 16, 18, 19, 20 ]
   },
@@ -305,7 +307,7 @@
     "icon": "oi oi-vertical-align-bottom",
     "buildings": [ "HouseOfFish", "KogoeGym" ],
     "unlockableAreas": [ "Northern Isles Trails,Follow the road out of town,," ],
-    "npcIDs": [ 16 ]
+    "npcIDs": [ 16, 41 ]
   },
   {
     "name": "Northern Isles Trails",
@@ -398,7 +400,7 @@
     "actions": [ "Carve Totem Pole:Exquisite Wood Shavings" ],
     "unlockableAreas": [ "Oasis,Continue Southward,,", "Leupp,Go West,," ],
     "redirectAreaURL": "Route7",
-    "npcIDs": [ 18 ]
+    "npcIDs": [ 18, 43 ]
   },
   {
     "name": "Strange Old Hut",
@@ -455,7 +457,8 @@
     "id": 44,
     "actions": [ "Chop Lignum Vitae Trees:Lignum Vitae Logs" ],
     "icon": "oi oi-droplet",
-    "unlockableAreas": [ "Great Shoe Lake,Travel south to the mountains,," ]
+    "unlockableAreas": [ "Great Shoe Lake,Travel south to the mountains,," ],
+    "npcIDs": [44]
   },
   {
     "name": "Leupp",
@@ -496,7 +499,8 @@
     "icon": "oi oi-sort-descending",
     "description": "There are a number of fisherman here. You haven't seen them catch anything, though.",
     "actions": [ "Fish for Shrimp:Shrimp", "Fish For Butterfish:Butterfish" ],
-    "unlockableAreas": [ "Ocean Fishing Platform,Sail to the Ocean Fishing Platform,,", "Deep Ocean Waters,Sail to Deep Ocean Waters,," ]
+    "unlockableAreas": [ "Ocean Fishing Platform,Sail to the Ocean Fishing Platform,,", "Deep Ocean Waters,Sail to Deep Ocean Waters,," ],
+    "npcIDs": [43]
   },
   {
     "name": "Ocean Fishing Platform",
@@ -506,7 +510,8 @@
     "actions": [ "Fish for Squid:Squid", "Fish for Tuna:Tuna", "Fish for Yellowtail:Yellowtail" ],
     "actionRequiredForAccess": "Shallow Ocean Travel",
     "redirectAreaURL": "EastUragotaDocks",
-    "icon": "oi oi-tag"
+    "icon": "oi oi-tag",
+    "npcIDs": [ 45 ]
   },
   {
     "name": "Deep Ocean Waters",

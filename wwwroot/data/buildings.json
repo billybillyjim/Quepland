@@ -93,7 +93,7 @@
     "url": "QCQuietTunnelD",
     "buttonText": "Go Straight",
     "description": "The silence of the cave is broken by noises from up ahead. The cave splits in two. You hear the sound of metal clanging to the left, and of birds to the east.",
-    "buildings": [ "QCQuietDwarfHome", "QCHuntingSpot" ]
+    "buildings": [ "QCQuietGnomeHome", "QCHuntingSpot" ]
   },
   {
     "name": "Queple Cave Quiet Tunnel East",
@@ -126,11 +126,11 @@
     "unlockableAreas": [ "Deep Cave Hunting Area,Build a ladder,Woodworking:35,", "Deep Cave Hunting Area,Parkour the steep slope,Deftness:65," ]
   },
   {
-    "name": "Queple Cave Quiet Tunnel Dwarf Home",
+    "name": "Queple Cave Quiet Tunnel Gnome Home",
     "id": 16,
-    "url": "QCQuietDwarfHome",
+    "url": "QCQuietGnomeHome",
     "buttonText": "Go North",
-    "description": "The sound of metal clanging becomes clear as you round a corner and find a dwarf, smashing the cave wall with a woodcutting axe.",
+    "description": "The sound of metal clanging becomes clear as you round a corner and find a gnome, smashing the cave wall with a woodcutting axe.",
     "npcIDs": [ 3 ]
   },
   {
@@ -145,8 +145,8 @@
     "id": 18,
     "url": "QCTinMotherlode",
     "buttonText": "Go East",
-    "description": "You emerge from the tunnel to find an enormous lode of tin ore; you could mine here and never run out.",
-    "unlockableAreas": [ "Queple Cave Tin Mine, This would be a great place to mine ore...,," ]
+    "description": "You emerge from the tunnel to find an enormous lode of tin ore across a broken bridge. You could mine here and never run out if you had a way across.",
+    "unlockableAreas": [ "Queple Cave Tin Mine, Jump the gap,Deftness:25," ]
   },
   {
     "name": "Queple Cave Deep Tunnel East",
