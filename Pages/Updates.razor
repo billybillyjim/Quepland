@@ -1,0 +1,33 @@
+﻿@page "/Updates"
+@inject HttpClient Http
+@inject GameState GameState
+@inject Microsoft.AspNetCore.Blazor.Services.WebAssemblyUriHelper UriHelper
+@implements IDisposable
+
+<h1>Updates</h1>
+
+<h2>6/13/2019</h2>
+<p>Fixed a bug that showed the wrong number of free inventory spaces when crafting.</p>
+<p>Fixed a but that prevented making arrows.</p>
+<p>Added arrow damage info to inventory and bank menus.</p>
+<p>Fixed a bug that prevented making some kinds of sushi.</p>
+<p>Fixed some bugs dealing with leaving the page when gathering or hunting.</p>
+
+@functions{
+
+    private void Return()
+    {
+        UriHelper.NavigateTo("/Bank/");
+    }
+
+    protected override void OnInit()
+    {
+        GameState.StateChanged += OnGameStateChanged;
+        this.StateHasChanged();
+    }
+    void IDisposable.Dispose()
+    {
+        GameState.StateChanged -= OnGameStateChanged;
+    }
+    void OnGameStateChanged(object sender, EventArgs e) => StateHasChanged();
+}

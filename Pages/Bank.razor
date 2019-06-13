@@ -40,7 +40,7 @@
                     @foreach (KeyValuePair<GameItem, int> item in GameState.GetPlayerBank().GetInventory().GetItemsSorted(sortStyle))
                     {
                         <tr class="buddy-top">
-                            <td style="font-weight:bold"><img src="data/ItemIcons/@(item.Key.Icon + ".png")" style="width:50px;opacity:0.3"/><br/>@item.Key.ItemName</td>
+                            <td style="font-weight:bold"><img src="data/ItemIcons/@(item.Key.Icon + ".png")" style="width:50px;opacity:0.3" /><br />@item.Key.ItemName</td>
                             <td>@item.Key.ItemDescription</td>
                             <td align="right">@item.Value</td>
                         </tr>
@@ -52,6 +52,13 @@
                                 <td>Gather Speed Bonus:@item.Key.GatherSpeedBonus</td>
                             </tr>
                         }
+                        if (item.Key.IsArrow)
+                        {
+                            <tr>
+                                <td>Damage:@item.Key.Damage</td>
+                            </tr>
+                        }
+
                         <tr class="buddy-row">
                             <td align="left">Withdraw </td>
                             <td align="left">

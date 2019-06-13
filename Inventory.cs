@@ -309,6 +309,7 @@ public class Inventory
             }
             if (amount == 0)
             {
+                totalItems--;
                 items.Remove(item);             
             }
             return true;

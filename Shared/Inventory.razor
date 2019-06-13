@@ -191,14 +191,39 @@
             {
                 builder.AddContent(29, EquipButtons(item));
             }
+            if (item.Key.IsArrow)
+            {
+                builder.AddContent(30, ArrowInfo(item));
+            }
+
             if (GameState.canBank)
             {
-                builder.AddContent(30, BankButtons(item));
+                builder.AddContent(31, BankButtons(item));
             }
             if (GameState.canSell && item.Key.Id != 0)
             {
-                builder.AddContent(31, SellButtons(item));
+                builder.AddContent(32, SellButtons(item));
             }
+
+        };
+    }
+    private RenderFragment ArrowInfo(KeyValuePair<GameItem, int> item)
+    {
+        return builder =>
+        {
+            builder.OpenElement(0, "tr");
+            builder.AddAttribute(1, "class", "buddy-mid");
+
+            builder.OpenElement(2, "td");
+            string infoString = "";
+            if(item.Key.Damage > 0)
+            {
+                infoString += "Damage: " + item.Key.Damage;
+            }
+
+            builder.AddContent(3, infoString);
+            builder.CloseElement();          
+            builder.CloseElement();
 
         };
     }

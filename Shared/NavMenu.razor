@@ -32,17 +32,21 @@
         return builder =>
         {
             builder.OpenElement(0, "div");
-            builder.AddAttribute(0, "class", "top-row pl-4 navbar navbar-dark");
-            builder.OpenElement(1, "a");
-            builder.AddAttribute(1, "class", "navbar-brand");
-            builder.AddAttribute(1, "href", "");
-            builder.AddContent(1, "Quepland Menu");
+            builder.AddAttribute(1, "class", "top-row pl-4 navbar navbar-dark");
+            builder.OpenElement(2, "a");
+            builder.AddAttribute(3, "class", "navbar-brand");
+            if(GameState.isGathering == false && GameState.isHunting == false)
+            {
+                builder.AddAttribute(4, "href", "");
+            }
+            builder.AddAttribute(5, "style", "color:white");
+            builder.AddContent(5, "Quepland Menu");
             builder.CloseElement();
-            builder.OpenElement(1, "button");
-            builder.AddAttribute(1, "class", "navbar-toggler");
-            builder.AddAttribute(1, "onclick", () => ToggleNavMenu());
-            builder.OpenElement(2, "span");
-            builder.AddAttribute(2, "class", "navbar-toggler-icon");
+            builder.OpenElement(6, "button");
+            builder.AddAttribute(7, "class", "navbar-toggler");
+            builder.AddAttribute(8, "onclick", () => ToggleNavMenu());
+            builder.OpenElement(9, "span");
+            builder.AddAttribute(10, "class", "navbar-toggler-icon");
             builder.CloseElement();
             builder.CloseElement();
             builder.CloseElement();
