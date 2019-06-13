@@ -12,8 +12,12 @@
         {
             <a href="/Followers">Followers</a>
         }
-        <a style="position:absolute; right:10px" href="/Help"> Help</a>
-        <a style="position:absolute; right:100px" href="/About"> About</a>
+        @if (GameState.isHunting == false && GameState.isGathering == false)
+        {
+            <a style="position:absolute; right:10px" href="/Help"> Help</a>
+            <a style="position:absolute; right:100px" href="/About"> About</a>
+        }
+
     </div>
 
     <div class="content px-4">
