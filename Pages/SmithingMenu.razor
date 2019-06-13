@@ -18,17 +18,11 @@
 
 @functions{
 
-
-    private bool isAutoForging;
     private bool waitingForAutoCollectMessage = true;
     private GameItem currentSmithingBar;
     private GameItem currentSmithingItem;
-    private GameItem autoForgeItem;
-    private GameItem autoForgeBar;
-    private GameItem autoForgeOre;
 
     private Timer smithingTimer;
-    private Timer autoForgeTimer;
 
     private int smithingStage = 0;
     private int progress = 0;
@@ -38,62 +32,6 @@
     Random rand = new Random();
     private string areaURL;
 
-    public void BeginAutoForging()
-    {
-        MessageManager.AddMessage("You enlist " + GameState.GetPlayer().activeFollower.Name + " to help you smith. It's slower going, but you don't have to pay as much attention.");
-        foreach (GameItem bar in Program.itemDatabase.GetSmithingBars())
-        {
-            bool hasIngredients = true;
-            if (bar.IngredientIDs != null)
-            {
-
-                foreach (int id in bar.IngredientIDs)
-                {
-                    if (GameState.GetPlayerInventory().HasItem(id))
-                    {
-
-                    }
-                    else
-                    {
-                        hasIngredients = false;
-                    }
-                }
-                if (hasIngredients)
-                {
-                    autoForgeOre = Program.itemDatabase.GetItemByID(bar.IngredientIDs[0]);
-                    autoForgeBar = bar;
-                    break;
-                }
-            }
-        }
-        if(autoForgeBar == null)
-        {
-            return;
-        }
-        foreach(GameItem item in Program.itemDatabase.GetSmithingItems())
-        {
-            if(item.IngredientIDs != null)
-            {
-                if(item.IngredientIDs[0] == autoForgeBar.Id)
-                {
-                    autoForgeItem = Program.itemDatabase.GetItemByID(item.Id);
-                }
-            }
-        }
-        if(autoForgeItem == null)
-        {
-            return;
-        }
-        if(autoForgeTimer != null)
-        {
-            autoForgeTimer.Dispose();
-            autoForgeTimer = null;
-        }
-        autoForgeTimer = new Timer(new TimerCallback(_ =>
-        {
-
-        }), null, 20, 5000);
-    }
     public RenderFragment LoadActions()
     {
         return builder =>
@@ -293,6 +231,7 @@
         if (smithingTimer != null)
         {
             smithingTimer.Dispose();
+            smithingTimer = null;
         }
         progress = 0;
         SendMessage();
@@ -307,6 +246,7 @@
                     GameState.GetPlayer().GainExperience(currentSmithingBar.ExperienceGained);
                 }
                 smithingTimer.Dispose();
+                smithingTimer = null;
                 smithingStage++;
                 StateHasChanged();
                 GameState.UpdateState();
@@ -375,19 +315,6 @@
     private string GetValueString()
     {
         return "" + progress;
-    }
-    public void AutoCollect()
-    {
-        int amountTaken = GameState.GetPlayerInventory().RemoveItems(autoForgeItem, GameState.GetPlayer().activeFollower.MaxCarry);
-        if(GameState.GetPlayerBank().GetInventory().AddMultipleOfItem(autoForgeOre, amountTaken) == false)
-        {
-            MessageManager.AddMessage("You have run out of " + autoForgeOre.ItemName + " in your bank.");
-        }
-        else
-        {
-            MessageManager.AddMessage(GameState.GetPlayer().activeFollower.AutoCollectMessage.Replace("$", amountTaken.ToString()));
-        }
-
     }
 
     protected override void OnInit()
