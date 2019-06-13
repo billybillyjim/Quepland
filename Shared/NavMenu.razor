@@ -225,13 +225,23 @@
             localStorage.SetItem("Inventory", GameState.GetPlayerInventory().ToString());
             localStorage.SetItem("Areas", Program.areaManager.SaveAreas());
             localStorage.SetItem("Followers", Program.followerManager.ToString());
-            if(GameState.GetPlayer().activeFollower != null)
+            localStorage.SetItem("HP", GameState.GetPlayer().CurrentHP);
+            if (GameState.GetPlayer().activeFollower != null)
             {
                 localStorage.SetItem("ActiveFollower", GameState.GetPlayer().activeFollower.id);
-            }            
+            }
+            List<int> ids = new List<int>();
+            foreach (KeyValuePair<GameItem, int> pair in GameState.GetPlayerInventory().GetEquippedItems())
+            {
+                ids.Add(pair.Key.Id);
+            }
+            localStorage.SetItem("EquippedItems", ids);
             localStorage.SetItem("AlchemyRecipes", GameState.GetPlayer().GetRecipes());
             localStorage.SetItem("SaveGameExists", true);
-            autoSaveString = "Last autosave: " + DateTime.Now.ToShortTimeString();
+            MessageManager.AddMessage("You game has been automatically saved.");
+
+            GameState.saveDataLoaded = true;
+
             StateHasChanged();
         }
     }
