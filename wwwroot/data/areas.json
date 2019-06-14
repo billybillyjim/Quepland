@@ -437,7 +437,7 @@
     "id": 42,
     "areaURL": "MtYamaMine",
     "icon": "oi oi-euro",
-    "actions": [ "Mine Cinnabar:Cinnabar", "Mine Galena:Galena" ],
+    "actions": [ "Mine Cinnabar:Cinnabar", "Mine Galena:Galena", "Mine Pentlandite:Pentlandite" ],
     "unlockableAreas": [ "Upper Mt Yama Mine, Build a ladder,Woodworking:60," ]
   },
   {
