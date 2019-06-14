@@ -79,7 +79,10 @@ app {
     border-top-color: lightgray;
     border-bottom-color: lightgray;
 }
+.bank-compact{
+    border: 1px groove black;
 
+}
 .skill-table:hover {
     background-color: lightgray;
 }
