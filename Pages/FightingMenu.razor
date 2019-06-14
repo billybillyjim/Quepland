@@ -44,6 +44,7 @@
             if (battleStarted || autoFight)
             {
                 builder.AddAttribute(0, "disabled", true);
+                builder.AddAttribute(0, "title", "You can't do this while battling!");
             }
             builder.AddContent(0, "Find Battle");
             builder.CloseElement();
@@ -62,6 +63,7 @@
             autoFight)
             {
                 builder.AddAttribute(0, "disabled", true);
+                builder.AddAttribute(0, "title", "You'll need a follower who can help you find enemies to do this.");
             }
             builder.AddContent(0, "Auto Battle");
             builder.CloseElement();
@@ -124,6 +126,7 @@
             if (battleStarted == true)
             {
                 builder.AddAttribute(0, "disabled", true);
+                builder.AddAttribute(0, "title", "You can't do this while battling.");
             }
             builder.AddContent(0, "Start Battle");
             builder.CloseElement();

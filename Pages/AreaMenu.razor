@@ -255,6 +255,7 @@
             if (currentMiningVeinID == -1)
             {
                 builder.AddAttribute(0, "disabled", true);
+                builder.AddAttribute(0, "title", "You'll need to find a vein first.");
                 builder.AddContent(0, "Mine");
             }
             else
@@ -441,8 +442,9 @@
                     builder.OpenElement(9, "button");
                     builder.AddAttribute(10, "style", "margin-bottom:10px");
                     builder.AddAttribute(11, "class", "btn btn-success");
-                    builder.AddAttribute(12, "onclick", () => UnlockArea(areaToUnlock));
-                    if (GameState.GetPlayerInventory().GetCoins() < int.Parse(requiredAction.Split(':')[1]))
+                    int cost = int.Parse(requiredAction.Split(':')[1]);
+                    builder.AddAttribute(12, "onclick", () => PayToUnlockArea(areaToUnlock, cost));
+                    if (GameState.GetPlayerInventory().GetCoins() < cost)
                     {
                         builder.AddAttribute(13, "disabled", true);
                         builder.AddAttribute(14, "title", "You don't have enough gold to do this." + "(" + int.Parse(requiredAction.Split(':')[1]) + ")" + GameState.GetPlayerInventory().GetCoins());
@@ -518,8 +520,9 @@
                             if (GameState.GetPlayerInventory().GetCoins() < f.Cost)
                             {
                                 builder.AddAttribute(14, "disabled", true);
+                                builder.AddAttribute(15, "title", "You don't have enough money.");
                             }
-                            builder.AddContent(15, "Buy " + f.Name + " for " + f.Cost + "gp");
+                            builder.AddContent(16, "Buy " + f.Name + " for " + f.Cost + "gp");
                             builder.CloseElement();
                         }
 
@@ -527,18 +530,18 @@
                     foreach (int itemID in npc.PurchaseItemIDs ?? Enumerable.Empty<int>())
                     {
                         GameItem item = Program.itemDatabase.GetItemByID(itemID);
-                        builder.OpenElement(16, "button");
-                        builder.AddAttribute(17, "style", "margin-bottom:10px");
-                        builder.AddAttribute(18, "class", "btn btn-primary");
-                        builder.AddAttribute(19, "onclick", () => BuyItem(item, 1));
+                        builder.OpenElement(17, "button");
+                        builder.AddAttribute(18, "style", "margin-bottom:10px");
+                        builder.AddAttribute(19, "class", "btn btn-primary");
+                        builder.AddAttribute(20, "onclick", () => BuyItem(item, 1));
                         if (GameState.GetPlayerInventory().GetCoins() < item.Value || GameState.GetPlayerInventory().GetAvailableSpaces() == 0)
                         {
-                            builder.AddAttribute(20, "disabled", true);
-                            builder.AddAttribute(21, "title", "You don't have enough coins with you to buy this.");
+                            builder.AddAttribute(21, "disabled", true);
+                            builder.AddAttribute(22, "title", "You don't have enough coins with you to buy this.");
                         }
-                        builder.AddContent(22, "Buy " + item.ItemName + " for " + item.Value + " gp");
+                        builder.AddContent(23, "Buy " + item.ItemName + " for " + item.Value + " gp");
                         builder.CloseElement();
-                        builder.OpenElement(23, "br");
+                        builder.OpenElement(24, "br");
                         builder.CloseElement();
                     }
 
@@ -746,7 +749,7 @@
             GameState.UpdateState();
             StateHasChanged();
         }), null, 1000, 1000);
-                GameState.UpdateState();
+        GameState.UpdateState();
         StateHasChanged();
     }
     public void StopGathering()
@@ -775,8 +778,8 @@
             workoutTimer.Dispose();
             workoutTimer = null;
         }
-                    GameState.UpdateState();
-            this.StateHasChanged();
+        GameState.UpdateState();
+        this.StateHasChanged();
     }
     private void Hunt(int length)
     {
@@ -870,6 +873,11 @@
     {
         UnlockArea(Program.areaManager.GetAreaByName(areaName));
         GameState.UpdateState();
+    }
+    public void PayToUnlockArea(Area a, int goldCost)
+    {
+        GameState.GetPlayerInventory().RemoveItems(Program.itemDatabase.GetGold(), goldCost);
+        UnlockArea(a);
     }
     public void UnlockArea(Area a)
     {
