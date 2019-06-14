@@ -12,7 +12,7 @@
         {
             <a href="/Followers">Followers</a>
         }
-        @if (GameState.isHunting == false && GameState.isGathering == false)
+        @if (GameState.CanLeave())
         {
             <a style="position:absolute; right:10px" href="/Help"> Help</a>
             <a style="position:absolute; right:100px" href="/About"> About</a>

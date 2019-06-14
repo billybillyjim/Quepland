@@ -97,33 +97,61 @@
                     }
                     else if (actionString == "Strength")
                     {
-                        builder.OpenElement(2, "button");
-                        builder.AddAttribute(3, "style", "margin-bottom:10px");
-                        builder.AddAttribute(4, "class", "btn btn-primary");
-                        builder.AddAttribute(5, "onclick", () => TrainStrength());
-                        if (GameState.isGathering || GameState.isHunting)
+                        if (GameState.isWorkingOut == false)
                         {
-                            builder.AddAttribute(6, "disabled", true);
+                            builder.OpenElement(2, "button");
+                            builder.AddAttribute(3, "style", "margin-bottom:10px");
+                            builder.AddAttribute(4, "class", "btn btn-primary");
+                            builder.AddAttribute(5, "onclick", () => TrainStrength());
+                            if (GameState.isGathering || GameState.isHunting)
+                            {
+                                builder.AddAttribute(6, "disabled", true);
+                            }
+                            builder.AddContent(7, "Lift Weights");
+                            builder.CloseElement();
+                            builder.OpenElement(8, "br");
+                            builder.CloseElement();
                         }
-                        builder.AddContent(7, "Lift Weights");
-                        builder.CloseElement();
-                        builder.OpenElement(8, "br");
-                        builder.CloseElement();
+                        else
+                        {
+                            builder.OpenElement(2, "button");
+                            builder.AddAttribute(3, "style", "margin-bottom:10px");
+                            builder.AddAttribute(4, "class", "btn btn-primary");
+                            builder.AddAttribute(5, "onclick", () => StopGathering());
+                            builder.AddContent(7, "Stop Lifting");
+                            builder.CloseElement();
+                            builder.OpenElement(8, "br");
+                            builder.CloseElement();
+                        }
                     }
                     else if (actionString == "Deftness")
                     {
-                        builder.OpenElement(2, "button");
-                        builder.AddAttribute(3, "style", "margin-bottom:10px");
-                        builder.AddAttribute(4, "class", "btn btn-primary");
-                        builder.AddAttribute(5, "onclick", () => TrainDeftness());
-                        if (GameState.isGathering || GameState.isHunting)
+                        if (GameState.isRunning == false)
                         {
-                            builder.AddAttribute(6, "disabled", true);
+                            builder.OpenElement(2, "button");
+                            builder.AddAttribute(3, "style", "margin-bottom:10px");
+                            builder.AddAttribute(4, "class", "btn btn-primary");
+                            builder.AddAttribute(5, "onclick", () => TrainDeftness());
+                            if (GameState.isGathering || GameState.isHunting)
+                            {
+                                builder.AddAttribute(6, "disabled", true);
+                            }
+                            builder.AddContent(7, "Run on Track");
+                            builder.CloseElement();
+                            builder.OpenElement(8, "br");
+                            builder.CloseElement();
                         }
-                        builder.AddContent(7, "Run on Track");
-                        builder.CloseElement();
-                        builder.OpenElement(8, "br");
-                        builder.CloseElement();
+                        else
+                        {
+                            builder.OpenElement(2, "button");
+                            builder.AddAttribute(3, "style", "margin-bottom:10px");
+                            builder.AddAttribute(4, "class", "btn btn-primary");
+                            builder.AddAttribute(5, "onclick", () => StopGathering());
+                            builder.AddContent(7, "Stop Running");
+                            builder.CloseElement();
+                            builder.OpenElement(8, "br");
+                            builder.CloseElement();
+                        }
                     }
                     else if (actionString == "Battle")
                     {
@@ -656,6 +684,7 @@
     {
         speedMulti = 1;
         tiredLevel = 0;
+
         StopGathering();
         if (workoutTimer != null)
         {
@@ -663,11 +692,13 @@
             workoutTimer = null;
         }
         MessageManager.AddMessage("You begin lifting weights.");
+        GameState.isWorkingOut = true;
         workoutTimer = new Timer(new TimerCallback(_ =>
         {
             GameState.GetPlayer().GainExperience("Strength:6");
             workoutTimer.Change((int)(1000 * speedMulti), (int)(1000 * speedMulti));
             speedMulti += 0.0005 * Math.Max(1, 100 - GameState.GetPlayer().GetLevel("Strength")) * (tiredLevel + 1);
+            MessageManager.AddMessage("You lift weights for a while.");
             if (speedMulti > 1.5 && speedMulti < 1.6 && tiredLevel == 0)
             {
                 MessageManager.AddMessage("You begin to feel tired.");
@@ -686,6 +717,8 @@
             GameState.UpdateState();
             StateHasChanged();
         }), null, 1000, 1000);
+        GameState.UpdateState();
+        StateHasChanged();
     }
     public void TrainDeftness()
     {
@@ -697,12 +730,13 @@
             workoutTimer = null;
         }
         MessageManager.AddMessage("You begin running.");
+        GameState.isRunning = true;
         workoutTimer = new Timer(new TimerCallback(_ =>
         {
             GameState.GetPlayer().GainExperience("Deftness:6");
             workoutTimer.Change((int)(1000 * speedMulti), (int)(1000 * speedMulti));
             speedMulti += 0.0005 * Math.Max(1, 100 - GameState.GetPlayer().GetLevel("Deftness"));
-
+            MessageManager.AddMessage("You run for a while.");
             if (speedMulti > 1.5)
             {
                 MessageManager.AddMessage("You begin to feel tired.");
@@ -718,6 +752,8 @@
             GameState.UpdateState();
             StateHasChanged();
         }), null, 1000, 1000);
+                GameState.UpdateState();
+        StateHasChanged();
     }
     public void StopGathering()
     {
@@ -726,6 +762,8 @@
             MessageManager.AddMessage("Your inventory is full.");
         }
         isAutoCollecting = false;
+        GameState.isWorkingOut = false;
+        GameState.isRunning = false;
         if (autoCollectTimer != null)
         {
             autoCollectTimer.Dispose();
@@ -735,14 +773,16 @@
             gatherTimer.Dispose();
             gatherItem = "";
             GameState.isGathering = false;
-            GameState.UpdateState();
-            this.StateHasChanged();
+
         }
         if (workoutTimer != null)
         {
+
             workoutTimer.Dispose();
             workoutTimer = null;
         }
+                    GameState.UpdateState();
+            this.StateHasChanged();
     }
     private void Hunt(int length)
     {

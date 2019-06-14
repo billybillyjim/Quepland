@@ -11,6 +11,9 @@ public class GameState
 
     public bool isGathering;
     public bool isHunting;
+    public bool isWorkingOut;
+    public bool isRunning;
+    public bool isSmithing;
     public bool canSell;
     public bool canBank;
 
@@ -63,5 +66,13 @@ public class GameState
     {
         currentBuffItem = item;
         buffSecondsLeft = item.HealDuration;
+    }
+    public bool CanLeave()
+    {
+        if(!isGathering && !isHunting && !isWorkingOut && !isSmithing && !isRunning)
+        {
+            return true;
+        }
+        return false;
     }
 }

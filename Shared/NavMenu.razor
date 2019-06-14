@@ -35,7 +35,7 @@
             builder.AddAttribute(1, "class", "top-row pl-4 navbar navbar-dark");
             builder.OpenElement(2, "a");
             builder.AddAttribute(3, "class", "navbar-brand");
-            if(GameState.isGathering == false && GameState.isHunting == false)
+            if(GameState.CanLeave())
             {
                 builder.AddAttribute(4, "href", "");
             }
@@ -63,7 +63,7 @@
             builder.OpenElement(3, "ul");
             builder.AddAttribute(4, "class", "nav flex-column");
 
-            if (GameState.isHunting == false && GameState.isGathering == false && Program.areaManager != null)
+            if (GameState.CanLeave() && Program.areaManager != null)
             {
                 //Make the bank link
                 builder.OpenElement(5, "li");
@@ -242,7 +242,7 @@
             localStorage.SetItem("EquippedItems", ids);
             localStorage.SetItem("AlchemyRecipes", GameState.GetPlayer().GetRecipes());
             localStorage.SetItem("SaveGameExists", true);
-            MessageManager.AddMessage("You game has been automatically saved.");
+            //MessageManager.AddMessage("You game has been automatically saved.");
 
             GameState.saveDataLoaded = true;
 

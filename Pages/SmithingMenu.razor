@@ -26,6 +26,7 @@
 
     private int smithingStage = 0;
     private int progress = 0;
+    private bool isUsingBar = false;
 
     private double speedMulti = 1;
 
@@ -74,7 +75,7 @@
                 builder.OpenElement(0, "button");
                 builder.AddAttribute(0, "class", "btn btn-primary");
                 builder.AddAttribute(0, "style", "margin-bottom:10px");
-                builder.AddAttribute(0, "onclick", () => IncrementSmithingStage());
+                builder.AddAttribute(0, "onclick", () => UseOre());
                 if (progress == 0 || progress >= 100)
                 {
 
@@ -83,11 +84,32 @@
                 {
                     builder.AddAttribute(0, "disabled", true);
                 }
+
                 builder.AddContent(0, "Insert " + Extensions.GetIngredientsAsString(currentSmithingBar, Program.itemDatabase) + " into furnace");
                 builder.CloseElement();
-
                 builder.OpenElement(0, "br");
                 builder.CloseElement();
+                if (GameState.GetPlayerInventory().HasItem(currentSmithingBar))
+                {
+                    builder.OpenElement(0, "button");
+                    builder.AddAttribute(0, "class", "btn btn-primary");
+                    builder.AddAttribute(0, "style", "margin-bottom:10px");
+                    builder.AddAttribute(0, "onclick", () => UseBar());
+                    if (progress == 0 || progress >= 100)
+                    {
+
+                    }
+                    else
+                    {
+                        builder.AddAttribute(0, "disabled", true);
+                    }
+                    builder.AddContent(0, "Insert " + currentSmithingBar.ItemName + " into furnace");
+                    builder.CloseElement();
+
+                    builder.OpenElement(0, "br");
+                    builder.CloseElement();
+                }
+
 
             }
             else if (GameState.isHunting == false && smithingStage == 2 && currentSmithingBar != null)
@@ -214,7 +236,15 @@
             return;
         }
         currentSmithingBar = i;
-        GameState.GetPlayerInventory().RemoveItemsByID(i.IngredientIDs);
+        if (isUsingBar)
+        {
+            GameState.GetPlayerInventory().RemoveItemByID(currentSmithingBar.Id);
+        }
+        else
+        {
+            GameState.GetPlayerInventory().RemoveItemsByID(i.IngredientIDs);
+        }
+
         smithingStage++;
         StateHasChanged();
         //IncrementSmithingStage();
@@ -226,6 +256,16 @@
         GameState.GetPlayerInventory().RemoveItemsByID(i.IngredientIDs);
         IncrementSmithingStage();
     }
+    private void UseOre()
+    {
+        isUsingBar = false;
+        IncrementSmithingStage();
+    }
+    private void UseBar()
+    {
+        isUsingBar = true;
+        IncrementSmithingStage();
+    }
     private void IncrementSmithingStage()
     {
         if (smithingTimer != null)
@@ -235,7 +275,7 @@
         }
         progress = 0;
         SendMessage();
-
+        GameState.isSmithing = true;
         smithingTimer = new Timer(new TimerCallback(_ =>
         {
             if (progress >= 100)
@@ -243,11 +283,16 @@
                 if (smithingStage == 2)
                 {
                     GameState.GetPlayerInventory().AddItem(currentSmithingBar);
-                    GameState.GetPlayer().GainExperience(currentSmithingBar.ExperienceGained);
+                    if (!isUsingBar)
+                    {
+                         GameState.GetPlayer().GainExperience(currentSmithingBar.ExperienceGained);
+                    }
+                   
                 }
                 smithingTimer.Dispose();
                 smithingTimer = null;
                 smithingStage++;
+                GameState.isSmithing = false;
                 StateHasChanged();
                 GameState.UpdateState();
             }
@@ -267,6 +312,7 @@
         GameState.GetPlayer().GainExperience(currentSmithingBar.ExperienceGained);
         currentSmithingItem = null;
         currentSmithingBar = null;
+        GameState.isSmithing = false;
         StateHasChanged();
         GameState.UpdateState();
 

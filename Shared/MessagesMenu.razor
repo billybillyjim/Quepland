@@ -20,7 +20,7 @@
                 mostRecent = MessageManager.GetMessages().Last();
             }
 
-            foreach(Message message in MessageManager.GetMessages())
+            foreach(Message message in MessageManager.GetReversedMessages())
             {
                 builder.OpenElement(4, "tr");
                 builder.OpenElement(5, "td");

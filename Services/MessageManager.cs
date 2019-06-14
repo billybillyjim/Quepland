@@ -32,6 +32,10 @@ public class MessageManager
     {
         return messages;
     }
+    public List<Message> GetReversedMessages()
+    {
+        return messages.Reverse<Message>().ToList();
+    }
     private void StateHasChanged()
     {
         StateChanged?.Invoke(this, EventArgs.Empty);
