@@ -26,7 +26,6 @@ public class Player
 	}
     public async void LoadSkills(HttpClient Http)
     {
-        Console.WriteLine("Change");
         Skill[] skillArray = await Http.GetJsonAsync<Skill[]>("data/skills.json");
         skills = skillArray.ToList();
         hasLoadedSkills = true;

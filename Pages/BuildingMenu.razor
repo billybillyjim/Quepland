@@ -231,7 +231,6 @@
     private void Alchemize(GameItem metal, GameItem element)
     {
         int totalQueplarValue = metal.QueplarValue + element.QueplarValue + thisBuilding.QueplarValue;
-        Console.WriteLine(totalQueplarValue);
         GameItem itemCreated = Program.itemDatabase.GetItemByQueplarValue(totalQueplarValue);
         GameState.GetPlayerInventory().RemoveOneOfItem(metal);
         GameState.GetPlayerInventory().RemoveOneOfItem(element);
@@ -365,11 +364,6 @@
                         builder.AddContent(5, building.ButtonText);
                     }
                     builder.CloseElement();
-                }
-
-                else
-                {
-                    Console.WriteLine(s);
                 }
                 builder.OpenElement(6, "br");
                 builder.CloseElement();

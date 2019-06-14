@@ -362,7 +362,6 @@ public class Inventory
     }
     public bool ActionIsEnabled(string skillName)
     {
-        Console.WriteLine("Skill: " + skillName);
         if (skillName.Contains("Gather") || skillName.Length < 1)
         {
             return true;

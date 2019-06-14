@@ -260,9 +260,7 @@
             else
             {
                 GameItem item = Program.itemDatabase.GetItemByID(currentMiningVeinID);
-                Console.WriteLine("Item is null:" + (item == null));
-                Console.WriteLine("Item:" + item.ItemName);
-                Console.WriteLine("Action Req:" + item.ActionRequired);
+
                 bool actionIsEnabled = GameState.GetPlayerInventory().ActionIsEnabled(item.ActionRequired);
                 bool playerHasLevels = GameState.GetPlayer().HasRequiredLevel(item);
                 if (actionIsEnabled && playerHasLevels)
@@ -566,10 +564,6 @@
                     builder.CloseElement();
                 }
 
-                else
-                {
-                    Console.WriteLine(s);
-                }
                 builder.OpenElement(0, "br");
                 builder.CloseElement();
             }

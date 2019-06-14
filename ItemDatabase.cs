@@ -50,7 +50,6 @@ public class ItemDatabase
         {
             return items[id];
         }
-        Console.WriteLine("Invalid id: " + id);
         return null;
     }
     /// <summary>

@@ -474,7 +474,7 @@
     private string Deposit(KeyValuePair<GameItem, int> item, int amount)
     {
         CancelUse();
-        Console.WriteLine("Depositing");
+
         if (amount > item.Value)
         {
             amount = item.Value;
@@ -491,7 +491,7 @@
     private string Sell(KeyValuePair<GameItem, int> item, int amount)
     {
         CancelUse();
-        Console.WriteLine("Selling");
+
         if (amount > item.Value)
         {
             amount = item.Value;
@@ -587,7 +587,6 @@
         createRepeatTimer = new Timer(new TimerCallback(_ =>
         {
             GameItem itemCreated = Program.itemDatabase.GetItemByID(usableIDs[itemCreatedID, 1]);
-            Console.WriteLine(itemCreated);
 
             GameState.GetPlayerInventory().RemoveOneOfItem(itemUsed);
 

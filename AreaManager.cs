@@ -79,7 +79,6 @@ public class AreaManager
                 }
             }
         }
-        Console.WriteLine("Area " + area.Name + " has no parent.");
         return null;
     }
     public List<Area> GetAreasWithChildren()
