@@ -2914,6 +2914,7 @@
     "usableIDs": [
       [ 188, 200 ]
     ],
+    "destroyOnUse": true,
     "icon": "ArrowTips"
   },
   {
@@ -2935,6 +2936,7 @@
       [ 188, 200 ],
       [ 186, 198 ]
     ],
+    "destroyOnUse": true,
     "icon": "ArrowTips"
   },
   {
@@ -2957,6 +2959,7 @@
       [ 186, 198 ],
       [ 187, 199 ]
     ],
+    "destroyOnUse": true,
     "icon": "ArrowTips"
   },
   {
@@ -2980,6 +2983,7 @@
       [ 187, 199 ],
       [ 189, 201 ]
     ],
+    "destroyOnUse": true,
     "icon": "ArrowTips"
   },
   {
@@ -3005,6 +3009,7 @@
       [ 190, 202 ],
       [ 191, 203 ]
     ],
+    "destroyOnUse": true,
     "icon": "ArrowTips"
   },
   {
@@ -3031,6 +3036,7 @@
       [ 191, 203 ],
       [ 192, 204 ]
     ],
+    "destroyOnUse": true,
     "icon": "ArrowTips"
   },
   {
@@ -3051,6 +3057,7 @@
     "usableIDs": [
       [ 193, 205 ]
     ],
+    "destroyOnUse": true,
     "icon": "ArrowTips"
   },
   {
@@ -3078,6 +3085,7 @@
       [ 192, 204 ],
       [ 194, 206 ]
     ],
+    "destroyOnUse": true,
     "icon": "ArrowTips"
   },
   {
@@ -3095,6 +3103,7 @@
     "isSmithable": true,
     "madeOnCreation": 5,
     "isUsable": true,
+    "destroyOnUse": true,
     "usableIDs": [
       [ 188, 200 ],
       [ 186, 198 ],
@@ -3123,6 +3132,7 @@
     "isSmithable": true,
     "madeOnCreation": 5,
     "isUsable": true,
+    "destroyOnUse": true,
     "usableIDs": [
       [ 188, 200 ],
       [ 186, 198 ],
@@ -3152,6 +3162,7 @@
     "isSmithable": true,
     "madeOnCreation": 5,
     "isUsable": true,
+    "destroyOnUse": true,
     "usableIDs": [
       [ 188, 200 ],
       [ 186, 198 ],
