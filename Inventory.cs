@@ -170,23 +170,25 @@ public class Inventory
           (totalItems == maxSize && item.IsStackable == false) ||
           (totalItems == maxSize && item.IsStackable == true && HasItem(item) == false))
         {
+            UpdateItemCount();
             return false;
         }
         if (items.TryGetValue(item, out int amount))
         {
             items[item] = Math.Min(amount + 1, maxValue);
-            if (item.IsStackable == false)
+            /*if (item.IsStackable == false)
             {
-                totalItems++;
-                totalItems.Clamp(0, maxSize);
-            }
+                //totalItems++;
+                //totalItems.Clamp(0, maxSize);
+            }*/
         }
         else
         {
             items[item] = 1;
-            totalItems++;
-            totalItems.Clamp(0, maxSize);
+            //totalItems++;
+            //totalItems.Clamp(0, maxSize);
         }
+        UpdateItemCount();
         return true;
     }
     public int GetAmountOfItem(GameItem item)
@@ -226,15 +228,8 @@ public class Inventory
         foreach (KeyValuePair<GameItem, int> itemToAdd in itemsToAdd)
         {
             items.Add(itemToAdd.Key, itemToAdd.Value);
-            if (itemToAdd.Key.IsStackable)
-            {
-                totalItems++;
-            }
-            else
-            {
-                totalItems += itemToAdd.Value;
-            }
         }
+        UpdateItemCount();
     }
     public bool AddMultipleOfItem(GameItem item, int amount)
     {
@@ -300,18 +295,19 @@ public class Inventory
             if (amount >= 1)
             {
                 items[item] = amount - 1;
-                if (item.IsStackable == false)
+                /*if (item.IsStackable == false)
                 {
                     totalItems--;
                     totalItems.Clamp(0, maxSize);
-                }
+                }*/
                 amount -= 1;
             }
             if (amount == 0)
             {
-                totalItems--;
+                //totalItems--;
                 items.Remove(item);             
             }
+            UpdateItemCount();
             return true;
         }
         return false;
@@ -323,24 +319,26 @@ public class Inventory
             if (currentAmount >= amount)
             {
                 items[item] = currentAmount - amount;
-                if (item.IsStackable == false)
+                /*if (item.IsStackable == false)
                 {
                     totalItems -= amount;
                     totalItems.Clamp(0, maxSize);
-                }
+                }*/
                 if (items[item] == 0)
                 {
                     items.Remove(item);
-                    if (item.IsStackable)
+                    /*if (item.IsStackable)
                     {
                         totalItems -= 1;
                         totalItems.Clamp(0, maxSize);
-                    }
+                    }*/
                 }
+                UpdateItemCount();
                 return amount;
             }
 
         }
+        UpdateItemCount();
         return 0;
     }
     public void RemoveItemByID(int id)
@@ -395,6 +393,21 @@ public class Inventory
         }
         EmptyInventory();
         AddItems(equippedItems);
+    }
+    private void UpdateItemCount()
+    {
+        totalItems = 0;
+        foreach(KeyValuePair<GameItem, int> item in items)
+        {
+            if (item.Key.IsStackable)
+            {
+                totalItems += 1;
+            }
+            else
+            {
+                totalItems += item.Value;
+            }
+        }
     }
     public override string ToString()
     {
