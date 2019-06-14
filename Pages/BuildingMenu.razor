@@ -235,6 +235,7 @@
         GameState.GetPlayerInventory().RemoveOneOfItem(metal);
         GameState.GetPlayerInventory().RemoveOneOfItem(element);
         GameState.GetPlayerInventory().AddItem(itemCreated);
+        GameState.GetPlayer().GainExperience("Alchemy", metal.Value);
         GameState.GetPlayer().LearnNewAlchemyRecipe(metal, element, thisBuilding, itemCreated);
         MessageManager.AddMessage("You merge the metal and element together and produce " + itemCreated.ItemName + ".");
         alchemyStage = 0;

@@ -118,6 +118,12 @@ else
 {
     <div class="table table-hover">
         <table style="width:100%">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
             <tbody>
                 @if (GameState.GetPlayerBank() != null)
                 {
@@ -127,6 +133,7 @@ else
                         {
                             <tr class="bank-compact">
                                 <td style="font-weight:bold"><img src="data/ItemIcons/@(item.Key.Icon + ".png")" style="width:50px;opacity:0.3" /><br />@item.Key.ItemName</td>
+                                <td>@item.Value</td>
                                 <td style="vertical-align:middle">
                                     <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, 1))">1</button>
                                     <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, 5))">5</button>
@@ -142,28 +149,15 @@ else
                         {
                             if (item.Key.ItemName.ToLower().Contains(searchString.ToLower()))
                             {
-                                <tr class="buddy-top">
-                                    <td align="left">@item.Key.ItemName</td>
-                                    <td>@item.Key.ItemDescription</td>
-                                    <td align="right">@item.Value</td>
-                                </tr>
-                                if (item.Key.IsEquipable)
-                                {
-                                    <tr>
-                                        <td>Damage:@item.Key.Damage</td>
-                                        <td>Attack Speed:@item.Key.AttackSpeed</td>
-                                        <td>Gather Speed Bonus:@item.Key.GatherSpeedBonus</td>
-                                    </tr>
-                                }
-                                <tr class="buddy-row">
-                                    <td align="left">Withdraw </td>
-                                    <td align="left">
+                                <tr class="bank-compact">
+                                    <td style="font-weight:bold"><img src="data/ItemIcons/@(item.Key.Icon + ".png")" style="width:50px;opacity:0.3" /><br />@item.Key.ItemName</td>
+                                    <td>@item.Value</td>
+                                    <td style="vertical-align:middle">
                                         <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, 1))">1</button>
                                         <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, 5))">5</button>
                                         <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, withdrawAmount))">@withdrawAmount</button>
                                         <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, int.MaxValue))">All</button>
                                     </td>
-                                    <td align="center"></td>
                                 </tr>
                             }
 

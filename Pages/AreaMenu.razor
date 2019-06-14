@@ -32,6 +32,7 @@
     private DateTime mineSearchStartTime;
 
     private bool isAutoCollecting;
+    private bool isLookingForVein = false;
     private bool waitingForAutoCollectMessage = true;
     private bool limitedOre;
     int tiredLevel = 0;
@@ -235,6 +236,10 @@
             builder.AddAttribute(0, "style", "margin-bottom:10px");
             builder.AddAttribute(0, "class", "btn btn-primary");
             builder.AddAttribute(0, "onclick", () => StartSearchForMiningVein());
+            if (isLookingForVein)
+            {
+                builder.AddAttribute(0, "disabled", true);
+            }
             builder.AddContent(0, "Find Ore Vein");
             builder.CloseElement();
 
@@ -373,11 +378,13 @@
         mineSearchStartTime = DateTime.UtcNow;
         currentMiningVeinID = -1;
         limitedOre = true;
+        isLookingForVein = true;
         miningVeinSearchTimer = new Timer(new TimerCallback(_ =>
         {
             if (DateTime.UtcNow.Subtract(mineSearchStartTime).TotalSeconds >= 5)
             {
                 SetCurrentMiningID(rand.Next(22, 26));
+                isLookingForVein = false;
                 GameState.UpdateState();
                 StateHasChanged();
             }
@@ -759,6 +766,7 @@
             MessageManager.AddMessage("Your inventory is full.");
         }
         isAutoCollecting = false;
+        isLookingForVein = false;
         GameState.isWorkingOut = false;
         GameState.isRunning = false;
         if (autoCollectTimer != null)
@@ -777,6 +785,11 @@
 
             workoutTimer.Dispose();
             workoutTimer = null;
+        }
+        if(miningVeinSearchTimer != null)
+        {
+            miningVeinSearchTimer.Dispose();
+            miningVeinSearchTimer = null;
         }
         GameState.UpdateState();
         this.StateHasChanged();

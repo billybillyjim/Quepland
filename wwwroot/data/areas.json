@@ -139,7 +139,7 @@
     "description": "You mark the cave in your journal. You can now quickly access parts of the cave you have already visited through the sidebar.",
     "areaURL": "quepleCave",
     "icon": "oi oi-random",
-    "children": [ "quepleCaveEntrance", "QCCopperMine", "QuepleCaveSmithy", "QCTinMine", "QCIronMine", "QCRiver" ]
+    "children": [ "quepleCaveEntrance", "QCCopperMine", "QuepleCaveSmithy", "QCTinMine", "QCIronMine", "QCRiver", "QCHuntingCave" ]
   },
   {
     "name": "The Rocky Shores",
@@ -148,7 +148,7 @@
     "description": "The shores north of the great Mount Queple. There seems to be a small fishing village east of the beach. You can now quickly access the parts of the shores you have already visited through the sidebar.",
     "areaURL": "RockyShores",
     "icon": "oi oi-script",
-    "children": [ "RockyShoresBeach", "UragotaTown", "DarkRiver", "WestUragotaDocks", "EastUragotaDocks" ]
+    "children": [ "RockyShoresBeach", "UragotaTown", "DarkRiver", "WestUragotaDocks", "EastUragotaDocks", "OceanFishingPlatform", "DeepOcean" ]
   },
   {
     "name": "Rocky Shores Beach",

@@ -460,7 +460,8 @@
     "isEquipable": true,
     "equipSlot": "Right Hand",
     "damage": 5,
-    "attackSpeed": 2000
+    "attackSpeed": 2000,
+    "icon": "Sword"
   },
   {
     "itemName": "Copper Axe",

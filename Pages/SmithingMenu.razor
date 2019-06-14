@@ -236,15 +236,6 @@
             return;
         }
         currentSmithingBar = i;
-        if (isUsingBar)
-        {
-            GameState.GetPlayerInventory().RemoveItemByID(currentSmithingBar.Id);
-        }
-        else
-        {
-            GameState.GetPlayerInventory().RemoveItemsByID(i.IngredientIDs);
-        }
-
         smithingStage++;
         StateHasChanged();
         //IncrementSmithingStage();
@@ -259,11 +250,13 @@
     private void UseOre()
     {
         isUsingBar = false;
+        GameState.GetPlayerInventory().RemoveItemsByID(currentSmithingBar.IngredientIDs);
         IncrementSmithingStage();
     }
     private void UseBar()
     {
         isUsingBar = true;
+        GameState.GetPlayerInventory().RemoveItemByID(currentSmithingBar.Id);
         IncrementSmithingStage();
     }
     private void IncrementSmithingStage()
