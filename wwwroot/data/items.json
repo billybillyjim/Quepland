@@ -2434,7 +2434,7 @@
   },
   {
     "itemName": "White Pine Arrows (Unfinished)",
-    "itemDescription": "Cheap and light arrows with no tip. Requires zinc or better tips.",
+    "itemDescription": "Cheap and light arrows with no tip. Requires copper or better tips.",
     "gatherString": "You attach a feather to the back of the arrow.",
     "id": 186,
     "value": 2,
@@ -2443,6 +2443,8 @@
     "experienceGained": "Woodworking:30",
     "isStackable": true,
     "usableIDs": [
+      [ 211, 198 ],
+      [ 212, 198 ],
       [ 213, 198 ],
       [ 214, 198 ],
       [ 215, 198 ],
