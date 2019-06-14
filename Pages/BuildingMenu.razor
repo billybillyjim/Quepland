@@ -392,6 +392,14 @@
                     GameState.GetPlayerInventory().ActionIsEnabled(requiredAction) == false)
                     {
                         builder.AddAttribute(0, "disabled", true);
+                        if (GameState.GetPlayer().HasLevelForRoadblock(requiredLevel) == false)
+                        {
+                            builder.AddAttribute(0, "title", "You lack the levels to do this." + "(" + requiredLevel + ")");
+                        }
+                        else if (GameState.GetPlayerInventory().ActionIsEnabled(requiredAction) == false)
+                        {
+                            builder.AddAttribute(0, "title", "You do not have an item that lets you do this." + "(" + requiredAction + ")");
+                        }
                     }
                     builder.AddContent(0, buttonText);
                     builder.CloseElement();
