@@ -380,7 +380,8 @@
     "url": "CamelShop",
     "description": "You enter the shop and are greeted by a short man who sells camels.",
     "isShop": true,
-    "items": [ 162 ]
+    "items": [ 162 ],
+    "npcIDs": [46]
   },
   {
     "name": "Archery Shop",
