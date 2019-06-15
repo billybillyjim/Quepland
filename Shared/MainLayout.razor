@@ -12,12 +12,15 @@
         {
             <a href="/Followers">Followers</a>
         }
+
         @if (GameState.CanLeave())
         {
             <a style="position:absolute; right:10px" href="/Help"> Help</a>
             <a style="position:absolute; right:100px" href="/About"> About</a>
             <a style="position:absolute; right:200px" href="/Updates"> Updates</a>
+            <a style="position:absolute; right:300px" href="/Settings"> Settings</a>
         }
+
 
     </div>
 
@@ -30,16 +33,35 @@
 
 </div>
 
+@if (GameState.isSplitView)
+{
+    <div class="col-md-3" style="padding-left:0px; padding-right:0px">
+        <SkillsMenu />
+    </div>
+    <div class="col-md-3" style="padding-left:0px; padding-right:0px">
+        <Inventory />
+    </div>
+}
+else
+{
+    if (GameState.inventoryIsActiveView)
+    { <div class="col-md-3" style="padding-left:0px; padding-right:0px">
+            <Inventory />
+        </div>
 
-<div class="col-md-3" style="padding-left:0px; padding-right:0px">
-    <SkillsMenu />
-</div>
-<div class="col-md-3" style="padding-left:0px; padding-right:0px">
-    <Inventory />
-</div>
+    }
+    else
+    {
+        <div class="col-md-3" style="padding-left:0px; padding-right:0px">
+            <SkillsMenu />
+        </div>
+    }
+}
+
 
 @functions{
     private string backURL;
+
     protected override void OnInit()
     {
 

@@ -288,20 +288,23 @@
     }
     public void WinBattle()
     {
+        MessageManager.AddMessage("You defeated the " + opponent.Name);
         if(opponent.AlwaysDrops != null)
         {
             GameState.GetPlayerInventory().AddMultiplesOfItems(Program.itemDatabase.GetItems(opponent.AlwaysDrops));
+            MessageManager.AddMessage("You got " + Extensions.GetItemsAsString(Program.itemDatabase.GetItems(opponent.AlwaysDrops)));
         }
         GameItem drop = Program.itemDatabase.GetItemByID(Extensions.GetDrop(opponent));
         if(drop != null)
         {
             GameState.GetPlayerInventory().AddMultipleOfItem(drop, 1);
+            MessageManager.AddMessage("You got a " + drop.ItemName);
         }
 
         battleFound = false;
         EndTimers();
         battleStarted = false;
-        MessageManager.AddMessage("You defeated " + opponent.Name);
+        
         winString = "You won!";
         if (autoFight)
         {

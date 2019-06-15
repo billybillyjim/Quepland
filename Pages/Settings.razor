@@ -1,0 +1,23 @@
+﻿@page "/Settings"
+@inject HttpClient Http
+@inject GameState GameState
+@implements IDisposable
+
+<h1>Settings</h1>
+
+<p><button class="btn btn-primary" onclick="@(() => GameState.ToggleSplitView())">Toggle Split View</button></p>
+
+
+@functions{
+
+    protected override void OnInit()
+    {
+        GameState.StateChanged += OnGameStateChanged;
+        this.StateHasChanged();
+    }
+    void IDisposable.Dispose()
+    {
+        GameState.StateChanged -= OnGameStateChanged;
+    }
+    void OnGameStateChanged(object sender, EventArgs e) => StateHasChanged();
+}

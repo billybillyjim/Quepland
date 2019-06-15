@@ -23,74 +23,81 @@
             builder.OpenElement(2, "h1");
             builder.AddContent(3, "Inventory");
             builder.CloseElement();
-
-            builder.OpenElement(4, "p");
-            builder.AddContent(5, GameState.GetPlayerInventory().GetFreeSpacesString());
+            if (!GameState.isSplitView)
+            {
+                builder.OpenElement(4, "button");
+                builder.AddAttribute(5, "class", "btn btn-primary");
+                builder.AddAttribute(6, "onclick", () => GameState.ToggleActiveView());
+                builder.AddContent(7, "Show Skills");
+                builder.CloseElement();
+            }
+            builder.OpenElement(8, "p");
+            builder.AddContent(9, GameState.GetPlayerInventory().GetFreeSpacesString());
             builder.CloseElement();
 
             if(GameState.GetPlayer().GetSkill("HP") != null)
             {
-                builder.OpenElement(4, "p");
-                builder.AddContent(5, "HP:" + GameState.GetPlayer().CurrentHP + "/" + GameState.GetPlayer().GetSkill("HP").GetSkillLevel());
+                builder.OpenElement(10, "p");
+                builder.AddContent(11, "HP:" + GameState.GetPlayer().CurrentHP + "/" + GameState.GetPlayer().GetSkill("HP").GetSkillLevel());
                 builder.CloseElement();
             }
 
 
             if (GameState.canSell)
             {
-                builder.OpenElement(6, "p");
-                builder.AddContent(6, "Sell X: ");
-                builder.OpenElement(7, "input");
-                builder.AddAttribute(8, "value", Microsoft.AspNetCore.Components.BindMethods.GetValue(sellAmount));
-                builder.AddAttribute(9, "onchange", Microsoft.AspNetCore.Components.EventCallback.Factory.CreateBinder(this, __value => sellAmount = __value, sellAmount));
+                builder.OpenElement(12, "p");
+                builder.AddContent(13, "Sell X: ");
+                builder.OpenElement(14, "input");
+                builder.AddAttribute(15, "value", Microsoft.AspNetCore.Components.BindMethods.GetValue(sellAmount));
+                builder.AddAttribute(16, "onchange", Microsoft.AspNetCore.Components.EventCallback.Factory.CreateBinder(this, __value => sellAmount = __value, sellAmount));
                 builder.CloseElement();
                 builder.CloseElement();
             }
 
 
-            builder.OpenElement(10, "p");
+            builder.OpenElement(17, "p");
             if (GameState.GetPlayer().activeFollower == null)
             {
-                builder.AddContent(11, "No current follower");
+                builder.AddContent(18, "No current follower");
             }
             else
             {
-                builder.AddContent(12, GameState.GetPlayer().activeFollower.ToString());
+                builder.AddContent(19, GameState.GetPlayer().activeFollower.ToString());
             }
 
             builder.CloseElement();
-            builder.OpenElement(13, "p");
+            builder.OpenElement(20, "p");
             if (GameState.buffSecondsLeft > 0)
             {
-                builder.AddContent(14, GameState.currentBuffItem.BuffedSkill + " +" + GameState.currentBuffItem.BuffAmount + ", " + GameState.buffSecondsLeft);
+                builder.AddContent(21, GameState.currentBuffItem.BuffedSkill + " +" + GameState.currentBuffItem.BuffAmount + ", " + GameState.buffSecondsLeft);
             }
 
             builder.CloseElement();
 
-            builder.OpenElement(15, "table");
-            builder.AddAttribute(16, "style", "width:100%");
-            builder.OpenElement(17, "thead");
-            builder.OpenElement(18, "tr");
-            builder.OpenElement(19, "th");
-            builder.AddAttribute(20, "align", "left");
-            builder.AddContent(21, "Item");
+            builder.OpenElement(22, "table");
+            builder.AddAttribute(23, "style", "width:100%");
+            builder.OpenElement(24, "thead");
+            builder.OpenElement(25, "tr");
+            builder.OpenElement(26, "th");
+            builder.AddAttribute(27, "align", "left");
+            builder.AddContent(28, "Item");
             builder.CloseElement();
 
-            builder.OpenElement(22, "th");
-            builder.AddAttribute(23, "style", "text-align:right");
-            builder.AddContent(24, "Amount");
+            builder.OpenElement(29, "th");
+            builder.AddAttribute(30, "style", "text-align:right");
+            builder.AddContent(31, "Amount");
             builder.CloseElement();
 
             builder.CloseElement();
             builder.CloseElement();
 
-            builder.OpenElement(25, "tbody");
+            builder.OpenElement(32, "tbody");
             if (GameState.GetPlayerInventory() != null)
             {
                 foreach (KeyValuePair<GameItem, int> item in GameState.GetPlayerInventory().GetItems())
                 {
 
-                    builder.AddContent(26, LoadItem(item));
+                    builder.AddContent(33, LoadItem(item));
 
                 }
 
@@ -222,7 +229,7 @@
             }
 
             builder.AddContent(3, infoString);
-            builder.CloseElement();          
+            builder.CloseElement();
             builder.CloseElement();
 
         };

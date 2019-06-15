@@ -130,6 +130,18 @@ public static class Extensions
         }
         return returnString;
     }
+    public static string GetItemsAsString(List<GameItem> items)
+    {
+        string returnString = "";
+        foreach(GameItem item in items)
+        {
+            returnString += item.ItemName + ", ";
+        }
+        returnString = returnString.Remove(returnString.Length - 2);
+        int lastAndPos = returnString.LastIndexOf(',');
+        returnString = returnString.Remove(lastAndPos, 1).Insert(lastAndPos, " and");
+        return returnString;
+    }
     public static int GetDrop(Monster monster)
     {
         if(monster.DropTable == null || monster.DropTable.Length == 0)

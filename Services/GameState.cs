@@ -17,6 +17,9 @@ public class GameState
     public bool canSell;
     public bool canBank;
 
+    public bool isSplitView;
+    public bool inventoryIsActiveView;
+
     public bool saveDataLoaded;
     public bool gameDataLoaded;
 
@@ -74,5 +77,15 @@ public class GameState
             return true;
         }
         return false;
+    }
+    public void ToggleSplitView()
+    {
+        isSplitView = !isSplitView;
+        UpdateState();
+    }
+    public void ToggleActiveView()
+    {
+        inventoryIsActiveView = !inventoryIsActiveView;
+        UpdateState();
     }
 }
