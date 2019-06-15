@@ -240,6 +240,11 @@
             {
                 builder.AddAttribute(0, "disabled", true);
             }
+            else if (GameState.CanLeave() == false)
+            {
+                builder.AddAttribute(0, "disabled", true);
+                builder.AddAttribute(0, "title", "You need to finish what you're doing before you do this.");
+            }
             builder.AddContent(0, "Find Ore Vein");
             builder.CloseElement();
 
@@ -572,7 +577,11 @@
                     builder.AddAttribute(0, "style", "margin-bottom:10px");
                     builder.AddAttribute(0, "class", "btn btn-info");
                     builder.AddAttribute(0, "onclick", () => EnterBuilding(s));
-
+                    if (GameState.CanLeave() == false)
+                    {
+                        builder.AddAttribute(0, "disabled", true);
+                        builder.AddAttribute(0, "title", "You need to finish what you're doing before you enter.");
+                    }
                     builder.AddContent(0, building.Name);
                     builder.CloseElement();
                 }
