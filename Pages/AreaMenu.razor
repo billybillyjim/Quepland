@@ -517,19 +517,22 @@
                     foreach (int followerID in npc.UnlockFollowerIDs ?? Enumerable.Empty<int>())
                     {
                         Follower f = Program.followerManager.GetFollowerByID(followerID);
+                        GameItem itemToPay = Program.itemDatabase.GetItemByID(f.CostItemID);
                         if (f.IsUnlocked == false)
                         {
                             builder.OpenElement(9, "button");
                             builder.AddAttribute(10, "style", "margin-bottom:10px");
-                            builder.AddAttribute(11, "class", "btn btn-warning");
-                            builder.AddAttribute(12, "onclick", () => GameState.GetPlayerInventory().RemoveItems(Program.itemDatabase.GetGold(), f.Cost));
+                            builder.AddAttribute(11, "class", "btn btn-primary");
+                            builder.AddAttribute(12, "onclick", () => GameState.GetPlayerInventory().RemoveItems(itemToPay, f.Cost));
                             builder.AddAttribute(13, "onclick", () => UnlockFollower(followerID));
-                            if (GameState.GetPlayerInventory().GetCoins() < f.Cost)
+                            if (GameState.GetPlayerInventory().GetAmountOfItem(itemToPay) < f.Cost)
                             {
                                 builder.AddAttribute(14, "disabled", true);
-                                builder.AddAttribute(15, "title", "You don't have enough money.");
+                                builder.AddAttribute(15, "title", "You don't have enough " + itemToPay.ItemName);
                             }
-                            builder.AddContent(16, "Buy " + f.Name + " for " + f.Cost + "gp");
+                            builder.AddContent(16, "Buy " + f.Name + " for " + f.Cost + " " + itemToPay.ItemName);
+                            builder.CloseElement();
+                            builder.OpenElement(17, "br");
                             builder.CloseElement();
                         }
 
@@ -537,18 +540,18 @@
                     foreach (int itemID in npc.PurchaseItemIDs ?? Enumerable.Empty<int>())
                     {
                         GameItem item = Program.itemDatabase.GetItemByID(itemID);
-                        builder.OpenElement(17, "button");
-                        builder.AddAttribute(18, "style", "margin-bottom:10px");
-                        builder.AddAttribute(19, "class", "btn btn-primary");
-                        builder.AddAttribute(20, "onclick", () => BuyItem(item, 1));
+                        builder.OpenElement(18, "button");
+                        builder.AddAttribute(19, "style", "margin-bottom:10px");
+                        builder.AddAttribute(20, "class", "btn btn-primary");
+                        builder.AddAttribute(21, "onclick", () => BuyItem(item, 1));
                         if (GameState.GetPlayerInventory().GetCoins() < item.Value || GameState.GetPlayerInventory().GetAvailableSpaces() == 0)
                         {
-                            builder.AddAttribute(21, "disabled", true);
-                            builder.AddAttribute(22, "title", "You don't have enough coins with you to buy this.");
+                            builder.AddAttribute(22, "disabled", true);
+                            builder.AddAttribute(23, "title", "You don't have enough coins with you to buy this.");
                         }
-                        builder.AddContent(23, "Buy " + item.ItemName + " for " + item.Value + " gp");
+                        builder.AddContent(24, "Buy " + item.ItemName + " for " + item.Value + " gp");
                         builder.CloseElement();
-                        builder.OpenElement(24, "br");
+                        builder.OpenElement(25, "br");
                         builder.CloseElement();
                     }
 
