@@ -225,7 +225,10 @@
                 {
                     if(GameState.GetPlayerInventory().HasArrows())
                     {
-                        GameState.GetPlayerInventory().RemoveOneOfItem(GameState.GetPlayerInventory().GetStrongestArrows());
+                        if(rand.Next(2) == 0)
+                        {
+                            GameState.GetPlayerInventory().RemoveOneOfItem(GameState.GetPlayerInventory().GetStrongestArrows());
+                        }                      
                         MessageManager.AddMessage("You shoot the " + opponent.Name + " for " + dmgDealt + " damage.");
                     }
                     else

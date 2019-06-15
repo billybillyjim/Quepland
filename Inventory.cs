@@ -139,6 +139,30 @@ public class Inventory
         }
         return null;
     }
+    public GameItem GetAnyOre()
+    {
+        foreach (KeyValuePair<GameItem, int> pair in items)
+        {
+            if (pair.Key.ActionRequired == "Mining")
+            {
+                return pair.Key;
+            }
+        }
+        return null;
+    }
+    public bool HasBarIngredients(GameItem bar)
+    {
+            foreach (int i in bar.IngredientIDs)
+            {
+                if (items.Keys.FirstOrDefault(x => x.Id == i) == null)
+                {
+                    return false;
+                }
+            }
+        
+
+        return true;
+    }
     public bool HasArrows()
     {
         foreach (KeyValuePair<GameItem, int> pair in items)
