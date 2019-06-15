@@ -8,20 +8,25 @@
 
 <div class="main">
     <div class="top-row px-4">
-        @if (GameState.canBank)
-        {
-            <a href="/Followers">Followers</a>
-        }
+        <table style="width:100%">
+            <tr>
+                @if (GameState.canBank)
+                {
+                    <td><a href="/Followers">Followers</a></td>
+                }
 
-        @if (GameState.CanLeave())
-        {
-            <a style="position:absolute; right:10px" href="/Help"> Help</a>
-            <a style="position:absolute; right:100px" href="/About"> About</a>
-            <a style="position:absolute; right:200px" href="/Updates"> Updates</a>
-            <a style="position:absolute; right:300px" href="/Settings"> Settings</a>
-        }
+                @if (GameState.CanLeave())
+                {
 
+                    <td><a href="/Help"> Help</a></td>
+                    <td><a href="/About"> About</a></td>
+                    <td><a href="/Updates"> Updates</a></td>
+                    <td><a href="/Settings"> Settings</a></td>
 
+                }
+
+            </tr>
+        </table>
     </div>
 
     <div class="content px-4">

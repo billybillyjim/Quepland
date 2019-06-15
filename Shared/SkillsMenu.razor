@@ -138,10 +138,11 @@ else
             builder.OpenElement(2, "h1");
             builder.AddContent(3, "Skills");
             builder.CloseElement();
-                        if (!GameState.isSplitView)
+            if (!GameState.isSplitView)
             {
                 builder.OpenElement(4, "button");
                 builder.AddAttribute(5, "class", "btn btn-primary");
+                builder.AddAttribute(5, "style", "margin-bottom:10px");
                 builder.AddAttribute(6, "onclick", () => GameState.ToggleActiveView());
                 builder.AddContent(7, "Show Inventory");
                 builder.CloseElement();

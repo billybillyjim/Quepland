@@ -96,7 +96,11 @@
                 {
                     builder.AddAttribute(0, "disabled", true);
                 }
-
+                if(GameState.GetPlayer().HasIngredients(currentSmithingBar.IngredientIDs) == false)
+                {
+                    builder.AddAttribute(0, "disabled", true);
+                    builder.AddAttribute(0, "title", "You don't have the materials to do this.");
+                }
                 builder.AddContent(0, "Insert " + Extensions.GetIngredientsAsString(currentSmithingBar, Program.itemDatabase) + " into furnace");
                 builder.CloseElement();
                 builder.OpenElement(0, "br");
@@ -290,7 +294,7 @@
     public void BeginAutoSmithing()
     {
         StopSmithing();
-        autoSmithProgress = 0;      
+        autoSmithProgress = 0;
         isAutoSmithing = true;
         bool barFound = false;
         foreach(GameItem bar in Program.itemDatabase.GetSmithingBars())
