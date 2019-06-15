@@ -7,13 +7,17 @@ public class Inventory
     private Dictionary<GameItem, int> items;
     private List<KeyValuePair<GameItem, int>> sortedItems = new List<KeyValuePair<GameItem, int>>();
     private int currentSortStyle = 0;
-    private readonly int maxSize;
+    private int maxSize;
     private readonly int maxValue = int.MaxValue - 1000000;
     private int totalItems;
     public Inventory(int max)
     {
         items = new Dictionary<GameItem, int>();
         maxSize = max;
+    }
+    public void IncreaseMaxSizeBy(int increase)
+    {
+        maxSize += increase;
     }
     /// <summary>
     /// Returns the amount of that specific item in the inventory.

@@ -14,6 +14,7 @@
     <p><button class="btn btn-primary" onclick="@(() => DebugUnlockAllFollowers())">Unlock Followers</button></p>
     <p><button class="btn btn-primary" onclick="@(() => DebugGetMoney())">Gain Money</button></p>
     <p><button class="btn btn-primary" onclick="@(() => DebugOneOfEveryItem())">Get All Items</button></p>
+    <p><button class="btn btn-primary" onclick="@(() => DebugGainStrengthLevel())">Gain Strength Level</button></p>
 }
 
 @if (GameState.saveDataLoaded == false && saveGameExists && gameHasBeenSaved == false && loadBegun == false)
@@ -59,6 +60,12 @@ else
         {
             f.IsUnlocked = true;
         }
+    }
+    public void DebugGainStrengthLevel()
+    {
+        GameState.GetPlayer().GainExperience("Strength", Extensions.GetExperienceRequired(GameState.GetPlayer().GetLevel("Strength")));
+        GameState.UpdateState();
+        StateHasChanged();
     }
     public void DebugOneOfEveryItem()
     {

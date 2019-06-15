@@ -38,6 +38,12 @@ public class Player
             {
                 skills.Find(x => x.SkillName == s.SkillName).SkillExperience = s.SkillExperience;
                 skills.Find(x => x.SkillName == s.SkillName).SetSkillLevel(s.GetSkillLevel());
+                if(s.SkillName == "Strength")
+                {
+                    int extraSlots = (s.GetSkillLevelUnboosted() / 10) * 4;
+                    //Subtract 1 to make up for starting at level 1.
+                    inventory.IncreaseMaxSizeBy(s.GetSkillLevelUnboosted() + extraSlots - 1);
+                }
             }
         }
 
@@ -211,6 +217,21 @@ public class Player
     {
         skill.SetSkillLevel(skill.GetSkillLevel() + 1);
         messageManager.AddMessage("You leveled up! Your " + skill.SkillName + " level is now " + skill.GetSkillLevel() + ".");
+        if (skill.SkillName == "Strength")
+        {
+            inventory.IncreaseMaxSizeBy(1);
+           
+            if (skill.GetSkillLevelUnboosted() % 10 == 0)
+            {
+                inventory.IncreaseMaxSizeBy(4);
+                messageManager.AddMessage("You feel stronger. You can now carry 4 more items in your inventory.");
+            }
+            else
+            {
+                messageManager.AddMessage("You feel stronger. You can now carry 1 more item in your inventory.");
+            }
+        }
+       
         if (skill.SkillExperience >= Extensions.GetExperienceRequired(skill.GetSkillLevel()))
         {         
             LevelUp(skill);

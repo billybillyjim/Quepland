@@ -215,7 +215,7 @@
     "unpackString": "Gut",
     "actionRequired": "Hunting",
     "requiredLevel": 5,
-    "experienceGained": "Hunting:100",
+    "experienceGained": "Hunting:200",
     "icon": "Deer"
   },
   {
@@ -228,7 +228,7 @@
     "unpackString": "Gut",
     "actionRequired": "Hunting",
     "requiredLevel": 1,
-    "experienceGained": "Hunting:60",
+    "experienceGained": "Hunting:120",
     "icon": "Deer"
   },
   {
@@ -853,7 +853,7 @@
     "unpackString": "Gut",
     "actionRequired": "Hunting",
     "requiredLevel": 20,
-    "experienceGained": "Hunting:200",
+    "experienceGained": "Hunting:400",
     "icon": "Deer"
   },
   {
@@ -866,7 +866,7 @@
     "unpackString": "Gut",
     "actionRequired": "Hunting",
     "requiredLevel": 55,
-    "experienceGained": "Hunting:500",
+    "experienceGained": "Hunting:900",
     "icon": "Deer"
   },
   {
@@ -879,7 +879,7 @@
     "unpackString": "Gut",
     "actionRequired": "Hunting",
     "requiredLevel": 65,
-    "experienceGained": "Hunting:800",
+    "experienceGained": "Hunting:1200",
     "icon": "Deer"
   },
   {
@@ -892,7 +892,7 @@
     "unpackString": "Gut",
     "actionRequired": "Hunting",
     "requiredLevel": 80,
-    "experienceGained": "Hunting:1300",
+    "experienceGained": "Hunting:1800",
     "icon": "Deer"
   },
   {
@@ -905,7 +905,7 @@
     "unpackString": "Gut",
     "actionRequired": "Hunting",
     "requiredLevel": 1,
-    "experienceGained": "Hunting:20",
+    "experienceGained": "Hunting:70",
     "icon": "Deer"
   },
   {
@@ -918,7 +918,7 @@
     "unpackString": "Gut",
     "actionRequired": "Hunting",
     "requiredLevel": 43,
-    "experienceGained": "Hunting:240",
+    "experienceGained": "Hunting:640",
     "icon": "Deer"
   },
   {
@@ -931,7 +931,7 @@
     "unpackString": "Gut",
     "actionRequired": "Hunting",
     "requiredLevel": 30,
-    "experienceGained": "Hunting:150",
+    "experienceGained": "Hunting:350",
     "icon": "Deer"
   },
   {
@@ -944,7 +944,7 @@
     "unpackString": "Gut",
     "actionRequired": "Hunting",
     "requiredLevel": 14,
-    "experienceGained": "Hunting:90",
+    "experienceGained": "Hunting:140",
     "icon": "Deer"
   },
   {

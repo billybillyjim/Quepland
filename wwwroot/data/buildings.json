@@ -3,7 +3,7 @@
     "name": "Teppas General Store",
     "id": 0,
     "url": "TeppasGeneralStore",
-    "items": [ 12, 13, 20, 6, 32 ],
+    "items": [ 12, 13, 20, 6, 32, 175, 200 ],
     "description": "This general store sells a variety of items you could use on your journey.",
     "npcIDs": [ 0 ],
     "isShop": true
