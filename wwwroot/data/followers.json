@@ -23,7 +23,7 @@
     "maxCarry": 15,
     "autoCollectSpeed": 15000,
     "isUnlocked": false,
-    "cost": 50000
+    "cost": 15000
   },
   {
     "name": "Grumpy the Gnome",
@@ -36,7 +36,7 @@
     "maxCarry": 19,
     "autoCollectSpeed": 10000,
     "isUnlocked": false,
-    "cost": 150000
+    "cost": 45000
   },
   {
     "name": "Slumpy the Gnome",
@@ -49,7 +49,7 @@
     "maxCarry": 23,
     "autoCollectSpeed": 7500,
     "isUnlocked": false,
-    "cost": 250000
+    "cost": 75000
   },
   {
     "name": "Rumpy the Gnome",
@@ -62,7 +62,7 @@
     "maxCarry": 26,
     "autoCollectSpeed": 5000,
     "isUnlocked": false,
-    "cost": 5000000
+    "cost": 280000
   },
   {
     "name": "Jumpy the Gnome",
@@ -75,7 +75,7 @@
     "maxCarry": 30,
     "autoCollectSpeed": 2000,
     "isUnlocked": false,
-    "cost": 10000000
+    "cost": 1000000
   },
   {
     "name": "Thurgood the Dwarf",
@@ -102,7 +102,7 @@
     "maxCarry": 15,
     "autoCollectSpeed": 15000,
     "isUnlocked": false,
-    "cost": 300000,
+    "cost": 30000,
     "costItemID": 0
   },
   ,
@@ -117,7 +117,7 @@
     "maxCarry": 18,
     "autoCollectSpeed": 12000,
     "isUnlocked": false,
-    "cost": 5000000,
+    "cost": 500000,
     "costItemID": 0
   },
   {
@@ -131,7 +131,7 @@
     "maxCarry": 30,
     "autoCollectSpeed": 10000,
     "isUnlocked": false,
-    "cost": 10000000,
+    "cost": 1000000,
     "costItemID": 0
   },
   {
@@ -184,7 +184,7 @@
     "maxCarry": 15,
     "autoCollectSpeed": 15000,
     "isUnlocked": false,
-    "cost": 50000
+    "cost": 5000
   },
   {
     "name": "Krim the Kushtaka",
@@ -197,7 +197,7 @@
     "maxCarry": 19,
     "autoCollectSpeed": 10000,
     "isUnlocked": false,
-    "cost": 150000
+    "cost": 18000
   },
   {
     "name": "Sloodle the Kushtaka",
@@ -210,7 +210,7 @@
     "maxCarry": 23,
     "autoCollectSpeed": 7500,
     "isUnlocked": false,
-    "cost": 250000
+    "cost": 55000
   },
   {
     "name": "Wenshoop the Kushtaka",
@@ -223,7 +223,7 @@
     "maxCarry": 26,
     "autoCollectSpeed": 5000,
     "isUnlocked": false,
-    "cost": 5000000
+    "cost": 170000
   },
   {
     "name": "Glindrear the Kushtaka",
@@ -236,7 +236,7 @@
     "maxCarry": 30,
     "autoCollectSpeed": 2000,
     "isUnlocked": false,
-    "cost": 10000000
+    "cost": 500000
   },
   {
     "name": "Grib Grab Grub Grob the Goblin",
