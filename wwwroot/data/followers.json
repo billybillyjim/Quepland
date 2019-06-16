@@ -238,4 +238,16 @@
     "isUnlocked": false,
     "cost": 10000000
   },
+  {
+    "name": "Grib Grab Grub Grob the Goblin",
+    "id": 18,
+    "description": "Perhaps the most disgusting creature you've ever seen.",
+    "autoCollectMessage": "Grib Grab Grub Grob takes $ items from your bank and delivers them to the general store.",
+    "autoCollectSkill": "Banking",
+    "autoCollectLevel": 100,
+    "maxCarry": 50,
+    "autoCollectSpeed": 6000,
+    "isUnlocked": false,
+    "cost": 777777
+  }
 ]

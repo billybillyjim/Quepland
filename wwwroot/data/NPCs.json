@@ -293,6 +293,12 @@
     "name": "Tolani Seba the Scout",
     "id": 46,
     "spokenText": "If you need someone to scout out enemies for you to fight, I'd love to help.",
-    "unlockFollowerIDs": [11]
+    "unlockFollowerIDs": [ 11 ]
+  },
+  {
+    "name": "Grib Grab Grub Grob the Goblin",
+    "id": 47,
+    "spokenText": "The hideous creature cries in a shrill voice:I love to sell things. I'll do it for you, for a price...",
+    "unlockFollowerIDs": [ 18 ]
   }
 ]

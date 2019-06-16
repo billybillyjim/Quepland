@@ -456,7 +456,7 @@
                 builder.AddAttribute(7, "disabled", true);
                 builder.AddAttribute(8, "title", "You lack the " + itemToMake.ActionRequired + " level to do this. (" + itemToMake.RequiredLevel + ")");
             }
-            else if(GameState.isGathering || GameState.isHunting)
+            else if(GameState.isGathering || GameState.isHunting || GameState.isSmithing)
             {
                 builder.AddAttribute(9, "disabled", true);
                 builder.AddAttribute(10, "title", "You can't make things while doing what you're doing.");
@@ -668,6 +668,8 @@
             GameState.GetPlayer().GetSkill(GameState.currentBuffItem.BuffedSkill).Boost = 0;
             GameState.foodTimer.Dispose();
             GameState.foodTimer = null;
+            GameState.UpdateState();
+            StateHasChanged();
         }
     }
     protected override void OnInit()
