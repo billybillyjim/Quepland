@@ -240,16 +240,17 @@ public class Inventory
             {
                 if (AddItem(itemToAdd.Key) == false)
                 {
+                    UpdateItemCount();
                     return false;
                 }
             }
         }
+        UpdateItemCount();
         return true;
     }
     public void LoadItems(Dictionary<GameItem, int> itemsToAdd)
     {
-
-        if (itemsToAdd == null)
+        if (itemsToAdd == null || itemsToAdd.Count == 0)
         {
             return;
         }
