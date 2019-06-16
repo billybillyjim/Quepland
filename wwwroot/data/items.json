@@ -542,7 +542,7 @@
     "equipSlot": "Right Hand",
     "damage": 45,
     "attackSpeed": 3000,
-    "gatherSpeedBonus": 0.25,
+    "gatherSpeedBonus": 0.3,
     "icon": "Axe"
   },
   {
@@ -1809,7 +1809,7 @@
     "equipSlot": "Right Hand",
     "damage": 90,
     "attackSpeed": 3000,
-    "gatherSpeedBonus": 0.4,
+    "gatherSpeedBonus": 0.5,
     "icon": "Axe"
   },
   {
@@ -3389,7 +3389,7 @@
     "equipSlot": "Right Hand",
     "damage": 130,
     "attackSpeed": 3000,
-    "gatherSpeedBonus": 0.65,
+    "gatherSpeedBonus": 0.75,
     "icon": "Axe"
   },
   {
@@ -3884,7 +3884,8 @@
     "equipSlot": "Right Hand",
     "damage": 30,
     "attackSpeed": 3000,
-    "icon": "Axe"
+    "icon": "Axe",
+    "gatherSpeedBonus": 0.25
   },
   {
     "itemName": "Lead Knife",
@@ -4044,7 +4045,7 @@
     "damage": 125,
     "attackSpeed": 2500,
     "actionsEnabled": "Axemanship Woodcutting",
-    "gatherSpeedBonus": 0.2,
+    "gatherSpeedBonus": 0.6,
     "icon": "Axe"
   },
   {
@@ -4061,7 +4062,7 @@
     "damage": 120,
     "attackSpeed": 3750,
     "actionsEnabled": "Axemanship Woodcutting",
-    "gatherSpeedBonus": 0.2,
+    "gatherSpeedBonus": 0.5,
     "icon": "Axe"
   },
   {
@@ -4078,7 +4079,7 @@
     "damage": 65,
     "attackSpeed": 3000,
     "actionsEnabled": "Axemanship Woodcutting",
-    "gatherSpeedBonus": 0.2,
+    "gatherSpeedBonus": 0.4,
     "icon": "Axe"
   },
   {

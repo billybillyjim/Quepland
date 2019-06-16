@@ -662,7 +662,11 @@
             {
                 MessageManager.AddMessage(itemToGather.GatherString);
                 GameState.GetPlayer().GainExperience(itemToGather.ExperienceGained);
-                gatherTimer.Change(Extensions.GetGaussianRandomInt(itemToGather.GatherSpeed, itemToGather.GatherSpeed / 2), Extensions.GetGaussianRandomInt(itemToGather.GatherSpeed, itemToGather.GatherSpeed / 2));
+
+                //New speed is a random int based on item gather speed multiplied by the player's gather speed bonus for that activity.
+                gatherTimer.Change((int)(Extensions.GetGaussianRandomInt(itemToGather.GatherSpeed, itemToGather.GatherSpeed / 2)* GameState.GetPlayer().GetGatherSpeed(itemToGather.ActionRequired)), 
+                    (int)(Extensions.GetGaussianRandomInt(itemToGather.GatherSpeed, itemToGather.GatherSpeed / 2)* GameState.GetPlayer().GetGatherSpeed(itemToGather.ActionRequired)));
+
                 if (GameState.currentGatherItem.ActionRequired == "Mining" && limitedOre)
                 {
                     speedMulti += 0.05;
