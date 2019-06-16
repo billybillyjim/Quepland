@@ -133,6 +133,15 @@ public static class Extensions
     public static string GetItemsAsString(List<GameItem> items)
     {
         string returnString = "";
+        if(items.Count == 0)
+        {
+            returnString = "Nothing";
+            return returnString;
+        }
+        if(items.Count == 1)
+        {
+            return items[0].ItemName;
+        }
         foreach(GameItem item in items)
         {
             returnString += item.ItemName + ", ";
