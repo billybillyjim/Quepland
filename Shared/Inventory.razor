@@ -123,6 +123,11 @@
             builder.OpenElement(5, "img");
             builder.AddAttribute(6, "src", "data/ItemIcons/" + item.Key.Icon + ".png");
             builder.AddAttribute(6, "style", "width:50px;opacity:0.6;color:green");
+            if(item.Key.ExperienceGained != null)
+            {
+                builder.AddAttribute(6, "title", "+ " + item.Key.ExperienceGained + " exp");
+            }
+            
             builder.CloseElement();
             builder.AddContent(7, item.Key.ItemName);
             builder.CloseElement();

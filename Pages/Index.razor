@@ -8,6 +8,7 @@
 
 <h1>Hello, Welcome to Quepland!</h1>
 
+<input type="file" name="file" />
 @if (debugMode)
 {
     <p><button class="btn btn-primary" onclick="@(() => DebugAll99s())">Max Account</button></p>
@@ -106,13 +107,14 @@ else
         {
             localStorage.SetItem("ActiveFollower", GameState.GetPlayer().activeFollower.id);
         }
-        List<int> ids = new List<int>();
+
+        localStorage.SetItem("AlchemyRecipes", GameState.GetPlayer().GetRecipes());
+                List<int> ids = new List<int>();
         foreach (KeyValuePair<GameItem, int> pair in GameState.GetPlayerInventory().GetEquippedItems())
         {
             ids.Add(pair.Key.Id);
         }
         localStorage.SetItem("EquippedItems", ids);
-        localStorage.SetItem("AlchemyRecipes", GameState.GetPlayer().GetRecipes());
         localStorage.SetItem("SaveGameExists", true);
         MessageManager.AddMessage("You game has been saved.");
         gameHasBeenSaved = true;
@@ -131,10 +133,7 @@ else
         GameState.GetPlayer().SetSkills(skills);
         GameState.GetPlayer().CurrentHP = localStorage.GetItem<int>("HP");
 
-        if (equippedItems != null)
-        {
-            GameState.GetPlayer().EquipItems(equippedItems);
-        }
+
 
         Program.followerManager.LoadSaveData(localStorage.GetItem<String>("Followers"));
 
@@ -145,7 +144,10 @@ else
 
         GameState.GetPlayer().LoadRecipes(localStorage.GetItem<List<string>>("AlchemyRecipes"));
         Program.areaManager.LoadSaveData(localStorage.GetItem<String>("Areas"));
-
+                if (equippedItems != null && equippedItems.Count > 0)
+        {
+            GameState.GetPlayer().EquipItems(equippedItems);
+        }
 
         MessageManager.AddMessage("Save game loaded.");
 
