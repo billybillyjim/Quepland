@@ -5,38 +5,74 @@
 <div class="sidebar">
     <NavMenu />
 </div>
+@if (!GameState.isSplitView)
+{
+    <div style="min-width:600px"class="main">
+        <div class="top-row px-4">
+            <table style="width:100%">
+                <tr>
+                    @if (GameState.canBank)
+                    {
+                        <td><a href="/Followers">Followers</a></td>
+                    }
 
-<div class="main">
-    <div class="top-row px-4">
-        <table style="width:100%">
-            <tr>
-                @if (GameState.canBank)
-                {
-                    <td><a href="/Followers">Followers</a></td>
-                }
+                    @if (GameState.CanLeave())
+                    {
 
-                @if (GameState.CanLeave())
-                {
+                        <td><a href="/Help"> Help</a></td>
+                        <td><a href="/About"> About</a></td>
+                        <td><a href="/Updates"> Updates</a></td>
+                        <td><a href="/Settings"> Settings</a></td>
 
-                    <td><a href="/Help"> Help</a></td>
-                    <td><a href="/About"> About</a></td>
-                    <td><a href="/Updates"> Updates</a></td>
-                    <td><a href="/Settings"> Settings</a></td>
+                    }
 
-                }
-
-            </tr>
-        </table>
-    </div>
-
-    <div class="content px-4">
-        @Body
-        <div class="footer navbar-fixed-bottom">
-            <MessagesMenu />
+                </tr>
+            </table>
         </div>
-    </div>
 
-</div>
+        <div class="content px-4">
+            @Body
+            <div class="footer navbar-fixed-bottom">
+                <MessagesMenu />
+            </div>
+        </div>
+
+    </div>
+}
+else
+{
+    <div class="main">
+        <div class="top-row px-4">
+            <table style="width:100%">
+                <tr>
+                    @if (GameState.canBank)
+                    {
+                        <td><a href="/Followers">Followers</a></td>
+                    }
+
+                    @if (GameState.CanLeave())
+                    {
+
+                        <td><a href="/Help"> Help</a></td>
+                        <td><a href="/About"> About</a></td>
+                        <td><a href="/Updates"> Updates</a></td>
+                        <td><a href="/Settings"> Settings</a></td>
+
+                    }
+
+                </tr>
+            </table>
+        </div>
+
+        <div class="content px-4">
+            @Body
+            <div class="footer navbar-fixed-bottom">
+                <MessagesMenu />
+            </div>
+        </div>
+
+    </div>
+}
 
 @if (GameState.isSplitView)
 {
@@ -50,14 +86,14 @@
 else
 {
     if (GameState.inventoryIsActiveView)
-    { <div class="col-md-3" style="padding-left:0px; padding-right:0px">
+    { <div class="col-md-3" style="padding-left:0px; padding-right:0px; min-width:400px">
             <Inventory />
         </div>
 
     }
     else
     {
-        <div class="col-md-3" style="padding-left:0px; padding-right:0px">
+        <div class="col-md-3" style="padding-left:0px; padding-right:0px; min-width:400px">
             <SkillsMenu />
         </div>
     }
