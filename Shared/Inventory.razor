@@ -76,7 +76,7 @@
             builder.CloseElement();
 
             builder.OpenElement(22, "table");
-            builder.AddAttribute(23, "style", "width:100%");
+            builder.AddAttribute(23, "style", "width:100%;table-layout:fixed;");
             builder.OpenElement(24, "thead");
             builder.OpenElement(25, "tr");
             builder.OpenElement(26, "th");
@@ -122,7 +122,7 @@
             builder.AddAttribute(4, "style", "text-align:left;font-weight:bold");
             builder.OpenElement(5, "img");
             builder.AddAttribute(6, "src", "data/ItemIcons/" + item.Key.Icon + ".png");
-            builder.AddAttribute(6, "style", "width:50px;opacity:0.3;");
+            builder.AddAttribute(6, "style", "width:50px;opacity:0.6;color:green");
             builder.CloseElement();
             builder.AddContent(7, item.Key.ItemName);
             builder.CloseElement();
@@ -551,7 +551,8 @@
         {
             GameState.buffSecondsLeft--;
             GameState.GetPlayer().CurrentHP = Math.Min(GameState.GetPlayer().CurrentHP + GameState.currentBuffItem.HealAmount, GameState.GetPlayer().GetSkill("HP").GetSkillLevel());
-            if(GameState.buffSecondsLeft <= 0)
+            GameState.GetPlayer().GainExperience("HP", GameState.currentBuffItem.HealAmount / 2);
+            if (GameState.buffSecondsLeft <= 0)
             {
                 GameState.GetPlayer().GetSkill(GameState.currentBuffItem.BuffedSkill).Boost = 0;
                 MessageManager.AddMessage("Your buff has expired.");

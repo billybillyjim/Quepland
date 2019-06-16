@@ -62,13 +62,18 @@
                     builder.OpenElement(17, "th");
                     builder.AddContent(18, "Cost");
                     builder.CloseElement();
+                    builder.OpenElement(19, "th");
+                    builder.AddAttribute(20, "style", "text-align:right");
+                    builder.AddContent(21, "Buy");
+                    
                     builder.CloseElement();
                     builder.CloseElement();
-                    builder.OpenElement(19, "tbody");
+                    builder.CloseElement();
+                    builder.OpenElement(22, "tbody");
 
                     foreach (int i in thisBuilding.items ?? Enumerable.Empty<int>())
                     {
-                        builder.AddContent(20, ShopItem(i));
+                        builder.AddContent(23, ShopItem(i));
                     }
                     builder.CloseElement();
                     builder.CloseElement();
@@ -92,7 +97,7 @@
             builder.AddContent(6, item.Value);
             builder.CloseElement();
             builder.OpenElement(7, "td");
-            builder.AddAttribute(8, "style", "text-align: center");
+            builder.AddAttribute(8, "style", "text-align: right; min-width:150px");
             builder.AddContent(9, BuyButton(item, 1));
             builder.AddContent(10, BuyButton(item, 5));
             builder.AddContent(11, BuyButton(item, buyAmount));

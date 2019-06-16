@@ -43,7 +43,7 @@
                         @foreach (KeyValuePair<GameItem, int> item in GameState.GetPlayerBank().GetInventory().GetItemsSorted(sortStyle))
                         {
                             <tr class="buddy-top">
-                                <td style="font-weight:bold"><img src="data/ItemIcons/@(item.Key.Icon + ".png")" style="width:50px;opacity:0.3" /><br />@item.Key.ItemName</td>
+                                <td style="font-weight:bold"><img src="data/ItemIcons/@(item.Key.Icon + ".png")" style="width:50px;opacity:0.6" /><br />@item.Key.ItemName</td>
                                 <td>@item.Key.ItemDescription</td>
                                 <td align="right">@item.Value</td>
                             </tr>
@@ -132,7 +132,7 @@ else
                         @foreach (KeyValuePair<GameItem, int> item in GameState.GetPlayerBank().GetInventory().GetItemsSorted(sortStyle))
                         {
                             <tr class="bank-compact">
-                                <td style="font-weight:bold"><img src="data/ItemIcons/@(item.Key.Icon + ".png")" style="width:50px;opacity:0.3" /><br />@item.Key.ItemName</td>
+                                <td style="font-weight:bold"><img src="data/ItemIcons/@(item.Key.Icon + ".png")" style="width:50px;opacity:0.6" /><br />@item.Key.ItemName</td>
                                 <td>@item.Value</td>
                                 <td style="vertical-align:middle">
                                     <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, 1))">1</button>
@@ -150,7 +150,7 @@ else
                             if (item.Key.ItemName.ToLower().Contains(searchString.ToLower()))
                             {
                                 <tr class="bank-compact">
-                                    <td style="font-weight:bold"><img src="data/ItemIcons/@(item.Key.Icon + ".png")" style="width:50px;opacity:0.3" /><br />@item.Key.ItemName</td>
+                                    <td style="font-weight:bold"><img src="data/ItemIcons/@(item.Key.Icon + ".png")" style="width:50px;opacity:0.6" /><br />@item.Key.ItemName</td>
                                     <td>@item.Value</td>
                                     <td style="vertical-align:middle">
                                         <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, 1))">1</button>
