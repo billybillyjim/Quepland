@@ -127,10 +127,11 @@ else
         Dictionary<GameItem, int> bankItems = Extensions.GetItemDicFromString(localStorage.GetItem<String>("Bank"), Program.itemDatabase);
         Dictionary<GameItem, int> invItems = Extensions.GetItemDicFromString(localStorage.GetItem<String>("Inventory"), Program.itemDatabase);
         List<Skill> skills = Extensions.GetSkillsFromString(localStorage.GetItem<string>("Skills"));
+         GameState.GetPlayer().SetSkills(skills);
         List<int> equippedItems = localStorage.GetItem<List<int>>("EquippedItems");
         GameState.GetPlayerBank().GetInventory().LoadItems(bankItems);
         GameState.GetPlayerInventory().LoadItems(invItems);
-        GameState.GetPlayer().SetSkills(skills);
+       
         GameState.GetPlayer().CurrentHP = localStorage.GetItem<int>("HP");
 
 

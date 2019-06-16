@@ -234,13 +234,14 @@
             {
                 localStorage.SetItem("ActiveFollower", GameState.GetPlayer().activeFollower.id);
             }
+
+            localStorage.SetItem("AlchemyRecipes", GameState.GetPlayer().GetRecipes());
             List<int> ids = new List<int>();
             foreach (KeyValuePair<GameItem, int> pair in GameState.GetPlayerInventory().GetEquippedItems())
             {
                 ids.Add(pair.Key.Id);
             }
             localStorage.SetItem("EquippedItems", ids);
-            localStorage.SetItem("AlchemyRecipes", GameState.GetPlayer().GetRecipes());
             localStorage.SetItem("SaveGameExists", true);
             //MessageManager.AddMessage("You game has been automatically saved.");
 
