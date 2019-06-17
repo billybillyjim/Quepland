@@ -102,7 +102,7 @@
   {
     "name": "Traveller",
     "id": 15,
-    "spokenText": "Beyond here is the great swamp. You won't make it to the other side without knowledge from someone who already has. Apparently a guy from Kogoe Town made it out alive, but he's crazy now.",
+    "spokenText": "Beyond here is the great swamp. You won't make it to the other side without knowledge from someone who already has. Apparently a guy from Uragota Town made it out alive, but he's crazy now.",
     "isInteractable": true
   },
   {
@@ -257,48 +257,56 @@
     "name": "Raka the Kushtaka",
     "id": 40,
     "spokenText": "I'll gladly help you bank your fish, if you pay me, of course.",
-    "unlockFollowerIDs": [ 12 ]
+    "unlockFollowerIDs": [ 12 ],
+    "isInteractable": true
   },
   {
     "name": "Al the Kushtaka",
     "id": 41,
     "spokenText": "Need any help banking your fish?",
-    "unlockFollowerIDs": [ 13 ]
+    "unlockFollowerIDs": [ 13 ],
+    "isInteractable": true
   },
   {
     "name": "Krim the Kushtaka",
     "id": 42,
     "spokenText": "I'm always available for hire. Just let me know when to start.",
-    "unlockFollowerIDs": [ 14 ]
+    "unlockFollowerIDs": [ 14 ],
+    "isInteractable": true
   },
   {
     "name": "Sloodle the Kushtaka",
     "id": 43,
     "spokenText": "I love hard work and doing a good job. Need any help with fishing?",
-    "unlockFollowerIDs": [ 15 ]
+    "unlockFollowerIDs": [ 15 ],
+    "isInteractable": true
   },
   {
     "name": "Wenshoop the Kushtaka",
     "id": 44,
     "spokenText": "I don't offer my services to just anyone, seeing how I'm the greatest fish-banker there ever was. But for a fee I suppose I could lend you a hand. You look like you need it...",
-    "unlockFollowerIDs": [ 16 ]
+    "unlockFollowerIDs": [ 16 ],
+    "isInteractable": true
   },
   {
     "name": "Glindrear the Kushtaka",
     "id": 45,
     "spokenText": "Glindrear says nothing. The sign laying by his feet says, 'Will Work For Money'.",
-    "unlockFollowerIDs": [ 17 ]
+    "unlockFollowerIDs": [ 17 ],
+    "isInteractable": true
   },
   {
     "name": "Tolani Seba the Scout",
     "id": 46,
     "spokenText": "If you need someone to scout out enemies for you to fight, I'd love to help.",
-    "unlockFollowerIDs": [ 11 ]
+    "unlockFollowerIDs": [ 11 ],
+    "isInteractable": true
   },
   {
     "name": "Grib Grab Grub Grob the Goblin",
     "id": 47,
     "spokenText": "The hideous creature cries in a shrill voice:I love to sell things. I'll do it for you, for a price...",
-    "unlockFollowerIDs": [ 18 ]
+    "unlockFollowerIDs": [ 18 ],
+    "isInteractable": true
   }
 ]
