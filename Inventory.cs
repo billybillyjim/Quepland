@@ -72,6 +72,10 @@ public class Inventory
         {
             sortedItems = sortedItems.OrderBy(x => x.Key.Damage).Reverse().ToList();
         }
+        else if (sortedBy == 4)
+        {
+            sortedItems = sortedItems.OrderBy(x => x.Key.Value).Reverse().ToList();
+        }
         return sortedItems;
     }
     public Dictionary<GameItem, int> GetUnequippedItems()
