@@ -108,7 +108,7 @@ else
         }
 
         localStorage.SetItem("AlchemyRecipes", GameState.GetPlayer().GetRecipes());
-                List<int> ids = new List<int>();
+        List<int> ids = new List<int>();
         foreach (KeyValuePair<GameItem, int> pair in GameState.GetPlayerInventory().GetEquippedItems())
         {
             ids.Add(pair.Key.Id);
@@ -120,6 +120,16 @@ else
         GameState.saveDataLoaded = true;
         return "";
     }
+    private void TestLocalStorage()
+    {
+        localStorage.SetItem("testString", "success");
+        string success = localStorage.GetItem<string>("testString");
+        if (success == null || success.Length == 0)
+        {
+            MessageManager.AddMessage("Local storage could not be accessed. Saving is not possible without working local storage.");
+        }
+
+    }
     private void LoadData()
     {
         loadBegun = true;
@@ -130,7 +140,7 @@ else
         List<int> equippedItems = localStorage.GetItem<List<int>>("EquippedItems");
         GameState.GetPlayerBank().GetInventory().LoadItems(bankItems);
         GameState.GetPlayerInventory().LoadItems(invItems);
-       
+
         GameState.GetPlayer().CurrentHP = localStorage.GetItem<int>("HP");
 
 
@@ -144,7 +154,7 @@ else
 
         GameState.GetPlayer().LoadRecipes(localStorage.GetItem<List<string>>("AlchemyRecipes"));
         Program.areaManager.LoadSaveData(localStorage.GetItem<String>("Areas"));
-                if (equippedItems != null && equippedItems.Count > 0)
+        if (equippedItems != null && equippedItems.Count > 0)
         {
             GameState.GetPlayer().EquipItems(equippedItems);
         }
@@ -158,6 +168,7 @@ else
     protected override void OnInit()
     {
         GameState.StateChanged += OnGameStateChanged;
+        TestLocalStorage();
         if (GameState.gameDataLoaded == false)
         {
             Program.gatherManager.SetGameState(GameState);

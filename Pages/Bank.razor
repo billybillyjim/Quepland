@@ -50,9 +50,7 @@
                             if (item.Key.IsEquipable)
                             {
                                 <tr style="padding:.2rem" title="DPS:@((float)item.Key.Damage  / (item.Key.AttackSpeed / 1000f))">
-                                    <td style="padding:.2rem">Damage:@item.Key.Damage</td>
-                                    <td style="padding:.2rem">Attack Speed:@(item.Key.AttackSpeed / 1000f)</td>
-                                    <td style="padding:.2rem">Gather Speed Bonus:@item.Key.GatherSpeedBonus</td>
+                                    <td style="padding:.2rem" colspan="3">Gather Speed Bonus:@(item.Key.GatherSpeedBonus), Damage:@(item.Key.Damage), Attack Speed:@(item.Key.AttackSpeed / 1000f)</td>
                                 </tr>
                             }
                             if (item.Key.IsArrow)

@@ -398,7 +398,7 @@
     "id": 38,
     "actionRequiredForAccess": "Desert Travel",
     "actions": [ "Carve Totem Pole:Exquisite Wood Shavings" ],
-    "unlockableAreas": [ "Oasis,Continue Southward,,", "Leupp,Go West,," ],
+    "unlockableAreas": [ "Oasis,Continue Southward,,", "Leupp,Go West,,", "Abandoned Desert Shack,Go East,," ],
     "redirectAreaURL": "Route7",
     "npcIDs": [ 18, 43 ]
   },

@@ -204,21 +204,15 @@ public class Inventory
         if (items.TryGetValue(item, out int amount))
         {
             items[item] = Math.Min(amount + 1, maxValue);
-            /*if (item.IsStackable == false)
-            {
-                //totalItems++;
-                //totalItems.Clamp(0, maxSize);
-            }*/
         }
         else
         {
             items[item] = 1;
-            //totalItems++;
-            //totalItems.Clamp(0, maxSize);
         }
         UpdateItemCount();
         return true;
     }
+
     public int GetAmountOfItem(GameItem item)
     {
         if (items.TryGetValue(item, out int amount))
@@ -233,17 +227,10 @@ public class Inventory
         if (itemsToAdd == null)
         {
             return false;
-        }
+        }     
         foreach (KeyValuePair<GameItem, int> itemToAdd in itemsToAdd)
         {
-            for (int i = 0; i < itemToAdd.Value; i++)
-            {
-                if (AddItem(itemToAdd.Key) == false)
-                {
-                    UpdateItemCount();
-                    return false;
-                }
-            }
+            AddMultipleOfItem(itemToAdd.Key, itemToAdd.Value);
         }
         UpdateItemCount();
         return true;
@@ -262,14 +249,48 @@ public class Inventory
     }
     public bool AddMultipleOfItem(GameItem item, int amount)
     {
-        for (int i = 0; i < amount; i++)
+        if (item.IsStackable)
         {
-            if (AddItem(item) == false)
+            return AddItemStackable(item, amount);
+        }
+        else
+        {
+            for (int i = 0; i < amount; i++)
+            {
+                if (AddItem(item) == false)
+                {
+                    return false;
+                }
+            }
+        }
+        UpdateItemCount();
+        return true;
+    }
+    public bool AddItemStackable(GameItem item, int amount)
+    {
+        if(items.TryGetValue(item, out int current))
+        {
+            if (item.IsStackable)
+            {
+                items[item] = current + amount;
+            }
+            else
             {
                 return false;
             }
         }
-
+        else
+        {
+            if (item.IsStackable)
+            {
+                items[item] = amount;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        UpdateItemCount();
         return true;
     }
     public void AddMultipleOfItemUnlimited(GameItem item, int amount)

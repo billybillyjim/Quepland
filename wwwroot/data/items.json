@@ -2099,7 +2099,7 @@
     "itemName": "Camel",
     "itemDescription": "An even-toed ungulate with two large humps on its back. It doesn't fit in your inventory, but it takes up a space anyways.  ¯\\_(ツ)_/¯",
     "id": 162,
-    "value": 2,
+    "value": 45000,
     "actionsEnabled": "Desert Travel",
     "icon": "Transport"
   },

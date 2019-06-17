@@ -359,7 +359,7 @@
             builder.AddAttribute(9, "style", "margin:2px");
             builder.AddAttribute(10, "onclick", () => Deposit(item, 1));
             builder.AddContent(11, "1");
-           // builder.CloseElement();
+            // builder.CloseElement();
             builder.CloseElement();
             //builder.OpenElement(12, "td");
             //builder.AddAttribute(12, "style", "text-align:right");
@@ -371,7 +371,7 @@
             //builder.CloseElement();
             builder.CloseElement();
             //builder.OpenElement(18, "td");
-           // builder.AddAttribute(18, "style", "text-align:right");
+            // builder.AddAttribute(18, "style", "text-align:right");
             builder.OpenElement(19, "button");
             builder.AddAttribute(20, "class", "btn btn-primary");
             builder.AddAttribute(21, "style", "margin:2px");
@@ -397,6 +397,7 @@
             builder.AddContent(4, "Sell for " + Math.Round(item.Key.Value / 2f) + " each");
             builder.CloseElement();
             builder.OpenElement(5, "td");
+            builder.AddAttribute(6, "colspan", "3");
             builder.AddAttribute(8, "style", "text-align:right");
             builder.OpenElement(9, "button");
             builder.AddAttribute(10, "class", "btn btn-primary");
@@ -490,7 +491,7 @@
         {
             builder.OpenElement(0, "tr");
             builder.AddAttribute(0, "class", "buddy-mid");
-            
+
             builder.OpenElement(1, "td");
             builder.AddAttribute(2, "colspan", "4");
             builder.AddAttribute(3, "align", "right");
@@ -533,6 +534,10 @@
         if (amount > item.Value)
         {
             amount = item.Value;
+        }
+        if(amount < 0)
+        {
+            return "";
         }
         if (item.Key.IsEquipable && item.Key.IsEquipped)
         {
