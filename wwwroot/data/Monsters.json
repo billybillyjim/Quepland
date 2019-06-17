@@ -9,9 +9,11 @@
     "strength": "Axemanship",
     "damage": 2,
     "attackSpeed": 1,
-    "alwaysDrops": [ 42, 43 ],
+    "alwaysDrops": [ 42, 231 ],
     "dropTable": [
-      [ 44, 100 ]
+      [ 44, 100 ],
+      [ 232, 10 ],
+      [ 233, 5 ] 
     ]
 
   },
