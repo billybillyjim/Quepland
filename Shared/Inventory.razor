@@ -76,29 +76,34 @@
             builder.CloseElement();
 
             builder.OpenElement(22, "table");
-            builder.AddAttribute(23, "style", "width:100%;table-layout:fixed;");
+            builder.AddAttribute(23, "style", "width:100%;");
             builder.OpenElement(24, "thead");
             builder.OpenElement(25, "tr");
             builder.OpenElement(26, "th");
             builder.AddAttribute(27, "align", "left");
             builder.AddContent(28, "Item");
             builder.CloseElement();
-
             builder.OpenElement(29, "th");
-            builder.AddAttribute(30, "style", "text-align:right");
-            builder.AddContent(31, "Amount");
+
+            builder.CloseElement();
+            builder.OpenElement(30, "th");
+
+            builder.CloseElement();
+            builder.OpenElement(31, "th");
+            builder.AddAttribute(32, "style", "text-align:right");
+            builder.AddContent(33, "Amount");
             builder.CloseElement();
 
             builder.CloseElement();
             builder.CloseElement();
 
-            builder.OpenElement(32, "tbody");
+            builder.OpenElement(34, "tbody");
             if (GameState.GetPlayerInventory() != null)
             {
                 foreach (KeyValuePair<GameItem, int> item in GameState.GetPlayerInventory().GetItems())
                 {
 
-                    builder.AddContent(33, LoadItem(item));
+                    builder.AddContent(35, LoadItem(item));
 
                 }
 
@@ -122,7 +127,7 @@
             builder.AddAttribute(4, "style", "text-align:left;font-weight:bold");
             builder.OpenElement(5, "img");
             builder.AddAttribute(6, "src", "data/ItemIcons/" + item.Key.Icon + ".png");
-            builder.AddAttribute(6, "style", "width:50px;opacity:0.6;color:green");
+            builder.AddAttribute(6, "style", "width:40px;opacity:0.6;color:green");
             if(item.Key.ExperienceGained != null)
             {
                 builder.AddAttribute(6, "title", "+ " + item.Key.ExperienceGained + " exp");
@@ -130,6 +135,10 @@
 
             builder.CloseElement();
             builder.AddContent(7, item.Key.ItemName);
+            builder.CloseElement();
+            builder.OpenElement(7, "td");
+            builder.CloseElement();
+            builder.OpenElement(7, "td");
             builder.CloseElement();
             builder.OpenElement(8, "td");
             builder.AddAttribute(9, "style", "text-align:right");
@@ -158,10 +167,8 @@
 
                 builder.AddAttribute(16, "class", "buddy-mid");
 
-
                 builder.OpenElement(17, "td");
-                builder.CloseElement();
-                builder.OpenElement(18, "td");
+                builder.AddAttribute(18, "colspan", "4");
                 builder.AddAttribute(19, "style", "text-align:right");
                 builder.OpenElement(20, "button");
                 builder.AddAttribute(21, "class", "btn btn-primary");
@@ -255,8 +262,7 @@
 
 
             builder.OpenElement(4, "td");
-            builder.CloseElement();
-            builder.OpenElement(5, "td");
+            builder.AddAttribute(5, "colspan", "4");
             builder.AddAttribute(6, "style", "text-align:right");
             builder.OpenElement(7, "button");
             builder.AddAttribute(8, "class", "btn btn-primary");
@@ -289,6 +295,7 @@
 
 
             builder.OpenElement(4, "td");
+            builder.AddAttribute(4, "colspan", "3");
             string infoString = "";
             if(item.Key.Damage > 0)
             {
@@ -342,28 +349,38 @@
             builder.OpenElement(3, "td");
             builder.AddContent(4, "Deposit");
             builder.CloseElement();
+            //builder.OpenElement(5, "td");
+            //builder.CloseElement();
             builder.OpenElement(5, "td");
             builder.AddAttribute(6, "style", "text-align:right");
+            builder.AddAttribute(6, "colspan", "3");
             builder.OpenElement(7, "button");
             builder.AddAttribute(8, "class", "btn btn-primary");
-            builder.AddAttribute(9, "style", "margin:3px");
+            builder.AddAttribute(9, "style", "margin:2px");
             builder.AddAttribute(10, "onclick", () => Deposit(item, 1));
             builder.AddContent(11, "1");
+           // builder.CloseElement();
             builder.CloseElement();
-            builder.OpenElement(12, "button");
-            builder.AddAttribute(13, "class", "btn btn-primary");
-            builder.AddAttribute(14, "style", "margin:3px");
-            builder.AddAttribute(15, "onclick", () => Deposit(item, 5));
-            builder.AddContent(16, "5");
+            //builder.OpenElement(12, "td");
+            //builder.AddAttribute(12, "style", "text-align:right");
+            builder.OpenElement(13, "button");
+            builder.AddAttribute(14, "class", "btn btn-primary");
+            builder.AddAttribute(15, "style", "margin:2px");
+            builder.AddAttribute(16, "onclick", () => Deposit(item, 5));
+            builder.AddContent(17, "5");
+            //builder.CloseElement();
             builder.CloseElement();
-            builder.OpenElement(17, "button");
-            builder.AddAttribute(18, "class", "btn btn-primary");
-            builder.AddAttribute(19, "style", "margin:3px");
-            builder.AddAttribute(20, "onclick", () => Deposit(item, int.MaxValue));
-            builder.AddContent(21, "All");
+            //builder.OpenElement(18, "td");
+           // builder.AddAttribute(18, "style", "text-align:right");
+            builder.OpenElement(19, "button");
+            builder.AddAttribute(20, "class", "btn btn-primary");
+            builder.AddAttribute(21, "style", "margin:2px");
+            builder.AddAttribute(22, "onclick", () => Deposit(item, int.MaxValue));
+            builder.AddContent(23, "All");
             builder.CloseElement();
             builder.CloseElement();
             builder.CloseElement();
+
         };
     }
     private RenderFragment SellButtons(KeyValuePair<GameItem, int> item)
@@ -421,8 +438,8 @@
                 else
                 {
                     builder.AddAttribute(29, "title", "You don't have inventory space for the coins you would receive.");
-                }             
-                
+                }
+
             }
             builder.AddContent(30, sellAmount);
             builder.CloseElement();
@@ -445,8 +462,7 @@
             builder.OpenElement(0, "tr");
             builder.AddAttribute(0, "class", "buddy-mid");
             builder.OpenElement(1, "td");
-            builder.CloseElement();
-            builder.OpenElement(2, "td");
+            builder.AddAttribute(2, "colspan", "4");
             builder.AddAttribute(3, "align", "right");
             builder.OpenElement(4, "button");
             builder.AddAttribute(5, "class", "btn btn-primary");
@@ -474,9 +490,9 @@
         {
             builder.OpenElement(0, "tr");
             builder.AddAttribute(0, "class", "buddy-mid");
+            
             builder.OpenElement(1, "td");
-            builder.CloseElement();
-            builder.OpenElement(2, "td");
+            builder.AddAttribute(2, "colspan", "4");
             builder.AddAttribute(3, "align", "right");
             builder.OpenElement(4, "button");
             builder.AddAttribute(5, "class", "btn btn-primary");

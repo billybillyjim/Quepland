@@ -64,7 +64,15 @@ app {
     bottom: 5px;
     left: 10px;
 }
-
+.bank-table{
+    padding:.1rem;
+}
+.bank-table td{
+    padding:.1rem;
+}
+.table td, .table th{
+    padding:.1rem;
+}
 .buddy-row {
     border-top: none;
     border-bottom: 2px solid;
@@ -80,6 +88,7 @@ app {
     border-bottom: 1px dashed;
     border-top-color: lightgray;
     border-bottom-color: lightgray;
+    column-span:all;
 }
 .bank-compact{
     border: 1px groove black;

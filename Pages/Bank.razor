@@ -26,10 +26,10 @@
 <br />
 @if (!compactStyle)
 {
-    <div class="table table-hover">
+    <div class="bank-table">
         <table style="width:100%">
             <thead>
-                <tr>
+                <tr style="padding:.2rem">
                     <th align="left">Item</th>
                     <th>Description</th>
                     <th style="text-align:right">Amount</th>
@@ -42,35 +42,35 @@
                     {
                         @foreach (KeyValuePair<GameItem, int> item in GameState.GetPlayerBank().GetInventory().GetItemsSorted(sortStyle))
                         {
-                            <tr class="buddy-top">
-                                <td style="font-weight:bold"><img src="data/ItemIcons/@(item.Key.Icon + ".png")" style="width:50px;opacity:0.6" /><br />@item.Key.ItemName</td>
-                                <td>@item.Key.ItemDescription</td>
-                                <td align="right">@item.Value</td>
+                            <tr class="buddy-top" style="padding:.2rem">
+                                <td style="font-weight:bold; padding:.2rem"><img src="data/ItemIcons/@(item.Key.Icon + ".png")" style="width:40px;opacity:0.6" />@item.Key.ItemName</td>
+                                <td style="padding:.2rem">@item.Key.ItemDescription</td>
+                                <td style="padding:.2rem" align="right">@item.Value</td>
                             </tr>
                             if (item.Key.IsEquipable)
                             {
-                                <tr title="DPS:@((float)item.Key.Damage  / (item.Key.AttackSpeed / 1000f))">
-                                    <td>Damage:@item.Key.Damage</td>
-                                    <td>Attack Speed:@(item.Key.AttackSpeed / 1000f)</td>
-                                    <td>Gather Speed Bonus:@item.Key.GatherSpeedBonus</td>
+                                <tr style="padding:.2rem" title="DPS:@((float)item.Key.Damage  / (item.Key.AttackSpeed / 1000f))">
+                                    <td style="padding:.2rem">Damage:@item.Key.Damage</td>
+                                    <td style="padding:.2rem">Attack Speed:@(item.Key.AttackSpeed / 1000f)</td>
+                                    <td style="padding:.2rem">Gather Speed Bonus:@item.Key.GatherSpeedBonus</td>
                                 </tr>
                             }
                             if (item.Key.IsArrow)
                             {
-                                <tr>
-                                    <td>Damage:@item.Key.Damage</td>
+                                <tr style="padding:.2rem">
+                                    <td style="padding:.2rem">Damage:@item.Key.Damage</td>
                                 </tr>
                             }
 
-                            <tr class="buddy-row">
-                                <td align="left">Withdraw </td>
-                                <td align="left">
+                            <tr class="buddy-row" style="padding:.2rem">
+                                <td style="padding:.2rem" align="left">Withdraw </td>
+                                <td style="padding:.2rem" align="left">
                                     <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, 1))">1</button>
                                     <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, 5))">5</button>
                                     <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, withdrawAmount))">@withdrawAmount</button>
                                     <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, int.MaxValue))">All</button>
                                 </td>
-                                <td align="center"></td>
+                                <td style="padding:.2rem" align="center"></td>
                             </tr>
                         }
                     }
@@ -80,28 +80,28 @@
                         {
                             if (item.Key.ItemName.ToLower().Contains(searchString.ToLower()))
                             {
-                                <tr class="buddy-top">
-                                    <td align="left">@item.Key.ItemName</td>
-                                    <td>@item.Key.ItemDescription</td>
-                                    <td align="right">@item.Value</td>
+                                <tr class="buddy-top" style="padding:.2rem">
+                                    <td style="padding:.2rem" align="left"><img src="data/ItemIcons/@(item.Key.Icon + ".png")" style="width:40px;opacity:0.6" />@item.Key.ItemName</td>
+                                    <td style="padding:.2rem">@item.Key.ItemDescription</td>
+                                    <td style="padding:.2rem" align="right">@item.Value</td>
                                 </tr>
                                 if (item.Key.IsEquipable)
                                 {
-                                    <tr>
-                                        <td>Damage:@item.Key.Damage</td>
-                                        <td>Attack Speed:@item.Key.AttackSpeed</td>
-                                        <td>Gather Speed Bonus:@item.Key.GatherSpeedBonus</td>
+                                    <tr style="padding:.2rem">
+                                        <td style="padding:.2rem">Damage:@item.Key.Damage</td>
+                                        <td style="padding:.2rem">Attack Speed:@item.Key.AttackSpeed</td>
+                                        <td style="padding:.2rem">Gather Speed Bonus:@item.Key.GatherSpeedBonus</td>
                                     </tr>
                                 }
-                                <tr class="buddy-row">
-                                    <td align="left">Withdraw </td>
-                                    <td align="left">
+                                <tr class="buddy-row" style="padding:.2rem">
+                                    <td style="padding:.2rem" align="left">Withdraw </td>
+                                    <td style="padding:.2rem" align="left">
                                         <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, 1))">1</button>
                                         <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, 5))">5</button>
                                         <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, withdrawAmount))">@withdrawAmount</button>
                                         <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, int.MaxValue))">All</button>
                                     </td>
-                                    <td align="center"></td>
+                                    <td style="padding:.2rem" align="center"></td>
                                 </tr>
                             }
 
@@ -117,7 +117,7 @@
 else
 {
     <div class="table table-hover">
-        <table style="width:100%">
+        <table style="width:100%; padding:.2rem">
             <thead>
                 <tr>
                     <th>Item</th>
@@ -132,9 +132,9 @@ else
                         @foreach (KeyValuePair<GameItem, int> item in GameState.GetPlayerBank().GetInventory().GetItemsSorted(sortStyle))
                         {
                             <tr class="bank-compact">
-                                <td style="font-weight:bold"><img src="data/ItemIcons/@(item.Key.Icon + ".png")" style="width:50px;opacity:0.6" /><br />@item.Key.ItemName</td>
-                                <td>@item.Value</td>
-                                <td style="vertical-align:middle">
+                                <td style="font-weight:bold; padding:.2rem"><img src="data/ItemIcons/@(item.Key.Icon + ".png")" style="width:30px;opacity:0.6" /><br />@item.Key.ItemName</td>
+                                <td style="padding:.2rem">@item.Value</td>
+                                <td style="vertical-align:middle;padding:.2rem">
                                     <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, 1))">1</button>
                                     <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, 5))">5</button>
                                     <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, withdrawAmount))">@withdrawAmount</button>
@@ -150,9 +150,9 @@ else
                             if (item.Key.ItemName.ToLower().Contains(searchString.ToLower()))
                             {
                                 <tr class="bank-compact">
-                                    <td style="font-weight:bold"><img src="data/ItemIcons/@(item.Key.Icon + ".png")" style="width:50px;opacity:0.6" /><br />@item.Key.ItemName</td>
-                                    <td>@item.Value</td>
-                                    <td style="vertical-align:middle">
+                                    <td style="font-weight:bold; padding:.2rem"><img src="data/ItemIcons/@(item.Key.Icon + ".png")" style="width:30px;opacity:0.6" /><br />@item.Key.ItemName</td>
+                                    <td style="padding:.2rem">@item.Value</td>
+                                    <td style="vertical-align:middle; padding:.2rem">
                                         <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, 1))">1</button>
                                         <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, 5))">5</button>
                                         <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, withdrawAmount))">@withdrawAmount</button>
