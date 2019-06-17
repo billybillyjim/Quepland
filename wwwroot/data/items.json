@@ -3627,7 +3627,7 @@
   {
     "itemName": "Steelflame Axe Handle",
     "id": 256,
-    "description": "The handle of an axe that is always burning. It needs a blade.",
+    "itemDescription": "The handle of an axe that is always burning. It needs a blade.",
     "value": 1200,
     "isUsable": true,
     "destroyOnUse": true,
@@ -3639,7 +3639,7 @@
   {
     "itemName": "Steelflame Axe Blade",
     "id": 257,
-    "description": "The blade of an axe that is always burning. It needs a handle.",
+    "itemDescription": "The blade of an axe that is always burning. It needs a handle.",
     "value": 1100,
     "isUsable": true,
     "destroyOnUse": true,
@@ -3666,7 +3666,7 @@
   {
     "itemName": "Earthen Hammer Head",
     "id": 259,
-    "description": "The head of a magical hammer. It needs a grip and handle to complete it.",
+    "itemDescription": "The head of a magical hammer. It needs a grip and handle to complete it.",
     "value": 700,
     "isUsable": true,
     "destroyOnUse": true,
@@ -3679,7 +3679,7 @@
   {
     "itemName": "Earthen Hammer Handle",
     "id": 260,
-    "description": "The handle of a magical hammer. It needs a grip and head to complete it.",
+    "itemDescription": "The handle of a magical hammer. It needs a grip and head to complete it.",
     "value": 600,
     "isUsable": true,
     "destroyOnUse": true,
@@ -3692,7 +3692,7 @@
   {
     "itemName": "Earthen Hammer Grip",
     "id": 261,
-    "description": "The grip of a magical hammer. It needs a head and handle to complete it.",
+    "itemDescription": "The grip of a magical hammer. It needs a head and handle to complete it.",
     "value": 800,
     "isUsable": true,
     "destroyOnUse": true,
@@ -3705,7 +3705,7 @@
   {
     "itemName": "Unfinished Earthen Hammer",
     "id": 262,
-    "description": "An unfinished magical hammer. It needs a head to complete it.",
+    "itemDescription": "An unfinished magical hammer. It needs a head to complete it.",
     "value": 800,
     "isUsable": true,
     "destroyOnUse": true,
@@ -3717,7 +3717,7 @@
   {
     "itemName": "Unfinished Earthen Hammer",
     "id": 263,
-    "description": "An unfinished magical hammer. It needs a handle to complete it.",
+    "itemDescription": "An unfinished magical hammer. It needs a handle to complete it.",
     "value": 800,
     "isUsable": true,
     "destroyOnUse": true,
@@ -3729,7 +3729,7 @@
   {
     "itemName": "Unfinished Earthen Hammer",
     "id": 264,
-    "description": "An unfinished magical hammer. It needs a grip to complete it.",
+    "itemDescription": "An unfinished magical hammer. It needs a grip to complete it.",
     "value": 800,
     "isUsable": true,
     "destroyOnUse": true,

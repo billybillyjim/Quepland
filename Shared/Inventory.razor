@@ -267,7 +267,8 @@
             builder.OpenElement(7, "button");
             builder.AddAttribute(8, "class", "btn btn-primary");
             builder.AddAttribute(9, "onclick", () => UnpackItem(item.Key));
-            if (GameState.GetPlayerInventory().GetAvailableSpaces() < item.Key.UnpackIDs.Length)
+            if (GameState.GetPlayerInventory().GetAvailableSpaces() < item.Key.UnpackIDs.Length &&
+             !(item.Key.UnpackIDs.Length == 1 && item.Key.IsStackable == false))
             {
                 builder.AddAttribute(10, "disabled", true);
             }
@@ -606,7 +607,8 @@
         CancelUse();
         int itemsCreated = item.UnpackIDs.Length;
 
-        if (GameState.GetPlayerInventory().GetAvailableSpaces() < itemsCreated)
+        if (GameState.GetPlayerInventory().GetAvailableSpaces() < itemsCreated &&
+            !(itemsCreated == 1 && Program.itemDatabase.GetItemByID(item.UnpackIDs[0]).IsStackable == true))
         {
             return "";
         }
