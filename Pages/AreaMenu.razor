@@ -925,7 +925,16 @@
     }
     public void UnlockFollower(int followerID)
     {
+        if (Program.followerManager.GetNumberOfUnlockedFollowers() == 0)
+        {
+            MessageManager.AddMessage(Program.followerManager.GetFollowerByID(followerID).Name + " will now follow you. Go to your bank and select \"Followers\" at the top of the screen to set them as your follower.");
+        }
+        else
+        {
+            MessageManager.AddMessage(Program.followerManager.GetFollowerByID(followerID).Name + " will now follow you.");
+        }
         Program.followerManager.GetFollowerByID(followerID).IsUnlocked = true;
+        GameState.UpdateState();
     }
     public void SpeakToNPC(NPC npc)
     {
