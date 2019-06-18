@@ -320,6 +320,10 @@
                             {
                                 builder.AddAttribute(13, "disabled", true);
                             }
+                            else
+                            {
+                                builder.AddAttribute(15, "title", f.Name + " will help you with " + f.AutoCollectSkill + " up to level " + f.AutoCollectLevel + ".");
+                            }
                             builder.AddContent(14, "Buy " + f.Name + " for " + f.Cost + " " + itemToPay.ItemName);
                             builder.CloseElement();
                             builder.OpenElement(15, "br");

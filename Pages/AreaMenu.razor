@@ -364,7 +364,7 @@
                     builder.AddAttribute(13, "disabled", true);
                     builder.AddAttribute(14, "title", "You need a bow in order to hunt.");
                 }
-                                if(GameState.GetPlayer().GetLevel("Hunting") < minHuntingLevel)
+                if(GameState.GetPlayer().GetLevel("Hunting") < minHuntingLevel)
                 {
                     builder.AddAttribute(13, "disabled", true);
                     builder.AddAttribute(14, "title", "You aren't a good enough hunter to hunt here yet.(Hunting:" + minHuntingLevel + ")");
@@ -375,7 +375,7 @@
                 builder.AddAttribute(17, "style", "margin:10px");
                 builder.AddAttribute(18, "class", "btn btn-primary");
                 builder.AddAttribute(19, "onclick", () => Hunt(8));
-                                if(GameState.GetPlayer().GetLevel("Hunting") < minHuntingLevel)
+                if(GameState.GetPlayer().GetLevel("Hunting") < minHuntingLevel)
                 {
                     builder.AddAttribute(13, "disabled", true);
                     builder.AddAttribute(14, "title", "You aren't a good enough hunter to hunt here yet.(Hunting:" + minHuntingLevel + ")");
@@ -562,6 +562,10 @@
                             {
                                 builder.AddAttribute(14, "disabled", true);
                                 builder.AddAttribute(15, "title", "You don't have enough " + itemToPay.ItemName);
+                            }
+                            else
+                            {
+                                builder.AddAttribute(15, "title", f.Name + " will help you with " + f.AutoCollectSkill + " up to level " + f.AutoCollectLevel + ".");
                             }
                             builder.AddContent(16, "Buy " + f.Name + " for " + f.Cost + " " + itemToPay.ItemName);
                             builder.CloseElement();
