@@ -104,7 +104,7 @@
                             builder.AddAttribute(3, "style", "margin-bottom:10px");
                             builder.AddAttribute(4, "class", "btn btn-primary");
                             builder.AddAttribute(5, "onclick", () => TrainStrength());
-                            if (GameState.isGathering || GameState.isHunting)
+                            if (GameState.isGathering || GameState.isHunting || GameState.isUsing)
                             {
                                 builder.AddAttribute(6, "disabled", true);
                             }
@@ -133,7 +133,7 @@
                             builder.AddAttribute(3, "style", "margin-bottom:10px");
                             builder.AddAttribute(4, "class", "btn btn-primary");
                             builder.AddAttribute(5, "onclick", () => TrainDeftness());
-                            if (GameState.isGathering || GameState.isHunting)
+                            if (GameState.isGathering || GameState.isHunting || GameState.isUsing)
                             {
                                 builder.AddAttribute(6, "disabled", true);
                             }
@@ -160,7 +160,7 @@
                         builder.AddAttribute(3, "style", "margin-bottom:10px");
                         builder.AddAttribute(4, "class", "btn btn-primary");
                         builder.AddAttribute(5, "onclick", () => EnterFightingMenu());
-                        if (GameState.isGathering || GameState.isHunting)
+                        if (GameState.isGathering || GameState.isHunting || GameState.isUsing)
                         {
                             builder.AddAttribute(6, "disabled", true);
                         }
@@ -192,6 +192,11 @@
                                 if (GameState.GetPlayerInventory().GetAvailableSpaces() == 0)
                                 {
                                     builder.AddAttribute(13, "title", "Your inventory is full.");
+                                    builder.AddAttribute(14, "disabled", true);
+                                }
+                                else if (GameState.isUsing)
+                                {
+                                    builder.AddAttribute(13, "title", "You can't do both those things at once.");
                                     builder.AddAttribute(14, "disabled", true);
                                 }
                                 builder.AddContent(15, action);
@@ -527,7 +532,7 @@
                         {
                             builder.OpenElement(9, "button");
                             builder.AddAttribute(10, "style", "margin-bottom:10px");
-                            builder.AddAttribute(11, "class", "btn btn-primary");                    
+                            builder.AddAttribute(11, "class", "btn btn-primary");
                             builder.AddAttribute(13, "onclick", () => UnlockAndPayForFollower(followerID));
                             if (GameState.GetPlayerInventory().GetAmountOfItem(itemToPay) < f.Cost)
                             {

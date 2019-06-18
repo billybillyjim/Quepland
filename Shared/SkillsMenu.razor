@@ -48,12 +48,20 @@ else
                 builder.OpenElement(16, "tbody");
                 foreach (string recipe in GameState.GetPlayer().GetRecipes())
                 {
-                    builder.OpenElement(17, "tr");
-                    builder.OpenElement(18, "td");
+                    if(!dustRecipesVisible && recipe.Contains("Dust"))
+                    {
 
-                    builder.AddContent(19, recipe);
-                    builder.CloseElement();
-                    builder.CloseElement();
+                    }
+                    else
+                    {
+                        builder.OpenElement(17, "tr");
+                        builder.OpenElement(18, "td");
+
+                        builder.AddContent(19, recipe);
+                        builder.CloseElement();
+                        builder.CloseElement();
+                    }
+
                 }
                 builder.CloseElement();
                 builder.CloseElement();
@@ -249,6 +257,7 @@ else
     public void ToggleDustVisibility()
     {
         dustRecipesVisible = !dustRecipesVisible;
+        StateHasChanged();
     }
 
     public void SetSkill(Skill skill)

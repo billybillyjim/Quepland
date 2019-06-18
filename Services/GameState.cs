@@ -16,6 +16,7 @@ public class GameState
     public bool isSmithing;
     public bool canSell;
     public bool canBank;
+    public bool isUsing;
 
     public bool isSplitView;
     public bool inventoryIsActiveView;

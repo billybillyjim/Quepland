@@ -6,8 +6,7 @@
 @LoadInventory()
 
 @functions{
-
-    private bool isUsing;
+  
     private GameItem currentUsedItem;
     private int[,] usableIDs;
     private Timer createRepeatTimer;
@@ -135,7 +134,7 @@
             }
 
             builder.CloseElement();
-             
+
             builder.AddContent(7, item.Key.ItemName);
             builder.CloseElement();
             builder.OpenElement(7, "td");
@@ -174,15 +173,21 @@
                 builder.AddAttribute(19, "style", "text-align:right");
                 builder.OpenElement(20, "button");
                 builder.AddAttribute(21, "class", "btn btn-primary");
-                if (!isUsing)
+                if(GameState.CanLeave() == false)
                 {
-                    builder.AddAttribute(22, "onclick", () => Use(item.Key));
-                    builder.AddContent(23, "Use " + item.Key.ItemName);
+                    builder.AddAttribute(22, "disabled", true);
+                    builder.AddAttribute(23, "title", "You can't do that while you are doing what you're doing.");
+                }
+
+                if (!GameState.isUsing)
+                {
+                    builder.AddAttribute(24, "onclick", () => Use(item.Key));
+                    builder.AddContent(25, "Use " + item.Key.ItemName);
                 }
                 else
                 {
-                    builder.AddAttribute(24, "onclick", () => CancelUse());
-                    builder.AddContent(25, "Cancel");
+                    builder.AddAttribute(26, "onclick", () => CancelUse());
+                    builder.AddContent(27, "Cancel");
                 }
                 builder.CloseElement();
                 builder.CloseElement();
@@ -197,34 +202,34 @@
                 {
                     if (usableIDs[i, 0] == item.Key.Id)
                     {
-                        builder.AddContent(26, UseButton(i, item.Key));
+                        builder.AddContent(28, UseButton(i, item.Key));
                     }
                 }
             }
             if (item.Key.IsUnpackable)
             {
-                builder.AddContent(27, UnpackButton(item));
+                builder.AddContent(29, UnpackButton(item));
             }
             if (item.Key.IsEdible)
             {
-                builder.AddContent(28, EatButton(item.Key));
+                builder.AddContent(30, EatButton(item.Key));
             }
             if (item.Key.IsEquipable)
             {
-                builder.AddContent(29, EquipButtons(item));
+                builder.AddContent(31, EquipButtons(item));
             }
             if (item.Key.IsArrow)
             {
-                builder.AddContent(30, ArrowInfo(item));
+                builder.AddContent(32, ArrowInfo(item));
             }
 
             if (GameState.canBank)
             {
-                builder.AddContent(31, BankButtons(item));
+                builder.AddContent(33, BankButtons(item));
             }
             if (GameState.canSell && item.Key.Id != 0)
             {
-                builder.AddContent(32, SellButtons(item));
+                builder.AddContent(34, SellButtons(item));
             }
 
         };
@@ -561,7 +566,7 @@
             usableIDs = Extensions.To2DArray<int>(item.UsableIDs);
             currentUsedItem = item;
         }
-        isUsing = true;
+        GameState.isUsing = true;
         GameState.UpdateState();
         StateHasChanged();
         return "";
@@ -573,7 +578,7 @@
             createRepeatTimer.Dispose();
         }
         currentUsedItem = null;
-        isUsing = false;
+        GameState.isUsing = false;
         usableIDs = null;
 
         GameState.UpdateState();
