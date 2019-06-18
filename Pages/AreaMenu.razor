@@ -327,6 +327,15 @@
             if (GameState.isHunting == false)
             {
                 bool canHunt = GameState.GetPlayerInventory().ActionIsEnabled("Hunting");
+                int minHuntingLevel = 100;
+                foreach(GameItem i in Program.itemDatabase.GetItems(area.HuntingIDs))
+                {
+                    if(i.RequiredLevel < minHuntingLevel)
+                    {
+                        minHuntingLevel = i.RequiredLevel;
+                    }
+                }
+
                 builder.OpenElement(0, "p");
                 builder.AddContent(1, "Hunt:");
 
@@ -339,6 +348,11 @@
                     builder.AddAttribute(6, "disabled", true);
                     builder.AddAttribute(7, "title", "You need a bow in order to hunt.");
                 }
+                if(GameState.GetPlayer().GetLevel("Hunting") < minHuntingLevel)
+                {
+                    builder.AddAttribute(6, "disabled", true);
+                    builder.AddAttribute(7, "title", "You aren't a good enough hunter to hunt here yet.(Hunting:" + minHuntingLevel + ")");
+                }
                 builder.AddContent(8, "1 Hour");
                 builder.CloseElement();
                 builder.OpenElement(9, "button");
@@ -350,12 +364,22 @@
                     builder.AddAttribute(13, "disabled", true);
                     builder.AddAttribute(14, "title", "You need a bow in order to hunt.");
                 }
+                                if(GameState.GetPlayer().GetLevel("Hunting") < minHuntingLevel)
+                {
+                    builder.AddAttribute(13, "disabled", true);
+                    builder.AddAttribute(14, "title", "You aren't a good enough hunter to hunt here yet.(Hunting:" + minHuntingLevel + ")");
+                }
                 builder.AddContent(15, "4 Hours");
                 builder.CloseElement();
                 builder.OpenElement(16, "button");
                 builder.AddAttribute(17, "style", "margin:10px");
                 builder.AddAttribute(18, "class", "btn btn-primary");
                 builder.AddAttribute(19, "onclick", () => Hunt(8));
+                                if(GameState.GetPlayer().GetLevel("Hunting") < minHuntingLevel)
+                {
+                    builder.AddAttribute(13, "disabled", true);
+                    builder.AddAttribute(14, "title", "You aren't a good enough hunter to hunt here yet.(Hunting:" + minHuntingLevel + ")");
+                }
                 if (canHunt == false)
                 {
                     builder.AddAttribute(20, "disabled", true);
