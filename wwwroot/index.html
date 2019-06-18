@@ -15,61 +15,6 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src='https://cdn1.kongregate.com/javascripts/kongregate_api.js'></script>
-    <script src='https://download.playfab.com/PlayFabClientApi.js'></script>
-    <script type='text/javascript'>
-
-        // This function just updates UI, nothing else
-        function updateFields() {
-            $('#init').hide();
-            $('#content').show();
-
-            // Visualize Kongregate Auth Data
-            $('#username').text('Username: ' + kongregate.services.getUsername());
-            $('#user_id').text('User ID: ' + kongregate.services.getUserId());
-
-            // If not authenticated in Kongregate, allow to use Login button
-            if (kongregate.services.isGuest()) {
-                $('#login').show();
-            } else {
-                $('#login').hide();
-            }
-        }
-
-        // The function prepares and triggers PlayFab LoginWithKongregate API call
-        function loginInUsingPlayFab() {
-            // Setting up playfab title ID
-            PlayFab.settings.titleId = "E9B77";
-
-            // forming request
-            var request = {
-                TitleId: PlayFab.settings.titleId,
-                AuthTicket: kongregate.services.getGameAuthToken(),
-                KongregateId: kongregate.services.getUserId(),
-                CreateAccount: true
-            };
-
-            console.log('logging in');
-            // Invoke LoginWithKongregate API call and visualize both results (success or failue)
-            PlayFabClientSDK.LoginWithKongregate(request,
-                function (result) {
-                    $('<div></div>').html('Authenticated via playfab').appendTo('#content')
-                    console.log("success");
-                },
-                function (err) {
-                    $('<div></div>').html('Problem occured: ' + PlayFab.GenerateErrorReport(err)).appendTo('#content')
-                    console.log("failure");
-                });
-        }
-
-        // The entry point for Kongregate initialization
-        kongregateAPI.loadAPI(function () {
-            window.kongregate = kongregateAPI.getAPI();
-            updateFields();
-            kongregate.services.addEventListener('login', function () {
-                updateFields();
-            });
-        });
-    </script>
+    
 </body>
 </html>
