@@ -39,9 +39,10 @@
             <tbody>
                 @if (GameState.GetPlayerBank() != null)
                 {
-                    @if (searchString == null || searchString == "")
+
+                    @foreach (KeyValuePair<GameItem, int> item in GameState.GetPlayerBank().GetInventory().GetItemsSorted(sortStyle))
                     {
-                        @foreach (KeyValuePair<GameItem, int> item in GameState.GetPlayerBank().GetInventory().GetItemsSorted(sortStyle))
+                        @if ((searchString == null || searchString == "") || item.Key.ItemName.ToLower().Contains(searchString.ToLower()))
                         {
                             <tr class="buddy-top" style="padding:.2rem">
                                 <td style="font-weight:bold; padding:.2rem"><img src="data/ItemIcons/@(item.Key.Icon + ".png")" style="width:40px;opacity:0.6" />@item.Key.ItemName</td>
@@ -50,7 +51,7 @@
                             </tr>
                             if (item.Key.IsEquipable)
                             {
-                                <tr style="padding:.2rem" title="DPS:@((float)item.Key.Damage  / (item.Key.AttackSpeed / 1000f))">
+                                <tr style="padding:.2rem" title="DPS:@((float)item.Key.Damage / (item.Key.AttackSpeed / 1000f))">
                                     <td style="padding:.2rem" colspan="3">Gather Speed Bonus:@(item.Key.GatherSpeedBonus), Damage:@(item.Key.Damage), Attack Speed:@(item.Key.AttackSpeed / 1000f)</td>
                                 </tr>
                             }
@@ -61,7 +62,7 @@
                                 </tr>
                             }
 
-                            <tr class="buddy-row" style="padding:.2rem">
+                            <tr class="buddy-mid" style="padding:.2rem">
                                 <td style="padding:.2rem" align="left">Withdraw </td>
                                 <td style="padding:.2rem" align="left">
                                     <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, 1))">1</button>
@@ -71,40 +72,20 @@
                                 </td>
                                 <td style="padding:.2rem" align="center"></td>
                             </tr>
-                        }
-                    }
-                    else
-                    {
-                        @foreach (KeyValuePair<GameItem, int> item in GameState.GetPlayerBank().GetInventory().GetItemsSorted(sortStyle))
-                        {
-                            if (item.Key.ItemName.ToLower().Contains(searchString.ToLower()))
+                            @if (GameState.GetPlayer().activeFollower != null && GameState.GetPlayer().activeFollower.AutoCollectSkill == "Banking" && item.Key.Id != 0)
                             {
-                                <tr class="buddy-top" style="padding:.2rem">
-                                    <td style="padding:.2rem" align="left"><img src="data/ItemIcons/@(item.Key.Icon + ".png")" style="width:40px;opacity:0.6" />@item.Key.ItemName</td>
-                                    <td style="padding:.2rem">@item.Key.ItemDescription</td>
-                                    <td style="padding:.2rem" align="right">@item.Value</td>
-                                </tr>
-                                if (item.Key.IsEquipable)
-                                {
-                                    <tr style="padding:.2rem">
-                                        <td style="padding:.2rem">Damage:@item.Key.Damage</td>
-                                        <td style="padding:.2rem">Attack Speed:@item.Key.AttackSpeed</td>
-                                        <td style="padding:.2rem">Gather Speed Bonus:@item.Key.GatherSpeedBonus</td>
-                                    </tr>
-                                }
-                                <tr class="buddy-row" style="padding:.2rem">
-                                    <td style="padding:.2rem" align="left">Withdraw </td>
-                                    <td style="padding:.2rem" align="left">
-                                        <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, 1))">1</button>
-                                        <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, 5))">5</button>
-                                        <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, withdrawAmount))">@withdrawAmount</button>
-                                        <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, int.MaxValue))">All</button>
+                                <tr class="buddy-mid" style="padding:.2rem">
+                                    <td>Have follower sell:</td>
+                                    <td>
+                                        <button class="btn btn-success" onclick="@(() => Sell(item, 1))">1</button>
+                                        <button class="btn btn-success" onclick="@(() => Sell(item, 5))">5</button>
+                                        <button class="btn btn-success" onclick="@(() => Sell(item, withdrawAmount))">@withdrawAmount</button>
+                                        <button class="btn btn-success" onclick="@(() => Sell(item, int.MaxValue))">All</button>
                                     </td>
-                                    <td style="padding:.2rem" align="center"></td>
                                 </tr>
                             }
-
                         }
+
                     }
 
 
@@ -126,11 +107,12 @@ else
             <tbody>
                 @if (GameState.GetPlayerBank() != null)
                 {
-                    @if (searchString == null || searchString == "")
+
+                    @foreach (KeyValuePair<GameItem, int> item in GameState.GetPlayerBank().GetInventory().GetItemsSorted(sortStyle))
                     {
-                        @foreach (KeyValuePair<GameItem, int> item in GameState.GetPlayerBank().GetInventory().GetItemsSorted(sortStyle))
+                        @if((searchString == null || searchString == "") || (item.Key.ItemName.ToLower().Contains(searchString.ToLower())))
                         {
-                            <tr class="bank-compact">
+                            <tr class="bank-compact-top">
                                 <td style="font-weight:bold; padding:.2rem"><img src="data/ItemIcons/@(item.Key.Icon + ".png")" style="width:30px;opacity:0.6" /><br />@item.Key.ItemName</td>
                                 <td style="padding:.2rem">@item.Value</td>
                                 <td style="vertical-align:middle;padding:.2rem">
@@ -140,31 +122,22 @@ else
                                     <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, int.MaxValue))">All</button>
                                 </td>
                             </tr>
-                        }
-                    }
-                    else
-                    {
-                        @foreach (KeyValuePair<GameItem, int> item in GameState.GetPlayerBank().GetInventory().GetItemsSorted(sortStyle))
-                        {
-                            if (item.Key.ItemName.ToLower().Contains(searchString.ToLower()))
+                            @if(GameState.GetPlayer().activeFollower != null && GameState.GetPlayer().activeFollower.AutoCollectSkill == "Banking" && item.Key.Id != 0)
                             {
                                 <tr class="bank-compact">
-                                    <td style="font-weight:bold; padding:.2rem"><img src="data/ItemIcons/@(item.Key.Icon + ".png")" style="width:30px;opacity:0.6" /><br />@item.Key.ItemName</td>
-                                    <td style="padding:.2rem">@item.Value</td>
-                                    <td style="vertical-align:middle; padding:.2rem">
-                                        <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, 1))">1</button>
-                                        <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, 5))">5</button>
-                                        <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, withdrawAmount))">@withdrawAmount</button>
-                                        <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, int.MaxValue))">All</button>
+                                    <td>Have follower sell:</td>
+                                    <td style="padding:.2rem"></td>
+                                    <td>
+                                        <button class="btn btn-success" onclick="@(() => Sell(item, 1))">1</button>
+                                        <button class="btn btn-success" onclick="@(() => Sell(item, 5))">5</button>
+                                        <button class="btn btn-success" onclick="@(() => Sell(item, withdrawAmount))">@withdrawAmount</button>
+                                        <button class="btn btn-success" onclick="@(() => Sell(item, int.MaxValue))">All</button>
                                     </td>
                                 </tr>
                             }
-
-                        }
+                         }
                     }
-
-
-                }
+                 }      
             </tbody>
         </table>
     </div>
@@ -212,7 +185,21 @@ else
         GameState.UpdateState();
         return "";
     }
-
+    private string Sell(KeyValuePair<GameItem, int> item, int amount)
+    {
+        if (amount > item.Value)
+        {
+            amount = item.Value;
+        }
+        if(amount < 0)
+        {
+            return "";
+        }
+        GameState.GetPlayerBank().GetInventory().RemoveItems(item.Key, amount);
+        GameState.GetPlayerBank().GetInventory().AddMultipleOfItem(Program.itemDatabase.GetGold(), (int)((item.Key.Value * amount) / 2d));
+        GameState.UpdateState();
+        return "";
+    }
     protected override void OnInit()
     {
 

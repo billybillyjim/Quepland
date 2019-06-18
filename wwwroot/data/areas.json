@@ -632,6 +632,6 @@
     "isUnlocked": false,
     "description": "You pass by the castle heading north and reach a quiet residential area. You can see the entrance to a massive garden up ahead.",
     "icon": "oi oi-link-intact",
-    "npcIDs": [ 33 ]
+    "npcIDs": [ 33, 47 ]
   }
 ]

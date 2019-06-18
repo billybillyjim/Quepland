@@ -91,8 +91,11 @@ app {
     column-span:all;
 }
 .bank-compact{
-    border: 1px groove black;
-
+   
+    border-top:1px groove lightgray;
+}
+.bank-compact-top {
+    border-top: 3px groove lightgray;
 }
 .skill-table:hover {
     background-color: lightgray;
