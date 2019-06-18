@@ -4106,6 +4106,8 @@
     "actionRequired": "Hammermanship",
     "requiredLevel": 0,
     "actionsEnabled": "Mining",
+    "ingredientIDs": [ 26 ],
+    "isSmithable": true,
     "isEquipable": true,
     "equipSlot": "Right Hand",
     "damage": 22,
@@ -4121,6 +4123,8 @@
     "actionRequired": "Hammermanship",
     "requiredLevel": 30,
     "actionsEnabled": "Mining",
+    "ingredientIDs": [ 28 ],
+    "isSmithable": true,
     "isEquipable": true,
     "equipSlot": "Right Hand",
     "damage": 110,
@@ -4128,7 +4132,7 @@
     "gatherSpeedBonus": 0.4,
     "icon": "Mining"
   },
-    {
+  {
     "itemName": "Steel Pickaxe",
     "itemDescription": "A pickaxe made of a an extremely strong alloy.",
     "id": 290,
@@ -4136,6 +4140,8 @@
     "actionRequired": "Hammermanship",
     "requiredLevel": 50,
     "actionsEnabled": "Mining",
+    "ingredientIDs": [ 210 ],
+    "isSmithable": true,
     "isEquipable": true,
     "equipSlot": "Right Hand",
     "damage": 160,

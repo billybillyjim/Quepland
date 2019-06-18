@@ -5,11 +5,23 @@
 
 <h1>Settings</h1>
 
-<p><button class="btn btn-primary" onclick="@(() => GameState.ToggleSplitView())">Toggle Split View</button></p>
+<p><button class="btn btn-primary" onclick="@(() => GameState.ToggleSplitView())">Toggle Split View</button> @GetOnOrOff(GameState.isSplitView)</p>
+<p><button class="btn btn-primary" onclick="@(() => GameState.ToggleBankStyle())">Toggle Compact Bank View</button>@GetOnOrOff(GameState.compactBankView)</p>
 
 
 @functions{
 
+    private string GetOnOrOff(bool value)
+    {
+        if(value == true)
+        {
+            return "On";
+        }
+        else
+        {
+            return "Off";
+        }
+    }
     protected override void OnInit()
     {
         GameState.StateChanged += OnGameStateChanged;

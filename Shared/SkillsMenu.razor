@@ -12,6 +12,8 @@ else
 
 @functions{
 
+    private bool dustRecipesVisible = true;
+
     private RenderFragment LoadSkillInfoMenu()
     {
         return builder =>
@@ -27,6 +29,11 @@ else
             builder.CloseElement();
             if (currentSkill.SkillName == "Alchemy")
             {
+                builder.OpenElement(6, "button");
+                builder.AddAttribute(6, "class", "btn btn-primary");
+                builder.AddAttribute(6, "onclick", () => ToggleDustVisibility());
+                builder.AddContent(6, "Toggle Dust Recipes");
+                builder.CloseElement();
                 builder.OpenElement(6, "table");
                 builder.AddAttribute(6, "class", "table-bordered");
                 builder.AddAttribute(7, "style", "width:100%");
@@ -53,6 +60,7 @@ else
             }
             else
             {
+
                 builder.OpenElement(6, "table");
                 builder.AddAttribute(7, "style", "width:100%");
                 builder.OpenElement(8, "thead");
@@ -74,19 +82,29 @@ else
                     builder.OpenElement(17, "tr");
 
                     builder.OpenElement(18, "td");
+                    string textColor = "color:black";
+                    if(GameState.GetPlayer().GetLevel(currentSkill.SkillName) >= item.RequiredLevel)
+                    {
+
+                    }
+                    else
+                    {
+                        textColor = "color:gray";
+                    }
+                    builder.AddAttribute(18, "style", textColor);
                     builder.AddContent(19, item.ItemName);
                     builder.CloseElement();
 
-                   /* if (item.Damage > 0)
-                    {
-                        builder.OpenElement(20, "td");
-                        builder.AddAttribute(21, "style", "text-align:right");
-                        builder.AddContent(22, item.Damage);
-                        builder.CloseElement();
-                    }*/
+                    /* if (item.Damage > 0)
+                     {
+                         builder.OpenElement(20, "td");
+                         builder.AddAttribute(21, "style", "text-align:right");
+                         builder.AddContent(22, item.Damage);
+                         builder.CloseElement();
+                     }*/
 
                     builder.OpenElement(21, "td");
-                    builder.AddAttribute(22, "style", "text-align:right");
+                    builder.AddAttribute(22, "style", "text-align:right;" + textColor);
                     builder.AddContent(23, item.RequiredLevel);
                     builder.CloseElement();
 
@@ -189,7 +207,7 @@ else
                     }
                     else
                     {
-                        builder.AddAttribute(24, "title", "Exp to Next Level: " + (Extensions.GetExperienceRequired(skill.GetSkillLevel() + 1) - skill.SkillExperience));
+                        builder.AddAttribute(24, "title", "Exp to Next Level: " + (Extensions.GetExperienceRequired(skill.GetSkillLevel()) - skill.SkillExperience));
                     }
 
                     builder.OpenElement(25, "div");
@@ -227,6 +245,11 @@ else
     }
 
     public Skill currentSkill;
+
+    public void ToggleDustVisibility()
+    {
+        dustRecipesVisible = !dustRecipesVisible;
+    }
 
     public void SetSkill(Skill skill)
     {

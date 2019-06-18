@@ -19,6 +19,7 @@ public class GameState
 
     public bool isSplitView;
     public bool inventoryIsActiveView;
+    public bool compactBankView;
 
     public bool saveDataLoaded;
     public bool gameDataLoaded;
@@ -48,6 +49,10 @@ public class GameState
     public GameState()
     {
 
+    }
+    public void ToggleBankStyle()
+    {
+        compactBankView = !compactBankView;
     }
     public Player GetPlayer()
     {

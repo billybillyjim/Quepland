@@ -64,7 +64,7 @@
                     builder.AddAttribute(0, "onclick", () => SetCurrentSmithingBar(i));
                     if (GameState.GetPlayer().HasRequiredLevel(i) == false)
                     {
-                        builder.AddAttribute(0, "title", "You lack the levels to smelt this bar.");
+                        builder.AddAttribute(0, "title", "You lack the levels to smelt this bar.(" + i.ActionRequired + ":" + i.RequiredLevel + ")");
                         builder.AddAttribute(0, "disabled", true);
                     }
                     else if (GameState.GetPlayer().HasIngredients(i.IngredientIDs) == false && GameState.GetPlayerInventory().HasItem(i) == false)

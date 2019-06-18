@@ -2,12 +2,15 @@
 @inject HttpClient Http
 @inject GameState GameState
 @inject MessageManager MessageManager
+@inject IJSRuntime JSRuntime
 @inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
+@using PlayFab
+@using PlayFab.ClientModels
 @implements IDisposable
 
 
 <h1>Hello, Welcome to Quepland!</h1>
-
+@pudding
 @if (debugMode)
 {
     <p><button class="btn btn-primary" onclick="@(() => DebugAll99s())">Max Account</button></p>
@@ -15,6 +18,7 @@
     <p><button class="btn btn-primary" onclick="@(() => DebugGetMoney())">Gain Money</button></p>
     <p><button class="btn btn-primary" onclick="@(() => DebugOneOfEveryItem())">Get All Items</button></p>
     <p><button class="btn btn-primary" onclick="@(() => DebugGainStrengthLevel())">Gain Strength Level</button></p>
+    <p><button class="btn btn-primary" onclick="@(() => PlayfabTest())">Test Playfab Login</button></p>
 }
 
 @if (GameState.saveDataLoaded == false && saveGameExists && gameHasBeenSaved == false && loadBegun == false)
@@ -53,6 +57,7 @@ else
     private bool gameHasBeenSaved = false;
     private bool gameIsRendered = false;
     private bool debugMode = false;
+    public string pudding = "Not set.";
 
     public void DebugUnlockAllFollowers()
     {
@@ -120,13 +125,51 @@ else
         GameState.saveDataLoaded = true;
         return "";
     }
+    public async Task PlayfabTest()
+    {
+        PlayFabSettings.staticSettings.TitleId = "E9B77";
+                string id =  await JSRuntime.InvokeAsync<string>("loginInUsingPlayFab","");
+        pudding = id;
+        var request = new LoginWithKongregateRequest {};
+        var loginTask = await PlayFabClientAPI.LoginWithKongregateAsync(request);
+
+
+        OnLoginComplete(loginTask);
+        
+        return;
+
+    }
+
+    private static void OnLoginComplete(PlayFabResult<LoginResult> result)
+    {
+        var apiError = result.Error;
+        var apiResult = result.Result;
+
+        if (apiError != null)
+        {
+            Console.ForegroundColor = ConsoleColor.Red; // Make the error more visible
+            Console.WriteLine("Something went wrong with your first API call.  :(");
+            Console.WriteLine("Here's some debug information:");
+            Console.WriteLine(PlayFabUtil.GenerateErrorReport(apiError));
+            Console.ForegroundColor = ConsoleColor.Gray; // Reset to normal
+        }
+        else if (apiResult != null)
+        {
+            Console.WriteLine("Congratulations, you made your first successful API call!");
+        }
+    }
     private void TestLocalStorage()
     {
-        localStorage.SetItem("testString", "success");
-        string success = localStorage.GetItem<string>("testString");
-        if (success == null || success.Length == 0)
+
+        string success = "Local storage could not be accessed. Saving is not possible without working local storage. Please enable cookies to save your game.";
+        try
         {
-            MessageManager.AddMessage("Local storage could not be accessed. Saving is not possible without working local storage.");
+            localStorage.SetItem("testString", "success");
+            success = localStorage.GetItem<string>("testString");
+        }
+        catch
+        {
+            MessageManager.AddMessage(success);
         }
 
     }
@@ -189,6 +232,7 @@ else
 
         saveGameExists = localStorage.GetItem<bool>("SaveGameExists");
 
+        GameState.UpdateState();
         this.StateHasChanged();
     }
     protected override void OnAfterRender()

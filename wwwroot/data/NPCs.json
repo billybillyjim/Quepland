@@ -258,7 +258,8 @@
     "id": 40,
     "spokenText": "I'll gladly help you bank your fish, if you pay me, of course.",
     "unlockFollowerIDs": [ 12 ],
-    "isInteractable": true
+    "isInteractable": true,
+    "hideOnFollow": true
   },
   {
     "name": "Al the Kushtaka",

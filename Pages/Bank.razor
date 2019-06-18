@@ -7,7 +7,7 @@
 
 <h1>Hello, this is your bank!</h1>
 <p><button class="btn btn-primary" onclick="@(() => DepositAll())">Deposit All</button></p>
-<p><button class="btn btn-primary" onclick="@(() => ToggleStyle())">Toggle Compact View</button></p>
+
 
 <p>Withdraw X:<input type="number" bind-value-oninput=@withdrawAmount /></p>
 <p>Search:<input type="text" bind-value-oninput=@searchString /></p>
@@ -25,7 +25,7 @@
     </div>
 </div>
 <br />
-@if (!compactStyle)
+@if (!GameState.compactBankView)
 {
     <div class="bank-table">
         <table style="width:100%">
@@ -174,13 +174,7 @@ else
     public int sortStyle = 0;
     public int withdrawAmount = 1;
     public string searchString = "";
-    public bool compactStyle = false;
-
-    public void ToggleStyle()
-    {
-        compactStyle = !compactStyle;
-        StateHasChanged();
-    }
+   
 
     public void SetSortStyle(int newVal)
     {

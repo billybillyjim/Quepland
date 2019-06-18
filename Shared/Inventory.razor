@@ -124,6 +124,7 @@
                 builder.AddAttribute(2, "style", "background-color:aquamarine");
             }
             builder.OpenElement(3, "td");
+            builder.AddAttribute(3, "title", item.Key.ItemDescription);
             builder.AddAttribute(4, "style", "text-align:left;font-weight:bold");
             builder.OpenElement(5, "img");
             builder.AddAttribute(6, "src", "data/ItemIcons/" + item.Key.Icon + ".png");
@@ -134,6 +135,7 @@
             }
 
             builder.CloseElement();
+             
             builder.AddContent(7, item.Key.ItemName);
             builder.CloseElement();
             builder.OpenElement(7, "td");
@@ -394,11 +396,14 @@
             {
                 builder.AddAttribute(2, "style", "background-color:aquamarine");
             }
+
             builder.OpenElement(3, "td");
+            builder.AddAttribute(3, "style", "width:50%");
             builder.AddContent(4, "Sell for " + Math.Round(item.Key.Value / 2f) + " each");
+
             builder.CloseElement();
             builder.OpenElement(5, "td");
-            builder.AddAttribute(6, "colspan", "3");
+            builder.AddAttribute(6, "colspan", "4");
             builder.AddAttribute(8, "style", "text-align:right");
             builder.OpenElement(9, "button");
             builder.AddAttribute(10, "class", "btn btn-primary");

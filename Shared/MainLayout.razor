@@ -7,7 +7,7 @@
 </div>
 @if (!GameState.isSplitView)
 {
-    <div style="min-width:425px"class="main">
+    <div style="height:100vh;min-width:425px;overflow:scroll"class="main" >
         <div class="top-row px-4">
             <table style="width:100%">
                 <tr>
@@ -41,7 +41,7 @@
 }
 else
 {
-    <div class="main">
+    <div class="main" style="height:100vh;overflow:scroll">
         <div class="top-row px-4">
             <table style="width:100%">
                 <tr>
@@ -76,24 +76,24 @@ else
 
 @if (GameState.isSplitView)
 {
-    <div class="col-md-3" style="padding-left:0px; padding-right:0px">
+    <div class="col-md-3" style="height:100vh;padding-left:0px; padding-right:0px;overflow:scroll">
         <SkillsMenu />
     </div>
-    <div class="col-md-3" style="padding-left:0px; padding-right:0px">
+    <div class="col-md-3" style="height:100vh;padding-left:0px; padding-right:0px;overflow:scroll">
         <Inventory />
     </div>
 }
 else
 {
     if (GameState.inventoryIsActiveView)
-    { <div class="col-md-3" style="padding-left:0px; padding-right:0px; min-width:400px">
+    { <div class="col-md-3" style="height:100vh;padding-left:0px; padding-right:0px; min-width:400px;overflow:scroll">
             <Inventory />
         </div>
 
     }
     else
     {
-        <div class="col-md-3" style="padding-left:0px; padding-right:0px; min-width:400px">
+        <div class="col-md-3" style="height:100vh;padding-left:0px; padding-right:0px; min-width:400px;overflow:scroll">
             <SkillsMenu />
         </div>
     }

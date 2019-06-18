@@ -527,9 +527,8 @@
                         {
                             builder.OpenElement(9, "button");
                             builder.AddAttribute(10, "style", "margin-bottom:10px");
-                            builder.AddAttribute(11, "class", "btn btn-primary");
-                            builder.AddAttribute(12, "onclick", () => GameState.GetPlayerInventory().RemoveItems(itemToPay, f.Cost));
-                            builder.AddAttribute(13, "onclick", () => UnlockFollower(followerID));
+                            builder.AddAttribute(11, "class", "btn btn-primary");                    
+                            builder.AddAttribute(13, "onclick", () => UnlockAndPayForFollower(followerID));
                             if (GameState.GetPlayerInventory().GetAmountOfItem(itemToPay) < f.Cost)
                             {
                                 builder.AddAttribute(14, "disabled", true);
@@ -664,7 +663,7 @@
                 GameState.GetPlayer().GainExperience(itemToGather.ExperienceGained);
 
                 //New speed is a random int based on item gather speed multiplied by the player's gather speed bonus for that activity.
-                gatherTimer.Change((int)(Extensions.GetGaussianRandomInt(itemToGather.GatherSpeed, itemToGather.GatherSpeed / 2)* GameState.GetPlayer().GetGatherSpeed(itemToGather.ActionRequired)), 
+                gatherTimer.Change((int)(Extensions.GetGaussianRandomInt(itemToGather.GatherSpeed, itemToGather.GatherSpeed / 2)* GameState.GetPlayer().GetGatherSpeed(itemToGather.ActionRequired)),
                     (int)(Extensions.GetGaussianRandomInt(itemToGather.GatherSpeed, itemToGather.GatherSpeed / 2)* GameState.GetPlayer().GetGatherSpeed(itemToGather.ActionRequired)));
 
                 if (GameState.currentGatherItem.ActionRequired == "Mining" && limitedOre)
@@ -922,6 +921,13 @@
     {
         npc.IsInteractable = true;
         GameState.UpdateState();
+    }
+    public void UnlockAndPayForFollower(int followerID)
+    {
+        Follower f = Program.followerManager.GetFollowerByID(followerID);
+        GameItem itemToPay = Program.itemDatabase.GetItemByID(f.CostItemID);
+        GameState.GetPlayerInventory().RemoveItems(itemToPay, f.Cost);
+        UnlockFollower(followerID);
     }
     public void UnlockFollower(int followerID)
     {
