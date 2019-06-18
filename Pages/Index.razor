@@ -4,8 +4,6 @@
 @inject MessageManager MessageManager
 @inject IJSRuntime JSRuntime
 @inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
-@using PlayFab
-@using PlayFab.ClientModels
 @implements IDisposable
 
 
@@ -18,7 +16,6 @@
     <p><button class="btn btn-primary" onclick="@(() => DebugGetMoney())">Gain Money</button></p>
     <p><button class="btn btn-primary" onclick="@(() => DebugOneOfEveryItem())">Get All Items</button></p>
     <p><button class="btn btn-primary" onclick="@(() => DebugGainStrengthLevel())">Gain Strength Level</button></p>
-    <p><button class="btn btn-primary" onclick="@(() => PlayfabTest())">Test Playfab Login</button></p>
 }
 
 @if (GameState.saveDataLoaded == false && saveGameExists && gameHasBeenSaved == false && loadBegun == false)
@@ -125,39 +122,7 @@ else
         GameState.saveDataLoaded = true;
         return "";
     }
-    public async Task PlayfabTest()
-    {
-        PlayFabSettings.staticSettings.TitleId = "E9B77";
-                string id =  await JSRuntime.InvokeAsync<string>("loginInUsingPlayFab","");
-        pudding = id;
-        var request = new LoginWithKongregateRequest {};
-        var loginTask = await PlayFabClientAPI.LoginWithKongregateAsync(request);
 
-
-        OnLoginComplete(loginTask);
-        
-        return;
-
-    }
-
-    private static void OnLoginComplete(PlayFabResult<LoginResult> result)
-    {
-        var apiError = result.Error;
-        var apiResult = result.Result;
-
-        if (apiError != null)
-        {
-            Console.ForegroundColor = ConsoleColor.Red; // Make the error more visible
-            Console.WriteLine("Something went wrong with your first API call.  :(");
-            Console.WriteLine("Here's some debug information:");
-            Console.WriteLine(PlayFabUtil.GenerateErrorReport(apiError));
-            Console.ForegroundColor = ConsoleColor.Gray; // Reset to normal
-        }
-        else if (apiResult != null)
-        {
-            Console.WriteLine("Congratulations, you made your first successful API call!");
-        }
-    }
     private void TestLocalStorage()
     {
 
