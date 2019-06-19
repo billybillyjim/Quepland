@@ -65,7 +65,7 @@
                     builder.OpenElement(19, "th");
                     builder.AddAttribute(20, "style", "text-align:right");
                     builder.AddContent(21, "Buy");
-                    
+
                     builder.CloseElement();
                     builder.CloseElement();
                     builder.CloseElement();
@@ -314,16 +314,15 @@
                         {
                             builder.OpenElement(9, "button");
                             builder.AddAttribute(10, "style", "margin-bottom:10px");
-                            builder.AddAttribute(11, "class", "btn btn-primary");                           
+                            builder.AddAttribute(11, "class", "btn btn-primary");
                             builder.AddAttribute(12, "onclick", () => UnlockAndPayForFollower(followerID));
                             if (GameState.GetPlayerInventory().GetAmountOfItem(itemToPay) < f.Cost)
                             {
                                 builder.AddAttribute(13, "disabled", true);
                             }
-                            else
-                            {
-                                builder.AddAttribute(15, "title", f.Name + " will help you with " + f.AutoCollectSkill + " up to level " + f.AutoCollectLevel + ".");
-                            }
+
+                            builder.AddAttribute(15, "title", f.Name + " will help you with " + f.AutoCollectSkill + " up to level " + f.AutoCollectLevel + ".");
+
                             builder.AddContent(14, "Buy " + f.Name + " for " + f.Cost + " " + itemToPay.ItemName);
                             builder.CloseElement();
                             builder.OpenElement(15, "br");
@@ -470,7 +469,7 @@
         npc.IsInteractable = true;
         GameState.UpdateState();
     }
-        public void UnlockAndPayForFollower(int followerID)
+    public void UnlockAndPayForFollower(int followerID)
     {
         Follower f = Program.followerManager.GetFollowerByID(followerID);
         GameItem itemToPay = Program.itemDatabase.GetItemByID(f.CostItemID);

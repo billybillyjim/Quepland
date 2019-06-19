@@ -48,7 +48,7 @@
     "id": 4,
     "actions": [ "Mining", "Battle", "Carve totem pole:Cheap Wood Shavings" ],
     "isUnlocked": false,
-    "description": "As you begin your ascent up the mountain, you notice the mouth of a cave off to the side of the path. A large totem pole stands near its entrance.",
+    "description": "As you begin your ascent up the mountain, you notice the mouth of a cave off to the side of the path. A large totem pole stands near its entrance. Along the mountain side you can see deposits of copper, tin, iron, and calamine.",
     "areaURL": "lowerMtQuepleTrail",
     "icon": "oi oi-compass",
     "unlockableAreas": [ "Queple Cave Entrance,Enter the cave,,", "Upper Mt Queple Trail,Continue up the trail,," ],
@@ -400,7 +400,7 @@
     "actions": [ "Carve Totem Pole:Exquisite Wood Shavings" ],
     "unlockableAreas": [ "Oasis,Continue Southward,,", "Leupp,Go West,,", "Abandoned Desert Shack,Go East,," ],
     "redirectAreaURL": "Route7",
-    "npcIDs": [ 18, 43 ]
+    "npcIDs": [ 18 ]
   },
   {
     "name": "Strange Old Hut",

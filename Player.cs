@@ -378,6 +378,7 @@ public class Player
                 totalBonus -= item.GatherSpeedBonus;
             }
         }
+        totalBonus -= GetLevel(skill) * 0.005f;
         totalBonus = Math.Max(totalBonus, 0.1f);
         return totalBonus;
     }

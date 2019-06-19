@@ -6,7 +6,7 @@
 @LoadInventory()
 
 @functions{
-  
+
     private GameItem currentUsedItem;
     private int[,] usableIDs;
     private Timer createRepeatTimer;
@@ -638,31 +638,33 @@
         if (createRepeatTimer != null)
         {
             createRepeatTimer.Dispose();
+            createRepeatTimer = null;
         }
         int creationTime = Program.itemDatabase.GetItemByID(usableIDs[itemCreatedID, 1]).GatherSpeed;
         createRepeatTimer = new Timer(new TimerCallback(_ =>
         {
             GameItem itemCreated = Program.itemDatabase.GetItemByID(usableIDs[itemCreatedID, 1]);
 
-            GameState.GetPlayerInventory().RemoveOneOfItem(itemUsed);
-
-            int numToMake = Math.Max(itemCreated.MadeOnCreation, 1);
-            GameState.GetPlayerInventory().AddMultipleOfItem(itemCreated, numToMake);
-            MessageManager.AddMessage(itemCreated.GatherString);
-            GameState.GetPlayer().GainExperience(itemCreated.ExperienceGained);
-            if (currentUsedItem.DestroyOnUse)
+            if (GameState.GetPlayerInventory().RemoveOneOfItem(itemUsed))
             {
-                GameState.GetPlayerInventory().RemoveOneOfItem(currentUsedItem);
-                if (GameState.GetPlayerInventory().HasItem(currentUsedItem) == false)
+                int numToMake = Math.Max(itemCreated.MadeOnCreation, 1);
+                GameState.GetPlayerInventory().AddMultipleOfItem(itemCreated, numToMake);
+                MessageManager.AddMessage(itemCreated.GatherString);
+                GameState.GetPlayer().GainExperience(itemCreated.ExperienceGained);
+                if (currentUsedItem.DestroyOnUse)
                 {
-                    MessageManager.AddMessage("You have run out of " + currentUsedItem.ItemName + ".");
+                    GameState.GetPlayerInventory().RemoveOneOfItem(currentUsedItem);
+                    if (GameState.GetPlayerInventory().HasItem(currentUsedItem) == false)
+                    {
+                        MessageManager.AddMessage("You have run out of " + currentUsedItem.ItemName + ".");
+                        CancelUse();
+                    }
+                }
+                if (GameState.GetPlayerInventory().HasItem(itemUsed) == false)
+                {
+                    MessageManager.AddMessage("You have run out of " + itemUsed.ItemName + ".");
                     CancelUse();
                 }
-            }
-            if (GameState.GetPlayerInventory().HasItem(itemUsed) == false)
-            {
-                MessageManager.AddMessage("You have run out of " + itemUsed.ItemName + ".");
-                CancelUse();
             }
             //CancelUse();
             GameState.UpdateState();

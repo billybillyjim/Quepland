@@ -1,6 +1,7 @@
 ﻿@page "/Settings"
 @inject HttpClient Http
 @inject GameState GameState
+@inject  MessageManager MessageManager
 @implements IDisposable
 
 <h1>Settings</h1>
@@ -8,12 +9,127 @@
 <p><button class="btn btn-primary" onclick="@(() => GameState.ToggleSplitView())">Toggle Split View</button> @GetOnOrOff(GameState.isSplitView)</p>
 <p><button class="btn btn-primary" onclick="@(() => GameState.ToggleBankStyle())">Toggle Compact Bank View</button>@GetOnOrOff(GameState.compactBankView)</p>
 
-
+<p style="font-weight:bold">Expirimental: (Should work fine, but I can't guarantee it.)</p>
+<p><button class="btn btn-primary" onclick="@(() => GenerateSaveFile())">Generate Save File</button></p>
+<p><textarea @bind(savefile) ValueChanged="@GenerateSaveFile()" Label="Save data will be generated here.">@savefile</textarea></p>
+<p><button class="btn btn-primary" onclick="@(() => LoadDataFromText())">Load From Save File</button></p>
+<p>Paste your save here:<input type="text" bind="@loadfile" /></p>
 @functions{
 
+    private SimpleAES Encryptor = new SimpleAES();
+    private string savefile = "Copy the generated save to a safe place.";
+    private string loadfile = "";
+    private void GenerateSaveFile()
+    {
+        savefile = GetSaveDataString();
+        this.StateHasChanged();
+    }
+    public string GetSaveDataString()
+    {
+        string data = "";
+        //Bank 0
+        data += "" + GameState.GetPlayerBank().GetInventory().ToString();
+        //Skills 1
+        data += "#" + GameState.GetPlayer().GetSkillString();
+        //Inventory 2
+        data += "#" + GameState.GetPlayerInventory().ToString();
+        //Areas 3
+        data += "#" + Program.areaManager.SaveAreas();
+        //Followers 4
+        data += "#" + Program.followerManager.ToString();
+        //HP 5
+        data += "#" + GameState.GetPlayer().CurrentHP.ToString();
+        //ActiveFollower 6
+        if (GameState.GetPlayer().activeFollower != null)
+        {
+            data += "#" + GameState.GetPlayer().activeFollower.id;
+        }
+        else
+        {
+            data += "#";
+        }
+        //Recipes 7
+        data += "#";
+        foreach (string s in GameState.GetPlayer().GetRecipes())
+        {
+            data += s + "/";
+        }
+        //EquippedItems 8
+        data += "#";
+        foreach (KeyValuePair<GameItem, int> pair in GameState.GetPlayerInventory().GetEquippedItems())
+        {
+            data += pair.Key.Id + "/";
+        }
+        data = Encryptor.EncryptToString(data);
+        return data;
+    }
+    private void LoadDataFromText()
+    {
+        string decryptedData = "";
+        try
+        {
+            decryptedData = Encryptor.DecryptString(loadfile);
+        }
+        catch
+        {
+            MessageManager.AddMessage("Failed to load from file. ");
+            return;
+        }
+
+        string[] lines = decryptedData.Split('#');
+
+        Dictionary<GameItem, int> bankItems = Extensions.GetItemDicFromString(lines[0], Program.itemDatabase);
+        List<Skill> skills = Extensions.GetSkillsFromString(lines[1]);
+        Dictionary<GameItem, int> invItems = Extensions.GetItemDicFromString(lines[2], Program.itemDatabase);
+
+        
+        GameState.GetPlayerInventory().ResetMaxSize();
+        GameState.GetPlayerBank().GetInventory().LoadItems(bankItems);
+        GameState.GetPlayer().SetSkills(skills);
+        GameState.GetPlayerInventory().LoadItems(invItems);
+
+        Program.areaManager.LoadSaveData(lines[3]);
+        Program.followerManager.LoadSaveData(lines[4]);
+
+        if (int.TryParse(lines[5], out int hp))
+        {
+            GameState.GetPlayer().CurrentHP = hp;
+        }
+        else
+        {
+            GameState.GetPlayer().CurrentHP = GameState.GetPlayer().GetLevel("HP");
+        }
+
+        if (int.TryParse(lines[6], out int activeFollower))
+        {
+            GameState.GetPlayer().activeFollower = Program.followerManager.GetFollowerByID(activeFollower);
+        }
+
+        List<string> recipes = lines[7].Split('/').ToList();
+        GameState.GetPlayer().LoadRecipes(recipes);
+
+
+        List<int> equippedItems = new List<int>();
+        foreach (string s in lines[8].Split('/') ?? Enumerable.Empty<string>())
+        {
+            if (int.TryParse(s, out int id))
+            {
+                equippedItems.Add(id);
+            }
+        }
+        if (equippedItems != null && equippedItems.Count > 0)
+        {
+            GameState.GetPlayer().EquipItems(equippedItems);
+        }
+        MessageManager.AddMessage("Save game loaded.");
+
+        GameState.saveDataLoaded = true;
+        GameState.UpdateState();
+        this.StateHasChanged();
+    }
     private string GetOnOrOff(bool value)
     {
-        if(value == true)
+        if (value == true)
         {
             return "On";
         }

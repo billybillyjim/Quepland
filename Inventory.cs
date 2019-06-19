@@ -19,6 +19,10 @@ public class Inventory
     {
         maxSize += increase;
     }
+    public void ResetMaxSize()
+    {
+        maxSize = 30;
+    }
     /// <summary>
     /// Returns the amount of that specific item in the inventory.
     /// </summary>
@@ -167,6 +171,21 @@ public class Inventory
 
         return true;
     }
+    public int GetMaxBarIngredients(GameItem bar)
+    {
+        int max = 0;
+        foreach (KeyValuePair<GameItem, int> pair in items)
+        {
+            foreach (int i in bar.IngredientIDs)
+            {
+                if (pair.Key.Id == i)
+                {
+                    max = Math.Max(max, pair.Value);
+                }
+            }
+        }
+        return max;
+    }
     public bool HasArrows()
     {
         foreach (KeyValuePair<GameItem, int> pair in items)
@@ -247,7 +266,15 @@ public class Inventory
         }
         foreach (KeyValuePair<GameItem, int> itemToAdd in itemsToAdd)
         {
-            items.Add(itemToAdd.Key, itemToAdd.Value);
+            if(items.TryGetValue(itemToAdd.Key, out _))
+            {
+                items[itemToAdd.Key] = itemToAdd.Value;
+            }
+            else
+            {
+                items.Add(itemToAdd.Key, itemToAdd.Value);
+            }
+
         }
         UpdateItemCount();
     }

@@ -32,7 +32,7 @@ public static class Extensions
         foreach (string line in dataLines)
         {
             if (line.Length > 0)
-            { 
+            {
                 string[] i = line.Split('-');
                 int id = int.Parse(i[0]);
                 int amount = int.Parse(i[1]);

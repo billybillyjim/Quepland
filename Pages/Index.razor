@@ -11,11 +11,18 @@
 
 @if (debugMode)
 {
+    @testString
     <p><button class="btn btn-primary" onclick="@(() => DebugAll99s())">Max Account</button></p>
     <p><button class="btn btn-primary" onclick="@(() => DebugUnlockAllFollowers())">Unlock Followers</button></p>
     <p><button class="btn btn-primary" onclick="@(() => DebugGetMoney())">Gain Money</button></p>
     <p><button class="btn btn-primary" onclick="@(() => DebugOneOfEveryItem())">Get All Items</button></p>
     <p><button class="btn btn-primary" onclick="@(() => DebugGainStrengthLevel())">Gain Strength Level</button></p>
+    <p><button class="btn btn-primary" onclick="@(() => EncryptionTest())">Encrypt String</button></p>
+    <p><button class="btn btn-primary" onclick="@(() => DecryptionTest())">Decrypt String</button></p>
+    <p><button class="btn btn-primary" onclick="@(() => SaveDataEncrypted())">Save Encrypted</button></p>
+    <p><button class="btn btn-primary" onclick="@(() => LoadDataEncrypted())">Load Encrypted</button></p>
+    <p><button class="btn btn-primary" onclick="@(() => GetSaveDataString())">Get Save Data String</button></p>
+    <p><button class="btn btn-primary" onclick="@(() => LoadDataFromString(testString))">Load Save Data String</button></p>
 }
 
 @if (GameState.saveDataLoaded == false && saveGameExists && gameHasBeenSaved == false && loadBegun == false)
@@ -27,7 +34,7 @@ else
     <p>Click the bank on your left to begin your journey. You'll find an axe to start off.</p>
     <p><button class="btn btn-primary" disabled onclick="@(() => LoadData())">Load Game</button></p>
 }
-@if (saveGameExists == false || (saveGameExists == true && GameState.saveDataLoaded == true))
+@if (saveGameExists == false || (GameState.saveDataLoaded == true))
 {
     <p><button class="btn btn-primary" onclick="@(() => SaveData())">Save Game</button></p>
 }
@@ -55,7 +62,20 @@ else
     private bool gameIsRendered = false;
     private bool debugMode = false;
     public string pudding = "Not set.";
+    public string encrypt = "This is a whole string, with many things to test! 1234, 50, 100";
+    public string testString = "";
+    private SimpleAES Encryptor = new SimpleAES();
 
+    public void EncryptionTest()
+    {
+        encrypt = Encryptor.EncryptToString(encrypt);
+        StateHasChanged();
+    }
+    public void DecryptionTest()
+    {
+        encrypt = Encryptor.DecryptString(encrypt);
+        StateHasChanged();
+    }
     public void DebugUnlockAllFollowers()
     {
         foreach (Follower f in Program.followerManager.GetFollowers())
@@ -96,6 +116,18 @@ else
         localStorage.Clear();
         StateHasChanged();
     }
+    private string SaveDataEncrypted()
+    {
+        localStorage.SetItem("eSave", GetSaveDataString());
+        return "";
+    }
+    private string LoadDataEncrypted()
+    {
+        LoadDataFromString(localStorage.GetItem<string>("eSave"));
+        GameState.UpdateState();
+        this.StateHasChanged();
+        return "";
+    }
     private string SaveData()
     {
         localStorage.SetItem("Bank", GameState.GetPlayerBank().GetInventory().ToString());
@@ -117,6 +149,7 @@ else
         }
         localStorage.SetItem("EquippedItems", ids);
         localStorage.SetItem("SaveGameExists", true);
+        SaveDataEncrypted();
         MessageManager.AddMessage("You game has been saved.");
         gameHasBeenSaved = true;
         GameState.saveDataLoaded = true;
@@ -137,6 +170,100 @@ else
             MessageManager.AddMessage(success);
         }
 
+    }
+    public string GetSaveDataString()
+    {
+        string data = "";
+        //Bank 0
+        data += "" + GameState.GetPlayerBank().GetInventory().ToString();
+        //Skills 1
+        data += "#" + GameState.GetPlayer().GetSkillString();
+        //Inventory 2
+        data += "#" + GameState.GetPlayerInventory().ToString();
+        //Areas 3
+        data += "#" + Program.areaManager.SaveAreas();
+        //Followers 4
+        data += "#" + Program.followerManager.ToString();
+        //HP 5
+        data += "#" + GameState.GetPlayer().CurrentHP.ToString();
+        //ActiveFollower 6
+        if (GameState.GetPlayer().activeFollower != null)
+        {
+            data += "#" + GameState.GetPlayer().activeFollower.id;
+        }
+        else
+        {
+            data += "#";
+        }
+        //Recipes 7
+        data += "#";
+        foreach (string s in GameState.GetPlayer().GetRecipes())
+        {
+            data += s + "/";
+        }
+        //EquippedItems 8
+        data += "#";
+        foreach (KeyValuePair<GameItem, int> pair in GameState.GetPlayerInventory().GetEquippedItems())
+        {
+            data += pair.Key.Id + "/";
+        }
+        testString = Encryptor.EncryptToString(data);
+        return testString;
+    }
+    private void LoadDataFromString(string data)
+    {
+        string decryptedData = Encryptor.DecryptString(data);
+        
+        
+        string[] lines = decryptedData.Split('#');
+        testString = lines[0];
+        
+        Dictionary<GameItem, int> bankItems = Extensions.GetItemDicFromString(lines[0], Program.itemDatabase);      
+        List<Skill> skills = Extensions.GetSkillsFromString(lines[1]);
+        Dictionary<GameItem, int> invItems = Extensions.GetItemDicFromString(lines[2], Program.itemDatabase);
+
+        GameState.GetPlayerBank().GetInventory().LoadItems(bankItems);
+        GameState.GetPlayer().SetSkills(skills);      
+        GameState.GetPlayerInventory().LoadItems(invItems);
+
+        Program.areaManager.LoadSaveData(lines[3]);
+        Program.followerManager.LoadSaveData(lines[4]);
+
+        if (int.TryParse(lines[5], out int hp))
+        {
+            GameState.GetPlayer().CurrentHP = hp;
+        }
+        else
+        {
+            GameState.GetPlayer().CurrentHP = GameState.GetPlayer().GetLevel("HP");
+        }
+
+        if (int.TryParse(lines[6], out int activeFollower))
+        {
+            GameState.GetPlayer().activeFollower = Program.followerManager.GetFollowerByID(activeFollower);
+        }
+
+        List<string> recipes = lines[7].Split('/').ToList();
+        GameState.GetPlayer().LoadRecipes(recipes);
+
+
+        List<int> equippedItems = new List<int>();
+        foreach (string s in lines[8].Split('/') ?? Enumerable.Empty<string>())
+        {
+            if (int.TryParse(s, out int id))
+            {
+                equippedItems.Add(id);
+            }
+        }
+        if (equippedItems != null && equippedItems.Count > 0)
+        {
+            GameState.GetPlayer().EquipItems(equippedItems);
+        }
+        MessageManager.AddMessage("Save game loaded.");
+
+        GameState.saveDataLoaded = true;
+        GameState.UpdateState();
+        this.StateHasChanged();
     }
     private void LoadData()
     {
@@ -176,7 +303,7 @@ else
     protected override void OnInit()
     {
         GameState.StateChanged += OnGameStateChanged;
-        TestLocalStorage();
+        saveGameExists = localStorage.GetItem<bool>("SaveGameExists");
         if (GameState.gameDataLoaded == false)
         {
             Program.gatherManager.SetGameState(GameState);
@@ -195,7 +322,7 @@ else
             GameState.gameDataLoaded = true;
         }
 
-        saveGameExists = localStorage.GetItem<bool>("SaveGameExists");
+        
 
         GameState.UpdateState();
         this.StateHasChanged();
