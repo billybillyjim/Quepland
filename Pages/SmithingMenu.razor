@@ -264,7 +264,7 @@
                     builder.AddAttribute(3, "title", "You need someone to help you do this.");
                     builder.AddAttribute(4, "disabled", true);
                 }
-                if (!GetOresFromBank() && GameState.GetPlayerInventory().GetAnyOre() == null && GameState.GetPlayerInventory().GetAnyBar() == null)
+                if (GameState.GetPlayerInventory().GetAnyOre() == null && GameState.GetPlayerInventory().GetAnyBar() == null)
                 {
                     builder.AddAttribute(5, "title", "You don't have anything to smith.");
                     builder.AddAttribute(6, "disabled", true);

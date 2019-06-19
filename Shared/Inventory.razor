@@ -597,7 +597,7 @@
         {
             GameState.buffSecondsLeft--;
             GameState.GetPlayer().CurrentHP = Math.Min(GameState.GetPlayer().CurrentHP + GameState.currentBuffItem.HealAmount, GameState.GetPlayer().GetSkill("HP").GetSkillLevel());
-            GameState.GetPlayer().GainExperience("HP", GameState.currentBuffItem.HealAmount / 2);
+            GameState.GetPlayer().GainExperience("HP", GameState.currentBuffItem.HealAmount);
             if (GameState.buffSecondsLeft <= 0)
             {
                 GameState.GetPlayer().GetSkill(GameState.currentBuffItem.BuffedSkill).Boost = 0;
