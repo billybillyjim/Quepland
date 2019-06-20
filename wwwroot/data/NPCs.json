@@ -315,5 +315,38 @@
     "unlockFollowerIDs": [ 18 ],
     "isInteractable": true,
     "hideOnFollow": true
-  }
+  },
+  {
+    "name": "Mysterious Traveller",
+    "id": 48,
+    "spokenText": "Did you know there is a great river south of Quepland Woods? Meet me there and I'll show you. No strings attached.",
+    "unlockNPCIds": [ 49 ],
+    "isInteractable": false,
+    "hideOnFollow": true,
+    "hideOnSpeak": true
+  },
+  {
+    "name": "Mysterious Traveller",
+    "id": 49,
+    "spokenText": "Greetings. I see you're interested in travelling somewhere new! Excellent. The forest is thick here, but if you can struggle through you'll reach the river in no time.",
+    "unlockAreaIDs": [ 62 ],
+    "isInteractable": false,
+    "hideOnFollow": true
+  },
+  {
+    "name": "Mysterious Traveller",
+    "id": 50,
+    "spokenText": "Wanna buy a raft? You'll need it to head down the river. What? Why are you looking at me like that?",
+    "unlockAreaIDs": [ 62 ],
+    "isInteractable": false,
+    "hideOnFollow": true
+  },
+    {
+    "name": "Skia the Monopod",
+    "id": 51,
+    "spokenText": "I'm the best blacksmith in Quepland. I'll work for you if the price is right.",
+    "unlockFollowerIDs": [ 10 ],
+    "isInteractable": true,
+    "hideOnFollow": true
+  },
 ]

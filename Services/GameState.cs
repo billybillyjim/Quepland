@@ -24,6 +24,7 @@ public class GameState
 
     public bool saveDataLoaded;
     public bool gameDataLoaded;
+    public bool saveGameExists;
 
     public string previousURL;
     
@@ -56,6 +57,9 @@ public class GameState
     //Smithing Timer
     public Timer smithingTimer;
     public Timer autoSmithingTimer;
+
+    //Navbar Timer
+    public Timer autoSaveTimer;
 
     private void StateHasChanged()
     {

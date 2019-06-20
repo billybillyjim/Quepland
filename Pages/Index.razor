@@ -4,6 +4,8 @@
 @inject MessageManager MessageManager
 @inject IJSRuntime JSRuntime
 @inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
+@inject Blazored.LocalStorage.ILocalStorageService asyncLocalStorage
+@using System.Threading;
 @implements IDisposable
 
 
@@ -34,7 +36,7 @@ else
     <p>Click the bank on your left to begin your journey. You'll find an axe to start off.</p>
     <p><button class="btn btn-primary" disabled onclick="@(() => LoadData())">Load Game</button></p>
 }
-@if (saveGameExists == false || (GameState.saveDataLoaded == true))
+@if (GameState.saveGameExists == false || (GameState.saveDataLoaded == true))
 {
     <p><button class="btn btn-primary" onclick="@(() => SaveData())">Save Game</button></p>
 }
@@ -60,7 +62,7 @@ else
     private bool userWantsGameReset = false;
     private bool gameHasBeenSaved = false;
     private bool gameIsRendered = false;
-    private bool debugMode = true;
+    private bool debugMode = false;
     public string pudding = "Not set.";
     public string encrypt = "This is a whole string, with many things to test! 1234, 50, 100";
     public string testString = "";
@@ -149,10 +151,12 @@ else
         }
         localStorage.SetItem("EquippedItems", ids);
         localStorage.SetItem("SaveGameExists", true);
+        localStorage.SetItem("NPC", Program.npcManager.GetNPCData());
         SaveDataEncrypted();
-        MessageManager.AddMessage("You game has been saved.");
+        MessageManager.AddMessage("Your game has been saved.");
         gameHasBeenSaved = true;
         GameState.saveDataLoaded = true;
+        GameState.saveGameExists = true;
         return "";
     }
 
@@ -213,17 +217,17 @@ else
     private void LoadDataFromString(string data)
     {
         string decryptedData = Encryptor.DecryptString(data);
-        
-        
+
+
         string[] lines = decryptedData.Split('#');
         testString = lines[0];
-        
-        Dictionary<GameItem, int> bankItems = Extensions.GetItemDicFromString(lines[0], Program.itemDatabase);      
+
+        Dictionary<GameItem, int> bankItems = Extensions.GetItemDicFromString(lines[0], Program.itemDatabase);
         List<Skill> skills = Extensions.GetSkillsFromString(lines[1]);
         Dictionary<GameItem, int> invItems = Extensions.GetItemDicFromString(lines[2], Program.itemDatabase);
 
         GameState.GetPlayerBank().GetInventory().LoadItems(bankItems);
-        GameState.GetPlayer().SetSkills(skills);      
+        GameState.GetPlayer().SetSkills(skills);
         GameState.GetPlayerInventory().LoadItems(invItems);
 
         Program.areaManager.LoadSaveData(lines[3]);
@@ -293,17 +297,35 @@ else
         {
             GameState.GetPlayer().EquipItems(equippedItems);
         }
-
+        Program.npcManager.LoadNPCData(localStorage.GetItem<String>("NPC"));
         MessageManager.AddMessage("Save game loaded.");
 
         GameState.saveDataLoaded = true;
+        if(GameState.autoSaveTimer != null)
+        {
+            GameState.autoSaveTimer.Dispose();
+            GameState.autoSaveTimer = null;
+        }
+        GameState.autoSaveTimer = new Timer(new TimerCallback(_ =>
+        {
+            try
+            {
+                SaveData();
+            }
+            catch
+            {
+                MessageManager.AddMessage("Failed to auto save. Please make a local backup before closing the game.", "red");
+            }
+
+        }), null, 60000, 60000);
         GameState.UpdateState();
         this.StateHasChanged();
     }
     protected override void OnInit()
     {
         GameState.StateChanged += OnGameStateChanged;
-        saveGameExists = localStorage.GetItem<bool>("SaveGameExists");
+        //saveGameExists = localStorage.GetItem<bool>("SaveGameExists");
+
         if (GameState.gameDataLoaded == false)
         {
             Program.gatherManager.SetGameState(GameState);
@@ -322,8 +344,35 @@ else
             GameState.gameDataLoaded = true;
         }
 
-        
 
+
+        GameState.UpdateState();
+        this.StateHasChanged();
+    }
+    protected async override Task OnInitAsync()
+    {
+        saveGameExists = await asyncLocalStorage.GetItemAsync<bool>("SaveGameExists");
+        GameState.saveGameExists = saveGameExists;
+        if(saveGameExists == false)
+        {
+            if(GameState.autoSaveTimer != null)
+        {
+            GameState.autoSaveTimer.Dispose();
+            GameState.autoSaveTimer = null;
+        }
+        GameState.autoSaveTimer = new Timer(new TimerCallback(_ =>
+        {
+            try
+            {
+                SaveData();
+            }
+            catch
+            {
+                MessageManager.AddMessage("Failed to auto save. Please make a local backup before closing the game.", "red");
+            }
+
+        }), null, 60000, 60000);
+        }
         GameState.UpdateState();
         this.StateHasChanged();
     }

@@ -19,7 +19,8 @@
     "unlockableAreas": [ "The foot of Mt Queple,Continue along path,,", "Rocky Shores Beach,Head north through the trees,Woodcutting:25,Woodcutting" ],
     "icon": "oi oi-rain",
     "monsterIDs": [ 2, 11, 4 ],
-    "huntingIDs": [ 14, 15, 66, 67, 68, 69, 71 ]
+    "huntingIDs": [ 14, 15, 66, 67, 68, 69, 71 ],
+    "npcIDs": [49]
   },
   {
     "name": "The foot of Mt Queple",
@@ -296,7 +297,9 @@
     "areaURL": "EastHigashiWoods",
     "icon": "oi oi-trash",
     "actions": [ "Chop Balsa Trees:Balsa Logs", "Gather Hemp:Hemp" ],
-    "unlockableAreas": [ "The Southern Trail,Take the road out of the forest,," ]
+    "unlockableAreas": [ "The Southern Trail,Take the road out of the forest,," ],
+    "npcIDs": [51]
+
   },
   {
     "name": "Kogoe Town",
@@ -581,7 +584,7 @@
     "description": "The road leads you through a tree nursery. There are plenty of trees to chop down here, but it looks like someone else owns them.",
     "icon": "oi oi-rain",
     "unlockableAreas": [ "West Tsu City,Follow the road into town,," ],
-    "npcIDs": [ 26 ]
+    "npcIDs": [ 26, 48 ]
   },
   {
     "name": "West Tsu City",
@@ -633,5 +636,14 @@
     "description": "You pass by the castle heading north and reach a quiet residential area. You can see the entrance to a massive garden up ahead.",
     "icon": "oi oi-link-intact",
     "npcIDs": [ 33, 47 ]
+  },
+  {
+    "name": "The Hoin River",
+    "id": 62,
+    "areaURL": "HoinRiver",
+    "isUnlocked": false,
+    "description": "",
+    "icon": "oi oi-link-intact",
+    "npcIDs": [ 50 ]
   }
 ]

@@ -537,7 +537,7 @@
                     {
                         foreach (int i in npc.UnlockNPCIDs)
                         {
-                            builder.AddAttribute(6, "onclick", () => UnlockNPC(Program.npcManager.GetNPCByID(i)));
+                            builder.AddAttribute(6, "onclick", () => SpeakToAndUnlockNPCs(npc, i));
                         }
                     }
                     builder.AddContent(7, "Speak to " + npc.Name);
@@ -559,7 +559,7 @@
                                 builder.AddAttribute(13, "disabled", true);
                             }
 
-                            builder.AddAttribute(15, "title", f.Name + " will help you with " + f.AutoCollectSkill + " up to level " + f.AutoCollectLevel + ".");                           
+                            builder.AddAttribute(15, "title", f.Name + " will help you with " + f.AutoCollectSkill + " up to level " + f.AutoCollectLevel + ".");
                             builder.AddContent(16, "Buy " + f.Name + " for " + f.Cost + " " + itemToPay.ItemName);
                             builder.CloseElement();
                             builder.OpenElement(17, "br");
@@ -692,7 +692,7 @@
                 int randSpeed = (Extensions.GetGaussianRandomInt(itemToGather.GatherSpeed, itemToGather.GatherSpeed / 2));
                 int speed = Math.Max((int)(randSpeed * GameState.GetPlayer().GetGatherSpeed(itemToGather.ActionRequired)), 50);
                 GameState.gatherTimer.Change(speed, speed);
-                    
+
                 if (GameState.currentGatherItem.ActionRequired == "Mining" && limitedOre)
                 {
                     speedMulti += 0.05;
@@ -917,6 +917,10 @@
     }
     public void AutoCollect(GameItem item)
     {
+        if(GameState.GetPlayerInventory().HasItem(item) == false)
+        {
+            return;
+        }
         int amountToTake = Math.Min(GameState.GetPlayerInventory().GetNumberOfItem(item), GameState.GetPlayer().activeFollower.MaxCarry);
         GameState.GetPlayerInventory().RemoveItems(item, amountToTake);
         GameState.GetPlayerBank().GetInventory().AddMultipleOfItem(item, amountToTake);
@@ -943,6 +947,11 @@
     {
         building.IsUnlocked = true;
         GameState.UpdateState();
+    }
+    public void SpeakToAndUnlockNPCs(NPC npc, int i)
+    {
+        SpeakToNPC(npc);
+        UnlockNPC(Program.npcManager.GetNPCByID(i));
     }
     public void UnlockNPC(NPC npc)
     {

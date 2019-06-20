@@ -10,11 +10,12 @@
 
 @functions {
     bool collapseNavMenu = true;
-    private Timer autoSaveTimer;
+
     private Area lastToggledArea;
     string autoSaveString = "Last autosave: Never";
     string test = "total";
     string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
+    private SimpleAES Encryptor = new SimpleAES();
 
     private bool loadGameComplete;
 
@@ -191,11 +192,6 @@
     protected override void OnInit()
     {
         GameState.StateChanged += OnGameStateChanged;
-        autoSaveTimer = new Timer(new TimerCallback(_ =>
-        {
-            AutoSave();
-
-        }), null, 60000, 60000);
         this.StateHasChanged();
     }
 
@@ -222,7 +218,7 @@
 
     private void AutoSave()
     {
-        if (localStorage.GetItem<bool>("SaveGameExists") == false || GameState.saveDataLoaded == true)
+        if (GameState.saveGameExists == false || GameState.saveDataLoaded == true)
         {
             localStorage.SetItem("Bank", GameState.GetPlayerBank().GetInventory().ToString());
             localStorage.SetItem("Skills", GameState.GetPlayer().GetSkillString());
@@ -244,11 +240,55 @@
             localStorage.SetItem("EquippedItems", ids);
             localStorage.SetItem("SaveGameExists", true);
             //MessageManager.AddMessage("You game has been automatically saved.");
-
+            SaveDataEncrypted();
             GameState.saveDataLoaded = true;
 
             StateHasChanged();
         }
+    }
+    private string SaveDataEncrypted()
+    {
+        localStorage.SetItem("eSave", GetSaveDataString());
+        return "";
+    }
+    public string GetSaveDataString()
+    {
+        string data = "";
+        //Bank 0
+        data += "" + GameState.GetPlayerBank().GetInventory().ToString();
+        //Skills 1
+        data += "#" + GameState.GetPlayer().GetSkillString();
+        //Inventory 2
+        data += "#" + GameState.GetPlayerInventory().ToString();
+        //Areas 3
+        data += "#" + Program.areaManager.SaveAreas();
+        //Followers 4
+        data += "#" + Program.followerManager.ToString();
+        //HP 5
+        data += "#" + GameState.GetPlayer().CurrentHP.ToString();
+        //ActiveFollower 6
+        if (GameState.GetPlayer().activeFollower != null)
+        {
+            data += "#" + GameState.GetPlayer().activeFollower.id;
+        }
+        else
+        {
+            data += "#";
+        }
+        //Recipes 7
+        data += "#";
+        foreach (string s in GameState.GetPlayer().GetRecipes())
+        {
+            data += s + "/";
+        }
+        //EquippedItems 8
+        data += "#";
+        foreach (KeyValuePair<GameItem, int> pair in GameState.GetPlayerInventory().GetEquippedItems())
+        {
+            data += pair.Key.Id + "/";
+        }
+        data = Encryptor.EncryptToString(data);
+        return data;
     }
     void IDisposable.Dispose()
     {
