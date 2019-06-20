@@ -2710,7 +2710,7 @@
   {
     "itemName": "White Pine Arrows",
     "itemDescription": "Cheap and light arrows.",
-    "gatherString": "You attach a feather to the back of the arrow.",
+    "gatherString": "You attach a head to the tip of the arrow.",
     "id": 198,
     "value": 4,
     "requiredLevel": 3,
@@ -2724,7 +2724,7 @@
   {
     "itemName": "Poplar Arrows",
     "itemDescription": "Cheap and light arrows.",
-    "gatherString": "You attach a feather to the back of the arrow.",
+    "gatherString": "You attach a head to the tip of the arrow.",
     "id": 199,
     "value": 4,
     "requiredLevel": 11,
@@ -2738,7 +2738,7 @@
   {
     "itemName": "Balsa Arrows",
     "itemDescription": "Thin, flimsy sticks with feathers and metal attached at either end.",
-    "gatherString": "You attach a feather to the back of the arrow.",
+    "gatherString": "You attach a head to the tip of the arrow.",
     "id": 200,
     "value": 4,
     "requiredLevel": 3,
@@ -2753,7 +2753,7 @@
   {
     "itemName": "Oak Arrows",
     "itemDescription": "They're like skinny, deadly oak tree corpses.",
-    "gatherString": "You attach a feather to the back of the arrow.",
+    "gatherString": "You attach a head to the tip of the arrow.",
     "id": 201,
     "value": 5,
     "requiredLevel": 18,
@@ -2768,7 +2768,7 @@
   {
     "itemName": "Sugar Maple Arrows",
     "itemDescription": "Sweet arrows.",
-    "gatherString": "You attach a feather to the back of the arrow.",
+    "gatherString": "You attach a head to the tip of the arrow.",
     "id": 202,
     "value": 7,
     "requiredLevel": 28,
@@ -2783,7 +2783,7 @@
   {
     "itemName": "Birch Arrows",
     "itemDescription": "Light colored arrows.",
-    "gatherString": "You attach a feather to the back of the arrow.",
+    "gatherString": "You attach a head to the tip of the arrow.",
     "id": 203,
     "value": 8,
     "requiredLevel": 35,
@@ -2798,7 +2798,7 @@
   {
     "itemName": "Mesquite Arrows",
     "itemDescription": "They're quite useful.",
-    "gatherString": "You attach a feather to the back of the arrow.",
+    "gatherString": "You attach a head to the tip of the arrow.",
     "id": 204,
     "value": 12,
     "requiredLevel": 43,
@@ -2813,7 +2813,7 @@
   {
     "itemName": "Mahogany Arrows",
     "itemDescription": "Decadent arrows.",
-    "gatherString": "You attach a feather to the back of the arrow.",
+    "gatherString": "You attach a head to the tip of the arrow.",
     "id": 205,
     "value": 14,
     "requiredLevel": 53,
@@ -2828,7 +2828,7 @@
   {
     "itemName": "Ironwood Arrows",
     "itemDescription": "Extremely strong arrows.",
-    "gatherString": "You attach a feather to the back of the arrow.",
+    "gatherString": "You attach a head to the tip of the arrow.",
     "id": 206,
     "value": 16,
     "requiredLevel": 63,
@@ -2843,7 +2843,7 @@
   {
     "itemName": "Snakewood Arrows",
     "itemDescription": "Are they supposed to be so straight?",
-    "gatherString": "You attach a feather to the back of the arrow.",
+    "gatherString": "You attach a head to the tip of the arrow.",
     "id": 207,
     "value": 18,
     "requiredLevel": 73,
@@ -2858,7 +2858,7 @@
   {
     "itemName": "Lignum Vitae Arrows",
     "itemDescription": "Very strong arrows.",
-    "gatherString": "You attach a feather to the back of the arrow.",
+    "gatherString": "You attach a head to the tip of the arrow.",
     "id": 208,
     "value": 35,
     "requiredLevel": 85,
@@ -2873,7 +2873,7 @@
   {
     "itemName": "Buloke Arrows",
     "itemDescription": "The hardest arrows in the world.",
-    "gatherString": "You attach a feather to the back of the arrow.",
+    "gatherString": "You attach a head to the tip of the arrow.",
     "id": 209,
     "value": 75,
     "requiredLevel": 92,

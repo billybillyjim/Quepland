@@ -28,9 +28,6 @@
     private GameItem currentSmithingItem;
     private string lastSmithedBar;
 
-    private Timer smithingTimer;
-    private Timer autoSmithingTimer;
-
     private int smithingStage = 0;
     private int progress = 0;
     private int autoSmithProgress = 0;
@@ -307,12 +304,8 @@
         autoSmithItemSelected = true;
         SetCurrentSmithingItem(item);
     }
-    public void BeginAutoSmithing()
+    private bool CheckForMaterials()
     {
-        StopSmithing();
-        GameState.isSmithing = true;
-        autoSmithProgress = 0;
-        isAutoSmithing = true;
         bool barFound = false;
         foreach(GameItem bar in Program.itemDatabase.GetSmithingBars())
         {
@@ -323,7 +316,8 @@
                     metalChanged = true;
                 }
                 SetCurrentSmithingBar(bar);
-                UseOre();
+                isUsingBar = false ;
+                //UseOre();
                 barFound = true;
                 break;
             }
@@ -334,11 +328,23 @@
                     metalChanged = true;
                 }
                 SetCurrentSmithingBar(bar);
-                UseBar();
+                isUsingBar = true;
+                //UseBar();
                 barFound = true;
                 break;
             }
         }
+
+        return barFound;
+    }
+    public void BeginAutoSmithing()
+    {
+        StopSmithing();
+        GameState.isSmithing = true;
+        autoSmithProgress = 0;
+        isAutoSmithing = true;
+
+        bool barFound = CheckForMaterials();
         if(!barFound)
         {
             currentSmithingBar = null;
@@ -351,20 +357,21 @@
             }
             else
             {
+                MessageManager.AddMessage(GameState.GetPlayer().activeFollower.Name + " heads to the bank and returns with more materials to smith.");
                 BeginAutoSmithing();
                 return;
             }
         }
 
         MessageManager.AddMessage("You begin to smith with " + GameState.GetPlayer().activeFollower.Name);
-        autoSmithingTimer = new Timer(new TimerCallback(_ =>
+        GameState.autoSmithingTimer = new Timer(new TimerCallback(_ =>
         {
             if (isAutoSmithing)
             {
                 if(autoSmithProgress == 6)
                 {
                     autoSmithProgress = 0;
-                    autoSmithingTimer.Dispose();
+                    GameState.autoSmithingTimer.Dispose();
                     BeginAutoSmithing();
 
                 }
@@ -392,10 +399,10 @@
                     {
                         GameState.GetPlayerInventory().AddItem(currentSmithingBar);
                         barWithdrawn = true;
+                        MessageManager.AddMessage(GameState.GetPlayer().activeFollower.Name + " withdraws a " + currentSmithingBar + ".");
                     }
                     if (autoSmithItemSelected)
                     {
-                        MessageManager.AddMessage(GameState.GetPlayer().activeFollower.Name + " withdraws a " + currentSmithingBar + ".");
                         autoSmithProgress++;
                     }
                 }
@@ -404,10 +411,14 @@
                     if (isUsingBar)
                     {
                         MessageManager.AddMessage(GameState.GetPlayer().activeFollower.Name + " puts the " + currentSmithingBar + " in the furnace.");
+                        UseBar();
+                        autoSmithProgress++;
                     }
                     else
                     {
                         MessageManager.AddMessage(GameState.GetPlayer().activeFollower.Name + " puts the " + Extensions.GetIngredientsAsString(currentSmithingBar, Program.itemDatabase) + " in the furnace.");
+                        UseOre();
+                        autoSmithProgress++;
                     }
                     if (metalChanged)
                     {
@@ -415,7 +426,7 @@
                         autoSmithItemSelected = false;
                     }
                     barWithdrawn = false;
-                    autoSmithProgress++;
+                    
                 }
                 else if (autoSmithProgress == 0)
                 {
@@ -452,15 +463,11 @@
     }
     private void UseOre()
     {
-        isUsingBar = false;
         GameState.GetPlayerInventory().RemoveItemsByID(currentSmithingBar.IngredientIDs);
-        IncrementSmithingStage();
     }
     private void UseBar()
     {
-        isUsingBar = true;
         GameState.GetPlayerInventory().RemoveItemByID(currentSmithingBar.Id);
-        IncrementSmithingStage();
     }
     private void IncrementSmithingStage()
     {
@@ -468,16 +475,16 @@
         {
             return;
         }
-        if (smithingTimer != null)
+        if (GameState.smithingTimer != null)
         {
-            smithingTimer.Dispose();
-            smithingTimer = null;
+            GameState.smithingTimer.Dispose();
+            GameState.smithingTimer = null;
         }
 
         progress = 0;
         SendMessage();
         GameState.isSmithing = true;
-        smithingTimer = new Timer(new TimerCallback(_ =>
+        GameState.smithingTimer = new Timer(new TimerCallback(_ =>
         {
             if (progress >= 100)
             {
@@ -490,8 +497,8 @@
                     }
 
                 }
-                smithingTimer.Dispose();
-                smithingTimer = null;
+                GameState.smithingTimer.Dispose();
+                GameState.smithingTimer = null;
                 smithingStage++;
                 GameState.isSmithing = false;
                 StateHasChanged();
@@ -641,15 +648,15 @@
     }
     private void StopSmithing()
     {
-        if(smithingTimer != null)
+        if(GameState.smithingTimer != null)
         {
-            smithingTimer.Dispose();
-            smithingTimer = null;
+            GameState.smithingTimer.Dispose();
+            GameState.smithingTimer = null;
         }
-        if(autoSmithingTimer != null)
+        if(GameState.autoSmithingTimer != null)
         {
-            autoSmithingTimer.Dispose();
-            autoSmithingTimer = null;
+            GameState.autoSmithingTimer.Dispose();
+            GameState.autoSmithingTimer = null;
         }
         GameState.isSmithing = false;
         GameState.UpdateState();
@@ -657,15 +664,15 @@
     }
     private void StopAutoSmithing()
     {
-        if(smithingTimer != null)
+        if(GameState.smithingTimer != null)
         {
-            smithingTimer.Dispose();
-            smithingTimer = null;
+            GameState.smithingTimer.Dispose();
+            GameState.smithingTimer = null;
         }
-        if(autoSmithingTimer != null)
+        if(GameState.autoSmithingTimer != null)
         {
-            autoSmithingTimer.Dispose();
-            autoSmithingTimer = null;
+            GameState.autoSmithingTimer.Dispose();
+            GameState.autoSmithingTimer = null;
         }
         GameState.isSmithing = false;
         isAutoSmithing = false;

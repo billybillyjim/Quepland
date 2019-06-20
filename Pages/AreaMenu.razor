@@ -24,11 +24,7 @@
     private Area area;
 
     public string gatherItem;
-    private Timer gatherTimer;
-    private Timer huntCountdownTimer;
-    private Timer autoCollectTimer;
-    private Timer miningVeinSearchTimer;
-    private Timer workoutTimer;
+
     private DateTime mineSearchStartTime;
 
     private bool isAutoCollecting;
@@ -253,7 +249,7 @@
             builder.AddContent(0, "Find Ore Vein");
             builder.CloseElement();
 
-            if (miningVeinSearchTimer != null && currentMiningVeinID == -1)
+            if (GameState.miningVeinSearchTimer != null && currentMiningVeinID == -1)
             {
                 builder.OpenElement(0, "p");
                 builder.AddContent(0, "Searching... " + (5 - (int)DateTime.UtcNow.Subtract(mineSearchStartTime).TotalSeconds));
@@ -413,7 +409,7 @@
         currentMiningVeinID = -1;
         limitedOre = true;
         isLookingForVein = true;
-        miningVeinSearchTimer = new Timer(new TimerCallback(_ =>
+        GameState.miningVeinSearchTimer = new Timer(new TimerCallback(_ =>
         {
             if (DateTime.UtcNow.Subtract(mineSearchStartTime).TotalSeconds >= 5)
             {
@@ -431,7 +427,7 @@
     {
         MessageManager.AddMessage("You find a vein of  " + Program.itemDatabase.GetItemByID(newID));
         currentMiningVeinID = newID;
-        miningVeinSearchTimer.Dispose();
+        GameState.miningVeinSearchTimer.Dispose();
     }
 
     public RenderFragment LoadRoadblocks()
@@ -674,7 +670,7 @@
         if (GameState.GetPlayer().activeFollower != null && Extensions.FollowerCanAutoCollect(GameState.GetPlayer().activeFollower, itemToGather))
         {
             isAutoCollecting = true;
-            autoCollectTimer = new Timer(new TimerCallback(_ =>
+            GameState.autoCollectTimer = new Timer(new TimerCallback(_ =>
             {
                 AutoCollect(itemToGather);
                 waitingForAutoCollectMessage = true;
@@ -685,21 +681,22 @@
             MessageManager.AddMessage(GameState.GetPlayer().activeFollower.Name + " cannot collect " + itemToGather.ItemName + " for you.");
         }
 
-        gatherTimer = new Timer(new TimerCallback(_ =>
+        GameState.gatherTimer = new Timer(new TimerCallback(_ =>
         {
             if (Program.gatherManager.Gather(itemToGather))
             {
                 MessageManager.AddMessage(itemToGather.GatherString);
                 GameState.GetPlayer().GainExperience(itemToGather.ExperienceGained);
 
-                //New speed is a random int based on item gather speed multiplied by the player's gather speed bonus for that activity.
-                gatherTimer.Change((int)(Extensions.GetGaussianRandomInt(itemToGather.GatherSpeed, itemToGather.GatherSpeed / 2)* GameState.GetPlayer().GetGatherSpeed(itemToGather.ActionRequired)),
-                    (int)(Extensions.GetGaussianRandomInt(itemToGather.GatherSpeed, itemToGather.GatherSpeed / 2)* GameState.GetPlayer().GetGatherSpeed(itemToGather.ActionRequired)));
-
+                //New speed is a random int based on item gather speed multiplied by the player's gather speed bonus for that activity. Minimum of 50 ms.
+                int randSpeed = (Extensions.GetGaussianRandomInt(itemToGather.GatherSpeed, itemToGather.GatherSpeed / 2));
+                int speed = Math.Max((int)(randSpeed * GameState.GetPlayer().GetGatherSpeed(itemToGather.ActionRequired)), 50);
+                GameState.gatherTimer.Change(speed, speed);
+                    
                 if (GameState.currentGatherItem.ActionRequired == "Mining" && limitedOre)
                 {
                     speedMulti += 0.05;
-                    gatherTimer.Change((int)(itemToGather.GatherSpeed * speedMulti), (int)((itemToGather.GatherSpeed / 2) * speedMulti));
+                    GameState.gatherTimer.Change((int)(itemToGather.GatherSpeed * speedMulti), (int)((itemToGather.GatherSpeed / 2) * speedMulti));
                     if (Math.Abs(speedMulti - 2) < 0.01)
                     {
                         MessageManager.AddMessage("The vein you are mining appears to be running low.");
@@ -735,17 +732,17 @@
         tiredLevel = 0;
 
         StopGathering();
-        if (workoutTimer != null)
+        if (GameState.workoutTimer != null)
         {
-            workoutTimer.Dispose();
-            workoutTimer = null;
+            GameState.workoutTimer.Dispose();
+            GameState.workoutTimer = null;
         }
         MessageManager.AddMessage("You begin lifting weights.");
         GameState.isWorkingOut = true;
-        workoutTimer = new Timer(new TimerCallback(_ =>
+        GameState.workoutTimer = new Timer(new TimerCallback(_ =>
         {
             GameState.GetPlayer().GainExperience("Strength:6");
-            workoutTimer.Change((int)(1000 * speedMulti), (int)(1000 * speedMulti));
+            GameState.workoutTimer.Change((int)(1000 * speedMulti), (int)(1000 * speedMulti));
             speedMulti += 0.0005 * Math.Max(1, 100 - GameState.GetPlayer().GetLevel("Strength")) * (tiredLevel + 1);
             MessageManager.AddMessage("You lift weights for a while.");
             if (speedMulti > 1.5 && speedMulti < 1.6 && tiredLevel == 0)
@@ -773,17 +770,17 @@
     {
         speedMulti = 1;
         StopGathering();
-        if (workoutTimer != null)
+        if (GameState.workoutTimer != null)
         {
-            workoutTimer.Dispose();
-            workoutTimer = null;
+            GameState.workoutTimer.Dispose();
+            GameState.workoutTimer = null;
         }
         MessageManager.AddMessage("You begin running.");
         GameState.isRunning = true;
-        workoutTimer = new Timer(new TimerCallback(_ =>
+        GameState.workoutTimer = new Timer(new TimerCallback(_ =>
         {
             GameState.GetPlayer().GainExperience("Deftness:6");
-            workoutTimer.Change((int)(1000 * speedMulti), (int)(1000 * speedMulti));
+            GameState.workoutTimer.Change((int)(1000 * speedMulti), (int)(1000 * speedMulti));
             speedMulti += 0.0005 * Math.Max(1, 100 - GameState.GetPlayer().GetLevel("Deftness"));
             MessageManager.AddMessage("You run for a while.");
             if (speedMulti > 1.5)
@@ -814,27 +811,27 @@
         isLookingForVein = false;
         GameState.isWorkingOut = false;
         GameState.isRunning = false;
-        if (autoCollectTimer != null)
+        if (GameState.autoCollectTimer != null)
         {
-            autoCollectTimer.Dispose();
+            GameState.autoCollectTimer.Dispose();
         }
-        if (gatherTimer != null)
+        if (GameState.gatherTimer != null)
         {
-            gatherTimer.Dispose();
+            GameState.gatherTimer.Dispose();
             gatherItem = "";
             GameState.isGathering = false;
 
         }
-        if (workoutTimer != null)
+        if (GameState.workoutTimer != null)
         {
 
-            workoutTimer.Dispose();
-            workoutTimer = null;
+            GameState.workoutTimer.Dispose();
+            GameState.workoutTimer = null;
         }
-        if(miningVeinSearchTimer != null)
+        if(GameState.miningVeinSearchTimer != null)
         {
-            miningVeinSearchTimer.Dispose();
-            miningVeinSearchTimer = null;
+            GameState.miningVeinSearchTimer.Dispose();
+            GameState.miningVeinSearchTimer = null;
         }
         GameState.UpdateState();
         this.StateHasChanged();
@@ -851,13 +848,13 @@
         Program.huntingManager.BeginHunt(length);
         GameState.isHunting = true;
         MessageManager.AddMessage("You head off to hunt some game.");
-        huntCountdownTimer = new Timer(new TimerCallback(_ =>
+        GameState.huntCountdownTimer = new Timer(new TimerCallback(_ =>
         {
             timeToEndOfHunt = "Time to done:" + TimeSpan.FromSeconds((int)Program.huntingManager.GetTimeUntilDone()).ToString();
             if (Program.huntingManager.GetTimeUntilDone() <= 0)
             {
                 CompleteHunt();
-                huntCountdownTimer.Dispose();
+                GameState.huntCountdownTimer.Dispose();
             }
             GameState.UpdateState();
             this.StateHasChanged();
@@ -865,9 +862,9 @@
     }
     private void EndHunt()
     {
-        if (huntCountdownTimer != null)
+        if (GameState.huntCountdownTimer != null)
         {
-            huntCountdownTimer.Dispose();
+            GameState.huntCountdownTimer.Dispose();
             GameState.isHunting = false;
         }
         GameState.UpdateState();
@@ -875,7 +872,7 @@
     }
     private void CompleteHunt()
     {
-        if (huntCountdownTimer != null)
+        if (GameState.huntCountdownTimer != null)
         {
             int caught = Math.Min(Program.huntingManager.GetNumberCaught(), GameState.GetPlayerInventory().GetAvailableSpaces());
 
@@ -911,7 +908,7 @@
             }
 
             Program.huntingManager.EndHunt();
-            huntCountdownTimer.Dispose();
+            GameState.huntCountdownTimer.Dispose();
             MessageManager.AddMessage("You successfully hunted " + caught + " animals and have returned with their carcasses.");
         }
         GameState.isHunting = false;

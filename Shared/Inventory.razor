@@ -9,7 +9,7 @@
 
     private GameItem currentUsedItem;
     private int[,] usableIDs;
-    private Timer createRepeatTimer;
+    
     public int sellAmount = 20;
 
     private RenderFragment LoadInventory()
@@ -573,9 +573,9 @@
     }
     private string CancelUse()
     {
-        if (createRepeatTimer != null)
+        if (GameState.createRepeatTimer != null)
         {
-            createRepeatTimer.Dispose();
+            GameState.createRepeatTimer.Dispose();
         }
         currentUsedItem = null;
         GameState.isUsing = false;
@@ -635,13 +635,13 @@
     }
     private string Create(GameItem itemUsed, int itemCreatedID)
     {
-        if (createRepeatTimer != null)
+        if (GameState.createRepeatTimer != null)
         {
-            createRepeatTimer.Dispose();
-            createRepeatTimer = null;
+            GameState.createRepeatTimer.Dispose();
+            GameState.createRepeatTimer = null;
         }
         int creationTime = Program.itemDatabase.GetItemByID(usableIDs[itemCreatedID, 1]).GatherSpeed;
-        createRepeatTimer = new Timer(new TimerCallback(_ =>
+        GameState.createRepeatTimer = new Timer(new TimerCallback(_ =>
         {
             GameItem itemCreated = Program.itemDatabase.GetItemByID(usableIDs[itemCreatedID, 1]);
 

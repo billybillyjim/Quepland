@@ -191,4 +191,14 @@ public static class Extensions
                      mean + stdDev * randStdNormal; //random normal(mean,stdDev^2)
         return (int)randNormal;
     }
+    public static double CalculateArmorDamageReduction(Player player)
+    {      
+        double armorTotal = 0;
+        foreach (KeyValuePair<GameItem, int> item in player.inventory.GetItems())
+        {
+            armorTotal += item.Key.Armor;
+        }
+        double reduction = ((armorTotal * 0.06d) / (1 + (armorTotal * 0.06d)));
+        return reduction;
+    }
 }

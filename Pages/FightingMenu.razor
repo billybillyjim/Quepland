@@ -26,8 +26,9 @@
     private bool battleFound;
     private bool battleStarted;
     private Monster opponent;
-    private Timer monsterAttackTimer;
-    private Timer autoFightTimer;
+
+
+
     private bool autoFight;
     private List<Monster> possibleMonsters = new List<Monster>();
     private string areaURL;
@@ -154,13 +155,13 @@
     public void StartAutoFighting()
     {
         autoFight = true;
-        if(autoFightTimer != null)
+        if(GameState.autoFightTimer != null)
         {
-            autoFightTimer.Dispose();
-            autoFightTimer = null;
+            GameState.autoFightTimer.Dispose();
+            GameState.autoFightTimer = null;
         }
         MessageManager.AddMessage(GameState.GetPlayer().activeFollower.Name + " looks for an enemy for you to fight.");
-        autoFightTimer = new Timer(new TimerCallback(_ =>
+        GameState.autoFightTimer = new Timer(new TimerCallback(_ =>
         {
             AutoBattle();
         }), null, 10000, 10000);
@@ -192,9 +193,9 @@
         {
             GameState.attackTimer.Dispose();
         }
-        if(monsterAttackTimer != null)
+        if(GameState.monsterAttackTimer != null)
         {
-            monsterAttackTimer.Dispose();
+            GameState.monsterAttackTimer.Dispose();
         }
         GameState.attackTimer = new Timer(new TimerCallback(_ =>
         {
@@ -203,7 +204,7 @@
             this.StateHasChanged();
         }), null, GameState.GetPlayer().GetWeaponAttackSpeed(), GameState.GetPlayer().GetWeaponAttackSpeed());
 
-        monsterAttackTimer = new Timer(new TimerCallback(_ =>
+        GameState.monsterAttackTimer = new Timer(new TimerCallback(_ =>
         {
             BeAttacked();
             GameState.UpdateState();
@@ -276,6 +277,7 @@
         if (battleFound)
         {
             int dmg = Math.Max(1, Extensions.GetGaussianRandomInt(opponent.Damage, opponent.Damage / 2d));
+            dmg *= (int)Math.Max(1 - Extensions.CalculateArmorDamageReduction(GameState.GetPlayer()), 0.05d);
             GameState.GetPlayer().GainExperience("HP", Math.Min(GameState.GetPlayer().CurrentHP, dmg) * 8);
             GameState.GetPlayer().CurrentHP -= dmg;
             MessageManager.AddMessage("You took " + dmg + " damage from the " + opponent.Name + "'s attack.");
@@ -328,15 +330,15 @@
             GameState.attackTimer.Dispose();
             GameState.attackTimer = null;
         }
-        if (monsterAttackTimer != null)
+        if (GameState.monsterAttackTimer != null)
         {
-            monsterAttackTimer.Dispose();
-            monsterAttackTimer = null;
+            GameState.monsterAttackTimer.Dispose();
+            GameState.monsterAttackTimer = null;
         }
-        if(autoFightTimer != null)
+        if(GameState.autoFightTimer != null)
         {
-            autoFightTimer.Dispose();
-            autoFightTimer = null;
+            GameState.autoFightTimer.Dispose();
+            GameState.autoFightTimer = null;
         }
         GameState.UpdateState();
         this.StateHasChanged();

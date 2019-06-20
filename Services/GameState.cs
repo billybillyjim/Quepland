@@ -39,6 +39,24 @@ public class GameState
     public Timer attackTimer;
     public Timer foodTimer;
 
+    //Area Menu Timers
+    public Timer gatherTimer;
+    public Timer huntCountdownTimer;
+    public Timer autoCollectTimer;
+    public Timer miningVeinSearchTimer;
+    public Timer workoutTimer;
+
+    //Fighting Menu Timers
+    public Timer monsterAttackTimer;
+    public Timer autoFightTimer;
+
+    //Inventory Timer
+    public Timer createRepeatTimer;
+
+    //Smithing Timer
+    public Timer smithingTimer;
+    public Timer autoSmithingTimer;
+
     private void StateHasChanged()
     {
         StateChanged?.Invoke(this, EventArgs.Empty);

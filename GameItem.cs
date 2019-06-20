@@ -17,6 +17,7 @@ public class GameItem
     public float GatherSpeedBonus { get; set; }
     public int AttackSpeed { get; set; }
     public int Damage { get; set; }
+    public int Armor { get; set; }
     public int QueplarValue { get; set; }
     public int RequiredLevel { get; set; }
     public int HealAmount { get; set; }
