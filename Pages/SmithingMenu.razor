@@ -86,7 +86,7 @@
                 builder.OpenElement(0, "button");
                 builder.AddAttribute(0, "class", "btn btn-primary");
                 builder.AddAttribute(0, "style", "margin-bottom:10px");
-                builder.AddAttribute(0, "onclick", () => UseOre());
+                builder.AddAttribute(0, "onclick", () => SmithUsingOre());
                 if (progress == 0 || progress >= 100)
                 {
 
@@ -109,7 +109,7 @@
                     builder.OpenElement(0, "button");
                     builder.AddAttribute(0, "class", "btn btn-primary");
                     builder.AddAttribute(0, "style", "margin-bottom:10px");
-                    builder.AddAttribute(0, "onclick", () => UseBar());
+                    builder.AddAttribute(0, "onclick", () => SmithUsingBar());
                     if (progress == 0 || progress >= 100)
                     {
 
@@ -426,7 +426,7 @@
                         autoSmithItemSelected = false;
                     }
                     barWithdrawn = false;
-                    
+
                 }
                 else if (autoSmithProgress == 0)
                 {
@@ -459,6 +459,18 @@
 
         currentSmithingItem = i;
         GameState.GetPlayerInventory().RemoveItemsByID(i.IngredientIDs);
+        IncrementSmithingStage();
+    }
+    private void SmithUsingOre()
+    {
+        GameState.GetPlayerInventory().RemoveItemsByID(currentSmithingBar.IngredientIDs);
+        isUsingBar = false;
+        IncrementSmithingStage();
+    }
+    private void SmithUsingBar()
+    {
+        GameState.GetPlayerInventory().RemoveItemByID(currentSmithingBar.Id);
+                isUsingBar = true;
         IncrementSmithingStage();
     }
     private void UseOre()
