@@ -4164,4 +4164,18 @@
     "gatherSpeedBonus": 0.8,
     "icon": "Mining"
   },
+  {
+    "itemName": "Yoga Mat",
+    "itemDescription": "You could do yoga on this mat.",
+    "id": 292,
+    "value": 150000,
+    "actionsEnabled": "Yoga",
+    "isEquipable": true,
+    "equipSlot": "Right Hand",
+    "damage": 3,
+    "actionRequired": "HP",
+    "requiredLevel": 50,
+    "attackSpeed": 3000,
+    "icon": "Yoga"
+  }
 ]

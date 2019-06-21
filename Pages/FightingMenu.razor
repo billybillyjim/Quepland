@@ -76,7 +76,7 @@
                 builder.OpenElement(0, "button");
                 builder.AddAttribute(0, "class", "btn btn-primary");
                 builder.AddAttribute(0, "style", "margin-bottom:10px");
-                builder.AddAttribute(0, "onclick", () => EndTimers());
+                builder.AddAttribute(0, "onclick", () => StopAutoBattling());
                 builder.AddContent(0, "Stop Battling");
                 builder.CloseElement();
             }
@@ -189,6 +189,7 @@
     public void StartBattle()
     {
         battleStarted = true;
+        GameState.isFighting = true;
         if (GameState.attackTimer != null)
         {
             GameState.attackTimer.Dispose();
@@ -229,7 +230,7 @@
                         if(rand.Next(2) == 0)
                         {
                             GameState.GetPlayerInventory().RemoveOneOfItem(GameState.GetPlayerInventory().GetStrongestArrows());
-                        }                      
+                        }
                         MessageManager.AddMessage("You shoot the " + opponent.Name + " for " + dmgDealt + " damage.");
                     }
                     else
@@ -293,25 +294,38 @@
         MessageManager.AddMessage("You defeated the " + opponent.Name);
         if(opponent.AlwaysDrops != null)
         {
-            GameState.GetPlayerInventory().AddOneOfMultipleItems(Program.itemDatabase.GetItems(opponent.AlwaysDrops));
-            MessageManager.AddMessage("You got " + Extensions.GetItemsAsString(Program.itemDatabase.GetItems(opponent.AlwaysDrops)));
+            if (GameState.GetPlayerInventory().AddOneOfMultipleItems(Program.itemDatabase.GetItems(opponent.AlwaysDrops)))
+            {
+                MessageManager.AddMessage("You got " + Extensions.GetItemsAsString(Program.itemDatabase.GetItems(opponent.AlwaysDrops)));
+            }
+            else
+            {
+                MessageManager.AddMessage("Your inventory is full, so you didn't pick up any drops.");
+            }
         }
         GameItem drop = Program.itemDatabase.GetItemByID(Extensions.GetDrop(opponent));
         if(drop != null)
         {
-            GameState.GetPlayerInventory().AddMultipleOfItem(drop, 1);
-            MessageManager.AddMessage("You got a " + drop.ItemName);
+            if(GameState.GetPlayerInventory().AddMultipleOfItem(drop, 1))
+            {
+                MessageManager.AddMessage("You got a " + drop.ItemName);
+            }
+            else
+            {
+                MessageManager.AddMessage("Your inventory is full, so you didn't pick up any drops.");
+            }
         }
 
         battleFound = false;
         EndTimers();
         battleStarted = false;
-        
+
         winString = "You won!";
         if (autoFight)
         {
             StartAutoFighting();
         }
+        GameState.isFighting = false;
     }
     public void LoseBattle()
     {
@@ -321,7 +335,17 @@
         battleStarted = false;
         autoFight = false;
         EndTimers();
+        GameState.isFighting = false;
         winString = "You lost!";
+    }
+    private void StopAutoBattling()
+    {
+        battleFound = false;
+        battleStarted = false;
+        autoFight = false;
+        EndTimers();
+        MessageManager.AddMessage("You stop looking for fights.");
+        GameState.isFighting = false;
     }
     private void EndTimers()
     {
@@ -340,6 +364,7 @@
             GameState.autoFightTimer.Dispose();
             GameState.autoFightTimer = null;
         }
+        GameState.isFighting = false;
         GameState.UpdateState();
         this.StateHasChanged();
     }

@@ -13,8 +13,10 @@ public class Building
     public int[] NPCIDs { get; set; }
     public bool IsShop { get; set; }
     public bool IsInn { get; set; }
+    public bool IsSushiTrainingBuilding { get; set; }
     public string[] UnlockableAreas { get; set; }
     public string[] Buildings { get; set; }
     public bool HasAlchemyStation { get; set; }
     public int QueplarValue { get; set; }
+
 }

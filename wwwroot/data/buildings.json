@@ -482,6 +482,23 @@
     "url": "TeppasInn",
     "description": "You enter a small inn where you can rest to restore your health.",
     "isInn": true
-  }
+  },
+  {
+    "name": "Amante",
+    "id": 60,
+    "url": "Amante",
+    "description": "You enter a quiet little cafe. The walls are lined with tea sets from around the world. A lovely old couple greet you as you close the door.",
+    "isSushiTrainingBuilding": true,
+    "npcIDs": [ 54, 55 ]
+  },
+    {
+    "name": "Soul Goods",
+    "id": 61,
+    "url": "SoulGoods",
+    "description": "The room is full of smoke, both from incense burners and the clerk who is smoking a pipe. There are a wide variety of exotic goods for sale here.",
+    "isShop": true,
+    "items": [ 245, 246 ],
+    "npcIDs": [ 56 ]
+  },
 
 ]

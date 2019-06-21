@@ -14,6 +14,7 @@ public class GameState
     public bool isWorkingOut;
     public bool isRunning;
     public bool isSmithing;
+    public bool isFighting;
     public bool canSell;
     public bool canBank;
     public bool isUsing;
@@ -100,7 +101,7 @@ public class GameState
     }
     public bool CanLeave()
     {
-        if(!isGathering && !isHunting && !isWorkingOut && !isSmithing && !isRunning)
+        if(!isGathering && !isHunting && !isWorkingOut && !isSmithing && !isRunning && !isFighting)
         {
             return true;
         }

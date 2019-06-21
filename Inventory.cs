@@ -268,7 +268,10 @@ public class Inventory
         {
             if(items.TryGetValue(itemToAdd.Key, out _))
             {
-                items[itemToAdd.Key] = itemToAdd.Value;
+                if(itemToAdd.Value > 0)
+                {
+                    items[itemToAdd.Key] = itemToAdd.Value;
+                }            
             }
             else
             {
@@ -280,6 +283,10 @@ public class Inventory
     }
     public bool AddMultipleOfItem(GameItem item, int amount)
     {
+        if(amount < 0)
+        {
+            amount = 0;
+        }
         if (item.IsStackable)
         {
             return AddItemStackable(item, amount);
@@ -299,6 +306,10 @@ public class Inventory
     }
     public bool AddItemStackable(GameItem item, int amount)
     {
+        if(amount < 0)
+        {
+            amount = 0;
+        }
         if(items.TryGetValue(item, out int current))
         {
             if (item.IsStackable)

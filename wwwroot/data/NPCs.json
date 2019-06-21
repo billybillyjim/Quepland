@@ -341,7 +341,7 @@
     "isInteractable": false,
     "hideOnFollow": true
   },
-    {
+  {
     "name": "Skia the Monopod",
     "id": 51,
     "spokenText": "I'm the best blacksmith in Quepland. I'll work for you if the price is right.",
@@ -349,4 +349,34 @@
     "isInteractable": true,
     "hideOnFollow": true
   },
+  {
+    "name": "Farmer",
+    "id": 52,
+    "spokenText": "We don't see too many visitors around these parts. The restaurant here is run by one of the greatest chefs in the world. He's mostly retired now, though.",
+    "isInteractable": true
+  },
+  {
+    "name": "Man eating jerky",
+    "id": 53,
+    "spokenText": "I like jerky! That's why I always bring my meat to Tammy. In just a few days I can get all the jerky I can eat. Yum!",
+    "isInteractable": true
+  },
+  {
+    "name": "Old Man",
+    "id": 54,
+    "spokenText": "Would you like to learn more about the culinary arts? I can teach you, if you pay for the materials.",
+    "isInteractable": true
+  },
+  {
+    "name": "Old Woman",
+    "id": 55,
+    "spokenText": "He may not look it, but my husband is one of the greatest chefs in the world. There's a lot he could teach you.",
+    "isInteractable": true
+  },
+  {
+    "name": "Man with pipe",
+    "id": 56,
+    "spokenText": "Hey man. We got all kinds of interesting things here. Check it out!",
+    "isInteractable": true
+  }
 ]

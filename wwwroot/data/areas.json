@@ -20,7 +20,7 @@
     "icon": "oi oi-rain",
     "monsterIDs": [ 2, 11, 4 ],
     "huntingIDs": [ 14, 15, 66, 67, 68, 69, 71 ],
-    "npcIDs": [49]
+    "npcIDs": [ 49 ]
   },
   {
     "name": "The foot of Mt Queple",
@@ -275,7 +275,7 @@
     "icon": "oi oi-rain",
     "actions": [ "Gather Cheese:Cheese", "Gather Bark:Bark" ],
     "unlockableAreas": [ "Higashi Bridge,Head down the hill,," ],
-    "npcIDs": [39]
+    "npcIDs": [ 39 ]
   },
   {
     "name": "Higashi Bridge",
@@ -298,7 +298,7 @@
     "icon": "oi oi-trash",
     "actions": [ "Chop Balsa Trees:Balsa Logs", "Gather Hemp:Hemp" ],
     "unlockableAreas": [ "The Southern Trail,Take the road out of the forest,," ],
-    "npcIDs": [51]
+    "npcIDs": [ 51 ]
 
   },
   {
@@ -461,7 +461,7 @@
     "actions": [ "Chop Lignum Vitae Trees:Lignum Vitae Logs" ],
     "icon": "oi oi-droplet",
     "unlockableAreas": [ "Great Shoe Lake,Travel south to the mountains,," ],
-    "npcIDs": [44]
+    "npcIDs": [ 44 ]
   },
   {
     "name": "Leupp",
@@ -503,7 +503,7 @@
     "description": "There are a number of fisherman here. You haven't seen them catch anything, though.",
     "actions": [ "Fish for Shrimp:Shrimp", "Fish For Butterfish:Butterfish" ],
     "unlockableAreas": [ "Ocean Fishing Platform,Sail to the Ocean Fishing Platform,,", "Deep Ocean Waters,Sail to Deep Ocean Waters,," ],
-    "npcIDs": [43]
+    "npcIDs": [ 43 ]
   },
   {
     "name": "Ocean Fishing Platform",
@@ -574,7 +574,7 @@
     "description": "You follow the path down to an open field. Up ahead you see a large castle town.",
     "icon": "oi oi-chevron-bottom",
     "unlockableAreas": [ "Tree Nursery,Continue toward the castle town,," ],
-    "npcIDs": [24, 25]
+    "npcIDs": [ 24, 25 ]
   },
   {
     "name": "Tree Nursery",
@@ -616,7 +616,7 @@
     "actions": [ "Battle" ],
     "monsterIDs": [ 28 ],
     "npcIDs": [ 30 ],
-    "buildings": ["ArcheryShop" ]
+    "buildings": [ "ArcheryShop" ]
   },
   {
     "name": "East Tsu City",
@@ -642,8 +642,64 @@
     "id": 62,
     "areaURL": "HoinRiver",
     "isUnlocked": false,
-    "description": "",
+    "description": "You reach a decently sized river. The foliage is too thick on the banks to walk along. You'll need to float down on some kind of raft.",
     "icon": "oi oi-link-intact",
-    "npcIDs": [ 50 ]
+    "npcIDs": [ 50 ],
+    "areaToUnlockOnArrival": "Hoin River Valley",
+    "unlockableAreas": [ "Plantrain Plains,Continue floating,," ]
+  },
+  {
+    "name": "Hoin River Valley",
+    "id": 63,
+    "isUnlocked": false,
+    "description": "A deep and winding valley that flows down from the mountains into the Middlesea.",
+    "areaURL": "HoinRiverValley",
+    "icon": "oi oi-inbox",
+    "children": [ "HoinRiver", "PlantrainPlains", "SunsHarbor", "Guttermouth","Ricechild" ],
+    "isMarked": false
+  },
+  {
+    "name": "Plantrain Plains",
+    "id": 64,
+    "areaURL": "PlantrainPlains",
+    "isUnlocked": false,
+    "description": "The trees on the banks grow thin as you pass by an open field filled with small farm plots. A few old buildings sit along their edge.",
+    "icon": "oi oi-link-intact",
+    "npcIDs": [ 9, 52 ],
+    "buildings": [
+      "Amante",
+      "SoulGoods"
+    ],
+    "unlockableAreas": [ "Sun's Harbor,Ride further down stream,," ]
+  },
+  {
+    "name": "Sun's Harbor",
+    "id": 65,
+    "areaURL": "SunsHarbor",
+    "isUnlocked": false,
+    "description": "A solitary building sits just off the shore of the river. It's flanked by an extremely old graveyard.",
+    "icon": "oi oi-link-intact",
+    "npcIDs": [ 53 ],
+    "buildings": [ "TammysTannery", "Graveyard" ],
+    "unlockableAreas": [ "Guttermouth,Float to the village,," ]
+  },
+  {
+    "name": "Guttermouth",
+    "id": 66,
+    "areaURL": "Guttermouth",
+    "isUnlocked": false,
+    "description": "You begin to reach signs of civilization. Down at the river's mouth you can see a large city. A number of houses surround the main building here, which has the word 'Woodworks' carved on the front of it.",
+    "icon": "oi oi-link-intact",
+    "buildings": [ "WoodWorkersAssociation" ],
+    "unlockableAreas": [ "Ricechild,Ride to the river's mouth,," ]
+  },
+  {
+    "name": "Ricechild",
+    "id": 67,
+    "areaURL": "Ricechild",
+    "isUnlocked": false,
+    "description": "You reach a bustling city at the mouth of the river. There are a few interesting shops here.",
+    "icon": "oi oi-link-intact",
+    "npcIDs": [ 11 ]
   }
 ]
