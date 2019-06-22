@@ -236,28 +236,33 @@
     "itemDescription": "The pelt of a deer.",
     "id": 16,
     "value": 150,
-    "icon": "Pelt"
+    "icon": "Pelt",
+    "isTannable": true
   },
   {
     "itemName": "Rabbit Pelt",
     "itemDescription": "The pelt of a rabbit.",
     "id": 17,
     "value": 90,
-    "icon": "Pelt"
+    "icon": "Pelt",
+    "isTannable": true
   },
   {
     "itemName": "Deer Meat",
     "itemDescription": "The meat of a deer.",
     "id": 18,
     "value": 30,
-    "icon": "Meat"
+    "icon": "Meat",
+    "isCurable": true
   },
   {
     "itemName": "Rabbit Meat",
     "itemDescription": "The meat of a rabbit.",
     "id": 19,
     "value": 15,
-    "icon": "Meat"
+    "icon": "Meat",
+    "isCurable": true
+
   },
   {
     "itemName": "Stone",
@@ -567,7 +572,9 @@
     "itemDescription": "The meat off a chicken.",
     "id": 42,
     "value": 10,
-    "icon": "Bird"
+    "icon": "Bird",
+    "isCurable": true
+
   },
   {
     "itemName": "Feather",
@@ -966,34 +973,41 @@
     "itemDescription": "The pelt of a black bear.",
     "id": 75,
     "value": 290,
-    "icon": "Pelt"
+    "icon": "Pelt",
+    "isTannable": true
   },
   {
     "itemName": "Bear Meat",
     "itemDescription": "The meat of a bear.",
     "id": 76,
     "value": 100,
-    "icon": "Meat"
+    "icon": "Meat",
+    "isCurable": true
+
   },
   {
     "itemName": "Grizzly Bear Pelt",
     "itemDescription": "The pelt of a grizzly bear.",
     "id": 77,
     "value": 550,
-    "icon": "Pelt"
+    "icon": "Pelt",
+    "isTannable": true
   },
   {
     "itemName": "Moose Meat",
     "itemDescription": "The meat of a moose.",
     "id": 78,
     "value": 100,
-    "icon": "Meat"
+    "icon": "Meat",
+    "isCurable": true
+
   },
   {
     "itemName": "Moose Pelt",
     "itemDescription": "The pelt of a moose.",
     "id": 79,
     "value": 550,
+    "isTannable": true,
     "icon": "Pelt"
   },
   {
@@ -1008,34 +1022,43 @@
     "itemDescription": "The meat of a pigeon. Probably shouldn't eat it...",
     "id": 81,
     "value": 5,
-    "icon": "Bird"
+    "icon": "Bird",
+    "isCurable": true
+
   },
   {
     "itemName": "Turkey Meat",
     "itemDescription": "The meat of a turkey.",
     "id": 82,
     "value": 75,
-    "icon": "Bird"
+    "icon": "Bird",
+    "isCurable": true
+
   },
   {
     "itemName": "Pheasant Meat",
     "itemDescription": "The meat of a pheasant.",
     "id": 83,
     "value": 40,
-    "icon": "Bird"
+    "icon": "Bird",
+    "isCurable": true
+
   },
   {
     "itemName": "Bison Meat",
     "itemDescription": "The meat of a bison.",
     "id": 84,
     "value": 150,
-    "icon": "Meat"
+    "icon": "Meat",
+    "isCurable": true
+
   },
   {
     "itemName": "Bison Pelt",
     "itemDescription": "The pelt of a bison.",
     "id": 85,
     "icon": "Pelt",
+    "isTannable": true,
     "value": 700
   },
   {
@@ -1043,13 +1066,16 @@
     "itemDescription": "The meat of a wild boar.",
     "id": 86,
     "value": 100,
-    "icon": "Meat"
+    "icon": "Meat",
+    "isCurable": true
+
   },
   {
     "itemName": "Wild Boar Pelt",
     "itemDescription": "The pelt of a wild boar.",
     "id": 87,
     "value": 55,
+    "isTannable": true,
     "icon": "Pelt"
   },
   {
@@ -3794,7 +3820,7 @@
     "actionRequired": "Fishing",
     "equipSlot": "Right Hand",
     "attackSpeed": 7000,
-    "gatherSpeedBonus": 0.4,
+    "gatherSpeedBonus": 0.35,
     "icon": "Net"
   },
   {
@@ -3809,7 +3835,7 @@
     "actionRequired": "Fishing",
     "equipSlot": "Right Hand",
     "attackSpeed": 7000,
-    "gatherSpeedBonus": 0.6,
+    "gatherSpeedBonus": 0.5,
     "icon": "Net"
   },
   {
@@ -3824,7 +3850,7 @@
     "actionRequired": "Fishing",
     "equipSlot": "Right Hand",
     "attackSpeed": 7000,
-    "gatherSpeedBonus": 0.8,
+    "gatherSpeedBonus": 0.7,
     "icon": "Net"
   },
   {
@@ -4294,7 +4320,7 @@
     "actionRequired": "Fishing",
     "icon": "Fish",
     "isUnpackable": true,
-    "unpackIDs": [ 0 ],
+    "unpackIDs": [ 304 ],
     "unpackString": "Gut"
   },
   {
@@ -4307,7 +4333,10 @@
     "requiredLevel": 60,
     "experienceGained": "Fishing:600",
     "actionRequired": "Fishing",
-    "icon": "Fish"
+    "icon": "Fish",
+    "isUnpackable": true,
+    "unpackIDs": [ 304, 313 ],
+    "unpackString": "Gut"
   },
   {
     "itemName": "Large Caiman",
@@ -4319,7 +4348,10 @@
     "requiredLevel": 80,
     "experienceGained": "Fishing:900",
     "actionRequired": "Fishing",
-    "icon": "Fish"
+    "icon": "Fish",
+    "isUnpackable": true,
+    "unpackIDs": [ 304, 304, 313 ],
+    "unpackString": "Gut"
   },
   {
     "itemName": "Huge Caiman",
@@ -4331,6 +4363,158 @@
     "requiredLevel": 95,
     "experienceGained": "Fishing:2000",
     "actionRequired": "Fishing",
-    "icon": "Fish"
-  }
+    "icon": "Fish",
+    "isUnpackable": true,
+    "unpackIDs": [ 304, 304, 304, 313, 313 ],
+    "unpackString": "Gut"
+  },
+  {
+    "itemName": "Caiman Skin",
+    "id": 304,
+    "itemDescription": "The skin of a large reptile.",
+    "value": 200,
+    "gatherString": "You skin the caiman.",
+    "gatherSpeed": 2500,
+    "requiredLevel": 5,
+    "experienceGained": "Leatherworking:10",
+    "actionRequired": "Leatherworking",
+    "icon": "Pelt",
+    "isTannable": true
+  },
+  {
+    "itemName": "Deer Jerky",
+    "id": 305,
+    "itemDescription": "Salted and dried meat from a deer.",
+    "value": 40,
+    "gatherString": "You withdraw some deer jerky.",
+    "requiredLevel": 1,
+    "experienceGained": "Culinary Arts:50",
+    "actionRequired": "Culinary Arts",
+    "isEdible": true,
+    "healAmount": 0,
+    "healDuration": 600,
+    "buffedSkill": "Archery",
+    "buffAmount": 3,
+    "icon": "Jerky"
+  },
+  {
+    "itemName": "Rabbit Jerky",
+    "id": 306,
+    "itemDescription": "Salted and dried meat from a rabbit.",
+    "value": 25,
+    "gatherString": "You withdraw some rabbit jerky.",
+    "requiredLevel": 1,
+    "experienceGained": "Culinary Arts:30",
+    "actionRequired": "Culinary Arts",
+    "isEdible": true,
+    "healAmount": 0,
+    "healDuration": 600,
+    "buffedSkill": "Knifesmanship",
+    "buffAmount": 3,
+    "icon": "Jerky"
+  },
+  {
+    "itemName": "Chicken Jerky",
+    "id": 307,
+    "itemDescription": "Salted and dried meat from a chicken.",
+    "value": 20,
+    "gatherString": "You withdraw some chicken jerky.",
+    "requiredLevel": 1,
+    "experienceGained": "Culinary Arts:20",
+    "actionRequired": "Culinary Arts",
+    "isEdible": true,
+    "healAmount": 0,
+    "healDuration": 600,
+    "buffedSkill": "Leatherworking",
+    "buffAmount": 3,
+    "icon": "Jerky"
+  },
+  {
+    "itemName": "Bear Jerky",
+    "id": 308,
+    "itemDescription": "Salted and dried meat from a bear.",
+    "value": 200,
+    "gatherString": "You withdraw some bear jerky.",
+    "requiredLevel": 15,
+    "experienceGained": "Culinary Arts:50",
+    "actionRequired": "Culinary Arts",
+    "isEdible": true,
+    "healAmount": 0,
+    "healDuration": 600,
+    "buffedSkill": "Hammermanship",
+    "buffAmount": 3,
+    "icon": "Jerky"
+  },
+  {
+    "itemName": "Moose Jerky",
+    "id": 309,
+    "itemDescription": "Salted and dried meat from a moose.",
+    "value": 200,
+    "gatherString": "You withdraw some moose jerky.",
+    "requiredLevel": 15,
+    "experienceGained": "Culinary Arts:80",
+    "actionRequired": "Culinary Arts",
+    "isEdible": true,
+    "healAmount": 0,
+    "healDuration": 600,
+    "buffedSkill": "Swordsmanship",
+    "buffAmount": 3,
+    "icon": "Jerky"
+  },
+  {
+    "itemName": "Bison Jerky",
+    "id": 310,
+    "itemDescription": "Salted and dried meat from a bison.",
+    "value": 900,
+    "gatherString": "You withdraw some bison jerky.",
+    "requiredLevel": 75,
+    "experienceGained": "Culinary Arts:150",
+    "actionRequired": "Culinary Arts",
+    "isEdible": true,
+    "healAmount": 0,
+    "healDuration": 1200,
+    "buffedSkill": "Woodcutting",
+    "buffAmount": 5,
+    "icon": "Jerky"
+  },
+  {
+    "itemName": "Wild Boar Jerky",
+    "id": 311,
+    "itemDescription": "Salted and dried meat from a wild boar.",
+    "value": 200,
+    "gatherString": "You withdraw some wild boar jerky.",
+    "requiredLevel": 35,
+    "experienceGained": "Culinary Arts:80",
+    "actionRequired": "Culinary Arts",
+    "isEdible": true,
+    "healAmount": 0,
+    "healDuration": 1200,
+    "buffedSkill": "Mining",
+    "buffAmount": 5,
+    "icon": "Jerky"
+  },
+  {
+    "itemName": "Caiman Jerky",
+    "id": 312,
+    "itemDescription": "Salted and dried meat from a caiman. Tastes like a mix between fish and chicken.",
+    "value": 200,
+    "gatherString": "You withdraw some caiman jerky.",
+    "requiredLevel": 55,
+    "experienceGained": "Culinary Arts:120",
+    "actionRequired": "Culinary Arts",
+    "isEdible": true,
+    "healAmount": 0,
+    "healDuration": 1200,
+    "buffedSkill": "Fishing",
+    "buffAmount": 5,
+    "icon": "Jerky"
+  },
+  {
+    "itemName": "Caiman Meat",
+    "itemDescription": "The meat of a caiman.",
+    "id": 313,
+    "value": 130,
+    "icon": "Meat",
+    "isCurable": true
+  },
 ]

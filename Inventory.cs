@@ -513,7 +513,14 @@ public class Inventory
         string returnString = "";
         foreach (KeyValuePair<GameItem, int> pair in items)
         {
-            returnString += pair.Key.Id + "-" + pair.Value + "/";
+            if(pair.Value < 0)
+            {
+                returnString += pair.Key.Id + "-" + 1 + "/";
+            }
+            else
+            {
+                returnString += pair.Key.Id + "-" + pair.Value + "/";
+            }
         }
         return returnString;
     }
