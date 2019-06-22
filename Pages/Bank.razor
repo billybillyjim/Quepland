@@ -147,7 +147,7 @@ else
     public int sortStyle = 0;
     public int withdrawAmount = 1;
     public string searchString = "";
-   
+
 
     public void SetSortStyle(int newVal)
     {
@@ -180,8 +180,12 @@ else
             //Gets the smallest of the amount, inventory space, and number in the bank.
             maxWithdraw = Math.Min(Math.Min(amount, GameState.GetPlayerInventory().GetAvailableSpaces()), GameState.GetPlayerBank().GetInventory().GetAmountOfItem(item));
         }
-        GameState.GetPlayerInventory().AddMultipleOfItem(item, maxWithdraw);
-        GameState.GetPlayerBank().GetInventory().RemoveItems(item, maxWithdraw);
+        if(GameState.GetPlayerInventory().AddMultipleOfItem(item, maxWithdraw))
+        {
+            GameState.GetPlayerBank().GetInventory().RemoveItems(item, maxWithdraw);
+        }
+        
+        
         GameState.UpdateState();
         return "";
     }

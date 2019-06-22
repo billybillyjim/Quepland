@@ -19,10 +19,11 @@
     private SimpleAES Encryptor = new SimpleAES();
     private string savefile = "Copy the generated save to a safe place.";
     private string loadfile = "";
-    private void GenerateSaveFile()
+    private bool GenerateSaveFile()
     {
         savefile = GetSaveDataString();
         this.StateHasChanged();
+        return true;
     }
     public string GetSaveDataString()
     {
