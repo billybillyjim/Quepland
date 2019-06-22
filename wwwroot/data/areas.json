@@ -84,7 +84,7 @@
     "description": "The mountain near which you began your journey.",
     "areaURL": "MountQueple",
     "icon": "oi oi-image",
-    "children": [ "queplandFields", "queplandWoods", "quepleFoot", "teppas", "lowerMtQuepleTrail", "upperMTQuepleTrail", "MtQueplePeak", "EasternTrail" ]
+    "children": [ "queplandFields", "queplandWoods", "quepleFoot", "teppas", "lowerMtQuepleTrail", "upperMTQuepleTrail", "MtQueplePeak", "EasternTrail", "DebugArea" ]
   },
   {
     "name": "Queple Cave Copper Mine",
@@ -701,5 +701,14 @@
     "description": "You reach a bustling city at the mouth of the river. There are a few interesting shops here.",
     "icon": "oi oi-link-intact",
     "npcIDs": [ 11 ]
+  },
+  {
+    "name": "Debug Area",
+    "id": 68,
+    "areaURL": "DebugArea",
+    "isUnlocked": false,
+    "description": "You shouldn't be here.",
+    "actions": [ "Chop Buloke Trees:Buloke Logs", "Mining", "Battle", "Carve totem pole:Cheap Wood Shavings", "Gather Rice:Rice", "Strength", "Deftness" ],
+    "monsterIDs": [0]
   }
 ]

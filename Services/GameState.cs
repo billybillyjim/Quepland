@@ -19,6 +19,8 @@ public class GameState
     public bool canBank;
     public bool isUsing;
 
+    public bool isAutoCollecting;
+
     public bool isSplitView;
     public bool inventoryIsActiveView;
     public bool compactBankView;

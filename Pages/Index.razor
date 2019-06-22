@@ -19,12 +19,9 @@
     <p><button class="btn btn-primary" onclick="@(() => DebugGetMoney())">Gain Money</button></p>
     <p><button class="btn btn-primary" onclick="@(() => DebugOneOfEveryItem())">Get All Items</button></p>
     <p><button class="btn btn-primary" onclick="@(() => DebugGainStrengthLevel())">Gain Strength Level</button></p>
-    <p><button class="btn btn-primary" onclick="@(() => EncryptionTest())">Encrypt String</button></p>
-    <p><button class="btn btn-primary" onclick="@(() => DecryptionTest())">Decrypt String</button></p>
     <p><button class="btn btn-primary" onclick="@(() => SaveDataEncrypted())">Save Encrypted</button></p>
     <p><button class="btn btn-primary" onclick="@(() => LoadDataEncrypted())">Load Encrypted</button></p>
-    <p><button class="btn btn-primary" onclick="@(() => GetSaveDataString())">Get Save Data String</button></p>
-    <p><button class="btn btn-primary" onclick="@(() => LoadDataFromString(testString))">Load Save Data String</button></p>
+    <p><button class="btn btn-primary" onclick="@(() => GoToDebugArea())">Go to Debug Area</button></p>
 }
 
 @if (GameState.saveDataLoaded == false && saveGameExists && gameHasBeenSaved == false && loadBegun == false)
@@ -68,6 +65,10 @@ else
     public string testString = "";
     private SimpleAES Encryptor = new SimpleAES();
 
+    public void GoToDebugArea()
+    {
+        Program.areaManager.GetAreaByID(68).IsUnlocked = true;
+    }
     public void EncryptionTest()
     {
         encrypt = Encryptor.EncryptToString(encrypt);
@@ -356,22 +357,22 @@ else
         if(saveGameExists == false)
         {
             if(GameState.autoSaveTimer != null)
-        {
-            GameState.autoSaveTimer.Dispose();
-            GameState.autoSaveTimer = null;
-        }
-        GameState.autoSaveTimer = new Timer(new TimerCallback(_ =>
-        {
-            try
             {
-                SaveData();
+                GameState.autoSaveTimer.Dispose();
+                GameState.autoSaveTimer = null;
             }
-            catch
+            GameState.autoSaveTimer = new Timer(new TimerCallback(_ =>
             {
-                MessageManager.AddMessage("Failed to auto save. Please make a local backup before closing the game.", "red");
-            }
+                try
+                {
+                    SaveData();
+                }
+                catch
+                {
+                    MessageManager.AddMessage("Failed to auto save. Please make a local backup before closing the game.", "red");
+                }
 
-        }), null, 60000, 60000);
+            }), null, 60000, 60000);
         }
         GameState.UpdateState();
         this.StateHasChanged();

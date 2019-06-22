@@ -1,0 +1,89 @@
+﻿@inject HttpClient Http
+@inject GameState GameState
+@inject  MessageManager  MessageManager
+@using System.Threading
+@implements IDisposable
+
+<p>@RenderButton()</p>
+
+@functions{
+
+        public RenderFragment RenderButton()
+        {
+            return builder =>
+            {
+                if (GameState.isRunning == false)
+                {
+                    builder.OpenElement(3, "button");
+                    builder.AddAttribute(4, "style", "margin-bottom:10px");
+                    builder.AddAttribute(5, "class", "btn btn-primary");
+                    builder.AddAttribute(6, "onclick", () => TrainDeftness());
+                    if (GameState.isGathering || GameState.isHunting || GameState.isUsing)
+                    {
+                        builder.AddAttribute(7, "disabled", true);
+                    }
+                    builder.AddContent(8, "Run on Track");
+                    builder.CloseElement();
+                    builder.OpenElement(9, "br");
+                    builder.CloseElement();
+                }
+                else
+                {
+                    builder.OpenElement(2, "button");
+                    builder.AddAttribute(3, "style", "margin-bottom:10px");
+                    builder.AddAttribute(4, "class", "btn btn-primary");
+                    builder.AddAttribute(5, "onclick", () => GameState.StopActions());
+                    builder.AddContent(7, "Stop Running");
+                    builder.CloseElement();
+                    builder.OpenElement(8, "br");
+                    builder.CloseElement();
+                }
+            };
+        }
+
+       public void TrainDeftness()
+    {
+        double speedMulti = 1;
+        GameState.StopActions();
+        if (GameState.workoutTimer != null)
+        {
+            GameState.workoutTimer.Dispose();
+            GameState.workoutTimer = null;
+        }
+        MessageManager.AddMessage("You begin running.");
+        GameState.isRunning = true;
+        GameState.workoutTimer = new Timer(new TimerCallback(_ =>
+        {
+            GameState.GetPlayer().GainExperience("Deftness:6");
+            GameState.workoutTimer.Change((int)(1000 * speedMulti), (int)(1000 * speedMulti));
+            speedMulti += 0.0005 * Math.Max(1, 100 - GameState.GetPlayer().GetLevel("Deftness"));
+            MessageManager.AddMessage("You run for a while.");
+            if (speedMulti > 1.5)
+            {
+                MessageManager.AddMessage("You begin to feel tired.");
+            }
+            if (speedMulti > 3)
+            {
+                MessageManager.AddMessage("You begin to feel very tired.");
+            }
+            if (speedMulti > 10)
+            {
+                MessageManager.AddMessage("You begin to feel extremely tired.");
+            }
+            GameState.UpdateState();
+            StateHasChanged();
+        }), null, 1000, 1000);
+        GameState.UpdateState();
+        StateHasChanged();
+    }
+    protected override void OnInit()
+    {
+        GameState.StateChanged += OnGameStateChanged;
+        this.StateHasChanged();
+    }
+    void IDisposable.Dispose()
+    {
+        GameState.StateChanged -= OnGameStateChanged;
+    }
+    void OnGameStateChanged(object sender, EventArgs e) => StateHasChanged();
+}

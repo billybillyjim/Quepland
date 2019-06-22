@@ -9,9 +9,18 @@
 <p><button class="btn btn-primary" onclick="@(() => DepositAll())">Deposit All</button></p>
 
 
-<p>Withdraw X:<input type="number" bind-value-oninput=@withdrawAmount /></p>
-<p>Search:<input type="text" bind-value-oninput=@searchString /></p>
+<p>
+    <EditForm Model="@withdrawAmountModel" OnValidSubmit="@SetWithdrawAmount">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
 
+        Withdraw X:<InputNumber id="withdrawamount" @bind-Value="@withdrawAmountModel.withdrawAmount" />
+
+    </EditForm>
+</p>
+<p>
+    Search:<input type="text" @bind-value="@searchString" @bind-value:event="oninput" />
+</p>
 <div class="dropdown">
     <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Sort By
@@ -67,7 +76,7 @@
                                 <td style="padding:.2rem" align="left">
                                     <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, 1))">1</button>
                                     <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, 5))">5</button>
-                                    <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, withdrawAmount))">@withdrawAmount</button>
+                                    <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, withdrawAmountModel.withdrawAmount))">@withdrawAmount</button>
                                     <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, int.MaxValue))">All</button>
                                 </td>
                                 <td style="padding:.2rem" align="center"></td>
@@ -79,7 +88,7 @@
                                     <td>
                                         <button class="btn btn-success" onclick="@(() => Sell(item, 1))">1</button>
                                         <button class="btn btn-success" onclick="@(() => Sell(item, 5))">5</button>
-                                        <button class="btn btn-success" onclick="@(() => Sell(item, withdrawAmount))">@withdrawAmount</button>
+                                        <button class="btn btn-success" onclick="@(() => Sell(item, withdrawAmountModel.withdrawAmount))">@withdrawAmount</button>
                                         <button class="btn btn-success" onclick="@(() => Sell(item, int.MaxValue))">All</button>
                                     </td>
                                 </tr>
@@ -118,7 +127,7 @@ else
                                 <td style="vertical-align:middle;padding:.2rem">
                                     <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, 1))">1</button>
                                     <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, 5))">5</button>
-                                    <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, withdrawAmount))">@withdrawAmount</button>
+                                    <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, withdrawAmountModel.withdrawAmount))">@withdrawAmount</button>
                                     <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, int.MaxValue))">All</button>
                                 </td>
                             </tr>
@@ -130,7 +139,7 @@ else
                                     <td>
                                         <button class="btn btn-success" onclick="@(() => Sell(item, 1))">1</button>
                                         <button class="btn btn-success" onclick="@(() => Sell(item, 5))">5</button>
-                                        <button class="btn btn-success" onclick="@(() => Sell(item, withdrawAmount))">@withdrawAmount</button>
+                                        <button class="btn btn-success" onclick="@(() => Sell(item, withdrawAmountModel.withdrawAmount))">@withdrawAmount</button>
                                         <button class="btn btn-success" onclick="@(() => Sell(item, int.MaxValue))">All</button>
                                     </td>
                                 </tr>
@@ -147,8 +156,14 @@ else
     public int sortStyle = 0;
     public int withdrawAmount = 1;
     public string searchString = "";
+    private WithdrawAmountModel withdrawAmountModel = new WithdrawAmountModel();
 
-
+    private void SetWithdrawAmount()
+    {
+        withdrawAmount = withdrawAmountModel.withdrawAmount;
+        GameState.UpdateState();
+        this.StateHasChanged();
+    }
     public void SetSortStyle(int newVal)
     {
         sortStyle = newVal;
@@ -184,8 +199,8 @@ else
         {
             GameState.GetPlayerBank().GetInventory().RemoveItems(item, maxWithdraw);
         }
-        
-        
+
+
         GameState.UpdateState();
         return "";
     }

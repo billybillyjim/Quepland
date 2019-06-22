@@ -11,13 +11,13 @@
 
 <p style="font-weight:bold">Expirimental: (Should work fine, but I can't guarantee it.)</p>
 <p><button class="btn btn-primary" onclick="@(() => GenerateSaveFile())">Generate Save File</button></p>
-<p style="word-wrap: break-word;width:400px">@quickFixString</p>
+<textarea>@quickFixString</textarea>
 <p><button class="btn btn-primary" onclick="@(() => LoadDataFromText())">Load From Save File</button></p>
 <EditForm Model="@saveModel">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
-    <InputText id="name" @bind-Value="@saveModel.saveFile" />
+    <InputTextArea id="name" @bind-Value="@saveModel.saveFile" />
 
 </EditForm>
 

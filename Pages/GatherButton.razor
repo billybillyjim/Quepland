@@ -1,0 +1,171 @@
+﻿@inject HttpClient Http
+@inject GameState GameState
+@inject  MessageManager  MessageManager
+@using System.Threading
+@implements IDisposable
+
+<p>@RenderButton()</p>
+
+@functions{
+
+    [Parameter]
+    private string actionString { get; set; }
+    [Parameter]
+    private bool limitedOre { get; set; }
+    private GameItem gatherItem;
+    private bool waitingForAutoCollectMessage;
+
+
+    protected override void OnParametersSet()
+    {
+
+            gatherItem = Program.itemDatabase.GetItemByName(actionString.Split(':')[1]);
+
+        base.OnParametersSet();
+    }
+
+    public RenderFragment RenderButton()
+    {
+        return builder =>
+        {
+            string itemString = actionString.Split(':')[1];
+            string action = actionString.Split(':')[0];
+            if (itemString == null || itemString.Length < 2)
+            {
+                return;
+            }
+            GameItem item = Program.itemDatabase.GetItemByName(itemString);
+            bool actionIsEnabled = GameState.GetPlayerInventory().ActionIsEnabled(item.ActionRequired);
+            bool playerHasLevels = GameState.GetPlayer().HasRequiredLevel(item);
+
+            if (actionIsEnabled && playerHasLevels)
+            {
+                builder.OpenElement(9, "button");
+                builder.AddAttribute(10, "style", "margin-bottom:10px");
+                builder.AddAttribute(11, "class", "btn btn-primary");
+                if (GameState.currentGatherItem == null || GameState.currentGatherItem.ItemName != itemString)
+                {
+                    builder.AddAttribute(12, "onclick", () => Gather(item));
+                    if (GameState.GetPlayerInventory().GetAvailableSpaces() == 0)
+                    {
+                        builder.AddAttribute(13, "title", "Your inventory is full.");
+                        builder.AddAttribute(14, "disabled", true);
+                    }
+                    else if (GameState.isUsing)
+                    {
+                        builder.AddAttribute(13, "title", "You can't do both those things at once.");
+                        builder.AddAttribute(14, "disabled", true);
+                    }
+                    builder.AddContent(15, action);
+
+                }
+                else
+                {
+                    builder.AddAttribute(16, "onclick", () => StopGathering());
+                    builder.AddContent(17, "Stop");
+                }
+                builder.CloseElement();
+            }
+        };
+    }
+
+    public void Gather(GameItem itemToGather)
+    {
+        GameState.StopActions();
+        GameState.isGathering = true;
+        gatherItem = itemToGather;
+        double speedMulti = 1;
+        if (GameState.GetPlayer().activeFollower != null && Extensions.FollowerCanAutoCollect(GameState.GetPlayer().activeFollower, itemToGather))
+        {
+            GameState.isAutoCollecting = true;
+            GameState.autoCollectTimer = new Timer(new TimerCallback(_ =>
+            {
+                AutoCollect(itemToGather);
+                waitingForAutoCollectMessage = true;
+            }), null, GameState.GetPlayer().activeFollower.AutoCollectSpeed, GameState.GetPlayer().activeFollower.AutoCollectSpeed);
+        }
+        else if (GameState.GetPlayer().activeFollower != null && Extensions.FollowerCanAutoCollect(GameState.GetPlayer().activeFollower, itemToGather) == false)
+        {
+            MessageManager.AddMessage(GameState.GetPlayer().activeFollower.Name + " cannot collect " + itemToGather.ItemName + " for you.");
+        }
+
+        GameState.gatherTimer = new Timer(new TimerCallback(_ =>
+        {
+            if (Program.gatherManager.Gather(itemToGather))
+            {
+                MessageManager.AddMessage(itemToGather.GatherString);
+                GameState.GetPlayer().GainExperience(itemToGather.ExperienceGained);
+
+                //New speed is a random int based on item gather speed multiplied by the player's gather speed bonus for that activity. Minimum of 50 ms.
+                int randSpeed = (Extensions.GetGaussianRandomInt(itemToGather.GatherSpeed, itemToGather.GatherSpeed / 2));
+                int speed = Math.Max((int)(randSpeed * GameState.GetPlayer().GetGatherSpeed(itemToGather.ActionRequired)), 50);
+                GameState.gatherTimer.Change(speed, speed);
+
+                if (GameState.currentGatherItem.ActionRequired == "Mining" && limitedOre)
+                {
+                    speedMulti += 0.05;
+                    GameState.gatherTimer.Change((int)(itemToGather.GatherSpeed * speedMulti), (int)((itemToGather.GatherSpeed / 2) * speedMulti));
+                    if (Math.Abs(speedMulti - 2) < 0.01)
+                    {
+                        MessageManager.AddMessage("The vein you are mining appears to be running low.");
+                    }
+                    else if (Math.Abs(speedMulti - 5) < 0.01)
+                    {
+                        MessageManager.AddMessage("The vein you are mining appears to be running extremely low.");
+                    }
+                    else if (Math.Abs(speedMulti - 10) < 0.01)
+                    {
+                        MessageManager.AddMessage("The vein you are mining appears to have almost nothing left.");
+                    }
+                }
+            }
+            else if (!GameState.isAutoCollecting)
+            {
+                StopGathering();
+            }
+            else if (waitingForAutoCollectMessage)
+            {
+                MessageManager.AddMessage("You wait for " + GameState.GetPlayer().activeFollower.Name + " to gather up " + gatherItem + " for banking.");
+                waitingForAutoCollectMessage = false;
+            }
+            GameState.UpdateState();
+            this.StateHasChanged();
+        }), null, (int)(itemToGather.GatherSpeed * GameState.GetPlayer().GetGatherSpeed(itemToGather.ActionRequired)), (int)(itemToGather.GatherSpeed * GameState.GetPlayer().GetGatherSpeed(itemToGather.ActionRequired) / 2f));
+        GameState.UpdateState();
+        this.StateHasChanged();
+    }
+    public void StopGathering()
+    {
+        if (GameState.GetPlayerInventory().GetAvailableSpaces() == 0)
+        {
+            MessageManager.AddMessage("Your inventory is full.");
+        }
+        GameState.isAutoCollecting = false;
+        GameState.StopActions();
+        GameState.UpdateState();
+        this.StateHasChanged();
+    }
+    public void AutoCollect(GameItem item)
+    {
+        if(GameState.GetPlayerInventory().HasItem(item) == false)
+        {
+            return;
+        }
+        int amountToTake = Math.Min(GameState.GetPlayerInventory().GetNumberOfItem(item), GameState.GetPlayer().activeFollower.MaxCarry);
+        GameState.GetPlayerInventory().RemoveItems(item, amountToTake);
+        GameState.GetPlayerBank().GetInventory().AddMultipleOfItem(item, amountToTake);
+        MessageManager.AddMessage(GameState.GetPlayer().activeFollower.AutoCollectMessage.Replace("$", amountToTake.ToString()));
+        StateHasChanged();
+        GameState.UpdateState();
+    }
+    protected override void OnInit()
+    {
+        GameState.StateChanged += OnGameStateChanged;
+        this.StateHasChanged();
+    }
+    void IDisposable.Dispose()
+    {
+        GameState.StateChanged -= OnGameStateChanged;
+    }
+    void OnGameStateChanged(object sender, EventArgs e) => StateHasChanged();
+}
