@@ -163,7 +163,7 @@ public class Player
     }
     public void GainExperience(Skill skill, int amount)
     {
-        skill.SkillExperience += amount;
+        skill.SkillExperience += (int)(amount * GetExperienceGainBonus(skill));
         if (skill.SkillExperience >= Extensions.GetExperienceRequired(skill.GetSkillLevel()))
         {
             LevelUp(skill);
@@ -353,6 +353,18 @@ public class Player
         }
         return total;
     }
+    public float GetExperienceGainBonus(Skill skill)
+    {
+        float baseExp = 1;
+        foreach(GameItem equipped in equippedItems)
+        {
+            if(equipped.ActionRequired == skill.SkillName)
+            {
+                baseExp += equipped.ExperienceGainBonus;
+            }
+        }
+        return baseExp;
+    }
     public GameItem GetWeapon()
     {
         return equippedItems.Find(x => x.EquipSlot == "Right Hand");
@@ -373,7 +385,7 @@ public class Player
         float totalBonus = 1;
         foreach(GameItem item in equippedItems)
         {
-            if (item.ActionsEnabled.Contains(skill))
+            if (item.ActionsEnabled != null && item.ActionsEnabled.Contains(skill))
             {
                 totalBonus -= item.GatherSpeedBonus;
             }

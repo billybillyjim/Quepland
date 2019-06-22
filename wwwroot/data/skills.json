@@ -39,7 +39,7 @@
     "skillName": "Strength",
     "skillLevel": 1,
     "skillExperience": 0,
-    "skillDescription": "Strength is the power with which you use weapons. Swords, axes, and hammers all use strength when calculating your damage dealt, but axes and hammers are more reliant on it."
+    "skillDescription": "Strength is the power with which you use weapons. Swords, axes, and hammers all use strength when calculating your damage dealt, but axes and hammers are more reliant on it. Every level also increases your inventory capacity by 1, and every 10th level by 5."
   },
   {
     "skillName": "Archery",

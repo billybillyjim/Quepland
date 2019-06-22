@@ -171,6 +171,26 @@ public static class Extensions
         }
         return -1;
     }
+    public static int GetRandomReward(Reward reward)
+    {
+        if (reward.Rewards == null || reward.Rewards.Length == 0)
+        {
+            return -1;
+        }
+        int odds = 1000;
+        int dropRoll = rand.Next(0, odds);
+        int count = 0;
+        int[] drops = reward.Rewards.SelectMany(x => x).ToArray();
+        for (int i = 0; i < drops.Length - 1; i += 2)
+        {
+            count += drops[i + 1];
+            if (count >= dropRoll)
+            {
+                return drops[i];
+            }
+        }
+        return -1;
+    }
     public static double GetGaussianRandom(double mean, double stdDev)
     {
         double u1 = 1.0 - rand.NextDouble(); //uniform(0,1] random doubles

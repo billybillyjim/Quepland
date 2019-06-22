@@ -646,7 +646,8 @@
     "icon": "oi oi-link-intact",
     "npcIDs": [ 50 ],
     "areaToUnlockOnArrival": "Hoin River Valley",
-    "unlockableAreas": [ "Plantrain Plains,Continue floating,," ]
+    "unlockableAreas": [ "Plantrain Plains,Continue floating,," ],
+    "actions": ["Harpoon Fishing"]
   },
   {
     "name": "Hoin River Valley",

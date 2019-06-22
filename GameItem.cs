@@ -15,6 +15,7 @@ public class GameItem
     public int Value { get; set; }
     public int GatherSpeed { get; set; }
     public float GatherSpeedBonus { get; set; }
+    public float ExperienceGainBonus { get; set; }
     public int AttackSpeed { get; set; }
     public int Damage { get; set; }
     public int Armor { get; set; }
@@ -42,6 +43,7 @@ public class GameItem
     public string UnpackString { get; set; }
 
     public string ExperienceGained { get; set; }
+    
 
     public string ActionsEnabled { get; set; }
     public string ActionRequired { get; set; }

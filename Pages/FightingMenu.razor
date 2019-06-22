@@ -155,6 +155,7 @@
     public void StartAutoFighting()
     {
         autoFight = true;
+        GameState.isFighting = true;
         if(GameState.autoFightTimer != null)
         {
             GameState.autoFightTimer.Dispose();
@@ -165,6 +166,8 @@
         {
             AutoBattle();
         }), null, 10000, 10000);
+        GameState.UpdateState();
+        this.StateHasChanged();
     }
     public void AutoBattle()
     {
@@ -172,6 +175,7 @@
         {
             if (battleFound == false)
             {
+                GameState.isFighting = true;
                 MessageManager.AddMessage(GameState.GetPlayer().activeFollower.Name + " found a battle!");
                 FindBattle();
                 StartBattle();
@@ -325,7 +329,11 @@
         {
             StartAutoFighting();
         }
-        GameState.isFighting = false;
+        else
+        {
+            GameState.isFighting = false;
+        }
+
     }
     public void LoseBattle()
     {
@@ -364,7 +372,11 @@
             GameState.autoFightTimer.Dispose();
             GameState.autoFightTimer = null;
         }
-        GameState.isFighting = false;
+        if(autoFight == false)
+        {
+            GameState.isFighting = false;
+        }
+        
         GameState.UpdateState();
         this.StateHasChanged();
     }

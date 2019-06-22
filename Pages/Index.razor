@@ -22,6 +22,7 @@
     <p><button class="btn btn-primary" onclick="@(() => SaveDataEncrypted())">Save Encrypted</button></p>
     <p><button class="btn btn-primary" onclick="@(() => LoadDataEncrypted())">Load Encrypted</button></p>
     <p><button class="btn btn-primary" onclick="@(() => GoToDebugArea())">Go to Debug Area</button></p>
+    <p><button class="btn btn-primary" onclick="@(() => DebugUnlockAllAreas())">Unlock All Areas</button></p>
 }
 
 @if (GameState.saveDataLoaded == false && saveGameExists && gameHasBeenSaved == false && loadBegun == false)
@@ -59,7 +60,7 @@ else
     private bool userWantsGameReset = false;
     private bool gameHasBeenSaved = false;
     private bool gameIsRendered = false;
-    private bool debugMode = false;
+    private bool debugMode = true;
     public string pudding = "Not set.";
     public string encrypt = "This is a whole string, with many things to test! 1234, 50, 100";
     public string testString = "";
@@ -85,6 +86,12 @@ else
         {
             f.IsUnlocked = true;
         }
+    }
+    public void DebugUnlockAllAreas()
+    {
+        Program.areaManager.UnlockAllAreas();
+        StateHasChanged();
+        GameState.UpdateState();
     }
     public void DebugGainStrengthLevel()
     {
@@ -212,6 +219,14 @@ else
         {
             data += pair.Key.Id + "/";
         }
+        //Settings 9
+        data += "#";
+        data += GameState.isSplitView.ToString();
+        data += ",";
+        data += GameState.compactBankView.ToString();
+        //NPC data 10
+        data += "#";
+        data += Program.npcManager.GetNPCData();
         testString = Encryptor.EncryptToString(data);
         return testString;
     }
@@ -264,6 +279,16 @@ else
         {
             GameState.GetPlayer().EquipItems(equippedItems);
         }
+        if (lines.Length > 9 && lines[9] != null)
+        {
+            string[] settings = lines[9].Split(',');
+            GameState.isSplitView = bool.Parse(settings[0]);
+            GameState.compactBankView = bool.Parse(settings[1]);
+        }
+        if (lines.Length > 10 && lines[10] != null)
+        {
+            Program.npcManager.LoadNPCData(lines[10]);
+        }
         MessageManager.AddMessage("Save game loaded.");
 
         GameState.saveDataLoaded = true;
@@ -272,37 +297,45 @@ else
     }
     private void LoadData()
     {
-        loadBegun = true;
-        Dictionary<GameItem, int> bankItems = Extensions.GetItemDicFromString(localStorage.GetItem<String>("Bank"), Program.itemDatabase);
-        Dictionary<GameItem, int> invItems = Extensions.GetItemDicFromString(localStorage.GetItem<String>("Inventory"), Program.itemDatabase);
-        List<Skill> skills = Extensions.GetSkillsFromString(localStorage.GetItem<string>("Skills"));
-        GameState.GetPlayer().SetSkills(skills);
-        List<int> equippedItems = localStorage.GetItem<List<int>>("EquippedItems");
-        GameState.GetPlayerBank().GetInventory().LoadItems(bankItems);
-        GameState.GetPlayerInventory().LoadItems(invItems);
-
-        GameState.GetPlayer().CurrentHP = localStorage.GetItem<int>("HP");
-
-
-
-        Program.followerManager.LoadSaveData(localStorage.GetItem<String>("Followers"));
-
-        if (Program.followerManager.GetFollowerByID(localStorage.GetItem<int>("ActiveFollower")).IsUnlocked)
+        try
         {
-            GameState.GetPlayer().activeFollower = Program.followerManager.GetFollowerByID(localStorage.GetItem<int>("ActiveFollower"));
+            LoadDataEncrypted();
         }
-
-        GameState.GetPlayer().LoadRecipes(localStorage.GetItem<List<string>>("AlchemyRecipes"));
-        Program.areaManager.LoadSaveData(localStorage.GetItem<String>("Areas"));
-        if (equippedItems != null && equippedItems.Count > 0)
+        catch
         {
-            GameState.GetPlayer().EquipItems(equippedItems);
+            loadBegun = true;
+            Dictionary<GameItem, int> bankItems = Extensions.GetItemDicFromString(localStorage.GetItem<String>("Bank"), Program.itemDatabase);
+            Dictionary<GameItem, int> invItems = Extensions.GetItemDicFromString(localStorage.GetItem<String>("Inventory"), Program.itemDatabase);
+            List<Skill> skills = Extensions.GetSkillsFromString(localStorage.GetItem<string>("Skills"));
+            GameState.GetPlayer().SetSkills(skills);
+            List<int> equippedItems = localStorage.GetItem<List<int>>("EquippedItems");
+            GameState.GetPlayerBank().GetInventory().LoadItems(bankItems);
+            GameState.GetPlayerInventory().LoadItems(invItems);
+
+            GameState.GetPlayer().CurrentHP = localStorage.GetItem<int>("HP");
+
+
+
+            Program.followerManager.LoadSaveData(localStorage.GetItem<String>("Followers"));
+
+            if (Program.followerManager.GetFollowerByID(localStorage.GetItem<int>("ActiveFollower")).IsUnlocked)
+            {
+                GameState.GetPlayer().activeFollower = Program.followerManager.GetFollowerByID(localStorage.GetItem<int>("ActiveFollower"));
+            }
+
+            GameState.GetPlayer().LoadRecipes(localStorage.GetItem<List<string>>("AlchemyRecipes"));
+            Program.areaManager.LoadSaveData(localStorage.GetItem<String>("Areas"));
+            if (equippedItems != null && equippedItems.Count > 0)
+            {
+                GameState.GetPlayer().EquipItems(equippedItems);
+            }
+            Program.npcManager.LoadNPCData(localStorage.GetItem<String>("NPC"));
+
+
         }
-        Program.npcManager.LoadNPCData(localStorage.GetItem<String>("NPC"));
         MessageManager.AddMessage("Save game loaded.");
-
         GameState.saveDataLoaded = true;
-        if(GameState.autoSaveTimer != null)
+        if (GameState.autoSaveTimer != null)
         {
             GameState.autoSaveTimer.Dispose();
             GameState.autoSaveTimer = null;
@@ -354,9 +387,9 @@ else
     {
         saveGameExists = await asyncLocalStorage.GetItemAsync<bool>("SaveGameExists");
         GameState.saveGameExists = saveGameExists;
-        if(saveGameExists == false)
+        if (saveGameExists == false)
         {
-            if(GameState.autoSaveTimer != null)
+            if (GameState.autoSaveTimer != null)
             {
                 GameState.autoSaveTimer.Dispose();
                 GameState.autoSaveTimer = null;

@@ -272,7 +272,7 @@
       [ 113, 10 ],
       [ 120, 10 ],
       [ 121, 10 ],
-      [ 269, 5 ],
+      [ 269, 3 ],
       [ 270, 1]
     ]
   },
@@ -349,8 +349,8 @@
       [ 163, 200 ],
       [ 178, 50 ],
       [ 179, 30 ],
-      [ 268, 5 ],
-      [ 289, 5 ]
+      [ 268, 2 ],
+      [ 289, 2 ]
     ]
   },
   {
@@ -439,9 +439,8 @@
     "damage": 3,
     "attackSpeed": 5,
     "dropTable": [
-      [ 267, 20 ],
-      [ 268, 10 ],
-      [ 269, 5 ],
+      [ 267, 10 ],
+      [ 268, 5 ],
       [ 3, 75 ],
       [ 4, 75 ],
       [ 45, 20 ],
@@ -462,8 +461,7 @@
     "attackSpeed": 5,
     "dropTable": [
       [ 267, 20 ],
-      [ 268, 10 ],
-      [ 269, 5 ],
+
       [ 3, 50 ],
       [ 4, 50 ],
       [ 45, 20 ],
@@ -518,6 +516,47 @@
     "strength": "Knifesmanship Swordsmanship Axemanship Hammermanship Strength",
     "damage": 0,
     "attackSpeed": 50
-    
+  },
+  {
+    "name": "Angry Swarm of Piranha",
+    "id": 29,
+    "level": 6,
+    "hp": 100,
+    "weakness": "Knifesmanship",
+    "strength": "Hammermanship",
+    "damage": 3,
+    "attackSpeed": 1,
+    "dropTable": [
+      [ 269, 5 ],
+      [ 268, 10 ]
+    ]
+  },
+  {
+    "name": "River Hand",
+    "id": 30,
+    "level": 6,
+    "hp": 350,
+    "weakness": "Hammermanship",
+    "strength": "Knifesmanship",
+    "damage": 12,
+    "attackSpeed": 2,
+    "dropTable": [
+      [ 269, 5 ],
+      [ 268, 10 ]
+    ]
+  },
+  {
+    "name": "River Hand",
+    "id": 30,
+    "level": 6,
+    "hp": 350,
+    "weakness": "Hammermanship",
+    "strength": "Knifesmanship",
+    "damage": 12,
+    "attackSpeed": 2,
+    "dropTable": [
+      [ 269, 5 ],
+      [ 268, 10 ]
+    ]
   }
 ]

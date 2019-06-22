@@ -98,6 +98,12 @@ public class AreaManager
         return areaList;
     }
 
-   
+   public void UnlockAllAreas()
+    {
+        foreach(Area area in areas)
+        {
+            area.IsUnlocked = true;
+        }
+    }
 }
 

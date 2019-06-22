@@ -165,6 +165,35 @@
                         builder.OpenElement(8, "br");
                         builder.CloseElement();
                     }
+                    else if(actionString == "Harpoon Fishing")
+                    {
+                        if (GameState.isGathering == false)
+                        {
+                            builder.OpenElement(2, "button");
+                            builder.AddAttribute(3, "style", "margin-bottom:10px");
+                            builder.AddAttribute(4, "class", "btn btn-primary");
+                            builder.AddAttribute(5, "onclick", () => BeginHarpoonFishing());
+                            if (GameState.isGathering || GameState.isHunting || GameState.isUsing || !GameState.GetPlayerInventory().ActionIsEnabled("Harpoon Fishing"))
+                            {
+                                builder.AddAttribute(6, "disabled", true);
+                            }
+                            builder.AddContent(7, "Harpoon Fish");
+                            builder.CloseElement();
+                            builder.OpenElement(8, "br");
+                            builder.CloseElement();
+                        }
+                        else
+                        {
+                            builder.OpenElement(2, "button");
+                            builder.AddAttribute(3, "style", "margin-bottom:10px");
+                            builder.AddAttribute(4, "class", "btn btn-primary");
+                            builder.AddAttribute(5, "onclick", () => StopGathering());
+                            builder.AddContent(7, "Stop Fishing");
+                            builder.CloseElement();
+                            builder.OpenElement(8, "br");
+                            builder.CloseElement();
+                        }
+                    }
                     else
                     {
                         string itemString = actionString.Split(':')[1];
@@ -409,12 +438,14 @@
         currentMiningVeinID = -1;
         limitedOre = true;
         isLookingForVein = true;
+        GameState.isGathering = true;
         GameState.miningVeinSearchTimer = new Timer(new TimerCallback(_ =>
         {
             if (DateTime.UtcNow.Subtract(mineSearchStartTime).TotalSeconds >= 5)
             {
                 SetCurrentMiningID(rand.Next(22, 26));
                 isLookingForVein = false;
+                GameState.isGathering = false;
                 GameState.UpdateState();
                 StateHasChanged();
             }
@@ -765,6 +796,36 @@
         }), null, 1000, 1000);
         GameState.UpdateState();
         StateHasChanged();
+    }
+    public void BeginHarpoonFishing()
+    {
+        GameState.StopActions();
+        MessageManager.AddMessage("You look for fish to harpoon.");
+        GameState.isGathering = true;
+        GameState.gatherTimer = new Timer(new TimerCallback(_ =>
+        {
+            GetRandomHarpoonItem();
+            GameState.UpdateState();
+            StateHasChanged();
+
+        }), null, 5000, 5000);
+
+        GameState.UpdateState();
+        StateHasChanged();
+    }
+    private void GetRandomHarpoonItem()
+    {
+        GameItem gainedItem = (Program.itemDatabase.GetItemByID(Extensions.GetRandomReward(Program.itemDatabase.GetRewardByName("Harpoon Fishing"))));
+        if (GameState.GetPlayerInventory().AddItem(gainedItem))
+        {
+            MessageManager.AddMessage("You harpooned a " + gainedItem.ItemName);
+        }
+        else
+        {
+            MessageManager.AddMessage("You don't have any inventory space to harpoon anything.");
+            GameState.StopActions();
+        }
+
     }
     public void TrainDeftness()
     {

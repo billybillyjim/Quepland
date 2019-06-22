@@ -10,6 +10,9 @@ public class ItemDatabase
     private List<GameItem> smithingBarTable = new List<GameItem>();
     private List<GameItem> smithingItemTable = new List<GameItem>();
     private List<GameItem> huntedAnimals = new List<GameItem>();
+    private List<Reward> rewards = new List<Reward>();
+    private static Random rand = new Random();
+
     public ItemDatabase()
     {
         items = new List<GameItem>();
@@ -33,7 +36,18 @@ public class ItemDatabase
             {
                 huntedAnimals.Add(i);
             }
+
         }
+        LoadRewards(Http);
+    }
+    public async void LoadRewards(HttpClient Http)
+    {
+        Reward[] rewardsArray = await Http.GetJsonAsync<Reward[]>("data/rewards.json");
+        rewards.AddRange(rewardsArray);
+    }
+    public Reward GetRewardByName(string name)
+    {
+        return rewards.Find(x => x.Name == name);
     }
     /// <summary>
     /// Gets the item by id. The fastest way to get an item from the database.
