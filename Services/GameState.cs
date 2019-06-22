@@ -73,6 +73,7 @@ public class GameState
     public GameState()
     {
 
+
     }
     public void ToggleBankStyle()
     {
@@ -106,6 +107,73 @@ public class GameState
             return true;
         }
         return false;
+    }
+    public void StopActions()
+    {
+        isWorkingOut = false;
+        isRunning = false;
+        isGathering = false;
+        isHunting = false;
+        isSmithing = false;
+        isFighting = false;
+
+        if(attackTimer != null)
+        {
+            attackTimer.Dispose();
+            attackTimer = null;
+        }
+        if (gatherTimer != null)
+        {
+            gatherTimer.Dispose();
+            gatherTimer = null;
+        }
+        if (huntCountdownTimer != null)
+        {
+            huntCountdownTimer.Dispose();
+            huntCountdownTimer = null;
+        }
+        if (autoCollectTimer != null)
+        {
+            autoCollectTimer.Dispose();
+            autoCollectTimer = null;
+        }
+        if (miningVeinSearchTimer != null)
+        {
+            miningVeinSearchTimer.Dispose();
+            miningVeinSearchTimer = null;
+        }
+        if (workoutTimer != null)
+        {
+            workoutTimer.Dispose();
+            workoutTimer = null;
+        }
+        if (monsterAttackTimer != null)
+        {
+            monsterAttackTimer.Dispose();
+            monsterAttackTimer = null;
+        }
+        if (autoFightTimer != null)
+        {
+            autoFightTimer.Dispose();
+            autoFightTimer = null;
+        }
+        if (createRepeatTimer != null)
+        {
+            createRepeatTimer.Dispose();
+            createRepeatTimer = null;
+        }
+        if (smithingTimer != null)
+        {
+            smithingTimer.Dispose();
+            smithingTimer = null;
+        }
+        if (autoSmithingTimer != null)
+        {
+            autoSmithingTimer.Dispose();
+            autoSmithingTimer = null;
+        }
+
+        UpdateState();
     }
     public void ToggleSplitView()
     {

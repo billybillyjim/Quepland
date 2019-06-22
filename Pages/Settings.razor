@@ -1,7 +1,7 @@
 ﻿@page "/Settings"
 @inject HttpClient Http
 @inject GameState GameState
-@inject  MessageManager MessageManager
+@inject MessageManager MessageManager
 @implements IDisposable
 
 <h1>Settings</h1>
@@ -11,17 +11,27 @@
 
 <p style="font-weight:bold">Expirimental: (Should work fine, but I can't guarantee it.)</p>
 <p><button class="btn btn-primary" onclick="@(() => GenerateSaveFile())">Generate Save File</button></p>
-<p><textarea @bind(savefile) ValueChanged="@GenerateSaveFile()" Label="Save data will be generated here.">@savefile</textarea></p>
+<p style="word-wrap: break-word;width:400px">@quickFixString</p>
 <p><button class="btn btn-primary" onclick="@(() => LoadDataFromText())">Load From Save File</button></p>
-<p>Paste your save here:<input type="text" bind="@loadfile" /></p>
+<EditForm Model="@saveModel">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <InputText id="name" @bind-Value="@saveModel.saveFile" />
+
+</EditForm>
+
 @functions{
 
+    private SaveModel saveModel = new SaveModel();
     private SimpleAES Encryptor = new SimpleAES();
     private string savefile = "Copy the generated save to a safe place.";
     private string loadfile = "";
+    private string quickFixString = "";
     private bool GenerateSaveFile()
     {
         savefile = GetSaveDataString();
+        quickFixString = savefile;
         this.StateHasChanged();
         return true;
     }
@@ -69,7 +79,7 @@
         string decryptedData = "";
         try
         {
-            decryptedData = Encryptor.DecryptString(loadfile);
+            decryptedData = Encryptor.DecryptString(saveModel.saveFile);
         }
         catch
         {
@@ -83,7 +93,7 @@
         List<Skill> skills = Extensions.GetSkillsFromString(lines[1]);
         Dictionary<GameItem, int> invItems = Extensions.GetItemDicFromString(lines[2], Program.itemDatabase);
 
-        
+
         GameState.GetPlayerInventory().ResetMaxSize();
         GameState.GetPlayerBank().GetInventory().LoadItems(bankItems);
         GameState.GetPlayer().SetSkills(skills);

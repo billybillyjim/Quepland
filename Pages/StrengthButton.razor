@@ -1,0 +1,90 @@
+﻿@inject HttpClient Http
+@inject GameState GameState
+@inject  MessageManager  MessageManager
+@using System.Threading
+@implements IDisposable
+
+<p>@RenderButton()</p>
+
+@functions{
+
+    public RenderFragment RenderButton()
+    {
+        return builder =>
+        {
+            if (GameState.isWorkingOut == false)
+            {
+                builder.OpenElement(0, "button");
+                builder.AddAttribute(1, "style", "margin-bottom:10px");
+                builder.AddAttribute(2, "class", "btn btn-primary");
+                builder.AddAttribute(3, "onclick", () => TrainStrength());
+                if (GameState.isGathering || GameState.isHunting || GameState.isUsing)
+                {
+                    builder.AddAttribute(4, "disabled", true);
+                }
+                builder.AddContent(5, "Lift Weights");
+                builder.CloseElement();
+                builder.OpenElement(6, "br");
+                builder.CloseElement();
+            }
+            else
+            {
+                builder.OpenElement(7, "button");
+                builder.AddAttribute(8, "style", "margin-bottom:10px");
+                builder.AddAttribute(9, "class", "btn btn-primary");
+                builder.AddAttribute(10, "onclick", () => GameState.StopActions());
+                builder.AddContent(11, "Stop Lifting");
+                builder.CloseElement();
+                builder.OpenElement(12, "br");
+                builder.CloseElement();
+            }
+        };
+    }
+
+    public string TrainStrength()
+    {
+        double speedMulti = 1;
+        int tiredLevel = 0;
+
+        GameState.StopActions();
+        MessageManager.AddMessage("You begin lifting weights.");
+        GameState.isWorkingOut = true;
+        GameState.workoutTimer = new Timer(new TimerCallback(_ =>
+        {
+            GameState.GetPlayer().GainExperience("Strength:6");
+            GameState.workoutTimer.Change((int)(1000 * speedMulti), (int)(1000 * speedMulti));
+            speedMulti += 0.0005 * Math.Max(1, 100 - GameState.GetPlayer().GetLevel("Strength")) * (tiredLevel + 1);
+            MessageManager.AddMessage("You lift weights for a while.");
+            if (speedMulti > 1.5 && speedMulti < 1.6 && tiredLevel == 0)
+            {
+                MessageManager.AddMessage("You begin to feel tired.");
+                tiredLevel = 1;
+            }
+            else if (speedMulti > 3 && speedMulti < 3.1 && tiredLevel == 1)
+            {
+                MessageManager.AddMessage("You begin to feel very tired.");
+                tiredLevel = 2;
+            }
+            else if (speedMulti > 10 && speedMulti < 10.1 && tiredLevel == 2)
+            {
+                MessageManager.AddMessage("You begin to feel extremely tired.");
+                tiredLevel = 3;
+            }
+            GameState.UpdateState();
+            StateHasChanged();
+        }), null, 1000, 1000);
+        GameState.UpdateState();
+        StateHasChanged();
+        return "";
+    }
+    protected override void OnInit()
+    {
+        GameState.StateChanged += OnGameStateChanged;
+        this.StateHasChanged();
+    }
+    void IDisposable.Dispose()
+    {
+        GameState.StateChanged -= OnGameStateChanged;
+    }
+    void OnGameStateChanged(object sender, EventArgs e) => StateHasChanged();
+}
