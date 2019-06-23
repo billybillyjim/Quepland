@@ -35,6 +35,9 @@ public class GameState
     public GameItem currentGatherItem;
     public GameItem currentBuffItem;
 
+    public int sushiHouseRice;
+    public int sushiHouseSeaweed;
+
     public int buffSecondsLeft;
     private Player player = new Player();
 

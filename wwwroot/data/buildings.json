@@ -497,7 +497,7 @@
     "url": "SoulGoods",
     "description": "The room is full of smoke, both from incense burners and the clerk who is smoking a pipe. There are a wide variety of exotic goods for sale here.",
     "isShop": true,
-    "items": [ 245, 246 ],
+    "items": [ 292 ],
     "npcIDs": [ 56 ]
   },
 

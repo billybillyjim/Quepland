@@ -24,14 +24,16 @@
     "id": 3,
     "spokenText": "Yes? I'm a little busy mining here.",
     "isInteractable": true,
-    "unlockFollowerIDs": [ 1 ]
+    "unlockFollowerIDs": [ 1 ],
+    "hideOnFollow": true
   },
   {
     "name": "Ugly Gnome",
     "id": 4,
     "spokenText": "Hello. Please don't look at me.",
     "isInteractable": true,
-    "unlockFollowerIDs": [ 4 ]
+    "unlockFollowerIDs": [ 4 ],
+    "hideOnFollow": true
   },
   {
     "name": "Strange Man",
@@ -65,21 +67,24 @@
     "id": 9,
     "spokenText": "Hello. I'd love a job, if you could give me one.",
     "isInteractable": true,
-    "unlockFollowerIDs": [ 7 ]
+    "unlockFollowerIDs": [ 7 ],
+    "hideOnFollow": true
   },
   {
     "name": "Tholdbur the Dwarf",
     "id": 10,
     "spokenText": "Hello. I hear you are looking for a useful helper.",
     "isInteractable": true,
-    "unlockFollowerIDs": [ 8 ]
+    "unlockFollowerIDs": [ 8 ],
+    "hideOnFollow": true
   },
   {
     "name": "Dwarny",
     "id": 11,
     "spokenText": "Hello. I am a true dwarf, capable of carrying untold amounts of ore faster than any other. For a one time fee, I'll work for you.",
     "isInteractable": true,
-    "unlockFollowerIDs": [ 9 ]
+    "unlockFollowerIDs": [ 9 ],
+    "hideOnFollow": true
   },
   {
     "name": "Jeplomi",
@@ -238,14 +243,16 @@
     "id": 37,
     "spokenText": "You got a job for me? Yeah? Sure, I'll do it. I'm in. Just let me know. Yessir. Right away! Oh, but you'll need to pay me. Up front. Deal?",
     "unlockFollowerIDs": [ 5 ],
-    "isInteractable": true
+    "isInteractable": true,
+    "hideOnFollow": true
   },
   {
     "name": "Slouching Gnome",
     "id": 38,
     "spokenText": "I'll work for you. Just show me the money!",
     "unlockFollowerIDs": [ 3 ],
-    "isInteractable": true
+    "isInteractable": true,
+    "hideOnFollow": true
   },
   {
     "name": "Excited Traveller",
@@ -329,7 +336,7 @@
     "name": "Mysterious Traveller",
     "id": 49,
     "spokenText": "Greetings. I see you're interested in travelling somewhere new! Excellent. The forest is thick here, but if you can struggle through you'll reach the river in no time.",
-    "unlockAreaIDs": [ 62 ],
+    "unlockAreaIDs": [ 63 ],
     "isInteractable": false,
     "hideOnFollow": true
   },
@@ -337,8 +344,8 @@
     "name": "Mysterious Traveller",
     "id": 50,
     "spokenText": "Wanna buy a raft? You'll need it to head down the river. What? Why are you looking at me like that?",
-    "unlockAreaIDs": [ 62 ],
-    "isInteractable": false,
+    "purchaseItemIDs": [ 8, 10 ],
+    "isInteractable": true,
     "hideOnFollow": true
   },
   {

@@ -4517,4 +4517,19 @@
     "icon": "Meat",
     "isCurable": true
   },
+  {
+    "itemName": "River Raft",
+    "itemDescription": "An even-toed ungulate with two large humps on its back. It doesn't fit in your inventory, but it takes up a space anyways.  ¯\\_(ツ)_/¯",
+    "id": 314,
+    "value": 45000,
+    "actionsEnabled": "Rafting",
+    "icon": "Transport"
+  },
+  {
+    "itemName": "Salt",
+    "id": 315,
+    "value": 50,
+    "itemDescription": "A useful tool in curing meat and making jerky.",
+    "icon": "Salt"
+  }
 ]

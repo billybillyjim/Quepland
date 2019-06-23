@@ -90,11 +90,7 @@
                         foreach (string child in area.Children)
                         {
                             Area childArea = Program.areaManager.GetAreaByURL(child);
-                            if(childArea.ID == 68)
-                            {
-                                //builder.AddContent(16, NewNavButton(childArea, false));
-                            }
-                            else if (childArea.IsUnlocked && childArea.Hidden == false)
+                            if (childArea.IsUnlocked && childArea.Hidden == false)
                             {
                                 builder.AddContent(17, NavButton(childArea, false));
                             }
@@ -167,62 +163,7 @@
         };
 
     }
-     private RenderFragment NewNavButton(Area area, bool bold)
-    {
-        return builder =>
-        {
-            builder.OpenElement(0, "li");
-            builder.AddAttribute(1, "class", "nav-item px-3");
-            builder.OpenComponent<NavLink>(2);
-            builder.AddAttribute(3, "class", "nav-link");
-
-            if (area.ActionRequiredForAccess != null &&
-                GameState.GetPlayer().HasItemToAccessArea(area.ActionRequiredForAccess) == false)
-            {
-                builder.AddAttribute(4, "href", "/GatherMenu/" + area.RedirectAreaURL);
-                builder.AddAttribute(5, "onclick", () => MessageManager.AddMessage("You don't have the item to access this location.(" + area.ActionRequiredForAccess + ")", "red"));
-                builder.AddAttribute(6, "title", "You do not have the item to access this location.(" + area.ActionRequiredForAccess + ")");
-                builder.AddAttribute(7, "style", "background-color:#EC565650");
-            }
-            else
-            {
-                builder.AddAttribute(7, "href", "/Area/" + area.AreaURL);
-            }
-
-            builder.AddAttribute(12, "ChildContent", (RenderFragment)((builder2) =>
-            {
-                builder2.OpenElement(13, "span");
-                builder2.AddAttribute(14, "class", area.Icon);
-                builder2.AddAttribute(15, "aria-hidden", "true");
-                builder2.CloseElement();
-                builder2.OpenElement(16, "span");
-                builder2.AddContent(18, area.Name);
-                builder2.CloseElement();
-                bool hasRoadblock = false;
-                int numOfRoadblocks = 0;
-                foreach (string a in area.UnlockableAreas ?? Enumerable.Empty<string>())
-                {
-                    if (Program.areaManager.GetAreaByName(a.Split(',')[0]).IsUnlocked == false)
-                    {
-                        hasRoadblock = true;
-                        numOfRoadblocks++;
-                    }
-                }
-                if (hasRoadblock)
-                {
-                    builder2.OpenElement(19, "div");
-                    builder2.AddAttribute(20, "class", "badge badge-pill badge-success");
-                    builder2.AddAttribute(21, "style", "margin-left:3px");
-                    builder2.AddContent(22, "" + numOfRoadblocks);
-                    builder2.CloseElement();
-                }
-
-            }));
-            builder.CloseComponent();
-            builder.CloseElement();
-        };
-
-    }
+    
     private RenderFragment ParentButton(Area area)
     {
         return builder =>

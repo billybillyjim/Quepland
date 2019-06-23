@@ -33,7 +33,14 @@ public class AreaManager
             {
                 int areaID = int.Parse(line.Split(',')[0]);
                 bool unlocked = bool.Parse(line.Split(',')[1]);
-                GetAreaByID(areaID).IsUnlocked = unlocked;
+                try
+                {
+                    GetAreaByID(areaID).IsUnlocked = unlocked;
+                }
+                catch
+                {
+                    Console.WriteLine("Failed to load area ID:" + areaID);
+                }
             }
         }
     }

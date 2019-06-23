@@ -84,7 +84,7 @@
     "description": "The mountain near which you began your journey.",
     "areaURL": "MountQueple",
     "icon": "oi oi-image",
-    "children": [ "queplandFields", "queplandWoods", "quepleFoot", "teppas", "lowerMtQuepleTrail", "upperMTQuepleTrail", "MtQueplePeak", "EasternTrail", "DebugArea" ]
+    "children": [ "queplandFields", "queplandWoods", "quepleFoot", "teppas", "lowerMtQuepleTrail", "upperMTQuepleTrail", "MtQueplePeak", "EasternTrail" ]
   },
   {
     "name": "Queple Cave Copper Mine",
@@ -638,26 +638,24 @@
     "npcIDs": [ 33, 47 ]
   },
   {
-    "name": "The Hoin River",
-    "id": 62,
-    "areaURL": "HoinRiver",
-    "isUnlocked": false,
-    "description": "You reach a decently sized river. The foliage is too thick on the banks to walk along. You'll need to float down on some kind of raft.",
-    "icon": "oi oi-link-intact",
-    "npcIDs": [ 50 ],
-    "areaToUnlockOnArrival": "Hoin River Valley",
-    "unlockableAreas": [ "Plantrain Plains,Continue floating,," ],
-    "actions": ["Harpoon Fishing"]
-  },
-  {
     "name": "Hoin River Valley",
-    "id": 63,
+    "id": 62,
     "isUnlocked": false,
     "description": "A deep and winding valley that flows down from the mountains into the Middlesea.",
     "areaURL": "HoinRiverValley",
     "icon": "oi oi-inbox",
-    "children": [ "HoinRiver", "PlantrainPlains", "SunsHarbor", "Guttermouth","Ricechild" ],
+    "children": [ "HoinRiverbank", "HoinRiver", "PlantrainPlains", "SunsHarbor", "Guttermouth", "Ricechild" ],
     "isMarked": false
+  },
+  {
+    "name": "Hoin Riverbank",
+    "id": 63,
+    "areaURL": "HoinRiverbank",
+    "isUnlocked": false,
+    "description": "You reach a river surrounded on both sides by thick foliage. You'll have to float down the river if you want to continue.",
+    "icon": "oi oi-action-redo",
+    "npcIDs": [ 50 ],
+    "unlockableAreas": [ "The Hoin River,Ride down stream,," ]
   },
   {
     "name": "Plantrain Plains",
@@ -665,13 +663,14 @@
     "areaURL": "PlantrainPlains",
     "isUnlocked": false,
     "description": "The trees on the banks grow thin as you pass by an open field filled with small farm plots. A few old buildings sit along their edge.",
-    "icon": "oi oi-link-intact",
+    "icon": "oi oi-grid-three-up",
     "npcIDs": [ 9, 52 ],
     "buildings": [
       "Amante",
       "SoulGoods"
     ],
-    "unlockableAreas": [ "Sun's Harbor,Ride further down stream,," ]
+    "unlockableAreas": [ "Sun's Harbor,Ride further down stream,," ],
+    "actionRequiredForAccess": "Rafting"
   },
   {
     "name": "Sun's Harbor",
@@ -679,10 +678,11 @@
     "areaURL": "SunsHarbor",
     "isUnlocked": false,
     "description": "A solitary building sits just off the shore of the river. It's flanked by an extremely old graveyard.",
-    "icon": "oi oi-link-intact",
+    "icon": "oi oi-cloudy",
     "npcIDs": [ 53 ],
     "buildings": [ "TammysTannery", "Graveyard" ],
-    "unlockableAreas": [ "Guttermouth,Float to the village,," ]
+    "unlockableAreas": [ "Guttermouth,Float to the village,," ],
+    "actionRequiredForAccess": "Rafting"
   },
   {
     "name": "Guttermouth",
@@ -690,9 +690,10 @@
     "areaURL": "Guttermouth",
     "isUnlocked": false,
     "description": "You begin to reach signs of civilization. Down at the river's mouth you can see a large city. A number of houses surround the main building here, which has the word 'Woodworks' carved on the front of it.",
-    "icon": "oi oi-link-intact",
+    "icon": "oi oi-eye",
     "buildings": [ "WoodWorkersAssociation" ],
-    "unlockableAreas": [ "Ricechild,Ride to the river's mouth,," ]
+    "unlockableAreas": [ "Ricechild,Ride to the river's mouth,," ],
+    "actionRequiredForAccess": "Rafting"
   },
   {
     "name": "Ricechild",
@@ -700,16 +701,20 @@
     "areaURL": "Ricechild",
     "isUnlocked": false,
     "description": "You reach a bustling city at the mouth of the river. There are a few interesting shops here.",
-    "icon": "oi oi-link-intact",
+    "icon": "oi oi-people",
+    "actionRequiredForAccess": "Rafting",
     "npcIDs": [ 11 ]
   },
   {
-    "name": "Debug Area",
+    "name": "The Hoin River",
     "id": 68,
-    "areaURL": "DebugArea",
+    "areaURL": "HoinRiver",
     "isUnlocked": false,
-    "description": "You shouldn't be here.",
-    "actions": [ "Chop Buloke Trees:Buloke Logs", "Mining", "Battle", "Carve totem pole:Cheap Wood Shavings", "Gather Rice:Rice", "Strength", "Deftness" ],
-    "monsterIDs": [0]
+    "description": "You float along the river and see all sorts of fish beneath the surface of the water.",
+    "icon": "oi oi-lightbulb",
+    "unlockableAreas": [ "Plantrain Plains,Continue floating,," ],
+    "actions": [ "Harpoon Fishing" ],
+    "actionRequiredForAccess": "Rafting"
   }
+
 ]

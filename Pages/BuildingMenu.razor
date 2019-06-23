@@ -13,6 +13,10 @@
 @LoadRoadblocks()
 @LoadAlchemyStation()
 @LoadInn()
+@if (thisBuilding.IsSushiTrainingBuilding)
+{
+    @LoadSushiTraining();
+}
 
 @functions{
 
@@ -416,6 +420,60 @@
                 builder.CloseElement();
             }
         };
+    }
+    public RenderFragment LoadSushiTraining()
+    {
+        return builder =>
+        {
+            builder.OpenElement(0, "p");
+           
+            builder.OpenElement(1, "button");
+            builder.AddAttribute(2, "class", "btn btn-primary");
+            builder.AddAttribute(3, "style", "align-text:right");
+            builder.AddAttribute(4, "onclick", () => LoadSushiHouseRice());
+            if(GameState.GetPlayerInventory().GetAmountOfItem(Program.itemDatabase.GetItemByName("Rice")) == 0)
+            {
+                builder.AddAttribute(5, "disabled", true);
+                builder.AddAttribute(6, "title", "You don't have any rice with you.");
+            }
+            builder.AddContent(7, "Deposit Rice");
+            builder.CloseElement();
+             builder.AddContent(8, " Rice Stored:" + GameState.sushiHouseRice);
+            builder.CloseElement();
+            builder.OpenElement(9, "p");
+            
+            builder.OpenElement(10, "button");
+            builder.AddAttribute(11, "class", "btn btn-primary");
+            builder.AddAttribute(12, "style", "align-text:right");
+            builder.AddAttribute(13, "onclick", () => LoadSushiHouseSeaweed());
+            if(GameState.GetPlayerInventory().GetAmountOfItem(Program.itemDatabase.GetItemByName("Seaweed")) == 0)
+            {
+                builder.AddAttribute(14, "disabled", true);
+                builder.AddAttribute(15, "title", "You don't have any seaweed with you.");
+            }
+            builder.AddContent(16, "Deposit Seaweed");
+            builder.CloseElement();
+            builder.AddContent(17, " Seaweed Stored:" + GameState.sushiHouseSeaweed);
+            builder.CloseElement();
+        };
+    }
+    public void LoadSushiHouseRice()
+    {
+        int riceAmount = GameState.GetPlayerInventory().GetAmountOfItem(Program.itemDatabase.GetItemByName("Rice"));
+        GameState.sushiHouseRice += riceAmount;
+        GameState.GetPlayerInventory().RemoveItems(Program.itemDatabase.GetItemByName("Rice"), riceAmount);
+        StateHasChanged();
+        GameState.UpdateState();
+
+    }
+    public void LoadSushiHouseSeaweed()
+    {
+        int seaweedAmount = GameState.GetPlayerInventory().GetAmountOfItem(Program.itemDatabase.GetItemByName("Seaweed"));
+        GameState.sushiHouseSeaweed += seaweedAmount;
+        GameState.GetPlayerInventory().RemoveItems(Program.itemDatabase.GetItemByName("Seaweed"), seaweedAmount);
+        StateHasChanged();
+        GameState.UpdateState();
+
     }
     protected override void OnParametersSet()
     {

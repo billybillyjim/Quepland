@@ -9,7 +9,7 @@
 
     private GameItem currentUsedItem;
     private int[,] usableIDs;
-    
+
     public int sellAmount = 20;
 
     private RenderFragment LoadInventory()
@@ -71,7 +71,10 @@
             {
                 builder.AddContent(21, GameState.currentBuffItem.BuffedSkill + " +" + GameState.currentBuffItem.BuffAmount + ", " + GameState.buffSecondsLeft);
             }
-
+            else
+            {
+                 builder.AddContent(21, "Current Buff:None");
+            }
             builder.CloseElement();
 
             builder.OpenElement(22, "table");
@@ -278,8 +281,9 @@
              !(item.Key.UnpackIDs.Length == 1 && item.Key.IsStackable == false))
             {
                 builder.AddAttribute(10, "disabled", true);
+                builder.AddAttribute(11, "title", "You don't have enough free inventory space.");
             }
-            builder.AddContent(11, item.Key.UnpackString);
+            builder.AddContent(12, item.Key.UnpackString);
             builder.CloseElement();
             builder.CloseElement();
             builder.CloseElement();
