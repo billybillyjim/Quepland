@@ -45,6 +45,7 @@ public class GameState
 
     public Timer attackTimer;
     public Timer foodTimer;
+    public Timer UIRefreshTimer;
 
     //Area Menu Timers
     public Timer gatherTimer;
@@ -177,7 +178,11 @@ public class GameState
             autoSmithingTimer.Dispose();
             autoSmithingTimer = null;
         }
-
+        if(UIRefreshTimer != null)
+        {
+            UIRefreshTimer.Dispose();
+            UIRefreshTimer = null;
+        }
         UpdateState();
     }
     public void ToggleSplitView()

@@ -470,7 +470,7 @@
     private void SmithUsingBar()
     {
         GameState.GetPlayerInventory().RemoveItemByID(currentSmithingBar.Id);
-                isUsingBar = true;
+        isUsingBar = true;
         IncrementSmithingStage();
     }
     private void UseOre()
@@ -622,6 +622,11 @@
     }
     private bool GetOresFromBank()
     {
+        if(GameState.GetPlayerInventory().GetAvailableSpaces() == 0)
+        {
+            MessageManager.AddMessage("Your inventory is too full to get any more smithing materials.");
+            return false;
+        }
         foreach(GameItem bar in Program.itemDatabase.GetSmithingBars())
         {
             if (GameState.GetPlayerBank().GetInventory().HasBarIngredients(bar) && GameState.GetPlayer().HasRequiredLevel(bar))
@@ -646,6 +651,7 @@
                 isUsingBar = true;
                 return true;
             }
+
         }
 
         return false;

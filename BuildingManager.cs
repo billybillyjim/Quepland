@@ -23,4 +23,8 @@ public class BuildingManager
     {
         return buildings[id];
     }
+    public List<Building> GetBuildings()
+    {
+        return buildings;
+    }
 }

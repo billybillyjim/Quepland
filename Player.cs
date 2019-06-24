@@ -331,10 +331,10 @@ public class Player
             {
                 baseDamage /= 2;
             }
-            
+            baseDamage *= 1 - (float)Extensions.CalculateArmorDamageReduction(opponent);
             return Math.Max(Extensions.GetGaussianRandomInt(baseDamage + equipmentBonus, equipmentBonus), 1);
         }
-        
+        baseDamage *= 1 - (float)Extensions.CalculateArmorDamageReduction(opponent);
         return Math.Max(Extensions.GetGaussianRandomInt(baseDamage + equipmentBonus, baseDamage + equipmentBonus), 1);
     }
     private int GetEquipmentBonus()

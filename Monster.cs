@@ -8,6 +8,7 @@ public class Monster
     public int ExperienceGained { get; set; }
     public int HP { get; set; }
     public int CurrentHP { get; set; }
+    public int Armor { get; set; }
     public string Weakness { get; set; }
     public string Strength { get; set; }
     public int Damage { get; set; }

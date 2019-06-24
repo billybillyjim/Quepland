@@ -13,7 +13,7 @@
     "dropTable": [
       [ 44, 100 ],
       [ 232, 10 ],
-      [ 233, 5 ] 
+      [ 233, 5 ]
     ]
 
   },
@@ -273,7 +273,7 @@
       [ 120, 10 ],
       [ 121, 10 ],
       [ 269, 3 ],
-      [ 270, 1]
+      [ 270, 1 ]
     ]
   },
   {
@@ -299,7 +299,7 @@
       [ 63, 100 ],
       [ 64, 50 ],
       [ 65, 20 ],
-      [289, 10]
+      [ 289, 10 ]
     ]
   },
   {
@@ -546,17 +546,55 @@
     ]
   },
   {
-    "name": "River Hand",
-    "id": 30,
+    "name": "Salty Zombie",
+    "id": 31,
     "level": 6,
-    "hp": 350,
+    "hp": 3500,
     "weakness": "Hammermanship",
     "strength": "Knifesmanship",
-    "damage": 12,
-    "attackSpeed": 2,
+    "damage": 15,
+    "attackSpeed": 8,
     "dropTable": [
-      [ 269, 5 ],
-      [ 268, 10 ]
+
+    ]
+  },
+  {
+    "name": "Sweet Zombie",
+    "id": 32,
+    "level": 6,
+    "hp": 4500,
+    "weakness": "Archery",
+    "strength": "Knifesmanship",
+    "damage": 15,
+    "attackSpeed": 5,
+    "dropTable": [
+
+    ]
+  },
+  {
+    "name": "Sour Zombie",
+    "id": 33,
+    "level": 6,
+    "hp": 2000,
+    "weakness": "Hammermanship",
+    "strength": "Knifesmanship",
+    "damage": 15,
+    "attackSpeed": 8,
+    "dropTable": [
+
+    ]
+  },
+  {
+    "name": "Bitter Zombie",
+    "id": 33,
+    "level": 6,
+    "hp": 2000,
+    "weakness": "Hammermanship",
+    "strength": "Knifesmanship",
+    "damage": 15,
+    "attackSpeed": 8,
+    "dropTable": [
+
     ]
   }
 ]

@@ -680,9 +680,11 @@
     "description": "A solitary building sits just off the shore of the river. It's flanked by an extremely old graveyard.",
     "icon": "oi oi-cloudy",
     "npcIDs": [ 53 ],
-    "buildings": [ "TammysTannery", "Graveyard" ],
+    "buildings": [ "TammysTannery"],
     "unlockableAreas": [ "Guttermouth,Float to the village,," ],
-    "actionRequiredForAccess": "Rafting"
+    "actionRequiredForAccess": "Rafting",
+    "actions": [ "Battle" ],
+    "monsterIDs": []
   },
   {
     "name": "Guttermouth",

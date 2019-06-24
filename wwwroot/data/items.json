@@ -1573,6 +1573,7 @@
     "isEdible": true,
     "healAmount": 1,
     "healDuration": 120,
+    "gatherSpeed": 1200,
     "buffedSkill": "Swordsmanship",
     "buffAmount": 5,
     "icon": "Roll"
@@ -1589,6 +1590,7 @@
     "isEdible": true,
     "healAmount": 2,
     "healDuration": 60,
+    "gatherSpeed": 1500,
     "buffedSkill": "Deftness",
     "buffAmount": 5,
     "icon": "Roll"
@@ -1624,6 +1626,7 @@
     "healDuration": 300,
     "buffedSkill": "Axemanship",
     "buffAmount": 5,
+    "gatherSpeed": 3500,
     "icon": "Roll"
   },
   {
@@ -4395,7 +4398,8 @@
     "healDuration": 600,
     "buffedSkill": "Archery",
     "buffAmount": 3,
-    "icon": "Jerky"
+    "icon": "Jerky",
+    "ingredientIDs": [ 18 ]
   },
   {
     "itemName": "Rabbit Jerky",
@@ -4411,7 +4415,8 @@
     "healDuration": 600,
     "buffedSkill": "Knifesmanship",
     "buffAmount": 3,
-    "icon": "Jerky"
+    "icon": "Jerky",
+    "ingredientIDs": [ 18 ]
   },
   {
     "itemName": "Chicken Jerky",
@@ -4427,7 +4432,8 @@
     "healDuration": 600,
     "buffedSkill": "Leatherworking",
     "buffAmount": 3,
-    "icon": "Jerky"
+    "icon": "Jerky",
+    "ingredientIDs": [ 42 ]
   },
   {
     "itemName": "Bear Jerky",
@@ -4443,7 +4449,8 @@
     "healDuration": 600,
     "buffedSkill": "Hammermanship",
     "buffAmount": 3,
-    "icon": "Jerky"
+    "icon": "Jerky",
+    "ingredientIDs": [ 76 ]
   },
   {
     "itemName": "Moose Jerky",
@@ -4459,7 +4466,8 @@
     "healDuration": 600,
     "buffedSkill": "Swordsmanship",
     "buffAmount": 3,
-    "icon": "Jerky"
+    "icon": "Jerky",
+    "ingredientIDs": [ 78 ]
   },
   {
     "itemName": "Bison Jerky",
@@ -4475,7 +4483,8 @@
     "healDuration": 1200,
     "buffedSkill": "Woodcutting",
     "buffAmount": 5,
-    "icon": "Jerky"
+    "icon": "Jerky",
+    "ingredientIDs": [ 84 ]
   },
   {
     "itemName": "Wild Boar Jerky",
@@ -4491,7 +4500,8 @@
     "healDuration": 1200,
     "buffedSkill": "Mining",
     "buffAmount": 5,
-    "icon": "Jerky"
+    "icon": "Jerky",
+    "ingredientIDs": [ 86 ]
   },
   {
     "itemName": "Caiman Jerky",
@@ -4507,7 +4517,8 @@
     "healDuration": 1200,
     "buffedSkill": "Fishing",
     "buffAmount": 5,
-    "icon": "Jerky"
+    "icon": "Jerky",
+    "ingredientIDs": [ 313 ]
   },
   {
     "itemName": "Caiman Meat",
@@ -4519,7 +4530,7 @@
   },
   {
     "itemName": "River Raft",
-    "itemDescription": "An even-toed ungulate with two large humps on its back. It doesn't fit in your inventory, but it takes up a space anyways.  ¯\\_(ツ)_/¯",
+    "itemDescription": "A set of logs crudely tied together with some rope.",
     "id": 314,
     "value": 45000,
     "actionsEnabled": "Rafting",
@@ -4531,5 +4542,13 @@
     "value": 50,
     "itemDescription": "A useful tool in curing meat and making jerky.",
     "icon": "Salt"
+  },
+  {
+    "itemName": "Chicken Leather",
+    "itemDescription": "The tanned leather of a chicken.",
+    "value": 100,
+    "id": 316,
+    "experienceGained": "Leatherworking:10",
+    "gatherString": "You withdraw some chicken leather."
   }
 ]

@@ -344,7 +344,7 @@
     "name": "Mysterious Traveller",
     "id": 50,
     "spokenText": "Wanna buy a raft? You'll need it to head down the river. What? Why are you looking at me like that?",
-    "purchaseItemIDs": [ 8, 10 ],
+    "purchaseItemIDs": [ 314 ],
     "isInteractable": true,
     "hideOnFollow": true
   },
@@ -384,6 +384,12 @@
     "name": "Man with pipe",
     "id": 56,
     "spokenText": "Hey man. We got all kinds of interesting things here. Check it out!",
+    "isInteractable": true
+  },
+  {
+    "name": "Tammy",
+    "id": 57,
+    "spokenText": "Welcome! You seem like an adventurer. Would you be interested in making use of my curing and tanning facilities?",
     "isInteractable": true
   }
 ]

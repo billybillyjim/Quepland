@@ -140,5 +140,15 @@ public class ItemDatabase
     {
         return huntedAnimals;
     }
-
+    public GameItem GetItemWithIngredientID(int id)
+    {
+        foreach(GameItem item in items)
+        {
+            if(item.IngredientIDs != null && item.IngredientIDs.Contains(id))
+            {
+                return item;
+            }
+        }
+        return null;
+    }
 }

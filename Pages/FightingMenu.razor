@@ -165,7 +165,7 @@
         GameState.autoFightTimer = new Timer(new TimerCallback(_ =>
         {
             AutoBattle();
-        }), null, 10000, 10000);
+        }), null, GameState.GetPlayer().activeFollower.AutoCollectSpeed,  GameState.GetPlayer().activeFollower.AutoCollectSpeed);
         GameState.UpdateState();
         this.StateHasChanged();
     }
@@ -333,7 +333,8 @@
         {
             GameState.isFighting = false;
         }
-
+        StateHasChanged();
+        GameState.UpdateState();
     }
     public void LoseBattle()
     {

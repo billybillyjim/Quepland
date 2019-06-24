@@ -2,6 +2,7 @@
 @inject GameState  GameState
 @inject MessageManager MessageManager
 @inject Microsoft.AspNetCore.Blazor.Services.WebAssemblyUriHelper UriHelper
+@using System.Threading
 
 
 <button class="btn btn-primary" style="margin-bottom:10px" onclick="@(() => Return(GameState.previousURL))">Leave</button>
@@ -15,7 +16,16 @@
 @LoadInn()
 @if (thisBuilding.IsSushiTrainingBuilding)
 {
-    @LoadSushiTraining();
+    <p>
+        <input type="checkbox" @bind-value="@autoBuySupplies" @bind-value:event="onchange" />
+        Auto Buy Supplies
+    </p>
+   
+    @LoadSushiTraining()
+}
+@if (thisBuilding.IsTannery)
+{
+   @LoadTannery()
 }
 
 @functions{
@@ -29,6 +39,9 @@
     private int alchemyStage;
     private int buyAmount;
     private string proofstring = "Not set.";
+
+    private bool autoBuySupplies = false;
+    private bool showItemTanningMenu = false;
 
     public RenderFragment LoadShop()
     {
@@ -98,7 +111,14 @@
             builder.AddContent(4, item.ItemDescription);
             builder.CloseElement();
             builder.OpenElement(5, "td");
-            builder.AddContent(6, item.Value);
+            if (thisBuilding.IsExpensive)
+            {
+                builder.AddContent(6, item.Value * 3);
+            }
+            else
+            {
+                builder.AddContent(6, item.Value);
+            }
             builder.CloseElement();
             builder.OpenElement(7, "td");
             builder.AddAttribute(8, "style", "text-align: right; min-width:150px");
@@ -116,6 +136,8 @@
             builder.OpenElement(8, "button");
             builder.AddAttribute(9, "class", "btn btn-primary");
             builder.AddAttribute(10, "onclick", (() => BuyItem(item, amount)));
+
+
             if (item.Value * amount > GameState.GetPlayerInventory().GetCoins() || amount <= 0)
             {
                 builder.AddAttribute(11, "disabled", true);
@@ -426,7 +448,7 @@
         return builder =>
         {
             builder.OpenElement(0, "p");
-           
+
             builder.OpenElement(1, "button");
             builder.AddAttribute(2, "class", "btn btn-primary");
             builder.AddAttribute(3, "style", "align-text:right");
@@ -438,10 +460,10 @@
             }
             builder.AddContent(7, "Deposit Rice");
             builder.CloseElement();
-             builder.AddContent(8, " Rice Stored:" + GameState.sushiHouseRice);
+            builder.AddContent(8, " Rice Stored:" + GameState.sushiHouseRice);
             builder.CloseElement();
             builder.OpenElement(9, "p");
-            
+
             builder.OpenElement(10, "button");
             builder.AddAttribute(11, "class", "btn btn-primary");
             builder.AddAttribute(12, "style", "align-text:right");
@@ -455,7 +477,167 @@
             builder.CloseElement();
             builder.AddContent(17, " Seaweed Stored:" + GameState.sushiHouseSeaweed);
             builder.CloseElement();
+            builder.OpenElement(18, "br");
+            builder.CloseElement();
+            builder.OpenElement(19, "button");
+            builder.AddAttribute(20, "class", "btn btn-primary");
+            builder.AddAttribute(21, "style", "align-text:right");
+
+            if(GameState.CanLeave() == true)
+            {
+                builder.AddAttribute(22, "onclick", () => BeginMakingSushi());
+                builder.AddContent(23, "Begin Making Sushi");
+            }
+            else
+            {
+                builder.AddAttribute(24, "onclick", () => GameState.StopActions());
+                builder.AddContent(25, "Stop Making Sushi");
+            }
+            builder.CloseElement();
+
         };
+    }
+    public RenderFragment LoadTannery()
+    {
+        return builder =>
+        {
+            builder.OpenElement(0, "p");
+            builder.OpenElement(1, "button");
+            builder.AddAttribute(2, "class", "btn btn-primary");
+            builder.AddAttribute(3, "style", "align-text:right");
+            builder.AddAttribute(4, "onclick", () => LoadTannerySalt());
+            if(GameState.GetPlayerInventory().GetAmountOfItem(Program.itemDatabase.GetItemByName("Salt")) == 0)
+            {
+                builder.AddAttribute(5, "disabled", true);
+                builder.AddAttribute(6, "title", "You don't have any salt with you.");
+            }
+            builder.AddContent(7, "Deposit Salt");
+            builder.CloseElement();
+            builder.AddContent(8, "Salt:" + thisBuilding.Salt);
+            builder.CloseElement();
+
+            if(showItemTanningMenu == false)
+            {
+                for (int i = 0; i < thisBuilding.TannerySlots; i++)
+                {
+                    int temp = i;
+                    builder.OpenElement(9, "p");
+                    builder.OpenElement(10, "button");
+                    builder.AddAttribute(11, "class", "btn btn-primary");
+                    builder.AddAttribute(12, "style", "align-text:right");
+                    if (thisBuilding.TanneryItems.Count > temp)
+                    {
+                        builder.AddAttribute(13, "onclick", () => WithdrawTanneryItem(temp));
+                        if(thisBuilding.TanneryItems[temp].EndTime.CompareTo(DateTime.UtcNow) > 0)
+                        {
+                            builder.AddAttribute(14, "disabled", true);
+                            builder.AddAttribute(15, "title", "It isn't ready yet. " + (DateTime.UtcNow - thisBuilding.TanneryItems[temp].EndTime));
+                        }
+                        builder.AddContent(16, "Withdraw " + thisBuilding.TanneryItems[temp].Item.Value + " " + Program.itemDatabase.GetItemByID(thisBuilding.TanneryItems[temp].Item.Key).ItemName);
+
+                    }
+                    else
+                    {
+                        builder.AddAttribute(17, "onclick", () => ShowDepositMenu());
+                        if(thisBuilding.Salt == 0)
+                        {
+                            builder.AddAttribute(18, "disabled", true);
+                        }
+                        builder.AddContent(19, "Cure or Tan item");
+                    }
+                    builder.CloseElement();
+                    if(thisBuilding.TanneryItems.Count > temp && thisBuilding.TanneryItems[temp].EndTime.CompareTo(DateTime.UtcNow) > 0)
+                    {
+                        TimeSpan remainingTime = thisBuilding.TanneryItems[temp].EndTime.Subtract(DateTime.UtcNow);
+                        string timeLeft = "" + remainingTime.Hours + ":" + remainingTime.Minutes + ":" + remainingTime.Seconds;
+                        builder.AddContent(20, "Time Remaining:" + timeLeft);
+
+                    }
+
+                    builder.CloseElement();
+                }
+            }
+            else
+            {
+                foreach(KeyValuePair<GameItem, int> i in GameState.GetPlayerInventory().GetItems())
+                {
+                    if(i.Key.IsTannable || i.Key.IsCurable)
+                    {
+                        builder.AddContent(21, LoadTanningButton(i.Key));
+                    }
+                }
+                builder.OpenElement(22, "p");
+                builder.OpenElement(23, "button");
+                builder.AddAttribute(24, "class", "btn btn-primary");
+                builder.AddAttribute(25, "style", "align-text:right");
+                builder.AddAttribute(26, "onclick", () => HideDepositMenu());
+                builder.AddContent(27, "Cancel");
+                builder.CloseElement();
+                builder.CloseElement();
+            }
+
+        };
+    }
+    public RenderFragment LoadTanningButton(GameItem item)
+    {
+        return builder =>
+        {
+            builder.OpenElement(0, "p");
+            builder.OpenElement(1, "button");
+            builder.AddAttribute(2, "class", "btn btn-primary");
+            builder.AddAttribute(3, "style", "align-text:right");
+            builder.AddAttribute(4, "onclick", () => DepositTanneryItem(item));
+            builder.AddContent(5, "Deposit " + item.ItemName);
+            builder.CloseElement();
+            builder.CloseElement();
+        };
+    }
+    public void ShowDepositMenu()
+    {
+        showItemTanningMenu = true;
+    }
+    public void HideDepositMenu()
+    {
+        showItemTanningMenu = false;
+    }
+    public void DepositTanneryItem(GameItem item)
+    {
+        int depositAmount = Math.Min(thisBuilding.Salt, GameState.GetPlayerInventory().GetAmountOfItem(item));
+        MessageManager.AddMessage("You deposited " + depositAmount + " " + item.ItemName);
+        if(thisBuilding.Salt == 0)
+        {
+            MessageManager.AddMessage("You have run out of salt!");
+        }
+
+        thisBuilding.TanneryItems.Add(new TanningSlot(item.Id, depositAmount, DateTime.UtcNow, DateTime.UtcNow + TimeSpan.FromDays(1)));
+        GameState.GetPlayerInventory().RemoveItems(item, depositAmount);
+        thisBuilding.Salt -= depositAmount;
+        showItemTanningMenu = false;
+        this.StateHasChanged();
+        GameState.UpdateState();
+    }
+    public void WithdrawTanneryItem(int i)
+    {
+        MessageManager.AddMessage("" + i);
+        GameItem jerky = Program.itemDatabase.GetItemWithIngredientID(thisBuilding.TanneryItems[i].Item.Key);
+        if(jerky == null)
+        {
+
+            return;
+        }
+        GameState.GetPlayerInventory().AddMultipleOfItem(jerky, thisBuilding.TanneryItems[i].Item.Value);
+        thisBuilding.TanneryItems.RemoveAt(i);
+        this.StateHasChanged();
+        GameState.UpdateState();
+    }
+    public void LoadTannerySalt()
+    {
+        int saltAmount = GameState.GetPlayerInventory().GetAmountOfItem(Program.itemDatabase.GetItemByName("Salt"));
+        thisBuilding.Salt += saltAmount;
+        GameState.GetPlayerInventory().RemoveItems(Program.itemDatabase.GetItemByName("Salt"), saltAmount);
+        StateHasChanged();
+        GameState.UpdateState();
+
     }
     public void LoadSushiHouseRice()
     {
@@ -475,10 +657,94 @@
         GameState.UpdateState();
 
     }
+    public void BeginMakingSushi()
+    {
+        GameState.StopActions();
+        GameState.isGathering = true;
+        GameState.gatherTimer = new Timer(new TimerCallback(_ =>
+        {
+            if(GameState.sushiHouseRice == 0 || GameState.sushiHouseSeaweed == 0)
+            {
+                if(autoBuySupplies == false)
+                {
+                    GameState.StopActions();
+                }
+                else if(TryBuyingSupplies())
+                {
+                    if (FindRollToMake())
+                    {
+
+                    }
+                    else
+                    {
+                        MessageManager.AddMessage("You don't have any fish to make sushi with.");
+                        GameState.StopActions();
+                    }
+                }
+            }
+            GameState.UpdateState();
+            StateHasChanged();
+        }), null, 8000, 8000);
+        GameState.UpdateState();
+        StateHasChanged();
+    }
+    private bool FindRollToMake()
+    {
+        //Rice roll is id 122.
+        int[,] fishIDs = Extensions.To2DArray(Program.itemDatabase.GetItemByID(122).UsableIDs);
+        for(int i = 0; i < fishIDs.GetLength(0); i++)
+        {
+            if (GameState.GetPlayerInventory().HasItem(Program.itemDatabase.GetItemByID(fishIDs[i, 0])))
+            {
+                GameState.GetPlayerInventory().RemoveItemByID(fishIDs[i, 0]);
+                GameState.GetPlayerInventory().AddItem(Program.itemDatabase.GetItemByID(fishIDs[i, 1]));
+                GameState.sushiHouseRice--;
+                GameState.sushiHouseSeaweed--;
+                MessageManager.AddMessage("You create a " + Program.itemDatabase.GetItemByID(fishIDs[i, 1]).ItemName + " under the supervision of the old man.");
+                return true;
+            }
+        }
+        return false;
+    }
+    private bool TryBuyingSupplies()
+    {
+        if(GameState.sushiHouseRice == 0)
+        {
+            if(GameState.GetPlayerInventory().GetAmountOfItem(Program.itemDatabase.GetGold()) >= 250)
+            {
+                GameState.sushiHouseRice++;
+                GameState.GetPlayerInventory().RemoveItems(Program.itemDatabase.GetGold(), 250);
+            }
+            else
+            {
+                return false;
+            }
+        }
+        if(GameState.sushiHouseSeaweed == 0)
+        {
+            if(GameState.GetPlayerInventory().GetAmountOfItem(Program.itemDatabase.GetGold()) >= 300)
+            {
+                GameState.sushiHouseSeaweed++;
+                GameState.GetPlayerInventory().RemoveItems(Program.itemDatabase.GetGold(), 300);
+            }
+            else
+            {
+                return false;
+            }
+        }
+        return true;
+    }
     protected override void OnParametersSet()
     {
         SetBuilding(buildingURL);
+        if (thisBuilding.IsTannery)
+        {
+            GameState.UIRefreshTimer = new Timer(new TimerCallback(_ =>
+            {
+                StateHasChanged();
 
+            }),null, 1000, 1000);
+        }
     }
     private void BuyItem(GameItem item, int amount)
     {
@@ -487,9 +753,14 @@
             amount = 0;
             buyAmount = 0;
         }
-        if (GameState.GetPlayerInventory().GetCoins() >= item.Value * amount)
+        int cost = item.Value;
+        if (thisBuilding.IsExpensive)
         {
-            GameState.GetPlayerInventory().RemoveItems(Program.itemDatabase.GetGold(), item.Value * amount);
+            cost *= 3;
+        }
+        if (GameState.GetPlayerInventory().GetCoins() >= cost * amount)
+        {
+            GameState.GetPlayerInventory().RemoveItems(Program.itemDatabase.GetGold(), cost * amount);
             GameState.GetPlayerInventory().AddMultipleOfItem(item, amount);
             MessageManager.AddMessage("You bought " + amount + " " + item.ItemName);
         }
@@ -556,6 +827,7 @@
     {
         GameState.StateChanged += OnGameStateChanged;
 
+
         this.StateHasChanged();
         GameState.UpdateState();
     }
@@ -565,6 +837,12 @@
     }
     public void Dispose()
     {
+        if(GameState.UIRefreshTimer != null)
+        {
+            GameState.UIRefreshTimer.Dispose();
+            GameState.UIRefreshTimer = null;
+        }
+
         GameState.canSell = false;
         ResetAlchemy();
         GameState.StateChanged -= OnGameStateChanged;

@@ -489,16 +489,33 @@
     "url": "Amante",
     "description": "You enter a quiet little cafe. The walls are lined with tea sets from around the world. A lovely old couple greet you as you close the door.",
     "isSushiTrainingBuilding": true,
-    "npcIDs": [ 54, 55 ]
+    "npcIDs": [ 54, 55 ],
+    "isShop": true,
+    "isExpensive": true,
+    "items": [136,137,138]
   },
-    {
+  {
     "name": "Soul Goods",
     "id": 61,
     "url": "SoulGoods",
     "description": "The room is full of smoke, both from incense burners and the clerk who is smoking a pipe. There are a wide variety of exotic goods for sale here.",
     "isShop": true,
-    "items": [ 292 ],
-    "npcIDs": [ 56 ]
+    "items": [ 292, 305, 315, 297, 298 ],
+    "npcIDs": [ 56 ],
+    "isExpensive": true
   },
+  {
+    "name": "Tammy's Tannery",
+    "id": 62,
+    "url": "TammysTannery",
+    "description": "You enter the tannery and are greeted by Tammy. There are a number of meat products you can buy here.",
+    "isShop": true,
+    "items": [ 305, 306, 307, 308 ],
+    "isExpensive": true,
+    "npcIDs": [ 57 ],
+    "isTannery": true,
+    "tannerySlots": 3,
+    "maxTannerySlots": 5
+  }
 
 ]

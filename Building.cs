@@ -14,9 +14,15 @@ public class Building
     public bool IsShop { get; set; }
     public bool IsInn { get; set; }
     public bool IsSushiTrainingBuilding { get; set; }
+    public bool IsTannery { get; set; }
+    public int TannerySlots { get; set; }
+    public int MaxTannerySlots { get; set; }
+    public int Salt { get; set; }
+    public List<TanningSlot> TanneryItems = new List<TanningSlot>();
     public string[] UnlockableAreas { get; set; }
     public string[] Buildings { get; set; }
     public bool HasAlchemyStation { get; set; }
     public int QueplarValue { get; set; }
+    public bool IsExpensive { get; set; }
 
 }

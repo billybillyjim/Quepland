@@ -158,7 +158,8 @@
     "isUnlocked": false,
     "cost": 100000,
     "costItemID": 0,
-    "autoCollectSkill": "Fighting"
+    "autoCollectSkill": "Fighting",
+    "autoCollectSpeed": 10000
   },
   {
     "name": "Raka the Kushtaka",
@@ -249,5 +250,18 @@
     "autoCollectSpeed": 6000,
     "isUnlocked": false,
     "cost": 777777
-  }
+  },
+  {
+    "name": "Anthropos en tayn Agros",
+    "id": 19,
+    "description": "Anthropos is a natural scout.",
+    "autoCollectMessage": "Anthropos hurries off with your loot away and returns to help find something else to kill.",
+    "requiredLevels": [ "Strength:35" ],
+    "maxCarry": 5,
+    "isUnlocked": false,
+    "cost": 8000000,
+    "costItemID": 0,
+    "autoCollectSkill": "Fighting",
+    "autoCollectSpeed": 5000
+  },
 ]
