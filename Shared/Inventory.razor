@@ -141,14 +141,16 @@
             if (item.Key.IsLocked)
             {
                 builder.AddAttribute(11, "src", "data/ItemIcons/Lock.png");
+                builder.AddAttribute(12, "style", "width:20px;opacity:0.6");
             }
             else
             {
-                builder.AddAttribute(12, "src", "data/ItemIcons/Unlock.png");
+                builder.AddAttribute(11, "src", "data/ItemIcons/Unlock.png");
+                builder.AddAttribute(12, "style", "width:20px;opacity:0.6");
             }
-            
-            builder.AddAttribute(13, "style", "width:20px;opacity:0.6");
-            builder.AddAttribute(14, "onclick", () => Use(item.Key));
+
+
+            builder.AddAttribute(14, "onclick", () => ToggleLock(item.Key));
             builder.CloseElement();
             builder.AddContent(15, item.Key.ItemName);
             builder.CloseElement();
@@ -193,7 +195,11 @@
                     builder.AddAttribute(32, "disabled", true);
                     builder.AddAttribute(33, "title", "You can't do that while you are doing what you're doing.");
                 }
-
+                else if (item.Key.IsLocked)
+                {
+                     builder.AddAttribute(32, "disabled", true);
+                    builder.AddAttribute(33, "title", "This item is locked. Click the lock by the name to unlock it.");
+                }
                 if (!GameState.isUsing)
                 {
                     builder.AddAttribute(34, "onclick", () => Use(item.Key));
@@ -295,6 +301,11 @@
                 builder.AddAttribute(10, "disabled", true);
                 builder.AddAttribute(11, "title", "You don't have enough free inventory space.");
             }
+            else if (item.Key.IsLocked)
+                {
+                     builder.AddAttribute(10, "disabled", true);
+                    builder.AddAttribute(11, "title", "This item is locked. Click the lock by the name to unlock it.");
+                }
             builder.AddContent(12, item.Key.UnpackString);
             builder.CloseElement();
             builder.CloseElement();
@@ -339,6 +350,11 @@
             builder.AddAttribute(6, "style", "text-align:right");
             builder.OpenElement(7, "button");
             builder.AddAttribute(8, "class", "btn btn-primary");
+            if (item.Key.IsLocked)
+                {
+                     builder.AddAttribute(9, "disabled", true);
+                    builder.AddAttribute(10, "title", "This item is locked. Click the lock by the name to unlock it.");
+                }
             if (item.Key.IsEquipped)
             {
                 builder.AddAttribute(9, "onclick", () => Unequip(item.Key));
@@ -382,25 +398,40 @@
             builder.AddAttribute(8, "class", "btn btn-primary");
             builder.AddAttribute(9, "style", "margin:2px");
             builder.AddAttribute(10, "onclick", () => Deposit(item, 1));
-            builder.AddContent(11, "1");
+            if (item.Key.IsLocked)
+                {
+                     builder.AddAttribute(11, "disabled", true);
+                    builder.AddAttribute(12, "title", "This item is locked. Click the lock by the name to unlock it.");
+                }
+            builder.AddContent(13, "1");
             // builder.CloseElement();
             builder.CloseElement();
             //builder.OpenElement(12, "td");
             //builder.AddAttribute(12, "style", "text-align:right");
-            builder.OpenElement(13, "button");
-            builder.AddAttribute(14, "class", "btn btn-primary");
-            builder.AddAttribute(15, "style", "margin:2px");
-            builder.AddAttribute(16, "onclick", () => Deposit(item, 5));
-            builder.AddContent(17, "5");
+            builder.OpenElement(14, "button");
+            builder.AddAttribute(15, "class", "btn btn-primary");
+            builder.AddAttribute(16, "style", "margin:2px");
+            builder.AddAttribute(17, "onclick", () => Deposit(item, 5));
+            if (item.Key.IsLocked)
+                {
+                     builder.AddAttribute(18, "disabled", true);
+                    builder.AddAttribute(19, "title", "This item is locked. Click the lock by the name to unlock it.");
+                }
+            builder.AddContent(20, "5");
             //builder.CloseElement();
             builder.CloseElement();
             //builder.OpenElement(18, "td");
             // builder.AddAttribute(18, "style", "text-align:right");
-            builder.OpenElement(19, "button");
-            builder.AddAttribute(20, "class", "btn btn-primary");
-            builder.AddAttribute(21, "style", "margin:2px");
-            builder.AddAttribute(22, "onclick", () => Deposit(item, int.MaxValue));
-            builder.AddContent(23, "All");
+            builder.OpenElement(21, "button");
+            builder.AddAttribute(22, "class", "btn btn-primary");
+            builder.AddAttribute(23, "style", "margin:2px");
+            builder.AddAttribute(24, "onclick", () => Deposit(item, int.MaxValue));
+            if (item.Key.IsLocked)
+                {
+                     builder.AddAttribute(25, "disabled", true);
+                    builder.AddAttribute(26, "title", "This item is locked. Click the lock by the name to unlock it.");
+                }
+            builder.AddContent(27, "All");
             builder.CloseElement();
             builder.CloseElement();
             builder.CloseElement();
@@ -436,6 +467,11 @@
                 builder.AddAttribute(13, "disabled", true);
                 builder.AddAttribute(14, "title", "You don't have inventory space for the coins you would receive.");
             }
+            else if (item.Key.IsLocked)
+                {
+                     builder.AddAttribute(13, "disabled", true);
+                    builder.AddAttribute(14, "title", "This item is locked. Click the lock by the name to unlock it.");
+                }
             builder.AddContent(15, "1");
             builder.CloseElement();
             builder.OpenElement(16, "button");
@@ -448,6 +484,11 @@
                 builder.AddAttribute(20, "disabled", true);
                 builder.AddAttribute(21, "title", "You don't have inventory space for the coins you would receive.");
             }
+            else if (item.Key.IsLocked)
+                {
+                     builder.AddAttribute(20, "disabled", true);
+                    builder.AddAttribute(21, "title", "This item is locked. Click the lock by the name to unlock it.");
+                }
             builder.AddContent(22, "5");
             builder.CloseElement();
             builder.OpenElement(23, "button");
@@ -469,13 +510,23 @@
                 }
 
             }
+            if (item.Key.IsLocked)
+                {
+                     builder.AddAttribute(27, "disabled", true);
+                    builder.AddAttribute(28, "title", "This item is locked. Click the lock by the name to unlock it.");
+                }
             builder.AddContent(30, sellAmount);
             builder.CloseElement();
             builder.OpenElement(31, "button");
             builder.AddAttribute(32, "class", "btn btn-primary");
             builder.AddAttribute(33, "style", "margin:3px");
             builder.AddAttribute(34, "onclick", () => Sell(item, int.MaxValue));
-            builder.AddContent(35, "All");
+            if (item.Key.IsLocked)
+                {
+                     builder.AddAttribute(35, "disabled", true);
+                    builder.AddAttribute(36, "title", "This item is locked. Click the lock by the name to unlock it.");
+                }
+            builder.AddContent(37, "All");
             builder.CloseElement();
             builder.CloseElement();
             builder.CloseElement();
@@ -505,7 +556,11 @@
                 builder.AddAttribute(9, "disabled", true);
                 builder.AddAttribute(10, "title", "You can't make things while doing what you're doing.");
             }
-
+            else if (item.IsLocked)
+                {
+                     builder.AddAttribute(9, "disabled", true);
+                    builder.AddAttribute(10, "title", "This item is locked. Click the lock by the name to unlock it.");
+                }
             builder.AddContent(11, itemToMake.ItemName);
             builder.CloseElement();
             builder.CloseElement();
@@ -525,7 +580,12 @@
             builder.OpenElement(4, "button");
             builder.AddAttribute(5, "class", "btn btn-primary");
             builder.AddAttribute(6, "onclick", () => Eat(item));
-            builder.AddContent(7, "Eat");
+            if (item.IsLocked)
+                {
+                     builder.AddAttribute(7, "disabled", true);
+                    builder.AddAttribute(8, "title", "This item is locked. Click the lock by the name to unlock it.");
+                }
+            builder.AddContent(9, "Eat");
             builder.CloseElement();
             builder.CloseElement();
             builder.CloseElement();
@@ -578,6 +638,8 @@
     public void ToggleLock(GameItem item)
     {
         item.IsLocked = !item.IsLocked;
+        GameState.UpdateState();
+        this.StateHasChanged();
     }
     private string Use(GameItem item)
     {

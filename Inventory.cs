@@ -483,15 +483,21 @@ public class Inventory
     public void EmptyInventoryOfUnequippedItems()
     {
         Dictionary<GameItem, int> equippedItems = new Dictionary<GameItem, int>();
+        Dictionary<GameItem, int> lockedItems = new Dictionary<GameItem, int>();
         foreach (KeyValuePair<GameItem, int> item in items)
         {
             if (item.Key.IsEquipped)
             {
                 equippedItems[item.Key] = item.Value;
             }
+            else if (item.Key.IsLocked)
+            {
+                lockedItems[item.Key] = item.Value;
+            }
         }
         EmptyInventory();
         AddItems(equippedItems);
+        AddItems(lockedItems);
     }
     private void UpdateItemCount()
     {
