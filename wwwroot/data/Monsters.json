@@ -301,7 +301,7 @@
     "weakness": "Hammermanship",
     "strength": "Swordsmanship",
     "damage": 35,
-    "armor": 15,
+    "armor": 55,
     "attackSpeed": 10,
     "dropTable": [
       [ 238, 5 ],
