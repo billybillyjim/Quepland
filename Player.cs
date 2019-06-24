@@ -330,8 +330,13 @@ public class Player
             else if (opponent.Strength.Contains(action))
             {
                 baseDamage /= 2;
+                baseDamage *= 1 - (float)Extensions.CalculateArmorDamageReduction(opponent);
             }
-            baseDamage *= 1 - (float)Extensions.CalculateArmorDamageReduction(opponent);
+            else
+            {
+                baseDamage *= 1 - (float)Extensions.CalculateArmorDamageReduction(opponent);
+            }
+            
             return Math.Max(Extensions.GetGaussianRandomInt(baseDamage + equipmentBonus, equipmentBonus), 1);
         }
         baseDamage *= 1 - (float)Extensions.CalculateArmorDamageReduction(opponent);
