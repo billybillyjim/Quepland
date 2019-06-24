@@ -684,7 +684,7 @@
     "unlockableAreas": [ "Guttermouth,Float to the village,," ],
     "actionRequiredForAccess": "Rafting",
     "actions": [ "Battle" ],
-    "monsterIDs": []
+    "monsterIDs": [31, 32, 33, 34, 35, 36, 37, 38]
   },
   {
     "name": "Guttermouth",

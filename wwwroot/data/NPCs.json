@@ -391,5 +391,11 @@
     "id": 57,
     "spokenText": "Welcome! You seem like an adventurer. Would you be interested in making use of my curing and tanning facilities?",
     "isInteractable": true
+  },
+  {
+    "name": "Ancient Alchemist",
+    "id": 58,
+    "spokenText": "Welcome to the Wind Hall. Inside you will find one of the great elemental portals which allows alchemists to perform alchemy. All that is required of you is a metal and one of the base elements. Finding the right recipe can be time consuming, but very rewarding.",
+    "isInteractable": true
   }
 ]

@@ -39,6 +39,9 @@ public class GameState
     public int sushiHouseSeaweed;
 
     public int buffSecondsLeft;
+
+    public int bankSortStyle;
+
     private Player player = new Player();
 
     public Area currentArea;

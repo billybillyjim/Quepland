@@ -73,7 +73,7 @@
             }
             else
             {
-                 builder.AddContent(21, "Current Buff:None");
+                builder.AddContent(21, "Current Buff:None");
             }
             builder.CloseElement();
 
@@ -126,36 +126,48 @@
                 builder.AddAttribute(2, "style", "background-color:aquamarine");
             }
             builder.OpenElement(3, "td");
-            builder.AddAttribute(3, "title", item.Key.ItemDescription);
-            builder.AddAttribute(4, "style", "text-align:left;font-weight:bold");
-            builder.OpenElement(5, "img");
-            builder.AddAttribute(6, "src", "data/ItemIcons/" + item.Key.Icon + ".png");
-            builder.AddAttribute(6, "style", "width:40px;opacity:0.6;color:green");
+            builder.AddAttribute(4, "title", item.Key.ItemDescription);
+            builder.AddAttribute(5, "style", "text-align:left;font-weight:bold");
+            builder.OpenElement(6, "img");
+            builder.AddAttribute(7, "src", "data/ItemIcons/" + item.Key.Icon + ".png");
+            builder.AddAttribute(8, "style", "width:40px;opacity:0.6;color:green");
             if(item.Key.ExperienceGained != null)
             {
-                builder.AddAttribute(6, "title", "+ " + item.Key.ExperienceGained + " exp");
+                builder.AddAttribute(9, "title", "+ " + item.Key.ExperienceGained + " exp");
             }
 
             builder.CloseElement();
-
-            builder.AddContent(7, item.Key.ItemName);
-            builder.CloseElement();
-            builder.OpenElement(7, "td");
-            builder.CloseElement();
-            builder.OpenElement(7, "td");
-            builder.CloseElement();
-            builder.OpenElement(8, "td");
-            builder.AddAttribute(9, "style", "text-align:right");
-            builder.OpenElement(10, "font");
-            builder.AddAttribute(11, "size", "4");
-
-            if (item.Key.IsStackable)
+            builder.OpenElement(10, "img");
+            if (item.Key.IsLocked)
             {
-                builder.AddContent(12, "1 Stack of " + item.Value);
+                builder.AddAttribute(11, "src", "data/ItemIcons/Lock.png");
             }
             else
             {
-                builder.AddContent(13, item.Value);
+                builder.AddAttribute(12, "src", "data/ItemIcons/Unlock.png");
+            }
+            
+            builder.AddAttribute(13, "style", "width:20px;opacity:0.6");
+            builder.AddAttribute(14, "onclick", () => Use(item.Key));
+            builder.CloseElement();
+            builder.AddContent(15, item.Key.ItemName);
+            builder.CloseElement();
+            builder.OpenElement(16, "td");
+            builder.CloseElement();
+            builder.OpenElement(17, "td");
+            builder.CloseElement();
+            builder.OpenElement(18, "td");
+            builder.AddAttribute(19, "style", "text-align:right");
+            builder.OpenElement(20, "font");
+            builder.AddAttribute(21, "size", "4");
+
+            if (item.Key.IsStackable)
+            {
+                builder.AddContent(22, "1 Stack of " + item.Value);
+            }
+            else
+            {
+                builder.AddContent(23, item.Value);
             }
             builder.CloseElement();
             builder.CloseElement();
@@ -163,34 +175,34 @@
             if (item.Key.IsUsable)
             {
 
-                builder.OpenElement(14, "tr");
+                builder.OpenElement(24, "tr");
                 if (item.Key.IsEquipped)
                 {
-                    builder.AddAttribute(15, "style", "background-color:aquamarine");
+                    builder.AddAttribute(25, "style", "background-color:aquamarine");
                 }
 
-                builder.AddAttribute(16, "class", "buddy-mid");
+                builder.AddAttribute(26, "class", "buddy-mid");
 
-                builder.OpenElement(17, "td");
-                builder.AddAttribute(18, "colspan", "4");
-                builder.AddAttribute(19, "style", "text-align:right");
-                builder.OpenElement(20, "button");
-                builder.AddAttribute(21, "class", "btn btn-primary");
+                builder.OpenElement(27, "td");
+                builder.AddAttribute(28, "colspan", "4");
+                builder.AddAttribute(29, "style", "text-align:right");
+                builder.OpenElement(30, "button");
+                builder.AddAttribute(31, "class", "btn btn-primary");
                 if(GameState.CanLeave() == false)
                 {
-                    builder.AddAttribute(22, "disabled", true);
-                    builder.AddAttribute(23, "title", "You can't do that while you are doing what you're doing.");
+                    builder.AddAttribute(32, "disabled", true);
+                    builder.AddAttribute(33, "title", "You can't do that while you are doing what you're doing.");
                 }
 
                 if (!GameState.isUsing)
                 {
-                    builder.AddAttribute(24, "onclick", () => Use(item.Key));
-                    builder.AddContent(25, "Use " + item.Key.ItemName);
+                    builder.AddAttribute(34, "onclick", () => Use(item.Key));
+                    builder.AddContent(35, "Use " + item.Key.ItemName);
                 }
                 else
                 {
-                    builder.AddAttribute(26, "onclick", () => CancelUse());
-                    builder.AddContent(27, "Cancel");
+                    builder.AddAttribute(36, "onclick", () => CancelUse());
+                    builder.AddContent(37, "Cancel");
                 }
                 builder.CloseElement();
                 builder.CloseElement();
@@ -205,34 +217,34 @@
                 {
                     if (usableIDs[i, 0] == item.Key.Id)
                     {
-                        builder.AddContent(28, UseButton(i, item.Key));
+                        builder.AddContent(38, UseButton(i, item.Key));
                     }
                 }
             }
             if (item.Key.IsUnpackable)
             {
-                builder.AddContent(29, UnpackButton(item));
+                builder.AddContent(39, UnpackButton(item));
             }
             if (item.Key.IsEdible)
             {
-                builder.AddContent(30, EatButton(item.Key));
+                builder.AddContent(40, EatButton(item.Key));
             }
             if (item.Key.IsEquipable)
             {
-                builder.AddContent(31, EquipButtons(item));
+                builder.AddContent(41, EquipButtons(item));
             }
             if (item.Key.IsArrow)
             {
-                builder.AddContent(32, ArrowInfo(item));
+                builder.AddContent(42, ArrowInfo(item));
             }
 
             if (GameState.canBank)
             {
-                builder.AddContent(33, BankButtons(item));
+                builder.AddContent(43, BankButtons(item));
             }
             if (GameState.canSell && item.Key.Id != 0)
             {
-                builder.AddContent(34, SellButtons(item));
+                builder.AddContent(44, SellButtons(item));
             }
 
         };
@@ -562,6 +574,10 @@
         GameState.GetPlayerInventory().AddMultipleOfItem(Program.itemDatabase.GetGold(), (int)((item.Key.Value * amount) / 2d));
         GameState.UpdateState();
         return "";
+    }
+    public void ToggleLock(GameItem item)
+    {
+        item.IsLocked = !item.IsLocked;
     }
     private string Use(GameItem item)
     {

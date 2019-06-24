@@ -414,4 +414,13 @@ public class Player
         }
         return false;
     }
+    public int GetTotalLevel()
+    {
+        int total = 0;
+        foreach(Skill s in skills)
+        {
+            total += s.GetSkillLevelUnboosted();
+        }
+        return total;
+    }
 }

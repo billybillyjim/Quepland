@@ -10,6 +10,7 @@
 
 
 <h1>Hello, Welcome to Quepland!</h1>
+<h2>Quepland will be changing server hosts on June 26 at 8pm EST! If you don't have a backup save before closing your game after that time, your save will likely be deleted! For more information check the updates page.</h2>
 
 @if (debugMode)
 {
@@ -399,11 +400,11 @@ else
                 GameState.GetPlayer().EquipItems(equippedItems);
             }
             Program.npcManager.LoadNPCData(localStorage.GetItem<String>("NPC"));
-
+            MessageManager.AddMessage("Save game loaded.");
 
         }
          
-        MessageManager.AddMessage("Save game loaded.");
+
         GameState.saveDataLoaded = true;
         if (GameState.autoSaveTimer != null)
         {

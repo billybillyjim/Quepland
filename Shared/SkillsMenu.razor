@@ -173,6 +173,9 @@ else
                 builder.AddContent(7, "Show Inventory");
                 builder.CloseElement();
             }
+            builder.OpenElement(4, "p");
+            builder.AddContent(4, "Total Level:" + GameState.GetPlayer().GetTotalLevel());
+            builder.CloseElement();
             builder.OpenElement(4, "table");
             builder.AddAttribute(5, "style", "width:100%");
             builder.OpenElement(6, "thead");

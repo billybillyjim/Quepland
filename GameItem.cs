@@ -36,6 +36,7 @@ public class GameItem
     public bool IsArrow { get; set; }
     public bool IsTannable { get; set; } 
     public bool IsCurable { get; set; }
+    public bool IsLocked { get; set; }
     public bool DestroyOnUse { get; set; }
 
     public int[][] UsableIDs { get; set; }

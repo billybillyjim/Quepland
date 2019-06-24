@@ -241,7 +241,8 @@
     "url": "WindHall",
     "buttonText": "Enter",
     "description": "The halls of the building surround a central courtyard. At the very center of which is a column of air gushing out of a vent in the ground.",
-    "buildings": [ "WindHallCourtyard" ]
+    "buildings": [ "WindHallCourtyard" ],
+    "npcIDs": [58]
   },
   {
     "name": "Wind Hall Courtyard",

@@ -2141,7 +2141,7 @@
     "isStackable": true,
     "isUnpackable": true,
     "unpackIDs": [ 164 ],
-    "unpackString": "Decortitate",
+    "unpackString": "Decorticate",
     "actionRequired": "Gather",
     "gatherSpeed": 4000,
     "gatherString": "You gather some hemp.",
@@ -4541,7 +4541,8 @@
     "id": 315,
     "value": 50,
     "itemDescription": "A useful tool in curing meat and making jerky.",
-    "icon": "Salt"
+    "icon": "Salt",
+    "isStackable": true
   },
   {
     "itemName": "Chicken Leather",
@@ -4550,5 +4551,85 @@
     "id": 316,
     "experienceGained": "Leatherworking:10",
     "gatherString": "You withdraw some chicken leather."
-  }
+  },
+  {
+    "itemName": "Small Bag of Salt",
+    "id": 317,
+    "value": 250,
+    "itemDescription": "A small bag full of salt.",
+    "unpackIDs": [ 315 ],
+    "madeOnCreation": 5,
+    "isUnpackable": true,
+    "unpackString": "Open",
+    "icon": "Bag"
+  },
+  {
+    "itemName": "Bag of Salt",
+    "id": 318,
+    "value": 750,
+    "itemDescription": "A bag full of salt.",
+    "unpackIDs": [ 315 ],
+    "madeOnCreation": 15,
+    "isUnpackable": true,
+    "unpackString": "Open",
+    "icon": "Bag"
+  },
+  {
+    "itemName": "Large Bag of Salt",
+    "id": 319,
+    "value": 1250,
+    "itemDescription": "A large bag full of salt.",
+    "unpackIDs": [ 315 ],
+    "madeOnCreation": 25,
+    "isUnpackable": true,
+    "unpackString": "Open",
+    "icon": "Bag"
+  },
+  {
+    "itemName": "Huge Bag of Salt",
+    "id": 320,
+    "value": 2500,
+    "itemDescription": "A huge bag full of salt.",
+    "unpackIDs": [ 315 ],
+    "madeOnCreation": 50,
+    "isUnpackable": true,
+    "unpackString": "Open",
+    "icon": "Bag"
+  },
+  {
+    "itemName": "Elemental Mix",
+    "id": 321,
+    "value": 1000,
+    "itemDescription": "A bag containing base elements",
+    "unpackIDs": [ 62, 63, 64, 65 ],
+    "madeOnCreation": 10,
+    "isUnpackable": true,
+    "unpackString": "Open",
+    "icon": "Bag"
+  },
+  {
+    "itemName": "Large Elemental Mix",
+    "id": 322,
+    "value": 3000,
+    "itemDescription": "A large bag containing base elements",
+    "unpackIDs": [ 62, 63, 64, 65 ],
+    "madeOnCreation": 30,
+    "isUnpackable": true,
+    "unpackString": "Open",
+    "icon": "Bag"
+  },
+    {
+    "itemName": "Zombisword",
+    "id": 323,
+    "value": 5000,
+    "itemDescription": "A magical sword dropped by a flavorful zombie. It's quite heavy.",
+    "isEquipable": true,
+    "damage": 280,
+    "attackSpeed": 3500,
+    "actionRequired": "Swordsmanship",
+    "actionsEnabled": "Swordsmanship",
+    "equipSlot": "Right Hand",
+    "requiredLevel": 90,
+    "icon": "FlameSword"
+  },
 ]

@@ -167,6 +167,7 @@ else
     public void SetSortStyle(int newVal)
     {
         sortStyle = newVal;
+        GameState.bankSortStyle = newVal;
     }
     private string DepositAll()
     {
@@ -223,7 +224,7 @@ else
     {
 
         GameState.StateChanged += OnGameStateChanged;
-
+        sortStyle = GameState.bankSortStyle;
         GameState.canBank = true;
         GameState.canSell = false;
         //Give the player an axe if they have no items.

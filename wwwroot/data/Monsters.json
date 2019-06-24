@@ -573,6 +573,7 @@
     "dropTable": [
       [ 269, 5 ],
       [ 268, 10 ]
+
     ]
   },
   {
@@ -580,13 +581,18 @@
     "id": 31,
     "level": 6,
     "hp": 3500,
-    "weakness": "Hammermanship",
+    "weakness": "Swordsmanship",
     "strength": "Knifesmanship",
     "damage": 15,
     "armor": 3,
     "attackSpeed": 8,
     "dropTable": [
-
+      [ 315, 200 ],
+      [ 317, 100 ],
+      [ 318, 50 ],
+      [ 319, 25 ],
+      [ 320, 10 ],
+      [ 323, 1 ]
     ]
   },
   {
@@ -595,12 +601,13 @@
     "level": 6,
     "hp": 4500,
     "armor": 1,
-    "weakness": "Archery",
+    "weakness": "Swordsmanship",
     "strength": "Knifesmanship",
     "damage": 15,
     "attackSpeed": 5,
     "dropTable": [
-
+      [ 21, 700 ],
+      [ 323, 1 ]
     ]
   },
   {
@@ -609,82 +616,130 @@
     "level": 6,
     "hp": 2000,
     "armor": 15,
-    "weakness": "Hammermanship",
+    "weakness": "Swordsmanship",
     "strength": "Knifesmanship",
     "damage": 15,
-    "attackSpeed": 8,
+    "attackSpeed": 6,
     "dropTable": [
-
+      [ 26, 50 ],
+      [ 27, 50 ],
+      [ 28, 50 ],
+      [ 29, 50 ],
+      [ 30, 50 ],
+      [ 31, 50 ],
+      [ 55, 20 ],
+      [ 56, 20 ],
+      [ 57, 20 ],
+      [ 58, 20 ],
+      [ 59, 10 ],
+      [ 60, 10 ],
+      [ 323, 1 ]
     ]
   },
   {
     "name": "Bitter Zombie",
-    "id": 33,
+    "id": 34,
     "level": 6,
-    "hp": 2000,
-    "armor": 25,
-    "weakness": "Hammermanship",
+    "hp": 2700,
+    "armor": 35,
+    "weakness": "Swordsmanship",
     "strength": "Knifesmanship",
     "damage": 15,
-    "attackSpeed": 8,
+    "attackSpeed": 5,
     "dropTable": [
-
+      [ 62, 100 ],
+      [ 63, 100 ],
+      [ 64, 100 ],
+      [ 65, 100 ],
+      [ 321, 10 ],
+      [ 322, 10 ],
+      [ 323, 1 ]
     ]
   },
   {
     "name": "Umami Zombie",
-    "id": 33,
+    "id": 35,
     "level": 6,
-    "hp": 2000,
+    "hp": 5000,
     "armor": 35,
-    "weakness": "Hammermanship",
+    "weakness": "Swordsmanship",
     "strength": "Knifesmanship",
-    "damage": 15,
-    "attackSpeed": 8,
+    "damage": 25,
+    "attackSpeed": 7,
     "dropTable": [
-
+      [ 310, 5 ],
+      [ 311, 5 ],
+      [ 312, 5 ],
+      [ 313, 35 ],
+      [ 18, 50 ],
+      [ 19, 50 ],
+      [ 42, 50 ],
+      [ 76, 50 ],
+      [ 78, 50 ],
+      [ 81, 50 ],
+      [ 82, 50 ],
+      [ 83, 50 ],
+      [ 84, 50 ],
+      [ 86, 50 ],
+      [ 323, 1 ]
     ]
   },
   {
     "name": "Dancing Skeleton",
-    "id": 33,
+    "id": 36,
     "level": 6,
     "hp": 2000,
     "armor": 6,
     "weakness": "Hammermanship",
     "strength": "Knifesmanship",
     "damage": 15,
-    "attackSpeed": 8,
+    "attackSpeed": 3,
     "dropTable": [
-
+      [ 16, 50 ],
+      [ 17, 50 ],
+      [ 75, 25 ],
+      [ 77, 25 ],
+      [ 79, 25 ],
+      [ 85, 15 ],
+      [ 87, 15 ]
     ]
   },
   {
     "name": "Writhing Skeleton",
-    "id": 33,
+    "id": 37,
     "level": 6,
-    "hp": 2000,
+    "hp": 4000,
     "armor": 22,
     "weakness": "Hammermanship",
     "strength": "Knifesmanship",
-    "damage": 15,
-    "attackSpeed": 8,
+    "damage": 10,
+    "attackSpeed": 2,
     "dropTable": [
-
+      [ 16, 25 ],
+      [ 17, 25 ],
+      [ 75, 50 ],
+      [ 77, 50 ],
+      [ 79, 50 ],
+      [ 85, 30 ],
+      [ 87, 30 ]
     ]
   },
   {
     "name": "Giant Jelly Zombie",
-    "id": 33,
+    "id": 38,
     "level": 6,
-    "hp": 2000,
+    "hp": 8000,
     "armor": 55,
-    "weakness": "Hammermanship",
+    "weakness": "Swordsmanship",
     "strength": "Knifesmanship",
-    "damage": 15,
-    "attackSpeed": 8,
+    "damage": 55,
+    "attackSpeed": 12,
     "dropTable": [
-
+      [ 323, 5 ],
+      [ 89, 20 ],
+      [ 90, 20 ],
+      [ 322, 15 ],
+      [ 320, 15 ]
     ]
   },
 ]
