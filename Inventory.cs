@@ -87,7 +87,7 @@ public class Inventory
         Dictionary<GameItem, int> unequippedItems = new Dictionary<GameItem, int>();
         foreach (KeyValuePair<GameItem, int> item in items)
         {
-            if (item.Key.IsEquipped == false)
+            if (item.Key.IsEquipped == false && item.Key.IsLocked == false)
             {
                 unequippedItems[item.Key] = item.Value;
             }

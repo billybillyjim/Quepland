@@ -350,11 +350,6 @@
             builder.AddAttribute(6, "style", "text-align:right");
             builder.OpenElement(7, "button");
             builder.AddAttribute(8, "class", "btn btn-primary");
-            if (item.Key.IsLocked)
-            {
-                builder.AddAttribute(9, "disabled", true);
-                builder.AddAttribute(10, "title", "This item is locked. Click the lock by the name to unlock it.");
-            }
             if (item.Key.IsEquipped)
             {
                 builder.AddAttribute(9, "onclick", () => Unequip(item.Key));
