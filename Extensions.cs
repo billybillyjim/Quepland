@@ -36,9 +36,17 @@ public static class Extensions
                 string[] i = line.Split('-');
                 int id = int.Parse(i[0]);
                 int amount = int.Parse(i[1]);
-                items[itemDB.GetItemByID(id)] = amount;
-                
-                
+                int locked = 0;
+                if(i.Length > 2)
+                {
+                    locked = int.Parse(i[2]);
+                }
+                GameItem item = itemDB.GetItemByID(id);
+                if(locked == 1)
+                {
+                    item.IsLocked = true;
+                }
+                items[item] = amount;
             }
         }
         return items;

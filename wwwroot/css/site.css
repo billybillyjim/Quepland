@@ -8,6 +8,7 @@ app {
     position: relative;
     display: flex;
     flex-direction: column;
+
 }
 
 .top-row {
@@ -23,7 +24,7 @@ app {
 }
 ​
 .main {
-    flex: 1;
+    flex: auto;
     overflow-y: auto;
     margin: 1px;
     min-width:400px;
@@ -38,7 +39,16 @@ app {
 .main .body-pad {
     margin-bottom: 200px;
 }
-
+.col-md-3 {
+    flex: 0 0 20% !important;
+}
+app, .main, .col-md-3 {
+    overflow: auto !important
+}
+.footer {
+    border-top: 2px solid #aaa;
+    background: #eee;
+}
 .sidebar {
     background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
     min-width: 250px;

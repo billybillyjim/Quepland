@@ -81,7 +81,7 @@
       [ 1, 8 ],
       [ 1, 9 ],
       [ 1, 222 ],
-      [ 2, 223],
+      [ 2, 223 ],
       [ 2, 10 ],
       [ 2, 11 ],
       [ 94, 142 ],
@@ -237,6 +237,7 @@
     "id": 16,
     "value": 150,
     "icon": "Pelt",
+    "requiredLevel": 5,
     "isTannable": true
   },
   {
@@ -245,7 +246,8 @@
     "id": 17,
     "value": 90,
     "icon": "Pelt",
-    "isTannable": true
+    "isTannable": true,
+    "requiredLevel": 1
   },
   {
     "itemName": "Deer Meat",
@@ -974,6 +976,7 @@
     "id": 75,
     "value": 290,
     "icon": "Pelt",
+    "requiredLevel": 55,
     "isTannable": true
   },
   {
@@ -991,6 +994,7 @@
     "id": 77,
     "value": 550,
     "icon": "Pelt",
+    "requiredLevel": 80,
     "isTannable": true
   },
   {
@@ -1007,6 +1011,7 @@
     "itemDescription": "The pelt of a moose.",
     "id": 79,
     "value": 550,
+    "requiredLevel": 65,
     "isTannable": true,
     "icon": "Pelt"
   },
@@ -1074,7 +1079,7 @@
     "itemName": "Wild Boar Pelt",
     "itemDescription": "The pelt of a wild boar.",
     "id": 87,
-    "value": 55,
+    "value": 325,
     "isTannable": true,
     "icon": "Pelt"
   },
@@ -1541,7 +1546,7 @@
       [ 45, 241 ],
       [ 46, 242 ],
       [ 47, 243 ],
-      [ 48, 244]
+      [ 48, 244 ]
     ],
     "icon": "Roll"
   },
@@ -4217,7 +4222,7 @@
     "itemDescription": "A pair of gloves that improve your fishing skills.",
     "id": 293,
     "value": 15000,
-    "damage": 2,
+    "damage": 1,
     "isEquipable": true,
     "actionRequired": "Fishing",
     "equipSlot": "Hands",
@@ -4245,7 +4250,7 @@
     "id": 295,
     "value": 25000,
     "damage": 1,
-    "armor": 2,
+    "armor": 1,
     "isEquipable": true,
     "actionRequired": "Fishing",
     "equipSlot": "Legs",
@@ -4258,7 +4263,7 @@
     "itemDescription": "A plaid shirt that identifies the wearer as a fisherman.",
     "id": 296,
     "value": 25000,
-    "damage": 2,
+    "damage": 1,
     "armor": 1,
     "isEquipable": true,
     "actionRequired": "Fishing",
@@ -4378,7 +4383,7 @@
     "value": 200,
     "gatherString": "You skin the caiman.",
     "gatherSpeed": 2500,
-    "requiredLevel": 5,
+    "requiredLevel": 20,
     "experienceGained": "Leatherworking:10",
     "actionRequired": "Leatherworking",
     "icon": "Pelt",
@@ -4545,13 +4550,10 @@
     "isStackable": true
   },
   {
-    "itemName": "Chicken Leather",
-    "itemDescription": "The tanned leather of a chicken.",
-    "value": 100,
+    "itemName": "filler",
     "id": 316,
-    "experienceGained": "Leatherworking:10",
-    "gatherString": "You withdraw some chicken leather."
-  },
+    "itemDescription": "I forgot to add a thing in slot 316 and I dont want to change all the numbers."
+  }
   {
     "itemName": "Small Bag of Salt",
     "id": 317,
@@ -4618,7 +4620,7 @@
     "unpackString": "Open",
     "icon": "Bag"
   },
-    {
+  {
     "itemName": "Zombisword",
     "id": 323,
     "value": 5000,
@@ -4631,5 +4633,280 @@
     "equipSlot": "Right Hand",
     "requiredLevel": 90,
     "icon": "FlameSword"
+  },
+  {
+    "itemName": "Deer Leather",
+    "id": 324,
+    "value": 300,
+    "itemDescription": "The tanned hide of a deer. It's slightly more protective than rabbit leather.",
+    "armor": 2,
+    "experienceGained": "Leatherworking:50",
+    "icon": "Leather",
+    "ingredientIDs":[16]
+  },
+  {
+    "itemName": "Rabbit Leather",
+    "id": 325,
+    "value": 180,
+    "itemDescription": "The tanned hide of a rabbit. An incredibly weak leather to work with.",
+    "armor": 1,
+    "experienceGained": "Leatherworking:35",
+    "icon": "Leather",
+    "ingredientIDs": [ 17 ]
+  },
+  {
+    "itemName": "Black Bear Leather",
+    "id": 326,
+    "value": 580,
+    "itemDescription": "The tanned hide of a black bear. It looks really cool, which makes it even stronger.",
+    "armor": 5,
+    "damage": 5,
+    "experienceGained": "Leatherworking:350",
+    "icon": "Leather",
+    "ingredientIDs": [ 75 ]
+  },
+  {
+    "itemName": "Moose Leather",
+    "id": 327,
+    "value": 1100,
+    "itemDescription": "The tanned hide of a moose. One of the toughest leathers in Quepland.",
+    "armor": 9,
+    "damage": 3,
+    "experienceGained": "Leatherworking:450",
+    "icon": "Leather",
+    "ingredientIDs": [ 79 ]
+  },
+  {
+    "itemName": "Grizzly Bear Leather",
+    "id": 328,
+    "value": 1100,
+    "itemDescription": "The tanned hide of a grizzly bear. A powerful material for making devastating armor.",
+    "armor": 6,
+    "damage": 6,
+    "experienceGained": "Leatherworking:500",
+    "icon": "Leather",
+    "ingredientIDs": [ 77 ]
+  },
+  {
+    "itemName": "Bison Leather",
+    "id": 329,
+    "value": 1400,
+    "itemDescription": "The tanned hide of a bison. It's the strongest known leather in Quepland.",
+    "armor": 10,
+    "damage": 7,
+    "experienceGained": "Leatherworking:650",
+    "icon": "Leather",
+    "ingredientIDs": [ 85 ]
+  },
+  {
+    "itemName": "Wild Boar Leather",
+    "id": 330,
+    "value": 650,
+    "itemDescription": "The tanned hide of a wild boar. It will make armor that increases your damage output.",
+    "armor": 4,
+    "damage": 2,
+    "experienceGained": "Leatherworking:150",
+    "icon": "Leather",
+    "ingredientIDs": [ 87 ]
+  },
+  {
+    "itemName": "Caiman Leather",
+    "id": 331,
+    "value": 400,
+    "itemDescription": "The tanned hide of a caiman. Armor made from this leather will slightly increase your damage dealt.",
+    "armor": 2,
+    "damage": 1,
+    "experienceGained": "Leatherworking:100",
+    "icon": "Leather",
+    "ingredientIDs": [ 304 ]
+  },
+  {
+    "itemName": "Turkey Jerky",
+    "id": 332,
+    "itemDescription": "Salted and dried meat from a turkey.",
+    "value": 150,
+    "gatherString": "You withdraw some turkey jerky.",
+    "requiredLevel": 30,
+    "experienceGained": "Culinary Arts:120",
+    "actionRequired": "Culinary Arts",
+    "isEdible": true,
+    "healAmount": 0,
+    "healDuration": 600,
+    "buffedSkill": "Hunting",
+    "buffAmount": 3,
+    "icon": "Jerky",
+    "ingredientIDs": [ 82 ]
+  },
+  {
+    "itemName": "Deer Leather Gloves",
+    "id": 333,
+    "value": 500,
+    "itemDescription": "A pair of decent leather gloves.",
+    "armor": 2,
+    "experienceGained": "Leatherworking:55",
+    "icon": "Glove",
+    "ingredientIDs": [ 324 ],
+    "requiredLevel": 5,
+    "isEquipable": true,
+    "equipSlot": "Hands",
+    "amountOfIngredientsToCreate": 2,
+    "actionRequired": "Leatherworking"
+  },
+  {
+    "itemName": "Deer Leather Hat",
+    "id": 334,
+    "value": 700,
+    "itemDescription": "A decent leather hat.",
+    "armor": 1,
+    "experienceGained": "Leatherworking:70",
+    "icon": "Hat",
+    "ingredientIDs": [ 324 ],
+    "requiredLevel": 8,
+    "isEquipable": true,
+    "equipSlot": "Head",
+    "amountOfIngredientsToCreate": 2,
+    "actionRequired": "Leatherworking"
+  },
+  {
+    "itemName": "Deer Leather Boots",
+    "id": 335,
+    "value": 600,
+    "itemDescription": "A pair of decent leather boots.",
+    "armor": 2,
+    "experienceGained": "Leatherworking:75",
+    "icon": "Boots",
+    "ingredientIDs": [ 324 ],
+    "requiredLevel": 10,
+    "isEquipable": true,
+    "equipSlot": "Feet",
+    "amountOfIngredientsToCreate": 3,
+    "actionRequired": "Leatherworking"
+  },
+  {
+    "itemName": "Deer Leather Pants",
+    "id": 336,
+    "value": 1000,
+    "itemDescription": "A pair of decent leather pants.",
+    "armor": 6,
+    "experienceGained": "Leatherworking:80",
+    "icon": "Pants",
+    "ingredientIDs": [ 324 ],
+    "requiredLevel": 12,
+    "isEquipable": true,
+    "equipSlot": "Legs",
+    "actionRequired": "Leatherworking",
+    "amountOfIngredientsToCreate": 4
+  },
+  {
+    "itemName": "Deer Leather Shirt",
+    "id": 337,
+    "value": 1200,
+    "itemDescription": "A pair of decent leather shirts.",
+    "armor": 9,
+    "experienceGained": "Leatherworking:95",
+    "icon": "Armor",
+    "ingredientIDs": [ 324 ],
+    "requiredLevel": 15,
+    "isEquipable": true,
+    "equipSlot": "Body",
+    "amountOfIngredientsToCreate": 5,
+    "actionRequired": "Leatherworking"
+  },
+  {
+    "itemName": "Rabbit Leather Gloves",
+    "id": 338,
+    "value": 250,
+    "itemDescription": "A cheap pair of leather gloves.",
+    "armor": 1,
+    "experienceGained": "Leatherworking:15",
+    "icon": "Glove",
+    "ingredientIDs": [ 325 ],
+    "requiredLevel": 1,
+    "isEquipable": true,
+    "equipSlot": "Hands",
+    "amountOfIngredientsToCreate": 1,
+    "actionRequired": "Leatherworking"
+  },
+  {
+    "itemName": "Rabbit Leather Hat",
+    "id": 339,
+    "value": 300,
+    "itemDescription": "A cheap leather hat.",
+    "armor": 1,
+    "experienceGained": "Leatherworking:25",
+    "icon": "Hat",
+    "ingredientIDs": [ 325 ],
+    "requiredLevel": 2,
+    "isEquipable": true,
+    "equipSlot": "Head",
+    "amountOfIngredientsToCreate": 2,
+    "actionRequired": "Leatherworking"
+  },
+  {
+    "itemName": "Rabbit Leather Boots",
+    "id": 340,
+    "value": 350,
+    "itemDescription": "A pair of cheap leather boots.",
+    "armor": 1,
+    "experienceGained": "Leatherworking:35",
+    "icon": "Boot",
+    "ingredientIDs": [ 325 ],
+    "requiredLevel": 3,
+    "isEquipable": true,
+    "equipSlot": "Feet",
+    "amountOfIngredientsToCreate": 2,
+    "actionRequired": "Leatherworking"
+  },
+  {
+    "itemName": "Rabbit Leather Pants",
+    "id": 341,
+    "value": 400,
+    "itemDescription": "A pair of cheap leather pants.",
+    "armor": 3,
+    "experienceGained": "Leatherworking:45",
+    "icon": "Pants",
+    "ingredientIDs": [ 325 ],
+    "requiredLevel": 4,
+    "isEquipable": true,
+    "equipSlot": "Legs",
+    "amountOfIngredientsToCreate": 3,
+    "actionRequired": "Leatherworking"
+  },
+  {
+    "itemName": "Rabbit Leather Shirt",
+    "id": 342,
+    "value": 450,
+    "itemDescription": "A cheap leather shirt.",
+    "armor": 5,
+    "experienceGained": "Leatherworking:55",
+    "icon": "Armor",
+    "ingredientIDs": [ 325 ],
+    "requiredLevel": 5,
+    "isEquipable": true,
+    "equipSlot": "Body",
+    "amountOfIngredientsToCreate": 4,
+    "actionRequired": "Leatherworking"
+  },
+  {
+    "itemName": "Leatherworking Toolkit",
+    "id": 343,
+    "value": 12000,
+    "itemDescription": "A set of tools to work with leather.",
+    "icon": "LeatherTool",
+    "isUsable": true,
+    "actionsEnabled": "Leatherworking",
+    "usableIDs": [
+      [ 324, 333 ],
+      [ 324, 334 ],
+      [ 324, 335 ],
+      [ 324, 336 ],
+      [ 324, 337 ],
+      [ 325, 338 ],
+      [ 325, 339 ],
+      [ 325, 340 ],
+      [ 325, 341 ],
+      [ 325, 342 ]
+
+    ]
   },
 ]

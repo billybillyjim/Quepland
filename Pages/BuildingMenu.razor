@@ -486,12 +486,23 @@
             if(GameState.CanLeave() == true)
             {
                 builder.AddAttribute(22, "onclick", () => BeginMakingSushi());
-                builder.AddContent(23, "Begin Making Sushi");
+                if(FindFishInInventory() == false)
+                {
+                    builder.AddAttribute(23, "disabled", true);
+                    builder.AddAttribute(24, "title", "You don't have any fish to make sushi with at your level.");
+                }
+                else if((GameState.GetPlayerInventory().GetAmountOfItem(Program.itemDatabase.GetItemByName("Rice")) == 0 ||
+                GameState.GetPlayerInventory().GetAmountOfItem(Program.itemDatabase.GetItemByName("Seaweed")) == 0) && autoBuySupplies == false)
+                {
+                     builder.AddAttribute(23, "disabled", true);
+                    builder.AddAttribute(24, "title", "You don't have enough rice or seaweed to make sushi.");
+                }
+                builder.AddContent(25, "Begin Making Sushi");
             }
             else
             {
-                builder.AddAttribute(24, "onclick", () => GameState.StopActions());
-                builder.AddContent(25, "Stop Making Sushi");
+                builder.AddAttribute(26, "onclick", () => GameState.StopActions());
+                builder.AddContent(27, "Stop Making Sushi");
             }
             builder.CloseElement();
 
@@ -587,7 +598,12 @@
             builder.AddAttribute(2, "class", "btn btn-primary");
             builder.AddAttribute(3, "style", "align-text:right");
             builder.AddAttribute(4, "onclick", () => DepositTanneryItem(item));
-            builder.AddContent(5, "Deposit " + item.ItemName);
+            if(item.RequiredLevel > GameState.GetPlayer().GetLevel("Leatherworking"))
+            {
+                builder.AddAttribute(5, "disabled", true);
+                builder.AddAttribute(6, "title", "You don't have the leatherworking level for that.(" + item.RequiredLevel + ")");
+            }
+            builder.AddContent(7, "Deposit " + item.ItemName);
             builder.CloseElement();
             builder.CloseElement();
         };
@@ -618,7 +634,6 @@
     }
     public void WithdrawTanneryItem(int i)
     {
-        MessageManager.AddMessage("" + i);
         GameItem jerky = Program.itemDatabase.GetItemWithIngredientID(thisBuilding.TanneryItems[i].Item.Key);
         if(jerky == null)
         {
@@ -627,6 +642,7 @@
         }
         GameState.GetPlayerInventory().AddMultipleOfItem(jerky, thisBuilding.TanneryItems[i].Item.Value);
         thisBuilding.TanneryItems.RemoveAt(i);
+        GameState.GetPlayer().GainExperience(jerky.ExperienceGained);
         this.StateHasChanged();
         GameState.UpdateState();
     }
@@ -661,6 +677,7 @@
     {
         GameState.StopActions();
         GameState.isGathering = true;
+        MessageManager.AddMessage("You set to work with the master as your guide.");
         GameState.gatherTimer = new Timer(new TimerCallback(_ =>
         {
             if(GameState.sushiHouseRice == 0 || GameState.sushiHouseSeaweed == 0)
@@ -677,16 +694,30 @@
                     }
                     else
                     {
-                        MessageManager.AddMessage("You don't have any fish to make sushi with.");
+                        MessageManager.AddMessage("You don't have any fish to make sushi with at your level.");
                         GameState.StopActions();
                     }
                 }
             }
             GameState.UpdateState();
             StateHasChanged();
-        }), null, 8000, 8000);
+        }), null, 7000, 7000);
         GameState.UpdateState();
         StateHasChanged();
+    }
+    private bool FindFishInInventory()
+    {
+        int[,] fishIDs = Extensions.To2DArray(Program.itemDatabase.GetItemByID(122).UsableIDs);
+        for(int i = 0; i < fishIDs.GetLength(0); i++)
+        {
+             GameItem resource = Program.itemDatabase.GetItemByID(fishIDs[i, 0]);
+            GameItem result = Program.itemDatabase.GetItemByID(fishIDs[i, 1]);
+            if (GameState.GetPlayerInventory().HasItem(resource) && GameState.GetPlayer().HasRequiredLevel(result))
+            {
+                return true;
+            }
+        }
+        return false;
     }
     private bool FindRollToMake()
     {
@@ -694,13 +725,16 @@
         int[,] fishIDs = Extensions.To2DArray(Program.itemDatabase.GetItemByID(122).UsableIDs);
         for(int i = 0; i < fishIDs.GetLength(0); i++)
         {
-            if (GameState.GetPlayerInventory().HasItem(Program.itemDatabase.GetItemByID(fishIDs[i, 0])))
+            GameItem resource = Program.itemDatabase.GetItemByID(fishIDs[i, 0]);
+            GameItem result = Program.itemDatabase.GetItemByID(fishIDs[i, 1]);
+            if (GameState.GetPlayerInventory().HasItem(resource) && GameState.GetPlayer().HasRequiredLevel(result))
             {
-                GameState.GetPlayerInventory().RemoveItemByID(fishIDs[i, 0]);
-                GameState.GetPlayerInventory().AddItem(Program.itemDatabase.GetItemByID(fishIDs[i, 1]));
+                GameState.GetPlayerInventory().RemoveOneOfItem(resource);
+                GameState.GetPlayerInventory().AddItem(result);
+                GameState.GetPlayer().GainExperience(result.ExperienceGained);
                 GameState.sushiHouseRice--;
                 GameState.sushiHouseSeaweed--;
-                MessageManager.AddMessage("You create a " + Program.itemDatabase.GetItemByID(fishIDs[i, 1]).ItemName + " under the supervision of the old man.");
+                MessageManager.AddMessage("You create a " + result.ItemName + " under the supervision of the old man.");
                 return true;
             }
         }

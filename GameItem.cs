@@ -25,6 +25,7 @@ public class GameItem
     public int BuffAmount { get; set; }
     public int HealDuration { get; set; }
     public int MadeOnCreation { get; set; }
+    public int AmountOfIngredientsToCreate { get; set; }
 
     public bool IsUsable { get; set; }
     public bool IsEquipable { get; set; }

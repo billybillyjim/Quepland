@@ -441,6 +441,10 @@ public class Inventory
         UpdateItemCount();
         return 0;
     }
+    /// <summary>
+    /// Slower than RemoveOneOfItem, iterates through all keyvalue pairs in items.
+    /// </summary>
+    /// <param name="id"></param>
     public void RemoveItemByID(int id)
     {
         KeyValuePair<GameItem, int> pairToRemove;
@@ -519,13 +523,18 @@ public class Inventory
         string returnString = "";
         foreach (KeyValuePair<GameItem, int> pair in items)
         {
+            int isLocked = 0;
+            if (pair.Key.IsLocked)
+            {
+                isLocked = 1;
+            }
             if(pair.Value < 0)
             {
-                returnString += pair.Key.Id + "-" + 1 + "/";
+                returnString += pair.Key.Id + "-" + 1 + "-" + isLocked + "/";
             }
             else
             {
-                returnString += pair.Key.Id + "-" + pair.Value + "/";
+                returnString += pair.Key.Id + "-" + pair.Value + "-" + isLocked + "/";
             }
         }
         return returnString;

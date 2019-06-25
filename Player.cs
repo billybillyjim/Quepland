@@ -163,6 +163,11 @@ public class Player
     }
     public void GainExperience(Skill skill, int amount)
     {
+        if(skill == null)
+        {
+            Console.WriteLine("Gained " + amount + " experience in unfound skill.");
+            return;
+        }
         skill.SkillExperience += (int)(amount * GetExperienceGainBonus(skill));
         if (skill.SkillExperience >= Extensions.GetExperienceRequired(skill.GetSkillLevel()))
         {

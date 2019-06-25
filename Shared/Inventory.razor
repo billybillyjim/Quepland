@@ -141,12 +141,12 @@
             if (item.Key.IsLocked)
             {
                 builder.AddAttribute(11, "src", "data/ItemIcons/Lock.png");
-                builder.AddAttribute(12, "style", "width:20px;opacity:0.6");
+                builder.AddAttribute(12, "style", "width:20px;opacity:0.6;margin:2px");
             }
             else
             {
                 builder.AddAttribute(11, "src", "data/ItemIcons/Unlock.png");
-                builder.AddAttribute(12, "style", "width:20px;opacity:0.6");
+                builder.AddAttribute(12, "style", "width:20px;opacity:0.6;margin:2px");
             }
 
 
@@ -197,7 +197,7 @@
                 }
                 else if (item.Key.IsLocked)
                 {
-                     builder.AddAttribute(32, "disabled", true);
+                    builder.AddAttribute(32, "disabled", true);
                     builder.AddAttribute(33, "title", "This item is locked. Click the lock by the name to unlock it.");
                 }
                 if (!GameState.isUsing)
@@ -302,10 +302,10 @@
                 builder.AddAttribute(11, "title", "You don't have enough free inventory space.");
             }
             else if (item.Key.IsLocked)
-                {
-                     builder.AddAttribute(10, "disabled", true);
-                    builder.AddAttribute(11, "title", "This item is locked. Click the lock by the name to unlock it.");
-                }
+            {
+                builder.AddAttribute(10, "disabled", true);
+                builder.AddAttribute(11, "title", "This item is locked. Click the lock by the name to unlock it.");
+            }
             builder.AddContent(12, item.Key.UnpackString);
             builder.CloseElement();
             builder.CloseElement();
@@ -351,10 +351,10 @@
             builder.OpenElement(7, "button");
             builder.AddAttribute(8, "class", "btn btn-primary");
             if (item.Key.IsLocked)
-                {
-                     builder.AddAttribute(9, "disabled", true);
-                    builder.AddAttribute(10, "title", "This item is locked. Click the lock by the name to unlock it.");
-                }
+            {
+                builder.AddAttribute(9, "disabled", true);
+                builder.AddAttribute(10, "title", "This item is locked. Click the lock by the name to unlock it.");
+            }
             if (item.Key.IsEquipped)
             {
                 builder.AddAttribute(9, "onclick", () => Unequip(item.Key));
@@ -399,10 +399,10 @@
             builder.AddAttribute(9, "style", "margin:2px");
             builder.AddAttribute(10, "onclick", () => Deposit(item, 1));
             if (item.Key.IsLocked)
-                {
-                     builder.AddAttribute(11, "disabled", true);
-                    builder.AddAttribute(12, "title", "This item is locked. Click the lock by the name to unlock it.");
-                }
+            {
+                builder.AddAttribute(11, "disabled", true);
+                builder.AddAttribute(12, "title", "This item is locked. Click the lock by the name to unlock it.");
+            }
             builder.AddContent(13, "1");
             // builder.CloseElement();
             builder.CloseElement();
@@ -413,10 +413,10 @@
             builder.AddAttribute(16, "style", "margin:2px");
             builder.AddAttribute(17, "onclick", () => Deposit(item, 5));
             if (item.Key.IsLocked)
-                {
-                     builder.AddAttribute(18, "disabled", true);
-                    builder.AddAttribute(19, "title", "This item is locked. Click the lock by the name to unlock it.");
-                }
+            {
+                builder.AddAttribute(18, "disabled", true);
+                builder.AddAttribute(19, "title", "This item is locked. Click the lock by the name to unlock it.");
+            }
             builder.AddContent(20, "5");
             //builder.CloseElement();
             builder.CloseElement();
@@ -427,10 +427,10 @@
             builder.AddAttribute(23, "style", "margin:2px");
             builder.AddAttribute(24, "onclick", () => Deposit(item, int.MaxValue));
             if (item.Key.IsLocked)
-                {
-                     builder.AddAttribute(25, "disabled", true);
-                    builder.AddAttribute(26, "title", "This item is locked. Click the lock by the name to unlock it.");
-                }
+            {
+                builder.AddAttribute(25, "disabled", true);
+                builder.AddAttribute(26, "title", "This item is locked. Click the lock by the name to unlock it.");
+            }
             builder.AddContent(27, "All");
             builder.CloseElement();
             builder.CloseElement();
@@ -468,10 +468,10 @@
                 builder.AddAttribute(14, "title", "You don't have inventory space for the coins you would receive.");
             }
             else if (item.Key.IsLocked)
-                {
-                     builder.AddAttribute(13, "disabled", true);
-                    builder.AddAttribute(14, "title", "This item is locked. Click the lock by the name to unlock it.");
-                }
+            {
+                builder.AddAttribute(13, "disabled", true);
+                builder.AddAttribute(14, "title", "This item is locked. Click the lock by the name to unlock it.");
+            }
             builder.AddContent(15, "1");
             builder.CloseElement();
             builder.OpenElement(16, "button");
@@ -485,10 +485,10 @@
                 builder.AddAttribute(21, "title", "You don't have inventory space for the coins you would receive.");
             }
             else if (item.Key.IsLocked)
-                {
-                     builder.AddAttribute(20, "disabled", true);
-                    builder.AddAttribute(21, "title", "This item is locked. Click the lock by the name to unlock it.");
-                }
+            {
+                builder.AddAttribute(20, "disabled", true);
+                builder.AddAttribute(21, "title", "This item is locked. Click the lock by the name to unlock it.");
+            }
             builder.AddContent(22, "5");
             builder.CloseElement();
             builder.OpenElement(23, "button");
@@ -511,10 +511,10 @@
 
             }
             if (item.Key.IsLocked)
-                {
-                     builder.AddAttribute(27, "disabled", true);
-                    builder.AddAttribute(28, "title", "This item is locked. Click the lock by the name to unlock it.");
-                }
+            {
+                builder.AddAttribute(27, "disabled", true);
+                builder.AddAttribute(28, "title", "This item is locked. Click the lock by the name to unlock it.");
+            }
             builder.AddContent(30, sellAmount);
             builder.CloseElement();
             builder.OpenElement(31, "button");
@@ -522,10 +522,10 @@
             builder.AddAttribute(33, "style", "margin:3px");
             builder.AddAttribute(34, "onclick", () => Sell(item, int.MaxValue));
             if (item.Key.IsLocked)
-                {
-                     builder.AddAttribute(35, "disabled", true);
-                    builder.AddAttribute(36, "title", "This item is locked. Click the lock by the name to unlock it.");
-                }
+            {
+                builder.AddAttribute(35, "disabled", true);
+                builder.AddAttribute(36, "title", "This item is locked. Click the lock by the name to unlock it.");
+            }
             builder.AddContent(37, "All");
             builder.CloseElement();
             builder.CloseElement();
@@ -557,10 +557,15 @@
                 builder.AddAttribute(10, "title", "You can't make things while doing what you're doing.");
             }
             else if (item.IsLocked)
-                {
-                     builder.AddAttribute(9, "disabled", true);
-                    builder.AddAttribute(10, "title", "This item is locked. Click the lock by the name to unlock it.");
-                }
+            {
+                builder.AddAttribute(9, "disabled", true);
+                builder.AddAttribute(10, "title", "This item is locked. Click the lock by the name to unlock it.");
+            }
+            else if(itemToMake.AmountOfIngredientsToCreate > GameState.GetPlayerInventory().GetAmountOfItem(Program.itemDatabase.GetItemByID(itemToMake.IngredientIDs[0])))
+            {
+                builder.AddAttribute(9, "disabled", true);
+                builder.AddAttribute(10, "title", "You don't have enough " + Program.itemDatabase.GetItemByID(itemToMake.IngredientIDs[0]).ItemName + ".(" + itemToMake.AmountOfIngredientsToCreate + ")");
+            }
             builder.AddContent(11, itemToMake.ItemName);
             builder.CloseElement();
             builder.CloseElement();
@@ -581,10 +586,10 @@
             builder.AddAttribute(5, "class", "btn btn-primary");
             builder.AddAttribute(6, "onclick", () => Eat(item));
             if (item.IsLocked)
-                {
-                     builder.AddAttribute(7, "disabled", true);
-                    builder.AddAttribute(8, "title", "This item is locked. Click the lock by the name to unlock it.");
-                }
+            {
+                builder.AddAttribute(7, "disabled", true);
+                builder.AddAttribute(8, "title", "This item is locked. Click the lock by the name to unlock it.");
+            }
             builder.AddContent(9, "Eat");
             builder.CloseElement();
             builder.CloseElement();
@@ -726,11 +731,34 @@
         GameState.createRepeatTimer = new Timer(new TimerCallback(_ =>
         {
             GameItem itemCreated = Program.itemDatabase.GetItemByID(usableIDs[itemCreatedID, 1]);
-
-            if (GameState.GetPlayerInventory().RemoveOneOfItem(itemUsed))
+            if(itemCreated.AmountOfIngredientsToCreate == 0)
             {
-                int numToMake = Math.Max(itemCreated.MadeOnCreation, 1);
-                GameState.GetPlayerInventory().AddMultipleOfItem(itemCreated, numToMake);
+                if (GameState.GetPlayerInventory().RemoveOneOfItem(itemUsed))
+                {
+                    int numToMake = Math.Max(itemCreated.MadeOnCreation, 1);
+                    GameState.GetPlayerInventory().AddMultipleOfItem(itemCreated, numToMake);
+                    MessageManager.AddMessage(itemCreated.GatherString);
+                    GameState.GetPlayer().GainExperience(itemCreated.ExperienceGained);
+                    if (currentUsedItem.DestroyOnUse)
+                    {
+                        GameState.GetPlayerInventory().RemoveOneOfItem(currentUsedItem);
+                        if (GameState.GetPlayerInventory().HasItem(currentUsedItem) == false)
+                        {
+                            MessageManager.AddMessage("You have run out of " + currentUsedItem.ItemName + ".");
+                            CancelUse();
+                        }
+                    }
+                    if (GameState.GetPlayerInventory().HasItem(itemUsed) == false)
+                    {
+                        MessageManager.AddMessage("You have run out of " + itemUsed.ItemName + ".");
+                        CancelUse();
+                    }
+                }
+            }
+            else
+            {
+                GameState.GetPlayerInventory().RemoveItems(itemUsed, itemCreated.AmountOfIngredientsToCreate);
+                GameState.GetPlayerInventory().AddItem(itemCreated);
                 MessageManager.AddMessage(itemCreated.GatherString);
                 GameState.GetPlayer().GainExperience(itemCreated.ExperienceGained);
                 if (currentUsedItem.DestroyOnUse)
@@ -742,11 +770,12 @@
                         CancelUse();
                     }
                 }
-                if (GameState.GetPlayerInventory().HasItem(itemUsed) == false)
+                if (GameState.GetPlayerInventory().HasItem(itemUsed) == false || GameState.GetPlayerInventory().GetAmountOfItem(itemUsed) < itemCreated.AmountOfIngredientsToCreate)
                 {
                     MessageManager.AddMessage("You have run out of " + itemUsed.ItemName + ".");
                     CancelUse();
                 }
+
             }
             //CancelUse();
             GameState.UpdateState();

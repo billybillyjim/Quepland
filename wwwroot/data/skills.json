@@ -94,6 +94,11 @@
     "skillLevel": 1,
     "skillExperience": 0,
     "skillDescription": "Culinary Arts involves taking raw materials and converting them into digestible materials through physical and chemical changes. Ultimately this boils down to making sushi rolls."
+  },
+  {
+    "skillName": "Leatherworking",
+    "skillLevel": 1,
+    "skillDescription": "Leatherworking is working with leather."
   }
 
 
