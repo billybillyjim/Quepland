@@ -47,7 +47,7 @@
   {
     "name": "Lower Mt Queple Trail",
     "id": 4,
-    "actions": [ "Mining", "Battle", "Carve totem pole:Cheap Wood Shavings" ],
+    "actions": [ "Mining", "Battle", "Carve totem pole:Cheap Totem" ],
     "isUnlocked": false,
     "description": "As you begin your ascent up the mountain, you notice the mouth of a cave off to the side of the path. A large totem pole stands near its entrance. Along the mountain side you can see deposits of copper, tin, iron, and calamine.",
     "areaURL": "lowerMtQuepleTrail",
@@ -320,7 +320,7 @@
     "areaURL": "NorthernIslesTrails",
     "icon": "oi oi-fire",
     "unlockableAreas": [ "The Foot of Mt Yama,Destroy the rock with your strength,Strength:45,", "The Foot of Mt Yama,Destroy the rock with your mining skills,Mining:40,Mining" ],
-    "actions": [ "Carve Totem Pole:Nice Wood Shavings", "Chop Maple Trees:Sugar Maple Logs" ]
+    "actions": [ "Carve Totem Pole:Nice Totem", "Chop Maple Trees:Sugar Maple Logs" ]
   },
   {
     "name": "The Foot of Mt Yama",
@@ -400,7 +400,7 @@
     "icon": "oi oi-signpost",
     "id": 38,
     "actionRequiredForAccess": "Desert Travel",
-    "actions": [ "Carve Totem Pole:Exquisite Wood Shavings" ],
+    "actions": [ "Carve Totem Pole:Exquisite Totem" ],
     "unlockableAreas": [ "Oasis,Continue Southward,,", "Leupp,Go West,,", "Abandoned Desert Shack,Go East,," ],
     "redirectAreaURL": "Route7",
     "npcIDs": [ 18 ]
@@ -411,7 +411,7 @@
     "areaURL": "StrangeOldHut",
     "icon": "oi oi-bug",
     "id": 39,
-    "actions": [ "Mine Coal:Coal", "Carve Totem:Wood Shavings" ],
+    "actions": [ "Mine Coal:Coal", "Carve Totem:Totem" ],
     "unlockableAreas": [ "Swamplake,Go around the hill,," ],
     "buildings": [ "EarthHall" ]
   },
@@ -680,10 +680,11 @@
     "description": "A solitary building sits just off the shore of the river. It's flanked by an extremely old graveyard.",
     "icon": "oi oi-cloudy",
     "npcIDs": [ 53 ],
-    "buildings": [ "TammysTannery"],
+    "buildings": [ "TammysTannery" ],
     "actionRequiredForAccess": "Rafting",
     "actions": [ "Battle" ],
-    "monsterIDs": [31, 32, 33, 34, 35, 36, 37, 38]
+    "monsterIDs": [ 31, 32, 33, 34, 35, 36, 37, 38 ],
+    "unlockableAreas": [ "Guttermouth,Continue down the river,," ]
   },
   {
     "name": "Guttermouth",
@@ -693,7 +694,6 @@
     "description": "You begin to reach signs of civilization. Down at the river's mouth you can see a large city. A number of houses surround the main building here, which has the word 'Woodworks' carved on the front of it.",
     "icon": "oi oi-eye",
     "buildings": [ "WoodWorkersAssociation" ],
-    "unlockableAreas": [ "Ricechild,Ride to the river's mouth,," ],
     "actionRequiredForAccess": "Rafting"
   },
   {

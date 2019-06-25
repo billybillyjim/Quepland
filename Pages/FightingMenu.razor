@@ -282,7 +282,7 @@
         if (battleFound)
         {
             int dmg = Math.Max(1, Extensions.GetGaussianRandomInt(opponent.Damage, opponent.Damage / 2d));
-            dmg *= (int)Math.Max(1 - Extensions.CalculateArmorDamageReduction(GameState.GetPlayer()), 0.05d);
+            dmg = (int)(dmg * Math.Max(1 - Extensions.CalculateArmorDamageReduction(GameState.GetPlayer()), 0.05d));
             GameState.GetPlayer().GainExperience("HP", Math.Min(GameState.GetPlayer().CurrentHP, dmg) * 8);
             GameState.GetPlayer().CurrentHP -= dmg;
             MessageManager.AddMessage("You took " + dmg + " damage from the " + opponent.Name + "'s attack.");

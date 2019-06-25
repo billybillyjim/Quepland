@@ -176,10 +176,11 @@
                             if (GameState.isGathering || GameState.isHunting || GameState.isUsing || !GameState.GetPlayerInventory().ActionIsEnabled("Harpoon Fishing"))
                             {
                                 builder.AddAttribute(6, "disabled", true);
+                                builder.AddAttribute(7, "title", "You don't have the tool to do this.");
                             }
-                            builder.AddContent(7, "Harpoon Fish");
+                            builder.AddContent(8, "Harpoon Fish");
                             builder.CloseElement();
-                            builder.OpenElement(8, "br");
+                            builder.OpenElement(9, "br");
                             builder.CloseElement();
                         }
                         else
@@ -189,6 +190,36 @@
                             builder.AddAttribute(4, "class", "btn btn-primary");
                             builder.AddAttribute(5, "onclick", () => StopGathering());
                             builder.AddContent(7, "Stop Fishing");
+                            builder.CloseElement();
+                            builder.OpenElement(8, "br");
+                            builder.CloseElement();
+                        }
+                    }
+                    else if(actionString.Contains("Carve totem"))
+                    {
+                        if (GameState.isGathering == false)
+                        {
+                            builder.OpenElement(2, "button");
+                            builder.AddAttribute(3, "style", "margin-bottom:10px");
+                            builder.AddAttribute(4, "class", "btn btn-primary");
+                            builder.AddAttribute(5, "onclick", () => BeginCarvingTotem(actionString));
+                            if (GameState.isGathering || GameState.isHunting || GameState.isUsing || !GameState.GetPlayerInventory().ActionIsEnabled("Woodworking"))
+                            {
+                                builder.AddAttribute(6, "disabled", true);
+                                builder.AddAttribute(7, "title", "You don't have the tool to do this.");
+                            }
+                            builder.AddContent(8, "Carve Totem");
+                            builder.CloseElement();
+                            builder.OpenElement(9, "br");
+                            builder.CloseElement();
+                        }
+                        else
+                        {
+                            builder.OpenElement(2, "button");
+                            builder.AddAttribute(3, "style", "margin-bottom:10px");
+                            builder.AddAttribute(4, "class", "btn btn-primary");
+                            builder.AddAttribute(5, "onclick", () => StopGathering());
+                            builder.AddContent(7, "Stop Carving");
                             builder.CloseElement();
                             builder.OpenElement(8, "br");
                             builder.CloseElement();
@@ -826,6 +857,37 @@
             GameState.StopActions();
         }
 
+    }
+    private void BeginCarvingTotem(string actionString)
+    {
+        GameState.StopActions();
+        string totemLevel = actionString.Split(':')[1];
+        MessageManager.AddMessage("You begin carving the totem.");
+        GameState.isGathering = true;
+        GameState.gatherTimer = new Timer(new TimerCallback(_ =>
+        {
+            GetRandomTotemItem(totemLevel);
+            GameState.UpdateState();
+            StateHasChanged();
+
+        }), null, 2000, 2000);
+
+        GameState.UpdateState();
+        StateHasChanged();
+    }
+    private void GetRandomTotemItem(string totemLevel)
+    {
+        GameItem gainedItem = (Program.itemDatabase.GetItemByID(Extensions.GetRandomReward(Program.itemDatabase.GetRewardByName(totemLevel))));
+        if (GameState.GetPlayerInventory().AddItem(gainedItem))
+        {
+            MessageManager.AddMessage("As you carve you aquire " + gainedItem.ItemName);
+        }
+        else
+        {
+            MessageManager.AddMessage("You don't have any inventory space to carve anything.");
+            GameState.StopActions();
+        }
+        this.StateHasChanged();
     }
     public void TrainDeftness()
     {

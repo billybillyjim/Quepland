@@ -539,7 +539,7 @@
     "id": 28,
     "level": 0,
     "experienceGained": 10,
-    "hp": 25,
+    "hp": 250,
     "weakness": "Archery",
     "strength": "Knifesmanship Swordsmanship Axemanship Hammermanship Strength",
     "damage": 0,
@@ -583,7 +583,7 @@
     "hp": 3500,
     "weakness": "Swordsmanship",
     "strength": "Knifesmanship",
-    "damage": 15,
+    "damage": 80,
     "armor": 3,
     "attackSpeed": 8,
     "dropTable": [
@@ -603,7 +603,7 @@
     "armor": 1,
     "weakness": "Swordsmanship",
     "strength": "Knifesmanship",
-    "damage": 15,
+    "damage": 75,
     "attackSpeed": 5,
     "dropTable": [
       [ 21, 700 ],
@@ -618,7 +618,7 @@
     "armor": 15,
     "weakness": "Swordsmanship",
     "strength": "Knifesmanship",
-    "damage": 15,
+    "damage": 55,
     "attackSpeed": 6,
     "dropTable": [
       [ 26, 50 ],
@@ -644,7 +644,7 @@
     "armor": 35,
     "weakness": "Swordsmanship",
     "strength": "Knifesmanship",
-    "damage": 15,
+    "damage": 65,
     "attackSpeed": 5,
     "dropTable": [
       [ 62, 100 ],
@@ -664,7 +664,7 @@
     "armor": 35,
     "weakness": "Swordsmanship",
     "strength": "Knifesmanship",
-    "damage": 25,
+    "damage": 60,
     "attackSpeed": 7,
     "dropTable": [
       [ 310, 5 ],
@@ -690,9 +690,9 @@
     "level": 6,
     "hp": 2000,
     "armor": 6,
-    "weakness": "Hammermanship",
+    "weakness": "Archery",
     "strength": "Knifesmanship",
-    "damage": 15,
+    "damage": 55,
     "attackSpeed": 3,
     "dropTable": [
       [ 16, 50 ],
@@ -710,9 +710,9 @@
     "level": 6,
     "hp": 4000,
     "armor": 22,
-    "weakness": "Hammermanship",
+    "weakness": "Archery",
     "strength": "Knifesmanship",
-    "damage": 10,
+    "damage": 40,
     "attackSpeed": 2,
     "dropTable": [
       [ 16, 25 ],
@@ -732,7 +732,7 @@
     "armor": 55,
     "weakness": "Swordsmanship",
     "strength": "Knifesmanship",
-    "damage": 55,
+    "damage": 90,
     "attackSpeed": 12,
     "dropTable": [
       [ 323, 5 ],

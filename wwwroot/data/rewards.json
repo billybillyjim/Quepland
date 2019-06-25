@@ -20,5 +20,31 @@
       [ 269, 5 ],
       [ 116, 50 ]
     ]
-  }
+  },
+  {
+    "name": "Cheap Totem",
+    "rewards": [
+      [ 234, 999 ],
+      [ 344, 1 ]
+    ]
+  },
+  {
+    "name": "Totem",
+    "rewards": [
+      [ 235, 998 ],
+      [ 344, 2 ]
+    ]
+  },  {
+    "name": "Nice Totem",
+    "rewards": [
+      [ 236, 997 ],
+      [ 344, 3 ]
+    ]
+  },  {
+    "name": "Exquisite Totem",
+    "rewards": [
+      [ 237, 995 ],
+      [ 344, 5 ]
+    ]
+  },
 ]

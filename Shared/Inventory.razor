@@ -331,9 +331,17 @@
             {
                 infoString += "Damage: " + item.Key.Damage;
             }
-            if(item.Key.GatherSpeedBonus > 0)
+            if(item.Key.Armor > 0)
             {
                 if(item.Key.Damage > 0)
+                {
+                    infoString += ", ";
+                }
+                infoString += " Armor: " + item.Key.Armor;
+            }
+            if(item.Key.GatherSpeedBonus > 0)
+            {
+                if(item.Key.Damage > 0 || item.Key.Armor > 0)
                 {
                     infoString += ", ";
                 }
@@ -353,7 +361,8 @@
             else
             {
                 builder.AddAttribute(11, "onclick", () => Equip(item.Key));
-                if(GameState.GetPlayer().GetLevel(item.Key.ActionRequired) < item.Key.RequiredLevel)
+                if(GameState.GetPlayer().GetLevel(item.Key.ActionRequired) < item.Key.RequiredLevel &&
+                item.Key.ActionRequired.Contains("Leatherworking") == false)
                 {
                     builder.AddAttribute(12, "disabled", true);
                     builder.AddAttribute(13, "title", "You don't have the " + item.Key.ActionRequired + " level to equip this item. (" + item.Key.RequiredLevel + ")");
