@@ -561,7 +561,7 @@
                 builder.AddAttribute(9, "disabled", true);
                 builder.AddAttribute(10, "title", "This item is locked. Click the lock by the name to unlock it.");
             }
-            else if(itemToMake.AmountOfIngredientsToCreate > GameState.GetPlayerInventory().GetAmountOfItem(Program.itemDatabase.GetItemByID(itemToMake.IngredientIDs[0])))
+            else if(itemToMake.IngredientIDs != null && itemToMake.AmountOfIngredientsToCreate > GameState.GetPlayerInventory().GetAmountOfItem(Program.itemDatabase.GetItemByID(itemToMake.IngredientIDs[0])))
             {
                 builder.AddAttribute(9, "disabled", true);
                 builder.AddAttribute(10, "title", "You don't have enough " + Program.itemDatabase.GetItemByID(itemToMake.IngredientIDs[0]).ItemName + ".(" + itemToMake.AmountOfIngredientsToCreate + ")");
