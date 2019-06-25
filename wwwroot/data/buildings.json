@@ -472,7 +472,7 @@
     "name": "Mound's Boats",
     "id": 58,
     "url": "MoundsBoats",
-    "description": "At the kiosk you meet Mound, who sells two different sized boats.",
+    "description": "At the kiosk you meet Gordo, who greets you nervously.",
     "isShop": true,
     "items": [ 245, 246 ],
     "npcIDs": [ 23 ]

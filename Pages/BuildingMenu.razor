@@ -147,10 +147,16 @@
                 }
                 else
                 {
-                    builder.AddAttribute(12, "title", "There's no point in buying none or less than none of something.");
+                    builder.AddAttribute(132, "title", "There's no point in buying none or less than none of something.");
                 }
             }
-            builder.AddContent(13, "" + amount);
+            else if((GameState.GetPlayerInventory().GetAvailableSpaces() < amount && (item.IsStackable == false)) ||
+            (item.IsStackable && GameState.GetPlayerInventory().GetAvailableSpaces() < amount && GameState.GetPlayerInventory().HasItem(item) == false))
+            {
+                builder.AddAttribute(14, "disabled", true);
+                 builder.AddAttribute(15, "title", "You don't have enough inventory space to buy this.");
+            }
+            builder.AddContent(16, "" + amount);
             builder.CloseElement();
         };
     }
@@ -494,7 +500,7 @@
                 else if((GameState.GetPlayerInventory().GetAmountOfItem(Program.itemDatabase.GetItemByName("Rice")) == 0 ||
                 GameState.GetPlayerInventory().GetAmountOfItem(Program.itemDatabase.GetItemByName("Seaweed")) == 0) && autoBuySupplies == false)
                 {
-                     builder.AddAttribute(23, "disabled", true);
+                    builder.AddAttribute(23, "disabled", true);
                     builder.AddAttribute(24, "title", "You don't have enough rice or seaweed to make sushi.");
                 }
                 builder.AddContent(25, "Begin Making Sushi");
@@ -710,7 +716,7 @@
         int[,] fishIDs = Extensions.To2DArray(Program.itemDatabase.GetItemByID(122).UsableIDs);
         for(int i = 0; i < fishIDs.GetLength(0); i++)
         {
-             GameItem resource = Program.itemDatabase.GetItemByID(fishIDs[i, 0]);
+            GameItem resource = Program.itemDatabase.GetItemByID(fishIDs[i, 0]);
             GameItem result = Program.itemDatabase.GetItemByID(fishIDs[i, 1]);
             if (GameState.GetPlayerInventory().HasItem(resource) && GameState.GetPlayer().HasRequiredLevel(result))
             {

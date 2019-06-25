@@ -195,11 +195,6 @@
                     builder.AddAttribute(32, "disabled", true);
                     builder.AddAttribute(33, "title", "You can't do that while you are doing what you're doing.");
                 }
-                else if (item.Key.IsLocked)
-                {
-                    builder.AddAttribute(32, "disabled", true);
-                    builder.AddAttribute(33, "title", "This item is locked. Click the lock by the name to unlock it.");
-                }
                 if (!GameState.isUsing)
                 {
                     builder.AddAttribute(34, "onclick", () => Use(item.Key));

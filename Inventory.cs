@@ -42,6 +42,10 @@ public class Inventory
     }
     public int GetAvailableSpaces()
     {
+        if(maxSize - totalItems < 0)
+        {
+            return 0;
+        }
         return maxSize - totalItems;
     }
     public Dictionary<GameItem, int> GetItems()

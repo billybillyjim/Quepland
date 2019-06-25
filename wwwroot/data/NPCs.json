@@ -153,9 +153,9 @@
     "isInteractable": true
   },
   {
-    "name": "Mound",
+    "name": "Gordo",
     "id": 23,
-    "spokenText": "Well I got some big boats, and some little ones. Which do you want?",
+    "spokenText": "Hi, welcome to Mound's boats. I'm the new guy. Would you like a boat?",
     "isInteractable": true
   },
   {
