@@ -511,7 +511,7 @@
     "url": "TammysTannery",
     "description": "You enter the tannery and are greeted by Tammy. There are a number of meat products you can buy here.",
     "isShop": true,
-    "items": [ 305, 306, 307, 308 ],
+    "items": [ 343, 305, 306, 307, 308 ],
     "isExpensive": true,
     "npcIDs": [ 57 ],
     "isTannery": true,
