@@ -30,7 +30,7 @@ public class GameState
     public bool saveGameExists;
 
     public string previousURL;
-    public string updateVersionString = "1.014b";
+    public string updateVersionString = "1.015a";
     
     public GameItem currentUsedItem;
     public GameItem currentGatherItem;

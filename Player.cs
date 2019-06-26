@@ -363,9 +363,17 @@ public class Player
         }
         return total;
     }
+    public float GetExperienceGainBonus(string skill)
+    {
+        return GetExperienceGainBonus(skills.Find(x => x.SkillName == skill));
+    }
     public float GetExperienceGainBonus(Skill skill)
     {
         float baseExp = 1;
+        if(skill == null)
+        {
+            return 1;
+        }
         foreach(GameItem equipped in equippedItems)
         {
             if(equipped.ActionRequired == skill.SkillName)
