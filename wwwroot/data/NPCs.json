@@ -325,7 +325,7 @@
   },
   {
     "name": "Mysterious Traveller",
-    "id": 48,
+    "id": 62,
     "spokenText": "Did you know there is a great river south of Quepland Woods? Meet me there and I'll show you. No strings attached.",
     "unlockNPCIds": [ 49 ],
     "isInteractable": true,

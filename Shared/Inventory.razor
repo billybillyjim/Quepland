@@ -32,6 +32,11 @@
                 builder.CloseElement();
             }
             builder.OpenElement(8, "p");
+            if(GameState.GetPlayerInventory().GetAvailableSpaces() == 0)
+            {
+                builder.AddAttribute(8, "style", "color:firebrick");
+            }
+            
             builder.AddContent(9, GameState.GetPlayerInventory().GetFreeSpacesString());
             builder.CloseElement();
 

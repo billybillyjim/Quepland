@@ -584,7 +584,7 @@
     "description": "The road leads you through a tree nursery. There are plenty of trees to chop down here, but it looks like someone else owns them.",
     "icon": "oi oi-rain",
     "unlockableAreas": [ "West Tsu City,Follow the road into town,," ],
-    "npcIDs": [ 26, 48 ]
+    "npcIDs": [ 26, 62 ]
   },
   {
     "name": "West Tsu City",
