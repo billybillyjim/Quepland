@@ -55,7 +55,7 @@ else
 {
     <p><button class="btn btn-primary" onclick="@(() => AskForReset())">Reset Game</button></p>
 }
-<h3 id="welcome" style="color:green;font-style:italic"></h3>
+
 
 @functions{
     private bool saveGameExists = false;
@@ -63,7 +63,7 @@ else
     private bool userWantsGameReset = false;
     private bool gameHasBeenSaved = false;
     private bool gameIsRendered = false;
-    private bool debugMode = true;
+    private bool debugMode = false;
     public string pudding = "Not set.";
     public string encrypt = "This is a whole string, with many things to test! 1234, 50, 100";
     public string testString = "";
