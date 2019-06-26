@@ -10,7 +10,7 @@
 
 
 <h1>Hello, Welcome to Quepland!</h1>
-<h2>Quepland will be changing server hosts on June 26 at 8pm EST! If you don't have a backup save before closing your game after that time, your save will likely be deleted! For more information check the updates page.</h2>
+<h2>Quepland has moved hosts! This location will go down on the 28th. Please export your save in the settings menu and start using the new host: <a href="https://billybillyjim.github.io/">Here</a></h2>
 
 @if (debugMode)
 {
@@ -24,7 +24,7 @@
     <p><button class="btn btn-primary" onclick="@(() => LoadDataEncrypted())">Load Encrypted</button></p>
     <p><button class="btn btn-primary" onclick="@(() => GoToDebugArea())">Go to Debug Area</button></p>
     <p><button class="btn btn-primary" onclick="@(() => DebugUnlockAllAreas())">Unlock All Areas</button></p>
-    <p><button class="btn btn-primary" onclick="@(() => DebugUnlockAllAreas())">Unlock All Areas</button></p>
+    <p><button class="btn btn-primary" onclick="@(() => DebugJSTest())">Test JS Interop</button></p>
 }
 
 @if (GameState.saveDataLoaded == false && saveGameExists && gameHasBeenSaved == false && loadBegun == false)
@@ -55,6 +55,7 @@ else
 {
     <p><button class="btn btn-primary" onclick="@(() => AskForReset())">Reset Game</button></p>
 }
+<h3 id="welcome" style="color:green;font-style:italic"></h3>
 
 @functions{
     private bool saveGameExists = false;
@@ -62,11 +63,16 @@ else
     private bool userWantsGameReset = false;
     private bool gameHasBeenSaved = false;
     private bool gameIsRendered = false;
-    private bool debugMode = false;
+    private bool debugMode = true;
     public string pudding = "Not set.";
     public string encrypt = "This is a whole string, with many things to test! 1234, 50, 100";
     public string testString = "";
     private SimpleAES Encryptor = new SimpleAES();
+    public async void DebugJSTest()
+    {
+        await JSRuntime.InvokeAsync<object>("kongregateFunctions.loadAPI");
+
+    }
     public void SetCulinaryTo43()
     {
         GameState.GetPlayer().GainExperience("Culinary Arts", 80000);

@@ -5522,5 +5522,22 @@
     "experienceGained": "Fishing:200",
     "actionRequired": "Fishing",
     "icon": "Fish"
+  },  
+  {
+    "itemName": "Pigeon Jerky",
+    "id": 376,
+    "itemDescription": "It's not much meat, but it sure is tasty.",
+    "value": 15,
+    "gatherString": "You withdraw some pigeon jerky.",
+    "requiredLevel": 1,
+    "experienceGained": "Culinary Arts:15",
+    "actionRequired": "Culinary Arts",
+    "isEdible": true,
+    "healAmount": 0,
+    "healDuration": 600,
+    "buffedSkill": "Axemanship",
+    "buffAmount": 3,
+    "icon": "Jerky",
+    "ingredientIDs": [ 70 ]
   },
 ]

@@ -919,6 +919,7 @@
         GameItem gainedItem = (Program.itemDatabase.GetItemByID(Extensions.GetRandomReward(Program.itemDatabase.GetRewardByName("Harpoon Fishing"))));
         if (GameState.GetPlayerInventory().AddItem(gainedItem))
         {
+            GameState.GetPlayer().GainExperience(gainedItem.ExperienceGained);
             MessageManager.AddMessage("You harpooned a " + gainedItem.ItemName);
         }
         else

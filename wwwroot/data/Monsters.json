@@ -691,7 +691,7 @@
     "hp": 2000,
     "armor": 6,
     "weakness": "Archery",
-    "strength": "Knifesmanship",
+    "strength": "Swordsmanship",
     "damage": 55,
     "attackSpeed": 3,
     "dropTable": [
@@ -711,7 +711,7 @@
     "hp": 4000,
     "armor": 22,
     "weakness": "Archery",
-    "strength": "Knifesmanship",
+    "strength": "Swordsmanship",
     "damage": 40,
     "attackSpeed": 2,
     "dropTable": [

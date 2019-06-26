@@ -548,6 +548,12 @@
                         {
                             builder.AddAttribute(14, "disabled", true);
                             builder.AddAttribute(15, "title", "It isn't ready yet. " + (DateTime.UtcNow - thisBuilding.TanneryItems[temp].EndTime));
+
+                        }
+                        else if(thisBuilding.TanneryItems[temp].Item.Value > GameState.GetPlayerInventory().GetAvailableSpaces())
+                        {
+                             builder.AddAttribute(14, "disabled", true);
+                            builder.AddAttribute(15, "title", "You don't have the inventory space to do this.");
                         }
                         builder.AddContent(16, "Withdraw " + thisBuilding.TanneryItems[temp].Item.Value + " " + Program.itemDatabase.GetItemByID(thisBuilding.TanneryItems[temp].Item.Key).ItemName);
 
@@ -630,7 +636,7 @@
             MessageManager.AddMessage("You have run out of salt!");
         }
 
-        thisBuilding.TanneryItems.Add(new TanningSlot(item.Id, depositAmount, DateTime.UtcNow, DateTime.UtcNow + TimeSpan.FromHours(6)));
+        thisBuilding.TanneryItems.Add(new TanningSlot(item.Id, depositAmount, DateTime.UtcNow, DateTime.UtcNow + TimeSpan.FromSeconds(6)));
         GameState.GetPlayerInventory().RemoveItems(item, depositAmount);
         thisBuilding.Salt -= depositAmount;
         showItemTanningMenu = false;
@@ -646,8 +652,9 @@
             return;
         }
         GameState.GetPlayerInventory().AddMultipleOfItem(jerky, thisBuilding.TanneryItems[i].Item.Value);
+        GameState.GetPlayer().GainExperienceFromMultipleItems(jerky.ExperienceGained, thisBuilding.TanneryItems[i].Item.Value);
         thisBuilding.TanneryItems.RemoveAt(i);
-        GameState.GetPlayer().GainExperience(jerky.ExperienceGained);
+        
         this.StateHasChanged();
         GameState.UpdateState();
     }

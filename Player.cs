@@ -161,6 +161,17 @@ public class Player
             GainExperience(skills.Find(x => x.SkillName == skill.Split(':')[0]), amount);
         }
     }
+    public void GainExperienceFromMultipleItems(string skill, int amount)
+    {
+        if (skill == null || skill == "")
+        {
+            return;
+        }
+        if (int.TryParse(skill.Split(':')[1], out int multi))
+        {
+            GainExperience(skills.Find(x => x.SkillName == skill.Split(':')[0]), multi* amount);
+        }
+    }
     public void GainExperience(Skill skill, int amount)
     {
         if(skill == null)
@@ -321,7 +332,7 @@ public class Player
             }
             else if (action.Contains("Archery"))
             {
-                baseDamage = 1 + GetSkill("Archery").GetSkillLevel() * 2;
+                baseDamage = 1 + GetSkill("Archery").GetSkillLevel() * 2 + deft;
                 if (inventory.HasArrows())
                 {
                     baseDamage += inventory.GetStrongestArrows().Damage;
