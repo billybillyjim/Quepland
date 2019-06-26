@@ -950,6 +950,7 @@
         GameItem gainedItem = (Program.itemDatabase.GetItemByID(Extensions.GetRandomReward(Program.itemDatabase.GetRewardByName(totemLevel))));
         if (GameState.GetPlayerInventory().AddItem(gainedItem))
         {
+            GameState.GetPlayer().GainExperience(gainedItem.ExperienceGained);
             MessageManager.AddMessage("As you carve you aquire " + gainedItem.ItemName);
         }
         else
