@@ -631,7 +631,7 @@
             MessageManager.AddMessage("You have run out of salt!");
         }
 
-        thisBuilding.TanneryItems.Add(new TanningSlot(item.Id, depositAmount, DateTime.UtcNow, DateTime.UtcNow + TimeSpan.FromDays(1)));
+        thisBuilding.TanneryItems.Add(new TanningSlot(item.Id, depositAmount, DateTime.UtcNow, DateTime.UtcNow + TimeSpan.FromHours(12)));
         GameState.GetPlayerInventory().RemoveItems(item, depositAmount);
         thisBuilding.Salt -= depositAmount;
         showItemTanningMenu = false;

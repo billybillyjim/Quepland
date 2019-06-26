@@ -320,7 +320,7 @@
     "areaURL": "NorthernIslesTrails",
     "icon": "oi oi-fire",
     "unlockableAreas": [ "The Foot of Mt Yama,Destroy the rock with your strength,Strength:45,", "The Foot of Mt Yama,Destroy the rock with your mining skills,Mining:40,Mining" ],
-    "actions": [ "Carve Totem Pole:Nice Totem", "Chop Maple Trees:Sugar Maple Logs" ]
+    "actions": [ "Carve totem Pole:Nice Totem", "Chop Maple Trees:Sugar Maple Logs" ]
   },
   {
     "name": "The Foot of Mt Yama",
@@ -400,7 +400,7 @@
     "icon": "oi oi-signpost",
     "id": 38,
     "actionRequiredForAccess": "Desert Travel",
-    "actions": [ "Carve Totem Pole:Exquisite Totem" ],
+    "actions": [ "Carve totem pole:Exquisite Totem" ],
     "unlockableAreas": [ "Oasis,Continue Southward,,", "Leupp,Go West,,", "Abandoned Desert Shack,Go East,," ],
     "redirectAreaURL": "Route7",
     "npcIDs": [ 18 ]
@@ -411,7 +411,7 @@
     "areaURL": "StrangeOldHut",
     "icon": "oi oi-bug",
     "id": 39,
-    "actions": [ "Mine Coal:Coal", "Carve Totem:Totem" ],
+    "actions": [ "Mine Coal:Coal", "Carve totem:Totem" ],
     "unlockableAreas": [ "Swamplake,Go around the hill,," ],
     "buildings": [ "EarthHall" ]
   },
@@ -552,7 +552,7 @@
     "isUnlocked": false,
     "description": "A mountain range.",
     "icon": "oi oi-graph",
-    "children": [ "ShoeLake", "TsuValley", "TreeNursery", "WestTsuCity", "CentralTsuCity", "TsuCastle", "EastTsuCity", "NorthTsuCity" ]
+    "children": [ "ShoeLake", "TsuValley", "TreeNursery", "WestTsuCity", "CentralTsuCity", "TsuCastle", "EastTsuCity", "NorthTsuCity", "Garden" ]
   },
   {
     "name": "Great Shoe Lake",
@@ -635,7 +635,8 @@
     "isUnlocked": false,
     "description": "You pass by the castle heading north and reach a quiet residential area. You can see the entrance to a massive garden up ahead.",
     "icon": "oi oi-link-intact",
-    "npcIDs": [ 33, 47 ]
+    "npcIDs": [ 33, 47 ],
+    "unlockableAreas": [ "Great Garden, Pay the bribe,,Pay Gold:15000" ]
   },
   {
     "name": "Hoin River Valley",
@@ -655,7 +656,8 @@
     "description": "You reach a river surrounded on both sides by thick foliage. You'll have to float down the river if you want to continue.",
     "icon": "oi oi-action-redo",
     "npcIDs": [ 50 ],
-    "unlockableAreas": [ "The Hoin River,Ride down stream,," ]
+    "unlockableAreas": [ "The Hoin River,Ride down stream,," ],
+    "areaToUnlockOnArrival": "Hoin River Valley"
   },
   {
     "name": "Plantrain Plains",
@@ -694,7 +696,8 @@
     "description": "You begin to reach signs of civilization. Down at the river's mouth you can see a large city. A number of houses surround the main building here, which has the word 'Woodworks' carved on the front of it.",
     "icon": "oi oi-eye",
     "buildings": [ "WoodWorkersAssociation" ],
-    "actionRequiredForAccess": "Rafting"
+    "actionRequiredForAccess": "Rafting",
+    "npcIDs": [ 11 ]
   },
   {
     "name": "Ricechild",
@@ -703,8 +706,8 @@
     "isUnlocked": false,
     "description": "You reach a bustling city at the mouth of the river. There are a few interesting shops here.",
     "icon": "oi oi-people",
-    "actionRequiredForAccess": "Rafting",
-    "npcIDs": [ 11 ]
+    "actionRequiredForAccess": "Rafting"
+
   },
   {
     "name": "The Hoin River",
@@ -716,6 +719,14 @@
     "unlockableAreas": [ "Plantrain Plains,Continue floating,," ],
     "actions": [ "Harpoon Fishing" ],
     "actionRequiredForAccess": "Rafting"
+  },
+  {
+    "name": "Great Garden",
+    "id": 69,
+    "areaURL": "Garden",
+    "description": "You enter a beautiful garden, full of flowers, trees, and an expansive pond. A central field has the perfect spot to do some yoga.",
+    "icon": "oi oi-sun",
+    "actions": [ "Yoga" ]
   }
 
 ]

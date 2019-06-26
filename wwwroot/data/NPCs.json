@@ -217,7 +217,7 @@
   {
     "name": "Garden Guard",
     "id": 33,
-    "spokenText": "The garden is currently under development.",
+    "spokenText": "The garden is 15000 gold coins to enter. What? You got a problem with that?",
     "isInteractable": true
   },
   {
@@ -328,22 +328,23 @@
     "id": 48,
     "spokenText": "Did you know there is a great river south of Quepland Woods? Meet me there and I'll show you. No strings attached.",
     "unlockNPCIds": [ 49 ],
-    "isInteractable": false,
+    "isInteractable": true,
     "hideOnFollow": true,
     "hideOnSpeak": true
   },
   {
     "name": "Mysterious Traveller",
     "id": 49,
-    "spokenText": "Greetings. I see you're interested in travelling somewhere new! Excellent. The forest is thick here, but if you can struggle through you'll reach the river in no time.",
+    "spokenText": "Greetings. I see you're interested in travelling somewhere new! Excellent. The forest is thick here, but if you can struggle through you'll reach the river in no time. Follow me.",
     "unlockAreaIDs": [ 63 ],
     "isInteractable": false,
-    "hideOnFollow": true
+    "hideOnFollow": true,
+    "hideOnSpeak": true
   },
   {
-    "name": "Mysterious Traveller",
+    "name": "Mysterious Raft Salesman",
     "id": 50,
-    "spokenText": "Wanna buy a raft? You'll need it to head down the river. What? Why are you looking at me like that?",
+    "spokenText": "Here we are! Wanna buy a raft? You'll need it to head down the river. What? Why are you looking at me like that?",
     "purchaseItemIDs": [ 314 ],
     "isInteractable": true,
     "hideOnFollow": true
@@ -409,6 +410,11 @@
     "id": 60,
     "spokenText": "Welcome to the Woodworkers' Association. We're a small group, but steadily growing! Can I interest you in some overpriced gloves?",
     "isInteractable": true
+  },
+  {
+    "name": "Garden Sign",
+    "id": 61,
+    "spokenText": "The sign reads:Entry Fee: 5 Gold Coins",
+    "isInteractable": true,
   }
-  
 ]

@@ -14,4 +14,5 @@ public class NPC
     public int[] PurchaseItemIDs { get; set; }
     [DefaultValue(1.0d)]
     public double PriceDiscount { get; set; }
+    public int UnlockAreaCost { get; set; }
 }

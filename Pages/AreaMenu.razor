@@ -225,6 +225,36 @@
                             builder.CloseElement();
                         }
                     }
+                    else if(actionString == "Yoga")
+                    {
+                        if (GameState.isWorkingOut == false)
+                        {
+                            builder.OpenElement(2, "button");
+                            builder.AddAttribute(3, "style", "margin-bottom:10px");
+                            builder.AddAttribute(4, "class", "btn btn-primary");
+                            builder.AddAttribute(5, "onclick", () => TrainHP());
+                            if (GameState.isGathering || GameState.isHunting || GameState.isUsing ||! GameState.GetPlayerInventory().ActionIsEnabled("Yoga"))
+                            {
+                                builder.AddAttribute(6, "disabled", true);
+                                builder.AddAttribute(7, "title", "You don't have a yoga mat to do yoga on.");
+                            }
+                            builder.AddContent(7, "Do Yoga");
+                            builder.CloseElement();
+                            builder.OpenElement(8, "br");
+                            builder.CloseElement();
+                        }
+                        else
+                        {
+                            builder.OpenElement(2, "button");
+                            builder.AddAttribute(3, "style", "margin-bottom:10px");
+                            builder.AddAttribute(4, "class", "btn btn-primary");
+                            builder.AddAttribute(5, "onclick", () => StopGathering());
+                            builder.AddContent(7, "Stop Doing Yoga");
+                            builder.CloseElement();
+                            builder.OpenElement(8, "br");
+                            builder.CloseElement();
+                        }
+                    }
                     else
                     {
                         string itemString = actionString.Split(':')[1];
@@ -585,7 +615,7 @@
                     {
                         foreach (int a in npc.UnlockAreaIDs)
                         {
-                            builder.AddAttribute(4, "onclick", () => UnlockArea(Program.areaManager.GetAreaByID(a)));
+                            builder.AddAttribute(4, "onclick", () => SpeakToAndUnlockArea(npc, Program.areaManager.GetAreaByID(a)));
                         }
                     }
                     if (npc.UnlockBuildingIDs != null && npc.UnlockBuildingIDs.Length > 0)
@@ -803,10 +833,50 @@
         GameState.isWorkingOut = true;
         GameState.workoutTimer = new Timer(new TimerCallback(_ =>
         {
-            GameState.GetPlayer().GainExperience("Strength:6");
+            GameState.GetPlayer().GainExperience("Strength:22");
             GameState.workoutTimer.Change((int)(1000 * speedMulti), (int)(1000 * speedMulti));
             speedMulti += 0.0005 * Math.Max(1, 100 - GameState.GetPlayer().GetLevel("Strength")) * (tiredLevel + 1);
             MessageManager.AddMessage("You lift weights for a while.");
+            if (speedMulti > 1.5 && speedMulti < 1.6 && tiredLevel == 0)
+            {
+                MessageManager.AddMessage("You begin to feel tired.");
+                tiredLevel = 1;
+            }
+            else if (speedMulti > 3 && speedMulti < 3.1 && tiredLevel == 1)
+            {
+                MessageManager.AddMessage("You begin to feel very tired.");
+                tiredLevel = 2;
+            }
+            else if (speedMulti > 10 && speedMulti < 10.1 && tiredLevel == 2)
+            {
+                MessageManager.AddMessage("You begin to feel extremely tired.");
+                tiredLevel = 3;
+            }
+            GameState.UpdateState();
+            StateHasChanged();
+        }), null, 1000, 1000);
+        GameState.UpdateState();
+        StateHasChanged();
+    }
+     public void TrainHP()
+    {
+        speedMulti = 1;
+        tiredLevel = 0;
+
+        StopGathering();
+        if (GameState.workoutTimer != null)
+        {
+            GameState.workoutTimer.Dispose();
+            GameState.workoutTimer = null;
+        }
+        MessageManager.AddMessage("You begin doing yoga.");
+        GameState.isWorkingOut = true;
+        GameState.workoutTimer = new Timer(new TimerCallback(_ =>
+        {
+            GameState.GetPlayer().GainExperience("HP:50");
+            GameState.workoutTimer.Change((int)(1000 * speedMulti), (int)(1000 * speedMulti));
+            speedMulti += 0.0002 * Math.Max(1, 100 - GameState.GetPlayer().GetLevel("HP")) * (tiredLevel + 1);
+            MessageManager.AddMessage("You do a yoga pose for a while.");
             if (speedMulti > 1.5 && speedMulti < 1.6 && tiredLevel == 0)
             {
                 MessageManager.AddMessage("You begin to feel tired.");
@@ -902,7 +972,7 @@
         GameState.isRunning = true;
         GameState.workoutTimer = new Timer(new TimerCallback(_ =>
         {
-            GameState.GetPlayer().GainExperience("Deftness:6");
+            GameState.GetPlayer().GainExperience("Deftness:22");
             GameState.workoutTimer.Change((int)(1000 * speedMulti), (int)(1000 * speedMulti));
             speedMulti += 0.0005 * Math.Max(1, 100 - GameState.GetPlayer().GetLevel("Deftness"));
             MessageManager.AddMessage("You run for a while.");
@@ -1064,12 +1134,27 @@
     public void UnlockArea(Area a)
     {
         a.IsUnlocked = true;
+        this.StateHasChanged();
+        GameState.UpdateState();
         UriHelper.NavigateTo("/GatherMenu/" + a.AreaURL);
     }
     public void UnlockBuilding(Building building)
     {
         building.IsUnlocked = true;
         GameState.UpdateState();
+    }
+    public void SpeakToAndUnlockArea(NPC npc, Area a)
+    {
+        SpeakToNPC(npc);
+        if(npc.UnlockAreaCost > 0 && GameState.GetPlayerInventory().GetAmountOfItem(Program.itemDatabase.GetGold()) > npc.UnlockAreaCost)
+        {
+            GameState.GetPlayerInventory().RemoveItems(Program.itemDatabase.GetGold(), npc.UnlockAreaCost);
+        }
+        else if(npc.UnlockAreaCost > 0)
+        {
+            return;
+        }
+        UnlockArea(a);
     }
     public void SpeakToAndUnlockNPCs(NPC npc, int i)
     {
@@ -1104,6 +1189,10 @@
     public void SpeakToNPC(NPC npc)
     {
         MessageManager.AddMessage(npc.SpokenText);
+        if (npc.HideOnSpeak)
+        {
+            npc.IsInteractable = false;
+        }
         GameState.UpdateState();
     }
     private void BuyItem(GameItem item, int amount)

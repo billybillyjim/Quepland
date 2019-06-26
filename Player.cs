@@ -383,11 +383,11 @@ public class Player
     {
         if(GetWeapon() != null)
         {
-            return GetWeapon().AttackSpeed;
+            return GetWeapon().AttackSpeed - GetLevel("Deftness");
         }
         else
         {
-            return 1500;
+            return 1500 - GetLevel("Deftness");
         }
     }
     public float GetGatherSpeed(string skill)

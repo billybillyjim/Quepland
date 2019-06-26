@@ -525,7 +525,8 @@
     "description": "You enter a long hall surrounded on all sides by various statues, carvings, and woodworking tools. Some booths here and there are selling some.",
     "isShop": true,
     "items": [ 6, 344, 143, 145, 147, 149, 151, 153, 155 ],
-    "isExpensive": true
+    "isExpensive": true,
+    "npcIDs": [ 59, 60]
   }
 
 ]

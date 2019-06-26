@@ -38,7 +38,7 @@
     "id": 3,
     "value": 2,
     "gatherSpeed": 1200,
-    "requiredLevel": 0,
+    "requiredLevel": 1,
     "experienceGained": "Fishing:8",
     "actionRequired": "Fishing",
     "icon": "Fish"
@@ -619,7 +619,7 @@
     "gatherString": "You catch a manta ray.",
     "gatherSpeed": 5000,
     "requiredLevel": 75,
-    "experienceGained": "Fishing:180",
+    "experienceGained": "Fishing:170",
     "actionRequired": "Fishing",
     "icon": "Fish"
   },
@@ -655,7 +655,7 @@
     "gatherString": "You catch a carp.",
     "gatherSpeed": 7500,
     "requiredLevel": 50,
-    "experienceGained": "Fishing:200",
+    "experienceGained": "Fishing:180",
     "actionRequired": "Fishing",
     "icon": "Fish"
   },
@@ -1382,7 +1382,7 @@
     "gatherString": "You catch a shad.",
     "gatherSpeed": 5000,
     "requiredLevel": 52,
-    "experienceGained": "Fishing:150",
+    "experienceGained": "Fishing:130",
     "actionRequired": "Fishing",
     "icon": "Fish"
   },
@@ -1394,7 +1394,7 @@
     "gatherString": "You catch a squid.",
     "gatherSpeed": 6200,
     "requiredLevel": 56,
-    "experienceGained": "Fishing:170",
+    "experienceGained": "Fishing:150",
     "actionRequired": "Fishing",
     "icon": "Fish"
   },
@@ -1406,7 +1406,7 @@
     "gatherString": "You catch a salmon.",
     "gatherSpeed": 8500,
     "requiredLevel": 60,
-    "experienceGained": "Fishing:250",
+    "experienceGained": "Fishing:220",
     "actionRequired": "Fishing",
     "icon": "Fish"
   },
@@ -1418,7 +1418,7 @@
     "gatherString": "You catch a tuna.",
     "gatherSpeed": 16000,
     "requiredLevel": 70,
-    "experienceGained": "Fishing:450",
+    "experienceGained": "Fishing:430",
     "actionRequired": "Fishing",
     "icon": "Fish"
   },
@@ -1430,7 +1430,7 @@
     "gatherString": "You catch a yellowtail.",
     "gatherSpeed": 12000,
     "requiredLevel": 70,
-    "experienceGained": "Fishing:485",
+    "experienceGained": "Fishing:455",
     "actionRequired": "Fishing",
     "icon": "Fish"
   },
@@ -1442,7 +1442,7 @@
     "gatherString": "You catch a giant clam.",
     "gatherSpeed": 18000,
     "requiredLevel": 80,
-    "experienceGained": "Fishing:1000",
+    "experienceGained": "Fishing:800",
     "actionRequired": "Fishing",
     "icon": "Fish"
   },
@@ -1454,7 +1454,7 @@
     "gatherString": "You catch a big tuna.",
     "gatherSpeed": 20000,
     "requiredLevel": 83,
-    "experienceGained": "Fishing:1800",
+    "experienceGained": "Fishing:1600",
     "actionRequired": "Fishing",
     "icon": "Fish"
   },
@@ -1466,7 +1466,7 @@
     "gatherString": "You catch a swordfish.",
     "gatherSpeed": 20000,
     "requiredLevel": 81,
-    "experienceGained": "Fishing:2000",
+    "experienceGained": "Fishing:1800",
     "actionRequired": "Fishing",
     "icon": "Fish"
   },
@@ -1478,7 +1478,7 @@
     "gatherString": "You catch a flounder.",
     "gatherSpeed": 15000,
     "requiredLevel": 85,
-    "experienceGained": "Fishing:1800",
+    "experienceGained": "Fishing:1900",
     "actionRequired": "Fishing",
     "icon": "Fish"
   },
@@ -4207,7 +4207,7 @@
     "itemName": "Yoga Mat",
     "itemDescription": "You could do yoga on this mat.",
     "id": 292,
-    "value": 150000,
+    "value": 15000,
     "actionsEnabled": "Yoga",
     "isEquipable": true,
     "equipSlot": "Right Hand",
@@ -5510,5 +5510,17 @@
     "amountOfIngredientsToCreate": 18,
     "actionRequired": "Leatherworking",
     "gatherSpeed": 7000
+  },
+  {
+    "itemName": "Camel Ray",
+    "id": 375,
+    "itemDescription": "A wide, flat fish, rotated sideways, with a hump, sand colored, favored by Master Miners in ancient times.",
+    "value": 450,
+    "gatherString": "You catch a camel manta ray.",
+    "gatherSpeed": 5000,
+    "requiredLevel": 75,
+    "experienceGained": "Fishing:200",
+    "actionRequired": "Fishing",
+    "icon": "Fish"
   },
 ]
