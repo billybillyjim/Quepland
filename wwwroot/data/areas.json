@@ -121,7 +121,7 @@
     "description": "There are a lot of fish here.",
     "areaURL": "QCRiver",
     "icon": "oi oi-droplet",
-    "monsterIDs": [ 15, 24, 25, 26, 27 ]
+    "monsterIDs": [ 15, 24, 25, 26, 27, 39 ]
   },
   {
     "name": "Deep Cave Hunting Area",

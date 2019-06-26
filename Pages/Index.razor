@@ -24,6 +24,7 @@
     <p><button class="btn btn-primary" onclick="@(() => LoadDataEncrypted())">Load Encrypted</button></p>
     <p><button class="btn btn-primary" onclick="@(() => GoToDebugArea())">Go to Debug Area</button></p>
     <p><button class="btn btn-primary" onclick="@(() => DebugUnlockAllAreas())">Unlock All Areas</button></p>
+    <p><button class="btn btn-primary" onclick="@(() => DebugUnlockAllAreas())">Unlock All Areas</button></p>
 }
 
 @if (GameState.saveDataLoaded == false && saveGameExists && gameHasBeenSaved == false && loadBegun == false)
@@ -56,323 +57,326 @@ else
 }
 
 @functions{
-        private bool saveGameExists = false;
-        private bool loadBegun = false;
-        private bool userWantsGameReset = false;
-        private bool gameHasBeenSaved = false;
-        private bool gameIsRendered = false;
-        private bool debugMode = false;
-        public string pudding = "Not set.";
-        public string encrypt = "This is a whole string, with many things to test! 1234, 50, 100";
-        public string testString = "";
-        private SimpleAES Encryptor = new SimpleAES();
+    private bool saveGameExists = false;
+    private bool loadBegun = false;
+    private bool userWantsGameReset = false;
+    private bool gameHasBeenSaved = false;
+    private bool gameIsRendered = false;
+    private bool debugMode = false;
+    public string pudding = "Not set.";
+    public string encrypt = "This is a whole string, with many things to test! 1234, 50, 100";
+    public string testString = "";
+    private SimpleAES Encryptor = new SimpleAES();
+    public void SetCulinaryTo43()
+    {
+        GameState.GetPlayer().GainExperience("Culinary Arts", 80000);
+    }
+    public void GoToDebugArea()
+    {
+        Program.areaManager.GetAreaByID(68).IsUnlocked = true;
+    }
+    public void EncryptionTest()
+    {
+        encrypt = Encryptor.EncryptToString(encrypt);
+        StateHasChanged();
+    }
+    public void DecryptionTest()
+    {
+        encrypt = Encryptor.DecryptString(encrypt);
+        StateHasChanged();
+    }
+    public void DebugUnlockAllFollowers()
+    {
+        foreach (Follower f in Program.followerManager.GetFollowers())
+        {
+            f.IsUnlocked = true;
+        }
+    }
+    public void DebugUnlockAllAreas()
+    {
+        Program.areaManager.UnlockAllAreas();
+        StateHasChanged();
+        GameState.UpdateState();
+    }
+    public void DebugGainStrengthLevel()
+    {
+        GameState.GetPlayer().GainExperience("Strength", Extensions.GetExperienceRequired(GameState.GetPlayer().GetLevel("Strength")) - GameState.GetPlayer().GetSkill("Strength").SkillExperience);
+        GameState.UpdateState();
+        StateHasChanged();
+    }
+    public void DebugOneOfEveryItem()
+    {
 
-        public void GoToDebugArea()
-        {
-            Program.areaManager.GetAreaByID(68).IsUnlocked = true;
-        }
-        public void EncryptionTest()
-        {
-            encrypt = Encryptor.EncryptToString(encrypt);
-            StateHasChanged();
-        }
-        public void DecryptionTest()
-        {
-            encrypt = Encryptor.DecryptString(encrypt);
-            StateHasChanged();
-        }
-        public void DebugUnlockAllFollowers()
-        {
-            foreach (Follower f in Program.followerManager.GetFollowers())
-            {
-                f.IsUnlocked = true;
-            }
-        }
-        public void DebugUnlockAllAreas()
-        {
-            Program.areaManager.UnlockAllAreas();
-            StateHasChanged();
-            GameState.UpdateState();
-        }
-        public void DebugGainStrengthLevel()
-        {
-            GameState.GetPlayer().GainExperience("Strength", Extensions.GetExperienceRequired(GameState.GetPlayer().GetLevel("Strength")) - GameState.GetPlayer().GetSkill("Strength").SkillExperience);
-            GameState.UpdateState();
-            StateHasChanged();
-        }
-        public void DebugOneOfEveryItem()
-        {
+        GameState.GetPlayerBank().GetInventory().AddOneOfMultipleItemsUnlimited(Program.itemDatabase.GetAllItems());
 
-            GameState.GetPlayerBank().GetInventory().AddOneOfMultipleItemsUnlimited(Program.itemDatabase.GetAllItems());
-
-        }
-        public void DebugAll99s()
+    }
+    public void DebugAll99s()
+    {
+        foreach (Skill s in GameState.GetPlayer().GetSkills())
         {
-            foreach (Skill s in GameState.GetPlayer().GetSkills())
-            {
-                GameState.GetPlayer().GainExperience(s.SkillName, 15000000);
-            }
+            GameState.GetPlayer().GainExperience(s.SkillName, 15000000);
         }
-        public void DebugGetMoney()
+    }
+    public void DebugGetMoney()
+    {
+        GameState.GetPlayerBank().GetInventory().AddMultipleOfItemUnlimited(Program.itemDatabase.GetGold(), 100000);
+    }
+    private void AskForReset()
+    {
+        userWantsGameReset = true;
+    }
+    private void ResetGame()
+    {
+        MessageManager.AddMessage("Save Game Reset. Please reload the page to avoid errors.");
+        localStorage.Clear();
+        StateHasChanged();
+    }
+    private string SaveDataEncrypted()
+    {
+        localStorage.SetItem("eSave", GetSaveDataString());
+        return "";
+    }
+    private string LoadDataEncrypted()
+    {
+        LoadDataFromString(localStorage.GetItem<string>("eSave"));
+        GameState.UpdateState();
+        this.StateHasChanged();
+        return "";
+    }
+    private string SaveData()
+    {
+        localStorage.SetItem("Bank", GameState.GetPlayerBank().GetInventory().ToString());
+        localStorage.SetItem("Skills", GameState.GetPlayer().GetSkillString());
+        localStorage.SetItem("Inventory", GameState.GetPlayerInventory().ToString());
+        localStorage.SetItem("Areas", Program.areaManager.SaveAreas());
+        localStorage.SetItem("Followers", Program.followerManager.ToString());
+        localStorage.SetItem("HP", GameState.GetPlayer().CurrentHP);
+        if (GameState.GetPlayer().activeFollower != null)
         {
-            GameState.GetPlayerBank().GetInventory().AddMultipleOfItemUnlimited(Program.itemDatabase.GetGold(), 100000);
-        }
-        private void AskForReset()
-        {
-            userWantsGameReset = true;
-        }
-        private void ResetGame()
-        {
-            MessageManager.AddMessage("Save Game Reset. Please reload the page to avoid errors.");
-            localStorage.Clear();
-            StateHasChanged();
-        }
-        private string SaveDataEncrypted()
-        {
-            localStorage.SetItem("eSave", GetSaveDataString());
-            return "";
-        }
-        private string LoadDataEncrypted()
-        {
-            LoadDataFromString(localStorage.GetItem<string>("eSave"));
-            GameState.UpdateState();
-            this.StateHasChanged();
-            return "";
-        }
-        private string SaveData()
-        {
-            localStorage.SetItem("Bank", GameState.GetPlayerBank().GetInventory().ToString());
-            localStorage.SetItem("Skills", GameState.GetPlayer().GetSkillString());
-            localStorage.SetItem("Inventory", GameState.GetPlayerInventory().ToString());
-            localStorage.SetItem("Areas", Program.areaManager.SaveAreas());
-            localStorage.SetItem("Followers", Program.followerManager.ToString());
-            localStorage.SetItem("HP", GameState.GetPlayer().CurrentHP);
-            if (GameState.GetPlayer().activeFollower != null)
-            {
-                localStorage.SetItem("ActiveFollower", GameState.GetPlayer().activeFollower.id);
-            }
-
-            localStorage.SetItem("AlchemyRecipes", GameState.GetPlayer().GetRecipes());
-            List<int> ids = new List<int>();
-            foreach (KeyValuePair<GameItem, int> pair in GameState.GetPlayerInventory().GetEquippedItems())
-            {
-                ids.Add(pair.Key.Id);
-            }
-            localStorage.SetItem("EquippedItems", ids);
-            localStorage.SetItem("SaveGameExists", true);
-            localStorage.SetItem("NPC", Program.npcManager.GetNPCData());
-            SaveDataEncrypted();
-            MessageManager.AddMessage("Your game has been saved.");
-            gameHasBeenSaved = true;
-            GameState.saveDataLoaded = true;
-            GameState.saveGameExists = true;
-            return "";
+            localStorage.SetItem("ActiveFollower", GameState.GetPlayer().activeFollower.id);
         }
 
-        private void TestLocalStorage()
+        localStorage.SetItem("AlchemyRecipes", GameState.GetPlayer().GetRecipes());
+        List<int> ids = new List<int>();
+        foreach (KeyValuePair<GameItem, int> pair in GameState.GetPlayerInventory().GetEquippedItems())
         {
-
-            string success = "Local storage could not be accessed. Saving is not possible without working local storage. Please enable cookies to save your game.";
-            try
-            {
-                localStorage.SetItem("testString", "success");
-                success = localStorage.GetItem<string>("testString");
-            }
-            catch
-            {
-                MessageManager.AddMessage(success);
-            }
-
+            ids.Add(pair.Key.Id);
         }
-        public string GetSaveDataString()
+        localStorage.SetItem("EquippedItems", ids);
+        localStorage.SetItem("SaveGameExists", true);
+        localStorage.SetItem("NPC", Program.npcManager.GetNPCData());
+        SaveDataEncrypted();
+        MessageManager.AddMessage("Your game has been saved.");
+        gameHasBeenSaved = true;
+        GameState.saveDataLoaded = true;
+        GameState.saveGameExists = true;
+        return "";
+    }
+
+    private void TestLocalStorage()
+    {
+
+        string success = "Local storage could not be accessed. Saving is not possible without working local storage. Please enable cookies to save your game.";
+        try
         {
-            string data = "";
-            //Bank 0
-            data += "" + GameState.GetPlayerBank().GetInventory().ToString();
-            //Skills 1
-            data += "#" + GameState.GetPlayer().GetSkillString();
-            //Inventory 2
-            data += "#" + GameState.GetPlayerInventory().ToString();
-            //Areas 3
-            data += "#" + Program.areaManager.SaveAreas();
-            //Followers 4
-            data += "#" + Program.followerManager.ToString();
-            //HP 5
-            data += "#" + GameState.GetPlayer().CurrentHP.ToString();
-            //ActiveFollower 6
-            if (GameState.GetPlayer().activeFollower != null)
-            {
-                data += "#" + GameState.GetPlayer().activeFollower.id;
-            }
-            else
-            {
-                data += "#";
-            }
-            //Recipes 7
+            localStorage.SetItem("testString", "success");
+            success = localStorage.GetItem<string>("testString");
+        }
+        catch
+        {
+            MessageManager.AddMessage(success);
+        }
+
+    }
+    public string GetSaveDataString()
+    {
+        string data = "";
+        //Bank 0
+        data += "" + GameState.GetPlayerBank().GetInventory().ToString();
+        //Skills 1
+        data += "#" + GameState.GetPlayer().GetSkillString();
+        //Inventory 2
+        data += "#" + GameState.GetPlayerInventory().ToString();
+        //Areas 3
+        data += "#" + Program.areaManager.SaveAreas();
+        //Followers 4
+        data += "#" + Program.followerManager.ToString();
+        //HP 5
+        data += "#" + GameState.GetPlayer().CurrentHP.ToString();
+        //ActiveFollower 6
+        if (GameState.GetPlayer().activeFollower != null)
+        {
+            data += "#" + GameState.GetPlayer().activeFollower.id;
+        }
+        else
+        {
             data += "#";
-            foreach (string s in GameState.GetPlayer().GetRecipes())
+        }
+        //Recipes 7
+        data += "#";
+        foreach (string s in GameState.GetPlayer().GetRecipes())
+        {
+            data += s + "/";
+        }
+        //EquippedItems 8
+        data += "#";
+        foreach (KeyValuePair<GameItem, int> pair in GameState.GetPlayerInventory().GetEquippedItems())
+        {
+            data += pair.Key.Id + "/";
+        }
+        //Settings 9
+        data += "#";
+        data += GameState.isSplitView.ToString();
+        data += ",";
+        data += GameState.compactBankView.ToString();
+        //NPC data 10
+        data += "#";
+        data += Program.npcManager.GetNPCData();
+        //Sushi House Data 11
+        data += "#";
+        data += GameState.sushiHouseRice + "," + GameState.sushiHouseSeaweed;
+        //Tannery Data 12
+        data += "#";
+        foreach (Building b in Program.buildingManager.GetBuildings())
+        {
+            if (b.Salt > 0)
             {
-                data += s + "/";
+                data += "" + b.ID + "," + b.Salt + "/";
             }
-            //EquippedItems 8
-            data += "#";
-            foreach (KeyValuePair<GameItem, int> pair in GameState.GetPlayerInventory().GetEquippedItems())
+        }
+        //Tannery Slot Data 13
+        data += "#";
+        foreach (Building b in Program.buildingManager.GetBuildings())
+        {
+            if (b.IsTannery)
             {
-                data += pair.Key.Id + "/";
-            }
-            //Settings 9
-            data += "#";
-            data += GameState.isSplitView.ToString();
-            data += ",";
-            data += GameState.compactBankView.ToString();
-            //NPC data 10
-            data += "#";
-            data += Program.npcManager.GetNPCData();
-            //Sushi House Data 11
-            data += "#";
-            data += GameState.sushiHouseRice + "," + GameState.sushiHouseSeaweed;
-            //Tannery Data 12
-            data += "#";
-            foreach(Building b in Program.buildingManager.GetBuildings())
-            {
-                if(b.Salt > 0)
+                data += b.ID + ">";
+                foreach (TanningSlot slot in b.TanneryItems)
                 {
-                    data += "" + b.ID + "," + b.Salt + "/";
+                    data += slot.GetString() + "_";
+                }
+                data += "@";
+            }
+        }
+        testString = Encryptor.EncryptToString(data);
+        return testString;
+    }
+    private void LoadDataFromString(string data)
+    {
+        string decryptedData = Encryptor.DecryptString(data);
+
+
+        string[] lines = decryptedData.Split('#');
+        testString = lines[0];
+
+        Dictionary<GameItem, int> bankItems = Extensions.GetItemDicFromString(lines[0], Program.itemDatabase);
+        List<Skill> skills = Extensions.GetSkillsFromString(lines[1]);
+        Dictionary<GameItem, int> invItems = Extensions.GetItemDicFromString(lines[2], Program.itemDatabase);
+
+        GameState.GetPlayerBank().GetInventory().LoadItems(bankItems);
+        GameState.GetPlayer().SetSkills(skills);
+        GameState.GetPlayerInventory().LoadItems(invItems);
+
+        Program.areaManager.LoadSaveData(lines[3]);
+        Program.followerManager.LoadSaveData(lines[4]);
+
+        if (int.TryParse(lines[5], out int hp))
+        {
+            GameState.GetPlayer().CurrentHP = hp;
+        }
+        else
+        {
+            GameState.GetPlayer().CurrentHP = GameState.GetPlayer().GetLevel("HP");
+        }
+
+        if (int.TryParse(lines[6], out int activeFollower))
+        {
+            GameState.GetPlayer().activeFollower = Program.followerManager.GetFollowerByID(activeFollower);
+        }
+
+        List<string> recipes = lines[7].Split('/').ToList();
+        GameState.GetPlayer().LoadRecipes(recipes);
+
+
+        List<int> equippedItems = new List<int>();
+        foreach (string s in lines[8].Split('/') ?? Enumerable.Empty<string>())
+        {
+            if (int.TryParse(s, out int id))
+            {
+                equippedItems.Add(id);
+            }
+        }
+        if (equippedItems != null && equippedItems.Count > 0)
+        {
+            GameState.GetPlayer().EquipItems(equippedItems);
+        }
+        if (lines.Length > 9 && lines[9] != null)
+        {
+            string[] settings = lines[9].Split(',');
+            GameState.isSplitView = bool.Parse(settings[0]);
+            GameState.compactBankView = bool.Parse(settings[1]);
+        }
+        if (lines.Length > 10 && lines[10] != null)
+        {
+            Program.npcManager.LoadNPCData(lines[10]);
+        }
+        if (lines.Length > 11 && lines[11] != null)
+        {
+            GameState.sushiHouseRice = int.Parse(lines[11].Split(',')[0]);
+            GameState.sushiHouseSeaweed = int.Parse(lines[11].Split(',')[1]);
+        }
+        if (lines.Length > 12 && lines[12] != null)
+        {
+            string[] salts = lines[12].Split('/');
+            foreach (string salt in salts)
+            {
+                if (salt.Length > 0)
+                {
+                    int id = int.Parse(salt.Split(',')[0]);
+                    int amount = int.Parse(salt.Split(',')[1]);
+                    Program.buildingManager.GetBuildingByID(id).Salt = amount;
                 }
             }
-            //Tannery Slot Data 13
-            data += "#";
-            foreach(Building b in Program.buildingManager.GetBuildings())
+        }
+        if (lines.Length > 13 && lines[13] != null)
+        {
+            string[] tanneries = lines[13].Split('@');
+
+            foreach (string tannery in tanneries)
             {
-                if (b.IsTannery)
+                if (tannery.Length > 0)
                 {
-                    data += b.ID + ">";
-                    foreach(TanningSlot slot in b.TanneryItems)
+                    Building t = Program.buildingManager.GetBuildingByID(int.Parse(tannery.Split('>')[0]));
+                    string[] tanneryData = tannery.Split('>')[1].Split('_');
+
+                    foreach (string s in tanneryData)
                     {
-                        data += slot.GetString() + "_";
-                    }
-                    data += "@";
-                }
-            }
-            testString = Encryptor.EncryptToString(data);
-            return testString;
-        }
-        private void LoadDataFromString(string data)
-        {
-            string decryptedData = Encryptor.DecryptString(data);
-
-
-            string[] lines = decryptedData.Split('#');
-            testString = lines[0];
-
-            Dictionary<GameItem, int> bankItems = Extensions.GetItemDicFromString(lines[0], Program.itemDatabase);
-            List<Skill> skills = Extensions.GetSkillsFromString(lines[1]);
-            Dictionary<GameItem, int> invItems = Extensions.GetItemDicFromString(lines[2], Program.itemDatabase);
-
-            GameState.GetPlayerBank().GetInventory().LoadItems(bankItems);
-            GameState.GetPlayer().SetSkills(skills);
-            GameState.GetPlayerInventory().LoadItems(invItems);
-
-            Program.areaManager.LoadSaveData(lines[3]);
-            Program.followerManager.LoadSaveData(lines[4]);
-
-            if (int.TryParse(lines[5], out int hp))
-            {
-                GameState.GetPlayer().CurrentHP = hp;
-            }
-            else
-            {
-                GameState.GetPlayer().CurrentHP = GameState.GetPlayer().GetLevel("HP");
-            }
-
-            if (int.TryParse(lines[6], out int activeFollower))
-            {
-                GameState.GetPlayer().activeFollower = Program.followerManager.GetFollowerByID(activeFollower);
-            }
-
-            List<string> recipes = lines[7].Split('/').ToList();
-            GameState.GetPlayer().LoadRecipes(recipes);
-
-
-            List<int> equippedItems = new List<int>();
-            foreach (string s in lines[8].Split('/') ?? Enumerable.Empty<string>())
-            {
-                if (int.TryParse(s, out int id))
-                {
-                    equippedItems.Add(id);
-                }
-            }
-            if (equippedItems != null && equippedItems.Count > 0)
-            {
-                GameState.GetPlayer().EquipItems(equippedItems);
-            }
-            if (lines.Length > 9 && lines[9] != null)
-            {
-                string[] settings = lines[9].Split(',');
-                GameState.isSplitView = bool.Parse(settings[0]);
-                GameState.compactBankView = bool.Parse(settings[1]);
-            }
-            if (lines.Length > 10 && lines[10] != null)
-            {
-                Program.npcManager.LoadNPCData(lines[10]);
-            }
-            if (lines.Length > 11 && lines[11] != null)
-            {
-                GameState.sushiHouseRice = int.Parse(lines[11].Split(',')[0]);
-                GameState.sushiHouseSeaweed = int.Parse(lines[11].Split(',')[1]);
-            }
-            if (lines.Length > 12 && lines[12] != null)
-            {
-                string[] salts = lines[12].Split('/');
-                foreach(string salt in salts)
-                {
-                    if(salt.Length > 0)
-                    {
-                        int id = int.Parse(salt.Split(',')[0]);
-                        int amount = int.Parse(salt.Split(',')[1]);
-                        Program.buildingManager.GetBuildingByID(id).Salt = amount;
-                    }
-                }
-            }
-            if(lines.Length > 13 && lines[13] != null)
-            {
-                string[] tanneries = lines[13].Split('@');
-
-                foreach(string tannery in tanneries)
-                {
-                    if(tannery.Length > 0)
-                    {
-                        Building t = Program.buildingManager.GetBuildingByID(int.Parse(tannery.Split('>')[0]));
-                        string[] tanneryData = tannery.Split('>')[1].Split('_');
-
-                        foreach(string s in tanneryData)
+                        if (s.Length > 0)
                         {
-                            if(s.Length > 0)
-                            {
-                                TanningSlot slot = new TanningSlot();
-                                slot.SetDataFromString(s);
-                                t.TanneryItems.Add(slot);
-
-                            }
+                            TanningSlot slot = new TanningSlot();
+                            slot.SetDataFromString(s);
+                            t.TanneryItems.Add(slot);
 
                         }
+
                     }
                 }
             }
-            MessageManager.AddMessage("Save game loaded.");
-
-            GameState.saveDataLoaded = true;
-            GameState.UpdateState();
-            this.StateHasChanged();
         }
-        private void LoadData()
+        MessageManager.AddMessage("Save game loaded.");
+
+        GameState.saveDataLoaded = true;
+        GameState.UpdateState();
+        this.StateHasChanged();
+    }
+    private void LoadData()
+    {
+        try
         {
-            try
-            {
-                LoadDataEncrypted();
-            }
-            catch
-            { 
+            LoadDataEncrypted();
+        }
+        catch
+        {
             loadBegun = true;
             Dictionary<GameItem, int> bankItems = Extensions.GetItemDicFromString(localStorage.GetItem<String>("Bank"), Program.itemDatabase);
             Dictionary<GameItem, int> invItems = Extensions.GetItemDicFromString(localStorage.GetItem<String>("Inventory"), Program.itemDatabase);
@@ -403,7 +407,7 @@ else
             MessageManager.AddMessage("Save game loaded.");
 
         }
-         
+
 
         GameState.saveDataLoaded = true;
         if (GameState.autoSaveTimer != null)
@@ -411,18 +415,18 @@ else
             GameState.autoSaveTimer.Dispose();
             GameState.autoSaveTimer = null;
         }
-    GameState.autoSaveTimer = new Timer(new TimerCallback(_ =>
+        GameState.autoSaveTimer = new Timer(new TimerCallback(_ =>
         {
-        try
-        {
-            SaveData();
-        }
-        catch
-        {
-            MessageManager.AddMessage("Failed to auto save. Please make a local backup before closing the game.", "red");
-        }
+            try
+            {
+                SaveData();
+            }
+            catch
+            {
+                MessageManager.AddMessage("Failed to auto save. Please make a local backup before closing the game.", "red");
+            }
 
-    }), null, 60000, 60000);
+        }), null, 60000, 60000);
         GameState.UpdateState();
         this.StateHasChanged();
     }

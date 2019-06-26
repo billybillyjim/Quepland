@@ -154,7 +154,7 @@
             (item.IsStackable && GameState.GetPlayerInventory().GetAvailableSpaces() < amount && GameState.GetPlayerInventory().HasItem(item) == false))
             {
                 builder.AddAttribute(14, "disabled", true);
-                 builder.AddAttribute(15, "title", "You don't have enough inventory space to buy this.");
+                builder.AddAttribute(15, "title", "You don't have enough inventory space to buy this.");
             }
             builder.AddContent(16, "" + amount);
             builder.CloseElement();
@@ -497,8 +497,7 @@
                     builder.AddAttribute(23, "disabled", true);
                     builder.AddAttribute(24, "title", "You don't have any fish to make sushi with at your level.");
                 }
-                else if((GameState.GetPlayerInventory().GetAmountOfItem(Program.itemDatabase.GetItemByName("Rice")) == 0 ||
-                GameState.GetPlayerInventory().GetAmountOfItem(Program.itemDatabase.GetItemByName("Seaweed")) == 0) && autoBuySupplies == false)
+                else if((GameState.sushiHouseRice == 0 || GameState.sushiHouseSeaweed == 0) && autoBuySupplies == false)
                 {
                     builder.AddAttribute(23, "disabled", true);
                     builder.AddAttribute(24, "title", "You don't have enough rice or seaweed to make sushi.");
@@ -691,12 +690,13 @@
                 if(autoBuySupplies == false)
                 {
                     GameState.StopActions();
+                    this.StateHasChanged();
                 }
                 else if(TryBuyingSupplies())
                 {
                     if (FindRollToMake())
                     {
-
+                        this.StateHasChanged();
                     }
                     else
                     {
@@ -704,6 +704,10 @@
                         GameState.StopActions();
                     }
                 }
+            }
+            else
+            {
+                FindRollToMake();
             }
             GameState.UpdateState();
             StateHasChanged();
@@ -741,9 +745,11 @@
                 GameState.sushiHouseRice--;
                 GameState.sushiHouseSeaweed--;
                 MessageManager.AddMessage("You create a " + result.ItemName + " under the supervision of the old man.");
+                GameState.UpdateState();
                 return true;
             }
         }
+        GameState.UpdateState();
         return false;
     }
     private bool TryBuyingSupplies()
@@ -882,7 +888,7 @@
             GameState.UIRefreshTimer.Dispose();
             GameState.UIRefreshTimer = null;
         }
-
+        GameState.StopActions();
         GameState.canSell = false;
         ResetAlchemy();
         GameState.StateChanged -= OnGameStateChanged;

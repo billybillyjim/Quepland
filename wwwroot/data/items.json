@@ -4227,7 +4227,7 @@
     "actionRequired": "Fishing",
     "equipSlot": "Hands",
     "gatherSpeedBonus": 0.1,
-    "experienceSkillGain": 0.025,
+    "experienceGainBonus": 0.025,
     "icon": "Net"
   },
   {
@@ -4241,7 +4241,7 @@
     "actionRequired": "Fishing",
     "equipSlot": "Head",
     "gatherSpeedBonus": 0.05,
-    "experienceSkillGain": 0.05,
+    "experienceGainBonus": 0.05,
     "icon": "Net"
   },
   {
@@ -4255,7 +4255,7 @@
     "actionRequired": "Fishing",
     "equipSlot": "Legs",
     "gatherSpeedBonus": 0.05,
-    "experienceSkillGain": 0.05,
+    "experienceGainBonus": 0.05,
     "icon": "Net"
   },
   {
@@ -4269,7 +4269,7 @@
     "actionRequired": "Fishing",
     "equipSlot": "Body",
     "gatherSpeedBonus": 0.05,
-    "experienceSkillGain": 0.05,
+    "experienceGainBonus": 0.05,
     "icon": "Net"
   },
   {
@@ -4966,7 +4966,7 @@
     "isEquipable": true,
     "equipSlot": "Hands",
     "icon": "Glove",
-    "experienceSkillGain": 0.1,
+    "experienceGainBonus": 0.1,
     "actionRequired": "Woodworking",
     "armor": 1,
     "requiredLevel": 1
