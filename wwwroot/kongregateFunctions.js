@@ -1,7 +1,6 @@
 ﻿window.kongregateFunctions = {
 
-    loadAPI:function() {
-        window.kongregate = kongregateAPI.getAPI();
+    getUsername:function() {
         // You can now access the Kongregate API with:
         // kongregate.services.getUsername(), etc
         // Proceed with loading your game...

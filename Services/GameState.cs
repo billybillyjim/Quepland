@@ -19,6 +19,10 @@ public class GameState
     public bool canBank;
     public bool isUsing;
 
+    public int huntingAreaID;
+    public DateTime huntingEndTime;
+    public DateTime huntingStartTime;
+
     public bool isAutoCollecting;
 
     public bool isSplitView;
@@ -30,7 +34,7 @@ public class GameState
     public bool saveGameExists;
 
     public string previousURL;
-    public string updateVersionString = "1.015d";
+    public string updateVersionString = "1.016a";
     
     public GameItem currentUsedItem;
     public GameItem currentGatherItem;
@@ -71,6 +75,8 @@ public class GameState
 
     //Navbar Timer
     public Timer autoSaveTimer;
+
+    private SimpleAES Encryptor = new SimpleAES();
 
     private void StateHasChanged()
     {
@@ -198,5 +204,84 @@ public class GameState
     {
         inventoryIsActiveView = !inventoryIsActiveView;
         UpdateState();
+    }
+    public string GetSaveString(AreaManager areaManager, FollowerManager followerManager, NPCManager npcManager, BuildingManager buildingManager)
+    {
+        string data = "";
+        //Bank 0
+        data += "" + GetPlayerBank().GetInventory().ToString();
+        //Skills 1
+        data += "#" + GetPlayer().GetSkillString();
+        //Inventory 2
+        data += "#" + GetPlayerInventory().ToString();
+        //Areas 3
+        data += "#" + areaManager.SaveAreas();
+        //Followers 4
+        data += "#" + followerManager.ToString();
+        //HP 5
+        data += "#" + GetPlayer().CurrentHP.ToString();
+        //ActiveFollower 6
+        if (GetPlayer().activeFollower != null)
+        {
+            data += "#" + GetPlayer().activeFollower.id;
+        }
+        else
+        {
+            data += "#";
+        }
+        //Recipes 7
+        data += "#";
+        foreach (string s in GetPlayer().GetRecipes())
+        {
+            data += s + "/";
+        }
+        //EquippedItems 8
+        data += "#";
+        foreach (KeyValuePair<GameItem, int> pair in GetPlayerInventory().GetEquippedItems())
+        {
+            data += pair.Key.Id + "/";
+        }
+        //Settings 9
+        data += "#";
+        data += isSplitView.ToString();
+        data += ",";
+        data += compactBankView.ToString();
+        //NPC data 10
+        data += "#";
+        data += npcManager.GetNPCData();
+        //Sushi House Data 11
+        data += "#";
+        data += sushiHouseRice + "," + sushiHouseSeaweed;
+        //Tannery Data 12
+        data += "#";
+        foreach (Building b in buildingManager.GetBuildings())
+        {
+            if (b.Salt > 0)
+            {
+                data += "" + b.ID + "," + b.Salt + "/";
+            }
+        }
+        //Tannery Slot Data 13
+        data += "#";
+        foreach (Building b in buildingManager.GetBuildings())
+        {
+            if (b.IsTannery)
+            {
+                data += b.ID + ">";
+                foreach (TanningSlot slot in b.TanneryItems)
+                {
+                    data += slot.GetString() + "_";
+                }
+                data += "@";
+            }
+        }
+        //GameState.isHunting 14
+        data += "#";
+        data += isHunting.ToString() + ",";
+        data += huntingAreaID + ",";
+        data += huntingStartTime.ToString() + ",";
+        data += huntingEndTime.ToString();
+        data = Encryptor.EncryptToString(data);
+        return data;
     }
 }

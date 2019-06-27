@@ -37,42 +37,9 @@
     }
     public string GetSaveDataString()
     {
-        string data = "";
-        //Bank 0
-        data += "" + GameState.GetPlayerBank().GetInventory().ToString();
-        //Skills 1
-        data += "#" + GameState.GetPlayer().GetSkillString();
-        //Inventory 2
-        data += "#" + GameState.GetPlayerInventory().ToString();
-        //Areas 3
-        data += "#" + Program.areaManager.SaveAreas();
-        //Followers 4
-        data += "#" + Program.followerManager.ToString();
-        //HP 5
-        data += "#" + GameState.GetPlayer().CurrentHP.ToString();
-        //ActiveFollower 6
-        if (GameState.GetPlayer().activeFollower != null)
-        {
-            data += "#" + GameState.GetPlayer().activeFollower.id;
-        }
-        else
-        {
-            data += "#";
-        }
-        //Recipes 7
-        data += "#";
-        foreach (string s in GameState.GetPlayer().GetRecipes())
-        {
-            data += s + "/";
-        }
-        //EquippedItems 8
-        data += "#";
-        foreach (KeyValuePair<GameItem, int> pair in GameState.GetPlayerInventory().GetEquippedItems())
-        {
-            data += pair.Key.Id + "/";
-        }
-        data = Encryptor.EncryptToString(data);
-        return data;
+
+        return GameState.GetSaveString(Program.areaManager, Program.followerManager, Program.npcManager, Program.buildingManager);
+
     }
     private void LoadDataFromText()
     {
@@ -131,6 +98,72 @@
         if (equippedItems != null && equippedItems.Count > 0)
         {
             GameState.GetPlayer().EquipItems(equippedItems);
+        }
+        if (lines.Length > 9 && lines[9] != null)
+        {
+            string[] settings = lines[9].Split(',');
+            GameState.isSplitView = bool.Parse(settings[0]);
+            GameState.compactBankView = bool.Parse(settings[1]);
+        }
+        if (lines.Length > 10 && lines[10] != null)
+        {
+            Program.npcManager.LoadNPCData(lines[10]);
+        }
+        if (lines.Length > 11 && lines[11] != null)
+        {
+            GameState.sushiHouseRice = int.Parse(lines[11].Split(',')[0]);
+            GameState.sushiHouseSeaweed = int.Parse(lines[11].Split(',')[1]);
+        }
+        if (lines.Length > 12 && lines[12] != null)
+        {
+            string[] salts = lines[12].Split('/');
+            foreach (string salt in salts)
+            {
+                if (salt.Length > 0)
+                {
+                    int id = int.Parse(salt.Split(',')[0]);
+                    int amount = int.Parse(salt.Split(',')[1]);
+                    Program.buildingManager.GetBuildingByID(id).Salt = amount;
+                }
+            }
+        }
+        if (lines.Length > 13 && lines[13] != null)
+        {
+            string[] tanneries = lines[13].Split('@');
+
+            foreach (string tannery in tanneries)
+            {
+                if (tannery.Length > 0)
+                {
+                    Building t = Program.buildingManager.GetBuildingByID(int.Parse(tannery.Split('>')[0]));
+                    string[] tanneryData = tannery.Split('>')[1].Split('_');
+
+                    foreach (string s in tanneryData)
+                    {
+                        if (s.Length > 0)
+                        {
+                            TanningSlot slot = new TanningSlot();
+                            slot.SetDataFromString(s);
+                            t.TanneryItems.Add(slot);
+
+                        }
+
+                    }
+                }
+            }
+        }
+        if(lines.Length > 14 && lines[14] != null)
+        {
+            if(bool.TryParse(lines[14].Split(',')[0], out bool isHunting))
+            {
+                if (isHunting)
+                {
+                    GameState.isHunting = true;
+                    GameState.huntingAreaID = int.Parse(lines[14].Split(',')[1]);
+                    GameState.huntingEndTime = DateTime.Parse(lines[14].Split(',')[2]);
+
+                }
+            }
         }
         MessageManager.AddMessage("Save game loaded.");
 

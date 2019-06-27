@@ -32,15 +32,15 @@
                 builder.CloseElement();
             }
             builder.OpenElement(8, "p");
-            if(GameState.GetPlayerInventory().GetAvailableSpaces() == 0)
+            if (GameState.GetPlayerInventory().GetAvailableSpaces() == 0)
             {
                 builder.AddAttribute(8, "style", "color:firebrick");
             }
-            
+
             builder.AddContent(9, GameState.GetPlayerInventory().GetFreeSpacesString());
             builder.CloseElement();
 
-            if(GameState.GetPlayer().GetSkill("HP") != null)
+            if (GameState.GetPlayer().GetSkill("HP") != null)
             {
                 builder.OpenElement(10, "p");
                 builder.AddContent(11, "HP:" + GameState.GetPlayer().CurrentHP + "/" + GameState.GetPlayer().GetSkill("HP").GetSkillLevel());
@@ -136,7 +136,7 @@
             builder.OpenElement(6, "img");
             builder.AddAttribute(7, "src", "data/ItemIcons/" + item.Key.Icon + ".png");
             builder.AddAttribute(8, "style", "width:40px;opacity:0.6;color:green");
-            if(item.Key.ExperienceGained != null)
+            if (item.Key.ExperienceGained != null)
             {
                 builder.AddAttribute(9, "title", "+ " + item.Key.ExperienceGained + " exp");
             }
@@ -195,7 +195,7 @@
                 builder.AddAttribute(29, "style", "text-align:right");
                 builder.OpenElement(30, "button");
                 builder.AddAttribute(31, "class", "btn btn-primary");
-                if(GameState.CanLeave() == false)
+                if (GameState.CanLeave() == false)
                 {
                     builder.AddAttribute(32, "disabled", true);
                     builder.AddAttribute(33, "title", "You can't do that while you are doing what you're doing.");
@@ -264,7 +264,7 @@
 
             builder.OpenElement(2, "td");
             string infoString = "";
-            if(item.Key.Damage > 0)
+            if (item.Key.Damage > 0)
             {
                 infoString += "Damage: " + item.Key.Damage;
             }
@@ -321,7 +321,7 @@
             {
                 builder.AddAttribute(1, "style", "background-color:aquamarine");
             }
-            if(item.Key.AttackSpeed != 0)
+            if (item.Key.AttackSpeed != 0)
             {
                 builder.AddAttribute(2, "title", "DPS: " + (float)item.Key.Damage / (item.Key.AttackSpeed / 1000f));
             }
@@ -332,21 +332,21 @@
             builder.OpenElement(4, "td");
             builder.AddAttribute(4, "colspan", "3");
             string infoString = "";
-            if(item.Key.Damage > 0)
+            if (item.Key.Damage > 0)
             {
                 infoString += "Damage: " + item.Key.Damage;
             }
-            if(item.Key.Armor > 0)
+            if (item.Key.Armor > 0)
             {
-                if(item.Key.Damage > 0)
+                if (item.Key.Damage > 0)
                 {
                     infoString += ", ";
                 }
                 infoString += " Armor: " + item.Key.Armor;
             }
-            if(item.Key.GatherSpeedBonus > 0)
+            if (item.Key.GatherSpeedBonus > 0)
             {
-                if(item.Key.Damage > 0 || item.Key.Armor > 0)
+                if (item.Key.Damage > 0 || item.Key.Armor > 0)
                 {
                     infoString += ", ";
                 }
@@ -366,7 +366,7 @@
             else
             {
                 builder.AddAttribute(11, "onclick", () => Equip(item.Key));
-                if(GameState.GetPlayer().GetLevel(item.Key.ActionRequired) < item.Key.RequiredLevel &&
+                if (GameState.GetPlayer().GetLevel(item.Key.ActionRequired) < item.Key.RequiredLevel &&
                 item.Key.ActionRequired.Contains("Leatherworking") == false)
                 {
                     builder.AddAttribute(12, "disabled", true);
@@ -504,7 +504,7 @@
                 sellAmount < 0)
             {
                 builder.AddAttribute(27, "disabled", true);
-                if(sellAmount < 0)
+                if (sellAmount < 0)
                 {
                     builder.AddAttribute(28, "title", "You can't sell a negative amount of something.");
                 }
@@ -542,6 +542,15 @@
         return builder =>
         {
             GameItem itemToMake = Program.itemDatabase.GetItemByID(usableIDs[i, 1]);
+            int spacesRequired = itemToMake.MadeOnCreation;
+            if (itemToMake.IsStackable)
+            {
+                spacesRequired = 1;
+                if (GameState.GetPlayerInventory().HasItem(itemToMake))
+                {
+                    spacesRequired = 0;
+                }
+            }
             builder.OpenElement(0, "tr");
             builder.AddAttribute(0, "class", "buddy-mid");
             builder.OpenElement(1, "td");
@@ -555,7 +564,7 @@
                 builder.AddAttribute(7, "disabled", true);
                 builder.AddAttribute(8, "title", "You lack the " + itemToMake.ActionRequired + " level to do this. (" + itemToMake.RequiredLevel + ")");
             }
-            else if(GameState.isGathering || GameState.isHunting || GameState.isSmithing)
+            else if (GameState.isGathering || GameState.isHunting || GameState.isSmithing)
             {
                 builder.AddAttribute(9, "disabled", true);
                 builder.AddAttribute(10, "title", "You can't make things while doing what you're doing.");
@@ -565,10 +574,17 @@
                 builder.AddAttribute(9, "disabled", true);
                 builder.AddAttribute(10, "title", "This item is locked. Click the lock by the name to unlock it.");
             }
-            else if(itemToMake.IngredientIDs != null && itemToMake.AmountOfIngredientsToCreate > GameState.GetPlayerInventory().GetAmountOfItem(Program.itemDatabase.GetItemByID(itemToMake.IngredientIDs[0])))
+            else if (itemToMake.IngredientIDs != null && itemToMake.AmountOfIngredientsToCreate > GameState.GetPlayerInventory().GetAmountOfItem(Program.itemDatabase.GetItemByID(itemToMake.IngredientIDs[0])))
             {
                 builder.AddAttribute(9, "disabled", true);
                 builder.AddAttribute(10, "title", "You don't have enough " + Program.itemDatabase.GetItemByID(itemToMake.IngredientIDs[0]).ItemName + ".(" + itemToMake.AmountOfIngredientsToCreate + ")");
+            }
+            else if(GameState.GetPlayerInventory().GetAvailableSpaces() < spacesRequired)
+            {
+
+                builder.AddAttribute(9, "disabled", true);
+                builder.AddAttribute(10, "title", "You don't have enough inventory space to make " + itemToMake.ItemName + "(" + spacesRequired + ")");
+
             }
             builder.AddContent(11, itemToMake.ItemName);
             builder.CloseElement();
@@ -631,7 +647,7 @@
         {
             amount = item.Value;
         }
-        if(amount < 0)
+        if (amount < 0)
         {
             return "";
         }
@@ -697,7 +713,7 @@
             }
             GameState.UpdateState();
             StateHasChanged();
-        }),null,1000,1000);
+        }), null, 1000, 1000);
         MessageManager.AddMessage("You eat a " + item.ItemName + " healing " + item.HealAmount + " and  boosting your " + item.BuffedSkill + " by " + item.BuffAmount + ".");
         GameState.GetPlayerInventory().RemoveOneOfItem(item);
         GameState.UpdateState();
@@ -716,7 +732,7 @@
         GameState.GetPlayerInventory().RemoveOneOfItem(item);
         foreach (int id in item.UnpackIDs)
         {
-            GameState.GetPlayerInventory().AddMultipleOfItem(Program.itemDatabase.GetItemByID(id), Math.Max(1,item.MadeOnCreation));
+            GameState.GetPlayerInventory().AddMultipleOfItem(Program.itemDatabase.GetItemByID(id), Math.Max(1, item.MadeOnCreation));
 
         }
 
@@ -731,16 +747,24 @@
             GameState.createRepeatTimer.Dispose();
             GameState.createRepeatTimer = null;
         }
+
+
         int creationTime = Program.itemDatabase.GetItemByID(usableIDs[itemCreatedID, 1]).GatherSpeed;
         GameState.createRepeatTimer = new Timer(new TimerCallback(_ =>
         {
+
             GameItem itemCreated = Program.itemDatabase.GetItemByID(usableIDs[itemCreatedID, 1]);
-            if(itemCreated.AmountOfIngredientsToCreate == 0)
+
+            if (itemCreated.AmountOfIngredientsToCreate == 0)
             {
                 if (GameState.GetPlayerInventory().RemoveOneOfItem(itemUsed))
                 {
                     int numToMake = Math.Max(itemCreated.MadeOnCreation, 1);
-                    GameState.GetPlayerInventory().AddMultipleOfItem(itemCreated, numToMake);
+                    if (GameState.GetPlayerInventory().AddMultipleOfItem(itemCreated, numToMake) == false)
+                    {
+                        CancelUse();
+                    }
+
                     MessageManager.AddMessage(itemCreated.GatherString);
                     GameState.GetPlayer().GainExperience(itemCreated.ExperienceGained);
                     if (currentUsedItem.DestroyOnUse)

@@ -526,7 +526,13 @@
     "isShop": true,
     "items": [ 6, 344, 143, 145, 147, 149, 151, 153, 155 ],
     "isExpensive": true,
-    "npcIDs": [ 59, 60]
+    "npcIDs": [ 59, 60 ]
+  },
+  {
+    "name": "Settled Sea Horse",
+    "id": 64,
+    "url": "SettledSeaHorse",
+    "description": "You enter a noisy barroom. A very tall man sits at the nearest table, staring at you as you walk through the door.",
   }
 
 ]

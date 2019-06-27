@@ -25,6 +25,9 @@
     <p><button class="btn btn-primary" onclick="@(() => GoToDebugArea())">Go to Debug Area</button></p>
     <p><button class="btn btn-primary" onclick="@(() => DebugUnlockAllAreas())">Unlock All Areas</button></p>
     <p><button class="btn btn-primary" onclick="@(() => DebugJSTest())">Test JS Interop</button></p>
+    <p>Item ID:<input type="number" @bind-value="@itemID" @bind-value:event="onchange" /></p>
+    <p>Amount:<input type="number" @bind-value="@amount" @bind-value:event="onchange" /></p>
+    <p><button class="btn btn-primary" onclick="@(() => GetItem())">Get Item</button></p>
 }
 
 @if (GameState.saveDataLoaded == false && saveGameExists && gameHasBeenSaved == false && loadBegun == false)
@@ -63,14 +66,24 @@ else
     private bool userWantsGameReset = false;
     private bool gameHasBeenSaved = false;
     private bool gameIsRendered = false;
-    private bool debugMode = false;
+    private bool debugMode = true;
     public string pudding = "Not set.";
     public string encrypt = "This is a whole string, with many things to test! 1234, 50, 100";
     public string testString = "";
+    private int itemID;
+    private int amount;
     private SimpleAES Encryptor = new SimpleAES();
+    public void GetItem()
+    {
+        GameState.GetPlayerBank().GetInventory().AddMultipleOfItem(Program.itemDatabase.GetItemByID(itemID), amount);
+    }
+    public void GoToArea()
+    {
+
+    }
     public async void DebugJSTest()
     {
-        await JSRuntime.InvokeAsync<object>("kongregateFunctions.loadAPI");
+        await JSRuntime.InvokeAsync<object>("kongregateFunctions.getUsername");
 
     }
     public void SetCulinaryTo43()
@@ -196,76 +209,7 @@ else
     }
     public string GetSaveDataString()
     {
-        string data = "";
-        //Bank 0
-        data += "" + GameState.GetPlayerBank().GetInventory().ToString();
-        //Skills 1
-        data += "#" + GameState.GetPlayer().GetSkillString();
-        //Inventory 2
-        data += "#" + GameState.GetPlayerInventory().ToString();
-        //Areas 3
-        data += "#" + Program.areaManager.SaveAreas();
-        //Followers 4
-        data += "#" + Program.followerManager.ToString();
-        //HP 5
-        data += "#" + GameState.GetPlayer().CurrentHP.ToString();
-        //ActiveFollower 6
-        if (GameState.GetPlayer().activeFollower != null)
-        {
-            data += "#" + GameState.GetPlayer().activeFollower.id;
-        }
-        else
-        {
-            data += "#";
-        }
-        //Recipes 7
-        data += "#";
-        foreach (string s in GameState.GetPlayer().GetRecipes())
-        {
-            data += s + "/";
-        }
-        //EquippedItems 8
-        data += "#";
-        foreach (KeyValuePair<GameItem, int> pair in GameState.GetPlayerInventory().GetEquippedItems())
-        {
-            data += pair.Key.Id + "/";
-        }
-        //Settings 9
-        data += "#";
-        data += GameState.isSplitView.ToString();
-        data += ",";
-        data += GameState.compactBankView.ToString();
-        //NPC data 10
-        data += "#";
-        data += Program.npcManager.GetNPCData();
-        //Sushi House Data 11
-        data += "#";
-        data += GameState.sushiHouseRice + "," + GameState.sushiHouseSeaweed;
-        //Tannery Data 12
-        data += "#";
-        foreach (Building b in Program.buildingManager.GetBuildings())
-        {
-            if (b.Salt > 0)
-            {
-                data += "" + b.ID + "," + b.Salt + "/";
-            }
-        }
-        //Tannery Slot Data 13
-        data += "#";
-        foreach (Building b in Program.buildingManager.GetBuildings())
-        {
-            if (b.IsTannery)
-            {
-                data += b.ID + ">";
-                foreach (TanningSlot slot in b.TanneryItems)
-                {
-                    data += slot.GetString() + "_";
-                }
-                data += "@";
-            }
-        }
-        testString = Encryptor.EncryptToString(data);
-        return testString;
+        return GameState.GetSaveString(Program.areaManager, Program.followerManager, Program.npcManager, Program.buildingManager);
     }
     private void LoadDataFromString(string data)
     {
@@ -366,6 +310,21 @@ else
                         }
 
                     }
+                }
+            }
+        }
+        if (lines.Length > 14 && lines[14] != null)
+        {
+            if (bool.TryParse(lines[14].Split(',')[0], out bool isHunting))
+            {
+                if (isHunting)
+                {
+                    GameState.isHunting = true;
+                    GameState.huntingAreaID = int.Parse(lines[14].Split(',')[1]);
+                    GameState.huntingStartTime = DateTime.Parse(lines[14].Split(',')[2]);
+                    GameState.huntingEndTime = DateTime.Parse(lines[14].Split(',')[3]);
+                    Program.huntingManager.LoadHunt(GameState.huntingStartTime, GameState.huntingEndTime);
+
                 }
             }
         }

@@ -828,6 +828,7 @@
     private void Return(string url)
     {
         GameState.previousURL = "/Inside/" + thisBuilding.URL;
+        GameState.StopActions();
         ResetAlchemy();
         UriHelper.NavigateTo(url);
     }

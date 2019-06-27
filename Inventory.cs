@@ -287,7 +287,7 @@ public class Inventory
     }
     public bool AddMultipleOfItem(GameItem item, int amount)
     {
-        if(totalItems == maxSize)
+        if(totalItems == maxSize && (item.IsStackable == false || HasItem(item) == false))
         {
             return false;
         }
@@ -314,7 +314,7 @@ public class Inventory
     }
     public bool AddItemStackable(GameItem item, int amount)
     {
-        if (totalItems == maxSize)
+        if (totalItems == maxSize && (item.IsStackable == false || HasItem(item) == false))
         {
             return false;
         }
