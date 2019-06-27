@@ -4420,7 +4420,7 @@
     "buffedSkill": "Knifesmanship",
     "buffAmount": 3,
     "icon": "Jerky",
-    "ingredientIDs": [ 18 ]
+    "ingredientIDs": [ 19 ]
   },
   {
     "itemName": "Chicken Jerky",
@@ -5522,7 +5522,7 @@
     "experienceGained": "Fishing:200",
     "actionRequired": "Fishing",
     "icon": "Fish"
-  },  
+  },
   {
     "itemName": "Pigeon Jerky",
     "id": 376,
@@ -5539,5 +5539,22 @@
     "buffAmount": 3,
     "icon": "Jerky",
     "ingredientIDs": [ 70 ]
+  },
+    {
+    "itemName": "Pheasant Jerky",
+    "id": 377,
+    "itemDescription": "It's pretty jerky.",
+    "value": 15,
+    "gatherString": "You withdraw some pheasant jerky.",
+    "requiredLevel": 15,
+    "experienceGained": "Culinary Arts:35",
+    "actionRequired": "Culinary Arts",
+    "isEdible": true,
+    "healAmount": 0,
+    "healDuration": 600,
+    "buffedSkill": "Smithing",
+    "buffAmount": 3,
+    "icon": "Jerky",
+    "ingredientIDs": [ 83 ]
   },
 ]
