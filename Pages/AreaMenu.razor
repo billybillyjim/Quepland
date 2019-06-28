@@ -1061,6 +1061,7 @@
             {
                 CompleteHunt();
                 GameState.huntCountdownTimer.Dispose();
+                GameState.huntCountdownTimer = null;
             }
             GameState.UpdateState();
             this.StateHasChanged();
@@ -1112,10 +1113,9 @@
                     GameState.GetPlayer().GainExperience(possibleCaughtAnimals[nextRand].ExperienceGained);
                 }
             }
-            MessageManager.AddMessage(Program.huntingManager.GetEndTime().ToString() + ", start: " + Program.huntingManager.GetStartTime().ToString());
-            MessageManager.AddMessage("total seconds hunting: " + Program.huntingManager.GetEndTime().Subtract(Program.huntingManager.GetStartTime()).TotalSeconds);
             Program.huntingManager.EndHunt();
             GameState.huntCountdownTimer.Dispose();
+            GameState.huntCountdownTimer = null;
             MessageManager.AddMessage("You successfully hunted " + caught + " animals and have returned with their carcasses.");
         }
         GameState.isHunting = false;

@@ -131,7 +131,7 @@
     "description": "There are plenty of exotic animals to catch here.",
     "areaURL": "QCHuntingCave",
     "icon": "oi oi-dial",
-    "huntingIDs": [ 69, 71, 74, 66, 67, 68 ]
+    "huntingIDs": [ 69, 71, 74, 66, 67, 68, 380 ]
   },
   {
     "name": "Queple Cave",

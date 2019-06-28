@@ -83,7 +83,14 @@ else
     }
     public async void DebugJSTest()
     {
-        await JSRuntime.InvokeAsync<object>("kongregateFunctions.getUsername");
+        string returnString = await JSRuntime.InvokeAsync<string>("kongregateFunctions.getUsername");
+        Console.WriteLine(returnString);
+        
+
+    }
+    private async void UpdateHighScores()
+    {
+        await JSRuntime.InvokeAsync<object>("kongregateFunctions.updateTotalLevelScore", GameState.GetPlayer().GetTotalLevel());
 
     }
     public void SetCulinaryTo43()
@@ -153,6 +160,7 @@ else
     private string SaveDataEncrypted()
     {
         localStorage.SetItem("eSave", GetSaveDataString());
+        UpdateHighScores();
         return "";
     }
     private string LoadDataEncrypted()
@@ -185,7 +193,9 @@ else
         localStorage.SetItem("SaveGameExists", true);
         localStorage.SetItem("NPC", Program.npcManager.GetNPCData());
         SaveDataEncrypted();
+
         MessageManager.AddMessage("Your game has been saved.");
+        UpdateHighScores();
         gameHasBeenSaved = true;
         GameState.saveDataLoaded = true;
         GameState.saveGameExists = true;

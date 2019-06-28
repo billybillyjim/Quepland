@@ -9,8 +9,14 @@
     <link href="css/site.css" rel="stylesheet" />
     <script src='https://cdn1.kongregate.com/javascripts/kongregate_api.js'></script>
 </head >
-                <body>
+<body>
+    <script type='text/javascript'>    
 
+        kongregateAPI.loadAPI(function () {
+            window.kongregate = kongregateAPI.getAPI();
+
+        });
+    </script>
     <script>
         //Script by Troy Alford from https://stackoverflow.com/questions/5802467/prevent-scrolling-of-parent-element-when-inner-element-scroll-position-reaches-t
         preventScroll = function () {

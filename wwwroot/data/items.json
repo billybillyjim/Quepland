@@ -5540,7 +5540,7 @@
     "icon": "Jerky",
     "ingredientIDs": [ 70 ]
   },
-    {
+  {
     "itemName": "Pheasant Jerky",
     "id": 377,
     "itemDescription": "It's pretty jerky.",
@@ -5556,5 +5556,46 @@
     "buffAmount": 3,
     "icon": "Jerky",
     "ingredientIDs": [ 83 ]
+  },
+  {
+    "itemName": "Big Moose Antlers",
+    "itemDescription": "The antlers of a giant moose.",
+    "id": 378,
+    "value": 1000,
+    "icon": "Deer",
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 361, 379 ]
+    ]
+  },
+  {
+    "itemName": "Moose Leather Hat (Antlered)",
+    "id": 379,
+    "value": 4000,
+    "itemDescription": "A hat made from moose leather. It's got cool antlers on either side.",
+    "gatherString": "You add antlers to your hat.",
+    "armor": 7,
+    "damage": 8,
+    "experienceGained": "Leatherworking:170",
+    "icon": "Hat",
+    "requiredLevel": 75,
+    "isEquipable": true,
+    "equipSlot": "Head",
+    "actionRequired": "Leatherworking",
+    "gatherSpeed": 4000
+  },
+  {
+    "itemName": "Big Moose",
+    "itemDescription": "The carcass of a massive moose.",
+    "id": 380,
+    "value": 3000,
+    "isUnpackable": true,
+    "unpackIDs": [ 78, 78, 78, 79, 79, 79, 378 ],
+    "unpackString": "Gut",
+    "actionRequired": "Hunting",
+    "requiredLevel": 85,
+    "experienceGained": "Hunting:1200",
+    "icon": "Deer"
   },
 ]

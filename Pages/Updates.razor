@@ -1,6 +1,8 @@
 ﻿@page "/Updates"
 @inject HttpClient Http
 @inject GameState GameState
+@inject MessageManager MessageManager
+@inject IJSRuntime JSRuntime
 @inject Microsoft.AspNetCore.Blazor.Services.WebAssemblyUriHelper UriHelper
 @implements IDisposable
 
@@ -20,9 +22,14 @@
 
 <h2>6/27/2019</h2>
 <p>Save imports and exports now work correctly with stored salt, seaweed, and rice.</p>
-<p>I have created a Patreon page. A few people have mentioned they would like a way to support me, and until I get the Kongregate API working this will be the only way. Thank you to anyone who feels like donating! <a href="https://www.patreon.com/billybillyjim" target="_blank">Patreon</a></p>
 <p>The game no longer breaks when leaving the sushi shop while making sushi.</p>
 <p>Hunting now works offline! When you return the only area accessible to you should be the place you were hunting. Let me know how it works for you!</p>
+<p>Connecting to the Kongregate API is slowly coming together. Click this button and it should tell you your username in the ledger! <button class="btn btn-primary" onclick="@(() => ShowUsername())">Tell me</button> If it doesn't work for you, let me know.</p>
+<p>You can now hunt Big Moose, which have a unique drop of Big Moose Antlers. You can add them to a Moose Hat to look cooler!</p>
+<p>Creating stackable items with a full inventory no longer makes you lose the materials but not get the item.</p>
+<p>Maybe some hunting bugs have been fixed.</p>
+<p>I have created a Patreon page. A few people have mentioned they would like a way to support me, and until I get the Kongregate API working this will be the only way. Thank you to anyone who feels like donating! <a href="https://www.patreon.com/billybillyjim" target="_blank">Patreon</a></p>
+
 
 <h2>6/26/2019</h2>
 <p>Fixed a bug that prevented withdrawing some kinds of meat from the tannery.</p>
@@ -198,7 +205,11 @@
 @functions{
 
 
-
+    private async void ShowUsername()
+    {
+        string name = await JSRuntime.InvokeAsync<string>("kongregateFunctions.getUsername");
+        MessageManager.AddMessage("Your username is " + name);
+    }
     protected override void OnInit()
     {
         GameState.StateChanged += OnGameStateChanged;
