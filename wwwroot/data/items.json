@@ -5538,7 +5538,7 @@
     "buffedSkill": "Axemanship",
     "buffAmount": 3,
     "icon": "Jerky",
-    "ingredientIDs": [ 70 ]
+    "ingredientIDs": [ 81 ]
   },
   {
     "itemName": "Pheasant Jerky",

@@ -9,7 +9,7 @@
 @LoadNavbar()
 
 @functions {
-    bool collapseNavMenu = true;
+    bool collapseNavMenu = false;
 
     private Area lastToggledArea;
     string autoSaveString = "Last autosave: Never";
@@ -41,16 +41,11 @@
                 builder.AddAttribute(4, "href", "");
             }
             builder.AddAttribute(5, "style", "color:white");
-            builder.AddContent(5, "Quepland Menu");
+            builder.AddContent(6, "Quepland Menu");
             builder.CloseElement();
-            builder.OpenElement(6, "button");
-            builder.AddAttribute(7, "class", "navbar-toggler");
-            builder.AddAttribute(8, "onclick", () => ToggleNavMenu());
-            builder.OpenElement(9, "span");
-            builder.AddAttribute(10, "class", "navbar-toggler-icon");
+            
             builder.CloseElement();
-            builder.CloseElement();
-            builder.CloseElement();
+
         };
     }
 
@@ -101,10 +96,10 @@
             else if (GameState.isHunting)
             {
                 Area childArea = Program.areaManager.GetAreaByID(GameState.huntingAreaID);
-                            if (childArea.IsUnlocked)
-                            {
-                                builder.AddContent(17, NavButton(childArea, false));
-                            }
+                if (childArea.IsUnlocked)
+                {
+                    builder.AddContent(17, NavButton(childArea, false));
+                }
             }
             builder.CloseElement();
             builder.CloseElement();

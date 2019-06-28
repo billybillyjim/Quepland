@@ -1114,9 +1114,10 @@
                 }
             }
             Program.huntingManager.EndHunt();
+            MessageManager.AddMessage("You successfully hunted " + caught + " animals and have returned with their carcasses.");
             GameState.huntCountdownTimer.Dispose();
             GameState.huntCountdownTimer = null;
-            MessageManager.AddMessage("You successfully hunted " + caught + " animals and have returned with their carcasses.");
+            
         }
         GameState.isHunting = false;
         GameState.UpdateState();

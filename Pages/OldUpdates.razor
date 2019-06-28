@@ -1,0 +1,172 @@
+﻿@page "/OldUpdates"
+@inject HttpClient Http
+@inject GameState GameState
+@inject MessageManager MessageManager
+@inject IJSRuntime JSRuntime
+@inject Microsoft.AspNetCore.Blazor.Services.WebAssemblyUriHelper UriHelper
+@implements IDisposable
+
+<h1>Old Updates</h1>
+
+
+<h2>6/24/2019</h2>
+<p>The bank now remembers your sort style during each game session.</p>
+<p>Hunting now yields fewer resources from higher levels than before.</p>
+<p>You can now see your total level in the skills menu.</p>
+<p>Items in your inventory can now be locked by clicking the lock by their name. This prevents using, equipping, eating, selling, and depositing them accidentally.</p>
+<p>The game's UI should be a little less jumpy. I'm still trying to figure this css thing out.</p>
+<p>Leatherworking appears as a skill now but you can't train it yet.</p>
+<p>The content update is about half done. 3 more areas to complete!</p>
+<p>A new NPC in the wind hall explains the area a little better.</p>
+<p>Fixed a bug that caused some usable items to no longer work properly.</p>
+
+<h2>6/23/2019</h2>
+<p>Winning an autobattle should immediately update the UI now.</p>
+<p>Version number now appears at the top of the screen in both split and regular view.</p>
+<p>The game no longer crashes when you autosmith with a full inventory.</p>
+<p>It appears that clicking load game too soon after the game loads can cause your game to load improperly. I'm trying to work on a fix, but in the mean time, if your save game disappears, try reloading the page and waiting for a second before clicking load game.</p>
+<p>Monsters now have armor! I've tried to keep it low for current enemies, but some enemies in some areas will resist a lot of damage. Note that using an effective weapon ignores enemy armor.</p>
+
+<h2>6/22/2019</h2>
+<p>You can no longer leave the area while looking for an ore vein.</p>
+<p>Various bug fixes.</p>
+<p>Settings now save properly.</p>
+<p>The game now saves an encrypted savefile along with the regular one, and tries to load the encrypted file first. In a few days the regular file will be removed.</p>
+<p>A number of players have mentioned their game crashing while autosmithing, but I haven't been able to recreate it yet. Let me know if it happens to you.</p>
+<p>Having a negative number of things no longer breaks your save.</p>
+<p>Fish are now slightly slower to catch and nets now help slightly less for catching speed. The next big update will introduce other equipable gear to help compensate for this change.</p>
+<p>More disabled buttons now tell you why they are disabled.</p>
+<p>Food buffs no longer move your inventory around when they begin and end.</p>
+
+<h2>6/21/2019</h2>
+<p>You can no longer leave the area while auto battling.</p>
+<p>Fixed some bugs involving getting negative amounts of items.</p>
+<p>Begun work on the River Hoin update, which will include equipable things that aren't weapons, afk culinary arts training, a new skill, a new way to train HP, and some handy shops.</p>
+<p>The settings menu no longer crashes the game.</p>
+<p>With my recent Blazor update, bank search and withdraw x/sell x features had to be completely changed. </p>
+
+<h2>6/20/2019</h2>
+<p>Fixed some log texts so crafting arrows properly describes adding tips.</p>
+<p>Changed the way a number of engine things work. Hopefully nothing broke, but it should fix some rare bugs involving double gathering/crafting.</p>
+<p>Autosaving now appears in the ledger again. This will hopefully make it easier to tell if the system is actually working like it should.</p>
+<p>Auto smithing is now possible with the right follower! I've really tried to bugtest this feature well, but it's a complicated process. Let me know if anything breaks!</p>
+<p>Fixed a bug that made it impossible to smith with ore.</p>
+
+<h2>6/19/2019</h2>
+<p>Fixed a number of loading bugs caused by attempting to use the PlayFab API.</p>
+<p>Fixed a bug that made the save button sometimes disabled when it shouldn't be.</p>
+<p>Mousing over a buy follower button now tells you what skill they help with even when you don't have enough money to buy them with you.</p>
+<p>The early mining area now tells you the kinds of ores you can find in the area description.</p>
+<p>I've added a local save and load option to the settings menu. It should work perfectly, but I can only test it so much before releasing it. Let me know if it works for you!</p>
+<p>Auto smithing is almost ready! Just need to figure out one issue and it'll be ready for use. Thanks for waiting!</p>
+<p>Fixed a pretty bad bug that would crash your game if you entered the smithy without any ores or bars in your bank.</p>
+
+<h2>6/18/2019</h2>
+<p>Added a message to players if save/load isn't working properly. Hopefully this lets people know before they waste time playing and losing a save file.</p>
+<p>Made the sell menu in shops fit better on one line.</p>
+<p>By request menu sections now have separate scroll wheels. Let me know if you like this change!</p>
+<p>The skill info menus now gray out items you don't have the levels for yet.</p>
+<p>Compact bank view is now a toggle in the settings menu.</p>
+<p>You can now smith pickaxes.</p>
+<p>Selling from the bank is now possible with a newly released follower! You can find him in Tsu City.</p>
+<p>The bank UI has been redone to hopefully be more efficient.</p>
+<p>Mousing over items in your inventory will now show their item descriptions.</p>
+<p>Alchemic recipes that create Dust can now be toggled hidden.</p>
+<p>You can no longer carve logs while chopping trees.</p>
+<p>Made it impossible to hunt in areas where your hunting level is too low to catch anything.</p>
+<p>Mousing over a buy follower button will tell you what skill they help with and their max helping level.</p>
+
+<h2>6/17/2019</h2>
+<p>Local saving is in the works, but needs some more testing to be ready. Expect it soon!</p>
+<p>The whole menu system has been improved again! Let me know if anything is broken.</p>
+<p>Item icons have been shrunk.</p>
+<p>Space between items in inventory has been greatly reduced.</p>
+<p>Item actions in the inventory have been reduced to one line each.</p>
+<p>Various bug fixes.</p>
+<p>For people struggling with save games:Cookies do need to be enabled for save and load to work properly.</p>
+<p>Made withdrawing large stacks of items from the bank much much faster.</p>
+<p>Fixed the sell button layout a bit.</p>
+<p>Changed item prices to better align with rarity and purpose.</p>
+<p>Added access to the Water Hall.</p>
+<p>Made weapons stats fit better on one line in the bank.</p>
+<p>Added description text to some items that were missing them.</p>
+<p>You can now open money pouches even if your inventory is full.</p>
+<p>Fixed a bug that sometimes made it cost you double to buy a follower.</p>
+<p>Made it more clear when you actually hire a follower, and what to do with them.</p>
+<p>Fixed a huge bug that made a number of NPCs not actually visible on the map.</p>
+
+<h2>6/16/2019</h2>
+<p>Fixed a huge combat bug. Things that die now stay dead.</p>
+<p>Updated weapon stats and drop tables to be more in line with what you'd expect.</p>
+<p>You now gain HP experience from eating food.</p>
+<p>The UI is slightly more compact.</p>
+<p>Added colors to item icons to make them more visually distinct at a glance.</p>
+<p>Mousing over icons now tells you how much experience that item gives when gathered.</p>
+<p>People have been asking for a kongregate forum, but I believe it's up to Kongregate to grant those. In the mean time, I have made a subreddit over at /r/Quepland on Reddit.</p>
+<p>I'm aware some people are having an issue with their saves. I think I've fixed it, but I can't reproduce the problem, so if it keeps happening let me know with as much information as you can. I'm sorry for any frustration this has caused.</p>
+<p>Added version numbers in the updates menu to make bug reports easier to pinpoint.</p>
+<p>Fixed a bug that caused item drops to be way too high for some items.</p>
+<p>Fixed a bug that let you still equip items you couldn't after your boost ends.</p>
+<p>You can no longer use items while smithing.</p>
+
+<h2>6/15/2019</h2>
+<p>Fixed a bug with npcs who don't cost money.</p>
+<p>Fixed a bug caused by entering a building while gathering.</p>
+<p>Added a low level bow and arrow to the starter store to allow for hunting.</p>
+<p>Increased the odds of catching higher level animals while hunting.</p>
+<p>Increased hunting experience gained for all animals.</p>
+<p>Arrows now only have a chance to be lost on use.</p>
+<p>Fixed a bug that required you to have an ore with you to smelt bars.</p>
+<p>Doubled manual smithing speed.</p>
+<p>Auto smithing is now possible with the right follower. Currently it only works with 1 inventory at a time.</p>
+<p>Added a message for item drops from battles.</p>
+<p>Added a settings menu.</p>
+<p>Added a split view toggle in settings.</p>
+<p>Replaced repeat messages with a number in parentheses after.</p>
+<p>Fixed a bug that prevented players from increasing gather speed with better tools.</p>
+<p>Balanced axe bonuses to better align with metal rarities.</p>
+
+<h2>6/14/2019</h2>
+<p>Fixed all free inventory slot issues.</p>
+<p>Made low level unfinished arrows work with more low level arrow tips.</p>
+<p>Removed auto save message. Don't worry! It's still saving.</p>
+<p>Due to popular demand, you can now smelt bars as well as ores.</p>
+<p>Most recent messages are now on the top of the list.</p>
+<p>Fixed a host of bugs surrounding the Kogoe Gym. It should work properly now.</p>
+<p>Fixed arrow creation bugs.</p>
+<p>Added a compact view toggle for the bank.</p>
+<p>Fixed some areas not appearing in the sidebar.</p>
+<p>Fixed a bug with smithing bars taking ores instead.</p>
+<p>Fixed a bug with compact toggle not working when searching.</p>
+<p>Fixed the ore searching button.</p>
+<p>Fixed the copper sword icon.</p>
+<p>Fixed a bug that prevented gaining Alchemy experience.</p>
+<p>Modified some item prices to be more consistent.</p>
+
+<h2>6/13/2019</h2>
+<p>Fixed a bug that showed the wrong number of free inventory spaces when crafting.</p>
+<p>Fixed a but that prevented making arrows.</p>
+<p>Added arrow damage info to inventory and bank menus.</p>
+<p>Fixed a bug that prevented making some kinds of sushi.</p>
+<p>Fixed some bugs dealing with leaving the page when gathering or hunting.</p>
+<p>Fixed an issue with smithing sometimes not let players finish making their bars.</p>
+
+@functions{
+
+
+    private async void ShowUsername()
+    {
+        string name = await JSRuntime.InvokeAsync<string>("kongregateFunctions.getUsername");
+        MessageManager.AddMessage("Your username is " + name);
+    }
+    protected override void OnInit()
+    {
+        GameState.StateChanged += OnGameStateChanged;
+        this.StateHasChanged();
+    }
+    void IDisposable.Dispose()
+    {
+        GameState.StateChanged -= OnGameStateChanged;
+    }
+    void OnGameStateChanged(object sender, EventArgs e) => StateHasChanged();
+}

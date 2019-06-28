@@ -100,7 +100,11 @@ else
                         textColor = "color:gray";
                     }
                     builder.AddAttribute(18, "style", textColor);
-                    builder.AddContent(19, item.ItemName);
+                    if(currentSkill.SkillName == "Culinary Arts")
+                    {
+                        builder.AddAttribute(19, "title", "Buffs " + item.BuffedSkill + " by " + item.BuffAmount + ".");
+                    }
+                    builder.AddContent(20, item.ItemName);
                     builder.CloseElement();
 
                     /* if (item.Damage > 0)

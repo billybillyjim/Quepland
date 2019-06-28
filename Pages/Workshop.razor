@@ -1,0 +1,21 @@
+﻿@page "/Workshop"
+@inject HttpClient Http
+@inject GameState GameState
+@implements IDisposable
+
+<h1>The Workshop</h1>
+<p>Inside you find all the tools you need to start processing lumber.</p>
+
+@functions{
+
+    protected override void OnInit()
+    {
+        GameState.StateChanged += OnGameStateChanged;
+        this.StateHasChanged();
+    }
+    void IDisposable.Dispose()
+    {
+        GameState.StateChanged -= OnGameStateChanged;
+    }
+    void OnGameStateChanged(object sender, EventArgs e) => StateHasChanged();
+}

@@ -7,8 +7,8 @@
 </div>
 @if (!GameState.isSplitView)
 {
-    <div style="height:100vh;min-width:425px;overflow:scroll"class="main" >
-        <div class="top-row px-4">
+    <div style="height:100vh;min-width:425px;overflow:scroll;padding-left:10px; padding-right:10px;"class="col-6" >
+        <div class="top-row px-6"  style="background:#e4e4e4; padding:10px;margin-left:-10px;margin-right:-10px;">
             <table style="width:100%">
                 <tr>
                     @if (GameState.canBank)
@@ -30,7 +30,7 @@
             </table>
         </div>
 
-        <div class="content px-4">
+        <div class="content px-6">
             @Body
             <div class="footer navbar-fixed-bottom">
                 <MessagesMenu />
@@ -41,8 +41,8 @@
 }
 else
 {
-    <div class="main" style="height:100vh;overflow:scroll">
-        <div class="top-row px-4">
+    <div class="col-5" style="height:100vh;overflow:scroll;padding-left:10px; padding-right:10px;">
+        <div class="top-row px-5" style="background:#e4e4e4;padding:10px;margin-left:-10px;margin-right:-10px;">
             <table style="width:100%">
                 <tr>
                     @if (GameState.canBank)
@@ -64,7 +64,7 @@ else
             </table>
         </div>
 
-        <div class="content px-4">
+        <div class="content px-5">
             @Body
             <div class="footer navbar-fixed-bottom">
                 <MessagesMenu />
@@ -86,14 +86,14 @@ else
 else
 {
     if (GameState.inventoryIsActiveView)
-    { <div class="col-md-3" style="height:100vh;padding-left:0px; padding-right:0px; min-width:400px;overflow:scroll">
+    { <div class="col align-self-end" style="height:100vh;padding-left:0px; padding-right:0px; min-width:400px;overflow:scroll">
             <Inventory />
         </div>
 
     }
     else
     {
-        <div class="col-md-3" style="height:100vh;padding-left:0px; padding-right:0px; min-width:400px;overflow:scroll">
+        <div class="col align-self-end" style="height:100vh;padding-left:0px; padding-right:0px; min-width:400px;overflow:scroll">
             <SkillsMenu />
         </div>
     }
