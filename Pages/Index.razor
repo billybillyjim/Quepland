@@ -28,6 +28,13 @@
     <p>Item ID:<input type="number" @bind-value="@itemID" @bind-value:event="onchange" /></p>
     <p>Amount:<input type="number" @bind-value="@amount" @bind-value:event="onchange" /></p>
     <p><button class="btn btn-primary" onclick="@(() => GetItem())">Get Item</button></p>
+    <ul id="simpleList" class="list-group" @ref="simpleList">
+        <li class="list-group-item">This is <a href="http://SortableJS.github.io/Sortable/">Sortable</a></li>
+        <li class="list-group-item">It works with Bootstrap...</li>
+        <li class="list-group-item">...out of the box.</li>
+        <li class="list-group-item">It has support for touch devices.</li>
+        <li class="list-group-item">Just drag some elements around.</li>
+    </ul>
 }
 
 @if (GameState.saveDataLoaded == false && saveGameExists && gameHasBeenSaved == false && loadBegun == false)
@@ -72,6 +79,7 @@ else
     public string testString = "";
     private int itemID;
     private int amount;
+    private ElementRef simpleList;
     private SimpleAES Encryptor = new SimpleAES();
     public void GetItem()
     {
@@ -83,9 +91,10 @@ else
     }
     public async void DebugJSTest()
     {
-        string returnString = await JSRuntime.InvokeAsync<string>("kongregateFunctions.getUsername");
-        Console.WriteLine(returnString);
-        
+        //string returnString = await JSRuntime.InvokeAsync<string>("kongregateFunctions.getUsername");
+        await JSRuntime.InvokeAsync<object>("kongregateFunctions.createSortableList", simpleList);
+        Console.WriteLine("nothing");
+
 
     }
     private async void UpdateHighScores()

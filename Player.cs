@@ -240,7 +240,7 @@ public class Player
             if (skill.GetSkillLevelUnboosted() % 10 == 0)
             {
                 inventory.IncreaseMaxSizeBy(4);
-                messageManager.AddMessage("You feel stronger. You can now carry 4 more items in your inventory.");
+                messageManager.AddMessage("You feel stronger. You can now carry 5 more items in your inventory.");
             }
             else
             {
@@ -304,7 +304,7 @@ public class Player
     {
         int str = GetSkill("Strength").GetSkillLevel();
         int deft = GetSkill("Deftness").GetSkillLevel();
-        float baseDamage = 1 + str / 2;
+        float baseDamage = 1 + (str / 3);
 
         int equipmentBonus = GetEquipmentBonus();
 
@@ -341,11 +341,12 @@ public class Player
             }
             if (opponent.Weakness.Contains(action))
             {
-                baseDamage *= 2;
+                baseDamage *= 1.75f;
+                baseDamage *= 1 - ((float)Extensions.CalculateArmorDamageReduction(opponent) / 3f);
             }
             else if (opponent.Strength.Contains(action))
             {
-                baseDamage /= 2;
+                baseDamage /= 1.75f;
                 baseDamage *= 1 - (float)Extensions.CalculateArmorDamageReduction(opponent);
             }
             else

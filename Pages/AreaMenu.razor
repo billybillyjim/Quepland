@@ -214,7 +214,7 @@
                             builder.OpenElement(9, "br");
                             builder.CloseElement();
                         }
-                        else
+                        else if(gatherItem == "Carving")
                         {
                             builder.OpenElement(2, "button");
                             builder.AddAttribute(3, "style", "margin-bottom:10px");
@@ -223,6 +223,20 @@
                             builder.AddContent(7, "Stop Carving");
                             builder.CloseElement();
                             builder.OpenElement(8, "br");
+                            builder.CloseElement();
+                        }
+                        else
+                        {
+                            builder.OpenElement(2, "button");
+                            builder.AddAttribute(3, "style", "margin-bottom:10px");
+                            builder.AddAttribute(4, "class", "btn btn-primary");
+
+                            builder.AddAttribute(6, "disabled", true);
+                            builder.AddAttribute(7, "title", "You can't do this while doing what you're doing.");
+
+                            builder.AddContent(8, "Carve Totem");
+                            builder.CloseElement();
+                            builder.OpenElement(9, "br");
                             builder.CloseElement();
                         }
                     }
@@ -268,12 +282,12 @@
                         bool actionIsEnabled = GameState.GetPlayerInventory().ActionIsEnabled(item.ActionRequired);
                         bool playerHasLevels = GameState.GetPlayer().HasRequiredLevel(item);
 
-                        if (actionIsEnabled && playerHasLevels)
+                        if (actionIsEnabled)
                         {
                             builder.OpenElement(9, "button");
                             builder.AddAttribute(10, "style", "margin-bottom:10px");
                             builder.AddAttribute(11, "class", "btn btn-primary");
-                            if (gatherItem != itemString)
+                            if (gatherItem != itemString && playerHasLevels)
                             {
                                 builder.AddAttribute(12, "onclick", () => Gather(item));
                                 if (GameState.GetPlayerInventory().GetAvailableSpaces() == 0)
@@ -289,7 +303,7 @@
                                 builder.AddContent(15, action);
 
                             }
-                            else
+                            else if(gatherItem == itemString)
                             {
                                 builder.AddAttribute(16, "onclick", () => StopGathering());
                                 builder.AddContent(17, "Stop");
@@ -366,15 +380,20 @@
 
                 bool actionIsEnabled = GameState.GetPlayerInventory().ActionIsEnabled(item.ActionRequired);
                 bool playerHasLevels = GameState.GetPlayer().HasRequiredLevel(item);
-                if (actionIsEnabled && playerHasLevels)
+                if (actionIsEnabled)
                 {
-                    if (gatherItem != item.ItemName)
+                    if (gatherItem != item.ItemName && playerHasLevels)
                     {
                         builder.AddAttribute(0, "onclick", () => Gather(item));
                         builder.AddContent(0, "Mine " + item.ItemName);
 
                     }
-                    else
+                    else if (!playerHasLevels)
+                    {
+                        builder.AddAttribute(0, "disabled", true);
+                        builder.AddAttribute(0, "title", "You lack the level to do this. (" + item.RequiredLevel + ")");
+                    }
+                    else if(gatherItem == item.ItemName)
                     {
                         builder.AddAttribute(0, "onclick", () => StopGathering());
                         builder.AddContent(0, "Stop");
@@ -383,16 +402,11 @@
                 }
                 else
                 {
-                    builder.AddAttribute(0, "onclick", () => StopGathering());
-                    builder.AddAttribute(0, "disabled", true);
 
+                    builder.AddAttribute(0, "disabled", true);
                     if (playerHasLevels)
                     {
                         builder.AddAttribute(0, "title", "You lack the tool to do this.");
-                    }
-                    else if (actionIsEnabled)
-                    {
-                        builder.AddAttribute(0, "title", "You lack the level to do this. (" + item.RequiredLevel + ")");
                     }
                     else
                     {
@@ -903,6 +917,10 @@
     {
         GameState.StopActions();
         MessageManager.AddMessage("You look for fish to harpoon.");
+        if(GameState.GetPlayer().activeFollower != null && GameState.GetPlayer().activeFollower.AutoCollectSkill == "Fishing")
+        {
+            MessageManager.AddMessage(GameState.GetPlayer().activeFollower.Name + " doesn't understand how to carry harpooned items to the bank, and stares at you blankly.");
+        }
         GameState.isGathering = true;
         GameState.gatherTimer = new Timer(new TimerCallback(_ =>
         {
@@ -924,7 +942,7 @@
             {
                 GameState.GetPlayer().GainExperience(gainedItem.ExperienceGained);
             }
-            
+
             MessageManager.AddMessage("You harpooned a " + gainedItem.ItemName);
         }
         else
@@ -938,6 +956,7 @@
     {
         GameState.StopActions();
         string totemLevel = actionString.Split(':')[1];
+        gatherItem = "Carving";
         MessageManager.AddMessage("You begin carving the totem.");
         GameState.isGathering = true;
         GameState.gatherTimer = new Timer(new TimerCallback(_ =>
@@ -1117,7 +1136,7 @@
             MessageManager.AddMessage("You successfully hunted " + caught + " animals and have returned with their carcasses.");
             GameState.huntCountdownTimer.Dispose();
             GameState.huntCountdownTimer = null;
-            
+
         }
         GameState.isHunting = false;
         GameState.UpdateState();

@@ -45,7 +45,7 @@
     "skillName": "Archery",
     "skillLevel": 1,
     "skillExperience": 0,
-    "skillDescription": "Archery is your ability to wield a bow and shoot arrows. "
+    "skillDescription": "Archery is your ability to wield a bow and shoot arrows. It also helps ensure a player going hunting doesn't return empty handed after a trip."
   },
   {
     "skillName": "Mining",
@@ -81,7 +81,7 @@
     "skillName": "Woodworking",
     "skillLevel": 1,
     "skillExperience": 0,
-    "skillDescription": "Woodworking is the act of cutting away parts of logs to make them more useful."
+    "skillDescription": "Woodworking is the act of cutting away parts of logs to make them more useful. You can train it by chiselling away at logs, or by finding one of the totems around Quepland."
   },
   {
     "skillName": "Hunting",
@@ -93,7 +93,7 @@
     "skillName": "Culinary Arts",
     "skillLevel": 1,
     "skillExperience": 0,
-    "skillDescription": "Culinary Arts involves taking raw materials and converting them into digestible materials through physical and chemical changes. Ultimately this boils down to making sushi rolls."
+    "skillDescription": "Culinary Arts involves taking raw materials and converting them into digestible materials through physical and chemical changes. Ultimately this boils down to making sushi rolls and curing meats into jerky."
   },
   {
     "skillName": "Leatherworking",

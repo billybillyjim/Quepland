@@ -12,6 +12,8 @@
     },
     updateTotalLevelScore: function (totalLevel) {
         kongregate.stats.submit("Total Level", totalLevel);
+    },
+    createSortableList: function (listElement) {
+        Sortable.create(listElement, {});
     }
-
 };
