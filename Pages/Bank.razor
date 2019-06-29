@@ -161,6 +161,7 @@ else
     private void SetWithdrawAmount()
     {
         withdrawAmount = withdrawAmountModel.withdrawAmount;
+        GameState.bankWithdrawAmount = withdrawAmount;
         GameState.UpdateState();
         this.StateHasChanged();
     }
@@ -227,6 +228,7 @@ else
         sortStyle = GameState.bankSortStyle;
         GameState.canBank = true;
         GameState.canSell = false;
+        withdrawAmount = GameState.bankWithdrawAmount;
         //Give the player an axe if they have no items.
         if (GameState.GetPlayerBank().GetInventory().GetTotalNumberOfItems() == 0 && GameState.GetPlayerInventory().GetTotalNumberOfItems() == 0)
         {

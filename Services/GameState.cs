@@ -43,6 +43,8 @@ public class GameState
     public int sushiHouseRice;
     public int sushiHouseSeaweed;
 
+    public int bankWithdrawAmount;
+
     public int buffSecondsLeft;
 
     public int bankSortStyle;
