@@ -362,7 +362,7 @@
 
             foreach(GameItem item in Program.itemDatabase.GetSmithingItems())
             {
-                if((currentSmithingBar != null && item.IngredientIDs[0] == currentSmithingBar.Id)  && GameState.GetPlayer().HasRequiredLevel(item))
+                if((currentSmithingBar != null && item.IngredientIDs[0] == currentSmithingBar.Id)  && GameState.GetPlayer().HasRequiredLevel(currentSmithingBar))
                 {
                     builder.OpenElement(34, "a");
                     builder.AddAttribute(35, "class", "dropdown-item");
