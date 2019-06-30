@@ -309,6 +309,13 @@
                                 builder.AddContent(17, "Stop");
 
                             }
+                            else
+                            {
+
+                                    builder.AddAttribute(13, "title", "You don't have the levels to do this.");
+                                    builder.AddAttribute(14, "disabled", true);
+                                 builder.AddContent(15, action);
+                            }
                             builder.CloseElement();
                         }
                         else
@@ -1151,7 +1158,7 @@
         int amountToTake = Math.Min(GameState.GetPlayerInventory().GetNumberOfItem(item), GameState.GetPlayer().activeFollower.MaxCarry);
         GameState.GetPlayerInventory().RemoveItems(item, amountToTake);
         GameState.GetPlayerBank().GetInventory().AddMultipleOfItem(item, amountToTake);
-        MessageManager.AddMessage(GameState.GetPlayer().activeFollower.AutoCollectMessage.Replace("$", amountToTake.ToString()));
+        MessageManager.AddMessage(GameState.GetPlayer().activeFollower.AutoCollectMessage.Replace("$", amountToTake.ToString()) + " (" + GameState.GetPlayerBank().GetInventory().GetNumberOfItem(item) + " total)");
         StateHasChanged();
         GameState.UpdateState();
     }
@@ -1215,7 +1222,7 @@
         }
         else
         {
-            MessageManager.AddMessage(Program.followerManager.GetFollowerByID(followerID).Name + " will now follow you.");
+            MessageManager.AddMessage(Program.followerManager.GetFollowerByID(followerID).Name + " will now follow you. Go to your bank and select \"Followers\" at the top of the screen to set them as your follower.");
         }
         Program.followerManager.GetFollowerByID(followerID).IsUnlocked = true;
         GameState.UpdateState();
