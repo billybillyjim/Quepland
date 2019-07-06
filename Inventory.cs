@@ -264,10 +264,12 @@ public class Inventory
     }
     public void LoadItems(Dictionary<GameItem, int> itemsToAdd)
     {
+
         if (itemsToAdd == null || itemsToAdd.Count == 0)
         {
             return;
         }
+        EmptyInventory();
         foreach (KeyValuePair<GameItem, int> itemToAdd in itemsToAdd)
         {
             if(items.TryGetValue(itemToAdd.Key, out _))

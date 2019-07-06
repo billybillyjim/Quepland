@@ -352,7 +352,7 @@ public class Player
     {
         int str = GetSkill("Strength").GetSkillLevel();
         int deft = GetSkill("Deftness").GetSkillLevel();
-        float baseDamage = 1 + (str / 3);
+        float baseDamage = 1 + (str / 4);
 
         int equipmentBonus = GetEquipmentBonus();
 
@@ -362,7 +362,7 @@ public class Player
 
             if (action.Contains("Knife"))
             {
-                baseDamage += deft * 4;
+                baseDamage += deft * 3;
             }
             else if (action.Contains("Sword"))
             {
@@ -371,7 +371,7 @@ public class Player
             }
             else if (action.Contains("Axe"))
             {
-                baseDamage += str * 3;
+                baseDamage += str * 2;
                 baseDamage += deft;
             }
             else if (action.Contains("Hammer"))
@@ -380,7 +380,7 @@ public class Player
             }
             else if (action.Contains("Archery"))
             {
-                baseDamage = 1 + GetSkill("Archery").GetSkillLevel() * 2 + deft;
+                baseDamage = 1 + GetSkill("Archery").GetSkillLevel() * 3 + (deft * 2);
                 if (inventory.HasArrows())
                 {
                     baseDamage += inventory.GetStrongestArrows().Damage;
@@ -402,10 +402,10 @@ public class Player
                 baseDamage *= 1 - (float)Extensions.CalculateArmorDamageReduction(opponent);
             }
             
-            return Math.Max(Extensions.GetGaussianRandomInt(baseDamage + equipmentBonus, equipmentBonus), 1);
+            return Math.Max(Extensions.GetGaussianRandomInt(baseDamage + equipmentBonus, baseDamage), 1);
         }
         baseDamage *= 1 - (float)Extensions.CalculateArmorDamageReduction(opponent);
-        return Math.Max(Extensions.GetGaussianRandomInt(baseDamage + equipmentBonus, baseDamage + equipmentBonus), 1);
+        return Math.Max(Extensions.GetGaussianRandomInt(baseDamage + equipmentBonus, baseDamage), 1);
     }
     private int GetEquipmentBonus()
     {
@@ -418,7 +418,7 @@ public class Player
             }
             else
             {
-                total += item.Damage;
+                total += (item.Damage * 2);
             }          
         }
         return total;

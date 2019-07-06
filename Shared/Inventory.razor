@@ -814,7 +814,7 @@
             GameState.safeToSave = true;
             GameState.UpdateState();
             StateHasChanged();
-        }), null, (int)((500 + (creationTime / 2)) * GameState.GetPlayer().GetGatherSpeed(itemUsed.ActionRequired)),(int)((1000 + creationTime) * GameState.GetPlayer().GetGatherSpeed(itemUsed.ActionRequired)));
+        }), null, (int)((500 + (creationTime / 2)) * GameState.GetPlayer().GetGatherSpeed(currentUsedItem.ActionRequired)),(int)((1000 + creationTime) * GameState.GetPlayer().GetGatherSpeed(currentUsedItem.ActionRequired)));
 
 
         return "";

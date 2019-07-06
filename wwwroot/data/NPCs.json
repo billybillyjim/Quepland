@@ -415,9 +415,9 @@
     "name": "Garden Sign",
     "id": 61,
     "spokenText": "The sign reads:Entry Fee: 5 Gold Coins",
-    "isInteractable": true,
+    "isInteractable": true
   },
-    {
+  {
     "name": "Mysterious Traveller",
     "id": 62,
     "spokenText": "Did you know there is a great river south of Quepland Woods? Meet me there and I'll show you. No strings attached.",
@@ -426,4 +426,10 @@
     "hideOnFollow": true,
     "hideOnSpeak": true
   },
+  {
+    "name": "Excited Chicken Man",
+    "id": 63,
+    "spokenText": "Killing all these chickens sure is exciting! I can't wait to attach them to my arrow shafts, I need lots of arrows to kill all these chickens!",
+    "isInteractable": true
+  }
 ]

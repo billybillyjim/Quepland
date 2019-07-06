@@ -20,7 +20,7 @@
     "icon": "oi oi-rain",
     "monsterIDs": [ 2, 11, 4 ],
     "huntingIDs": [ 14, 15, 66, 67, 68, 69, 71 ],
-    "npcIDs": [ 49 ]
+    "npcIDs": [ 49, 63 ]
   },
   {
     "name": "The foot of Mt Queple",

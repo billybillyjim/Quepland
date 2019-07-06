@@ -87,7 +87,7 @@ public class HuntingManager
         double totalTimeHunting = currentHuntEndTime.Subtract(currentHuntStartTime).TotalSeconds;
         double caughtBase = totalTimeHunting * catchOdds * (double)((gameState.GetPlayer().GetLevel("Hunting") + 4) / 4d);
         double caught = Extensions.GetGaussianRandom(caughtBase, caughtBase / 3);
-        int catchFloor = (gameState.GetPlayer().GetLevel("Archery") / 10) + 1;
+        int catchFloor = ((gameState.GetPlayer().GetLevel("Archery") / 10) + 1) * Math.Max((int)(totalTimeHunting / 3600), 1);
         if(caught < catchFloor)
         {
             caught = catchFloor;
