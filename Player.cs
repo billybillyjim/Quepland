@@ -8,6 +8,7 @@ public class Player
 {
     public Inventory inventory;
     public Bank bank;
+    public House house;
     public Follower activeFollower;
     public bool hasLoadedSkills;
     public int CurrentHP;
@@ -144,7 +145,14 @@ public class Player
         }
         return 0;
     }
-    public void GainExperience(string skill, int amount)
+    /*public void GainExperience(string skill, int amount)
+    {
+        if (skills.Find(x => x.SkillName == skill) != null)
+        {
+            GainExperience(skills.Find(x => x.SkillName == skill), amount);
+        }
+    }*/
+    public void GainExperience(string skill, long amount)
     {
         if (skills.Find(x => x.SkillName == skill) != null)
         {
@@ -173,6 +181,7 @@ public class Player
             GainExperience(skills.Find(x => x.SkillName == skill.Split(':')[0]), multi* amount);
         }
     }
+    /*
     public void GainExperience(Skill skill, int amount)
     {
         if(skill == null)
@@ -181,6 +190,19 @@ public class Player
             return;
         }
         skill.SkillExperience += (int)(amount * GetExperienceGainBonus(skill));
+        if (skill.SkillExperience >= Extensions.GetExperienceRequired(skill.GetSkillLevelUnboosted()))
+        {
+            LevelUp(skill);
+        }
+    }*/
+    public void GainExperience(Skill skill, long amount)
+    {
+        if (skill == null)
+        {
+            Console.WriteLine("Gained " + amount + " experience in unfound skill.");
+            return;
+        }
+        skill.SkillExperience += (long)(amount * GetExperienceGainBonus(skill));
         if (skill.SkillExperience >= Extensions.GetExperienceRequired(skill.GetSkillLevelUnboosted()))
         {
             LevelUp(skill);

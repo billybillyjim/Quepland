@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public static class Extensions
 {
     private static readonly Random rand = new Random();
-    public static int GetExperienceRequired(int level)
+    /*public static int GetExperienceRequired(int level)
     {
         int exp = 0;
         for(int i = 0; i < level; i++)
@@ -13,17 +13,33 @@ public static class Extensions
             exp += (int)(100.0d * Math.Pow(1.1, i));
         }
         return exp;
+    }*/
+    public static long GetExperienceRequired(int level)
+    {
+        long exp = 0;
+        for (int i = 0; i < level; i++)
+        {
+            exp += (long)(100.0d * Math.Pow(1.1, i));
+        }
+        return exp;
     }
     public static int Clamp(this int value, int min, int max)
     {
         return (value < min) ? min : (value > max) ? max : value;
     }
-    public static int GetProgressForLevel(int exp, int level)
+    /*public static int GetProgressForLevel(int exp, int level)
     {
         int expToLevel = GetExperienceRequired(level) - GetExperienceRequired(level - 1);
         int expProgress = exp - GetExperienceRequired(level - 1);
 
         return (int)(((double)expProgress / (double)expToLevel) * 100);
+    }*/
+    public static long GetProgressForLevel(long exp, int level)
+    {
+        long expToLevel = GetExperienceRequired(level) - GetExperienceRequired(level - 1);
+        long expProgress = exp - GetExperienceRequired(level - 1);
+
+        return (long)(((double)expProgress / (double)expToLevel) * 100);
     }
     public static Dictionary<GameItem, int> GetItemDicFromString(string data, ItemDatabase itemDB)
     {
@@ -62,7 +78,7 @@ public static class Extensions
                 string[] s = line.Split(',');
                 Skill skill = new Skill();
                 skill.SkillName = s[0];
-                skill.SkillExperience = int.Parse(s[1]);
+                skill.SkillExperience = long.Parse(s[1]);
                 skill.SetSkillLevel(int.Parse(s[2]));
                 skills.Add(skill);
             }
@@ -224,7 +240,11 @@ public static class Extensions
         double armorTotal = 0;
         foreach (KeyValuePair<GameItem, int> item in player.inventory.GetItems())
         {
-            armorTotal += item.Key.Armor;
+            if (item.Key.IsEquipped)
+            {
+                armorTotal += item.Key.Armor;
+            }
+            
         }
         double reduction = ((armorTotal * 0.06d) / (1 + (armorTotal * 0.06d)));
         return reduction;

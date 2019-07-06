@@ -1546,7 +1546,8 @@
       [ 45, 241 ],
       [ 46, 242 ],
       [ 47, 243 ],
-      [ 48, 244 ]
+      [ 48, 244 ],
+      [ 299, 381 ]
     ],
     "icon": "Roll"
   },
@@ -5604,9 +5605,19 @@
     "isEdible": true,
     "healAmount": 3,
     "healDuration": 60,
-    "gatherSpeed": 1500,
+    "gatherSpeed": 1600,
     "buffedSkill": "HP",
     "buffAmount": 5,
     "icon": "Roll"
+  },
+  {
+    "itemName": "Sushi Knife",
+    "id": 382,
+    "itemDescription": "A special knife made for chopping up sushi.",
+    "value": 15000,
+    "requiredLevel": 30,
+    "actionRequired": "Culinary Arts",
+    "icon": "Knife",
+    "actionsEnabled": "Culinary Arts"
   }
 ]

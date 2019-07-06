@@ -9,7 +9,6 @@
 <p><button class="btn btn-primary" onclick="@(() => GameState.ToggleSplitView())">Toggle Split View</button> @GetOnOrOff(GameState.isSplitView)</p>
 <p><button class="btn btn-primary" onclick="@(() => GameState.ToggleBankStyle())">Toggle Compact Bank View</button>@GetOnOrOff(GameState.compactBankView)</p>
 
-<p style="font-weight:bold">Expirimental: (Should work fine, but I can't guarantee it.)</p>
 <p><button class="btn btn-primary" onclick="@(() => GenerateSaveFile())">Generate Save File</button></p>
 <textarea>@quickFixString</textarea>
 <p><button class="btn btn-primary" onclick="@(() => LoadDataFromText())">Load From Save File</button></p>

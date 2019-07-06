@@ -4,17 +4,18 @@ public class Skill
 {
     public string SkillName { get; set; }
     private int SkillLevel { get; set; }
-    private int skillExperience;
-    public int SkillExperience {
-        get { return (int)skillExperience; }
+    private long skillExperience;
+
+    public long SkillExperience {
+        get { return skillExperience; }
         set {
             if (value >= 0)
             {
-                skillExperience = Math.Min(value, int.MaxValue - 47483647);
+                skillExperience = Math.Min(value, long.MaxValue - 20000000);
             }
             else
             {
-                skillExperience = int.MaxValue - 47483647;
+                skillExperience = long.MaxValue - 20000000;
             }
         }
     }

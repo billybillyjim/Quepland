@@ -1,0 +1,34 @@
+﻿@page "/House/{RoomURL}"
+@inject HttpClient Http
+@inject GameState GameState
+@implements IDisposable
+
+<h1>Welcome Home</h1>
+
+
+
+@functions{
+
+    [Parameter]
+    private string roomURL { get; set; }
+    private Room room;
+
+    protected override void OnParametersSet()
+    {
+        SetRoom(roomURL);
+    }
+    private void SetRoom(string url)
+    {
+        
+    }
+    protected override void OnInit()
+    {
+        GameState.StateChanged += OnGameStateChanged;
+        this.StateHasChanged();
+    }
+    void IDisposable.Dispose()
+    {
+        GameState.StateChanged -= OnGameStateChanged;
+    }
+    void OnGameStateChanged(object sender, EventArgs e) => StateHasChanged();
+}

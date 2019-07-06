@@ -12,6 +12,7 @@ namespace Quepland
         public static BuildingManager buildingManager = new BuildingManager();
         public static FollowerManager followerManager = new FollowerManager();
         public static NPCManager npcManager = new NPCManager();
+        public static RoomManager roomManager = new RoomManager();
 
         public static void Main(string[] args)
         {
