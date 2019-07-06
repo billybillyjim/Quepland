@@ -79,7 +79,7 @@ else
     private bool userWantsGameReset = false;
     private bool gameHasBeenSaved = false;
     private bool gameIsRendered = false;
-    private bool debugMode = true;
+    private bool debugMode = false;
     public string pudding = "Not set.";
     public string encrypt = "This is a whole string, with many things to test! 1234, 50, 100";
     public string testString = "";
@@ -266,7 +266,7 @@ else
         }
         else
         {
-            GameState.GetPlayer().CurrentHP = GameState.GetPlayer().GetLevel("HP");
+            GameState.GetPlayer().CurrentHP = GameState.GetPlayer().MaxHP;
         }
 
         if (int.TryParse(lines[6], out int activeFollower))
@@ -457,6 +457,10 @@ else
             GameState.GetPlayer().SetMessageManager(MessageManager);
             GameState.GetPlayer().CurrentHP = 50;
             GameState.gameDataLoaded = true;
+            GameState.safeToLoad = true;
+        }
+        else
+        {
             GameState.safeToLoad = true;
         }
         if (saveGameExists == false)

@@ -1166,8 +1166,8 @@
     "isSmithable": true,
     "isEquipable": true,
     "equipSlot": "Right Hand",
-    "damage": 23,
-    "attackSpeed": 500,
+    "damage": 21,
+    "attackSpeed": 600,
     "icon": "Knife"
   },
   {
@@ -3788,7 +3788,7 @@
     "value": 5000,
     "itemDescription": "An extremely powerful knife made from platinum and steel combined. It is somehow stronger than a regular steel knife.",
     "isEquipable": true,
-    "damage": 50,
+    "damage": 45,
     "attackSpeed": 850,
     "actionRequired": "Knifesmanship",
     "actionsEnabled": "Knifesmanship",
@@ -3900,7 +3900,7 @@
     "isSmithable": true,
     "isEquipable": true,
     "equipSlot": "Right Hand",
-    "damage": 25,
+    "damage": 23,
     "attackSpeed": 1000,
     "icon": "Knife"
   },
@@ -3933,7 +3933,7 @@
     "isSmithable": true,
     "isEquipable": true,
     "equipSlot": "Right Hand",
-    "damage": 40,
+    "damage": 38,
     "attackSpeed": 1500,
     "icon": "Knife"
   },
@@ -3949,7 +3949,7 @@
     "isSmithable": true,
     "isEquipable": true,
     "equipSlot": "Right Hand",
-    "damage": 18,
+    "damage": 16,
     "attackSpeed": 1000,
     "icon": "Knife"
   },
@@ -3965,7 +3965,7 @@
     "isSmithable": true,
     "isEquipable": true,
     "equipSlot": "Right Hand",
-    "damage": 22,
+    "damage": 20,
     "attackSpeed": 1000,
     "icon": "Knife"
   },
@@ -4636,7 +4636,8 @@
     "armor": 2,
     "experienceGained": "Leatherworking:50",
     "icon": "Leather",
-    "ingredientIDs": [ 16 ]
+    "ingredientIDs": [ 16 ],
+    "actionRequired": "Leatherworking"
   },
   {
     "itemName": "Rabbit Leather",
@@ -4909,6 +4910,7 @@
     "icon": "LeatherTool",
     "isUsable": true,
     "actionsEnabled": "Leatherworking",
+    "actionRequired": "Leatherworking",
     "usableIDs": [
       [ 324, 333 ],
       [ 324, 334 ],

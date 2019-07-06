@@ -75,7 +75,7 @@
         }
         else
         {
-            GameState.GetPlayer().CurrentHP = GameState.GetPlayer().GetLevel("HP");
+            GameState.GetPlayer().CurrentHP = GameState.GetPlayer().MaxHP;
         }
 
         if (int.TryParse(lines[6], out int activeFollower))

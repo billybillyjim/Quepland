@@ -12,6 +12,7 @@ public class Player
     public Follower activeFollower;
     public bool hasLoadedSkills;
     public int CurrentHP;
+    public int MaxHP;
     private List<Skill> skills;
     private List<GameItem> equippedItems = new List<GameItem>();
     private List<string> knownAlchemicRecipes = new List<string>();
@@ -24,12 +25,17 @@ public class Player
         inventory = new Inventory(maxInventorySize);
         bank = new Bank();
         skills = new List<Skill>();
+        MaxHP = 50;
 	}
     public async void LoadSkills(HttpClient Http)
     {
         Skill[] skillArray = await Http.GetJsonAsync<Skill[]>("data/skills.json");
         skills = skillArray.ToList();
         hasLoadedSkills = true;
+    }
+    private void IncreaseMaxHPBy(int amount)
+    {
+        MaxHP += amount;
     }
     public void SetSkills(List<Skill> skillList)
     {
@@ -45,6 +51,12 @@ public class Player
                     //Subtract 1 to make up for starting at level 1.
                     inventory.ResetMaxSize();
                     inventory.IncreaseMaxSizeBy(s.GetSkillLevelUnboosted() + extraSlots - 1);
+                }
+                else if(s.SkillName == "HP")
+                {
+                    MaxHP = 50;
+                    int extraHP = (s.GetSkillLevelUnboosted() / 5) * 10;
+                    IncreaseMaxHPBy((s.GetSkillLevelUnboosted() * 5) + extraHP - 5);
                 }
             }
         }
@@ -270,6 +282,19 @@ public class Player
                 messageManager.AddMessage("You feel stronger. You can now carry 1 more item in your inventory.");
             }
         }
+        else if(skill.SkillName == "HP")
+        {
+            IncreaseMaxHPBy(5);
+            if(skill.GetSkillLevelUnboosted() % 5 == 0)
+            {
+                IncreaseMaxHPBy(10);
+                messageManager.AddMessage("You feel much healthier. Your maximum HP has increased by 15!");
+            }
+            else
+            {
+                messageManager.AddMessage("You feel healthier. Your maximum HP has increased by 5.");
+            }
+        }
        
         if (skill.SkillExperience >= Extensions.GetExperienceRequired(skill.GetSkillLevelUnboosted()))
         {         
@@ -436,6 +461,10 @@ public class Player
     public float GetGatherSpeed(string skill)
     {
         float totalBonus = 1;
+        if(skill == null || skill == "")
+        {
+            return 1;
+        }
         foreach(GameItem item in equippedItems)
         {
             if (item.ActionsEnabled != null && item.ActionsEnabled.Contains(skill))

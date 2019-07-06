@@ -43,7 +43,7 @@
             if (GameState.GetPlayer().GetSkill("HP") != null)
             {
                 builder.OpenElement(10, "p");
-                builder.AddContent(11, "HP:" + GameState.GetPlayer().CurrentHP + "/" + GameState.GetPlayer().GetSkill("HP").GetSkillLevel());
+                builder.AddContent(11, "HP:" + GameState.GetPlayer().CurrentHP + "/" + GameState.GetPlayer().MaxHP);
                 builder.CloseElement();
             }
 

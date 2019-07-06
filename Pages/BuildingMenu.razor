@@ -244,7 +244,7 @@
     }
     private void StayAtInn()
     {
-        GameState.GetPlayer().CurrentHP = GameState.GetPlayer().GetSkill("HP").GetSkillLevelUnboosted();
+        GameState.GetPlayer().CurrentHP = GameState.GetPlayer().MaxHP;
         GameState.GetPlayerInventory().RemoveItems(Program.itemDatabase.GetGold(), 100);
         MessageManager.AddMessage("You stay at the inn for a night.");
         GameState.UpdateState();
@@ -641,7 +641,7 @@
             MessageManager.AddMessage("You have run out of salt!");
         }
 
-        thisBuilding.TanneryItems.Add(new TanningSlot(item.Id, depositAmount, DateTime.UtcNow, DateTime.UtcNow + TimeSpan.FromSeconds(6)));
+        thisBuilding.TanneryItems.Add(new TanningSlot(item.Id, depositAmount, DateTime.UtcNow, DateTime.UtcNow + TimeSpan.FromHours(6)));
         GameState.GetPlayerInventory().RemoveItems(item, depositAmount);
         thisBuilding.Salt -= depositAmount;
         showItemTanningMenu = false;
