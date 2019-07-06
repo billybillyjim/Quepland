@@ -705,7 +705,7 @@
         GameState.foodTimer = new Timer(new TimerCallback(_ =>
         {
             GameState.buffSecondsLeft--;
-            GameState.GetPlayer().CurrentHP = Math.Min(GameState.GetPlayer().CurrentHP + GameState.currentBuffItem.HealAmount, GameState.GetPlayer().GetSkill("HP").GetSkillLevel());
+            GameState.GetPlayer().CurrentHP = Math.Min(GameState.GetPlayer().CurrentHP + GameState.currentBuffItem.HealAmount, GameState.GetPlayer().MaxHP);
             GameState.GetPlayer().GainExperience("HP", GameState.currentBuffItem.HealAmount);
             if (GameState.buffSecondsLeft <= 0)
             {
