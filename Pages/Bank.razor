@@ -46,7 +46,7 @@
                 </tr>
             </thead>
             <tbody>
-                @if (GameState.GetPlayerBank() != null)
+                @if (GameState.GetPlayerBank() != null && GameState.isGathering == false)
                 {
 
                     @foreach (KeyValuePair<GameItem, int> item in GameState.GetPlayerBank().GetInventory().GetItemsSorted(sortStyle))
@@ -114,7 +114,7 @@ else
                 </tr>
             </thead>
             <tbody>
-                @if (GameState.GetPlayerBank() != null)
+                @if (GameState.GetPlayerBank() != null && GameState.isGathering == false)
                 {
 
                     @foreach (KeyValuePair<GameItem, int> item in GameState.GetPlayerBank().GetInventory().GetItemsSorted(sortStyle))
@@ -172,14 +172,18 @@ else
     }
     private string DepositAll()
     {
+        GameState.safeToSave = false;
         GameState.GetPlayerBank().GetInventory().AddItems(GameState.GetPlayerInventory().GetUnequippedItems());
         GameState.GetPlayerInventory().EmptyInventoryOfUnequippedItems();
+         GameState.safeToSave = true;
         GameState.UpdateState();
+
         StateHasChanged();
         return "";
     }
     private string Withdraw(GameItem item, int amount)
     {
+        GameState.safeToSave = false;
         if (amount < 0)
         {
             amount = 0;
@@ -202,12 +206,13 @@ else
             GameState.GetPlayerBank().GetInventory().RemoveItems(item, maxWithdraw);
         }
 
-
+        GameState.safeToSave = true;
         GameState.UpdateState();
         return "";
     }
     private string Sell(KeyValuePair<GameItem, int> item, int amount)
     {
+         GameState.safeToSave = false;
         if (amount > item.Value)
         {
             amount = item.Value;
@@ -218,6 +223,7 @@ else
         }
         GameState.GetPlayerBank().GetInventory().RemoveItems(item.Key, amount);
         GameState.GetPlayerBank().GetInventory().AddMultipleOfItem(Program.itemDatabase.GetGold(), (int)((item.Key.Value * amount) / 2d));
+         GameState.safeToSave = true;
         GameState.UpdateState();
         return "";
     }

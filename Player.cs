@@ -37,11 +37,12 @@ public class Player
             if(skills.Find(x => x.SkillName == s.SkillName) != null)
             {
                 skills.Find(x => x.SkillName == s.SkillName).SkillExperience = s.SkillExperience;
-                skills.Find(x => x.SkillName == s.SkillName).SetSkillLevel(s.GetSkillLevel());
+                skills.Find(x => x.SkillName == s.SkillName).SetSkillLevel(s.GetSkillLevelUnboosted());
                 if(s.SkillName == "Strength")
                 {
                     int extraSlots = (s.GetSkillLevelUnboosted() / 10) * 4;
                     //Subtract 1 to make up for starting at level 1.
+                    inventory.ResetMaxSize();
                     inventory.IncreaseMaxSizeBy(s.GetSkillLevelUnboosted() + extraSlots - 1);
                 }
             }
@@ -180,7 +181,7 @@ public class Player
             return;
         }
         skill.SkillExperience += (int)(amount * GetExperienceGainBonus(skill));
-        if (skill.SkillExperience >= Extensions.GetExperienceRequired(skill.GetSkillLevel()))
+        if (skill.SkillExperience >= Extensions.GetExperienceRequired(skill.GetSkillLevelUnboosted()))
         {
             LevelUp(skill);
         }
@@ -231,8 +232,8 @@ public class Player
     }
     public void LevelUp(Skill skill)
     {
-        skill.SetSkillLevel(skill.GetSkillLevel() + 1);
-        messageManager.AddMessage("You leveled up! Your " + skill.SkillName + " level is now " + skill.GetSkillLevel() + ".");
+        skill.SetSkillLevel(skill.GetSkillLevelUnboosted() + 1);
+        messageManager.AddMessage("You leveled up! Your " + skill.SkillName + " level is now " + skill.GetSkillLevelUnboosted() + ".");
         if (skill.SkillName == "Strength")
         {
             inventory.IncreaseMaxSizeBy(1);
@@ -248,7 +249,7 @@ public class Player
             }
         }
        
-        if (skill.SkillExperience >= Extensions.GetExperienceRequired(skill.GetSkillLevel()))
+        if (skill.SkillExperience >= Extensions.GetExperienceRequired(skill.GetSkillLevelUnboosted()))
         {         
             LevelUp(skill);
             

@@ -32,9 +32,11 @@ public class GameState
     public bool saveDataLoaded;
     public bool gameDataLoaded;
     public bool saveGameExists;
+    public bool safeToSave = true;
+    public bool safeToLoad = false;
 
     public string previousURL;
-    public string updateVersionString = "1.019a";
+    public string updateVersionString = "1.020a";
     
     public GameItem currentUsedItem;
     public GameItem currentGatherItem;

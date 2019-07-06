@@ -544,18 +544,23 @@
                     if (thisBuilding.TanneryItems.Count > temp)
                     {
                         builder.AddAttribute(13, "onclick", () => WithdrawTanneryItem(temp));
+                        int amountToWithdraw = Math.Min(GameState.GetPlayerInventory().GetAvailableSpaces(),thisBuilding.TanneryItems[temp].Item.Value);
                         if(thisBuilding.TanneryItems[temp].EndTime.CompareTo(DateTime.UtcNow) > 0)
                         {
                             builder.AddAttribute(14, "disabled", true);
                             builder.AddAttribute(15, "title", "It isn't ready yet. " + (DateTime.UtcNow - thisBuilding.TanneryItems[temp].EndTime));
 
                         }
-                        else if(thisBuilding.TanneryItems[temp].Item.Value > GameState.GetPlayerInventory().GetAvailableSpaces())
+                        else if(GameState.GetPlayerInventory().GetAvailableSpaces() == 0)
                         {
                              builder.AddAttribute(14, "disabled", true);
-                            builder.AddAttribute(15, "title", "You don't have the inventory space to do this.");
+                            builder.AddAttribute(15, "title", "Your inventory is full.");
                         }
-                        builder.AddContent(16, "Withdraw " + thisBuilding.TanneryItems[temp].Item.Value + " " + Program.itemDatabase.GetItemByID(thisBuilding.TanneryItems[temp].Item.Key).ItemName);
+                        else if(thisBuilding.TanneryItems[temp].Item.Value > GameState.GetPlayerInventory().GetAvailableSpaces())
+                        {
+                            builder.AddAttribute(15, "title", "You don't have the inventory space to withdraw all of them.");
+                        }
+                        builder.AddContent(16, "Withdraw " + amountToWithdraw + " " + Program.itemDatabase.GetItemByID(thisBuilding.TanneryItems[temp].Item.Key).ItemName);
 
                     }
                     else
@@ -651,10 +656,23 @@
 
             return;
         }
-        GameState.GetPlayerInventory().AddMultipleOfItem(jerky, thisBuilding.TanneryItems[i].Item.Value);
-        GameState.GetPlayer().GainExperienceFromMultipleItems(jerky.ExperienceGained, thisBuilding.TanneryItems[i].Item.Value);
-        thisBuilding.TanneryItems.RemoveAt(i);
-        
+        if(GameState.GetPlayerInventory().GetAvailableSpaces() >= thisBuilding.TanneryItems[i].Item.Value)
+        {
+            GameState.GetPlayerInventory().AddMultipleOfItem(jerky, thisBuilding.TanneryItems[i].Item.Value);
+            GameState.GetPlayer().GainExperienceFromMultipleItems(jerky.ExperienceGained, thisBuilding.TanneryItems[i].Item.Value);
+            thisBuilding.TanneryItems.RemoveAt(i);
+        }
+        else
+        {
+            int amountToWithdraw = GameState.GetPlayerInventory().GetAvailableSpaces();
+            int amountInTannery = thisBuilding.TanneryItems[i].Item.Value;
+            int id = thisBuilding.TanneryItems[i].Item.Key;
+            GameState.GetPlayerInventory().AddMultipleOfItem(jerky, amountToWithdraw);
+            GameState.GetPlayer().GainExperienceFromMultipleItems(jerky.ExperienceGained, amountToWithdraw);
+            thisBuilding.TanneryItems[i] = new TanningSlot(id, amountInTannery - amountToWithdraw, DateTime.MinValue, DateTime.MinValue);
+        }
+
+
         this.StateHasChanged();
         GameState.UpdateState();
     }

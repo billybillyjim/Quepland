@@ -2940,7 +2940,7 @@
     "madeOnCreation": 5,
     "isUsable": true,
     "usableIDs": [
-      [ 186, 198 ]
+      [ 186, 198 ],
       [ 188, 200 ]
     ],
     "destroyOnUse": true,
@@ -5592,4 +5592,21 @@
     "experienceGained": "Hunting:1200",
     "icon": "Deer"
   },
+  {
+    "itemName": "River Clam Roll",
+    "id": 381,
+    "itemDescription": "A roll made in honor of Sheldon, the clam, who resides inside.",
+    "value": 115,
+    "gatherString": "You make a river clam roll.",
+    "requiredLevel": 10,
+    "experienceGained": "Culinary Arts:60",
+    "actionRequired": "Culinary Arts",
+    "isEdible": true,
+    "healAmount": 3,
+    "healDuration": 60,
+    "gatherSpeed": 1500,
+    "buffedSkill": "HP",
+    "buffAmount": 5,
+    "icon": "Roll"
+  }
 ]

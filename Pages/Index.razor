@@ -10,64 +10,70 @@
 
 
 <h1>Hello, Welcome to Quepland!</h1>
-<h2>Quepland has moved hosts! Today is the last day to get your save file from the old host: <a href="https://quepland.azurewebsites.net/">Here</a></h2>
 
-@if (debugMode)
+@if (GameState.safeToLoad)
 {
-    @testString
-    <p><button class="btn btn-primary" onclick="@(() => DebugAll99s())">Max Account</button></p>
-    <p><button class="btn btn-primary" onclick="@(() => DebugUnlockAllFollowers())">Unlock Followers</button></p>
-    <p><button class="btn btn-primary" onclick="@(() => DebugGetMoney())">Gain Money</button></p>
-    <p><button class="btn btn-primary" onclick="@(() => DebugOneOfEveryItem())">Get All Items</button></p>
-    <p><button class="btn btn-primary" onclick="@(() => DebugGainStrengthLevel())">Gain Strength Level</button></p>
-    <p><button class="btn btn-primary" onclick="@(() => SaveDataEncrypted())">Save Encrypted</button></p>
-    <p><button class="btn btn-primary" onclick="@(() => LoadDataEncrypted())">Load Encrypted</button></p>
-    <p><button class="btn btn-primary" onclick="@(() => GoToDebugArea())">Go to Debug Area</button></p>
-    <p><button class="btn btn-primary" onclick="@(() => DebugUnlockAllAreas())">Unlock All Areas</button></p>
-    <p><button class="btn btn-primary" onclick="@(() => DebugJSTest())">Test JS Interop</button></p>
-    <p>Item ID:<input type="number" @bind-value="@itemID" @bind-value:event="onchange" /></p>
-    <p>Amount:<input type="number" @bind-value="@amount" @bind-value:event="onchange" /></p>
-    <p><button class="btn btn-primary" onclick="@(() => GetItem())">Get Item</button></p>
-    <ul id="simpleList" class="list-group" @ref="simpleList">
-        <li class="list-group-item">This is <a href="http://SortableJS.github.io/Sortable/">Sortable</a></li>
-        <li class="list-group-item">It works with Bootstrap...</li>
-        <li class="list-group-item">...out of the box.</li>
-        <li class="list-group-item">It has support for touch devices.</li>
-        <li class="list-group-item">Just drag some elements around.</li>
-    </ul>
-}
+    @if (debugMode)
+    {
+        @testString
+        <p><button class="btn btn-primary" onclick="@(() => DebugAll99s())">Max Account</button></p>
+        <p><button class="btn btn-primary" onclick="@(() => DebugUnlockAllFollowers())">Unlock Followers</button></p>
+        <p><button class="btn btn-primary" onclick="@(() => DebugGetMoney())">Gain Money</button></p>
+        <p><button class="btn btn-primary" onclick="@(() => DebugOneOfEveryItem())">Get All Items</button></p>
+        <p><button class="btn btn-primary" onclick="@(() => DebugGainStrengthLevel())">Gain Strength Level</button></p>
+        <p><button class="btn btn-primary" onclick="@(() => SaveDataEncrypted())">Save Encrypted</button></p>
+        <p><button class="btn btn-primary" onclick="@(() => LoadDataEncrypted())">Load Encrypted</button></p>
+        <p><button class="btn btn-primary" onclick="@(() => GoToDebugArea())">Go to Debug Area</button></p>
+        <p><button class="btn btn-primary" onclick="@(() => DebugUnlockAllAreas())">Unlock All Areas</button></p>
+        <p><button class="btn btn-primary" onclick="@(() => DebugJSTest())">Test JS Interop</button></p>
+        <p>Item ID:<input type="number" @bind-value="@itemID" @bind-value:event="onchange" /></p>
+        <p>Amount:<input type="number" @bind-value="@amount" @bind-value:event="onchange" /></p>
+        <p><button class="btn btn-primary" onclick="@(() => GetItem())">Get Item</button></p>
+        <ul id="simpleList" class="list-group" @ref="simpleList">
+            <li class="list-group-item">This is <a href="http://SortableJS.github.io/Sortable/">Sortable</a></li>
+            <li class="list-group-item">It works with Bootstrap...</li>
+            <li class="list-group-item">...out of the box.</li>
+            <li class="list-group-item">It has support for touch devices.</li>
+            <li class="list-group-item">Just drag some elements around.</li>
+        </ul>
+    }
 
-@if (GameState.saveDataLoaded == false && saveGameExists && gameHasBeenSaved == false && loadBegun == false)
-{
-    <p><button class="btn btn-primary" onclick="@(() => LoadData())">Load Game</button></p>
+    @if (GameState.saveDataLoaded == false && saveGameExists && gameHasBeenSaved == false && loadBegun == false)
+    {
+        <p><button class="btn btn-primary" onclick="@(() => LoadData())">Load Game</button></p>
+    }
+    else
+    {
+        <p>Click the bank on your left to begin your journey. You'll find an axe to start off.</p>
+        <p><button class="btn btn-primary" disabled onclick="@(() => LoadData())">Load Game</button></p>
+    }
+    @if (GameState.saveGameExists == false || (GameState.saveDataLoaded == true))
+    {
+        <p><button class="btn btn-primary" onclick="@(() => SaveData())">Save Game</button></p>
+    }
+    else
+    {
+        <p><button class="btn btn-primary" disabled onclick="@(() => SaveData())">Save Game</button></p>
+    }
+
+    <br />
+    <br />
+    @if (userWantsGameReset)
+    {
+        <p><button class="btn btn-primary" onclick="@(() => ResetGame())">Are you sure?</button></p>
+    }
+    else
+    {
+        <p><button class="btn btn-primary" onclick="@(() => AskForReset())">Reset Game</button></p>
+    }
 }
 else
 {
-    <p>Click the bank on your left to begin your journey. You'll find an axe to start off.</p>
-    <p><button class="btn btn-primary" disabled onclick="@(() => LoadData())">Load Game</button></p>
+    <p>More Loading...</p>
 }
-@if (GameState.saveGameExists == false || (GameState.saveDataLoaded == true))
-{
-    <p><button class="btn btn-primary" onclick="@(() => SaveData())">Save Game</button></p>
-}
-else
-{
-    <p><button class="btn btn-primary" disabled onclick="@(() => SaveData())">Save Game</button></p>
-}
-
-<br />
-<br />
-@if (userWantsGameReset)
-{
-    <p><button class="btn btn-primary" onclick="@(() => ResetGame())">Are you sure?</button></p>
-}
-else
-{
-    <p><button class="btn btn-primary" onclick="@(() => AskForReset())">Reset Game</button></p>
-}
-
 
 @functions{
+    private bool safeToLoadGame = false;
     private bool saveGameExists = false;
     private bool loadBegun = false;
     private bool userWantsGameReset = false;
@@ -81,6 +87,7 @@ else
     private int amount;
     private ElementRef simpleList;
     private SimpleAES Encryptor = new SimpleAES();
+
     public void GetItem()
     {
         GameState.GetPlayerBank().GetInventory().AddMultipleOfItem(Program.itemDatabase.GetItemByID(itemID), amount);
@@ -181,6 +188,10 @@ else
     }
     private string SaveData()
     {
+        while(!GameState.safeToSave)
+        {
+            Thread.Sleep(5);
+        }
         localStorage.SetItem("Bank", GameState.GetPlayerBank().GetInventory().ToString());
         localStorage.SetItem("Skills", GameState.GetPlayer().GetSkillString());
         localStorage.SetItem("Inventory", GameState.GetPlayerInventory().ToString());
@@ -419,23 +430,7 @@ else
         GameState.StateChanged += OnGameStateChanged;
         //saveGameExists = localStorage.GetItem<bool>("SaveGameExists");
 
-        if (GameState.gameDataLoaded == false)
-        {
-            Program.gatherManager.SetGameState(GameState);
-            Program.huntingManager.SetGameState(GameState);
 
-            GameState.LoadPlayerData(Http);
-
-            Program.itemDatabase.LoadItems(Http);
-            Program.areaManager.LoadAreas(Http);
-            Program.buildingManager.LoadBuildings(Http);
-            Program.followerManager.LoadFollowers(Http);
-            Program.npcManager.LoadNPCs(Http);
-            Program.battleManager.LoadMonsters(Http);
-            GameState.GetPlayer().SetMessageManager(MessageManager);
-            GameState.GetPlayer().CurrentHP = 50;
-            GameState.gameDataLoaded = true;
-        }
 
 
 
@@ -446,6 +441,24 @@ else
     {
         saveGameExists = await asyncLocalStorage.GetItemAsync<bool>("SaveGameExists");
         GameState.saveGameExists = saveGameExists;
+        if (GameState.gameDataLoaded == false)
+        {
+            Program.gatherManager.SetGameState(GameState);
+            Program.huntingManager.SetGameState(GameState);
+
+            GameState.LoadPlayerData(Http);
+
+            await Program.itemDatabase.LoadItems(Http);
+            Program.areaManager.LoadAreas(Http);
+            Program.buildingManager.LoadBuildings(Http);
+            Program.followerManager.LoadFollowers(Http);
+            Program.npcManager.LoadNPCs(Http);
+            Program.battleManager.LoadMonsters(Http);
+            GameState.GetPlayer().SetMessageManager(MessageManager);
+            GameState.GetPlayer().CurrentHP = 50;
+            GameState.gameDataLoaded = true;
+            GameState.safeToLoad = true;
+        }
         if (saveGameExists == false)
         {
             if (GameState.autoSaveTimer != null)
@@ -471,7 +484,7 @@ else
     }
     protected override void OnAfterRender()
     {
-
+        safeToLoadGame = true;
     }
     void IDisposable.Dispose()
     {

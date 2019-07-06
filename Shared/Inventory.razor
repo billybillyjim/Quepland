@@ -625,7 +625,7 @@
     private string Deposit(KeyValuePair<GameItem, int> item, int amount)
     {
         CancelUse();
-
+         GameState.safeToSave = false;
         if (amount > item.Value)
         {
             amount = item.Value;
@@ -636,13 +636,14 @@
         }
         GameState.GetPlayerBank().GetInventory().AddMultipleOfItem(item.Key, amount);
         GameState.GetPlayerInventory().RemoveItems(item.Key, amount);
+         GameState.safeToSave = true;
         GameState.UpdateState();
         return "";
     }
     private string Sell(KeyValuePair<GameItem, int> item, int amount)
     {
         CancelUse();
-
+         GameState.safeToSave = false;
         if (amount > item.Value)
         {
             amount = item.Value;
@@ -657,6 +658,7 @@
         }
         GameState.GetPlayerInventory().RemoveItems(item.Key, amount);
         GameState.GetPlayerInventory().AddMultipleOfItem(Program.itemDatabase.GetGold(), (int)((item.Key.Value * amount) / 2d));
+         GameState.safeToSave = true;
         GameState.UpdateState();
         return "";
     }
@@ -687,7 +689,7 @@
         currentUsedItem = null;
         GameState.isUsing = false;
         usableIDs = null;
-
+        GameState.safeToSave = true;
         GameState.UpdateState();
         StateHasChanged();
         return "";
@@ -714,8 +716,10 @@
             GameState.UpdateState();
             StateHasChanged();
         }), null, 1000, 1000);
+         GameState.safeToSave = false;
         MessageManager.AddMessage("You eat a " + item.ItemName + " healing " + item.HealAmount + " and  boosting your " + item.BuffedSkill + " by " + item.BuffAmount + ".");
         GameState.GetPlayerInventory().RemoveOneOfItem(item);
+         GameState.safeToSave = true;
         GameState.UpdateState();
         StateHasChanged();
     }
@@ -723,7 +727,7 @@
     {
         CancelUse();
         int itemsCreated = item.UnpackIDs.Length;
-
+         GameState.safeToSave = false;
         if (GameState.GetPlayerInventory().GetAvailableSpaces() < itemsCreated &&
             !(itemsCreated == 1 && Program.itemDatabase.GetItemByID(item.UnpackIDs[0]).IsStackable == true))
         {
@@ -735,7 +739,7 @@
             GameState.GetPlayerInventory().AddMultipleOfItem(Program.itemDatabase.GetItemByID(id), Math.Max(1, item.MadeOnCreation));
 
         }
-
+         GameState.safeToSave = true;
         GameState.UpdateState();
         this.StateHasChanged();
         return "";
@@ -754,9 +758,10 @@
         {
 
             GameItem itemCreated = Program.itemDatabase.GetItemByID(usableIDs[itemCreatedID, 1]);
-
+            GameState.safeToSave = false;
             if (itemCreated.AmountOfIngredientsToCreate == 0)
             {
+                 
                 if (GameState.GetPlayerInventory().RemoveOneOfItem(itemUsed))
                 {
                     int numToMake = Math.Max(itemCreated.MadeOnCreation, 1);
@@ -806,9 +811,10 @@
 
             }
             //CancelUse();
+            GameState.safeToSave = true;
             GameState.UpdateState();
             StateHasChanged();
-        }), null, (500 + (creationTime / 2)), (1000 + creationTime));
+        }), null, (int)((500 + (creationTime / 2)) * GameState.GetPlayer().GetGatherSpeed(itemUsed.ActionRequired)),(int)((1000 + creationTime) * GameState.GetPlayer().GetGatherSpeed(itemUsed.ActionRequired)));
 
 
         return "";

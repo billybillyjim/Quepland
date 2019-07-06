@@ -287,7 +287,7 @@
                             builder.OpenElement(9, "button");
                             builder.AddAttribute(10, "style", "margin-bottom:10px");
                             builder.AddAttribute(11, "class", "btn btn-primary");
-                            if (gatherItem != itemString && playerHasLevels)
+                            if (gatherItem != itemString && playerHasLevels && GameState.isGathering == false)
                             {
                                 builder.AddAttribute(12, "onclick", () => Gather(item));
                                 if (GameState.GetPlayerInventory().GetAvailableSpaces() == 0)
@@ -1059,6 +1059,7 @@
             GameState.miningVeinSearchTimer.Dispose();
             GameState.miningVeinSearchTimer = null;
         }
+        GameState.safeToSave = true;
         GameState.UpdateState();
         this.StateHasChanged();
     }
@@ -1125,7 +1126,7 @@
                     int temp = nextRand;
                     for (int j = 0; j < temp; j++)
                     {
-                        if (rand.Next(3) == 0)
+                        if (rand.Next(5) == 0)
                         {
                             nextRand -= 1;
                             if (nextRand < 0)
@@ -1282,6 +1283,7 @@
                 this.StateHasChanged();
             }), null, 1000, 1000);
         }
+        StopGathering();
         this.StateHasChanged();
         GameState.UpdateState();
     }
