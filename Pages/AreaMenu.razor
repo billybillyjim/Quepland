@@ -995,6 +995,8 @@
     public void TrainDeftness()
     {
         speedMulti = 1;
+        tiredLevel = 0;
+
         StopGathering();
         if (GameState.workoutTimer != null)
         {
@@ -1009,17 +1011,20 @@
             GameState.workoutTimer.Change((int)(1000 * speedMulti), (int)(1000 * speedMulti));
             speedMulti += 0.0005 * Math.Max(1, 100 - GameState.GetPlayer().GetLevel("Deftness"));
             MessageManager.AddMessage("You run for a while.");
-            if (speedMulti > 1.5)
+            if (speedMulti > 1.5 && tiredLevel == 0)
             {
                 MessageManager.AddMessage("You begin to feel tired.");
+                tiredLevel = 1;
             }
-            if (speedMulti > 3)
+            else if (speedMulti > 3 && tiredLevel == 1)
             {
                 MessageManager.AddMessage("You begin to feel very tired.");
+                tiredLevel = 2;
             }
-            if (speedMulti > 10)
+            else if (speedMulti > 10 && tiredLevel == 2)
             {
                 MessageManager.AddMessage("You begin to feel extremely tired.");
+                tiredLevel = 3;
             }
             GameState.UpdateState();
             StateHasChanged();
