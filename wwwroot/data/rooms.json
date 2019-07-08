@@ -1,33 +1,53 @@
 [
   {
-    "name": "Master Bedroom"
+    "name": "Master Bedroom",
+    "id": 0,
+    "url": "Master_Bedroom"
 
   },
   {
-    "name": "Arena"
+    "name": "Arena",
+    "id": 0,
+    "url": "Master_Bedroom"
   },
   {
-    "name": "Chicken Room"
+    "name": "Chicken Room",
+    "id": 1,
+    "url": "Chicken_Room"
   },
   {
-    "name": "Pulp and Paper Room"
+    "name": "Pulp and Paper Room",
+    "id": 2,
+    "url": "Pulp_and_Paper_Room"
   },
   {
-    "name": "Salt Room"
+    "name": "Salt Room",
+    "id": 3,
+    "url": "Salt_Room"
   },
   {
-    "name": "Workshop"
+    "name": "Workshop",
+    "id": 4,
+    "url": "Workshop"
   },
   {
-    "name": "Saw Room"
+    "name": "Saw Room",
+    "id": 5,
+    "url": "Saw_Room"
   },
   {
-    "name": "Frost Forge"
+    "name": "Frost Forge",
+    "id": 6,
+    "url": "Frost_Forge"
   },
   {
-    "name": "Guest Bedroom"
+    "name": "Guest Bedroom",
+    "id": 7,
+    "url": "Guest_Bedroom"
   },
-    {
-    "name": "Alchemy Room"
+  {
+    "name": "Alchemy Room",
+    "id": 8,
+    "url": "Alchemy_Room"
   }
 ]

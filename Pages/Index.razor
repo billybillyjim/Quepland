@@ -23,7 +23,7 @@
         <p><button class="btn btn-primary" onclick="@(() => DebugGainStrengthLevel())">Gain Strength Level</button></p>
         <p><button class="btn btn-primary" onclick="@(() => SaveDataEncrypted())">Save Encrypted</button></p>
         <p><button class="btn btn-primary" onclick="@(() => LoadDataEncrypted())">Load Encrypted</button></p>
-        <p><button class="btn btn-primary" onclick="@(() => GoToDebugArea())">Go to Debug Area</button></p>
+        <p><button class="btn btn-primary" onclick="@(() => AddRoomToHouse())">Add Test Room To House</button></p>
         <p><button class="btn btn-primary" onclick="@(() => DebugUnlockAllAreas())">Unlock All Areas</button></p>
         <p><button class="btn btn-primary" onclick="@(() => DebugJSTest())">Test JS Interop</button></p>
         <p>Item ID:<input type="number" @bind-value="@itemID" @bind-value:event="onchange" /></p>
@@ -88,6 +88,10 @@ else
     private ElementRef simpleList;
     private SimpleAES Encryptor = new SimpleAES();
 
+    public void AddRoomToHouse()
+    {
+        GameState.GetPlayer().house.AddRoom(Program.roomManager.GetRoomByID(0));
+    }
     public void GetItem()
     {
         GameState.GetPlayerBank().GetInventory().AddMultipleOfItem(Program.itemDatabase.GetItemByID(itemID), amount);
@@ -358,6 +362,10 @@ else
                 }
             }
         }
+        if(lines.Length > 15 && lines[15] != null)
+        {
+            GameState.GetPlayerBank().LoadTabsFromString(lines[15]);
+        }
         MessageManager.AddMessage("Save game loaded.");
 
         GameState.saveDataLoaded = true;
@@ -449,13 +457,16 @@ else
             GameState.LoadPlayerData(Http);
 
             await Program.itemDatabase.LoadItems(Http);
-            Program.areaManager.LoadAreas(Http);
-            Program.buildingManager.LoadBuildings(Http);
-            Program.followerManager.LoadFollowers(Http);
+            await Program.areaManager.LoadAreas(Http);
+            await Program.buildingManager.LoadBuildings(Http);
+            await Program.followerManager.LoadFollowers(Http);
             Program.npcManager.LoadNPCs(Http);
             Program.battleManager.LoadMonsters(Http);
+            Program.roomManager.LoadRooms(Http);
+            Program.furnitureManager.LoadFurniture(Http);
             GameState.GetPlayer().SetMessageManager(MessageManager);
             GameState.GetPlayer().CurrentHP = 50;
+            GameState.GetPlayerBank().AddItemsToCurrentTab(Program.itemDatabase.GetAllItemIDs());
             GameState.gameDataLoaded = true;
             GameState.safeToLoad = true;
         }

@@ -3,7 +3,11 @@
 @inject GameState GameState
 @implements IDisposable
 
-<h1>Welcome Home</h1>
+@if (room != null)
+{
+    <h1>@room.Name</h1>
+}
+
 
 
 
@@ -19,7 +23,7 @@
     }
     private void SetRoom(string url)
     {
-        
+        room = Program.roomManager.GetRoomByURL(url);
     }
     protected override void OnInit()
     {

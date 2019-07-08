@@ -34,130 +34,205 @@
     </div>
 </div>
 <br />
-@if (!GameState.compactBankView)
+@if (addingItemsToTab)
 {
-    <div class="bank-table">
-        <table style="width:100%">
-            <thead>
-                <tr style="padding:.2rem">
-                    <th align="left">Item</th>
-                    <th>Description</th>
-                    <th style="text-align:right">Amount</th>
-                </tr>
-            </thead>
-            <tbody>
-                @if (GameState.GetPlayerBank() != null && GameState.isGathering == false)
+    <button class="btn btn-primary" style="margin:10px" onclick="@(() => ToggleAddingItemsToTab())">Stop</button>
+}
+else
+{
+    <button class="btn btn-primary" style="margin:10px" onclick="@(() => ToggleAddingItemsToTab())">Add Items to Tab</button>
+}
+
+<br />
+<ul class="nav nav-pills">
+
+    @foreach (BankTab tab in GameState.GetPlayerBank().tabs)
+    {
+        <li class="nav-item" style="padding:2px;margin:5px">
+            @if (GameState.GetPlayerBank().activeTab.Name == tab.Name)
+            {
+                <a class="btn btn-outline-primary">@tab.Name</a>
+            }
+            else
+            {
+                <a class="btn btn-primary" onclick="@(() => SetActiveTab(tab.Name))">@tab.Name</a>
+            }
+        </li>
+
+    }
+    @if (creatingNewTab == false)
+    {
+        <li class="nav-item" style="padding:2px;margin:5px">
+            <a class="btn btn-primary" @onclick="@(() => BeginCreatingNewTab())">New</a>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item" style="padding:2px;margin:5px">
+            <input type="text" @bind-value="@newTabName" @bind-value:event="onchange" />
+            <button class="btn btn-primary" onclick="@(() => CreateNewTab(newTabName))">Create</button>
+        </li>
+    }
+
+</ul>
+<div class="bank-table">
+    <table style="width:100%">
+        <thead>
+            <tr style="padding:.2rem">
+                <th align="left">Item</th>
+                @if (!GameState.compactBankView)
                 {
+                    <th>Description</th>
+                }
+                <th style="text-align:right">Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (GameState.GetPlayerBank() != null && GameState.isGathering == false)
+            {
 
-                    @foreach (KeyValuePair<GameItem, int> item in GameState.GetPlayerBank().GetInventory().GetItemsSorted(sortStyle))
+                @foreach (KeyValuePair<GameItem, int> item in GameState.GetPlayerBank().GetInventory().GetItemsSorted(sortStyle))
+                {
+                    //If the search string is null or empty, or the search string contains characters in the item's name.
+                    @if ((((searchString == null || searchString == "") || item.Key.ItemName.ToLower().Contains(searchString.ToLower())) &&
+                    //If the tab is set to all and the tab contains that item id
+                    ((GameState.GetPlayerBank().activeTab.Name == "All" || GameState.GetPlayerBank().activeTab.itemIDs.Contains(item.Key.Id)) || addingItemsToTab)))
+                    //If the player is adding items to the tab, all items are visible.
+
                     {
-                        @if ((searchString == null || searchString == "") || item.Key.ItemName.ToLower().Contains(searchString.ToLower()))
-                        {
-                            <tr class="buddy-top" style="padding:.2rem">
-                                <td style="font-weight:bold; padding:.2rem"><img src="data/ItemIcons/@(item.Key.Icon + ".png")" style="width:40px;opacity:0.6" />@item.Key.ItemName</td>
+                        <tr class="buddy-top" style="padding:.2rem">
+                            <td style="font-weight:bold; padding:.2rem"><img src="data/ItemIcons/@(item.Key.Icon + ".png")" style="width:40px;opacity:0.6" />@item.Key.ItemName</td>
+                            @if (!GameState.compactBankView && !addingItemsToTab)
+                            {
                                 <td style="padding:.2rem">@item.Key.ItemDescription</td>
-                                <td style="padding:.2rem" align="right">@item.Value</td>
-                            </tr>
-                            if (item.Key.IsEquipable)
-                            {
-                                <tr style="padding:.2rem" title="DPS:@((float)item.Key.Damage / (item.Key.AttackSpeed / 1000f))">
-                                    <td style="padding:.2rem" colspan="3">Gather Speed Bonus:@(item.Key.GatherSpeedBonus), Damage:@(item.Key.Damage), Attack Speed:@(item.Key.AttackSpeed / 1000f)</td>
-                                </tr>
                             }
-                            if (item.Key.IsArrow)
+                            @if (!addingItemsToTab)
                             {
-                                <tr style="padding:.2rem">
-                                    <td style="padding:.2rem">Damage:@item.Key.Damage</td>
-                                </tr>
+                                <td style="padding:.2rem" align="right">@item.Value</td>
                             }
 
-                            <tr class="buddy-mid" style="padding:.2rem">
-                                <td style="padding:.2rem" align="left">Withdraw </td>
-                                <td style="padding:.2rem" align="left">
+                            @if (GameState.compactBankView && !addingItemsToTab)
+                            {
+                                <td style="padding:.2rem" align="right">
                                     <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, 1))">1</button>
                                     <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, 5))">5</button>
                                     <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, withdrawAmountModel.withdrawAmount))">@withdrawAmount</button>
                                     <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, int.MaxValue))">All</button>
                                 </td>
-                                <td style="padding:.2rem" align="center"></td>
-                            </tr>
-                            @if (GameState.GetPlayer().activeFollower != null && GameState.GetPlayer().activeFollower.AutoCollectSkill == "Banking" && item.Key.Id != 0)
-                            {
-                                <tr class="buddy-mid" style="padding:.2rem">
-                                    <td>Have follower sell:</td>
-                                    <td>
-                                        <button class="btn btn-success" onclick="@(() => Sell(item, 1))">1</button>
-                                        <button class="btn btn-success" onclick="@(() => Sell(item, 5))">5</button>
-                                        <button class="btn btn-success" onclick="@(() => Sell(item, withdrawAmountModel.withdrawAmount))">@withdrawAmount</button>
-                                        <button class="btn btn-success" onclick="@(() => Sell(item, int.MaxValue))">All</button>
-                                    </td>
-                                </tr>
                             }
+                            @if (addingItemsToTab)
+                            {
+                                @if (!GameState.GetPlayerBank().activeTab.itemIDs.Contains(item.Key.Id))
+                                {
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <button class="btn btn-success" onclick="@(() => AddItemToTab(item.Key.Id))">Add</button>
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td></td>
+                                    <td></td>
+                                    <td>
+                                        <button class="btn btn-success" onclick="@(() => RemoveItemFromTab(item.Key.Id))">Remove</button>
+                                    </td>
+                                }
+                            }
+                        </tr>
+
+                        @if (item.Key.IsEquipable && !GameState.compactBankView && !addingItemsToTab)
+                        {
+                            <tr style="padding:.2rem" title="DPS:@((float)item.Key.Damage / (item.Key.AttackSpeed / 1000f))">
+                                <td style="padding:.2rem" colspan="3">
+                                    Gather Speed Bonus:@(item.Key.GatherSpeedBonus), Damage:@(item.Key.Damage), Attack Speed:@(item.Key.AttackSpeed / 1000f) @if (item.Key.Armor > 0)
+                                    {<div>Armor:@(item.Key.Armor)</div>}
+                                </td>
+                            </tr>
+                        }
+                        @if (item.Key.IsArrow && !GameState.compactBankView && !addingItemsToTab)
+                        {
+                            <tr style="padding:.2rem">
+                                <td style="padding:.2rem">Damage:@item.Key.Damage</td>
+                            </tr>
+                        }
+                        @if (!GameState.compactBankView && !addingItemsToTab)
+                        {
+                            <tr class="buddy-mid" style="padding:.2rem">
+                                <td style="padding:.2rem" align="left">Withdraw </td>
+                                <td style="padding:.2rem" align="left"></td>
+                                <td style="padding:.2rem;min-width:220px" align="right">
+                                    <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, 1))">1</button>
+                                    <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, 5))">5</button>
+                                    <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, withdrawAmountModel.withdrawAmount))">@withdrawAmount</button>
+                                    <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, int.MaxValue))">All</button>
+                                </td>
+                            </tr>
+                        }
+                        @if (GameState.GetPlayer().activeFollower != null && GameState.GetPlayer().activeFollower.AutoCollectSkill == "Banking" && item.Key.Id != 0 && !addingItemsToTab)
+                        {
+                            <tr class="buddy-mid" style="padding:.2rem">
+                                <td>Have follower sell:</td>
+                                <td>
+                                    <button class="btn btn-success" onclick="@(() => Sell(item, 1))">1</button>
+                                    <button class="btn btn-success" onclick="@(() => Sell(item, 5))">5</button>
+                                    <button class="btn btn-success" onclick="@(() => Sell(item, withdrawAmountModel.withdrawAmount))">@withdrawAmount</button>
+                                    <button class="btn btn-success" onclick="@(() => Sell(item, int.MaxValue))">All</button>
+                                </td>
+                            </tr>
                         }
 
                     }
 
-
                 }
-            </tbody>
-        </table>
-    </div>
-}
-else
-{
-    <div class="table table-hover">
-        <table style="width:100%; padding:.2rem">
-            <thead>
-                <tr>
-                    <th>Item</th>
-                    <th>Amount</th>
-                </tr>
-            </thead>
-            <tbody>
-                @if (GameState.GetPlayerBank() != null && GameState.isGathering == false)
-                {
 
-                    @foreach (KeyValuePair<GameItem, int> item in GameState.GetPlayerBank().GetInventory().GetItemsSorted(sortStyle))
-                    {
-                        @if((searchString == null || searchString == "") || (item.Key.ItemName.ToLower().Contains(searchString.ToLower())))
-                        {
-                            <tr class="bank-compact-top">
-                                <td style="font-weight:bold; padding:.2rem"><img src="data/ItemIcons/@(item.Key.Icon + ".png")" style="width:30px;opacity:0.6" /><br />@item.Key.ItemName</td>
-                                <td style="padding:.2rem">@item.Value</td>
-                                <td style="vertical-align:middle;padding:.2rem">
-                                    <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, 1))">1</button>
-                                    <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, 5))">5</button>
-                                    <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, withdrawAmountModel.withdrawAmount))">@withdrawAmount</button>
-                                    <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, int.MaxValue))">All</button>
-                                </td>
-                            </tr>
-                            @if(GameState.GetPlayer().activeFollower != null && GameState.GetPlayer().activeFollower.AutoCollectSkill == "Banking" && item.Key.Id != 0)
-                            {
-                                <tr class="bank-compact">
-                                    <td>Have follower sell:</td>
-                                    <td style="padding:.2rem"></td>
-                                    <td>
-                                        <button class="btn btn-success" onclick="@(() => Sell(item, 1))">1</button>
-                                        <button class="btn btn-success" onclick="@(() => Sell(item, 5))">5</button>
-                                        <button class="btn btn-success" onclick="@(() => Sell(item, withdrawAmountModel.withdrawAmount))">@withdrawAmount</button>
-                                        <button class="btn btn-success" onclick="@(() => Sell(item, int.MaxValue))">All</button>
-                                    </td>
-                                </tr>
-                            }
-                         }
-                    }
-                 }      
-            </tbody>
-        </table>
-    </div>
-}
+            }
+
+
+        </tbody>
+    </table>
+</div>
+
+
 @functions{
 
     public int sortStyle = 0;
     public int withdrawAmount = 1;
+    private bool creatingNewTab = false;
+    private bool addingItemsToTab = false;
     public string searchString = "";
+    public string newTabName = "";
     private WithdrawAmountModel withdrawAmountModel = new WithdrawAmountModel();
 
+    private void ToggleAddingItemsToTab()
+    {
+        addingItemsToTab = !addingItemsToTab;
+    }
+    private void AddItemToTab(int id)
+    {
+        GameState.GetPlayerBank().activeTab.itemIDs.Add(id);
+        StateHasChanged();
+    }
+    private void RemoveItemFromTab(int id)
+    {
+        GameState.GetPlayerBank().activeTab.itemIDs.Remove(id);
+        StateHasChanged();
+    }
+    private void BeginCreatingNewTab()
+    {
+        creatingNewTab = true;
+    }
+    private void CreateNewTab(string newName)
+    {
+        GameState.GetPlayerBank().tabs.Add(new BankTab(newName));
+        creatingNewTab = false;
+    }
+    private void SetActiveTab(string tabName)
+    {
+        Console.WriteLine("Setting tab to " + tabName);
+        GameState.GetPlayerBank().SetActiveTab(tabName);
+        StateHasChanged();
+    }
     private void SetWithdrawAmount()
     {
         withdrawAmount = withdrawAmountModel.withdrawAmount;
@@ -175,7 +250,7 @@ else
         GameState.safeToSave = false;
         GameState.GetPlayerBank().GetInventory().AddItems(GameState.GetPlayerInventory().GetUnequippedItems());
         GameState.GetPlayerInventory().EmptyInventoryOfUnequippedItems();
-         GameState.safeToSave = true;
+        GameState.safeToSave = true;
         GameState.UpdateState();
 
         StateHasChanged();
@@ -201,7 +276,7 @@ else
             //Gets the smallest of the amount, inventory space, and number in the bank.
             maxWithdraw = Math.Min(Math.Min(amount, GameState.GetPlayerInventory().GetAvailableSpaces()), GameState.GetPlayerBank().GetInventory().GetAmountOfItem(item));
         }
-        if(GameState.GetPlayerInventory().AddMultipleOfItem(item, maxWithdraw))
+        if (GameState.GetPlayerInventory().AddMultipleOfItem(item, maxWithdraw))
         {
             GameState.GetPlayerBank().GetInventory().RemoveItems(item, maxWithdraw);
         }
@@ -212,18 +287,18 @@ else
     }
     private string Sell(KeyValuePair<GameItem, int> item, int amount)
     {
-         GameState.safeToSave = false;
+        GameState.safeToSave = false;
         if (amount > item.Value)
         {
             amount = item.Value;
         }
-        if(amount < 0)
+        if (amount < 0)
         {
             return "";
         }
         GameState.GetPlayerBank().GetInventory().RemoveItems(item.Key, amount);
         GameState.GetPlayerBank().GetInventory().AddMultipleOfItem(Program.itemDatabase.GetGold(), (int)((item.Key.Value * amount) / 2d));
-         GameState.safeToSave = true;
+        GameState.safeToSave = true;
         GameState.UpdateState();
         return "";
     }

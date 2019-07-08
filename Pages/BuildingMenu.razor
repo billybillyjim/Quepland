@@ -576,7 +576,7 @@
                     if(thisBuilding.TanneryItems.Count > temp && thisBuilding.TanneryItems[temp].EndTime.CompareTo(DateTime.UtcNow) > 0)
                     {
                         TimeSpan remainingTime = thisBuilding.TanneryItems[temp].EndTime.Subtract(DateTime.UtcNow);
-                        string timeLeft = "" + remainingTime.Hours + ":" + remainingTime.Minutes + ":" + remainingTime.Seconds;
+                        string timeLeft = "" + remainingTime.Hours.ToString("00") + ":" + remainingTime.Minutes.ToString("00") + ":" + remainingTime.Seconds.ToString("00");
                         builder.AddContent(20, "Time Remaining:" + timeLeft);
 
                     }

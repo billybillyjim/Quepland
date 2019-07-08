@@ -36,7 +36,7 @@ public class GameState
     public bool safeToLoad = false;
 
     public string previousURL;
-    public string updateVersionString = "1.021b";
+    public string updateVersionString = "1.022a";
     
     public GameItem currentUsedItem;
     public GameItem currentGatherItem;
@@ -303,6 +303,9 @@ public class GameState
             data += huntingAreaID + ",";
             data += huntingStartTime.ToString() + ",";
             data += huntingEndTime.ToString();
+            //Bank Tabs 15
+            data += "#";
+            data += GetPlayerBank().GetTabsString();
             data = Encryptor.EncryptToString(data);
             pos++;
         }

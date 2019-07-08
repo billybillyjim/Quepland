@@ -1,0 +1,58 @@
+[
+  {
+    "name": "Cheap Chicken Coop",
+    "id": 0,
+    "description": "A cheaply made chicken coop that can house 10 chickens.",
+    "planksRequired": 1000,
+    "barsRequired": 100,
+    "minimumPlankLevel": 0,
+    "minimumBarLevel": 0,
+    "experienceGained": 1000,
+    "otherItemCosts": [
+      [ 44, 5 ]
+    ],
+    "upgradeIDs": [1,2,3]
+  },
+  {
+    "name": "Chicken Coop",
+    "id": 1,
+    "description": "A chicken coop that can house 30 chickens.",
+    "planksRequired": 4000,
+    "barsRequired": 250,
+    "minimumPlankLevel": 3,
+    "minimumBarLevel": 1,
+    "experienceGained": 5000,
+    "otherItemCosts": [
+      [ 44, 15 ]
+    ],
+    "upgradeIDs": [ 2, 3 ]
+  },
+  {
+    "name": "Fancy Chicken Coop",
+    "id": 2,
+    "description": "A fancily made chicken coop that can house 100 chickens. The chickens can't tell the difference, though.",
+    "planksRequired": 10000,
+    "barsRequired": 1000,
+    "minimumPlankLevel": 5,
+    "minimumBarLevel": 2,
+    "experienceGained": 10000,
+    "otherItemCosts": [
+      [ 44, 50 ]
+    ],
+    "upgradeIDs": [ 3 ]
+  },
+  {
+    "name": "Wonderful Chicken Coop",
+    "id": 3,
+    "description": "A wonderfully made chicken coop that can house 400 chickens.",
+    "planksRequired": 25000,
+    "barsRequired": 2000,
+    "minimumPlankLevel": 7,
+    "minimumBarLevel": 4,
+    "experienceGained": 25000,
+    "otherItemCosts": [
+      [ 44, 200 ]
+    ]
+
+  }
+]

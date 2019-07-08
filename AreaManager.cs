@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Net.Http;
 using Microsoft.AspNetCore.Components;
+using System.Threading.Tasks;
 
 public class AreaManager
 {
@@ -10,7 +11,7 @@ public class AreaManager
 	public AreaManager()
 	{
 	}
-    public async void LoadAreas(HttpClient Http)
+    public async Task LoadAreas(HttpClient Http)
     {
         Area[] areasArray = await Http.GetJsonAsync<Area[]>("data/areas.json");
         areas = areasArray.ToList();

@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading.Tasks;
 
 public class BuildingManager
 {
@@ -10,7 +11,7 @@ public class BuildingManager
 	public BuildingManager()
 	{
 	}
-    public async void LoadBuildings(HttpClient Http)
+    public async Task LoadBuildings(HttpClient Http)
     {
         Building[] buildingArray = await Http.GetJsonAsync<Building[]>("data/buildings.json");
         buildings = buildingArray.ToList();

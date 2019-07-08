@@ -26,6 +26,8 @@ public class Player
         bank = new Bank();
         skills = new List<Skill>();
         MaxHP = 50;
+        house = new House();
+    
 	}
     public async void LoadSkills(HttpClient Http)
     {
@@ -402,10 +404,10 @@ public class Player
                 baseDamage *= 1 - (float)Extensions.CalculateArmorDamageReduction(opponent);
             }
             
-            return Math.Max(Extensions.GetGaussianRandomInt(baseDamage + equipmentBonus, baseDamage), 1);
+            return Math.Max(Extensions.GetGaussianRandomInt(baseDamage + equipmentBonus, baseDamage / 3f), 1);
         }
         baseDamage *= 1 - (float)Extensions.CalculateArmorDamageReduction(opponent);
-        return Math.Max(Extensions.GetGaussianRandomInt(baseDamage + equipmentBonus, baseDamage), 1);
+        return Math.Max(Extensions.GetGaussianRandomInt(baseDamage + equipmentBonus, baseDamage / 3f), 1);
     }
     private int GetEquipmentBonus()
     {

@@ -151,4 +151,13 @@ public class ItemDatabase
         }
         return null;
     }
+    public List<int> GetAllItemIDs()
+    {
+        List<int> ids = new List<int>();
+        for (int i = 0; i < items.Count; i++)
+        {
+            ids.Add(i);
+        }
+        return ids;
+    }
 }

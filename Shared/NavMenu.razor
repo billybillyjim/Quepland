@@ -10,6 +10,7 @@
 
 @functions {
     bool collapseNavMenu = false;
+    private bool debugMode = true;
 
     private Area lastToggledArea;
     string autoSaveString = "Last autosave: Never";
@@ -43,7 +44,7 @@
             builder.AddAttribute(5, "style", "color:white");
             builder.AddContent(6, "Quepland Menu");
             builder.CloseElement();
-            
+
             builder.CloseElement();
 
         };
@@ -77,6 +78,26 @@
                 }));
                 builder.CloseComponent();
                 builder.CloseElement();
+                if (debugMode)
+                {
+                                    //Make the house link
+                builder.OpenElement(5, "li");
+                builder.AddAttribute(6, "class", "nav-item px-3");
+                builder.OpenComponent<NavLink>(7);
+                builder.AddAttribute(8, "class", "nav-link");
+                builder.AddAttribute(9, "href", "/House");
+                builder.AddAttribute(10, "ChildContent", (RenderFragment)((builder2) =>
+                {
+                    builder2.OpenElement(11, "span");
+                    builder2.AddAttribute(12, "class", "oi oi-basket");
+                    builder2.AddAttribute(13, "aria-hidden", "true");
+                    builder2.CloseElement();
+                    builder2.AddContent(14, "Home");
+                }));
+                builder.CloseComponent();
+                builder.CloseElement();
+                }
+
                 foreach (Area area in Program.areaManager.GetAreasWithChildren())
                 {
                     if (area.IsUnlocked)

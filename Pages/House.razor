@@ -1,14 +1,56 @@
 ﻿@page "/House"
 @inject HttpClient Http
 @inject GameState GameState
+@inject Microsoft.AspNetCore.Blazor.Services.WebAssemblyUriHelper UriHelper
 @implements IDisposable
 
 <h1>Welcome Home</h1>
 
-
+@LoadHouse()
 
 @functions{
 
+    private RenderFragment LoadHouse()
+    {
+        return builder =>
+        {
+            builder.OpenElement(1, "div");
+            builder.AddAttribute(2, "class", "dropdown");
+            builder.AddAttribute(2, "style", "margin-bottom:10px");
+            builder.OpenElement(3, "button");
+
+            builder.AddAttribute(4, "class", "btn btn-primary dropdown-toggle");
+            builder.AddAttribute(5, "type", "button");
+            builder.AddAttribute(6, "id", "dropdownMenuButton");
+            builder.AddAttribute(7, "data-toggle", "dropdown");
+            builder.AddAttribute(8, "aria-haspopup", "true");
+            builder.AddAttribute(9, "aria-expanded", "false");
+            builder.AddContent(10, "Choose a room");
+             builder.CloseElement();
+             builder.OpenElement(11, "div");
+            builder.AddAttribute(12, "class", "dropdown-menu");
+            builder.AddAttribute(13, "aria-labelledby", "dropdownMenuButton");
+            foreach (Room room in GameState.GetPlayer().house.GetRooms())
+            {
+
+                builder.OpenElement(14, "a");
+                builder.AddAttribute(15, "class", "dropdown-item");
+                builder.AddAttribute(16, "onclick", () => GoToRoom(room));
+                builder.AddContent(17, room.Name);
+                builder.CloseElement();
+
+
+            }
+            
+            builder.CloseElement();
+            builder.CloseElement();
+        };
+    }
+    private void GoToRoom(Room room)
+    {
+        UriHelper.NavigateTo("/House/" + room.URL);
+        Console.WriteLine("This ran.");
+    }
     protected override void OnInit()
     {
         GameState.StateChanged += OnGameStateChanged;

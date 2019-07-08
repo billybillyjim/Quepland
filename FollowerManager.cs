@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Components;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading.Tasks;
 
 public class FollowerManager
 {
@@ -9,7 +10,7 @@ public class FollowerManager
 	public FollowerManager()
 	{
 	}
-    public async void LoadFollowers(HttpClient Http)
+    public async Task LoadFollowers(HttpClient Http)
     {
         Follower[] followerArray = await Http.GetJsonAsync<Follower[]>("data/followers.json");
         followers.AddRange(followerArray);
