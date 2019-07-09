@@ -5657,7 +5657,7 @@
   {
     "itemName": "Tin Nails",
     "itemDescription": "Some tin nails.",
-    "id": 212,
+    "id": 385,
     "value": 4,
     "gatherString": "You forge some tin nails.",
     "ingredientIDs": [ 27 ],
@@ -5671,7 +5671,7 @@
   {
     "itemName": "Zinc Nails",
     "itemDescription": "Don't eat these.",
-    "id": 213,
+    "id": 386,
     "value": 5,
     "gatherString": "You forge some zinc nails.",
     "ingredientIDs": [ 29 ],
@@ -5685,7 +5685,7 @@
   {
     "itemName": "Brass Nails",
     "itemDescription": "Shiny nails you can pound into planks.",
-    "id": 214,
+    "id": 387,
     "value": 7,
     "gatherString": "You forge some brass nails.",
     "ingredientIDs": [ 30 ],
@@ -5699,7 +5699,7 @@
   {
     "itemName": "Bronze Nails",
     "itemDescription": "Nice and shiny nails.",
-    "id": 215,
+    "id": 388,
     "value": 9,
     "gatherString": "You forge some bronze nails.",
     "ingredientIDs": [ 31 ],
@@ -5713,7 +5713,7 @@
   {
     "itemName": "Nickel Nails",
     "itemDescription": "Probably not the best material to make nails out of...",
-    "id": 216,
+    "id": 389,
     "value": 6,
     "gatherString": "You forge some nickel nails.",
     "ingredientIDs": [ 55 ],
@@ -5727,7 +5727,7 @@
   {
     "itemName": "Golden Nails",
     "itemDescription": "Don't hit them too hard, they'll break.",
-    "id": 217,
+    "id": 390,
     "value": 70,
     "gatherString": "You forge some golden nails.",
     "ingredientIDs": [ 59 ],
@@ -5741,7 +5741,7 @@
   {
     "itemName": "Iron Nails",
     "itemDescription": "Strong nails to hold planks together.",
-    "id": 218,
+    "id": 391,
     "value": 11,
     "gatherString": "You forge some iron nails.",
     "ingredientIDs": [ 28 ],
@@ -5755,7 +5755,7 @@
   {
     "itemName": "Lead Nails",
     "itemDescription": "Don't breathe these in.",
-    "id": 219,
+    "id": 392,
     "value": 13,
     "gatherString": "You forge some lead nails.",
     "ingredientIDs": [ 56 ],
@@ -5769,7 +5769,7 @@
   {
     "itemName": "Aluminum Nails",
     "itemDescription": "Lightweight nails that crumple when hammered.",
-    "id": 220,
+    "id": 393,
     "value": 15,
     "gatherString": "You forge some aluminum nails.",
     "ingredientIDs": [ 58 ],
@@ -5783,7 +5783,7 @@
   {
     "itemName": "Steel Nails",
     "itemDescription": "The strongest nails in Quepland, probably.",
-    "id": 221,
+    "id": 394,
     "value": 18,
     "gatherString": "You forge some steel nails.",
     "ingredientIDs": [ 210 ],

@@ -76,7 +76,7 @@ public class Bank
     {
         foreach(BankTab t in tabs)
         {
-            if(t.Name == name)
+            if(t.Name == name || t.Name.Contains("#"))
             {
                 return false;
             }
