@@ -1547,7 +1547,8 @@
       [ 46, 242 ],
       [ 47, 243 ],
       [ 48, 244 ],
-      [ 299, 381 ]
+      [ 299, 381 ],
+      [ 375, 383 ]
     ],
     "icon": "Roll"
   },
@@ -5621,5 +5622,22 @@
     "actionRequired": "Culinary Arts",
     "icon": "Knife",
     "actionsEnabled": "Culinary Arts"
-  }
+  },
+    {
+    "itemName": "Camel Ray Roll",
+    "id": 383,
+    "itemDescription": "A camel ray roll.",
+    "value": 900,
+    "gatherString": "You make a camel ray roll.",
+    "gatherSpeed": 12000,
+    "requiredLevel": 80,
+    "experienceGained": "Culinary Arts:550",
+    "actionRequired": "Culinary Arts",
+    "isEdible": true,
+    "healAmount": 18,
+    "healDuration": 500,
+    "buffedSkill": "Hunting",
+    "buffAmount": 5,
+    "icon": "Roll"
+  },
 ]

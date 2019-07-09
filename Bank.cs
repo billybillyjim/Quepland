@@ -47,13 +47,13 @@ public class Bank
                 returnString += id + ",";
             }
             returnString = returnString.Substring(0, returnString.Length - 1);
-            returnString += "/";
+            returnString += (char)14;
         }
         return returnString;
     }
     public void LoadTabsFromString(string data)
     {
-        string[] lines = data.Split('/');
+        string[] lines = data.Split((char)14);
         foreach (string line in lines)
         {
             if (line.Length > 0)
@@ -71,5 +71,16 @@ public class Bank
             }
         }
 
+    }
+    public bool NameIsValid(string name)
+    {
+        foreach(BankTab t in tabs)
+        {
+            if(t.Name == name)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }

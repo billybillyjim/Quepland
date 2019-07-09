@@ -37,10 +37,15 @@
 @if (addingItemsToTab)
 {
     <button class="btn btn-primary" style="margin:10px" onclick="@(() => ToggleAddingItemsToTab())">Stop</button>
+
+    <input type="text" @bind-value="@newTabName" @bind-value:event="onchange" />
+    <button class="btn btn-primary" style="margin:10px" onclick="@(() => ChangeTabName(newTabName))">Change Name</button>
+    <button class="btn btn-primary" style="margin:10px" onclick="@(() => DeleteTab())">Delete Tab</button>
 }
-else
+else if(GameState.GetPlayerBank().activeTab != GameState.GetPlayerBank().tabs[0])
 {
-    <button class="btn btn-primary" style="margin:10px" onclick="@(() => ToggleAddingItemsToTab())">Add Items to Tab</button>
+    <button class="btn btn-primary" style="margin:10px" onclick="@(() => ToggleAddingItemsToTab())">Modify Tab</button>
+
 }
 
 <br />
@@ -95,8 +100,8 @@ else
                 {
                     //If the search string is null or empty, or the search string contains characters in the item's name.
                     @if ((((searchString == null || searchString == "") || item.Key.ItemName.ToLower().Contains(searchString.ToLower())) &&
-                    //If the tab is set to all and the tab contains that item id
-                    ((GameState.GetPlayerBank().activeTab.Name == "All" || GameState.GetPlayerBank().activeTab.itemIDs.Contains(item.Key.Id)) || addingItemsToTab)))
+                 //If the tab is set to all and the tab contains that item id
+                 ((GameState.GetPlayerBank().activeTab.Name == "All" || GameState.GetPlayerBank().activeTab.itemIDs.Contains(item.Key.Id)) || addingItemsToTab)))
                     //If the player is adding items to the tab, all items are visible.
 
                     {
@@ -113,7 +118,7 @@ else
 
                             @if (GameState.compactBankView && !addingItemsToTab)
                             {
-                                <td style="padding:.2rem" align="right">
+                                <td style="padding:.2rem; min-width:220px" align="right">
                                     <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, 1))">1</button>
                                     <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, 5))">5</button>
                                     <button class="btn btn-primary" onclick="@(() => Withdraw(item.Key, withdrawAmountModel.withdrawAmount))">@withdrawAmount</button>
@@ -200,10 +205,32 @@ else
     public int withdrawAmount = 1;
     private bool creatingNewTab = false;
     private bool addingItemsToTab = false;
+    private bool changingNewTabName = false;
     public string searchString = "";
     public string newTabName = "";
     private WithdrawAmountModel withdrawAmountModel = new WithdrawAmountModel();
 
+    private void DeleteTab()
+    {
+        if (GameState.GetPlayerBank().activeTab.Name != "All")
+        {
+            GameState.GetPlayerBank().tabs.Remove(GameState.GetPlayerBank().activeTab);
+        }
+        GameState.GetPlayerBank().SetActiveTab("All");
+        addingItemsToTab = false;
+    }
+    private void ChangeTabName(string newName)
+    {
+        if (GameState.GetPlayerBank().activeTab.Name != "All" && GameState.GetPlayerBank().NameIsValid(newName))
+        {
+            GameState.GetPlayerBank().activeTab.Name = newName;
+        }
+        else
+        {
+            MessageManager.AddMessage("You already have a tab with that name.");
+        }
+        changingNewTabName = false;
+    }
     private void ToggleAddingItemsToTab()
     {
         addingItemsToTab = !addingItemsToTab;
@@ -224,12 +251,19 @@ else
     }
     private void CreateNewTab(string newName)
     {
-        GameState.GetPlayerBank().tabs.Add(new BankTab(newName));
+         if (GameState.GetPlayerBank().NameIsValid(newName))
+        {
+            GameState.GetPlayerBank().tabs.Add(new BankTab(newName));
+        }
+        else
+        {
+            MessageManager.AddMessage("You already have a tab with that name.");
+        }
+        
         creatingNewTab = false;
     }
     private void SetActiveTab(string tabName)
     {
-        Console.WriteLine("Setting tab to " + tabName);
         GameState.GetPlayerBank().SetActiveTab(tabName);
         StateHasChanged();
     }
