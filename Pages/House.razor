@@ -7,9 +7,12 @@
 <h1>Welcome Home</h1>
 
 @LoadHouse()
+@LoadBuildableRoomDropdown()
+@BuildNewRoomButton()
 
 @functions{
 
+    private string newRoomName;
     private RenderFragment LoadHouse()
     {
         return builder =>
@@ -25,9 +28,9 @@
             builder.AddAttribute(7, "data-toggle", "dropdown");
             builder.AddAttribute(8, "aria-haspopup", "true");
             builder.AddAttribute(9, "aria-expanded", "false");
-            builder.AddContent(10, "Choose a room");
-             builder.CloseElement();
-             builder.OpenElement(11, "div");
+            builder.AddContent(10, "Choose a room to enter");
+            builder.CloseElement();
+            builder.OpenElement(11, "div");
             builder.AddAttribute(12, "class", "dropdown-menu");
             builder.AddAttribute(13, "aria-labelledby", "dropdownMenuButton");
             foreach (Room room in GameState.GetPlayer().house.GetRooms())
@@ -41,10 +44,84 @@
 
 
             }
-            
+
             builder.CloseElement();
             builder.CloseElement();
         };
+    }
+    private RenderFragment LoadBuildableRoomDropdown()
+    {
+        return builder =>
+        {
+            builder.OpenElement(1, "div");
+            builder.AddAttribute(2, "class", "dropdown");
+            builder.AddAttribute(2, "style", "margin-bottom:10px");
+            builder.OpenElement(3, "button");
+
+            builder.AddAttribute(4, "class", "btn btn-primary dropdown-toggle");
+            builder.AddAttribute(5, "type", "button");
+            builder.AddAttribute(6, "id", "dropdownMenuButton");
+            builder.AddAttribute(7, "data-toggle", "dropdown");
+            builder.AddAttribute(8, "aria-haspopup", "true");
+            builder.AddAttribute(9, "aria-expanded", "false");
+            if(newRoomName == null)
+            {
+                builder.AddContent(10, "Build a New Room");
+            }
+            else
+            {
+                builder.AddContent(10, newRoomName);
+            }
+            
+            builder.CloseElement();
+            builder.OpenElement(11, "div");
+            builder.AddAttribute(12, "class", "dropdown-menu");
+            builder.AddAttribute(13, "aria-labelledby", "dropdownMenuButton");
+            foreach (Room room in Program.roomManager.GetRooms())
+            {
+
+                builder.OpenElement(14, "a");
+                builder.AddAttribute(15, "class", "dropdown-item");
+                builder.AddAttribute(16, "onclick", () => SetNewRoomName(room.Name));
+                builder.AddContent(17, room.Name);
+                builder.CloseElement();
+
+
+            }
+
+            builder.CloseElement();
+            builder.CloseElement();
+        };
+    }
+    private RenderFragment BuildNewRoomButton()
+    {
+        return builder =>
+        {
+            builder.OpenElement(0, "p");
+            builder.OpenElement(1, "button");
+            builder.AddAttribute(2, "class", "btn btn-primary");
+            builder.AddAttribute(3, "style", "margin:10px");
+            builder.AddAttribute(4, "onclick", () => BuildNewRoom());
+            if(newRoomName == null)
+            {
+                builder.AddAttribute(5, "disabled", true);
+            }
+            builder.AddContent(6, "Build New Room");
+            builder.CloseElement();
+            builder.CloseElement();
+        };
+
+    }
+    private void BuildNewRoom()
+    {
+        Room newRoom = Program.roomManager.GetRoomByName(newRoomName);
+        GameState.GetPlayer().house.AddRoom(newRoom);
+        StateHasChanged();
+    }
+    private void SetNewRoomName(string name)
+    {
+        newRoomName = name;
+        StateHasChanged();
     }
     private void GoToRoom(Room room)
     {
