@@ -128,7 +128,8 @@
       [ 228, 50 ],
       [ 249, 1 ],
       [ 250, 1 ]
-    ]
+    ],
+    "immuneTo": "Freeze"
   },
   {
     "name": "Mercurial Warrior",
@@ -148,7 +149,8 @@
       [ 227, 100 ],
       [ 247, 1 ],
       [ 248, 1 ]
-    ]
+    ],
+    "immuneTo": "Freeze"
   },
   {
     "name": "Mercurial Beast",
@@ -170,7 +172,8 @@
       [ 248, 1 ],
       [ 249, 1 ],
       [ 250, 1 ]
-    ]
+    ],
+    "immuneTo": "Freeze"
   },
   {
     "name": "Mercurial Giant",
@@ -192,7 +195,8 @@
       [ 248, 2 ],
       [ 249, 2 ],
       [ 250, 2 ]
-    ]
+    ],
+    "immuneTo": "Freeze"
   },
   {
     "name": "Small Tree Man",
@@ -742,7 +746,7 @@
       [ 320, 15 ]
     ]
   },
-    {
+  {
     "name": "Womanfish",
     "id": 39,
     "level": 65,
@@ -755,7 +759,6 @@
     "attackSpeed": 5,
     "dropTable": [
       [ 267, 20 ],
-
       [ 3, 50 ],
       [ 4, 50 ],
       [ 45, 20 ],
@@ -764,4 +767,104 @@
       [ 48, 10 ]
     ]
   },
+   {
+    "name": "Ice Knight",
+    "id": 40,
+    "level": 18,
+    "experienceGained": 300,
+    "hp": 2300,
+    "weakness": "Hammermanship",
+    "strength": "Archery",
+    "damage": 60,
+    "armor": 65,
+    "attackSpeed": 3,
+    "dropTable": [
+      [ 395, 100 ],
+      [ 396, 100 ],
+      [ 210, 50 ],
+      [ 399, 3 ]
+    ],
+    "immuneTo": "Freeze"
+  },
+  {
+    "name": "Ice Warrior",
+    "id": 41,
+    "level": 18,
+    "experienceGained": 300,
+    "hp": 2800,
+    "weakness": "Hammermanship",
+    "strength": "Swordsmanship",
+    "damage": 35,
+    "armor": 80,
+    "attackSpeed": 4,
+    "dropTable": [
+      [ 395, 200 ],
+      [ 396, 200 ],
+      [ 210, 100 ],
+      [ 399, 2 ],
+      [ 400, 2 ]
+    ],
+    "immuneTo": "Freeze"
+  },
+  {
+    "name": "Frost Beast",
+    "id": 42,
+    "level": 18,
+    "experienceGained": 300,
+    "hp": 3300,
+    "weakness": "Hammermanship",
+    "strength": "Knifesmanship",
+    "damage": 75,
+    "armor": 90,
+    "attackSpeed": 5,
+    "dropTable": [
+      [ 395, 200 ],
+      [ 396, 200 ],
+      [ 210, 100 ],
+      [ 397, 2 ],
+      [ 398, 2 ]
+    ],
+    "immuneTo": "Freeze"
+  },
+  {
+    "name": "Frost Giant",
+    "id": 43,
+    "level": 18,
+    "experienceGained": 300,
+    "hp": 3500,
+    "armor": 110,
+    "weakness": "Hammermanship",
+    "strength": "Axemanship",
+    "damage": 155,
+    "attackSpeed": 5,
+    "dropTable": [
+      [ 395, 200 ],
+      [ 396, 200 ],
+      [ 210, 100 ],
+      [ 397, 3 ],
+      [ 398, 3 ],
+      [ 399, 3 ],
+      [ 400, 3 ],
+      [ 401, 1 ]
+    ],
+    "immuneTo": "Freeze"
+  },
+  {
+    "name": "Italian Christmas Tree",
+    "id": 44,
+    "level": 7,
+    "experienceGained": 250,
+    "hp": 1500,
+    "weakness": "Axemanship",
+    "strength": "Hammermanship",
+    "damage": 35,
+    "armor": 12,
+    "attackSpeed": 4,
+    "alwaysDrops": [ 99 ],
+    "dropTable": [
+      [ 100, 200 ],
+      [ 101, 100 ],
+      [ 102, 50 ]
+    ]
+  }
 ]

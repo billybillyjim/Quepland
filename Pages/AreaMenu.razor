@@ -14,8 +14,8 @@
     @LoadActions()
     @LoadBuildings()
     @LoadRoadblocks()
-    @LoadSmithingButton();
-
+    @LoadSmithingButton()
+    @LoadRegions()
 }
 
 @functions{
@@ -53,6 +53,8 @@
             }
             Program.areaManager.GetAreaByName(area.AreaToUnlockOnArrival).IsUnlocked = true;
         }
+        StateHasChanged();
+        GameState.UpdateState();
     }
     public void DebugGoToNextArea()
     {
@@ -312,9 +314,9 @@
                             else
                             {
 
-                                    builder.AddAttribute(13, "title", "You don't have the levels to do this.");
-                                    builder.AddAttribute(14, "disabled", true);
-                                 builder.AddContent(15, action);
+                                builder.AddAttribute(13, "title", "You don't have the levels to do this.");
+                                builder.AddAttribute(14, "disabled", true);
+                                builder.AddContent(15, action);
                             }
                             builder.CloseElement();
                         }
@@ -513,6 +515,41 @@
                 builder.CloseElement();
             }
         };
+    }
+    private RenderFragment LoadRegions()
+    {
+        return builder =>
+        {
+            if (area != null && GameState.isHunting == false && area.AccessibleRegions != null)
+            {
+                foreach (string regionString in area.AccessibleRegions.Split('/') ?? Enumerable.Empty<string>())
+                {
+                    string[] splitData = regionString.Split(',');
+                    string regionToAccess = splitData[0];
+                    string areaToAccess = splitData[1];
+                    string buttonText = splitData[2];
+                    builder.OpenElement(0, "button");
+                    builder.AddAttribute(1, "style", "margin-bottom:10px");
+                    builder.AddAttribute(2, "class", "btn btn-success");
+                    builder.AddAttribute(3, "onclick", () => GoToRegion(regionToAccess, areaToAccess));
+                    if (GameState.isGathering || GameState.isHunting)
+                    {
+                        builder.AddAttribute(4, "disabled", true);
+                    }
+                    builder.AddContent(8, buttonText);
+                    builder.CloseElement();
+                }
+            }
+        };
+    }
+    private void GoToRegion(string region, string area)
+    {
+        GameState.currentRegion = region;
+        Program.areaManager.GetAreaByName(area).IsUnlocked = true;
+
+        GameState.UpdateState();
+                this.StateHasChanged();
+        UriHelper.NavigateTo("/GatherMenu/" + Program.areaManager.GetAreaByName(area).AreaURL);
     }
     public void StartSearchForMiningVein()
     {

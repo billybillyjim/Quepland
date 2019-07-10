@@ -27,4 +27,7 @@ public class Area
     public bool Hidden { get; set; }
     public bool IsMarked { get; set; }
     public bool IsShowingChildren { get; set; }
+    public bool IsRegion { get; set; }
+    public string Region { get; set; }
+    public string AccessibleRegions { get; set; }
 }

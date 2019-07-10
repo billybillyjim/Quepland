@@ -36,7 +36,7 @@ public class GameState
     public bool safeToLoad = false;
 
     public string previousURL;
-    public string updateVersionString = "1.023b";
+    public string updateVersionString = "1.024a";
     
     public GameItem currentUsedItem;
     public GameItem currentGatherItem;
@@ -54,6 +54,7 @@ public class GameState
     private Player player = new Player();
 
     public Area currentArea;
+    public string currentRegion = "Quepland";
 
     public Timer attackTimer;
     public Timer foodTimer;

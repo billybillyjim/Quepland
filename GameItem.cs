@@ -52,6 +52,9 @@ public class GameItem
     public string ActionsEnabled { get; set; }
     public string ActionRequired { get; set; }
     public string BuffedSkill { get; set; }
+    public string StatusEffect { get; set; }
+    public double EffectOdds { get; set; }
+    public int EffectDuration { get; set; }
 
     [DefaultValue("Unknown.png")]
     public string Icon { get; set; }

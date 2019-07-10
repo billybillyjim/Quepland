@@ -100,7 +100,7 @@
 
                 foreach (Area area in Program.areaManager.GetAreasWithChildren())
                 {
-                    if (area.IsUnlocked)
+                    if (area.IsUnlocked && area.Region == GameState.currentRegion)
                     {
                         builder.AddContent(15, ParentButton(area));
                         foreach (string child in area.Children)

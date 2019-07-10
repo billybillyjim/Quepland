@@ -15,4 +15,7 @@ public class Monster
     public int AttackSpeed { get; set; }
     public int[] AlwaysDrops { get; set; }
     public int[][] DropTable { get; set; }
+    public string CurrentStatusEffect { get; set; }
+    public int StatusEffectTimeLeft { get; set; }
+    public string ImmuneTo { get; set; }
 }
