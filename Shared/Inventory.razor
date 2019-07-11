@@ -167,13 +167,22 @@
             builder.AddAttribute(19, "style", "text-align:right");
             builder.OpenElement(20, "font");
             builder.AddAttribute(21, "size", "4");
-
+            if(item.Value == 1)
+            {
+                builder.AddAttribute(22, "title", "Worth " + ((item.Key.Value / 2f) * item.Value));
+            }
+            else
+            {
+                builder.AddAttribute(22, "title", "Worth " + ((item.Key.Value / 2f) * item.Value) + "(" + (item.Key.Value / 2f) + " each)");
+            }
+            
             if (item.Key.IsStackable)
             {
                 builder.AddContent(22, "1 Stack of " + item.Value);
             }
             else
             {
+
                 builder.AddContent(23, item.Value);
             }
             builder.CloseElement();
@@ -625,7 +634,7 @@
     private string Deposit(KeyValuePair<GameItem, int> item, int amount)
     {
         CancelUse();
-         GameState.safeToSave = false;
+        GameState.safeToSave = false;
         if (amount > item.Value)
         {
             amount = item.Value;
@@ -636,14 +645,14 @@
         }
         GameState.GetPlayerBank().GetInventory().AddMultipleOfItem(item.Key, amount);
         GameState.GetPlayerInventory().RemoveItems(item.Key, amount);
-         GameState.safeToSave = true;
+        GameState.safeToSave = true;
         GameState.UpdateState();
         return "";
     }
     private string Sell(KeyValuePair<GameItem, int> item, int amount)
     {
         CancelUse();
-         GameState.safeToSave = false;
+        GameState.safeToSave = false;
         if (amount > item.Value)
         {
             amount = item.Value;
@@ -658,7 +667,7 @@
         }
         GameState.GetPlayerInventory().RemoveItems(item.Key, amount);
         GameState.GetPlayerInventory().AddMultipleOfItem(Program.itemDatabase.GetGold(), (int)((item.Key.Value * amount) / 2d));
-         GameState.safeToSave = true;
+        GameState.safeToSave = true;
         GameState.UpdateState();
         return "";
     }
@@ -716,10 +725,10 @@
             GameState.UpdateState();
             StateHasChanged();
         }), null, 1000, 1000);
-         GameState.safeToSave = false;
+        GameState.safeToSave = false;
         MessageManager.AddMessage("You eat a " + item.ItemName + " healing " + item.HealAmount + " and  boosting your " + item.BuffedSkill + " by " + item.BuffAmount + ".");
         GameState.GetPlayerInventory().RemoveOneOfItem(item);
-         GameState.safeToSave = true;
+        GameState.safeToSave = true;
         GameState.UpdateState();
         StateHasChanged();
     }
@@ -727,7 +736,7 @@
     {
         CancelUse();
         int itemsCreated = item.UnpackIDs.Length;
-         GameState.safeToSave = false;
+        GameState.safeToSave = false;
         if (GameState.GetPlayerInventory().GetAvailableSpaces() < itemsCreated &&
             !(itemsCreated == 1 && Program.itemDatabase.GetItemByID(item.UnpackIDs[0]).IsStackable == true))
         {
@@ -739,7 +748,7 @@
             GameState.GetPlayerInventory().AddMultipleOfItem(Program.itemDatabase.GetItemByID(id), Math.Max(1, item.MadeOnCreation));
 
         }
-         GameState.safeToSave = true;
+        GameState.safeToSave = true;
         GameState.UpdateState();
         this.StateHasChanged();
         return "";
@@ -761,7 +770,7 @@
             GameState.safeToSave = false;
             if (itemCreated.AmountOfIngredientsToCreate == 0)
             {
-                 
+
                 if (GameState.GetPlayerInventory().RemoveOneOfItem(itemUsed))
                 {
                     int numToMake = Math.Max(itemCreated.MadeOnCreation, 1);

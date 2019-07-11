@@ -5,6 +5,7 @@ public class Furniture
 	public string Name { get; set; }
     public int ID { get; set; }
     public string Description { get; set; }
+    public int ConstructionLevelRequired { get; set; }
     public int MinimumPlankLevel { get; set; }
     public int PlanksRequired { get; set; }
     public int BarsRequired { get; set; }

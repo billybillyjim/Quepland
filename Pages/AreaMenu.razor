@@ -211,6 +211,11 @@
                                 builder.AddAttribute(6, "disabled", true);
                                 builder.AddAttribute(7, "title", "You don't have the tool to do this.");
                             }
+                            if(GameState.GetPlayer().GetLevel("Woodworking") < Program.itemDatabase.GetRewardByName(actionString.Split(':')[1]).MinimumLevel)
+                            {
+                                 builder.AddAttribute(6, "disabled", true);
+                                builder.AddAttribute(7, "title", "You don't have the level to do this.(" + Program.itemDatabase.GetRewardByName(actionString.Split(':')[1]).MinimumLevel + ")");
+                            }
                             builder.AddContent(8, "Carve Totem");
                             builder.CloseElement();
                             builder.OpenElement(9, "br");
@@ -548,7 +553,7 @@
         Program.areaManager.GetAreaByName(area).IsUnlocked = true;
 
         GameState.UpdateState();
-                this.StateHasChanged();
+        this.StateHasChanged();
         UriHelper.NavigateTo("/GatherMenu/" + Program.areaManager.GetAreaByName(area).AreaURL);
     }
     public void StartSearchForMiningVein()

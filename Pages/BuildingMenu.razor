@@ -173,14 +173,15 @@
                         builder.OpenElement(0, "button");
                         builder.AddAttribute(1, "class", "btn btn-primary");
                         builder.AddAttribute(2, "style", "margin:10px");
-                        if (GameState.GetPlayerInventory().HasItem(item) == false)
+                        if (GameState.GetPlayerInventory().HasItem(item) == false || GameState.GetPlayer().GetLevel("Alchemy") < item.RequiredLevel - 5)
                         {
                             builder.AddAttribute(3, "disabled", true);
+                            builder.AddAttribute(4, "title", "You need level " + (item.RequiredLevel - 5) + " Alchemy to perform alchemy on this bar.");
                         }
-                        builder.AddAttribute(4, "onclick", () => SetMetal(item));
-                        builder.AddContent(4, item.ItemName);
+                        builder.AddAttribute(5, "onclick", () => SetMetal(item));
+                        builder.AddContent(6, item.ItemName);
                         builder.CloseElement();
-                        builder.OpenElement(5, "br");
+                        builder.OpenElement(7, "br");
                         builder.CloseElement();
                     }
                 }

@@ -8,7 +8,9 @@
 
 @LoadHouse()
 @LoadBuildableRoomDropdown()
+@ShowRoomData()
 @BuildNewRoomButton()
+
 
 @functions{
 
@@ -64,7 +66,7 @@
             builder.AddAttribute(7, "data-toggle", "dropdown");
             builder.AddAttribute(8, "aria-haspopup", "true");
             builder.AddAttribute(9, "aria-expanded", "false");
-            if(newRoomName == null)
+            if (newRoomName == null)
             {
                 builder.AddContent(10, "Build a New Room");
             }
@@ -72,7 +74,7 @@
             {
                 builder.AddContent(10, newRoomName);
             }
-            
+
             builder.CloseElement();
             builder.OpenElement(11, "div");
             builder.AddAttribute(12, "class", "dropdown-menu");
@@ -102,15 +104,53 @@
             builder.AddAttribute(2, "class", "btn btn-primary");
             builder.AddAttribute(3, "style", "margin:10px");
             builder.AddAttribute(4, "onclick", () => BuildNewRoom());
-            if(newRoomName == null)
+            if (newRoomName == null)
             {
                 builder.AddAttribute(5, "disabled", true);
             }
-            builder.AddContent(6, "Build New Room");
+            if (string.IsNullOrEmpty(newRoomName))
+            {
+                builder.AddContent(6, "Build New Room");
+            }
+            else
+            {
+                builder.AddContent(6, "Build " + newRoomName);
+            }
+            
             builder.CloseElement();
             builder.CloseElement();
         };
 
+    }
+    private RenderFragment ShowRoomData()
+    {
+        return builder =>
+        {
+            if(string.IsNullOrEmpty(newRoomName) == false)
+            {
+                Room room = Program.roomManager.GetRoomByName(newRoomName);
+                builder.OpenElement(0, "p");
+                builder.AddContent(1, room.Name);
+                builder.CloseElement();
+                builder.OpenElement(2, "p");
+                builder.AddContent(3, "Level Required:" + room.ConstructionLevelRequired);
+                builder.CloseElement();
+                builder.OpenElement(4, "p");
+                builder.AddContent(5, "Planks:" + room.PlanksRequired + " " + GetPlankString(room.MinimumPlankLevel) + " or better.");
+                builder.CloseElement();
+                builder.OpenElement(6, "p");
+                builder.AddContent(7, "Bars:" + room.BarsRequired + " " + GetBarString(room.MinimumBarLevel) + "s or better.");
+                builder.CloseElement();
+            }
+        };
+    }
+    public string GetPlankString(int level)
+    {
+        return Program.itemDatabase.GetLogs()[level].ItemName;
+    }
+    public string GetBarString(int level)
+    {
+        return Program.itemDatabase.GetSmithingBars()[level].ItemName;
     }
     private void BuildNewRoom()
     {

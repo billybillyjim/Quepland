@@ -2,52 +2,119 @@
   {
     "name": "Master Bedroom",
     "id": 0,
-    "url": "Master_Bedroom"
+    "url": "Master_Bedroom",
+    "description": "Your main bedroom. You can build various pieces of furniture to make it more comfortabal. Your house can only have one master bedroom.",
+    "constructionLevelRequired": 1,
+    "minimumPlankLevel": 0,
+    "planksRequired": 1000,
+    "minimumBarLevel": 0,
+    "barsRequired": 500
 
   },
   {
     "name": "Arena",
     "id": 0,
-    "url": "Arena"
+    "url": "Arena",
+    "description": "The arena is a place in your home that lets you kill things. Simply build a kyonshi of the monster you want to kill, and activate it for private farming.",
+    "constructionLevelRequired": 20,
+    "minimumPlankLevel": 1,
+    "planksRequired": 3000,
+    "minimumBarLevel": 2,
+    "barsRequired": 1500
   },
   {
     "name": "Chicken Room",
     "id": 1,
-    "url": "Chicken_Room"
+    "url": "Chicken_Room",
+    "description": "The chicken room can be filled with chicken coops, which produce eggs and feathers daily.",
+    "constructionLevelRequired": 10,
+    "minimumPlankLevel": 2,
+    "planksRequired": 4000,
+    "minimumBarLevel": 0,
+    "barsRequired": 250
   },
   {
     "name": "Pulp and Paper Room",
     "id": 2,
-    "url": "Pulp_and_Paper_Room"
+    "url": "Pulp_and_Paper_Room",
+    "description": "The pulp and paper room allows for the creation of paper, a vital element in making kyonshi.",
+    "constructionLevelRequired": 20,
+    "minimumPlankLevel": 2,
+    "planksRequired": 3000,
+    "minimumBarLevel": 1,
+    "barsRequired": 3000
   },
   {
     "name": "Salt Room",
     "id": 3,
-    "url": "Salt_Room"
+    "url": "Salt_Room",
+    "description": "The salt room allows you to make salt from drying sea water, pumped in through a water pump.",
+    "constructionLevelRequired": 30,
+    "minimumPlankLevel": 5,
+    "planksRequired": 5000
   },
   {
     "name": "Workshop",
     "id": 4,
-    "url": "Workshop"
+    "url": "Workshop",
+    "description": "The workshop unlocks a number of higher level furnitures and house upgrades, if you can afford them.",
+    "constructionLevelRequired": 50,
+    "minimumPlankLevel": 6,
+    "planksRequired": 5000,
+    "minimumBarLevel": 5,
+    "barsRequired": 3500
   },
   {
     "name": "Saw Room",
     "id": 5,
-    "url": "Saw_Room"
+    "url": "Saw_Room",
+    "description": "The saw room enabled plank making from your house, at no gold cost to yourself! After you build it, of course.",
+    "constructionLevelRequired": 50,
+    "minimumPlankLevel": 5,
+    "planksRequired": 3500,
+    "minimumBarLevel": 6,
+    "barsRequired": 5000
   },
   {
     "name": "Frost Forge",
     "id": 6,
-    "url": "Frost_Forge"
+    "url": "Frost_Forge",
+    "description": "The frost forge lets you create a number of magical items that require extreme cold to make.",
+    "constructionLevelRequired": 70,
+    "minimumBarLevel": 7,
+    "barsRequired": 12500
   },
   {
     "name": "Guest Bedroom",
     "id": 7,
-    "url": "Guest_Bedroom"
+    "url": "Guest_Bedroom",
+    "description": "Guest bedrooms can be added for your followers to sleep in. Improving the quality of their lives can improve the work they do for you!",
+    "constructionLevelRequired": 1,
+    "minimumPlankLevel": 0,
+    "planksRequired": 1000,
+    "minimumBarLevel": 0,
+    "barsRequired": 500
   },
   {
     "name": "Alchemy Room",
     "id": 8,
-    "url": "Alchemy_Room"
+    "url": "Alchemy_Room",
+    "description": "The alchemy room provides a space to perform new kinds of alchemic reactions, previously not possible anywhere else.",
+    "constructionLevelRequired": 35,
+    "minimumPlankLevel": 0,
+    "planksRequired": 1000,
+    "minimumBarLevel": 0,
+    "barsRequired": 500
+  },
+  {
+    "name": "Tannery",
+    "id": 9,
+    "url": "Tannery",
+    "description": "Tan things from the comfort of your own home!",
+    "constructionLevelRequired": 40,
+    "minimumPlankLevel": 0,
+    "planksRequired": 1000,
+    "minimumBarLevel": 0,
+    "barsRequired": 500
   }
 ]

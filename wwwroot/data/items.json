@@ -113,7 +113,8 @@
       [ 100, 171 ],
       [ 101, 172 ],
       [ 102, 173 ],
-      [ 103, 174 ]
+      [ 103, 174 ],
+      [ 402, 403 ]
 
     ],
     "icon": "Knife"
@@ -597,7 +598,8 @@
       [ 155, 194 ],
       [ 157, 195 ],
       [ 159, 196 ],
-      [ 161, 197 ]
+      [ 161, 197 ],
+      [ 403, 404 ]
 
     ],
     "icon": "Feather",
@@ -5708,7 +5710,7 @@
     "isStackable": true,
     "isSmithable": true,
     "madeOnCreation": 15,
-    "icon": "ArrowTips"
+    "icon": "Nails"
   },
   {
     "itemName": "Nickel Nails",
@@ -5898,4 +5900,85 @@
     "equipSlot": "Head",
     "icon": "Hat"
   },
+  {
+    "itemName": "Ice Logs",
+    "itemDescription": "Magical frozen logs. They stick to your tongue.",
+    "gatherString": "You chop some ice logs.",
+    "id": 402,
+    "value": 700,
+    "gatherSpeed": 25000,
+    "requiredLevel": 99,
+    "experienceGained": "Woodcutting:780",
+    "actionRequired": "Woodcutting",
+    "icon": "Wood"
+  },
+  {
+    "itemName": "Ice Arrow Shafts",
+    "itemDescription": "Magical frozen arrow shafts. Feathers can be attached to the end.",
+    "gatherString": "You make some arrow shafts from the ice wood.",
+    "id": 403,
+    "value": 102,
+    "requiredLevel": 95,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:350",
+    "isStackable": true,
+    "GatherSpeed": 2250,
+    "madeOnCreation": 2,
+    "icon": "ArrowShaft"
+  },
+  {
+    "itemName": "Ice Arrows (Unfinished)",
+    "itemDescription": "Magical frozen arrows with feathers attached to the end. Requires mercurice tips.",
+    "gatherString": "You attach a feather to the back of the arrow.",
+    "id": 404,
+    "value": 155,
+    "requiredLevel": 95,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:350",
+    "isStackable": true,
+    "GatherSpeed": 3250,
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 406, 405 ]
+    ],
+    "icon": "ArrowHeadless"
+  },
+  {
+    "itemName": "Ice Arrows",
+    "itemDescription": "Magical arrows that can freeze enemy opponents.",
+    "gatherString": "You attach a head to the tip of the arrow.",
+    "id": 405,
+    "value": 205,
+    "requiredLevel": 95,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:350",
+    "isStackable": true,
+    "GatherSpeed": 2250,
+    "isArrow": true,
+    "damage": 30,
+    "icon": "Arrow",
+    "statusEffect": "Freeze",
+    "effectDuration": 3,
+    "effectOdds": 0.1
+  },
+    {
+    "itemName": "Mercurice Arrowtips",
+    "itemDescription": "The tip for an ice arrow.",
+    "id": 406,
+    "value": 85,
+    "gatherString": "You forge some mercurice arrowtips.",
+    "gatherSpeed": 2500,
+    "requiredLevel": 95,
+    "experienceGained": "Woodworking:120",
+    "actionRequired": "Woodworking",
+    "isStackable": true,
+    "madeOnCreation": 5,
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 404, 405 ]
+    ],
+    "icon": "ArrowTips"
+  }
 ]

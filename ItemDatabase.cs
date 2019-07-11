@@ -10,6 +10,7 @@ public class ItemDatabase
     private List<GameItem> smithingBarTable = new List<GameItem>();
     private List<GameItem> smithingItemTable = new List<GameItem>();
     private List<GameItem> huntedAnimals = new List<GameItem>();
+    private List<GameItem> woodcuttingItems = new List<GameItem>();
     private List<Reward> rewards = new List<Reward>();
     private static Random rand = new Random();
 
@@ -35,6 +36,10 @@ public class ItemDatabase
             else if(i.ActionRequired == "Hunting")
             {
                 huntedAnimals.Add(i);
+            }
+            else if(i.ActionRequired == "Woodcutting")
+            {
+                woodcuttingItems.Add(i);
             }
 
         }
@@ -159,5 +164,9 @@ public class ItemDatabase
             ids.Add(i);
         }
         return ids;
+    }
+    public List<GameItem> GetLogs()
+    {
+        return woodcuttingItems;
     }
 }

@@ -407,9 +407,9 @@
             builder.CloseElement();
             builder.OpenElement(52, "br");
             builder.CloseElement();
-                        builder.OpenElement(53, "br");
+            builder.OpenElement(53, "br");
             builder.CloseElement();
-                        builder.OpenElement(54, "br");
+            builder.OpenElement(54, "br");
             builder.CloseElement();
         };
     }
@@ -762,6 +762,10 @@
         if (currentSmithingBar != null && GameState.GetPlayerBank().GetInventory().HasBarIngredients(currentSmithingBar) && GameState.GetPlayer().HasRequiredLevel(currentSmithingBar))
         {
             int maxIngredients = Math.Min(GameState.GetPlayerBank().GetInventory().GetMaxBarIngredients(currentSmithingBar), GameState.GetPlayerInventory().GetAvailableSpaces()) / currentSmithingBar.IngredientIDs.Length;
+            if(maxIngredients == 0 || (maxIngredients == 1 && currentSmithingBar.IngredientIDs.Length > 1))
+            {
+                return false;
+            }
             foreach (int id in currentSmithingBar.IngredientIDs)
             {
                 maxIngredients = WithdrawItemsFromBank(Program.itemDatabase.GetItemByID(id), maxIngredients);

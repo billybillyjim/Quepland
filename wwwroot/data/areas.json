@@ -830,7 +830,7 @@
     "areaURL": "SahotaIceFields",
     "description": "A cavern of ice that extends as far as the eye can see. Frosty creatures roam the plain, and the walls are solid ice that may be extractable.",
     "icon": "oi oi-chevron-bottom",
-    "actions": [ "Mine Ice:Ice Block", "Battle" ],
+    "actions": [ "Mine Ice:Ice Block", "Battle", "Chop Ice Trees:Ice Logs" ],
     "accessibleRegions": "Quepland,Mt Yama Mine,Climb up to the surface",
     "areaToUnlockOnArrival": "Sahota Tir",
     "region": "Caligin Commonwealth",
