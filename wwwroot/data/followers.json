@@ -72,10 +72,10 @@
     "RequiredLevels": [ "Woodcutting:75" ],
     "autoCollectSkill": "Woodcutting",
     "autoCollectLevel": 100,
-    "maxCarry": 30,
+    "maxCarry": 50,
     "autoCollectSpeed": 2000,
     "isUnlocked": false,
-    "cost": 1000000
+    "cost": 3000000
   },
   {
     "name": "Thurgood the Dwarf",

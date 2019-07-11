@@ -834,7 +834,8 @@
     "accessibleRegions": "Quepland,Mt Yama Mine,Climb up to the surface",
     "areaToUnlockOnArrival": "Sahota Tir",
     "region": "Caligin Commonwealth",
-    "monsterIDs": [ 40, 41, 42, 43, 44 ]
+    "monsterIDs": [ 40, 41, 42, 43, 44 ],
+    "npcIDs": [37]
   }
 
 
