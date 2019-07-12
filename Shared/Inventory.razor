@@ -136,7 +136,7 @@
                 builder.AddAttribute(2, "style", "background-color:aquamarine");
             }
             builder.OpenElement(3, "td");
-            builder.AddAttribute(4, "title", item.Key.ItemDescription + ", " + item.Key.itemPos);
+            builder.AddAttribute(4, "title", item.Key.ItemDescription);
             builder.AddAttribute(5, "style", "text-align:left;font-weight:bold;line-height:40px;display:flex");
             builder.OpenElement(6, "img");
             builder.AddAttribute(7, "src", "data/ItemIcons/" + item.Key.Icon + ".png");

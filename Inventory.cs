@@ -10,6 +10,7 @@ public class Inventory
     private int maxSize;
     private readonly int maxValue = int.MaxValue - 1000000;
     private int totalItems;
+    private int inventorySlotPos;
     public bool isBank;
     public Inventory(int max)
     {
@@ -232,14 +233,14 @@ public class Inventory
         {
             UpdateItemCount();
             return false;
-        }
-        item.itemPos = totalItems;     
+        }      
         if (items.TryGetValue(item, out int amount))
         {
             items[item] = Math.Min(amount + 1, maxValue);
         }
         else
         {
+            item.itemPos = inventorySlotPos;
             items[item] = 1;
         }
         UpdateItemCount();
@@ -278,7 +279,7 @@ public class Inventory
         EmptyInventory();
         foreach (KeyValuePair<GameItem, int> itemToAdd in itemsToAdd)
         {
-            itemToAdd.Key.itemPos = totalItems;
+            itemToAdd.Key.itemPos = inventorySlotPos;
             if (items.TryGetValue(itemToAdd.Key, out _))
             {
                 if(itemToAdd.Value > 0)
@@ -331,7 +332,7 @@ public class Inventory
         {
             amount = 0;
         }
-        item.itemPos = totalItems;
+        
 
         if (items.TryGetValue(item, out int current))
         {
@@ -348,6 +349,7 @@ public class Inventory
         {
             if (item.IsStackable)
             {
+                item.itemPos = inventorySlotPos;
                 items[item] = amount;
             }
             else
@@ -422,6 +424,7 @@ public class Inventory
                 //totalItems--;
                 items.Remove(item);             
             }
+            
             UpdateItemCount();
             return true;
         }
@@ -497,6 +500,7 @@ public class Inventory
     public void EmptyInventory()
     {
         totalItems = 0;
+        inventorySlotPos = 0;
         items.Clear();
     }
     public void EmptyInventoryOfUnequippedItems()
@@ -521,7 +525,8 @@ public class Inventory
     private void UpdateItemCount()
     {
         totalItems = 0;
-        foreach(KeyValuePair<GameItem, int> item in items)
+        inventorySlotPos = 0;
+        foreach (KeyValuePair<GameItem, int> item in items)
         {
             if (item.Key.IsStackable)
             {
@@ -531,6 +536,7 @@ public class Inventory
             {
                 totalItems += item.Value;
             }
+            inventorySlotPos++;
         }
     }
     public override string ToString()

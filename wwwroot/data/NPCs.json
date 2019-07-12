@@ -431,5 +431,12 @@
     "id": 63,
     "spokenText": "Killing all these chickens sure is exciting! I can't wait to attach them to my arrow shafts, I need lots of arrows to kill all these chickens!",
     "isInteractable": true
+  },
+  {
+    "name": "Toby McGurga",
+    "id": 64,
+    "spokenText": "",
+    "isInteractable": true,
+    "purchaseItemIDs": [ 128, 130, 132 ]
   }
 ]
