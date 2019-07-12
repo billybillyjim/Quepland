@@ -140,7 +140,7 @@
             builder.AddAttribute(5, "style", "text-align:left;font-weight:bold;line-height:40px;display:flex");
             builder.OpenElement(6, "img");
             builder.AddAttribute(7, "src", "data/ItemIcons/" + item.Key.Icon + ".png");
-            builder.AddAttribute(8, "style", "width:40px;opacity:0.6;color:green;float:left");
+            builder.AddAttribute(8, "style", "width:40px;height:40px;opacity:0.6;color:green;float:left");
             if (item.Key.ExperienceGained != null)
             {
                 builder.AddAttribute(9, "title", "+ " + item.Key.ExperienceGained + " exp");
@@ -151,26 +151,26 @@
             builder.OpenElement(11, "img");
 
             builder.AddAttribute(12, "src", "data/ItemIcons/Up.png");
-            builder.AddAttribute(13, "style", "width:20px;opacity:0.6;margin:1px;display:table-cell");
+            builder.AddAttribute(13, "style", "width:20px;opacity:0.6;margin:0px;display:table-cell");
             builder.AddAttribute(14, "onclick", () => MoveItemUp(item.Key));
             builder.CloseElement();
             builder.OpenElement(15, "img");
             if (item.Key.IsLocked)
             {
                 builder.AddAttribute(16, "src", "data/ItemIcons/Lock.png");
-                builder.AddAttribute(17, "style", "width:20px;opacity:0.6;margin:1px;display:table-cell");
+                builder.AddAttribute(17, "style", "width:20px;opacity:0.6;margin:0px;display:table-cell");
             }
             else
             {
                 builder.AddAttribute(16, "src", "data/ItemIcons/Unlock.png");
-                builder.AddAttribute(17, "style", "width:20px;opacity:0.6;margin:1px;display:table-cell");
+                builder.AddAttribute(17, "style", "width:20px;opacity:0.6;margin:0px;display:table-cell");
             }
             builder.AddAttribute(18, "onclick", () => ToggleLock(item.Key));
             builder.CloseElement();
             builder.OpenElement(19, "img");
 
             builder.AddAttribute(20, "src", "data/ItemIcons/Down.png");
-            builder.AddAttribute(21, "style", "width:20px;opacity:0.6;margin:1px;display:table-cell");
+            builder.AddAttribute(21, "style", "width:20px;opacity:0.6;margin:0px;display:table-cell");
             builder.AddAttribute(22, "onclick", () => MoveItemDown(item.Key));
             builder.CloseElement();
 
