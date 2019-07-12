@@ -36,7 +36,7 @@ public class GameState
     public bool safeToLoad = false;
 
     public string previousURL;
-    public string updateVersionString = "1.026a";
+    public string updateVersionString = "1.026b";
     
     public GameItem currentUsedItem;
     public GameItem currentGatherItem;
