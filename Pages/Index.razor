@@ -29,6 +29,7 @@
         <p>Item ID:<input type="number" @bind-value="@itemID" @bind-value:event="onchange" /></p>
         <p>Amount:<input type="number" @bind-value="@amount" @bind-value:event="onchange" /></p>
         <p><button class="btn btn-primary" onclick="@(() => GetItem())">Get Item</button></p>
+
         <ul id="simpleList" class="list-group" @ref="simpleList">
             <li class="list-group-item">This is <a href="http://SortableJS.github.io/Sortable/">Sortable</a></li>
             <li class="list-group-item">It works with Bootstrap...</li>
@@ -299,6 +300,10 @@ else
             string[] settings = lines[9].Split(',');
             GameState.isSplitView = bool.Parse(settings[0]);
             GameState.compactBankView = bool.Parse(settings[1]);
+            if(settings.Length > 2 && settings[2] != null)
+            {
+                GameState.expensiveItemThreshold = int.Parse(settings[2]);
+            }
         }
         if (lines.Length > 10 && lines[10] != null)
         {
@@ -467,6 +472,7 @@ else
             GameState.GetPlayer().SetMessageManager(MessageManager);
             GameState.GetPlayer().CurrentHP = 50;
             GameState.GetPlayerBank().AddItemsToCurrentTab(Program.itemDatabase.GetAllItemIDs());
+            GameState.GetPlayerBank().GetInventory().isBank = true;
             GameState.gameDataLoaded = true;
             GameState.safeToLoad = true;
         }

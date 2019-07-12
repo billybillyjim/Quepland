@@ -10,6 +10,7 @@ public class Inventory
     private int maxSize;
     private readonly int maxValue = int.MaxValue - 1000000;
     private int totalItems;
+    public bool isBank;
     public Inventory(int max)
     {
         items = new Dictionary<GameItem, int>();
@@ -83,6 +84,10 @@ public class Inventory
         else if (sortedBy == 4)
         {
             sortedItems = sortedItems.OrderBy(x => x.Key.Value).Reverse().ToList();
+        }
+        else if( sortedBy == 5)
+        {
+            sortedItems = sortedItems.OrderBy(x => x.Key.itemPos).ToList();
         }
         return sortedItems;
     }
@@ -228,6 +233,7 @@ public class Inventory
             UpdateItemCount();
             return false;
         }
+        item.itemPos = totalItems;     
         if (items.TryGetValue(item, out int amount))
         {
             items[item] = Math.Min(amount + 1, maxValue);
@@ -272,7 +278,8 @@ public class Inventory
         EmptyInventory();
         foreach (KeyValuePair<GameItem, int> itemToAdd in itemsToAdd)
         {
-            if(items.TryGetValue(itemToAdd.Key, out _))
+            itemToAdd.Key.itemPos = totalItems;
+            if (items.TryGetValue(itemToAdd.Key, out _))
             {
                 if(itemToAdd.Value > 0)
                 {
@@ -283,7 +290,7 @@ public class Inventory
             {
                 items.Add(itemToAdd.Key, itemToAdd.Value);
             }
-
+            UpdateItemCount();
         }
         UpdateItemCount();
     }
@@ -324,7 +331,9 @@ public class Inventory
         {
             amount = 0;
         }
-        if(items.TryGetValue(item, out int current))
+        item.itemPos = totalItems;
+
+        if (items.TryGetValue(item, out int current))
         {
             if (item.IsStackable)
             {
@@ -536,12 +545,13 @@ public class Inventory
             }
             if(pair.Value < 0)
             {
-                returnString += pair.Key.Id + "-" + 1 + "-" + isLocked + "/";
+                returnString += pair.Key.Id + "-" + 1 + "-" + isLocked;
             }
             else
             {
-                returnString += pair.Key.Id + "-" + pair.Value + "-" + isLocked + "/";
+                returnString += pair.Key.Id + "-" + pair.Value + "-" + isLocked;
             }
+            returnString += "/";
         }
         return returnString;
     }

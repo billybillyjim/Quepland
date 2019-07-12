@@ -9,6 +9,8 @@
 <p><button class="btn btn-primary" onclick="@(() => GameState.ToggleSplitView())">Toggle Split View</button> @GetOnOrOff(GameState.isSplitView)</p>
 <p><button class="btn btn-primary" onclick="@(() => GameState.ToggleBankStyle())">Toggle Compact Bank View</button>@GetOnOrOff(GameState.compactBankView)</p>
 
+<p>Set limit for selling confirmation:<input type="number" @bind-value="@Limit" @bind-value:event="onchange" /> Current:@GameState.expensiveItemThreshold</p>
+
 <p><button class="btn btn-primary" onclick="@(() => GenerateSaveFile())">Generate Save File</button></p>
 <textarea>@quickFixString</textarea>
 <p><button class="btn btn-primary" onclick="@(() => LoadDataFromText())">Load From Save File</button></p>
@@ -27,6 +29,16 @@
     private string savefile = "Copy the generated save to a safe place.";
     private string loadfile = "";
     private string quickFixString = "";
+    public int Limit {
+        get
+        {
+            return GameState.expensiveItemThreshold;
+        }
+        set
+        {
+            GameState.expensiveItemThreshold = Math.Max(value, 0);
+        }
+    }
     private bool GenerateSaveFile()
     {
         savefile = GetSaveDataString();

@@ -58,7 +58,7 @@ public static class Extensions
                     locked = int.Parse(i[2]);
                 }
                 GameItem item = itemDB.GetItemByID(id);
-                if(locked == 1)
+                if (locked == 1)
                 {
                     item.IsLocked = true;
                 }

@@ -36,7 +36,7 @@ public class GameState
     public bool safeToLoad = false;
 
     public string previousURL;
-    public string updateVersionString = "1.025a";
+    public string updateVersionString = "1.026a";
     
     public GameItem currentUsedItem;
     public GameItem currentGatherItem;
@@ -50,6 +50,8 @@ public class GameState
     public int buffSecondsLeft;
 
     public int bankSortStyle;
+
+    public int expensiveItemThreshold = 10000;
 
     private Player player = new Player();
 
@@ -264,6 +266,8 @@ public class GameState
             data += isSplitView.ToString();
             data += ",";
             data += compactBankView.ToString();
+            data += ",";
+            data += expensiveItemThreshold;
             pos++;
             //NPC data 10
             data += "#";

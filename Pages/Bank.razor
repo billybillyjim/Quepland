@@ -2,6 +2,7 @@
 @inject HttpClient Http
 @inject GameState GameState
 @inject MessageManager MessageManager
+@inject IJSRuntime JSRuntime
 
 @implements IDisposable
 
@@ -42,7 +43,7 @@
     <button class="btn btn-primary" style="margin:10px" onclick="@(() => ChangeTabName(newTabName))">Change Name</button>
     <button class="btn btn-primary" style="margin:10px" onclick="@(() => DeleteTab())">Delete Tab</button>
 }
-else if(GameState.GetPlayerBank().activeTab != GameState.GetPlayerBank().tabs[0])
+else if (GameState.GetPlayerBank().activeTab != GameState.GetPlayerBank().tabs[0])
 {
     <button class="btn btn-primary" style="margin:10px" onclick="@(() => ToggleAddingItemsToTab())">Modify Tab</button>
 
@@ -100,8 +101,8 @@ else if(GameState.GetPlayerBank().activeTab != GameState.GetPlayerBank().tabs[0]
                 {
                     //If the search string is null or empty, or the search string contains characters in the item's name.
                     @if ((((searchString == null || searchString == "") || item.Key.ItemName.ToLower().Contains(searchString.ToLower())) &&
-                 //If the tab is set to all and the tab contains that item id
-                 ((GameState.GetPlayerBank().activeTab.Name == "All" || GameState.GetPlayerBank().activeTab.itemIDs.Contains(item.Key.Id)) || addingItemsToTab)))
+                //If the tab is set to all and the tab contains that item id
+                ((GameState.GetPlayerBank().activeTab.Name == "All" || GameState.GetPlayerBank().activeTab.itemIDs.Contains(item.Key.Id)) || addingItemsToTab)))
                     //If the player is adding items to the tab, all items are visible.
 
                     {
@@ -113,7 +114,7 @@ else if(GameState.GetPlayerBank().activeTab != GameState.GetPlayerBank().tabs[0]
                             }
                             @if (!addingItemsToTab)
                             {
-                                <td style="padding:.2rem" align="right">@item.Value</td>
+                                <td style="padding:.2rem" align="right" title="Worth @(((item.Key.Value / 2f) * item.Value) + " (" + (item.Key.Value / 2f)) each)">@item.Value</td>
                             }
 
                             @if (GameState.compactBankView && !addingItemsToTab)
@@ -251,7 +252,7 @@ else if(GameState.GetPlayerBank().activeTab != GameState.GetPlayerBank().tabs[0]
     }
     private void CreateNewTab(string newName)
     {
-         if (GameState.GetPlayerBank().NameIsValid(newName))
+        if (GameState.GetPlayerBank().NameIsValid(newName))
         {
             GameState.GetPlayerBank().tabs.Add(new BankTab(newName));
         }
@@ -259,7 +260,7 @@ else if(GameState.GetPlayerBank().activeTab != GameState.GetPlayerBank().tabs[0]
         {
             MessageManager.AddMessage("You already have a tab with that name.");
         }
-        
+
         creatingNewTab = false;
     }
     private void SetActiveTab(string tabName)
@@ -355,6 +356,7 @@ else if(GameState.GetPlayerBank().activeTab != GameState.GetPlayerBank().tabs[0]
         this.StateHasChanged();
 
     }
+
     void IDisposable.Dispose()
     {
         GameState.canBank = false;

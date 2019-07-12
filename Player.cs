@@ -364,21 +364,25 @@ public class Player
 
             if (action.Contains("Knife"))
             {
-                baseDamage += deft * 3;
+                baseDamage += deft * 2;
+                baseDamage += GetSkill("Knifesmanship").GetSkillLevel();
             }
             else if (action.Contains("Sword"))
             {
-                baseDamage += str * 2;
+                baseDamage += str;
                 baseDamage += deft * 2;
+                baseDamage += GetSkill("Swordsmanship").GetSkillLevel();
             }
             else if (action.Contains("Axe"))
             {
                 baseDamage += str * 2;
-                baseDamage += deft;
+                baseDamage += deft / 2f;
+                baseDamage += GetSkill("Axemanship").GetSkillLevel() * 2;
             }
             else if (action.Contains("Hammer"))
             {
-                baseDamage += str * 4;
+                baseDamage += str * 3;
+                baseDamage += GetSkill("Hammermanship").GetSkillLevel() * 2;
             }
             else if (action.Contains("Archery"))
             {
@@ -420,7 +424,7 @@ public class Player
             }
             else
             {
-                total += (item.Damage * 2);
+                total += (item.Damage * 4);
             }          
         }
         return total;

@@ -91,6 +91,7 @@ app, .main, .col-md-3 {
 .buddy-top {
     border-bottom: none;
     border-top: 2px solid;
+    width:100%
 }
 
 .buddy-mid {
@@ -99,6 +100,7 @@ app, .main, .col-md-3 {
     border-top-color: lightgray;
     border-bottom-color: lightgray;
     column-span:all;
+    width:100%
 }
 .bank-compact{
    

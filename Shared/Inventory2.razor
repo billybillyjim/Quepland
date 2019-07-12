@@ -4,143 +4,57 @@
 @inject IJSRuntime JSRuntime
 @using System.Threading
 
-@LoadInventory()
+
+
+<div class="table-hover">
+    <h1>Inventory</h1>
+    <table style="width:100%">
+        <thead>
+        </thead>
+        <tbody id="inventoryRef" @ref="inventoryRef">
+            @foreach (KeyValuePair<GameItem, int> pair in GameState.GetPlayerInventory().GetItems())
+            {
+                @if (pair.Key.IsEquipped)
+                {
+                    <tr style="background-color:aquamarine">                    
+                            @LoadItem(pair)
+
+                    </tr>
+
+                }
+                else
+                {
+                    <tr>
+                        @LoadItem(pair)
+                    </tr>
+                }
+
+
+            }
+        </tbody>
+    </table>
+</div>
 
 @functions{
 
     private GameItem currentUsedItem;
-    private int confirmSellItemID;
-    private bool trySellingExpensiveItem = false;
     private int[,] usableIDs;
+    private ElementRef inventoryRef;
 
     public int sellAmount = 20;
 
-    private RenderFragment LoadInventory()
-    {
-        return builder =>
-        {
-            builder.OpenElement(0, "div");
-            builder.AddAttribute(1, "class", "table-hover");
-
-            builder.OpenElement(2, "h1");
-            builder.AddContent(3, "Inventory");
-            builder.CloseElement();
-            if (!GameState.isSplitView)
-            {
-                builder.OpenElement(4, "button");
-                builder.AddAttribute(5, "class", "btn btn-primary");
-                builder.AddAttribute(5, "style", "margin-bottom:10px");
-                builder.AddAttribute(6, "onclick", () => GameState.ToggleActiveView());
-                builder.AddContent(7, "Show Skills");
-                builder.CloseElement();
-            }
-            builder.OpenElement(8, "p");
-            if (GameState.GetPlayerInventory().GetAvailableSpaces() == 0)
-            {
-                builder.AddAttribute(8, "style", "color:firebrick");
-            }
-
-            builder.AddContent(9, GameState.GetPlayerInventory().GetFreeSpacesString());
-            builder.CloseElement();
-
-            if (GameState.GetPlayer().GetSkill("HP") != null)
-            {
-                builder.OpenElement(10, "p");
-                builder.AddContent(11, "HP:" + GameState.GetPlayer().CurrentHP + "/" + GameState.GetPlayer().MaxHP);
-                builder.CloseElement();
-            }
-
-
-            if (GameState.canSell)
-            {
-                builder.OpenElement(12, "p");
-                builder.AddContent(13, "Sell X: ");
-                builder.OpenElement(14, "input");
-                builder.AddAttribute(15, "value", Microsoft.AspNetCore.Components.BindMethods.GetValue(sellAmount));
-                builder.AddAttribute(16, "onchange", Microsoft.AspNetCore.Components.EventCallback.Factory.CreateBinder(this, __value => sellAmount = __value, sellAmount));
-                builder.CloseElement();
-                builder.CloseElement();
-            }
-
-
-            builder.OpenElement(17, "p");
-            if (GameState.GetPlayer().activeFollower == null)
-            {
-                builder.AddContent(18, "No current follower");
-            }
-            else
-            {
-                builder.AddContent(19, GameState.GetPlayer().activeFollower.ToString());
-            }
-
-            builder.CloseElement();
-            builder.OpenElement(20, "p");
-            if (GameState.buffSecondsLeft > 0)
-            {
-                builder.AddContent(21, GameState.currentBuffItem.BuffedSkill + " +" + GameState.currentBuffItem.BuffAmount + ", " + GameState.buffSecondsLeft);
-            }
-            else
-            {
-                builder.AddContent(21, "Current Buff:None");
-            }
-            builder.CloseElement();
-
-            builder.OpenElement(22, "table");
-            builder.AddAttribute(23, "style", "width:100%;");
-            builder.OpenElement(24, "thead");
-            builder.OpenElement(25, "tr");
-            builder.OpenElement(26, "th");
-            builder.AddAttribute(27, "align", "left");
-            builder.AddContent(28, "Item");
-            builder.CloseElement();
-            builder.OpenElement(29, "th");
-
-            builder.CloseElement();
-            builder.OpenElement(30, "th");
-
-            builder.CloseElement();
-            builder.OpenElement(31, "th");
-            builder.AddAttribute(32, "style", "text-align:right");
-            builder.AddContent(33, "Amount");
-            builder.CloseElement();
-
-            builder.CloseElement();
-            builder.CloseElement();
-
-            builder.OpenElement(34, "tbody");
-            builder.AddAttribute(35, "id", "inventoryRef");
-            builder.AddAttribute(36, "ref", "inventoryRef");
-            if (GameState.GetPlayerInventory() != null)
-            {
-                foreach (KeyValuePair<GameItem, int> item in GameState.GetPlayerInventory().GetItemsSorted(5))
-                {
-
-                    builder.AddContent(37, LoadItem(item));
-
-                }
-
-            }
-            builder.CloseElement();
-            builder.CloseElement();
-            builder.CloseElement();
-        };
-    }
     private RenderFragment LoadItem(KeyValuePair<GameItem, int> item)
     {
         return builder =>
         {
-            builder.OpenElement(0, "tr");
+            builder.OpenElement(0, "div");
             builder.AddAttribute(1, "class", "buddy-top");
-            if (item.Key.IsEquipped)
-            {
-                builder.AddAttribute(2, "style", "background-color:aquamarine");
-            }
-            builder.OpenElement(3, "td");
-            builder.AddAttribute(4, "title", item.Key.ItemDescription + ", " + item.Key.itemPos);
-            builder.AddAttribute(5, "style", "text-align:left;font-weight:bold;line-height:40px;display:flex");
+            builder.OpenElement(3, "div");
+            builder.AddAttribute(4, "title", item.Key.ItemDescription + ", " + item.Key.LastAddedToInventory);
+            builder.AddAttribute(5, "style", "text-align:left;font-weight:bold;");
             builder.OpenElement(6, "img");
             builder.AddAttribute(7, "src", "data/ItemIcons/" + item.Key.Icon + ".png");
-            builder.AddAttribute(8, "style", "width:40px;opacity:0.6;color:green;float:left");
+            builder.AddAttribute(8, "style", "width:40px;opacity:0.6;color:green");
             if (item.Key.ExperienceGained != null)
             {
                 builder.AddAttribute(9, "title", "+ " + item.Key.ExperienceGained + " exp");
@@ -148,95 +62,83 @@
 
             builder.CloseElement();
             builder.OpenElement(10, "div");
-            builder.OpenElement(11, "img");
+             builder.OpenElement(11, "img");
 
-            builder.AddAttribute(12, "src", "data/ItemIcons/Up.png");
-            builder.AddAttribute(13, "style", "width:20px;opacity:0.6;margin:1px;display:table-cell");
-            builder.AddAttribute(14, "onclick", () => MoveItemUp(item.Key));
+                builder.AddAttribute(12, "src", "data/ItemIcons/Up.png");
+                builder.AddAttribute(13, "style", "width:10px;opacity:0.6;margin:1px");
             builder.CloseElement();
-            builder.OpenElement(15, "img");
+            builder.OpenElement(14, "img");
             if (item.Key.IsLocked)
             {
-                builder.AddAttribute(16, "src", "data/ItemIcons/Lock.png");
-                builder.AddAttribute(17, "style", "width:20px;opacity:0.6;margin:1px;display:table-cell");
+                builder.AddAttribute(15, "src", "data/ItemIcons/Lock.png");
+                builder.AddAttribute(16, "style", "width:20px;opacity:0.6;margin:2px");
             }
             else
             {
-                builder.AddAttribute(16, "src", "data/ItemIcons/Unlock.png");
-                builder.AddAttribute(17, "style", "width:20px;opacity:0.6;margin:1px;display:table-cell");
+                builder.AddAttribute(17, "src", "data/ItemIcons/Unlock.png");
+                builder.AddAttribute(18, "style", "width:20px;opacity:0.6;margin:2px");
             }
-            builder.AddAttribute(18, "onclick", () => ToggleLock(item.Key));
-            builder.CloseElement();
-            builder.OpenElement(19, "img");
+                         builder.OpenElement(19, "img");
 
-            builder.AddAttribute(20, "src", "data/ItemIcons/Down.png");
-            builder.AddAttribute(21, "style", "width:20px;opacity:0.6;margin:1px;display:table-cell");
-            builder.AddAttribute(22, "onclick", () => MoveItemDown(item.Key));
+                builder.AddAttribute(20, "src", "data/ItemIcons/Down.png");
+                builder.AddAttribute(21, "style", "width:10px;opacity:0.6;margin:1px");
+            builder.CloseElement();
             builder.CloseElement();
 
-
+            builder.AddAttribute(22, "onclick", () => ToggleLock(item.Key));
             builder.CloseElement();
             builder.AddContent(23, item.Key.ItemName);
-            builder.CloseElement();
-            builder.OpenElement(24, "td");
-            builder.CloseElement();
-            builder.OpenElement(25, "td");
-            builder.CloseElement();
-            builder.OpenElement(26, "td");
-            builder.AddAttribute(27, "style", "text-align:right");
-            builder.OpenElement(28, "font");
-            builder.AddAttribute(29, "size", "4");
+            builder.OpenElement(24, "div");
+            builder.AddAttribute(25, "style", "text-align:right;float:right;position:relative;line-height:40px");
+            builder.OpenElement(26, "font");
+            builder.AddAttribute(27, "size", "4");
             if (item.Value == 1)
             {
-                builder.AddAttribute(30, "title", "Worth " + ((item.Key.Value / 2f) * item.Value));
+                builder.AddAttribute(28, "title", "Worth " + ((item.Key.Value / 2f) * item.Value));
             }
             else
             {
-                builder.AddAttribute(30, "title", "Worth " + ((item.Key.Value / 2f) * item.Value) + "(" + (item.Key.Value / 2f) + " each)");
+                builder.AddAttribute(28, "title", "Worth " + ((item.Key.Value / 2f) * item.Value) + "(" + (item.Key.Value / 2f) + " each)");
             }
 
             if (item.Key.IsStackable)
             {
-                builder.AddContent(31, "1 Stack of " + item.Value);
+                builder.AddContent(29, "1 Stack of " + item.Value);
             }
             else
             {
 
-                builder.AddContent(31, item.Value);
+                builder.AddContent(29, item.Value);
             }
+            builder.CloseElement();
             builder.CloseElement();
             builder.CloseElement();
             builder.CloseElement();
             if (item.Key.IsUsable)
             {
 
-                builder.OpenElement(32, "tr");
-                if (item.Key.IsEquipped)
-                {
-                    builder.AddAttribute(33, "style", "background-color:aquamarine");
-                }
+                builder.OpenElement(30, "div");
+                builder.AddAttribute(31, "class", "buddy-mid");
 
-                builder.AddAttribute(34, "class", "buddy-mid");
-
-                builder.OpenElement(35, "td");
-                builder.AddAttribute(36, "colspan", "4");
-                builder.AddAttribute(37, "style", "text-align:right");
-                builder.OpenElement(38, "button");
-                builder.AddAttribute(39, "class", "btn btn-primary");
+                builder.OpenElement(32, "td");
+                builder.AddAttribute(33, "colspan", "4");
+                builder.AddAttribute(34, "style", "text-align:right;float:right");
+                builder.OpenElement(35, "button");
+                builder.AddAttribute(36, "class", "btn btn-primary");
                 if (GameState.CanLeave() == false)
                 {
-                    builder.AddAttribute(40, "disabled", true);
-                    builder.AddAttribute(41, "title", "You can't do that while you are doing what you're doing.");
+                    builder.AddAttribute(37, "disabled", true);
+                    builder.AddAttribute(38, "title", "You can't do that while you are doing what you're doing.");
                 }
                 if (!GameState.isUsing)
                 {
-                    builder.AddAttribute(42, "onclick", () => Use(item.Key));
-                    builder.AddContent(43, "Use " + item.Key.ItemName);
+                    builder.AddAttribute(39, "onclick", () => Use(item.Key));
+                    builder.AddContent(40, "Use " + item.Key.ItemName);
                 }
                 else
                 {
-                    builder.AddAttribute(44, "onclick", () => CancelUse());
-                    builder.AddContent(45, "Cancel");
+                    builder.AddAttribute(41, "onclick", () => CancelUse());
+                    builder.AddContent(42, "Cancel");
                 }
                 builder.CloseElement();
                 builder.CloseElement();
@@ -251,34 +153,34 @@
                 {
                     if (usableIDs[i, 0] == item.Key.Id)
                     {
-                        builder.AddContent(46, UseButton(i, item.Key));
+                        builder.AddContent(43, UseButton(i, item.Key));
                     }
                 }
             }
             if (item.Key.IsUnpackable)
             {
-                builder.AddContent(47, UnpackButton(item));
+                builder.AddContent(44, UnpackButton(item));
             }
             if (item.Key.IsEdible)
             {
-                builder.AddContent(48, EatButton(item.Key));
+                builder.AddContent(45, EatButton(item.Key));
             }
             if (item.Key.IsEquipable)
             {
-                builder.AddContent(49, EquipButtons(item));
+                builder.AddContent(46, EquipButtons(item));
             }
             if (item.Key.IsArrow)
             {
-                builder.AddContent(50, ArrowInfo(item));
+                builder.AddContent(47, ArrowInfo(item));
             }
 
             if (GameState.canBank)
             {
-                builder.AddContent(51, BankButtons(item));
+                builder.AddContent(48, BankButtons(item));
             }
             if (GameState.canSell && item.Key.Id != 0)
             {
-                builder.AddContent(52, SellButtons(item));
+                builder.AddContent(49, SellButtons(item));
             }
 
         };
@@ -287,7 +189,7 @@
     {
         return builder =>
         {
-            builder.OpenElement(0, "tr");
+            builder.OpenElement(0, "div");
             builder.AddAttribute(1, "class", "buddy-mid");
 
             builder.OpenElement(2, "td");
@@ -307,19 +209,12 @@
     {
         return builder =>
         {
-            builder.OpenElement(0, "tr");
-            if (item.Key.IsEquipped)
-            {
-                builder.AddAttribute(1, "style", "background-color:aquamarine");
-            }
-
+            builder.OpenElement(0, "div");
             builder.AddAttribute(2, "class", "buddy-mid");
-
-
 
             builder.OpenElement(4, "td");
             builder.AddAttribute(5, "colspan", "4");
-            builder.AddAttribute(6, "style", "text-align:right");
+            builder.AddAttribute(6, "style", "text-align:right; float:right");
             builder.OpenElement(7, "button");
             builder.AddAttribute(8, "class", "btn btn-primary");
             builder.AddAttribute(9, "onclick", () => UnpackItem(item.Key));
@@ -344,11 +239,10 @@
     {
         return builder =>
         {
-            builder.OpenElement(0, "tr");
-            if (item.Key.IsEquipped)
-            {
-                builder.AddAttribute(1, "style", "background-color:aquamarine");
-            }
+            builder.OpenElement(0, "div");
+
+            builder.AddAttribute(1, "style", "width:100%");
+
             if (item.Key.AttackSpeed != 0)
             {
                 builder.AddAttribute(2, "title", "DPS: " + (float)item.Key.Damage / (item.Key.AttackSpeed / 1000f));
@@ -359,6 +253,7 @@
 
             builder.OpenElement(4, "td");
             builder.AddAttribute(4, "colspan", "3");
+            builder.AddAttribute(4, "style", "float:left;position:relative;top:6px");
             string infoString = "";
             if (item.Key.Damage > 0)
             {
@@ -382,8 +277,9 @@
             }
             builder.AddContent(4, infoString);
             builder.CloseElement();
-            builder.OpenElement(5, "td");
-            builder.AddAttribute(6, "style", "text-align:right");
+            builder.OpenElement(5, "div");
+            builder.AddAttribute(6, "style", "text-align:right; float:right");
+            builder.AddAttribute(7, "alight", "right");
             builder.OpenElement(7, "button");
             builder.AddAttribute(8, "class", "btn btn-primary");
             if (item.Key.IsEquipped)
@@ -412,23 +308,20 @@
     {
         return builder =>
         {
-            builder.OpenElement(0, "tr");
+            builder.OpenElement(0, "div");
             builder.AddAttribute(1, "class", "buddy-mid");
-            if (item.Key.IsEquipped)
-            {
-                builder.AddAttribute(2, "style", "background-color:aquamarine");
-            }
-            builder.OpenElement(3, "td");
+            builder.OpenElement(3, "div");
+            builder.AddAttribute(4, "style", "text-align:left;float:left;top:10px;position:relative");
             builder.AddContent(4, "Deposit");
             builder.CloseElement();
             //builder.OpenElement(5, "td");
             //builder.CloseElement();
-            builder.OpenElement(5, "td");
+            builder.OpenElement(5, "div");
             builder.AddAttribute(6, "style", "text-align:right");
             builder.AddAttribute(6, "colspan", "3");
             builder.OpenElement(7, "button");
             builder.AddAttribute(8, "class", "btn btn-primary");
-            builder.AddAttribute(9, "style", "margin:2px");
+            builder.AddAttribute(9, "style", "margin:2px;float:right");
             builder.AddAttribute(10, "onclick", () => Deposit(item, 1));
             if (item.Key.IsLocked)
             {
@@ -442,7 +335,7 @@
             //builder.AddAttribute(12, "style", "text-align:right");
             builder.OpenElement(14, "button");
             builder.AddAttribute(15, "class", "btn btn-primary");
-            builder.AddAttribute(16, "style", "margin:2px");
+            builder.AddAttribute(16, "style", "margin:2px;float:right");
             builder.AddAttribute(17, "onclick", () => Deposit(item, 5));
             if (item.Key.IsLocked)
             {
@@ -456,7 +349,7 @@
             // builder.AddAttribute(18, "style", "text-align:right");
             builder.OpenElement(21, "button");
             builder.AddAttribute(22, "class", "btn btn-primary");
-            builder.AddAttribute(23, "style", "margin:2px");
+            builder.AddAttribute(23, "style", "margin:2px;float:right");
             builder.AddAttribute(24, "onclick", () => Deposit(item, int.MaxValue));
             if (item.Key.IsLocked)
             {
@@ -474,40 +367,21 @@
     {
         return builder =>
         {
-            builder.OpenElement(0, "tr");
+            builder.OpenElement(0, "div");
             builder.AddAttribute(1, "class", "buddy-mid");
-            if (item.Key.IsEquipped)
-            {
-                builder.AddAttribute(2, "style", "background-color:aquamarine");
-            }
 
-            builder.OpenElement(3, "td");
-            builder.AddAttribute(3, "style", "width:50%");
-            if(item.Key.Id == confirmSellItemID && trySellingExpensiveItem)
-            {
-                builder.AddContent(4, "Confirm sale for " + Math.Round(item.Key.Value / 2f) + " each");
-            }
-            else
-            {
-                builder.AddContent(4, "Sell for " + Math.Round(item.Key.Value / 2f) + " each");
-            }
-            
+            builder.OpenElement(2, "td");
+            builder.AddAttribute(3, "style", "float:left;line-height:40px");
+            builder.AddContent(4, "Sell for " + Math.Round(item.Key.Value / 2f) + " each");
 
             builder.CloseElement();
             builder.OpenElement(5, "td");
             builder.AddAttribute(6, "colspan", "4");
-            builder.AddAttribute(8, "style", "text-align:right");
+            builder.AddAttribute(8, "style", "text-align:right; float:right");
             builder.OpenElement(9, "button");
             builder.AddAttribute(10, "class", "btn btn-primary");
-            builder.AddAttribute(11, "style", "margin:3px");
-            if(item.Key.Value < GameState.expensiveItemThreshold || trySellingExpensiveItem == true)
-            {
-                builder.AddAttribute(12, "onclick", () => Sell(item, 1));
-            }
-            else
-            {
-                builder.AddAttribute(12, "onclick", () => TrySell(item, 1));
-            }
+            builder.AddAttribute(11, "style", "margin:3px;");
+            builder.AddAttribute(12, "onclick", () => Sell(item, 1));
             //If the player has a full inventory and no place for coins, they can't sell part of a stack.
             if (item.Key.IsStackable && item.Value > 1 && GameState.GetPlayerInventory().GetAvailableSpaces() == 0 && GameState.GetPlayerInventory().GetCoins() == 0)
             {
@@ -524,14 +398,7 @@
             builder.OpenElement(16, "button");
             builder.AddAttribute(17, "class", "btn btn-primary");
             builder.AddAttribute(18, "style", "margin:3px");
-            if(item.Key.Value < GameState.expensiveItemThreshold || trySellingExpensiveItem == true)
-            {
-                builder.AddAttribute(19, "onclick", () => Sell(item, 5));
-            }
-            else
-            {
-                builder.AddAttribute(19, "onclick", () => TrySell(item, 5));
-            }
+            builder.AddAttribute(19, "onclick", () => Sell(item, 5));
             //If the player has a full inventory and no place for coins, they can't sell part of a stack.
             if (item.Key.IsStackable && item.Value > 5 && GameState.GetPlayerInventory().GetAvailableSpaces() == 0 && GameState.GetPlayerInventory().GetCoins() == 0)
             {
@@ -548,14 +415,7 @@
             builder.OpenElement(23, "button");
             builder.AddAttribute(24, "class", "btn btn-primary");
             builder.AddAttribute(25, "style", "margin:3px");
-            if(item.Key.Value < GameState.expensiveItemThreshold || trySellingExpensiveItem == true)
-            {
-                builder.AddAttribute(26, "onclick", () => Sell(item, sellAmount));
-            }
-            else
-            {
-                builder.AddAttribute(26, "onclick", () => TrySell(item, sellAmount));
-            }
+            builder.AddAttribute(26, "onclick", () => Sell(item, sellAmount));
             //If the player has a full inventory and no place for coins, they can't sell part of a stack.
             if ((item.Key.IsStackable && item.Value > sellAmount && GameState.GetPlayerInventory().GetAvailableSpaces() == 0 && GameState.GetPlayerInventory().GetCoins() == 0) ||
                     sellAmount < 0)
@@ -581,14 +441,7 @@
             builder.OpenElement(31, "button");
             builder.AddAttribute(32, "class", "btn btn-primary");
             builder.AddAttribute(33, "style", "margin:3px");
-            if(item.Key.Value < GameState.expensiveItemThreshold || trySellingExpensiveItem == true)
-            {
-                builder.AddAttribute(34, "onclick", () => Sell(item, int.MaxValue));
-            }
-            else
-            {
-                builder.AddAttribute(34, "onclick", () => TrySell(item, int.MaxValue));
-            }
+            builder.AddAttribute(34, "onclick", () => Sell(item, int.MaxValue));
             if (item.Key.IsLocked)
             {
                 builder.AddAttribute(35, "disabled", true);
@@ -615,11 +468,11 @@
                     spacesRequired = 0;
                 }
             }
-            builder.OpenElement(0, "tr");
+            builder.OpenElement(0, "div");
             builder.AddAttribute(0, "class", "buddy-mid");
             builder.OpenElement(1, "td");
             builder.AddAttribute(2, "colspan", "4");
-            builder.AddAttribute(3, "align", "right");
+            builder.AddAttribute(3, "style", "float:right");
             builder.OpenElement(4, "button");
             builder.AddAttribute(5, "class", "btn btn-primary");
             builder.AddAttribute(6, "onclick", () => Create(item, i));
@@ -660,12 +513,12 @@
     {
         return builder =>
         {
-            builder.OpenElement(0, "tr");
+            builder.OpenElement(0, "div");
             builder.AddAttribute(0, "class", "buddy-mid");
 
             builder.OpenElement(1, "td");
             builder.AddAttribute(2, "colspan", "4");
-            builder.AddAttribute(3, "align", "right");
+            builder.AddAttribute(3, "style", "float:right");
             builder.OpenElement(4, "button");
             builder.AddAttribute(5, "class", "btn btn-primary");
             builder.AddAttribute(6, "onclick", () => Eat(item));
@@ -708,8 +561,6 @@
     {
         CancelUse();
         GameState.safeToSave = false;
-                trySellingExpensiveItem = false;
-        confirmSellItemID = -1;
         if (amount > item.Value)
         {
             amount = item.Value;
@@ -726,13 +577,6 @@
         GameState.GetPlayerInventory().AddMultipleOfItem(Program.itemDatabase.GetGold(), (int)((item.Key.Value * amount) / 2d));
         GameState.safeToSave = true;
         GameState.UpdateState();
-        return "";
-    }
-    private string TrySell(KeyValuePair<GameItem, int> item, int amount)
-    {
-        trySellingExpensiveItem = true;
-        confirmSellItemID = item.Key.Id;
-        StateHasChanged();
         return "";
     }
     public void ToggleLock(GameItem item)
@@ -925,40 +769,26 @@
             StateHasChanged();
         }
     }
-    private void MoveItemUp(GameItem item)
+    public async void MakeSortable()
     {
-        foreach(KeyValuePair<GameItem, int> pair in GameState.GetPlayerInventory().GetItems())
-        {
-            if(pair.Key.itemPos == item.itemPos - 1)
-            {
-                pair.Key.itemPos++;
-                item.itemPos--;
-                GameState.UpdateState();
-                StateHasChanged();
-                return;
-            }
-        }
-    }
-    private void MoveItemDown(GameItem item)
-    {
-        foreach(KeyValuePair<GameItem, int> pair in GameState.GetPlayerInventory().GetItems())
-        {
-            if(pair.Key.itemPos == item.itemPos + 1)
-            {
-                pair.Key.itemPos--;
-                item.itemPos++;
-                GameState.UpdateState();
-                StateHasChanged();
-                return;
-            }
-        }
+        //string returnString = await JSRuntime.InvokeAsync<string>("kongregateFunctions.getUsername");
+        await JSRuntime.InvokeAsync<object>("kongregateFunctions.createSortableList", inventoryRef);
+        Console.WriteLine("nothing");
 
+
+    }
+    void TestOnDrag(UIDragEventArgs uIDragEvent)
+    {
+        Console.WriteLine(uIDragEvent.DataTransfer.Items[0].Kind);
     }
     protected override void OnInit()
     {
         GameState.StateChanged += OnInventoryStateChanged;
     }
-
+    protected override void OnAfterRender()
+    {
+        //MakeSortable();
+    }
     public void Dispose()
     {
         GameState.StateChanged -= OnInventoryStateChanged;

@@ -58,7 +58,8 @@ public class GameItem
 
     [DefaultValue("Unknown.png")]
     public string Icon { get; set; }
-
+    public DateTime LastAddedToInventory { get; set; }
+    public int itemPos { get; set; }
     public override string ToString()
     {
         return ItemName;
