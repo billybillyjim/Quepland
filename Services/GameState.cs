@@ -36,7 +36,7 @@ public class GameState
     public bool safeToLoad = false;
 
     public string previousURL;
-    public string updateVersionString = "1.026b";
+    public string updateVersionString = "1.027a";
     
     public GameItem currentUsedItem;
     public GameItem currentGatherItem;
@@ -82,6 +82,8 @@ public class GameState
 
     //Navbar Timer
     public Timer autoSaveTimer;
+    public int saveToPlayFab = 0;
+    public int saveToPlayFabEvery = 30;
 
     private SimpleAES Encryptor = new SimpleAES();
 
@@ -212,7 +214,7 @@ public class GameState
         inventoryIsActiveView = !inventoryIsActiveView;
         UpdateState();
     }
-    public string GetSaveString(AreaManager areaManager, FollowerManager followerManager, NPCManager npcManager, BuildingManager buildingManager)
+    public string GetSaveStringEncrypted(AreaManager areaManager, FollowerManager followerManager, NPCManager npcManager, BuildingManager buildingManager, bool encrypt)
     {
         int pos = 0;
         string data = "";
@@ -308,10 +310,15 @@ public class GameState
             data += huntingAreaID + ",";
             data += huntingStartTime.ToString() + ",";
             data += huntingEndTime.ToString();
+            pos++;
             //Bank Tabs 15
             data += "#";
             data += GetPlayerBank().GetTabsString();
-            data = Encryptor.EncryptToString(data);
+            if (encrypt)
+            {
+                data = Encryptor.EncryptToString(data);
+            }
+            
             pos++;
         }
         catch
@@ -319,5 +326,9 @@ public class GameState
             data = "Failed to generate save file. Please contact the developer to let him know he messed up. (Error line:" + pos + ")";
         }
         return data;
+    }
+    public string GetSaveString(AreaManager areaManager, FollowerManager followerManager, NPCManager npcManager, BuildingManager buildingManager)
+    {
+        return GetSaveStringEncrypted(areaManager, followerManager, npcManager, buildingManager, true);
     }
 }

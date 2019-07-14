@@ -54,7 +54,7 @@
     "experienceGained": 250,
     "hp": 100,
     "weakness": "Axemanship",
-    "strength": "Hamermanship",
+    "strength": "Hammermanship",
     "damage": 18,
     "armor": 7,
     "attackSpeed": 6,
@@ -767,7 +767,7 @@
       [ 48, 10 ]
     ]
   },
-   {
+  {
     "name": "Ice Knight",
     "id": 40,
     "level": 18,
@@ -870,6 +870,52 @@
       [ 101, 100 ],
       [ 102, 50 ],
       [ 402, 50 ]
+    ]
+  },
+  {
+    "name": "Baobhan Sith",
+    "id": 45,
+    "level": 7,
+    "experienceGained": 250,
+    "hp": 2000,
+    "weakness": "Axemanship",
+    "strength": "Swordsmanship",
+    "damage": 125,
+    "armor": 20,
+    "attackSpeed": 2,
+    "alwaysDrops": [ 420 ],
+    "dropTable": [
+      [ 62, 100 ],
+      [ 63, 100 ],
+      [ 64, 100 ],
+      [ 65, 100 ],
+      [ 321, 50 ],
+      [ 322, 50 ],
+      [ 409, 150 ]
+    ],
+    "statusEffect": "Drain"
+  },
+  {
+    "name": "Bandit King",
+    "id": 46,
+    "level": 65,
+    "experienceGained": 250,
+    "hp": 5300,
+    "weakness": "Swordsmanship",
+    "strength": "Archery",
+    "damage": 45,
+    "armor": 50,
+    "attackSpeed": 3,
+    "alwaysDrops": [ 229 ],
+    "dropTable": [
+      [ 226, 200 ],
+      [ 227, 100 ],
+      [ 228, 300 ],
+      [ 229, 200 ],
+      [ 230, 100 ],
+      [ 238, 20 ],
+      [ 290, 20 ],
+      [ 407, 10 ]
     ]
   }
 ]

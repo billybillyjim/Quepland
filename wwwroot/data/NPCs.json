@@ -435,8 +435,22 @@
   {
     "name": "Toby McGurga",
     "id": 64,
-    "spokenText": "",
+    "spokenText": "Are you interested in sharpening a sword in my whetstone? That's fine by me, but you'll have to do something in return. Bring me 1000 teeth from baobhan siths and I'll let you sharpen a sword on it.",
     "isInteractable": true,
-    "purchaseItemIDs": [ 128, 130, 132 ]
+    "purchaseItemIDs": [ 408, 410, 412, 413,414,415,416,417,418,419 ],
+    "itemPaymentIDs": [
+      [ 409, 407 ],
+      [ 409, 35 ],
+      [ 409, 255 ],
+      [ 409, 271 ],
+      [ 409, 279 ],
+      [ 409, 280 ],
+      [ 409, 281 ],
+      [ 409, 282 ],
+      [ 409, 283 ],
+      [ 409, 323 ]
+    ],
+    "specialCosts": [ 1000, 1 ],
+    "hasSpecialCosts": true
   }
 ]

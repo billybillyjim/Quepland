@@ -6,7 +6,7 @@
         // Proceed with loading your game...
 
         if (window.kongregate.services.isGuest()) {
-            return "You are a guest.";
+            return "";
         } else {
             return window.kongregate.services.getUsername();
         }

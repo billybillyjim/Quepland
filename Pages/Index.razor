@@ -88,6 +88,7 @@ else
     private int amount;
     private ElementRef simpleList;
     private SimpleAES Encryptor = new SimpleAES();
+    private static string username;
 
     public void AddRoomToHouse()
     {
@@ -433,8 +434,14 @@ else
             {
                 MessageManager.AddMessage("Failed to auto save. Please make a local backup before closing the game.", "red");
             }
-
+            GameState.saveToPlayFab++;
+            if(GameState.saveToPlayFab > GameState.saveToPlayFabEvery)
+            {
+                Program.playfabManager.Save(GameState.GetSaveStringEncrypted(Program.areaManager, Program.followerManager, Program.npcManager, Program.buildingManager, false));
+                GameState.saveToPlayFab = 0;
+            }
         }), null, 60000, 60000);
+
         GameState.UpdateState();
         this.StateHasChanged();
     }
@@ -453,6 +460,7 @@ else
     protected async override Task OnInitAsync()
     {
         saveGameExists = await asyncLocalStorage.GetItemAsync<bool>("SaveGameExists");
+        username = await JSRuntime.InvokeAsync<string>("kongregateFunctions.getUsername");
         GameState.saveGameExists = saveGameExists;
         if (GameState.gameDataLoaded == false)
         {
@@ -500,6 +508,15 @@ else
 
             }), null, 60000, 60000);
         }
+        try
+        {
+            Program.playfabManager.TryLogin(username);
+        }
+        catch
+        {
+            Console.WriteLine("Couldn't connect to Playfab.");
+        }
+
         GameState.UpdateState();
         this.StateHasChanged();
     }

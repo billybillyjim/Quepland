@@ -135,6 +135,30 @@ public class Inventory
         }
         return false;
     }
+    public bool HasItems(List<GameItem> itemList, int[] amounts)
+    {
+        int i = 0;
+        foreach(GameItem item in itemList)
+        {
+            if(items.TryGetValue(item, out int v))
+            {
+                if(v < amounts[i])
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+            i++;
+            if(i >= amounts.Length)
+            {
+                i = 0;
+            }
+        }
+        return true;
+    }
     public int GetCoins()
     {
         foreach (KeyValuePair<GameItem, int> pair in items)
@@ -255,7 +279,6 @@ public class Inventory
         }
         return 0;
     }
-
     public bool AddItems(Dictionary<GameItem, int> itemsToAdd)
     {
         if (itemsToAdd == null)
@@ -528,6 +551,7 @@ public class Inventory
         inventorySlotPos = 0;
         foreach (KeyValuePair<GameItem, int> item in items)
         {
+            item.Key.itemPos = inventorySlotPos;
             if (item.Key.IsStackable)
             {
                 totalItems += 1;

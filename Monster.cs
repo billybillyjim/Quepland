@@ -15,6 +15,10 @@ public class Monster
     public int AttackSpeed { get; set; }
     public int[] AlwaysDrops { get; set; }
     public int[][] DropTable { get; set; }
+    /// <summary>
+    /// The status effect this monster can inflict. Not to be confused with CurrentStatusEffect, which is the effect the monster has been inflicted with.
+    /// </summary>
+    public string StatusEffect { get; set; }
     public string CurrentStatusEffect { get; set; }
     public int StatusEffectTimeLeft { get; set; }
     public string ImmuneTo { get; set; }

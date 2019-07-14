@@ -314,7 +314,7 @@
     "actions": [ "Hunting", "Battle" ],
     "unlockableAreas": [ "East Higashi Woods,Jump across the gap,Deftness:35,", "East Higashi Woods,Repair the bridge,Woodworking:35," ],
     "huntingIDs": [ 70, 72, 73 ],
-    "monsterIDs": [ 16, 18, 19, 20 ],
+    "monsterIDs": [ 16, 18, 19, 20, 46 ],
     "region": "Quepland"
   },
   {
@@ -417,7 +417,7 @@
     "buildings": [ "CamelShop" ],
     "unlockableAreas": [ "Route 7 South,Continue past the shop,," ],
     "npcIDs": [ 17 ],
-    "monsterIDs": [ 17, 21, 22, 23 ],
+    "monsterIDs": [ 17, 21, 22, 23, 45 ],
     "region": "Quepland"
   },
   {
@@ -617,7 +617,7 @@
     "description": "You reach the Rising hills. The lake sits at the foot of a huge mountain range. It may have once looked like a shoe. Legends tell of monsters beneath the surface of the water.",
     "actions": [ "Battle" ],
     "icon": "oi oi-vertical-align-center",
-    "monsterIDs": [ 15, 24, 25 ],
+    "monsterIDs": [ 15, 24, 25, 45 ],
     "areaToUnlockOnArrival": "The Rising Hills",
     "unlockableAreas": [ "Tsu Valley,Hike the mountain trail,," ],
     "region": "Quepland"
@@ -835,7 +835,7 @@
     "areaToUnlockOnArrival": "Sahota Tir",
     "region": "Caligin Commonwealth",
     "monsterIDs": [ 40, 41, 42, 43, 44 ],
-    "npcIDs": [37]
+    "npcIDs": [37, 64]
   }
 
 

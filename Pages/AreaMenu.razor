@@ -103,7 +103,7 @@
                             builder.AddAttribute(3, "style", "margin-bottom:10px");
                             builder.AddAttribute(4, "class", "btn btn-primary");
                             builder.AddAttribute(5, "onclick", () => TrainStrength());
-                            if (GameState.isGathering || GameState.isHunting || GameState.isUsing)
+                            if (GameState.isGathering || GameState.isHunting || GameState.isUsing || GameState.isFighting)
                             {
                                 builder.AddAttribute(6, "disabled", true);
                             }
@@ -132,7 +132,7 @@
                             builder.AddAttribute(3, "style", "margin-bottom:10px");
                             builder.AddAttribute(4, "class", "btn btn-primary");
                             builder.AddAttribute(5, "onclick", () => TrainDeftness());
-                            if (GameState.isGathering || GameState.isHunting || GameState.isUsing)
+                            if (GameState.isGathering || GameState.isHunting || GameState.isUsing || GameState.isFighting)
                             {
                                 builder.AddAttribute(6, "disabled", true);
                             }
@@ -176,7 +176,7 @@
                             builder.AddAttribute(3, "style", "margin-bottom:10px");
                             builder.AddAttribute(4, "class", "btn btn-primary");
                             builder.AddAttribute(5, "onclick", () => BeginHarpoonFishing());
-                            if (GameState.isGathering || GameState.isHunting || GameState.isUsing || !GameState.GetPlayerInventory().ActionIsEnabled("Harpoon Fishing"))
+                            if (GameState.isGathering || GameState.isHunting || GameState.isUsing || !GameState.GetPlayerInventory().ActionIsEnabled("Harpoon Fishing") || GameState.isFighting)
                             {
                                 builder.AddAttribute(6, "disabled", true);
                                 builder.AddAttribute(7, "title", "You don't have the tool to do this.");
@@ -206,14 +206,14 @@
                             builder.AddAttribute(3, "style", "margin-bottom:10px");
                             builder.AddAttribute(4, "class", "btn btn-primary");
                             builder.AddAttribute(5, "onclick", () => BeginCarvingTotem(actionString));
-                            if (GameState.isGathering || GameState.isHunting || GameState.isUsing || !GameState.GetPlayerInventory().ActionIsEnabled("Woodworking"))
+                            if (GameState.isGathering || GameState.isHunting || GameState.isUsing || !GameState.GetPlayerInventory().ActionIsEnabled("Woodworking") || GameState.isFighting)
                             {
                                 builder.AddAttribute(6, "disabled", true);
                                 builder.AddAttribute(7, "title", "You don't have the tool to do this.");
                             }
                             if(GameState.GetPlayer().GetLevel("Woodworking") < Program.itemDatabase.GetRewardByName(actionString.Split(':')[1]).MinimumLevel)
                             {
-                                 builder.AddAttribute(6, "disabled", true);
+                                builder.AddAttribute(6, "disabled", true);
                                 builder.AddAttribute(7, "title", "You don't have the level to do this.(" + Program.itemDatabase.GetRewardByName(actionString.Split(':')[1]).MinimumLevel + ")");
                             }
                             builder.AddContent(8, "Carve Totem");
@@ -255,7 +255,7 @@
                             builder.AddAttribute(3, "style", "margin-bottom:10px");
                             builder.AddAttribute(4, "class", "btn btn-primary");
                             builder.AddAttribute(5, "onclick", () => TrainHP());
-                            if (GameState.isGathering || GameState.isHunting || GameState.isUsing || !GameState.GetPlayerInventory().ActionIsEnabled("Yoga"))
+                            if (GameState.isGathering || GameState.isHunting || GameState.isUsing || !GameState.GetPlayerInventory().ActionIsEnabled("Yoga") || GameState.isFighting)
                             {
                                 builder.AddAttribute(6, "disabled", true);
                                 builder.AddAttribute(7, "title", "You don't have a yoga mat to do yoga on.");
@@ -302,7 +302,7 @@
                                     builder.AddAttribute(13, "title", "Your inventory is full.");
                                     builder.AddAttribute(14, "disabled", true);
                                 }
-                                else if (GameState.isUsing)
+                                else if (GameState.isUsing || GameState.isFighting)
                                 {
                                     builder.AddAttribute(13, "title", "You can't do both those things at once.");
                                     builder.AddAttribute(14, "disabled", true);
@@ -353,40 +353,40 @@
         return builder =>
         {
             builder.OpenElement(0, "button");
-            builder.AddAttribute(0, "style", "margin-bottom:10px");
-            builder.AddAttribute(0, "class", "btn btn-primary");
-            builder.AddAttribute(0, "onclick", () => StartSearchForMiningVein());
-            if (isLookingForVein)
+            builder.AddAttribute(1, "style", "margin-bottom:10px");
+            builder.AddAttribute(2, "class", "btn btn-primary");
+            builder.AddAttribute(3, "onclick", () => StartSearchForMiningVein());
+            if (isLookingForVein )
             {
-                builder.AddAttribute(0, "disabled", true);
+                builder.AddAttribute(4, "disabled", true);
             }
-            else if (GameState.CanLeave() == false)
+            else if (GameState.CanLeave() == false || GameState.isFighting)
             {
-                builder.AddAttribute(0, "disabled", true);
-                builder.AddAttribute(0, "title", "You need to finish what you're doing before you do this.");
+                builder.AddAttribute(5, "disabled", true);
+                builder.AddAttribute(6, "title", "You need to finish what you're doing before you do this.");
             }
-            builder.AddContent(0, "Find Ore Vein");
+            builder.AddContent(7, "Find Ore Vein");
             builder.CloseElement();
 
             if (GameState.miningVeinSearchTimer != null && currentMiningVeinID == -1)
             {
-                builder.OpenElement(0, "p");
-                builder.AddContent(0, "Searching... " + (5 - (int)DateTime.UtcNow.Subtract(mineSearchStartTime).TotalSeconds));
+                builder.OpenElement(8, "p");
+                builder.AddContent(9, "Searching... " + (5 - (int)DateTime.UtcNow.Subtract(mineSearchStartTime).TotalSeconds));
                 builder.CloseElement();
             }
             else
             {
-                builder.OpenElement(0, "p");
+                builder.OpenElement(10, "p");
                 builder.CloseElement();
             }
-            builder.OpenElement(0, "button");
-            builder.AddAttribute(0, "style", "margin-bottom:10px");
-            builder.AddAttribute(0, "class", "btn btn-primary");
+            builder.OpenElement(11, "button");
+            builder.AddAttribute(12, "style", "margin-bottom:10px");
+            builder.AddAttribute(13, "class", "btn btn-primary");
             if (currentMiningVeinID == -1)
             {
-                builder.AddAttribute(0, "disabled", true);
-                builder.AddAttribute(0, "title", "You'll need to find a vein first.");
-                builder.AddContent(0, "Mine");
+                builder.AddAttribute(14, "disabled", true);
+                builder.AddAttribute(15, "title", "You'll need to find a vein first.");
+                builder.AddContent(16, "Mine");
             }
             else
             {
@@ -398,35 +398,36 @@
                 {
                     if (gatherItem != item.ItemName && playerHasLevels)
                     {
-                        builder.AddAttribute(0, "onclick", () => Gather(item));
-                        builder.AddContent(0, "Mine " + item.ItemName);
+                        builder.AddAttribute(17, "onclick", () => Gather(item));
+                        builder.AddContent(18, "Mine " + item.ItemName);
 
                     }
                     else if (!playerHasLevels)
                     {
-                        builder.AddAttribute(0, "disabled", true);
-                        builder.AddAttribute(0, "title", "You lack the level to do this. (" + item.RequiredLevel + ")");
+                        builder.AddAttribute(19, "disabled", true);
+                        builder.AddAttribute(20, "title", "You lack the level to do this. (" + item.RequiredLevel + ")");
+                        builder.AddContent(21, "Mine " + item.ItemName);
                     }
                     else if(gatherItem == item.ItemName)
                     {
-                        builder.AddAttribute(0, "onclick", () => StopGathering());
-                        builder.AddContent(0, "Stop");
+                        builder.AddAttribute(22, "onclick", () => StopGathering());
+                        builder.AddContent(23, "Stop");
 
                     }
                 }
                 else
                 {
 
-                    builder.AddAttribute(0, "disabled", true);
+                    builder.AddAttribute(24, "disabled", true);
                     if (playerHasLevels)
                     {
-                        builder.AddAttribute(0, "title", "You lack the tool to do this.");
+                        builder.AddAttribute(25, "title", "You lack the tool to do this.");
                     }
                     else
                     {
-                        builder.AddAttribute(0, "title", "You lack the tool and level to do this.(" + item.RequiredLevel + ")");
+                        builder.AddAttribute(26, "title", "You lack the tool and level to do this.(" + item.RequiredLevel + ")");
                     }
-                    builder.AddContent(0, "Mine " + item.ItemName);
+                    builder.AddContent(27, "Mine " + item.ItemName);
                 }
             }
 
@@ -458,7 +459,7 @@
                 builder.AddAttribute(3, "style", "margin:10px");
                 builder.AddAttribute(4, "class", "btn btn-primary");
                 builder.AddAttribute(5, "onclick", () => Hunt(1));
-                if (canHunt == false)
+                if (canHunt == false || GameState.isFighting)
                 {
                     builder.AddAttribute(6, "disabled", true);
                     builder.AddAttribute(7, "title", "You need a bow in order to hunt.");
@@ -474,7 +475,7 @@
                 builder.AddAttribute(10, "style", "margin:10px");
                 builder.AddAttribute(11, "class", "btn btn-primary");
                 builder.AddAttribute(12, "onclick", () => Hunt(4));
-                if (canHunt == false)
+                if (canHunt == false || GameState.isFighting)
                 {
                     builder.AddAttribute(13, "disabled", true);
                     builder.AddAttribute(14, "title", "You need a bow in order to hunt.");
@@ -495,7 +496,7 @@
                     builder.AddAttribute(13, "disabled", true);
                     builder.AddAttribute(14, "title", "You aren't a good enough hunter to hunt here yet.(Hunting:" + minHuntingLevel + ")");
                 }
-                if (canHunt == false)
+                if (canHunt == false || GameState.isFighting)
                 {
                     builder.AddAttribute(20, "disabled", true);
                     builder.AddAttribute(21, "title", "You need a bow in order to hunt.");
@@ -723,26 +724,96 @@
                         }
 
                     }
-                    foreach (int itemID in npc.PurchaseItemIDs ?? Enumerable.Empty<int>())
+                    if (npc.HasSpecialCosts)
                     {
-                        GameItem item = Program.itemDatabase.GetItemByID(itemID);
-                        builder.OpenElement(18, "button");
-                        builder.AddAttribute(19, "style", "margin-bottom:10px");
-                        builder.AddAttribute(20, "class", "btn btn-primary");
-                        builder.AddAttribute(21, "onclick", () => BuyItem(item, 1));
-                        if (GameState.GetPlayerInventory().GetCoins() < item.Value || GameState.GetPlayerInventory().GetAvailableSpaces() == 0)
+                        builder.AddContent(18, LoadNPCSellDropdown(npc));
+                    }
+                    else
+                    {
+                        foreach (int itemID in npc.PurchaseItemIDs ?? Enumerable.Empty<int>())
                         {
-                            builder.AddAttribute(22, "disabled", true);
-                            builder.AddAttribute(23, "title", "You don't have enough coins with you to buy this.");
+                            GameItem item = Program.itemDatabase.GetItemByID(itemID);
+
+                            builder.OpenElement(18, "button");
+                            builder.AddAttribute(19, "style", "margin-bottom:10px");
+                            builder.AddAttribute(20, "class", "btn btn-primary");
+                            builder.AddAttribute(21, "onclick", () => BuyItem(item, 1, Program.itemDatabase.GetGold()));
+
+                            if (GameState.GetPlayerInventory().GetCoins() < item.Value || GameState.GetPlayerInventory().GetAvailableSpaces() == 0)
+                            {
+                                builder.AddAttribute(22, "disabled", true);
+                                builder.AddAttribute(23, "title", "You don't have everything you need to buy this.");
+                            }
+
+                            builder.AddContent(24, "Buy " + item.ItemName + " for " + item.Value + " coins");
+                            builder.CloseElement();
+                            builder.OpenElement(25, "br");
+                            builder.CloseElement();
                         }
-                        builder.AddContent(24, "Buy " + item.ItemName + " for " + item.Value + " gp");
-                        builder.CloseElement();
-                        builder.OpenElement(25, "br");
-                        builder.CloseElement();
                     }
 
                 }
             }
+        };
+    }
+    public RenderFragment LoadNPCSellDropdown(NPC npc)
+    {
+        return builder =>
+        {
+            int it = 0;
+            builder.OpenElement(1, "div");
+            builder.AddAttribute(2, "class", "dropdown");
+            builder.AddAttribute(2, "style", "margin-bottom:10px");
+            builder.OpenElement(3, "button");
+
+            builder.AddAttribute(4, "class", "btn btn-primary dropdown-toggle");
+            builder.AddAttribute(5, "type", "button");
+            builder.AddAttribute(6, "id", "dropdownMenuButton");
+            builder.AddAttribute(7, "data-toggle", "dropdown");
+            builder.AddAttribute(8, "aria-haspopup", "true");
+            builder.AddAttribute(9, "aria-expanded", "false");
+            builder.AddContent(10, "Select Item");
+            builder.CloseElement();
+            builder.OpenElement(11, "div");
+            builder.AddAttribute(12, "class", "dropdown-menu");
+            builder.AddAttribute(13, "aria-labelledby", "dropdownMenuButton");
+            foreach (int itemID in npc.PurchaseItemIDs ?? Enumerable.Empty<int>())
+            {
+                GameItem item = Program.itemDatabase.GetItemByID(itemID);
+                List<GameItem> costItems = Program.itemDatabase.GetItems(npc.ItemPaymentIDs[it]);
+                it++;
+                int[] costs = npc.SpecialCosts;
+                builder.OpenElement(14, "button");
+                builder.AddAttribute(15, "style", "margin-bottom:10px");
+                builder.AddAttribute(16, "class", "btn btn-primary");
+                builder.AddAttribute(17, "onclick", () => BuyItemMultipleCosts(item, costItems, costs));
+
+                if (GameState.GetPlayerInventory().HasItems(costItems, costs) == false || GameState.GetPlayerInventory().GetAvailableSpaces() == 0)
+                {
+                    builder.AddAttribute(18, "disabled", true);
+                    builder.AddAttribute(19, "title", "You don't have everything you need to buy this.");
+                }
+                string buyString = "Exchange ";
+                int i = 0;
+                foreach (GameItem cItem in costItems)
+                {
+                    buyString += costs[i] + " " + cItem.ItemName + ", ";
+                    i++;
+                    if(i >= costs.Length)
+                    {
+                        i = 0;
+                    }
+                    
+                }
+                buyString = buyString.Substring(0, buyString.Length - 1);
+                buyString += " for " + item.ItemName;
+                builder.AddContent(20, buyString);
+                builder.CloseElement();
+                builder.OpenElement(21, "br");
+                builder.CloseElement();
+            }
+            builder.CloseElement();
+            builder.CloseElement();
         };
     }
     public RenderFragment LoadBuildings()
@@ -1284,16 +1355,20 @@
         }
         GameState.UpdateState();
     }
-    private void BuyItem(GameItem item, int amount)
+    private void BuyItem(GameItem item, int amount, GameItem costItem)
+    {
+        BuyItem(item, amount, costItem, item.Value);
+    }
+    private void BuyItem(GameItem item, int amount, GameItem costItem, int specialCost)
     {
         if (amount < 0)
         {
             amount = 0;
         }
-        int price = item.Value * amount;
-        if (GameState.GetPlayerInventory().GetCoins() >= price)
+        int price = specialCost * amount;
+        if (GameState.GetPlayerInventory().GetAmountOfItem(costItem) >= price)
         {
-            GameState.GetPlayerInventory().RemoveItems(Program.itemDatabase.GetGold(), price);
+            GameState.GetPlayerInventory().RemoveItems(Program.itemDatabase.GetItemByID(costItem.Id), price);
             GameState.GetPlayerInventory().AddMultipleOfItem(item, amount);
             MessageManager.AddMessage("You bought " + amount + " " + item.ItemName);
         }
@@ -1302,6 +1377,27 @@
             MessageManager.AddMessage("You can't afford that.");
         }
 
+        GameState.UpdateState();
+        StateHasChanged();
+    }
+    private void BuyItemMultipleCosts(GameItem item, List<GameItem> costItems, int[] specialCosts)
+    {
+        int it = 0;
+        foreach(GameItem costItem in costItems)
+        {
+            if (GameState.GetPlayerInventory().GetAmountOfItem(costItem) >= specialCosts[it])
+            {
+                GameState.GetPlayerInventory().RemoveItems(Program.itemDatabase.GetItemByID(costItem.Id), specialCosts[it]);
+
+            }
+            it++;
+            if(it >= specialCosts.Length)
+            {
+                it = 0;
+            }
+        }
+        GameState.GetPlayerInventory().AddItem(item);
+        MessageManager.AddMessage("You bought a " + item.ItemName);
         GameState.UpdateState();
         StateHasChanged();
     }

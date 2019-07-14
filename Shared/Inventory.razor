@@ -22,18 +22,26 @@
             builder.OpenElement(0, "div");
             builder.AddAttribute(1, "class", "table-hover");
 
-            builder.OpenElement(2, "h1");
-            builder.AddContent(3, "Inventory");
-            builder.CloseElement();
             if (!GameState.isSplitView)
             {
-                builder.OpenElement(4, "button");
-                builder.AddAttribute(5, "class", "btn btn-primary");
-                builder.AddAttribute(5, "style", "margin-bottom:10px");
-                builder.AddAttribute(6, "onclick", () => GameState.ToggleActiveView());
-                builder.AddContent(7, "Show Skills");
+                builder.OpenElement(1, "p");
+                builder.AddAttribute(1, "style", "margin-bottom:.2rem");
+                builder.OpenElement(2, "img");
+                builder.AddAttribute(3, "src", "data/ItemIcons/Skills.png");
+                builder.AddAttribute(4, "style", "width:60px;height:60px;");
+                builder.AddAttribute(5, "onclick", () => GameState.ToggleActiveView());
+                builder.AddContent(6, "Show Skills");
+                builder.CloseElement();
+                                builder.OpenElement(2, "img");
+                builder.AddAttribute(3, "src", "data/ItemIcons/Inventory.png");
+                builder.AddAttribute(4, "style", "width:60px;height:60px;opacity:.6");
+                builder.AddContent(6, "Show Inventory");
+                builder.CloseElement();
                 builder.CloseElement();
             }
+            builder.OpenElement(7, "h1");
+            builder.AddContent(8, "Inventory");
+            builder.CloseElement();
             builder.OpenElement(8, "p");
             if (GameState.GetPlayerInventory().GetAvailableSpaces() == 0)
             {
@@ -491,7 +499,7 @@
             {
                 builder.AddContent(4, "Sell for " + Math.Round(item.Key.Value / 2f) + " each");
             }
-            
+
 
             builder.CloseElement();
             builder.OpenElement(5, "td");
@@ -708,7 +716,7 @@
     {
         CancelUse();
         GameState.safeToSave = false;
-                trySellingExpensiveItem = false;
+        trySellingExpensiveItem = false;
         confirmSellItemID = -1;
         if (amount > item.Value)
         {

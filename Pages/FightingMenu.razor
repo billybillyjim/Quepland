@@ -233,8 +233,16 @@
                 {
                     if(rand.NextDouble() < weapon.EffectOdds)
                     {
-                        ApplyStatusEffect(weapon.StatusEffect, weapon.EffectDuration);
                         color = "blue";
+                        if(weapon.StatusEffect == "Drain")
+                        {
+
+                            color = "red";
+
+                        }
+
+                        ApplyStatusEffect(weapon.StatusEffect, weapon.EffectDuration, dmgDealt);
+
                     }
                 }
                 if(weapon.ActionRequired == "Archery")
@@ -245,7 +253,7 @@
                         {
                             if(rand.NextDouble() < GameState.GetPlayerInventory().GetStrongestArrows().EffectOdds)
                             {
-                                ApplyStatusEffect(GameState.GetPlayerInventory().GetStrongestArrows().StatusEffect, GameState.GetPlayerInventory().GetStrongestArrows().EffectDuration);
+                                ApplyStatusEffect(GameState.GetPlayerInventory().GetStrongestArrows().StatusEffect, GameState.GetPlayerInventory().GetStrongestArrows().EffectDuration, dmgDealt);
                                 color = "blue";
                             }
                         }
@@ -314,6 +322,20 @@
             if(GameState.GetPlayer().CurrentHP <= 0)
             {
                 LoseBattle();
+            }
+            if(opponent.StatusEffect != null && battleFound)
+            {
+                if(opponent.StatusEffect == "Drain")
+                {
+
+                    int maxHP = opponent.HP - opponent.CurrentHP;
+                    opponent.CurrentHP += Math.Min(maxHP, dmg);
+                    if(Math.Min(maxHP, dmg) > 0)
+                    {
+                         MessageManager.AddMessage(opponent.Name + " absorbed " +  Math.Min(maxHP, dmg) + " HP!");
+                    }
+                   
+                }
             }
         }
 
@@ -406,21 +428,33 @@
         GameState.UpdateState();
         this.StateHasChanged();
     }
-    private void ApplyStatusEffect(string effect, int duration)
+    private void ApplyStatusEffect(string effect, int duration, int dmgDealt)
     {
         if(opponent.ImmuneTo == null || opponent.ImmuneTo.Contains(effect) == false)
         {
-            opponent.CurrentStatusEffect = effect;
-            opponent.StatusEffectTimeLeft = duration;
-            if(GameState.GetPlayer().GetWeapon().ActionRequired == "Archery")
+
+            if(effect == "Drain")
             {
-                MessageManager.AddMessage(opponent.Name + " was affected by the " + GameState.GetPlayerInventory().GetStrongestArrows().ItemName + "' effect!", "blue");
+                int maxHPGain = GameState.GetPlayer().MaxHP - GameState.GetPlayer().CurrentHP;
+                GameState.GetPlayer().CurrentHP += Math.Min(dmgDealt / duration, maxHPGain);
+                MessageManager.AddMessage("You absorbed " + Math.Min(dmgDealt / duration, maxHPGain) + " HP from the " + opponent.Name, "red");
             }
             else
             {
-                MessageManager.AddMessage(opponent.Name + " was affected by the " + GameState.GetPlayer().GetWeapon().ItemName + "'s effect!", "blue");
+                opponent.CurrentStatusEffect = effect;
+                opponent.StatusEffectTimeLeft = duration;
+                if(GameState.GetPlayer().GetWeapon().ActionRequired == "Archery")
+                {
+                    MessageManager.AddMessage(opponent.Name + " was affected by the " + GameState.GetPlayerInventory().GetStrongestArrows().ItemName + "' effect!", "blue");
+                }
+                else
+                {
+                    MessageManager.AddMessage(opponent.Name + " was affected by the " + GameState.GetPlayer().GetWeapon().ItemName + "'s effect!", "blue");
+                }
             }
-            
+
+
+
 
         }
 
