@@ -79,6 +79,7 @@
         GameState.GetPlayerInventory().LoadItems(invItems);
 
         Program.areaManager.LoadSaveData(lines[3]);
+        loadfile = lines[3];
         Program.followerManager.LoadSaveData(lines[4]);
 
         if (int.TryParse(lines[5], out int hp))

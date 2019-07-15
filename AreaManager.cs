@@ -15,6 +15,7 @@ public class AreaManager
     {
         Area[] areasArray = await Http.GetJsonAsync<Area[]>("data/areas.json");
         areas = areasArray.ToList();
+        areas[0].IsUnlocked = true;
     }
     public string SaveAreas()
     {
@@ -44,6 +45,7 @@ public class AreaManager
                 }
             }
         }
+        areas[0].IsUnlocked = true;
     }
     public Area GetAreaByID(int id)
     {
