@@ -11,6 +11,7 @@ public class ItemDatabase
     private List<GameItem> smithingItemTable = new List<GameItem>();
     private List<GameItem> huntedAnimals = new List<GameItem>();
     private List<GameItem> woodcuttingItems = new List<GameItem>();
+    private List<GameItem> nails = new List<GameItem>();
     private List<Reward> rewards = new List<Reward>();
     private static Random rand = new Random();
 
@@ -32,6 +33,10 @@ public class ItemDatabase
             else if (i.IsSmithable)
             {
                 smithingItemTable.Add(i);
+                if (i.ItemName.Contains("Nails"))
+                {
+                    nails.Add(i);
+                }
             }
             else if(i.ActionRequired == "Hunting")
             {
@@ -168,5 +173,9 @@ public class ItemDatabase
     public List<GameItem> GetLogs()
     {
         return woodcuttingItems;
+    }
+    public List<GameItem> GetNails()
+    {
+        return nails;
     }
 }

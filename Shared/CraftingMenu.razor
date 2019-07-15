@@ -92,7 +92,8 @@
             }
             else
             {
-                int maxToMake = Math.Max(GameState.GetPlayerInventory().GetAmountOfItem(sourceItem), GameState.GetPlayerInventory().GetAmountOfItem(itemUsed));
+                int ingredientCost = Math.Max(item.AmountOfIngredientsToCreate, 1);
+                int maxToMake = Math.Max(GameState.GetPlayerInventory().GetAmountOfItem(sourceItem), GameState.GetPlayerInventory().GetAmountOfItem(itemUsed) / ingredientCost);
                 builder.AddContent(12, "Can make:" + maxToMake);
             }
             builder.CloseElement();
@@ -123,8 +124,8 @@
             GameState.createRepeatTimer.Dispose();
             GameState.createRepeatTimer = null;
         }
-        Console.WriteLine("Start");
         int creationTime = itemCreated.GatherSpeed;
+        GameState.isUsing = true;
         GameState.createRepeatTimer = new Timer(new TimerCallback(_ =>
         {
 

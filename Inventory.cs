@@ -503,6 +503,23 @@ public class Inventory
         }
         return false;
     }
+    public GameItem GetBestNails()
+    {
+        int reqLevel = 0;
+        GameItem bestNails = null;
+        foreach(KeyValuePair<GameItem, int> pair in items)
+        {
+            if (pair.Key.ItemName.Contains("Nails"))
+            {
+                if(pair.Key.RequiredLevel > reqLevel)
+                {
+                    bestNails = pair.Key;
+                    reqLevel = pair.Key.RequiredLevel;
+                }
+            }
+        }
+        return bestNails;
+    }
     public void EmptyInventory()
     {
         totalItems = 0;
@@ -590,5 +607,5 @@ public class Inventory
     {
         return "Free Spaces: " + GetAvailableSpaces() + "/" + maxSize;
     }
-
+    
 }

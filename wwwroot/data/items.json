@@ -1169,7 +1169,7 @@
     "isEquipable": true,
     "equipSlot": "Right Hand",
     "damage": 21,
-    "attackSpeed": 600,
+    "attackSpeed": 700,
     "icon": "Knife"
   },
   {
@@ -4049,7 +4049,7 @@
     "isEquipable": true,
     "equipSlot": "Right Hand",
     "damage": 50,
-    "attackSpeed": 1000,
+    "attackSpeed": 1200,
     "icon": "Sword"
   },
   {
@@ -4079,7 +4079,7 @@
     "isSmithable": true,
     "isEquipable": true,
     "equipSlot": "Right Hand",
-    "damage": 125,
+    "damage": 120,
     "attackSpeed": 2500,
     "actionsEnabled": "Axemanship Woodcutting",
     "gatherSpeedBonus": 0.6,
@@ -4096,7 +4096,7 @@
     "isSmithable": true,
     "isEquipable": true,
     "equipSlot": "Right Hand",
-    "damage": 120,
+    "damage": 130,
     "attackSpeed": 3750,
     "actionsEnabled": "Axemanship Woodcutting",
     "gatherSpeedBonus": 0.5,
@@ -6152,7 +6152,7 @@
     "isEquipable": true,
     "equipSlot": "Right Hand",
     "damage": 50,
-    "attackSpeed": 1000,
+    "attackSpeed": 1200,
     "icon": "Sword",
     "statusEffect": "Drain",
     "effectDuration": 10,
@@ -6192,7 +6192,7 @@
     "effectDuration": 3,
     "effectOdds": 0.2
   },
-    {
+  {
     "itemName": "Strand of Baobhan Hair",
     "itemDescription": "Someone would probably pay money for this.",
     "id": 420,

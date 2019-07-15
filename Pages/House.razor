@@ -2,6 +2,7 @@
 @using System.Threading;
 @inject HttpClient Http
 @inject GameState GameState
+@inject MessageManager  MessageManager
 @inject Microsoft.AspNetCore.Blazor.Services.WebAssemblyUriHelper UriHelper
 @implements IDisposable
 
@@ -10,7 +11,15 @@
 @LoadHouse()
 @LoadBuildableRoomDropdown()
 @ShowRoomData()
-@BuildNewRoomButton()
+@if (currentRoom == null)
+{
+    @BuildNewRoomButton()
+}
+else
+{
+    @WorkOnRoomButton()
+}
+
 
 
 @functions{
@@ -105,7 +114,7 @@
             builder.OpenElement(1, "button");
             builder.AddAttribute(2, "class", "btn btn-primary");
             builder.AddAttribute(3, "style", "margin:10px");
-            builder.AddAttribute(4, "onclick", () => BuildNewRoom());
+            builder.AddAttribute(4, "onclick", () => BeginBuildingNewRoom());
             if (newRoomName == null)
             {
                 builder.AddAttribute(5, "disabled", true);
@@ -128,31 +137,36 @@
     {
         return builder =>
         {
-            builder.OpenElement(0, "p");
             builder.OpenElement(1, "button");
             builder.AddAttribute(2, "class", "btn btn-primary");
             builder.AddAttribute(3, "style", "margin:10px");
-            builder.AddAttribute(4, "onclick", () => Construct());
-            if (newRoomName == null)
+            if (GameState.isGathering == false)
             {
-                builder.AddAttribute(5, "disabled", true);
+                if (GameState.GetPlayerInventory().GetBestNails() == null)
+                {
+                    builder.AddAttribute(4, "disabled", true);
+                    builder.AddAttribute(4, "title", "You don't have any nails!");
+                    builder.AddContent(5, "Construct");
+                }
+                else
+                {
+                    builder.AddAttribute(6, "onclick", () => Construct());
+                    builder.AddContent(7, "Construct");
+                }
             }
-            if (string.IsNullOrEmpty(newRoomName))
+            else
             {
-                builder.AddContent(6, "Construct");
-            }
-
-
-            builder.CloseElement();
+                builder.AddAttribute(8, "onclick", () => StopConstruction());
+                builder.AddContent(9, "Stop");
+            };
             builder.CloseElement();
         };
-
     }
     private RenderFragment ShowRoomData()
     {
         return builder =>
         {
-            if(string.IsNullOrEmpty(newRoomName) == false)
+            if (string.IsNullOrEmpty(newRoomName) == false)
             {
                 Room room = Program.roomManager.GetRoomByName(newRoomName);
                 builder.OpenElement(0, "p");
@@ -166,6 +180,9 @@
                 builder.CloseElement();
                 builder.OpenElement(6, "p");
                 builder.AddContent(7, "Bars:" + room.BarsRequired + " " + GetBarString(room.MinimumBarLevel) + "s or better.");
+                builder.CloseElement();
+                builder.OpenElement(8, "p");
+                builder.AddContent(9, "Work Remaining:" + room.WorkRemaining);
                 builder.CloseElement();
             }
         };
@@ -195,15 +212,35 @@
     {
         GameState.gatherTimer = new Timer(new TimerCallback(_ =>
         {
-            if(currentRoom.IsComplete == false)
+            if (currentRoom.IsComplete == false)
             {
-                if (GameState.GetPlayerInventory().HasItem(0))
+                GameItem bestNails = GameState.GetPlayerInventory().GetBestNails();
+                if (bestNails != null && GameState.GetPlayerInventory().RemoveOneOfItem(bestNails))
                 {
-                    currentRoom.WorkRemaining--;
+                    currentRoom.WorkRemaining -= bestNails.RequiredLevel / 3;
+                    MessageManager.AddMessage("You nail two planks together.");
                 }
-                
+                if (currentRoom.WorkRemaining <= 0)
+                {
+                    currentRoom.IsComplete = true;
+                    GameState.gatherTimer.Dispose();
+                }
+                GameState.UpdateState();
+                StateHasChanged();
             }
-        }),null, 1000,1000);
+        }), null, 1000, 1000);
+        GameState.UpdateState();
+    }
+    private void StopConstruction()
+    {
+        if (GameState.gatherTimer != null)
+        {
+            GameState.gatherTimer.Dispose();
+            GameState.gatherTimer = null;
+        }
+        GameState.isGathering = false;
+        StateHasChanged();
+        GameState.UpdateState();
     }
     private void SetNewRoomName(string name)
     {

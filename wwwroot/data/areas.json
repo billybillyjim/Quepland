@@ -838,8 +838,16 @@
     "npcIDs": [ 37, 64 ]
   },
   {
+    "name": "Sahota Caverns",
+    "id": 74,
+    "areaURL": "SahotaCaverns",
+    "description": "A series of tunnels that weave around the walls of the ice fields.",
+    "icon": "oi oi-random",
+    "actions": [ "Hunting" ],
+    "region": "Caligin Commonwealth",
+    "huntingIDs": [ 71, 67, 69 ]
 
-  }
+  } 
 
 
 ]

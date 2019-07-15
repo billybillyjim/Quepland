@@ -17,7 +17,7 @@ public class GameState
     public bool isFighting;
     public bool canSell;
     public bool canBank;
-    public bool isUsing;
+    public bool isUsing { get; set; }
 
     public int huntingAreaID;
     public DateTime huntingEndTime;
@@ -37,7 +37,7 @@ public class GameState
     public bool safeToLoad = false;
 
     public string previousURL;
-    public string updateVersionString = "1.028b";
+    public string updateVersionString = "1.028c";
     
     public GameItem currentUsedItem;
     public GameItem currentGatherItem;

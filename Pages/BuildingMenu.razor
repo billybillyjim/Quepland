@@ -151,7 +151,7 @@
                 }
             }
             else if((GameState.GetPlayerInventory().GetAvailableSpaces() < amount && (item.IsStackable == false)) ||
-            (item.IsStackable && GameState.GetPlayerInventory().GetAvailableSpaces() < amount && GameState.GetPlayerInventory().HasItem(item) == false))
+            (item.IsStackable && GameState.GetPlayerInventory().GetAvailableSpaces() == 0 && GameState.GetPlayerInventory().HasItem(item) == false))
             {
                 builder.AddAttribute(14, "disabled", true);
                 builder.AddAttribute(15, "title", "You don't have enough inventory space to buy this.");
@@ -554,7 +554,7 @@
                         }
                         else if(GameState.GetPlayerInventory().GetAvailableSpaces() == 0)
                         {
-                             builder.AddAttribute(14, "disabled", true);
+                            builder.AddAttribute(14, "disabled", true);
                             builder.AddAttribute(15, "title", "Your inventory is full.");
                         }
                         else if(thisBuilding.TanneryItems[temp].Item.Value > GameState.GetPlayerInventory().GetAvailableSpaces())
@@ -833,7 +833,15 @@
         if (GameState.GetPlayerInventory().GetCoins() >= cost * amount)
         {
             GameState.GetPlayerInventory().RemoveItems(Program.itemDatabase.GetGold(), cost * amount);
-            GameState.GetPlayerInventory().AddMultipleOfItem(item, amount);
+            if (item.IsStackable)
+            {
+                GameState.GetPlayerInventory().AddItemStackable(item, amount);
+            }
+            else
+            {
+                GameState.GetPlayerInventory().AddMultipleOfItem(item, amount);
+            }
+            
             MessageManager.AddMessage("You bought " + amount + " " + item.ItemName);
         }
         else
