@@ -89,6 +89,7 @@ else
     private ElementRef simpleList;
     private SimpleAES Encryptor = new SimpleAES();
     private static string username;
+    private static string token;
 
     public void AddRoomToHouse()
     {
@@ -460,7 +461,16 @@ else
     protected async override Task OnInitAsync()
     {
         saveGameExists = await asyncLocalStorage.GetItemAsync<bool>("SaveGameExists");
-        username = await JSRuntime.InvokeAsync<string>("kongregateFunctions.getUsername");
+        try
+        {
+            username = await JSRuntime.InvokeAsync<string>("kongregateFunctions.getUsername");
+            token = await JSRuntime.InvokeAsync<string>("kongregateFunctions.getToken");
+        }
+        catch
+        {
+            username = "";
+            token = "";
+        }
         GameState.saveGameExists = saveGameExists;
         if (GameState.gameDataLoaded == false)
         {
@@ -510,7 +520,7 @@ else
         }
         try
         {
-            Program.playfabManager.TryLogin(username);
+            Program.playfabManager.TryLogin(username, token);
         }
         catch
         {

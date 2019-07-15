@@ -1,0 +1,56 @@
+@inject GameState GameState
+@implements IDisposable
+
+@LoadMenuButtons()
+
+
+
+@functions{
+
+    private RenderFragment LoadMenuButtons()
+    {
+        return builder =>
+        {
+            builder.OpenElement(0, "p");
+            builder.AddAttribute(1, "style", "margin-bottom:.2rem; width:100%");
+            foreach(string button in menuButtons)
+            {
+                builder.OpenElement(2, "img");
+                builder.AddAttribute(3, "src", "data/ItemIcons/" + button + ".png");
+                if(GameState.activeView == button)
+                {
+                    builder.AddAttribute(4, "style", activeStyle);
+                }
+                else
+                {
+                    builder.AddAttribute(4, "style", inactiveStyle);
+                }
+                builder.AddAttribute(5, "onclick", () => SetActiveView(button));
+                builder.AddContent(6, "Show " + button);
+                builder.CloseElement();
+            }
+            builder.CloseElement();
+
+        };
+    }
+    private List<string> menuButtons = new List<string>() { "Skills", "Inventory", "Crafting", "Followers" };
+    private string activeStyle = "width:70px;height:70px;opacity:.6";
+    private string inactiveStyle = "width:70px;height:70px;";
+    private void SetActiveView(string view)
+    {
+        GameState.activeView = view;
+        GameState.UpdateState();
+    }
+
+    protected override void OnInit()
+    {
+        GameState.StateChanged += OnInventoryStateChanged;
+        this.StateHasChanged();
+    }
+    public void Dispose()
+    {
+        GameState.StateChanged -= OnInventoryStateChanged;
+    }
+    void OnInventoryStateChanged(object sender, EventArgs e) => StateHasChanged();
+}
+

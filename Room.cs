@@ -13,4 +13,6 @@ public class Room
     public int MinimumBarLevel { get; set; }
     public int[][] OtherItemCosts { get; set; }
     public int ExperienceGained { get; set; }
+    public bool IsComplete { get; set; }
+    public int WorkRemaining { get; set; }
 }

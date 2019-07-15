@@ -19,6 +19,8 @@ public class Player
     //DEBUG Value!
     private readonly int maxInventorySize = 30;
     private MessageManager messageManager;
+    public string LastLevelledSkill;
+    
 
 	public Player()
 	{
@@ -159,13 +161,7 @@ public class Player
         }
         return 0;
     }
-    /*public void GainExperience(string skill, int amount)
-    {
-        if (skills.Find(x => x.SkillName == skill) != null)
-        {
-            GainExperience(skills.Find(x => x.SkillName == skill), amount);
-        }
-    }*/
+
     public void GainExperience(string skill, long amount)
     {
         if (skills.Find(x => x.SkillName == skill) != null)
@@ -195,20 +191,6 @@ public class Player
             GainExperience(skills.Find(x => x.SkillName == skill.Split(':')[0]), multi* amount);
         }
     }
-    /*
-    public void GainExperience(Skill skill, int amount)
-    {
-        if(skill == null)
-        {
-            Console.WriteLine("Gained " + amount + " experience in unfound skill.");
-            return;
-        }
-        skill.SkillExperience += (int)(amount * GetExperienceGainBonus(skill));
-        if (skill.SkillExperience >= Extensions.GetExperienceRequired(skill.GetSkillLevelUnboosted()))
-        {
-            LevelUp(skill);
-        }
-    }*/
     public void GainExperience(Skill skill, long amount)
     {
         if (skill == null)
@@ -216,6 +198,7 @@ public class Player
             Console.WriteLine("Gained " + amount + " experience in unfound skill.");
             return;
         }
+        LastLevelledSkill = skill.SkillName;
         skill.SkillExperience += (long)(amount * GetExperienceGainBonus(skill));
         if (skill.SkillExperience >= Extensions.GetExperienceRequired(skill.GetSkillLevelUnboosted()))
         {

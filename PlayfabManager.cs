@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 public class PlayfabManager
 {
     private bool _running = true;
-    public async void TryLogin(string username)
+    public async void TryLogin(string username, string token)
     {
         PlayFabSettings.staticSettings.TitleId = "E9B77"; 
 
-        var request = new LoginWithKongregateRequest { KongregateId = username, CreateAccount = true  };
+        var request = new LoginWithKongregateRequest { KongregateId = username, AuthTicket = token, CreateAccount = true, TitleId = "E9B77"  };
         var loginTask = await PlayFabClientAPI.LoginWithKongregateAsync(request);
         
          OnLoginComplete(loginTask);

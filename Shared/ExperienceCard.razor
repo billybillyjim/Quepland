@@ -1,0 +1,48 @@
+@inject GameState GameState
+@implements IDisposable
+
+@LoadExperienceCard()
+
+
+
+@functions{
+
+    private RenderFragment LoadExperienceCard()
+    {
+        return builder =>
+        {
+            if(GameState.GetPlayer().LastLevelledSkill != null)
+            {
+                Skill skill = GameState.GetPlayer().GetSkill(GameState.GetPlayer().LastLevelledSkill);
+                long exp = Extensions.GetExperienceRequired(skill.GetSkillLevel()) - skill.SkillExperience;
+                builder.OpenElement(0, "div");
+                builder.OpenElement(1, "div");
+                builder.AddAttribute(2, "style", "top:0px;position:absolute;right:10px");
+                builder.AddContent(3, GameState.GetPlayer().LastLevelledSkill);
+                builder.CloseElement();
+                builder.OpenElement(4, "div");
+                builder.AddAttribute(5, "style", "top:17px;position:absolute;right:10px");
+                builder.AddContent(6, "Current:" + String.Format("{0:n0}", skill.SkillExperience));
+                builder.CloseElement();
+                builder.OpenElement(7, "div");
+                builder.AddAttribute(8, "style", "top:34px;position:absolute;right:10px");
+                builder.AddContent(9, "To Level:" + String.Format("{0:n0}", exp));
+                builder.CloseElement();
+                builder.CloseElement();
+            }
+
+
+        };
+    }
+    protected override void OnInit()
+    {
+        GameState.StateChanged += OnInventoryStateChanged;
+        this.StateHasChanged();
+    }
+    public void Dispose()
+    {
+        GameState.StateChanged -= OnInventoryStateChanged;
+    }
+    void OnInventoryStateChanged(object sender, EventArgs e) => StateHasChanged();
+}
+

@@ -11,6 +11,14 @@
             return window.kongregate.services.getUsername();
         }
     },
+    getToken: function () {
+        if (window.kongregate.services.isGuest()) {
+            return "";
+        }
+        else {
+            return window.kongregate.services.getGameAuthToken();
+        }
+    },
     updateTotalLevelScore: function (totalLevel) {
         window.kongregate.stats.submit("Total Level", totalLevel);
     },

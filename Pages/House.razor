@@ -1,4 +1,5 @@
 ﻿@page "/House"
+@using System.Threading;
 @inject HttpClient Http
 @inject GameState GameState
 @inject Microsoft.AspNetCore.Blazor.Services.WebAssemblyUriHelper UriHelper
@@ -15,6 +16,7 @@
 @functions{
 
     private string newRoomName;
+    private Room currentRoom;
     private RenderFragment LoadHouse()
     {
         return builder =>
@@ -116,7 +118,31 @@
             {
                 builder.AddContent(6, "Build " + newRoomName);
             }
-            
+
+            builder.CloseElement();
+            builder.CloseElement();
+        };
+
+    }
+    private RenderFragment WorkOnRoomButton()
+    {
+        return builder =>
+        {
+            builder.OpenElement(0, "p");
+            builder.OpenElement(1, "button");
+            builder.AddAttribute(2, "class", "btn btn-primary");
+            builder.AddAttribute(3, "style", "margin:10px");
+            builder.AddAttribute(4, "onclick", () => Construct());
+            if (newRoomName == null)
+            {
+                builder.AddAttribute(5, "disabled", true);
+            }
+            if (string.IsNullOrEmpty(newRoomName))
+            {
+                builder.AddContent(6, "Construct");
+            }
+
+
             builder.CloseElement();
             builder.CloseElement();
         };
@@ -152,11 +178,32 @@
     {
         return Program.itemDatabase.GetSmithingBars()[level].ItemName;
     }
+    private void BeginBuildingNewRoom()
+    {
+        Room newRoom = Program.roomManager.GetRoomByName(newRoomName);
+        currentRoom = newRoom;
+        StateHasChanged();
+    }
     private void BuildNewRoom()
     {
         Room newRoom = Program.roomManager.GetRoomByName(newRoomName);
         GameState.GetPlayer().house.AddRoom(newRoom);
+        currentRoom = newRoom;
         StateHasChanged();
+    }
+    private void Construct()
+    {
+        GameState.gatherTimer = new Timer(new TimerCallback(_ =>
+        {
+            if(currentRoom.IsComplete == false)
+            {
+                if (GameState.GetPlayerInventory().HasItem(0))
+                {
+                    currentRoom.WorkRemaining--;
+                }
+                
+            }
+        }),null, 1000,1000);
     }
     private void SetNewRoomName(string name)
     {

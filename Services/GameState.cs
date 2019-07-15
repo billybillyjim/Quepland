@@ -27,6 +27,7 @@ public class GameState
 
     public bool isSplitView;
     public bool inventoryIsActiveView;
+    public string activeView = "Skills";
     public bool compactBankView;
 
     public bool saveDataLoaded;
@@ -36,7 +37,7 @@ public class GameState
     public bool safeToLoad = false;
 
     public string previousURL;
-    public string updateVersionString = "1.027a";
+    public string updateVersionString = "1.028a";
     
     public GameItem currentUsedItem;
     public GameItem currentGatherItem;

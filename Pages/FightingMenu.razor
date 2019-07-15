@@ -215,7 +215,10 @@
             GameState.UpdateState();
             this.StateHasChanged();
         }), null, 1000 * opponent.AttackSpeed, 1000 * opponent.AttackSpeed);
-
+        if(GameState.GetPlayer().GetWeapon() != null && GameState.GetPlayer().GetWeapon().ActionRequired == "Archery")
+        {
+            Attack();
+        }
         GameState.UpdateState();
         this.StateHasChanged();
     }
@@ -332,9 +335,9 @@
                     opponent.CurrentHP += Math.Min(maxHP, dmg);
                     if(Math.Min(maxHP, dmg) > 0)
                     {
-                         MessageManager.AddMessage(opponent.Name + " absorbed " +  Math.Min(maxHP, dmg) + " HP!");
+                        MessageManager.AddMessage(opponent.Name + " absorbed " +  Math.Min(maxHP, dmg) + " HP!");
                     }
-                   
+
                 }
             }
         }

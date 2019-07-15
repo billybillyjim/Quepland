@@ -1,0 +1,234 @@
+@inject GameState GameState
+@inject MessageManager MessageManager
+@implements IDisposable
+@using System.Threading
+
+@LoadCraftingMenu()
+
+
+
+@functions{
+
+    private bool hasItemsToShow = false;
+    private RenderFragment LoadCraftingMenu()
+    {
+        return builder =>
+        {
+            builder.OpenElement(0, "table");
+            builder.AddAttribute(1, "class", "table-hover");
+            builder.AddAttribute(2, "style", "width:100%");
+            if (!GameState.isSplitView)
+            {
+                builder.OpenComponent<MenuButtons>(2);
+                builder.CloseComponent();
+            }
+
+            builder.OpenElement(2, "h1");
+            builder.AddContent(3, "Craft");
+            builder.CloseElement();
+            builder.OpenElement(4, "thead");
+            builder.AddAttribute(5, "style", "width:100%");
+            builder.CloseElement();
+            builder.OpenElement(6, "tbody");
+            hasItemsToShow = false;
+            foreach (KeyValuePair<GameItem, int> pair in GameState.GetPlayerInventory().GetItems())
+            {
+                if (pair.Key.IsUsable)
+                {
+                    
+                    int it = 0;
+                    foreach (GameItem item in GetCreatableItems(pair.Key, out List<GameItem> sources))
+                    {
+                        hasItemsToShow = true;
+                        builder.AddContent(7, LoadItem(item, pair.Key, sources[it]));
+                        it++;
+                    }
+
+                }
+                
+            }
+            if(hasItemsToShow == false)
+            {
+                builder.OpenElement(8, "tr");
+                builder.AddAttribute(9, "class", "buddy-top");
+                builder.OpenElement(10, "td");
+                builder.AddContent(11, "You don't have anything you can craft right now.");
+                builder.CloseElement();
+                builder.CloseElement();
+            }
+            builder.CloseElement();
+            builder.CloseElement();
+
+        };
+    }
+    private RenderFragment LoadItem(GameItem item, GameItem itemUsed, GameItem sourceItem)
+    {
+        return builder =>
+        {
+            builder.OpenElement(0, "tr");
+            builder.AddAttribute(1, "class", "buddy-top");
+            builder.OpenElement(3, "td");
+            builder.AddAttribute(4, "title", item.ItemDescription);
+            builder.AddAttribute(5, "style", "text-align:left;font-weight:bold;line-height:40px;display:flex");
+            builder.OpenElement(6, "img");
+            builder.AddAttribute(7, "src", "data/ItemIcons/" + item.Icon + ".png");
+            builder.AddAttribute(8, "style", "width:40px;height:40px;opacity:0.6;color:green;float:left");
+            if (item.ExperienceGained != null)
+            {
+                builder.AddAttribute(9, "title", "+ " + item.ExperienceGained + " exp");
+            }
+            //Close 6 img
+            builder.CloseElement();
+
+            builder.AddContent(10, item.ItemName);
+
+            //Close 3 td
+            builder.CloseElement();
+            builder.OpenElement(11, "td");
+            if(itemUsed.DestroyOnUse == false)
+            {
+                builder.AddContent(12, "Can make:" + GameState.GetPlayerInventory().GetAmountOfItem(sourceItem));
+            }
+            else
+            {
+                int maxToMake = Math.Max(GameState.GetPlayerInventory().GetAmountOfItem(sourceItem), GameState.GetPlayerInventory().GetAmountOfItem(itemUsed));
+                builder.AddContent(12, "Can make:" + maxToMake);
+            }
+            builder.CloseElement();
+            builder.OpenElement(13, "td");
+            builder.OpenElement(14, "button");
+            builder.AddAttribute(15, "class", "btn btn-primary");
+            builder.AddAttribute(16, "style", "float:right;margin-right:5px;");
+            builder.AddAttribute(17, "title", "Create a " + item.ItemName);
+            builder.AddAttribute(18, "onclick", () => CreateItem(item, itemUsed, sourceItem));
+            builder.AddContent(19, "Create");
+            //Close 11 td, 12 button
+            builder.CloseElement();
+            builder.CloseElement();
+            //Close 0 tr
+            builder.CloseElement();
+        };
+    }
+
+    private string CreateItem(GameItem itemCreated, GameItem itemUsed, GameItem sourceItem)
+    {
+        if (GameState.createRepeatTimer != null)
+        {
+            GameState.createRepeatTimer.Dispose();
+            GameState.createRepeatTimer = null;
+        }
+        Console.WriteLine("Start");
+        int creationTime = itemCreated.GatherSpeed;
+        GameState.createRepeatTimer = new Timer(new TimerCallback(_ =>
+        {
+
+            GameState.safeToSave = false;
+            if (itemCreated.AmountOfIngredientsToCreate == 0)
+            {
+                Console.WriteLine("Ingredients == 0");
+                if (GameState.GetPlayerInventory().RemoveOneOfItem(sourceItem))
+                {
+                    Console.WriteLine("Removed Source Item");
+                    int numToMake = Math.Max(itemCreated.MadeOnCreation, 1);
+                    if (GameState.GetPlayerInventory().AddMultipleOfItem(itemCreated, numToMake) == false)
+                    {
+                        CancelUse();
+                    }
+
+                    MessageManager.AddMessage(itemCreated.GatherString);
+                    GameState.GetPlayer().GainExperience(itemCreated.ExperienceGained);
+                    if (itemUsed.DestroyOnUse)
+                    {
+                        GameState.GetPlayerInventory().RemoveOneOfItem(itemUsed);
+                        if (GameState.GetPlayerInventory().HasItem(itemUsed) == false)
+                        {
+                            MessageManager.AddMessage("You have run out of " + itemUsed.ItemName + ".");
+                            CancelUse();
+                        }
+                    }
+                    if (GameState.GetPlayerInventory().HasItem(sourceItem) == false)
+                    {
+                        MessageManager.AddMessage("You have run out of " + sourceItem.ItemName + ".");
+                        CancelUse();
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("Ingredients > 0");
+                GameState.GetPlayerInventory().RemoveItems(sourceItem, itemCreated.AmountOfIngredientsToCreate);
+                GameState.GetPlayerInventory().AddItem(itemCreated);
+                MessageManager.AddMessage(itemCreated.GatherString);
+                GameState.GetPlayer().GainExperience(itemCreated.ExperienceGained);
+                if (itemUsed.DestroyOnUse)
+                {
+                    GameState.GetPlayerInventory().RemoveOneOfItem(itemUsed);
+                    if (GameState.GetPlayerInventory().HasItem(itemUsed) == false)
+                    {
+                        MessageManager.AddMessage("You have run out of " + itemUsed.ItemName + ".");
+                        CancelUse();
+                    }
+                }
+                if (GameState.GetPlayerInventory().HasItem(sourceItem) == false || GameState.GetPlayerInventory().GetAmountOfItem(sourceItem) < itemCreated.AmountOfIngredientsToCreate)
+                {
+                    MessageManager.AddMessage("You have run out of " + sourceItem.ItemName + ".");
+                    CancelUse();
+                }
+
+            }
+            GameState.safeToSave = true;
+            GameState.UpdateState();
+            StateHasChanged();
+        }), null, (int)((500 + (creationTime / 2)) * GameState.GetPlayer().GetGatherSpeed(itemUsed.ActionsEnabled)), (int)((1000 + creationTime) * GameState.GetPlayer().GetGatherSpeed(itemUsed.ActionsEnabled)));
+
+
+        return "";
+    }
+
+    private string CancelUse()
+    {
+        if (GameState.createRepeatTimer != null)
+        {
+            GameState.createRepeatTimer.Dispose();
+        }
+
+        GameState.isUsing = false;
+        GameState.safeToSave = true;
+        GameState.UpdateState();
+        StateHasChanged();
+        return "";
+    }
+    private List<GameItem> GetCreatableItems(GameItem item, out List<GameItem> sourceItems)
+    {
+        if (item.UsableIDs == null)
+        {
+            Console.WriteLine("No usable ids for " + item.ItemName);
+            sourceItems = null;
+            return new List<GameItem>();
+        }
+        int[,] usableIDs = Extensions.To2DArray<int>(item.UsableIDs);
+        List<GameItem> items = new List<GameItem>();
+        sourceItems = new List<GameItem>();
+        for (int i = 0; i < usableIDs.GetLength(0); i++)
+        {
+            if (GameState.GetPlayerInventory().HasItem(usableIDs[i, 0]))
+            {
+                items.Add(Program.itemDatabase.GetItemByID(usableIDs[i, 1]));
+                sourceItems.Add(Program.itemDatabase.GetItemByID(usableIDs[i, 0]));
+            }
+        }
+
+        return items;
+    }
+    protected override void OnInit()
+    {
+        GameState.StateChanged += OnInventoryStateChanged;
+        this.StateHasChanged();
+    }
+    public void Dispose()
+    {
+        GameState.StateChanged -= OnInventoryStateChanged;
+    }
+    void OnInventoryStateChanged(object sender, EventArgs e) => StateHasChanged();
+}
+

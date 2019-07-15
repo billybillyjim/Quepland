@@ -7,22 +7,20 @@
 </div>
 @if (!GameState.isSplitView)
 {
-    <div style="height:100vh;min-width:425px;overflow-y:scroll;padding-left:10px; padding-right:10px;"class="col-6" >
-        <div class="top-row px-6"  style="background:#e4e4e4; padding:10px;margin-left:-10px;margin-right:-10px;">
-            <table style="width:100%">
+    <div style="height:100vh;min-width:425px;overflow-y:scroll;padding-left:10px; padding-right:10px;" class="col-6">
+        <div class="top-row px-6" style="background:#e4e4e4; padding:10px;margin-left:-10px;margin-right:-10px;">
+            <table style="width:80%">
                 <tr>
                     @if (GameState.CanLeave())
                     {
-                        <td><a href="/Followers">Followers</a></td>
                         <td><a href="/Help"> Help</a></td>
                         <td><a href="/About"> About</a></td>
                         <td><a href="/Updates"> Updates(@GameState.updateVersionString)</a></td>
-                        <td><a href="/Settings"> Settings</a></td>
-
+                        <td><a href="/Settings"> Settings</a></td>                     
                     }
-
                 </tr>
             </table>
+            <div><ExperienceCard></ExperienceCard></div>
         </div>
 
         <div class="content px-6">
@@ -56,7 +54,7 @@ else
 
         <div class="content px-5" style="padding-left:10px!important; padding-right:10px!important;">
             @Body
-            <div class="footer navbar-fixed-bottom"style="padding-right:10px;padding-left:10px;margin-left:-10px;margin-right:-10px;">
+            <div class="footer navbar-fixed-bottom" style="padding-right:10px;padding-left:10px;margin-left:-10px;margin-right:-10px;">
                 <MessagesMenu />
             </div>
         </div>
@@ -75,16 +73,28 @@ else
 }
 else
 {
-    if (GameState.inventoryIsActiveView)
+    if (GameState.activeView == "Inventory")
     { <div class="col align-self-start" style="height:100vh;padding-left:0px; padding-right:0px; min-width:400px;overflow-y:scroll">
             <Inventory />
         </div>
 
     }
-    else
+    else if (GameState.activeView == "Skills")
     {
         <div class="col align-self-start" style="height:100vh;padding-left:0px; padding-right:0px; min-width:400px;overflow-y:scroll">
             <SkillsMenu />
+        </div>
+    }
+    else if (GameState.activeView == "Crafting")
+    {
+        <div class="col align-self-start" style="height:100vh;padding-left:0px; padding-right:0px; min-width:400px;overflow-y:scroll">
+            <CraftingMenu />
+        </div>
+    }
+    else if (GameState.activeView == "Followers")
+    {
+        <div class="col align-self-start" style="height:100vh;padding-left:0px; padding-right:0px; min-width:400px;overflow-y:scroll">
+            <FollowersMenu />
         </div>
     }
 }

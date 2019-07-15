@@ -24,28 +24,21 @@
 
             if (!GameState.isSplitView)
             {
-                builder.OpenElement(1, "p");
-                builder.AddAttribute(1, "style", "margin-bottom:.2rem");
-                builder.OpenElement(2, "img");
-                builder.AddAttribute(3, "src", "data/ItemIcons/Skills.png");
-                builder.AddAttribute(4, "style", "width:60px;height:60px;");
-                builder.AddAttribute(5, "onclick", () => GameState.ToggleActiveView());
-                builder.AddContent(6, "Show Skills");
-                builder.CloseElement();
-                                builder.OpenElement(2, "img");
-                builder.AddAttribute(3, "src", "data/ItemIcons/Inventory.png");
-                builder.AddAttribute(4, "style", "width:60px;height:60px;opacity:.6");
-                builder.AddContent(6, "Show Inventory");
-                builder.CloseElement();
-                builder.CloseElement();
+                builder.OpenComponent<MenuButtons>(2);
+                builder.CloseComponent();
             }
             builder.OpenElement(7, "h1");
+            builder.AddAttribute(7, "style", "margin-bottom: .2rem;");
             builder.AddContent(8, "Inventory");
             builder.CloseElement();
             builder.OpenElement(8, "p");
             if (GameState.GetPlayerInventory().GetAvailableSpaces() == 0)
             {
-                builder.AddAttribute(8, "style", "color:firebrick");
+                builder.AddAttribute(8, "style", "color:firebrick; margin-bottom: .2rem;");
+            }
+            else
+            {
+                  builder.AddAttribute(8, "style", "margin-bottom: .2rem;");
             }
 
             builder.AddContent(9, GameState.GetPlayerInventory().GetFreeSpacesString());
@@ -54,6 +47,7 @@
             if (GameState.GetPlayer().GetSkill("HP") != null)
             {
                 builder.OpenElement(10, "p");
+                builder.AddAttribute(10, "style", "margin-bottom: .2rem;");
                 builder.AddContent(11, "HP:" + GameState.GetPlayer().CurrentHP + "/" + GameState.GetPlayer().MaxHP);
                 builder.CloseElement();
             }
@@ -62,6 +56,7 @@
             if (GameState.canSell)
             {
                 builder.OpenElement(12, "p");
+                builder.AddAttribute(12, "style", "margin-bottom: .2rem;");
                 builder.AddContent(13, "Sell X: ");
                 builder.OpenElement(14, "input");
                 builder.AddAttribute(15, "value", Microsoft.AspNetCore.Components.BindMethods.GetValue(sellAmount));
@@ -72,6 +67,7 @@
 
 
             builder.OpenElement(17, "p");
+            builder.AddAttribute(17, "style", "margin-bottom: .2rem;");
             if (GameState.GetPlayer().activeFollower == null)
             {
                 builder.AddContent(18, "No current follower");
@@ -83,6 +79,7 @@
 
             builder.CloseElement();
             builder.OpenElement(20, "p");
+            builder.AddAttribute(20, "style", "margin-bottom: .2rem;");
             if (GameState.buffSecondsLeft > 0)
             {
                 builder.AddContent(21, GameState.currentBuffItem.BuffedSkill + " +" + GameState.currentBuffItem.BuffAmount + ", " + GameState.buffSecondsLeft);
@@ -144,7 +141,7 @@
                 builder.AddAttribute(2, "style", "background-color:aquamarine");
             }
             builder.OpenElement(3, "td");
-            builder.AddAttribute(4, "title", item.Key.ItemDescription);
+            builder.AddAttribute(4, "title", item.Key.ItemDescription + ", " + item.Key.itemPos);
             builder.AddAttribute(5, "style", "text-align:left;font-weight:bold;line-height:40px;display:flex");
             builder.OpenElement(6, "img");
             builder.AddAttribute(7, "src", "data/ItemIcons/" + item.Key.Icon + ".png");
