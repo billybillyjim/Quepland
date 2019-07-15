@@ -14,14 +14,15 @@
     {
         return builder =>
         {
-            builder.OpenElement(0, "table");
-            builder.AddAttribute(1, "class", "table-hover");
-            builder.AddAttribute(2, "style", "width:100%");
-            if (!GameState.isSplitView)
+                        if (!GameState.isSplitView)
             {
-                builder.OpenComponent<MenuButtons>(2);
+                builder.OpenComponent<MenuButtons>(0);
                 builder.CloseComponent();
             }
+            builder.OpenElement(1, "table");
+            builder.AddAttribute(2, "class", "table-hover");
+            builder.AddAttribute(2, "style", "width:100%");
+
 
             builder.OpenElement(2, "h1");
             builder.AddContent(3, "Craft");
@@ -101,7 +102,12 @@
             builder.AddAttribute(16, "style", "float:right;margin-right:5px;");
             builder.AddAttribute(17, "title", "Create a " + item.ItemName);
             builder.AddAttribute(18, "onclick", () => CreateItem(item, itemUsed, sourceItem));
-            builder.AddContent(19, "Create");
+             if (GameState.GetPlayer().HasRequiredLevel(item) == false)
+            {
+                builder.AddAttribute(19, "disabled", true);
+                builder.AddAttribute(20, "title", "You lack the " + item.ActionRequired + " level to do this. (" + item.RequiredLevel + ")");
+            }
+            builder.AddContent(21, "Create");
             //Close 11 td, 12 button
             builder.CloseElement();
             builder.CloseElement();

@@ -835,7 +835,10 @@
     "areaToUnlockOnArrival": "Sahota Tir",
     "region": "Caligin Commonwealth",
     "monsterIDs": [ 40, 41, 42, 43, 44 ],
-    "npcIDs": [37, 64]
+    "npcIDs": [ 37, 64 ]
+  },
+  {
+
   }
 
 

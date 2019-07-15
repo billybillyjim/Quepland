@@ -468,8 +468,14 @@ else
         }
         catch
         {
+            Console.WriteLine("Failed to get username and token.");
+            if(username != null)
+            {
+                Console.WriteLine(username);
+            }
             username = "";
             token = "";
+
         }
         GameState.saveGameExists = saveGameExists;
         if (GameState.gameDataLoaded == false)

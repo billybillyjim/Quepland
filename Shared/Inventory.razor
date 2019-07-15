@@ -27,14 +27,14 @@
                 builder.OpenComponent<MenuButtons>(2);
                 builder.CloseComponent();
             }
-            builder.OpenElement(7, "h1");
-            builder.AddAttribute(7, "style", "margin-bottom: .2rem;");
-            builder.AddContent(8, "Inventory");
+            builder.OpenElement(3, "h1");
+            builder.AddAttribute(4, "style", "margin-bottom: .2rem;");
+            builder.AddContent(5, "Inventory");
             builder.CloseElement();
-            builder.OpenElement(8, "p");
+            builder.OpenElement(6, "p");
             if (GameState.GetPlayerInventory().GetAvailableSpaces() == 0)
             {
-                builder.AddAttribute(8, "style", "color:firebrick; margin-bottom: .2rem;");
+                builder.AddAttribute(7, "style", "color:firebrick; margin-bottom: .2rem;");
             }
             else
             {

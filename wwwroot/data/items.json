@@ -65,7 +65,7 @@
     "gatherString": "You pick up some cheese. Probably shouldn't eat it.",
     "icon": "Cheese",
     "isEdible": true,
-    "healAmount": 3,
+    "healAmount": 10,
     "healDuration": 3,
     "buffedSkill": "Strength",
     "buffAmount": 2
@@ -287,7 +287,7 @@
     "gatherSpeed": 750,
     "icon": "Plant",
     "isEdible": true,
-    "healAmount": 3,
+    "healAmount": 9,
     "healDuration": 3,
     "buffedSkill": "Deftness",
     "buffAmount": 2
