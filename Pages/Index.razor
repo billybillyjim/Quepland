@@ -88,7 +88,7 @@ else
     private int amount;
     private ElementRef simpleList;
     private SimpleAES Encryptor = new SimpleAES();
-    private static string username;
+    private static string userID;
     private static string token;
 
     public void AddRoomToHouse()
@@ -463,17 +463,17 @@ else
         saveGameExists = await asyncLocalStorage.GetItemAsync<bool>("SaveGameExists");
         try
         {
-            username = await JSRuntime.InvokeAsync<string>("kongregateFunctions.getUsername");
+            userID = await JSRuntime.InvokeAsync<string>("kongregateFunctions.getUserID");
             token = await JSRuntime.InvokeAsync<string>("kongregateFunctions.getToken");
         }
         catch
         {
             Console.WriteLine("Failed to get username and token.");
-            if(username != null)
+            if(userID != null)
             {
-                Console.WriteLine(username);
+                Console.WriteLine(userID);
             }
-            username = "";
+            userID = "";
             token = "";
 
         }
@@ -526,7 +526,7 @@ else
         }
         try
         {
-            Program.playfabManager.TryLogin(username, token);
+            Program.playfabManager.TryLogin(userID, token);
         }
         catch
         {
