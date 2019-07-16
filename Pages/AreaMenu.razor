@@ -1085,7 +1085,7 @@
             GameState.UpdateState();
             StateHasChanged();
 
-        }), null, 2000, 2000);
+        }), null, 2000 + Program.itemDatabase.GetRewardByName(totemLevel).SpeedMalus, 2000 + Program.itemDatabase.GetRewardByName(totemLevel).SpeedMalus);
 
         GameState.UpdateState();
         StateHasChanged();

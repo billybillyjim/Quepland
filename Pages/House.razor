@@ -199,6 +199,7 @@ else
     {
         Room newRoom = Program.roomManager.GetRoomByName(newRoomName);
         currentRoom = newRoom;
+        newRoom.WorkRemaining = (newRoom.PlanksRequired * 4 * (newRoom.MinimumPlankLevel + 1)) + (newRoom.BarsRequired * 10 * (newRoom.MinimumBarLevel + 1));
         StateHasChanged();
     }
     private void BuildNewRoom()
@@ -206,6 +207,12 @@ else
         Room newRoom = Program.roomManager.GetRoomByName(newRoomName);
         GameState.GetPlayer().house.AddRoom(newRoom);
         currentRoom = newRoom;
+        StateHasChanged();
+    }
+    private void CompleteNewRoom()
+    {
+        currentRoom.IsComplete = true;
+        GameState.GetPlayer().house.AddRoom(currentRoom);
         StateHasChanged();
     }
     private void Construct()
@@ -218,11 +225,12 @@ else
                 if (bestNails != null && GameState.GetPlayerInventory().RemoveOneOfItem(bestNails))
                 {
                     currentRoom.WorkRemaining -= bestNails.RequiredLevel / 3;
+                    GameState.GetPlayer().GainExperience("Construction", bestNails.RequiredLevel / 3);
                     MessageManager.AddMessage("You nail two planks together.");
                 }
                 if (currentRoom.WorkRemaining <= 0)
                 {
-                    currentRoom.IsComplete = true;
+                    CompleteNewRoom();
                     GameState.gatherTimer.Dispose();
                 }
                 GameState.UpdateState();

@@ -32,6 +32,7 @@
   {
     "name": "Totem",
     "minimumLevel": 20,
+    "speedMalus": 500,
     "rewards": [
       [ 235, 999 ],
       [ 344, 1 ]
@@ -39,6 +40,7 @@
   },  {
     "name": "Nice Totem",
     "minimumLevel": 40,
+    "speedMalus": 1000,
     "rewards": [
       [ 236, 998 ],
       [ 344, 2 ]
@@ -46,6 +48,7 @@
   },  {
     "name": "Exquisite Totem",
     "minimumLevel": 60,
+    "speedMalus": 1500,
     "rewards": [
       [ 237, 997 ],
       [ 344, 3 ]

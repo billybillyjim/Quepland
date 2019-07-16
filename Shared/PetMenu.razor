@@ -1,0 +1,78 @@
+@inject GameState GameState
+@inject MessageManager MessageManager
+@implements IDisposable
+@using System.Threading
+
+@LoadPetMenu()
+
+
+@functions{
+
+    private RenderFragment LoadPetMenu()
+    {
+        return builder =>
+        {
+           
+            builder.OpenElement(1, "table");
+            builder.AddAttribute(2, "class", "table-hover");
+            builder.AddAttribute(2, "style", "width:100%");
+
+
+            builder.OpenElement(2, "h1");
+            builder.AddContent(3, "Craft");
+            builder.CloseElement();
+            builder.OpenElement(4, "thead");
+            builder.AddAttribute(5, "style", "width:100%");
+            builder.CloseElement();
+            builder.OpenElement(6, "tbody");
+
+            builder.CloseElement();
+            builder.CloseElement();
+
+        };
+    }
+    private RenderFragment LoadPet()
+    {
+        return builder =>
+        {
+            builder.OpenElement(0, "tr");
+            builder.AddAttribute(1, "class", "buddy-top");
+            builder.OpenElement(3, "td");
+            builder.AddAttribute(4, "title", "");
+            builder.AddAttribute(5, "style", "text-align:left;font-weight:bold;line-height:40px;display:flex");
+            builder.OpenElement(6, "img");
+            builder.AddAttribute(7, "src", "data/ItemIcons/Unknown.png");
+            builder.AddAttribute(8, "style", "width:40px;height:40px;opacity:0.6;color:green;float:left");
+            //Close 6 img
+            builder.CloseElement();
+
+            builder.AddContent(10, "");
+
+            //Close 3 td
+            builder.CloseElement();
+
+            builder.OpenElement(13, "td");
+            builder.OpenElement(14, "button");
+            builder.AddAttribute(15, "class", "btn btn-primary");
+            builder.AddAttribute(16, "style", "float:right;margin-right:5px;");
+
+            //Close 11 td, 12 button
+            builder.CloseElement();
+            builder.CloseElement();
+            //Close 0 tr
+            builder.CloseElement();
+        };
+    }
+
+    protected override void OnInit()
+    {
+        GameState.StateChanged += OnInventoryStateChanged;
+        this.StateHasChanged();
+    }
+    public void Dispose()
+    {
+        GameState.StateChanged -= OnInventoryStateChanged;
+    }
+    void OnInventoryStateChanged(object sender, EventArgs e) => StateHasChanged();
+}
+

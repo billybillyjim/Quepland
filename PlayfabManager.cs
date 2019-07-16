@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 public class PlayfabManager
 {
     private bool _running = true;
+    private string loadString = "";
     public async void TryLogin(string userID, string token)
     {
         PlayFabSettings.staticSettings.TitleId = "E9B77"; 
@@ -32,10 +33,18 @@ public class PlayfabManager
     }
     public async void Save(string data)
     {
+        string dataPart2 = "";
+        if(data.Length > 4500)
+        {
+            dataPart2 = data.Substring(4500, data.Length);
+            data = data.Substring(0, 4500);
+        }
         PlayFabResult<UpdateUserDataResult> result = await PlayFabClientAPI.UpdateUserDataAsync(new UpdateUserDataRequest()
         {
             Data = new Dictionary<string, string>() {
-                    {"Save Data", data }
+                    {"Save Data", data },
+                    {"Save Data2", dataPart2 }
+
                 }
         });
         if(result.Error != null)
@@ -44,5 +53,21 @@ public class PlayfabManager
         }
         
 
+    }
+    public string Load()
+    {
+        LoadData();
+        return loadString;
+    }
+    private async void LoadData()
+    {
+        PlayFabResult<GetUserDataResult> result = await PlayFabClientAPI.GetUserDataAsync(new GetUserDataRequest());
+        loadString += result.Result.Data["Save Data"].Value;
+        if(result.Result.Data.TryGetValue("Save Data 2", out UserDataRecord extraData))
+        {
+            loadString += extraData.Value;
+        }
+
+        
     }
 }

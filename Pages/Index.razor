@@ -80,7 +80,7 @@ else
     private bool userWantsGameReset = false;
     private bool gameHasBeenSaved = false;
     private bool gameIsRendered = false;
-    private bool debugMode = false;
+    private bool debugMode = true;
     public string pudding = "Not set.";
     public string encrypt = "This is a whole string, with many things to test! 1234, 50, 100";
     public string testString = "";
@@ -114,6 +114,7 @@ else
     private async void UpdateHighScores()
     {
         await JSRuntime.InvokeAsync<object>("kongregateFunctions.updateTotalLevelScore", GameState.GetPlayer().GetTotalLevel());
+        await JSRuntime.InvokeAsync<object>("kongregateFunctions.updateTotalKills", GameState.totalKills);
 
     }
     public void SetCulinaryTo43()
@@ -222,7 +223,6 @@ else
         SaveDataEncrypted();
 
         MessageManager.AddMessage("Your game has been saved.");
-        UpdateHighScores();
         gameHasBeenSaved = true;
         GameState.saveDataLoaded = true;
         GameState.saveGameExists = true;
@@ -305,6 +305,10 @@ else
             if(settings.Length > 2 && settings[2] != null)
             {
                 GameState.expensiveItemThreshold = int.Parse(settings[2]);
+            }
+            if(settings.Length > 3 && settings[3] != null)
+            {
+                GameState.totalKills = int.Parse(settings[3]);
             }
         }
         if (lines.Length > 10 && lines[10] != null)

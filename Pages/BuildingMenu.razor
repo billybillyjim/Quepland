@@ -113,11 +113,11 @@
             builder.OpenElement(5, "td");
             if (thisBuilding.IsExpensive)
             {
-                builder.AddContent(6, item.Value * 3);
+                builder.AddContent(6, String.Format("{0:n0}",item.Value * 3));
             }
             else
             {
-                builder.AddContent(6, item.Value);
+                builder.AddContent(6, String.Format("{0:n0}",item.Value));
             }
             builder.CloseElement();
             builder.OpenElement(7, "td");
@@ -374,7 +374,7 @@
                         {
                             builder.AddAttribute(20, "disabled", true);
                         }
-                        builder.AddContent(21, "Buy " + item.ItemName + " for " + item.Value + " gp");
+                        builder.AddContent(21, "Buy " + item.ItemName + " for " + String.Format("{0:n0}",item.Value) + " gp");
                         builder.CloseElement();
                         builder.OpenElement(22, "br");
                         builder.CloseElement();

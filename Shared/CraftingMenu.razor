@@ -10,11 +10,12 @@
 @functions{
 
     private bool hasItemsToShow = false;
+    private GameItem currentCraftingItem;
     private RenderFragment LoadCraftingMenu()
     {
         return builder =>
         {
-                        if (!GameState.isSplitView)
+            if (!GameState.isSplitView)
             {
                 builder.OpenComponent<MenuButtons>(0);
                 builder.CloseComponent();
@@ -36,7 +37,7 @@
             {
                 if (pair.Key.IsUsable)
                 {
-                    
+
                     int it = 0;
                     foreach (GameItem item in GetCreatableItems(pair.Key, out List<GameItem> sources))
                     {
@@ -46,7 +47,7 @@
                     }
 
                 }
-                
+
             }
             if(hasItemsToShow == false)
             {
@@ -102,13 +103,27 @@
             builder.AddAttribute(15, "class", "btn btn-primary");
             builder.AddAttribute(16, "style", "float:right;margin-right:5px;");
             builder.AddAttribute(17, "title", "Create a " + item.ItemName);
-            builder.AddAttribute(18, "onclick", () => CreateItem(item, itemUsed, sourceItem));
-             if (GameState.GetPlayer().HasRequiredLevel(item) == false)
+            if (currentCraftingItem != item)
             {
-                builder.AddAttribute(19, "disabled", true);
-                builder.AddAttribute(20, "title", "You lack the " + item.ActionRequired + " level to do this. (" + item.RequiredLevel + ")");
+                builder.AddAttribute(18, "onclick", () => CreateItem(item, itemUsed, sourceItem));
+                if (GameState.GetPlayer().HasRequiredLevel(item) == false)
+                {
+                    builder.AddAttribute(19, "disabled", true);
+                    builder.AddAttribute(20, "title", "You lack the " + item.ActionRequired + " level to do this. (" + item.RequiredLevel + ")");
+                }
+                else if(GameState.CanLeave() == false)
+                {
+                    builder.AddAttribute(19, "disabled", true);
+                    builder.AddAttribute(20, "title", "Finish what you're doing first.");
+                }
+                builder.AddContent(21, "Create");
             }
-            builder.AddContent(21, "Create");
+            else if(currentCraftingItem == item)
+            {
+                 builder.AddAttribute(18, "onclick", () => CancelUse());
+                 builder.AddContent(21, "Stop");
+            }
+
             //Close 11 td, 12 button
             builder.CloseElement();
             builder.CloseElement();
@@ -125,6 +140,7 @@
             GameState.createRepeatTimer = null;
         }
         int creationTime = itemCreated.GatherSpeed;
+        currentCraftingItem = itemCreated;
         GameState.isUsing = true;
         GameState.createRepeatTimer = new Timer(new TimerCallback(_ =>
         {
@@ -187,8 +203,6 @@
             GameState.UpdateState();
             StateHasChanged();
         }), null, (int)((500 + (creationTime / 2)) * GameState.GetPlayer().GetGatherSpeed(itemUsed.ActionsEnabled)), (int)((1000 + creationTime) * GameState.GetPlayer().GetGatherSpeed(itemUsed.ActionsEnabled)));
-
-
         return "";
     }
 

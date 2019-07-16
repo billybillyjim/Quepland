@@ -54,6 +54,8 @@ public class GameState
 
     public int expensiveItemThreshold = 10000;
 
+    public int totalKills;
+
     private Player player = new Player();
 
     public Area currentArea;
@@ -271,6 +273,8 @@ public class GameState
             data += compactBankView.ToString();
             data += ",";
             data += expensiveItemThreshold;
+            data += ",";
+            data += totalKills;
             pos++;
             //NPC data 10
             data += "#";

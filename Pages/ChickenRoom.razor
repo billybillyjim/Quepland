@@ -1,0 +1,34 @@
+﻿@page "/House/ChickenRoom"
+@inject HttpClient Http
+@inject GameState GameState
+@implements IDisposable
+
+@if (room != null)
+{
+    <h1>@room.Name</h1>
+}
+
+
+
+
+@functions{
+
+    protected override void OnParametersSet()
+    {
+        SetRoom(roomURL);
+    }
+    private void SetRoom(string url)
+    {
+        room = Program.roomManager.GetRoomByURL(url);
+    }
+    protected override void OnInit()
+    {
+        GameState.StateChanged += OnGameStateChanged;
+        this.StateHasChanged();
+    }
+    void IDisposable.Dispose()
+    {
+        GameState.StateChanged -= OnGameStateChanged;
+    }
+    void OnGameStateChanged(object sender, EventArgs e) => StateHasChanged();
+}

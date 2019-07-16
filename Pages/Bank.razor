@@ -114,7 +114,7 @@ else if (GameState.GetPlayerBank().activeTab != GameState.GetPlayerBank().tabs[0
                             }
                             @if (!addingItemsToTab)
                             {
-                                <td style="padding:.2rem" align="right" title="Worth @(((item.Key.Value / 2f) * item.Value) + " (" + (item.Key.Value / 2f)) each)">@item.Value</td>
+                                <td style="padding:.2rem" align="right" title="Worth @(((item.Key.Value / 2f) * item.Value) + " (" + (item.Key.Value / 2f)) each)">@String.Format("{0:n0}",item.Value)</td>
                             }
 
                             @if (GameState.compactBankView && !addingItemsToTab)

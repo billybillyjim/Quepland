@@ -33,6 +33,9 @@
     updateTotalLevelScore: function (totalLevel) {
         window.kongregate.stats.submit("Total Level", totalLevel);
     },
+    updateTotalKills: function (totalKills) {
+        window.kongregate.stats.submit("Total Kills", totalKills);
+    },
     createSortableList: function (listElement) {
         Sortable.create(listElement, {
             group: "localStorage-example",

@@ -193,21 +193,21 @@
             builder.AddAttribute(29, "size", "4");
             if (item.Value == 1)
             {
-                builder.AddAttribute(30, "title", "Worth " + ((item.Key.Value / 2f) * item.Value));
+                builder.AddAttribute(30, "title", "Worth " + String.Format("{0:n0}", ((item.Key.Value / 2f) * item.Value)));
             }
             else
             {
-                builder.AddAttribute(30, "title", "Worth " + ((item.Key.Value / 2f) * item.Value) + "(" + (item.Key.Value / 2f) + " each)");
+                builder.AddAttribute(30, "title", "Worth " + String.Format("{0:n0}",((item.Key.Value / 2f) * item.Value)) + "(" + (item.Key.Value / 2f) + " each)");
             }
 
             if (item.Key.IsStackable)
             {
-                builder.AddContent(31, "1 Stack of " + item.Value);
+                builder.AddContent(31, "1 Stack of " + String.Format("{0:n0}",item.Value));
             }
             else
             {
 
-                builder.AddContent(31, item.Value);
+                builder.AddContent(31, String.Format("{0:n0}",item.Value));
             }
             builder.CloseElement();
             builder.CloseElement();
