@@ -37,7 +37,7 @@ public class GameState
     public bool safeToLoad = false;
 
     public string previousURL;
-    public string updateVersionString = "1.028c";
+    public string updateVersionString = "1.029b";
     
     public GameItem currentUsedItem;
     public GameItem currentGatherItem;
@@ -231,7 +231,7 @@ public class GameState
             data += "#" + GetPlayer().GetSkillString();
             pos++;
             //Inventory 2
-            data += "#" + GetPlayerInventory().ToString();
+            data += "#" + GetPlayerInventory().ToStringSorted();
             pos++;
             //Areas 3
             data += "#" + areaManager.SaveAreas();

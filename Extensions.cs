@@ -45,6 +45,7 @@ public static class Extensions
     {
         Dictionary<GameItem, int> items = new Dictionary<GameItem, int>();
         string[] dataLines = data.Split('/');
+        int pos = 0;
         foreach (string line in dataLines)
         {
             if (line.Length > 0)
@@ -62,7 +63,9 @@ public static class Extensions
                 {
                     item.IsLocked = true;
                 }
+                item.itemPos = pos;
                 items[item] = amount;
+                pos++;
             }
         }
         return items;

@@ -603,6 +603,28 @@ public class Inventory
         }
         return returnString;
     }
+    public string ToStringSorted()
+    {
+        string returnString = "";
+        foreach (KeyValuePair<GameItem, int> pair in GetItemsSorted(5))
+        {
+            int isLocked = 0;
+            if (pair.Key.IsLocked)
+            {
+                isLocked = 1;
+            }
+            if (pair.Value < 0)
+            {
+                returnString += pair.Key.Id + "-" + 1 + "-" + isLocked;
+            }
+            else
+            {
+                returnString += pair.Key.Id + "-" + pair.Value + "-" + isLocked;
+            }
+            returnString += "/";
+        }
+        return returnString;
+    }
     public string GetFreeSpacesString()
     {
         return "Free Spaces: " + GetAvailableSpaces() + "/" + maxSize;

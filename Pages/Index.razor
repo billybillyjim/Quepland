@@ -202,7 +202,7 @@ else
         }
         localStorage.SetItem("Bank", GameState.GetPlayerBank().GetInventory().ToString());
         localStorage.SetItem("Skills", GameState.GetPlayer().GetSkillString());
-        localStorage.SetItem("Inventory", GameState.GetPlayerInventory().ToString());
+        localStorage.SetItem("Inventory", GameState.GetPlayerInventory().ToStringSorted());
         localStorage.SetItem("Areas", Program.areaManager.SaveAreas());
         localStorage.SetItem("Followers", Program.followerManager.ToString());
         localStorage.SetItem("HP", GameState.GetPlayer().CurrentHP);

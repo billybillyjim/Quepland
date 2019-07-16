@@ -116,12 +116,17 @@
                     builder.AddAttribute(19, "disabled", true);
                     builder.AddAttribute(20, "title", "Finish what you're doing first.");
                 }
+                else if(item.IngredientIDs != null && item.AmountOfIngredientsToCreate > GameState.GetPlayerInventory().GetAmountOfItem(sourceItem))
+                {
+                    builder.AddAttribute(19, "disabled", true);
+                    builder.AddAttribute(20, "title", "You don't have enough materials to make this.(" + item.AmountOfIngredientsToCreate + ")");
+                }
                 builder.AddContent(21, "Create");
             }
             else if(currentCraftingItem == item)
             {
-                 builder.AddAttribute(18, "onclick", () => CancelUse());
-                 builder.AddContent(21, "Stop");
+                builder.AddAttribute(18, "onclick", () => CancelUse());
+                builder.AddContent(21, "Stop");
             }
 
             //Close 11 td, 12 button
@@ -148,13 +153,12 @@
             GameState.safeToSave = false;
             if (itemCreated.AmountOfIngredientsToCreate == 0)
             {
-                Console.WriteLine("Ingredients == 0");
                 if (GameState.GetPlayerInventory().RemoveOneOfItem(sourceItem))
                 {
-                    Console.WriteLine("Removed Source Item");
                     int numToMake = Math.Max(itemCreated.MadeOnCreation, 1);
                     if (GameState.GetPlayerInventory().AddMultipleOfItem(itemCreated, numToMake) == false)
                     {
+                        
                         CancelUse();
                     }
 
@@ -178,7 +182,7 @@
             }
             else
             {
-                Console.WriteLine("Ingredients > 0");
+
                 GameState.GetPlayerInventory().RemoveItems(sourceItem, itemCreated.AmountOfIngredientsToCreate);
                 GameState.GetPlayerInventory().AddItem(itemCreated);
                 MessageManager.AddMessage(itemCreated.GatherString);

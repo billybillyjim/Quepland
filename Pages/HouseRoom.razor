@@ -1,12 +1,7 @@
-﻿@page "/House/{RoomURL}"
+﻿@page "/House/{RoomID}"
 @inject HttpClient Http
 @inject GameState GameState
 @implements IDisposable
-
-@if (room != null)
-{
-    <h1>@room.Name</h1>
-}
 
 
 
@@ -14,16 +9,16 @@
 @functions{
 
     [Parameter]
-    private string roomURL { get; set; }
+    private string roomID { get; set; }
     private Room room;
 
     protected override void OnParametersSet()
     {
-        SetRoom(roomURL);
+        SetRoom(roomID);
     }
-    private void SetRoom(string url)
+    private void SetRoom(string id)
     {
-        room = Program.roomManager.GetRoomByURL(url);
+        room = Program.roomManager.GetRoomByID(int.Parse(id));
     }
     protected override void OnInit()
     {

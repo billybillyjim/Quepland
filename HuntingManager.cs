@@ -50,36 +50,8 @@ public class HuntingManager
     public string GetTimeUntilDoneString()
     {
         TimeSpan t = currentHuntEndTime.Subtract(DateTime.UtcNow);
-        string hours = "";
-        string minutes = "";
-        string seconds = "";
-        if(t.Hours < 10)
-        {
-            hours = "0" + t.Hours;
-        }
-        else
-        {
-            hours = "" + t.Hours;
-        }
-            
-        if(t.Minutes < 10)
-        {
-            minutes = "0" + t.Minutes;
-        }
-        else
-        {
-            minutes = "" + t.Minutes;
-        }
-
-        if(t.Seconds < 10)
-        {
-           seconds =  "0" + t.Seconds;
-        }
-        else
-        {
-            seconds = "" + t.Seconds;
-        }
-        return hours + ":" + minutes + ":" + seconds;
+        string timeLeft = "" + t.Hours.ToString("00") + ":" + t.Minutes.ToString("00") + ":" + t.Seconds.ToString("00");
+        return timeLeft;
         
     }
     public int GetNumberCaught()
