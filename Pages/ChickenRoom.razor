@@ -3,24 +3,11 @@
 @inject GameState GameState
 @implements IDisposable
 
-@if (room != null)
-{
-    <h1>@room.Name</h1>
-}
-
-
 
 
 @functions{
 
-    protected override void OnParametersSet()
-    {
-        SetRoom(roomURL);
-    }
-    private void SetRoom(string url)
-    {
-        room = Program.roomManager.GetRoomByURL(url);
-    }
+
     protected override void OnInit()
     {
         GameState.StateChanged += OnGameStateChanged;
