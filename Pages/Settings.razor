@@ -26,6 +26,15 @@
 
 </EditForm>
 
+@if (Program.playfabManager.IsConnected)
+{
+    <p>
+        Experimental(Don't rely on this yet!):
+        <button class="btn btn-primary" onclick="@(() => LoadDataFromCloud())">Load Game From Cloud Save</button>
+    </p>
+}
+
+
 @functions{
 
     private SaveModel saveModel = new SaveModel();
@@ -57,7 +66,12 @@
         return GameState.GetSaveString(Program.areaManager, Program.followerManager, Program.npcManager, Program.buildingManager);
 
     }
-
+    public async void LoadDataFromCloud()
+    {
+        string data = await Program.playfabManager.LoadData();
+        saveModel.saveFile = Encryptor.EncryptToString(data);
+        LoadDataFromText();
+    }
     private void LoadDataFromText()
     {
         string decryptedData = "";
@@ -72,7 +86,6 @@
         }
 
         string[] lines = decryptedData.Split('#');
-
         Dictionary<GameItem, int> bankItems = Extensions.GetItemDicFromString(lines[0], Program.itemDatabase);
         List<Skill> skills = Extensions.GetSkillsFromString(lines[1]);
         Dictionary<GameItem, int> invItems = Extensions.GetItemDicFromString(lines[2], Program.itemDatabase);
@@ -84,7 +97,6 @@
         GameState.GetPlayerInventory().LoadItems(invItems);
 
         Program.areaManager.LoadSaveData(lines[3]);
-        loadfile = lines[3];
         Program.followerManager.LoadSaveData(lines[4]);
 
         if (int.TryParse(lines[5], out int hp))

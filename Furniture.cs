@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 public class Furniture
 {
@@ -13,4 +14,9 @@ public class Furniture
     public int[][] OtherItemCosts { get; set; }
     public int ExperienceGained { get; set; }
     public int[] UpgradeIDs { get; set; }
+    public List<GameItem> LoadedItems = new List<GameItem>();
+    public GameItem WithdrawItem { get; set; }
+    public TimeSpan WithdrawEvery { get; set; }
+    public int WithdrawAmount { get; set; }
+
 }

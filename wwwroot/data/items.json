@@ -2314,7 +2314,8 @@
     "isEquipable": true,
     "damage": 3,
     "equipSlot": "Right Hand",
-    "icon": "Bow"
+    "icon": "Bow",
+    "gatherString": "You craft a bow."
   },
   {
     "itemName": "Oak Bow",
@@ -2330,7 +2331,8 @@
     "isEquipable": true,
     "damage": 6,
     "equipSlot": "Right Hand",
-    "icon": "Bow"
+    "icon": "Bow",
+    "gatherString": "You craft a bow."
   },
   {
     "itemName": "Sugar Maple Bow",
@@ -2346,7 +2348,8 @@
     "isEquipable": true,
     "damage": 9,
     "equipSlot": "Right Hand",
-    "icon": "Bow"
+    "icon": "Bow",
+    "gatherString": "You craft a bow."
   },
   {
     "itemName": "Birch Bow",
@@ -2362,7 +2365,8 @@
     "isEquipable": true,
     "damage": 12,
     "equipSlot": "Right Hand",
-    "icon": "Bow"
+    "icon": "Bow",
+    "gatherString": "You craft a bow."
   },
   {
     "itemName": "Mesquite Bow",
@@ -2378,7 +2382,8 @@
     "isEquipable": true,
     "damage": 15,
     "equipSlot": "Right Hand",
-    "icon": "Bow"
+    "icon": "Bow",
+    "gatherString": "You craft a bow."
   },
   {
     "itemName": "Mahogany Bow",
@@ -2394,7 +2399,8 @@
     "isEquipable": true,
     "damage": 20,
     "equipSlot": "Right Hand",
-    "icon": "Bow"
+    "icon": "Bow",
+    "gatherString": "You craft a bow."
   },
   {
     "itemName": "Ironwood Bow",
@@ -2410,7 +2416,8 @@
     "isEquipable": true,
     "damage": 25,
     "equipSlot": "Right Hand",
-    "icon": "Bow"
+    "icon": "Bow",
+    "gatherString": "You craft a bow."
   },
   {
     "itemName": "Snakewood Bow",
@@ -2426,7 +2433,8 @@
     "isEquipable": true,
     "damage": 30,
     "equipSlot": "Right Hand",
-    "icon": "Bow"
+    "icon": "Bow",
+    "gatherString": "You craft a bow."
   },
   {
     "itemName": "Lignum Vitae Bow",
@@ -2442,7 +2450,8 @@
     "isEquipable": true,
     "damage": 45,
     "equipSlot": "Right Hand",
-    "icon": "Bow"
+    "icon": "Bow",
+    "gatherString": "You craft a bow."
   },
   {
     "itemName": "Buloke Bow",
@@ -2458,7 +2467,8 @@
     "isEquipable": true,
     "damage": 70,
     "equipSlot": "Right Hand",
-    "icon": "Bow"
+    "icon": "Bow",
+    "gatherString": "You craft a bow."
   },
   {
     "itemName": "Coal",
@@ -2926,7 +2936,8 @@
     "experienceGained": "Smithing:75",
     "gatherSpeed": 15000,
     "ingredientIDs": [ 24, 185 ],
-    "icon": "Bar"
+    "icon": "Bar",
+    "queplarValue": 200
   },
   {
     "itemName": "Copper Arrowtips",
@@ -3250,7 +3261,8 @@
     "isEquipable": true,
     "damage": 4,
     "equipSlot": "Right Hand",
-    "icon": "Bow"
+    "icon": "Bow",
+    "gatherString": "You craft a bow."
   },
   {
     "itemName": "Poplar Bow",
@@ -3266,7 +3278,8 @@
     "isEquipable": true,
     "damage": 5,
     "equipSlot": "Right Hand",
-    "icon": "Bow"
+    "icon": "Bow",
+    "gatherString": "You craft a bow."
   },
   {
     "itemName": "Coin Pouch (25)",

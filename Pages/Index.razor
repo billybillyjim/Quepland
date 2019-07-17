@@ -25,7 +25,6 @@
         <p><button class="btn btn-primary" onclick="@(() => LoadDataEncrypted())">Load Encrypted</button></p>
         <p><button class="btn btn-primary" onclick="@(() => AddRoomToHouse())">Add Test Room To House</button></p>
         <p><button class="btn btn-primary" onclick="@(() => DebugUnlockAllAreas())">Unlock All Areas</button></p>
-        <p><button class="btn btn-primary" onclick="@(() => DebugJSTest())">Test JS Interop</button></p>
         <p>Item ID:<input type="number" @bind-value="@itemID" @bind-value:event="onchange" /></p>
         <p>Amount:<input type="number" @bind-value="@amount" @bind-value:event="onchange" /></p>
         <p><button class="btn btn-primary" onclick="@(() => GetItem())">Get Item</button></p>
@@ -71,6 +70,7 @@
 else
 {
     <p>More Loading...</p>
+    <p>If you see this for more than a few seconds, you might have to enable third party cookies in your browser settings.</p>
 }
 
 @functions{
@@ -99,42 +99,17 @@ else
     {
         GameState.GetPlayerBank().GetInventory().AddMultipleOfItem(Program.itemDatabase.GetItemByID(itemID), amount);
     }
-    public void GoToArea()
-    {
-
-    }
-    public async void DebugJSTest()
-    {
-        //string returnString = await JSRuntime.InvokeAsync<string>("kongregateFunctions.getUsername");
-        await JSRuntime.InvokeAsync<object>("kongregateFunctions.createSortableList", simpleList);
-        Console.WriteLine("nothing");
-
-
-    }
     private async void UpdateHighScores()
     {
         await JSRuntime.InvokeAsync<object>("kongregateFunctions.updateTotalLevelScore", GameState.GetPlayer().GetTotalLevel());
         await JSRuntime.InvokeAsync<object>("kongregateFunctions.updateTotalKills", GameState.totalKills);
 
     }
-    public void SetCulinaryTo43()
-    {
-        GameState.GetPlayer().GainExperience("Culinary Arts", 80000);
-    }
     public void GoToDebugArea()
     {
         Program.areaManager.GetAreaByID(68).IsUnlocked = true;
     }
-    public void EncryptionTest()
-    {
-        encrypt = Encryptor.EncryptToString(encrypt);
-        StateHasChanged();
-    }
-    public void DecryptionTest()
-    {
-        encrypt = Encryptor.DecryptString(encrypt);
-        StateHasChanged();
-    }
+
     public void DebugUnlockAllFollowers()
     {
         foreach (Follower f in Program.followerManager.GetFollowers())
@@ -229,21 +204,6 @@ else
         return "";
     }
 
-    private void TestLocalStorage()
-    {
-
-        string success = "Local storage could not be accessed. Saving is not possible without working local storage. Please enable cookies to save your game.";
-        try
-        {
-            localStorage.SetItem("testString", "success");
-            success = localStorage.GetItem<string>("testString");
-        }
-        catch
-        {
-            MessageManager.AddMessage(success);
-        }
-
-    }
     public string GetSaveDataString()
     {
         return GameState.GetSaveString(Program.areaManager, Program.followerManager, Program.npcManager, Program.buildingManager);
@@ -454,9 +414,6 @@ else
     {
         GameState.StateChanged += OnGameStateChanged;
         //saveGameExists = localStorage.GetItem<bool>("SaveGameExists");
-
-
-
 
 
         GameState.UpdateState();

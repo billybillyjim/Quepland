@@ -3,7 +3,15 @@
 @inject GameState GameState
 @implements IDisposable
 
+@if (room != null)
+{
+    @room.Name
+    @foreach (Furniture furniture in room.Furniture)
+    {
+        @LoadFurniture(furniture);
+    }
 
+}
 
 
 @functions{
@@ -11,6 +19,18 @@
     [Parameter]
     private string roomID { get; set; }
     private Room room;
+
+    private RenderFragment LoadFurniture(Furniture furniture)
+    {
+        return builder =>
+        {
+            builder.OpenElement(0, "p");
+            builder.OpenElement(1, "div");
+            builder.AddContent(2, furniture.Name);
+            builder.CloseElement();
+            builder.CloseElement();
+        };
+    }
 
     protected override void OnParametersSet()
     {

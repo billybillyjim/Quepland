@@ -24,8 +24,6 @@
     private string thisArea { get; set; }
     private Area area;
 
-    public string gatherItem;
-
     private DateTime mineSearchStartTime;
 
     private bool isAutoCollecting;
@@ -221,7 +219,7 @@
                             builder.OpenElement(9, "br");
                             builder.CloseElement();
                         }
-                        else if(gatherItem == "Carving")
+                        else if(GameState.gatherItem == "Carving")
                         {
                             builder.OpenElement(2, "button");
                             builder.AddAttribute(3, "style", "margin-bottom:10px");
@@ -286,7 +284,7 @@
                             continue;
                         }
                         GameItem item = Program.itemDatabase.GetItemByName(itemString);
-                        bool actionIsEnabled = GameState.GetPlayerInventory().ActionIsEnabled(item.ActionRequired);
+                        bool actionIsEnabled = GameState.GetPlayerInventory().ActionIsEnabled(item.ActionRequired, true);
                         bool playerHasLevels = GameState.GetPlayer().HasRequiredLevel(item);
 
                         if (actionIsEnabled)
@@ -294,7 +292,7 @@
                             builder.OpenElement(9, "button");
                             builder.AddAttribute(10, "style", "margin-bottom:10px");
                             builder.AddAttribute(11, "class", "btn btn-primary");
-                            if (gatherItem != itemString && playerHasLevels && GameState.isGathering == false)
+                            if (GameState.gatherItem != itemString && playerHasLevels && GameState.isGathering == false)
                             {
                                 builder.AddAttribute(12, "onclick", () => Gather(item));
                                 if (GameState.GetPlayerInventory().GetAvailableSpaces() == 0)
@@ -310,7 +308,7 @@
                                 builder.AddContent(15, action);
 
                             }
-                            else if(gatherItem == itemString)
+                            else if(GameState.gatherItem == itemString)
                             {
                                 builder.AddAttribute(16, "onclick", () => StopGathering());
                                 builder.AddContent(17, "Stop");
@@ -396,7 +394,7 @@
                 bool playerHasLevels = GameState.GetPlayer().HasRequiredLevel(item);
                 if (actionIsEnabled)
                 {
-                    if (gatherItem != item.ItemName && playerHasLevels)
+                    if (GameState.gatherItem != item.ItemName && playerHasLevels)
                     {
                         builder.AddAttribute(17, "onclick", () => Gather(item));
                         builder.AddContent(18, "Mine " + item.ItemName);
@@ -408,7 +406,7 @@
                         builder.AddAttribute(20, "title", "You lack the level to do this. (" + item.RequiredLevel + ")");
                         builder.AddContent(21, "Mine " + item.ItemName);
                     }
-                    else if(gatherItem == item.ItemName)
+                    else if(GameState.gatherItem == item.ItemName)
                     {
                         builder.AddAttribute(22, "onclick", () => StopGathering());
                         builder.AddContent(23, "Stop");
@@ -803,7 +801,7 @@
                     {
                         i = 0;
                     }
-                    
+
                 }
                 buyString = buyString.Substring(0, buyString.Length - 1);
                 buyString += " for " + item.ItemName;
@@ -868,7 +866,11 @@
             builder.AddAttribute(0, "tabindex", "0");
             builder.AddAttribute(0, "data-toggle", "tooltip");
 
-            if (playerHasLevels)
+            if(playerHasLevels && GameState.GetPlayerInventory().ActionIsEnabled(item.ActionRequired, false))
+            {
+                builder.AddAttribute(0, "title", "You need to equip your tool to do this." + "(" + item.ActionRequired + ")");
+            }
+            else if (playerHasLevels)
             {
                 builder.AddAttribute(0, "title", "You lack the tool to do this." + "(" + item.ActionRequired + ")");
             }
@@ -893,7 +895,7 @@
     {
         StopGathering();
         GameState.isGathering = true;
-        gatherItem = itemToGather.ItemName;
+        GameState.gatherItem = itemToGather.ItemName;
         if (GameState.GetPlayer().activeFollower != null && Extensions.FollowerCanAutoCollect(GameState.GetPlayer().activeFollower, itemToGather))
         {
             isAutoCollecting = true;
@@ -944,7 +946,7 @@
             }
             else if (waitingForAutoCollectMessage)
             {
-                MessageManager.AddMessage("You wait for " + GameState.GetPlayer().activeFollower.Name + " to gather up " + gatherItem + " for banking.");
+                MessageManager.AddMessage("You wait for " + GameState.GetPlayer().activeFollower.Name + " to gather up " + GameState.gatherItem + " for banking.");
                 waitingForAutoCollectMessage = false;
             }
             GameState.UpdateState();
@@ -1076,7 +1078,7 @@
     {
         GameState.StopActions();
         string totemLevel = actionString.Split(':')[1];
-        gatherItem = "Carving";
+        GameState.gatherItem = "Carving";
         MessageManager.AddMessage("You begin carving the totem.");
         GameState.isGathering = true;
         GameState.gatherTimer = new Timer(new TimerCallback(_ =>
@@ -1162,7 +1164,7 @@
         if (GameState.gatherTimer != null)
         {
             GameState.gatherTimer.Dispose();
-            gatherItem = "";
+            GameState.gatherItem = "";
             GameState.isGathering = false;
 
         }

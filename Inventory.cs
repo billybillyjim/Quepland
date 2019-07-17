@@ -490,13 +490,17 @@ public class Inventory
     }
     public bool ActionIsEnabled(string skillName)
     {
+        return ActionIsEnabled(skillName, false);
+    }
+    public bool ActionIsEnabled(string skillName, bool requiresEquipped)
+    {
         if (skillName.Contains("Gather") || skillName.Length < 1)
         {
             return true;
         }
         foreach (GameItem i in items.Keys)
         {
-            if (i.ActionsEnabled != null && i.ActionsEnabled.Contains(skillName))
+            if (i.ActionsEnabled != null && i.ActionsEnabled.Contains(skillName) && (i.IsEquipped || !requiresEquipped))
             {
                 return true;
             }
@@ -586,18 +590,13 @@ public class Inventory
         string returnString = "";
         foreach (KeyValuePair<GameItem, int> pair in items)
         {
-            int isLocked = 0;
-            if (pair.Key.IsLocked)
-            {
-                isLocked = 1;
-            }
             if(pair.Value < 0)
             {
-                returnString += pair.Key.Id + "-" + 1 + "-" + isLocked;
+                returnString += pair.Key.Id + "-" + 1;
             }
             else
             {
-                returnString += pair.Key.Id + "-" + pair.Value + "-" + isLocked;
+                returnString += pair.Key.Id + "-" + pair.Value;
             }
             returnString += "/";
         }
@@ -615,11 +614,26 @@ public class Inventory
             }
             if (pair.Value < 0)
             {
-                returnString += pair.Key.Id + "-" + 1 + "-" + isLocked;
+                if (isLocked == 1)
+                {
+                    returnString += pair.Key.Id + "-" + 1 + "-" + isLocked;
+                }
+                else
+                {
+                    returnString += pair.Key.Id + "-" + 1;
+                }
+                
             }
             else
             {
-                returnString += pair.Key.Id + "-" + pair.Value + "-" + isLocked;
+                if (isLocked == 1)
+                {
+                    returnString += pair.Key.Id + "-" + pair.Value + "-" + isLocked;
+                }
+                else
+                {
+                    returnString += pair.Key.Id + "-" + pair.Value;
+                }
             }
             returnString += "/";
         }

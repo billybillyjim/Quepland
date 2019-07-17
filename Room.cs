@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 public class Room
 {
@@ -15,4 +16,5 @@ public class Room
     public int ExperienceGained { get; set; }
     public bool IsComplete { get; set; }
     public int WorkRemaining { get; set; }
+    public List<Furniture> Furniture = new List<Furniture>();
 }

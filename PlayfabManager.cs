@@ -9,6 +9,7 @@ public class PlayfabManager
 {
     private bool _running = true;
     private string loadString = "";
+    public bool IsConnected = false;
     public async void TryLogin(string userID, string token)
     {
         PlayFabSettings.staticSettings.TitleId = "E9B77"; 
@@ -28,6 +29,10 @@ public class PlayfabManager
             Console.ForegroundColor = ConsoleColor.Red; // Make the error more visible
             Console.WriteLine(PlayFabUtil.GenerateErrorReport(apiError));
             Console.ForegroundColor = ConsoleColor.Gray; // Reset to normal
+        }
+        else
+        {
+            IsConnected = true;
         }
         _running = false; 
     }
@@ -54,20 +59,17 @@ public class PlayfabManager
         
 
     }
-    public string Load()
+
+    public async Task<string> LoadData()
     {
-        LoadData();
-        return loadString;
-    }
-    private async void LoadData()
-    {
+        loadString = "";
         PlayFabResult<GetUserDataResult> result = await PlayFabClientAPI.GetUserDataAsync(new GetUserDataRequest());
         loadString += result.Result.Data["Save Data"].Value;
         if(result.Result.Data.TryGetValue("Save Data 2", out UserDataRecord extraData))
         {
             loadString += extraData.Value;
         }
-
+        return loadString;
         
     }
 }

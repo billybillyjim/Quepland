@@ -18,7 +18,9 @@
 else
 {
     @WorkOnRoomButton()
+    <button onclick="@(() => CompleteNewRoom())">Complete Room</button>
 }
+
 
 
 
@@ -215,6 +217,7 @@ else
         GameState.GetPlayer().house.AddRoom(currentRoom);
         StateHasChanged();
     }
+
     private void Construct()
     {
         GameState.gatherTimer = new Timer(new TimerCallback(_ =>
@@ -257,8 +260,7 @@ else
     }
     private void GoToRoom(Room room)
     {
-        UriHelper.NavigateTo("/House/" + room.URL);
-        Console.WriteLine("This ran.");
+        UriHelper.NavigateTo("/House/" + room.ID);
     }
     protected override void OnInit()
     {

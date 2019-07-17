@@ -38,7 +38,10 @@ public class GameState
 
     public string previousURL;
     public string updateVersionString = "1.029b";
-    
+
+    public string gatherItem;
+
+
     public GameItem currentUsedItem;
     public GameItem currentGatherItem;
     public GameItem currentBuffItem;
@@ -138,6 +141,7 @@ public class GameState
     }
     public void StopActions()
     {
+        gatherItem = "";
         isWorkingOut = false;
         isRunning = false;
         isGathering = false;

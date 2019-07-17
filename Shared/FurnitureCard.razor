@@ -1,0 +1,37 @@
+@inject GameState GameState
+@implements IDisposable
+
+@LoadFurniture()
+
+
+
+@functions{
+
+    private RenderFragment LoadFurniture()
+    {
+        return builder =>
+        {
+            if(GameState.GetPlayer().LastLevelledSkill != null)
+            {              
+                builder.OpenElement(0, "div");
+                builder.OpenElement(1, "div");
+
+                builder.CloseElement();
+                builder.CloseElement();
+            }
+
+
+        };
+    }
+    protected override void OnInit()
+    {
+        GameState.StateChanged += OnInventoryStateChanged;
+        this.StateHasChanged();
+    }
+    public void Dispose()
+    {
+        GameState.StateChanged -= OnInventoryStateChanged;
+    }
+    void OnInventoryStateChanged(object sender, EventArgs e) => StateHasChanged();
+}
+

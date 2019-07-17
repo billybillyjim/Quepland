@@ -58,11 +58,11 @@
             builder.AddAttribute(0, "class", "btn btn-primary");
             builder.AddAttribute(0, "style", "margin-bottom:10px");
             builder.AddAttribute(0, "onclick", () => StartAutoFighting());
-        //If there is a battle, the player has no follower, or the player's follower is not a fighter, or is already auto fighting.
-        if (battleStarted ||
-            (GameState.GetPlayer().activeFollower == null) ||
-            (GameState.GetPlayer().activeFollower != null && GameState.GetPlayer().activeFollower.AutoCollectSkill != "Fighting") ||
-            autoFight)
+            //If there is a battle, the player has no follower, or the player's follower is not a fighter, or is already auto fighting.
+            if (battleStarted ||
+                (GameState.GetPlayer().activeFollower == null) ||
+                (GameState.GetPlayer().activeFollower != null && GameState.GetPlayer().activeFollower.AutoCollectSkill != "Fighting") ||
+                autoFight)
             {
                 builder.AddAttribute(0, "disabled", true);
                 builder.AddAttribute(0, "title", "You'll need a follower who can help you find enemies to do this.");
@@ -203,12 +203,25 @@
         {
             GameState.monsterAttackTimer.Dispose();
         }
-        GameState.attackTimer = new Timer(new TimerCallback(_ =>
+        if (GameState.GetPlayer().GetWeapon() != null && GameState.GetPlayer().GetWeapon().ActionRequired == "Archery" && GameState.GetPlayerInventory().HasArrows())
         {
-            Attack();
-            GameState.UpdateState();
-            this.StateHasChanged();
-        }), null, GameState.GetPlayer().GetWeaponAttackSpeed(), GameState.GetPlayer().GetWeaponAttackSpeed());
+            GameState.attackTimer = new Timer(new TimerCallback(_ =>
+            {
+                Attack();
+                GameState.UpdateState();
+                this.StateHasChanged();
+            }), null, 150, GameState.GetPlayer().GetWeaponAttackSpeed());
+        }
+        else
+        {
+            GameState.attackTimer = new Timer(new TimerCallback(_ =>
+            {
+                Attack();
+                GameState.UpdateState();
+                this.StateHasChanged();
+            }), null, GameState.GetPlayer().GetWeaponAttackSpeed(), GameState.GetPlayer().GetWeaponAttackSpeed());
+        }
+
 
         GameState.monsterAttackTimer = new Timer(new TimerCallback(_ =>
         {
@@ -216,10 +229,7 @@
             GameState.UpdateState();
             this.StateHasChanged();
         }), null, 1000 * opponent.AttackSpeed, 1000 * opponent.AttackSpeed);
-        if (GameState.GetPlayer().GetWeapon() != null && GameState.GetPlayer().GetWeapon().ActionRequired == "Archery")
-        {
-            Attack();
-        }
+
         GameState.UpdateState();
         this.StateHasChanged();
     }

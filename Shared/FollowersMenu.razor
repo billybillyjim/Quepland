@@ -57,12 +57,16 @@
     private void Assign(Follower follower)
     {
         GameState.GetPlayer().activeFollower = follower;
+        GameState.StopActions();
         GameState.UpdateState();
+        StateHasChanged();
     }
     private void Unassign()
     {
         GameState.GetPlayer().activeFollower = null;
+        GameState.StopActions();
         GameState.UpdateState();
+        StateHasChanged();
     }
     protected override void OnInit()
     {
