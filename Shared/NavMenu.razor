@@ -80,22 +80,42 @@
                 builder.CloseElement();
                 if (debugMode)
                 {
-                                    //Make the house link
-                builder.OpenElement(5, "li");
-                builder.AddAttribute(6, "class", "nav-item px-3");
-                builder.OpenComponent<NavLink>(7);
-                builder.AddAttribute(8, "class", "nav-link");
-                builder.AddAttribute(9, "href", "/House");
-                builder.AddAttribute(10, "ChildContent", (RenderFragment)((builder2) =>
+                    //Make the house link
+                    builder.OpenElement(5, "li");
+                    builder.AddAttribute(6, "class", "nav-item px-3");
+                    builder.OpenComponent<NavLink>(7);
+                    builder.AddAttribute(8, "class", "nav-link");
+                    builder.AddAttribute(9, "href", "/House");
+                    builder.AddAttribute(10, "ChildContent", (RenderFragment)((builder2) =>
+                    {
+                        builder2.OpenElement(11, "span");
+                        builder2.AddAttribute(12, "class", "oi oi-basket");
+                        builder2.AddAttribute(13, "aria-hidden", "true");
+                        builder2.CloseElement();
+                        builder2.AddContent(14, "Home");
+                    }));
+                    builder.CloseComponent();
+                    builder.CloseElement();
+                }
+                if (GameState.currentRegion != "Quepland")
                 {
-                    builder2.OpenElement(11, "span");
-                    builder2.AddAttribute(12, "class", "oi oi-basket");
-                    builder2.AddAttribute(13, "aria-hidden", "true");
-                    builder2.CloseElement();
-                    builder2.AddContent(14, "Home");
-                }));
-                builder.CloseComponent();
-                builder.CloseElement();
+                    //Make the house link
+                    builder.OpenElement(5, "li");
+                    builder.AddAttribute(6, "class", "nav-item px-3");
+                    builder.OpenComponent<NavLink>(7);
+                    builder.AddAttribute(8, "class", "nav-link");
+                    builder.AddAttribute(9, "href", "/GatherMenu/" + GameState.previousArea);
+                    builder.AddAttribute(10, "onclick", () => GameState.currentRegion = "Quepland");
+                    builder.AddAttribute(10, "ChildContent", (RenderFragment)((builder2) =>
+                    {
+                        builder2.OpenElement(11, "span");
+                        builder2.AddAttribute(12, "class", "oi oi-action-undo");
+                        builder2.AddAttribute(13, "aria-hidden", "true");
+                        builder2.CloseElement();
+                        builder2.AddContent(14, "Return to Quepland");
+                    }));
+                    builder.CloseComponent();
+                    builder.CloseElement();
                 }
 
                 foreach (Area area in Program.areaManager.GetAreasWithChildren())
@@ -180,6 +200,14 @@
                     builder2.AddContent(22, "" + numOfRoadblocks);
                     builder2.CloseElement();
                 }
+                else if(area.AccessibleRegions != null && area.AccessibleRegions != "")
+                {
+                    builder2.OpenElement(23, "div");
+                    builder2.AddAttribute(24, "class", "badge badge-pill badge-success");
+                    builder2.AddAttribute(25, "style", "margin-left:3px");
+                    builder2.AddContent(26, ".");
+                    builder2.CloseElement();
+                }
 
             }));
             builder.CloseComponent();
@@ -230,14 +258,18 @@
     }
     public void ToggleAreaChildren(Area area)
     {
-        HideAllChildren();
+        if(lastToggledArea != area)
+        {
+            HideAllChildren();
+        }
+
 
         area.IsShowingChildren = !area.IsShowingChildren;
         foreach (string child in area.Children)
         {
             Program.areaManager.GetAreaByURL(child).Hidden = !Program.areaManager.GetAreaByURL(child).Hidden;
         }
-
+        lastToggledArea = area;
         StateHasChanged();
     }
 

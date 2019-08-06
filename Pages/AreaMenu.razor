@@ -69,6 +69,16 @@
         GameState.previousURL = "/GatherMenu/" + area.AreaURL;
         UriHelper.NavigateTo("/FightingMenu/" + area.AreaURL);
     }
+    public void EnterBaitFishingMenu()
+    {
+        GameState.previousURL = "/" + area.AreaURL;
+        UriHelper.NavigateTo("/" + area.AreaURL + "/BaitFishing");
+    }
+    public void EnterGemMiningMenu()
+    {
+        GameState.previousURL = "/" + area.AreaURL;
+        UriHelper.NavigateTo("/" + area.AreaURL + "/GemMining");
+    }
     protected override void OnParametersSet()
     {
         SetArea(thisArea);
@@ -162,6 +172,46 @@
                             builder.AddAttribute(6, "disabled", true);
                         }
                         builder.AddContent(7, "Battle");
+                        builder.CloseElement();
+                        builder.OpenElement(8, "br");
+                        builder.CloseElement();
+                    }
+                    else if (actionString == "Bait Fishing")
+                    {
+                        builder.OpenElement(2, "button");
+                        builder.AddAttribute(3, "style", "margin-bottom:10px");
+                        builder.AddAttribute(4, "class", "btn btn-primary");
+                        builder.AddAttribute(5, "onclick", () => EnterBaitFishingMenu());
+                        if (GameState.isGathering || GameState.isHunting || GameState.isUsing)
+                        {
+                            builder.AddAttribute(6, "disabled", true);
+                        }
+                        else if(GameState.GetPlayer().GetLevel("Fishing") < 87)
+                        {
+                            builder.AddAttribute(6, "disabled", true);
+                            builder.AddAttribute(7, "title", "You don't have the fishing level to do this. (87)");
+                        }
+                        builder.AddContent(7, "Go Bait Fishing");
+                        builder.CloseElement();
+                        builder.OpenElement(8, "br");
+                        builder.CloseElement();
+                    }
+                    else if (actionString == "Gem Mining")
+                    {
+                        builder.OpenElement(2, "button");
+                        builder.AddAttribute(3, "style", "margin-bottom:10px");
+                        builder.AddAttribute(4, "class", "btn btn-primary");
+                        builder.AddAttribute(5, "onclick", () => EnterGemMiningMenu());
+                        if (GameState.isGathering || GameState.isHunting || GameState.isUsing)
+                        {
+                            builder.AddAttribute(6, "disabled", true);
+                        }
+                        else if(GameState.GetPlayer().GetLevel("Mining") < 97)
+                        {
+                            builder.AddAttribute(6, "disabled", true);
+                            builder.AddAttribute(7, "title", "You don't have the mining level to do this. (97)");
+                        }
+                        builder.AddContent(7, "Go Gem Mining");
                         builder.CloseElement();
                         builder.OpenElement(8, "br");
                         builder.CloseElement();
@@ -317,7 +367,7 @@
                             else
                             {
 
-                                builder.AddAttribute(13, "title", "You don't have the levels to do this.");
+                                builder.AddAttribute(13, "title", "You don't have the levels to do this.(" + item.ActionRequired + ":" + item.RequiredLevel+")");
                                 builder.AddAttribute(14, "disabled", true);
                                 builder.AddContent(15, action);
                             }
@@ -548,6 +598,7 @@
     }
     private void GoToRegion(string region, string area)
     {
+        GameState.previousArea = thisArea;
         GameState.currentRegion = region;
         Program.areaManager.GetAreaByName(area).IsUnlocked = true;
 
@@ -917,9 +968,9 @@
                 MessageManager.AddMessage(itemToGather.GatherString);
                 GameState.GetPlayer().GainExperience(itemToGather.ExperienceGained);
 
-                //New speed is a random int based on item gather speed multiplied by the player's gather speed bonus for that activity. Minimum of 50 ms.
+                //New speed is a random int based on item gather speed multiplied by the player's gather speed bonus for that activity. Minimum of 20 ms.
                 int randSpeed = (Extensions.GetGaussianRandomInt(itemToGather.GatherSpeed, itemToGather.GatherSpeed / 2));
-                int speed = Math.Max((int)(randSpeed * GameState.GetPlayer().GetGatherSpeed(itemToGather.ActionRequired)), 50);
+                int speed = Math.Max((int)(randSpeed * GameState.GetPlayer().GetGatherSpeed(itemToGather.ActionRequired)), 20);
                 GameState.gatherTimer.Change(speed, speed);
 
                 if (GameState.currentGatherItem.ActionRequired == "Mining" && limitedOre)
@@ -1050,7 +1101,7 @@
             GameState.UpdateState();
             StateHasChanged();
 
-        }), null, 5000, 5000);
+        }), null, (int)(8000 * GameState.GetPlayer().GetGatherSpeed("Harpoon Fishing")),  (int)(8000 * GameState.GetPlayer().GetGatherSpeed("Harpoon Fishing")));
 
         GameState.UpdateState();
         StateHasChanged();
@@ -1098,7 +1149,7 @@
         if (GameState.GetPlayerInventory().AddItem(gainedItem))
         {
             GameState.GetPlayer().GainExperience(gainedItem.ExperienceGained);
-            MessageManager.AddMessage("As you carve you aquire " + gainedItem.ItemName);
+            MessageManager.AddMessage("As you carve you acquire " + gainedItem.ItemName);
         }
         else
         {
@@ -1337,14 +1388,16 @@
     }
     public void UnlockFollower(int followerID)
     {
-        if (Program.followerManager.GetNumberOfUnlockedFollowers() == 0)
+
+        if (GameState.isSplitView)
         {
-            MessageManager.AddMessage(Program.followerManager.GetFollowerByID(followerID).Name + " will now follow you. Go to your bank and select \"Followers\" at the top of the screen to set them as your follower.");
+            MessageManager.AddMessage(Program.followerManager.GetFollowerByID(followerID).Name + " will now follow you. Select \"Followers\" at the top of the screen to set them as your follower.");
         }
         else
         {
-            MessageManager.AddMessage(Program.followerManager.GetFollowerByID(followerID).Name + " will now follow you. Go to your bank and select \"Followers\" at the top of the screen to set them as your follower.");
+            MessageManager.AddMessage(Program.followerManager.GetFollowerByID(followerID).Name + " will now follow you. Select \"Followers\" at the top of your " + GameState.activeView + " menu to set them as your follower.");
         }
+
         Program.followerManager.GetFollowerByID(followerID).IsUnlocked = true;
         GameState.UpdateState();
     }
@@ -1355,6 +1408,15 @@
         {
             npc.IsInteractable = false;
         }
+        if(npc.ID == 65)
+        {
+            if(GameState.PetShopUnlocked == false)
+            {
+                MessageManager.AddMessage("The pet shop is now unlocked! You can visit it any time by clicking \"Pet Shop\" at the top of the page.");
+            }
+            GameState.PetShopUnlocked = true;
+        }
+
         GameState.UpdateState();
     }
     private void BuyItem(GameItem item, int amount, GameItem costItem)

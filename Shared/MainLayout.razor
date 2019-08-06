@@ -16,7 +16,12 @@
                         <td><a href="/Help"> Help</a></td>
                         <td><a href="/About"> About</a></td>
                         <td><a href="/Updates"> Updates(@GameState.updateVersionString)</a></td>
-                        <td><a href="/Settings"> Settings</a></td>                     
+                        <td><a href="/Settings"> Settings</a></td>
+                        @if (GameState.PetShopUnlocked)
+                        {
+                            <td><a href="/PetStore"> Pet Store</a></td>
+                        }
+
                     }
                 </tr>
             </table>
@@ -45,7 +50,10 @@ else
                         <td><a href="/About"> About</a></td>
                         <td><a href="/Updates"> Updates(@GameState.updateVersionString)</a></td>
                         <td><a href="/Settings"> Settings</a></td>
-
+                        @if (GameState.PetShopUnlocked)
+                        {
+                            <td><a href="/PetStore"> Pet Store</a></td>
+                        }
                     }
 
                 </tr>
@@ -95,6 +103,18 @@ else
     {
         <div class="col align-self-start" style="height:100vh;padding-left:0px; padding-right:0px; min-width:400px;overflow-y:scroll">
             <FollowersMenu />
+        </div>
+    }
+    else if (GameState.activeView == "Pets")
+    {
+        <div class="col align-self-start" style="height:100vh;padding-left:0px; padding-right:0px; min-width:400px;overflow-y:scroll">
+            <PetMenu />
+        </div>
+    }
+    else if (GameState.activeView == "Stats")
+    {
+        <div class="col align-self-start" style="height:100vh;padding-left:0px; padding-right:0px; min-width:400px;overflow-y:scroll">
+            <StatsMenu />
         </div>
     }
 }

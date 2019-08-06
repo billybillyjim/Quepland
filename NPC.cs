@@ -18,4 +18,5 @@ public class NPC
     [DefaultValue(1.0d)]
     public double PriceDiscount { get; set; }
     public int UnlockAreaCost { get; set; }
+    public int ID { get; set; }
 }

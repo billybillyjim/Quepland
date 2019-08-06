@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 
 public class RoomManager
 {
     private List<Room> Rooms = new List<Room>();
 
-    public async void LoadRooms(HttpClient Http)
+    public async Task LoadRooms(HttpClient Http)
     {
         Room[] roomArray = await Http.GetJsonAsync<Room[]>("data/rooms.json");
         Rooms.AddRange(roomArray);

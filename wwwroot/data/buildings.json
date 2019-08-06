@@ -263,11 +263,11 @@
     "npcIDs": [34,35]
   },
   {
-    "name": "Rocky Shores House of Fish",
+    "name": "Rocky Shores House of Fish And Rods",
     "id": 34,
     "url": "HouseOfFish",
-    "items": [ 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119 ],
-    "description": "You can buy tons of fish here.",
+    "items": [ 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118, 119, 432, 433 ],
+    "description": "You can buy tons of fish here. And fishing rods, too!",
     "isShop": true
   },
   {

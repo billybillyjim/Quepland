@@ -10,7 +10,7 @@ public class SimpleAES
     private byte[] Key = { 1, 2, 4, 128, 212, 34, 54, 45, 114, 184, 3, 101, 37, 112, 222, 22, 23, 24, 78, 144, 98, 53, 99, 29, 24, 26, 17, 100, 131, 236, 53, 209 };
 
     // a hardcoded IV should not be used for production AES-CBC code
-    // IVs should be unpredictable per ciphertext
+    // IVs should be unpredictable per ciphertext 
     private byte[] Vector = { 46, 64, 91, 11, 23, 3, 13, 19, 23, 12, 12, 12, 79, 32, 14, 56 };
 
 
@@ -30,25 +30,6 @@ public SimpleAES()
     UTFEncoder = new System.Text.UTF8Encoding();
 }
 
-/// -------------- Two Utility Methods (not used but may be useful) -----------
-/// Generates an encryption key.
-static public byte[] GenerateEncryptionKey()
-{
-    //Generate a Key.
-    RijndaelManaged rm = new RijndaelManaged();
-    rm.GenerateKey();
-    return rm.Key;
-}
-
-/// Generates a unique encryption vector
-static public byte[] GenerateEncryptionVector()
-{
-    //Generate a Vector
-    RijndaelManaged rm = new RijndaelManaged();
-    rm.GenerateIV();
-    return rm.IV;
-}
-
 
 /// ----------- The commonly used methods ------------------------------    
 /// Encrypt some text and return a string suitable for passing in a URL.
@@ -60,6 +41,7 @@ public string EncryptToString(string TextValue)
 /// Encrypt some text and return an encrypted byte array.
 public byte[] Encrypt(string TextValue)
 {
+
     //Translates our text value into a byte array.
     Byte[] bytes = UTFEncoder.GetBytes(TextValue);
 
@@ -74,19 +56,19 @@ public byte[] Encrypt(string TextValue)
     CryptoStream cs = new CryptoStream(memoryStream, EncryptorTransform, CryptoStreamMode.Write);
     cs.Write(bytes, 0, bytes.Length);
     cs.FlushFinalBlock();
-    #endregion
+        #endregion
 
-    #region Read encrypted value back out of the stream
-    memoryStream.Position = 0;
+        #region Read encrypted value back out of the stream
+        memoryStream.Position = 0;
     byte[] encrypted = new byte[memoryStream.Length];
     memoryStream.Read(encrypted, 0, encrypted.Length);
-    #endregion
+        #endregion
 
-    //Clean up.
-    cs.Close();
+        //Clean up.
+        cs.Close();
     memoryStream.Close();
 
-    return encrypted;
+        return encrypted;
 }
 
 /// The other side: Decryption methods

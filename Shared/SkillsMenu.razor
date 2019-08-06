@@ -106,49 +106,10 @@ else
                     }
                     builder.AddContent(20, item.ItemName);
                     builder.CloseElement();
-
-                    /* if (item.Damage > 0)
-                     {
-                         builder.OpenElement(20, "td");
-                         builder.AddAttribute(21, "style", "text-align:right");
-                         builder.AddContent(22, item.Damage);
-                         builder.CloseElement();
-                     }*/
-
                     builder.OpenElement(21, "td");
                     builder.AddAttribute(22, "style", "text-align:right;" + textColor);
                     builder.AddContent(23, item.RequiredLevel);
                     builder.CloseElement();
-
-                    /*if(item.Damage > 0 && item.AttackSpeed > 0)
-                    {
-                        builder.OpenElement(24, "td");
-                        builder.AddAttribute(25, "style", "text-align:right");
-                        float DPS = item.Damage / (item.AttackSpeed / 1000f);
-                        builder.AddContent(26, "" + DPS);
-                        builder.CloseElement();
-
-                    }
-                     if (item.GatherSpeed > 0 && item.ExperienceGained != null)
-                     {
-                         int expGain = int.Parse(item.ExperienceGained.Split(':')[1]);
-                         builder.OpenElement(24, "td");
-                         builder.AddAttribute(25, "style", "text-align:right");
-                         float expHour = ((float)expGain / item.GatherSpeed) * 3600;
-                         builder.AddContent(26, "," + expHour);
-                         builder.CloseElement();
-                         builder.OpenElement(27, "td");
-                         builder.AddAttribute(28, "style", "text-align:right");
-                         float valueHour = ((float)item.Value / item.GatherSpeed) * 3600;
-                         builder.AddContent(29, "," + valueHour);
-                         builder.CloseElement();
-                         builder.OpenElement(30, "td");
-                         builder.AddAttribute(31, "style", "text-align:right");
-                         float ratio = expHour / valueHour;
-                         builder.AddContent(32, "," + ratio);
-                         builder.CloseElement();
-                     }*/
-
                     builder.CloseElement();
                 }
                 builder.CloseElement();
@@ -221,7 +182,7 @@ else
                     }
                     else
                     {
-                        builder.AddAttribute(24, "title", "Exp to Next Level: " + (Extensions.GetExperienceRequired(skill.GetSkillLevel()) - skill.SkillExperience));
+                        builder.AddAttribute(24, "title", "Exp to Next Level: " + (Extensions.GetExperienceRequired(skill.GetSkillLevelUnboosted()) - skill.SkillExperience));
                     }
 
                     builder.OpenElement(25, "div");
@@ -273,11 +234,11 @@ else
     }
     private string GetWidthString(Skill skill)
     {
-        return "width: " + Extensions.GetProgressForLevel(skill.SkillExperience, skill.GetSkillLevel()) + "%";
+        return "width: " + Extensions.GetProgressForLevel(skill.SkillExperience, skill.GetSkillLevelUnboosted()) + "%";
     }
     private string GetValueString(Skill skill)
     {
-        return "" + Extensions.GetProgressForLevel(skill.SkillExperience, skill.GetSkillLevel());
+        return "" + Extensions.GetProgressForLevel(skill.SkillExperience, skill.GetSkillLevelUnboosted());
     }
 
     protected override void OnInit()

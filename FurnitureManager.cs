@@ -1,13 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 
 public class FurnitureManager
 {
     private List<Furniture> Furniture = new List<Furniture>();
 
-    public async void LoadFurniture(HttpClient Http)
+    public async Task LoadFurniture(HttpClient Http)
     {
         Furniture[] furnitureArray = await Http.GetJsonAsync<Furniture[]>("data/furniture.json");
         Furniture.AddRange(furnitureArray);

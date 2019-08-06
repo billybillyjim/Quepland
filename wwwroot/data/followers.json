@@ -262,5 +262,33 @@
     "costItemID": 0,
     "autoCollectSkill": "Fighting",
     "autoCollectSpeed": 5000
+  },
+  {
+    "name": "Thunkirn the Dwarf",
+    "id": 20,
+    "description": "Thunkirn is an excellent hauler who hasn't seen the light of day in twenty years. It's his own fault, though, with a beard like that...",
+    "autoCollectMessage": "Thunkirn fills his bag with $ ores and runs it back to the bank.",
+    "RequiredLevels": [ "Mining:90" ],
+    "autoCollectSkill": "Mining",
+    "autoCollectLevel": 125,
+    "maxCarry": 50,
+    "autoCollectSpeed": 8000,
+    "isUnlocked": false,
+    "cost": 4000000,
+    "costItemID": 0
+  },
+    {
+    "name": "Threnden the Dwarf",
+    "id": 21,
+    "description": "Threnden's wife named him so. Not that he's complaining. They used to call him Pickles. He's quite possibly the greatest mining hauler below Quepland's surface.",
+    "autoCollectMessage": "Threnden fills his bag with $ ores and runs it back to the bank.",
+    "RequiredLevels": [ "Mining:110" ],
+    "autoCollectSkill": "Mining",
+    "autoCollectLevel": 150,
+    "maxCarry": 80,
+    "autoCollectSpeed": 6000,
+    "isUnlocked": false,
+    "cost": 10000000,
+    "costItemID": 0
   }
 ]

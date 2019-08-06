@@ -1,0 +1,43 @@
+﻿@page "/PetUpdate"
+@inject HttpClient Http
+@inject GameState GameState
+@inject Microsoft.AspNetCore.Blazor.Services.WebAssemblyUriHelper UriHelper
+@implements IDisposable
+
+<p>With pets now in the game, Quepland has its first in-app purchases included with the update. I realize microtransactions are a very contentious issue, so I thought it might be good to explain my view on them here.</p>
+
+
+<p>I spent a good amount of time thinking about what kind of monetization I wanted to add to Quepland. While leaving everything completely free would be nice, 
+    I currently would be making more money working a part time minimum wage job one day a week than what I'm earning with Quepland.
+    I really like the way the game is turning out and I would love to continue to develop it for a long time, but with the
+    way things are going I am going to have to start working on other projects. With that in mind, I am adding some small microtransactions to the game
+    to see if it is a viable source of income, or if I need to make multiple games in order to get by on Kongregate.</p>
+
+<p>The structure of Quepland made me shy away from items or boosts that increase gathering speed or the like. I find microtransactions that make the game
+    shorter in that way to be counterproductive. The game becomes less fun for the purchaser more quickly, and the creator keeps their paying player base for
+    a shorter amount of time. Nothing in Quepland really lent itself well to paid items, so I decided to add a new feature that would work better with them.</p>
+
+<p>Pets are creatures that follow the player around and earn experience just like players do, at one-tenth the rate. For every level a pet has gained in a stat, the player
+    gains bonus experience when training that stat. Every pet has an affinity, which is a stat that they gain experience for more quickly in, and help players gain more
+    experience more quickly in return. In addition to affinities, pets also have a specialization role, which is based on the average of their combat, gathering, and crafting stats. The
+    highest of those three groups also gets a boost.</p>
+
+<p>Right now, pets are mainly an experience gaining mechanism, but I have a lot of ideas for them in the future, including pet competitions and tasks similar to slayer tasks in Runescape.
+    They also serve the purpose of making it more possible to attain levels greater than 100, which Construction and Magic will also help with. </p>
+
+<p>So these are pets. I realize this is a ton of text, but I figure if a few people read it the information can disseminate to the less interested players.</p>
+
+
+@functions{
+
+    protected override void OnInit()
+    {
+        GameState.StateChanged += OnGameStateChanged;
+        this.StateHasChanged();
+    }
+    void IDisposable.Dispose()
+    {
+        GameState.StateChanged -= OnGameStateChanged;
+    }
+    void OnGameStateChanged(object sender, EventArgs e) => StateHasChanged();
+}

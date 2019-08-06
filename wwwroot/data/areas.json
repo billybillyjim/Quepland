@@ -71,7 +71,8 @@
     "icon": "oi oi-compass",
     "unlockableAreas": [ "The Peak of Mount Queple,Climb to the summit,,", "Eastern Trail,Continue around the mountain,," ],
     "actions": [ "Chop Oak Trees:Oak Logs" ],
-    "region": "Quepland"
+    "region": "Quepland",
+    "npcIDs": [65]
   },
   {
     "name": "Queple Cave Entrance",
@@ -248,7 +249,7 @@
     "name": "Swampland",
     "id": 22,
     "isUnlocked": false,
-    "description": "You enter an enourmous swamp. Trees entangle an overgrowth immersed in water. Rice grows wild here. Ahead you see a dark wooded region.",
+    "description": "You enter an enormous swamp. Trees entangle an overgrowth immersed in water. Rice grows wild here. Ahead you see a dark wooded region.",
     "areaURL": "Swampland",
     "icon": "oi oi-inbox",
     "actions": [ "Gather Rice:Rice", "Chop Snakewood Trees:Snakewood Logs", "Hunting" ],
@@ -261,7 +262,7 @@
     "name": "The Great Swamp",
     "id": 23,
     "isUnlocked": false,
-    "description": "You enter an enourmous swamp. Trees entangle an overgrowth immersed in water. Rice grows wild here.",
+    "description": "You enter an enormous swamp. Trees entangle an overgrowth immersed in water. Rice grows wild here.",
     "areaURL": "GreatSwamp",
     "icon": "oi oi-inbox",
     "children": [ "Swampland", "Swampwood", "StrangeOldHut", "Swamplake" ],
@@ -821,32 +822,42 @@
     "areaURL": "SahotaTir",
     "description": "An icy region of Caligin.",
     "icon": "oi oi-chevron-bottom",
-    "children": [ "SahotaIceFields" ],
+    "children": [ "SahotaIceFields", "SahotaCaverns", "SahotaDungeon" ],
     "region": "Caligin Commonwealth"
   },
   {
     "name": "Sahota Ice Fields",
     "id": 73,
     "areaURL": "SahotaIceFields",
-    "description": "A cavern of ice that extends as far as the eye can see. Frosty creatures roam the plain, and the walls are solid ice that may be extractable.",
+    "description": "A cavern of ice that extends as far as the eye can see. Frosty creatures roam the plain, and the walls are solid ice that may be extractable. There is an entrance to a cave system, but most of the paths are blocked by overgrown roots that have frozen solid.",
     "icon": "oi oi-chevron-bottom",
     "actions": [ "Mine Ice:Ice Block", "Battle", "Chop Ice Trees:Ice Logs" ],
     "accessibleRegions": "Quepland,Mt Yama Mine,Climb up to the surface",
     "areaToUnlockOnArrival": "Sahota Tir",
     "region": "Caligin Commonwealth",
     "monsterIDs": [ 40, 41, 42, 43, 44 ],
-    "npcIDs": [ 37, 64 ]
+    "npcIDs": [ 37, 64 ],
+    "unlockableAreas": [ "Sahota Caverns,Chop the frozen roots,Woodcutting:75,", "Sahota Caverns,Hack away the frozen roots,Axemanship:75,", "Sahota Dungeon,Follow the main cave path,," ]
   },
   {
     "name": "Sahota Caverns",
     "id": 74,
     "areaURL": "SahotaCaverns",
-    "description": "A series of tunnels that weave around the walls of the ice fields.",
+    "description": "A series of tunnels that weave around the walls of the ice fields. There's water beneath your feet, and here and there you find holes large enough to fish from.",
     "icon": "oi oi-random",
-    "actions": [ "Hunting" ],
+    "actions": [ "Hunting", "Bait Fishing" ],
     "region": "Caligin Commonwealth",
-    "huntingIDs": [ 71, 67, 69 ]
-
+    "huntingIDs": [ 71, 67, 69, 434 ]
+  },
+  {
+    "name": "Sahota Dungeon",
+    "id": 74,
+    "areaURL": "SahotaDungeon",
+    "description": "As you descend deeper into the tunnels, the temperature begins to rise. You find the tunnel you're traversing is narrowing until you reach an opening into a glittering cave. The walls shimmer with jewels. A dwarf stands just inside looking at you expectantly.",
+    "icon": "oi oi-random",
+    "actions": [ "Gem Mining" ],
+    "region": "Caligin Commonwealth",
+    "npcIDs": [66]
   } 
 
 

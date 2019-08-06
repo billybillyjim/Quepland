@@ -25,7 +25,6 @@
     <InputTextArea id="name" @bind-Value="@saveModel.saveFile" />
 
 </EditForm>
-
 @if (Program.playfabManager.IsConnected)
 {
     <p>
@@ -142,6 +141,22 @@
             {
                 GameState.totalKills = int.Parse(settings[3]);
             }
+            if (settings.Length > 4 && settings[4] != null)
+            {
+                GameState.PetShopUnlocked = bool.Parse(settings[4]);
+            }
+            if (settings.Length > 5 && settings[5] != null)
+            {
+                GameState.autoBuySushiSupplies = bool.Parse(settings[5]);
+            }
+            if (settings.Length > 6 && settings[6] != null)
+            {
+                GameState.totalCoinsEarned = long.Parse(settings[6]);
+            }
+            if (settings.Length > 7 && settings[7] != null)
+            {
+                GameState.totalDeaths = int.Parse(settings[7]);
+            }
         }
         if (lines.Length > 10 && lines[10] != null)
         {
@@ -203,6 +218,18 @@
                 }
             }
         }
+        if (lines.Length > 15 && lines[15] != null)
+        {
+            GameState.GetPlayerBank().LoadTabsFromString(lines[15]);
+        }
+        if (lines.Length > 16 && lines[16] != null)
+        {
+            GameState.GetPlayer().LoadPetsFromString(lines[16]);
+        }
+        if (lines.Length > 17 && lines[17] != null)
+        {
+            GameState.LoadKC(lines[17]);
+        }
         MessageManager.AddMessage("Save game loaded.");
 
         GameState.saveDataLoaded = true;
@@ -221,43 +248,59 @@
             {
                 MessageManager.AddMessage("Failed to auto save. Please make a local backup before closing the game.", "red");
             }
+            GameState.saveToPlayFab++;
+            if (GameState.saveToPlayFab > GameState.saveToPlayFabEvery)
+            {
+                if (Program.playfabManager.IsConnected == false)
+                {
+                    ConnectToCloudAndSave();
 
+                }
+                else if (Program.playfabManager.IsConnected)
+                {
+                    Program.playfabManager.Save(GameState.GetSaveStringEncrypted(Program.areaManager, Program.followerManager, Program.npcManager, Program.buildingManager, false));
+                }
+
+                GameState.saveToPlayFab = 0;
+            }
         }), null, 60000, 60000);
         GameState.UpdateState();
         this.StateHasChanged();
     }
-    private string SaveData()
+        private async Task ConnectToCloudAndSave()
+    {
+        await ConnectToKongregate();
+        await Program.playfabManager.TryLogin(GameState.userID, GameState.token);
+        Program.playfabManager.Save(GameState.GetSaveStringEncrypted(Program.areaManager, Program.followerManager, Program.npcManager, Program.buildingManager, false));
+    }
+        private async Task ConnectToKongregate()
+    {
+        try
+        {
+            GameState.userID = await JSRuntime.InvokeAsync<string>("kongregateFunctions.getUserID");
+            GameState.token = await JSRuntime.InvokeAsync<string>("kongregateFunctions.getToken");
+        }
+        catch
+        {
+
+            GameState.userID = "";
+            GameState.token = "";
+
+        }
+    }
+    private void SaveData()
     {
         while (!GameState.safeToSave)
         {
             Thread.Sleep(5);
         }
-        localStorage.SetItem("Bank", GameState.GetPlayerBank().GetInventory().ToString());
-        localStorage.SetItem("Skills", GameState.GetPlayer().GetSkillString());
-        localStorage.SetItem("Inventory", GameState.GetPlayerInventory().ToString());
-        localStorage.SetItem("Areas", Program.areaManager.SaveAreas());
-        localStorage.SetItem("Followers", Program.followerManager.ToString());
-        localStorage.SetItem("HP", GameState.GetPlayer().CurrentHP);
-        if (GameState.GetPlayer().activeFollower != null)
-        {
-            localStorage.SetItem("ActiveFollower", GameState.GetPlayer().activeFollower.id);
-        }
 
-        localStorage.SetItem("AlchemyRecipes", GameState.GetPlayer().GetRecipes());
-        List<int> ids = new List<int>();
-        foreach (KeyValuePair<GameItem, int> pair in GameState.GetPlayerInventory().GetEquippedItems())
-        {
-            ids.Add(pair.Key.Id);
-        }
-        localStorage.SetItem("EquippedItems", ids);
-        localStorage.SetItem("SaveGameExists", true);
-        localStorage.SetItem("NPC", Program.npcManager.GetNPCData());
         SaveDataEncrypted();
 
         MessageManager.AddMessage("Your game has been saved.");
         GameState.saveDataLoaded = true;
         GameState.saveGameExists = true;
-        return "";
+        
     }
     private async void UpdateHighScores()
     {

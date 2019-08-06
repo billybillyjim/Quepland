@@ -136,7 +136,7 @@
                     {
                         builder.AddContent(37, LoadItem(item));
                     }
-                    
+
 
                 }
 
@@ -157,7 +157,7 @@
                 builder.AddAttribute(2, "style", "background-color:aquamarine");
             }
             builder.OpenElement(3, "td");
-            builder.AddAttribute(4, "title", item.Key.ItemDescription + ", " + item.Key.itemPos);
+            builder.AddAttribute(4, "title", item.Key.ItemDescription);
             builder.AddAttribute(5, "style", "text-align:left;font-weight:bold;line-height:40px;display:flex");
             builder.OpenElement(6, "img");
             builder.AddAttribute(7, "src", "data/ItemIcons/" + item.Key.Icon + ".png");
@@ -506,11 +506,11 @@
             builder.AddAttribute(3, "style", "width:50%");
             if (item.Key.Id == confirmSellItemID && trySellingExpensiveItem)
             {
-                builder.AddContent(4, "Confirm sale for " + Math.Round(item.Key.Value / 2f) + " each");
+                builder.AddContent(4, "Confirm sale for " + Math.Round(item.Key.Value / 2f, 1) + " each");
             }
             else
             {
-                builder.AddContent(4, "Sell for " + Math.Round(item.Key.Value / 2f) + " each");
+                builder.AddContent(4, "Sell for " + Math.Round(item.Key.Value / 2f, 1) + " each");
             }
 
 
@@ -682,20 +682,24 @@
         return builder =>
         {
             builder.OpenElement(0, "tr");
-            builder.AddAttribute(0, "class", "buddy-mid");
+            builder.AddAttribute(1, "class", "buddy-mid");
 
-            builder.OpenElement(1, "td");
-            builder.AddAttribute(2, "colspan", "4");
-            builder.AddAttribute(3, "align", "right");
-            builder.OpenElement(4, "button");
-            builder.AddAttribute(5, "class", "btn btn-primary");
-            builder.AddAttribute(6, "onclick", () => Eat(item));
+            builder.OpenElement(2, "td");
+            builder.AddAttribute(3, "title", "Boosts " + item.BuffedSkill + " by " + item.BuffAmount);
+            builder.AddContent(4, "Heals " + item.HealAmount + " for " + item.HealDuration + " seconds");
+            builder.CloseElement();
+            builder.OpenElement(5, "td");
+            builder.AddAttribute(6, "colspan", "3");
+            builder.AddAttribute(7, "align", "right");
+            builder.OpenElement(8, "button");
+            builder.AddAttribute(9, "class", "btn btn-primary");
+            builder.AddAttribute(10, "onclick", () => Eat(item));
             if (item.IsLocked)
             {
-                builder.AddAttribute(7, "disabled", true);
-                builder.AddAttribute(8, "title", "This item is locked. Click the lock by the name to unlock it.");
+                builder.AddAttribute(11, "disabled", true);
+                builder.AddAttribute(12, "title", "This item is locked. Click the lock by the name to unlock it.");
             }
-            builder.AddContent(9, "Eat");
+            builder.AddContent(13, "Eat");
             builder.CloseElement();
             builder.CloseElement();
             builder.CloseElement();
@@ -745,6 +749,7 @@
         }
         GameState.GetPlayerInventory().RemoveItems(item.Key, amount);
         GameState.GetPlayerInventory().AddMultipleOfItem(Program.itemDatabase.GetGold(), (int)((item.Key.Value * amount) / 2d));
+        GameState.totalCoinsEarned += (int)((item.Key.Value * amount) / 2d);
         GameState.safeToSave = true;
         GameState.UpdateState();
         return "";
@@ -805,6 +810,14 @@
             {
                 GameState.GetPlayer().GetSkill(GameState.currentBuffItem.BuffedSkill).Boost = 0;
                 MessageManager.AddMessage("Your buff has expired.");
+                EndBoostTimer();
+            }
+            else if(GameState.GetPlayer().CurrentHP <= 0)
+            {
+                GameState.buffSecondsLeft = 0;
+                GameState.GetPlayer().GetSkill(GameState.currentBuffItem.BuffedSkill).Boost = 0;
+                MessageManager.AddMessage("You died from food poisoning.");
+                GameState.GetPlayer().CurrentHP = GameState.GetPlayer().MaxHP;
                 EndBoostTimer();
             }
             GameState.UpdateState();
@@ -921,6 +934,10 @@
         {
             GameState.attackTimer.Change(GameState.GetPlayer().GetWeaponAttackSpeed(), GameState.GetPlayer().GetWeaponAttackSpeed());
         }
+        else
+        {
+            GameState.StopActions();
+        }
         GameState.UpdateState();
         StateHasChanged();
     }
@@ -931,6 +948,10 @@
         if (GameState.attackTimer != null)
         {
             GameState.attackTimer.Change(GameState.GetPlayer().GetWeaponAttackSpeed(), GameState.GetPlayer().GetWeaponAttackSpeed());
+        }
+                else
+        {
+            GameState.StopActions();
         }
         GameState.UpdateState();
         StateHasChanged();

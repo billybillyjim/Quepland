@@ -10,16 +10,22 @@ public class Player
     public Bank bank;
     public House house;
     public Follower activeFollower;
+    public Pet activePet;
     public bool hasLoadedSkills;
     public int CurrentHP;
     public int MaxHP;
     private List<Skill> skills;
     private List<GameItem> equippedItems = new List<GameItem>();
     private List<string> knownAlchemicRecipes = new List<string>();
+    private List<string> shorterRecipes = new List<string>();
+    public List<Pet> Pets = new List<Pet>();
     //DEBUG Value!
     private readonly int maxInventorySize = 30;
     private MessageManager messageManager;
     public string LastLevelledSkill;
+    public bool LastLevelledSkillLocked;
+    
+    
     
 
 	public Player()
@@ -69,10 +75,12 @@ public class Player
     public void SetMessageManager(MessageManager m)
     {
         messageManager = m;
+
     }
     public void LearnNewAlchemyRecipe(GameItem metal, GameItem element, Building location, GameItem result)
     {
         string recipe = "" + metal.ItemName + " + " + element.ItemName + " in " + location.Name + " = " + result.ItemName;
+        string shortRecipe = "" + metal.ItemName.Substring(0, 3) + "+" + element.ItemName.Substring(0,3) + "+" + location.Name.Substring(0,3) + "+" + result.ItemName.Substring(0,3);
         bool alreadyKnown = false;
         foreach(string r in knownAlchemicRecipes)
         {
@@ -84,12 +92,29 @@ public class Player
         if(alreadyKnown == false)
         {
             knownAlchemicRecipes.Add(recipe);
+            shorterRecipes.Add(recipe);
+
         }
         knownAlchemicRecipes = knownAlchemicRecipes.OrderBy(x => x).ToList();
+    }
+    public bool HasPet(Pet pet)
+    {
+        foreach(Pet p in Pets)
+        {
+            if(p.Name == pet.Name)
+            {
+                return true;
+            }
+        }
+        return false;
     }
     public List<string> GetRecipes()
     {
         return knownAlchemicRecipes;
+    }
+    public List<string> GetShortRecipes()
+    {
+        return shorterRecipes;
     }
     public void LoadRecipes(List<string> recipes)
     {
@@ -150,6 +175,60 @@ public class Player
         skillString = skillString.Remove(skillString.Length - 1);
         return skillString;
     }
+    public string GetPetString()
+    {
+        string petString = "";
+        foreach(Pet p in Pets)
+        {
+            petString += p.GetSaveString();
+            petString += (char)16;
+        }
+        if (activePet != null)
+        {
+            petString += (char)17 + activePet.Name;
+        }
+        else
+        {
+            petString += (char)17 + "None";
+        }
+        return petString;
+    }
+    public void LoadPetsFromString(string data)
+    {
+        string[] lines = data.Split((char)17)[0].Split((char)16);
+        foreach(string line in lines)
+        {
+            if(line.Length > 1)
+            {
+                Pet newPet = new Pet();
+                string[] info = line.Split((char)15)[0].Split((char)14);
+                newPet.Name = info[0];
+                newPet.Description = info[1];
+                newPet.Nickname = info[2];
+
+                newPet.MinLevel = int.Parse(info[3]);
+
+                newPet.Affinity = info[4];
+
+                newPet.Identifier = info[5];
+                string skillString = line.Split((char)15)[1];
+                
+                newPet.SetSkills(Extensions.GetSkillsFromString(skillString));
+                Pets.Add(newPet);
+            }
+
+        }
+        if (data.Split((char)17).Length > 1)
+        {
+            if(data.Split((char)17)[1] == "None")
+            {
+                return;
+            }
+            activePet = Pets.Find(x => x.Name == data.Split((char)17)[1]);
+        }
+        
+        
+    }
     public int GetLevel(string skillName)
     {
         foreach(Skill skill in skills)
@@ -198,8 +277,26 @@ public class Player
             Console.WriteLine("Gained " + amount + " experience in unfound skill.");
             return;
         }
-        LastLevelledSkill = skill.SkillName;
-        skill.SkillExperience += (long)(amount * GetExperienceGainBonus(skill));
+        if(amount <= 0)
+        {
+            return;
+        }
+        if(LastLevelledSkillLocked == false)
+        {
+            LastLevelledSkill = skill.SkillName;
+        }
+
+        
+        if(activePet != null)
+        {
+            activePet.GainExperience(skill.SkillName, amount / 10);
+            skill.SkillExperience += (long)(amount * GetExperienceGainBonus(skill) * activePet.GetSkillBoost(skill));
+        }
+        else
+        {
+            skill.SkillExperience += (long)(amount * GetExperienceGainBonus(skill));
+        }
+        
         if (skill.SkillExperience >= Extensions.GetExperienceRequired(skill.GetSkillLevelUnboosted()))
         {
             LevelUp(skill);
@@ -396,7 +493,7 @@ public class Player
         baseDamage *= 1 - (float)Extensions.CalculateArmorDamageReduction(opponent);
         return Math.Max(Extensions.GetGaussianRandomInt(baseDamage + equipmentBonus, baseDamage / 3f), 1);
     }
-    private int GetEquipmentBonus()
+    public int GetEquipmentBonus()
     {
         int total = 0;
         foreach(GameItem item in equippedItems)
@@ -458,11 +555,44 @@ public class Player
         {
             if (item.ActionsEnabled != null && item.ActionsEnabled.Contains(skill))
             {
-                totalBonus -= item.GatherSpeedBonus;
+                if(item.GatherSpeedBonus > 0)
+                {
+                    totalBonus *= 1 - item.GatherSpeedBonus;
+                }             
+            }
+            else if(item.ActionRequired != null && item.ActionRequired.Contains(skill))
+            {
+                if (item.GatherSpeedBonus > 0)
+                {
+                    totalBonus *= 1 - item.GatherSpeedBonus;
+                }
             }
         }
-        totalBonus -= GetLevel(skill) * 0.005f;
-        totalBonus = Math.Max(totalBonus, 0.1f);
+        int level = GetLevel(skill);
+        if(level < 100)
+        {
+            totalBonus *= 1 - (level * 0.005f);
+        }
+        else if(level < 200)
+        {
+            totalBonus *= 1 - (100 * 0.005f);
+            totalBonus *= 1 - (level * 0.002f);
+        }
+        else if(level < 300)
+        {
+            totalBonus *= 1 - (100 * 0.005f);
+            totalBonus *= 1 - (200 * 0.002f);
+            totalBonus *= 1 - (level * 0.001f);
+        }
+        else
+        {
+            totalBonus *= 1 - (100 * 0.005f);
+            totalBonus *= 1 - (200 * 0.002f);
+            totalBonus *= 1 - (300 * 0.001f);
+            totalBonus *= 1 - (level * 0.0005f);
+        }
+        //totalBonus -= GetLevel(skill) * 0.005f;
+        totalBonus = Math.Max(totalBonus, 0.01f);
         return totalBonus;
     }
     public bool HasItemToAccessArea(string requirement)

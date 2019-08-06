@@ -59,13 +59,21 @@ public static class Extensions
                     locked = int.Parse(i[2]);
                 }
                 GameItem item = itemDB.GetItemByID(id);
-                if (locked == 1)
+                if(item == null)
                 {
-                    item.IsLocked = true;
+                    Console.WriteLine("Failed to find item." + line);
                 }
-                item.itemPos = pos;
-                items[item] = amount;
-                pos++;
+                else
+                {
+                    if (locked == 1)
+                    {
+                        item.IsLocked = true;
+                    }
+                    item.itemPos = pos;
+                    items[item] = amount;
+                    pos++;
+                }
+
             }
         }
         return items;
@@ -83,6 +91,10 @@ public static class Extensions
                 skill.SkillName = s[0];
                 skill.SkillExperience = long.Parse(s[1]);
                 skill.SetSkillLevel(int.Parse(s[2]));
+                if(s.Length > 3 && s[3] != null)
+                {
+                    skill.IsBlocked = bool.Parse(s[3]);
+                }
                 skills.Add(skill);
             }
         }
@@ -96,6 +108,18 @@ public static class Extensions
         }
 
         if(follower.AutoCollectLevel >= item.RequiredLevel)
+        {
+            return true;
+        }
+        return false;
+    }
+    public static bool FollowerCanAutoCollect(Follower follower, string skill, int level)
+    {
+        if (follower.AutoCollectSkill != skill)
+        {
+            return false;
+        }
+        if (follower.AutoCollectLevel >= level)
         {
             return true;
         }
@@ -218,6 +242,7 @@ public static class Extensions
         }
         return -1;
     }
+ 
     public static double GetGaussianRandom(double mean, double stdDev)
     {
         double u1 = 1.0 - rand.NextDouble(); //uniform(0,1] random doubles

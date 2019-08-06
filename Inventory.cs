@@ -194,6 +194,7 @@ public class Inventory
     }
     public bool HasBarIngredients(GameItem bar)
     {
+        
             foreach (int i in bar.IngredientIDs)
             {
                 if (items.Keys.FirstOrDefault(x => x.Id == i) == null)
@@ -270,7 +271,15 @@ public class Inventory
         UpdateItemCount();
         return true;
     }
-
+    public int GetTotalArmor()
+    {
+        int total = 0;
+        foreach (GameItem i in GetEquippedItems().Keys)
+        {
+            total += i.Armor;
+        }
+        return total;
+    }
     public int GetAmountOfItem(GameItem item)
     {
         if (items.TryGetValue(item, out int amount))
@@ -359,7 +368,15 @@ public class Inventory
         {
             if (item.IsStackable)
             {
-                items[item] = current + amount;
+                if(amount > 0 && current + amount < current)
+                {
+                    return false;
+                }
+                else
+                {
+                    items[item] = current + amount;
+                }
+                
             }
             else
             {

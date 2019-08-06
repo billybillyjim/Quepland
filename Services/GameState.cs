@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Linq;
 using System.Threading;
+using Microsoft.JSInterop;
 
 public class GameState
 {
 	public event EventHandler StateChanged;
+    public IJSRuntime JSRuntime;
 
     public bool isGathering;
     public bool isHunting;
@@ -18,6 +20,10 @@ public class GameState
     public bool canSell;
     public bool canBank;
     public bool isUsing { get; set; }
+    public bool PetShopUnlocked;
+
+    public string userID;
+    public string token;
 
     public int huntingAreaID;
     public DateTime huntingEndTime;
@@ -29,6 +35,7 @@ public class GameState
     public bool inventoryIsActiveView;
     public string activeView = "Skills";
     public bool compactBankView;
+    public bool autoBuySushiSupplies;
 
     public bool saveDataLoaded;
     public bool gameDataLoaded;
@@ -37,7 +44,7 @@ public class GameState
     public bool safeToLoad = false;
 
     public string previousURL;
-    public string updateVersionString = "1.030a";
+    public string updateVersionString = "1.1a";
 
     public string gatherItem;
 
@@ -58,11 +65,15 @@ public class GameState
     public int expensiveItemThreshold = 10000;
 
     public int totalKills;
+    public List<int> killCount = new List<int>();
+    public int totalDeaths;
+    public long totalCoinsEarned;
 
     private Player player = new Player();
 
     public Area currentArea;
     public string currentRegion = "Quepland";
+    public string previousArea;
 
     public Timer attackTimer;
     public Timer foodTimer;
@@ -89,9 +100,12 @@ public class GameState
     //Navbar Timer
     public Timer autoSaveTimer;
     public int saveToPlayFab = 0;
-    public int saveToPlayFabEvery = 30;
+    public int saveToPlayFabEvery = 5;
 
-    private SimpleAES Encryptor = new SimpleAES();
+    public Pet petToBuy;
+    public List<Pet> buyablePets = new List<Pet>();
+
+    private static SimpleAES Encryptor = new SimpleAES();
 
     private void StateHasChanged()
     {
@@ -105,6 +119,17 @@ public class GameState
     {
 
 
+    }
+
+    public void RestorePet(string petID)
+    {
+        foreach(Pet pet in buyablePets)
+        {
+            if(pet.Identifier == petID && GetPlayer().HasPet(pet) == false)
+            {
+                GetPlayer().Pets.Add(pet);
+            }
+        }
     }
     public void ToggleBankStyle()
     {
@@ -125,6 +150,13 @@ public class GameState
     public void LoadPlayerData(HttpClient Http)
     {
         player.LoadSkills(Http);
+    }
+    public void LoadMonsters(List<Monster> monsters)
+    {
+        foreach(Monster m in monsters)
+        {
+            killCount.Add(0);
+        }
     }
     public void SetBuffItem(GameItem item)
     {
@@ -221,13 +253,22 @@ public class GameState
         inventoryIsActiveView = !inventoryIsActiveView;
         UpdateState();
     }
+    public void IncrementKillCount(int monsterID)
+    {
+        killCount[monsterID] += 1;
+    }
+    public async void GetKongregateLogin()
+    {
+        userID = await JSRuntime.InvokeAsync<string>("kongregateFunctions.getUserID");
+        token = await JSRuntime.InvokeAsync<string>("kongregateFunctions.getToken");
+    }
     public string GetSaveStringEncrypted(AreaManager areaManager, FollowerManager followerManager, NPCManager npcManager, BuildingManager buildingManager, bool encrypt)
     {
+
         int pos = 0;
         string data = "";
         try
         {
-            
             //Bank 0
             data += "" + GetPlayerBank().GetInventory().ToString();
             pos++;
@@ -258,10 +299,10 @@ public class GameState
             pos++;
             //Recipes 7
             data += "#";
-            foreach (string s in GetPlayer().GetRecipes())
+            /*foreach (string s in GetPlayer().GetRecipes())
             {
                 data += s + "/";
-            }
+            }*/
             pos++;
             //EquippedItems 8
             data += "#";
@@ -279,6 +320,14 @@ public class GameState
             data += expensiveItemThreshold;
             data += ",";
             data += totalKills;
+            data += ",";
+            data += PetShopUnlocked.ToString();
+            data += ",";
+            data += autoBuySushiSupplies.ToString();
+            data += ",";
+            data += totalCoinsEarned;
+            data += ",";
+            data += totalDeaths;
             pos++;
             //NPC data 10
             data += "#";
@@ -323,11 +372,18 @@ public class GameState
             //Bank Tabs 15
             data += "#";
             data += GetPlayerBank().GetTabsString();
+            pos++;
+            //Pets 16
+            data += "#";
+            data += GetPlayer().GetPetString();
+            pos++;
+            //KC 17
+            data += "#";
+            data += GetKCString();
             if (encrypt)
             {
                 data = Encryptor.EncryptToString(data);
             }
-            
             pos++;
         }
         catch
@@ -339,5 +395,27 @@ public class GameState
     public string GetSaveString(AreaManager areaManager, FollowerManager followerManager, NPCManager npcManager, BuildingManager buildingManager)
     {
         return GetSaveStringEncrypted(areaManager, followerManager, npcManager, buildingManager, true);
+    }
+    private string GetKCString()
+    {
+        string data = "";
+        foreach(int i in killCount)
+        {
+            data += i + ",";
+        }
+        return data;
+    }
+    public void LoadKC(string kcString)
+    {
+        string[] data = kcString.Split(',');
+        int i = 0;
+        foreach(string line in data)
+        {
+            if(line.Length > 0)
+            {
+                killCount[i] = int.Parse(line);
+                i++;
+            }
+        }
     }
 }

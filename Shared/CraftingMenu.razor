@@ -94,7 +94,11 @@
             else
             {
                 int ingredientCost = Math.Max(item.AmountOfIngredientsToCreate, 1);
-                int maxToMake = Math.Max(GameState.GetPlayerInventory().GetAmountOfItem(sourceItem), GameState.GetPlayerInventory().GetAmountOfItem(itemUsed) / ingredientCost);
+                int maxToMake = Math.Min(GameState.GetPlayerInventory().GetAmountOfItem(sourceItem), GameState.GetPlayerInventory().GetAmountOfItem(item) / ingredientCost);
+                if (itemUsed.DestroyOnUse)
+                {
+                    maxToMake = Math.Min(GameState.GetPlayerInventory().GetAmountOfItem(itemUsed), maxToMake);
+                }
                 builder.AddContent(12, "Can make:" + maxToMake);
             }
             builder.CloseElement();
@@ -102,10 +106,10 @@
             builder.OpenElement(14, "button");
             builder.AddAttribute(15, "class", "btn btn-primary");
             builder.AddAttribute(16, "style", "float:right;margin-right:5px;");
-            builder.AddAttribute(17, "title", "Create a " + item.ItemName);
+            builder.AddAttribute(17, "title", "Create one " + item.ItemName + " using " + itemUsed.ItemName + " and " + sourceItem.ItemName);
             if (currentCraftingItem != item)
             {
-                builder.AddAttribute(18, "onclick", () => CreateItem(item, itemUsed, sourceItem));
+                builder.AddAttribute(18, "onclick", () => CreateItem(item, itemUsed, sourceItem, false));
                 if (GameState.GetPlayer().HasRequiredLevel(item) == false)
                 {
                     builder.AddAttribute(19, "disabled", true);
@@ -121,7 +125,41 @@
                     builder.AddAttribute(19, "disabled", true);
                     builder.AddAttribute(20, "title", "You don't have enough materials to make this.(" + item.AmountOfIngredientsToCreate + ")");
                 }
-                builder.AddContent(21, "Create");
+                builder.AddContent(21, "One");
+            }
+            else if(currentCraftingItem == item)
+            {
+                builder.AddAttribute(18, "onclick", () => CancelUse());
+                builder.AddContent(21, "Stop");
+            }
+
+            //Close 11 td, 12 button
+            builder.CloseElement();
+            builder.CloseElement();
+            builder.OpenElement(13, "td");
+            builder.OpenElement(14, "button");
+            builder.AddAttribute(15, "class", "btn btn-primary");
+            builder.AddAttribute(16, "style", "float:right;margin-right:5px;");
+            builder.AddAttribute(17, "title", "Create as many " + item.ItemName + " using " + itemUsed.ItemName + " and " + sourceItem.ItemName + " as you can");
+            if (currentCraftingItem != item)
+            {
+                builder.AddAttribute(18, "onclick", () => CreateItem(item, itemUsed, sourceItem, true));
+                if (GameState.GetPlayer().HasRequiredLevel(item) == false)
+                {
+                    builder.AddAttribute(19, "disabled", true);
+                    builder.AddAttribute(20, "title", "You lack the " + item.ActionRequired + " level to do this. (" + item.RequiredLevel + ")");
+                }
+                else if(GameState.CanLeave() == false)
+                {
+                    builder.AddAttribute(19, "disabled", true);
+                    builder.AddAttribute(20, "title", "Finish what you're doing first.");
+                }
+                else if(item.IngredientIDs != null && item.AmountOfIngredientsToCreate > GameState.GetPlayerInventory().GetAmountOfItem(sourceItem))
+                {
+                    builder.AddAttribute(19, "disabled", true);
+                    builder.AddAttribute(20, "title", "You don't have enough materials to make this.(" + item.AmountOfIngredientsToCreate + ")");
+                }
+                builder.AddContent(21, "All");
             }
             else if(currentCraftingItem == item)
             {
@@ -137,7 +175,7 @@
         };
     }
 
-    private string CreateItem(GameItem itemCreated, GameItem itemUsed, GameItem sourceItem)
+    private string CreateItem(GameItem itemCreated, GameItem itemUsed, GameItem sourceItem, bool craftMany)
     {
         if (GameState.createRepeatTimer != null)
         {
@@ -158,7 +196,7 @@
                     int numToMake = Math.Max(itemCreated.MadeOnCreation, 1);
                     if (GameState.GetPlayerInventory().AddMultipleOfItem(itemCreated, numToMake) == false)
                     {
-                        
+
                         CancelUse();
                     }
 
@@ -202,6 +240,11 @@
                     CancelUse();
                 }
 
+            }
+            if(craftMany == false)
+            {
+                GameState.createRepeatTimer.Dispose();
+                GameState.createRepeatTimer = null;
             }
             GameState.safeToSave = true;
             GameState.UpdateState();

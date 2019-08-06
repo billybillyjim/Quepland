@@ -1,0 +1,344 @@
+﻿@page "/PetStore"
+@using System.Threading;
+@inject HttpClient Http
+@inject GameState GameState
+@inject MessageManager  MessageManager
+@inject Microsoft.AspNetCore.Blazor.Services.WebAssemblyUriHelper UriHelper
+@inject IJSRuntime JSRuntime
+@implements IDisposable
+
+<h1>Welcome To The Pet Store</h1>
+
+<button class="btn btn-primary" onclick="@(() => SwitchStores())">Switch Stores</button>
+
+@if (showLocalStore)
+{
+    @LoadPetStore()
+}
+else
+{
+    @if (isRestoringPurchases == false)
+    {
+        <button class="btn btn-primary" onclick="@(() => RestorePurchases())">Restore Purchases</button>
+    }
+    else
+    {
+        <button class="btn btn-primary" disabled onclick="@(() => RestorePurchases())">Restore Purchases</button>
+        @restoringPurchasesString
+    }
+
+
+    @LoadKongPetStore()
+}
+
+
+
+@functions{
+
+    private bool showLocalStore = true;
+    private Pet currentPetToBuy;
+    private List<Pet> buyablePets = new List<Pet>();
+    private string restoringPurchasesString = "";
+    private bool isRestoringPurchases;
+
+    private RenderFragment LoadPetStore()
+    {
+        return builder =>
+        {
+            builder.OpenElement(0, "div");
+            builder.OpenElement(1, "table");
+            builder.AddAttribute(2, "class", "");
+            builder.AddAttribute(3, "style", "");
+            builder.OpenElement(4, "thead");
+            builder.OpenElement(5, "tr");
+            builder.OpenElement(6, "th");
+            builder.AddContent(7, "Pet");
+            builder.CloseElement();
+            builder.OpenElement(8, "th");
+            builder.AddContent(9, "Description");
+            builder.CloseElement();
+            builder.OpenElement(10, "th");
+            builder.AddContent(11, "Price");
+            builder.CloseElement();
+            builder.OpenElement(12, "th");
+            builder.CloseElement();
+            builder.CloseElement();
+            builder.CloseElement();
+            builder.OpenElement(13, "tbody");
+
+            foreach (Pet pet in Program.petManager.GetPets())
+            {
+                if (GameState.GetPlayer().HasPet(pet) == false)
+                {
+                    builder.OpenElement(13, "tr");
+                    builder.AddAttribute(13, "class", "buddy-top");
+                    builder.OpenElement(14, "td");
+                    builder.OpenElement(14, "img");
+                    builder.AddAttribute(14, "src", "data/ItemIcons/" + pet.Name + ".png");
+                    builder.AddAttribute(14, "style", "width:100px;height:100px;opacity:1");
+                    builder.CloseElement();
+                    builder.AddContent(15, pet.Name);
+                    builder.CloseElement();
+                    builder.OpenElement(16, "td");
+                    builder.AddContent(17, pet.Description);
+                    builder.CloseElement();
+                    builder.OpenElement(18, "td");
+                    builder.AddContent(19, pet.Cost);
+                    builder.CloseElement();
+                    builder.OpenElement(20, "td");
+                    builder.OpenElement(21, "button");
+                    builder.AddAttribute(22, "class", "btn btn-primary");
+                    builder.AddAttribute(23, "style", "");
+                    if (GameState.GetPlayerInventory().GetCoins() >= pet.Cost)
+                    {
+                        builder.AddAttribute(24, "onclick", () => BuyPet(pet));
+                    }
+                    else
+                    {
+                        builder.AddAttribute(24, "title", "You don't have enough coins with you to buy this.");
+                        builder.AddAttribute(25, "disabled", true);
+                    }
+                    builder.AddContent(26, "Buy");
+                    builder.CloseElement();
+                    builder.CloseElement();
+                    builder.CloseElement();
+                }
+
+            }
+            builder.CloseElement();
+            builder.CloseElement();
+            builder.CloseElement();
+
+
+        };
+    }
+    private RenderFragment LoadKongPetStore()
+    {
+        return builder =>
+        {
+            builder.OpenElement(0, "div");
+            builder.OpenElement(1, "h1");
+            builder.AddContent(2, "Buy Pets for Kreds");
+            builder.CloseElement();
+            builder.OpenElement(3, "table");
+            builder.AddAttribute(4, "class", "");
+            builder.AddAttribute(5, "style", "");
+            builder.OpenElement(6, "thead");
+            builder.OpenElement(7, "tr");
+            builder.OpenElement(8, "th");
+            builder.AddContent(9, "Pet");
+            builder.CloseElement();
+            builder.OpenElement(10, "th");
+            builder.AddContent(11, "Description");
+            builder.CloseElement();
+            builder.OpenElement(12, "th");
+            builder.AddContent(13, "Price");
+            builder.CloseElement();
+            builder.OpenElement(14, "th");
+            builder.CloseElement();
+            builder.CloseElement();
+            builder.CloseElement();
+            builder.OpenElement(15, "tbody");
+
+            foreach (Pet pet in buyablePets)
+            {
+                if (GameState.GetPlayer().HasPet(pet) == false)
+                {
+                    builder.OpenElement(16, "tr");
+                    builder.AddAttribute(17, "class", "buddy-top");
+                    builder.OpenElement(18, "td");
+                    builder.OpenElement(19, "img");
+                    builder.AddAttribute(20, "src", "data/ItemIcons/" + pet.Name + ".png");
+                    builder.AddAttribute(21, "style", "width:100px;height:100px;opacity:1");
+                    builder.CloseElement();
+                    builder.AddContent(22, pet.Name);
+                    builder.CloseElement();
+                    builder.OpenElement(23, "td");
+                    builder.AddContent(24, pet.Description);
+                    builder.CloseElement();
+                    builder.OpenElement(25, "td");
+                    builder.AddAttribute(25, "style", "text-align:center");
+                    builder.OpenElement(26, "img");
+                    builder.AddAttribute(27, "src", "data/ItemIcons/Kreds.png");
+                    builder.AddAttribute(28, "style", "width:90px;height:50px;opacity:1");
+                    builder.CloseElement();
+                    builder.AddContent(29, pet.Cost);
+                    builder.CloseElement();
+                    builder.OpenElement(30, "td");
+                    builder.OpenElement(31, "button");
+                    builder.AddAttribute(32, "class", "btn btn-primary");
+                    builder.AddAttribute(33, "style", "");
+                    builder.AddAttribute(34, "onclick", () => TryBuyPetFromKong(pet));
+                    builder.AddContent(35, "Buy");
+                    builder.CloseElement();
+                    builder.CloseElement();
+                    builder.CloseElement();
+                }
+
+            }
+            builder.CloseElement();
+            builder.CloseElement();
+            builder.CloseElement();
+
+        };
+    }
+    public void SwitchStores()
+    {
+        showLocalStore = !showLocalStore;
+        GameState.UpdateState();
+        StateHasChanged();
+    }
+    public async void RestorePurchases()
+    {
+        isRestoringPurchases = true;
+        GameState.UpdateState();
+        restoringPurchasesString = "Restoring purchases... This may take a while.";
+        await JSRuntime.InvokeAsync<object>("kongregateFunctions.restorePurchases", new DotNetObjectRef(new PetPurchase(GameState)));
+
+        isRestoringPurchases = false;
+        GameState.UpdateState();
+    }
+    public async void TryBuyPetFromKong(Pet pet)
+    {
+
+        if(GameState.userID == null || GameState.userID == "")
+        {
+            await JSRuntime.InvokeAsync<object>("kongregateFunctions.showRegistration", new DotNetObjectRef(new PetPurchase(GameState)));
+            GameState.UpdateState();
+            return;
+        }
+        else if(Program.playfabManager.IsConnected == false)
+        {
+            await ConnectToPlayFab();
+        }
+        currentPetToBuy = pet;
+        GameState.petToBuy = pet;
+        await JSRuntime.InvokeAsync<object>("kongregateFunctions.purchasePet", pet.Identifier, new DotNetObjectRef(new PetPurchase(GameState)));
+        GameState.UpdateState();
+    }
+
+    public void BuyPetFromKong()
+    {
+        GameState.GetPlayer().Pets.Add(currentPetToBuy);
+        currentPetToBuy = null;
+        StateHasChanged();
+        GameState.UpdateState();
+    }
+
+    public void CancelBuyPetFromKong()
+    {
+        currentPetToBuy = null;
+        StateHasChanged();
+        GameState.UpdateState();
+    }
+    private void BuyPet(Pet pet)
+    {
+        GameState.GetPlayerInventory().RemoveItems(Program.itemDatabase.GetGold(), pet.Cost);
+        GameState.GetPlayer().Pets.Add(pet);
+        StateHasChanged();
+        GameState.UpdateState();
+    }
+    private async void LoadBuyablePets(HttpClient Http)
+    {
+        buyablePets = new List<Pet>();
+        Pet scarab = new Pet();
+        scarab.Name = "Scarab";
+        scarab.Nickname = "";
+        scarab.Affinity = "Woodworking";
+        scarab.Description = "The scarab is a shiny companion. His hard outer shell makes it hard to be friends with him, but he'll help you grow in your skills a little more quickly. He has a natural affinity for Woodworking, as it's his favorite food.";
+        scarab.MinLevel = 1;
+        scarab.Cost = 10;
+        scarab.Identifier = "scarab";
+        buyablePets.Add(scarab);
+        Pet frog = new Pet();
+        frog.Name = "Frog";
+        frog.Nickname = "";
+        frog.Affinity = "Mining";
+        frog.Description = "The frog is a slimy companion. He loves to eat bugs and teach people about things from the well where he lives. He'll help your skills grow a little bit more quickly. He has a natural affinity for Mining, though no one is quite sure why.";
+        frog.MinLevel = 1;
+        frog.Cost = 10;
+        frog.Identifier = "frog";
+        buyablePets.Add(frog);
+        Pet falcon = new Pet();
+        falcon.Name = "Falcon";
+        falcon.Nickname = "";
+        falcon.Affinity = "Smithing";
+        falcon.Description = "The Falcon is a feathery companion. As a trained flying bird, he'll help you grow in your skills exceptionally quickly. He has a natural gift for Smithing, in part thanks to his excellent eyesight.";
+        falcon.MinLevel = 20;
+        falcon.Cost = 30;
+        falcon.Identifier = "falcon";
+        buyablePets.Add(falcon);
+        Pet tetropus = new Pet();
+        tetropus.Name = "Tetropus";
+        tetropus.Nickname = "";
+        tetropus.Affinity = "Axemanship";
+        tetropus.Description = "The Tetropus is a quadrupedal companion. He'll help you learn exceptionally more quickly with his four arms. He has a natural ability for wielding axes, which came from many, many mistakes using axes. He wasn't always a tetropus...";
+        tetropus.MinLevel = 20;
+        tetropus.Cost = 30;
+        tetropus.Identifier = "tetropus";
+        buyablePets.Add(tetropus);
+        Pet nailBoy = new Pet();
+        nailBoy.Name = "Nail Boy";
+        nailBoy.Nickname = "";
+        nailBoy.Affinity = "Woodcutting";
+        nailBoy.Description = "Nail Boy is a huggable companion. The smartest of all the pets in Quepland, Nail Boy knows how to help you improve your skills extremely quickly. He has a natural affinity for Woodcutting thanks to his ability to hammer himself to any tree he's chopping.";
+        nailBoy.MinLevel = 30;
+        nailBoy.Cost = 50;
+        nailBoy.Identifier = "nailboy";
+        buyablePets.Add(nailBoy);
+        Pet dragon = new Pet();
+        dragon.Name = "Dragon";
+        dragon.Nickname = "";
+        dragon.Affinity = "Swordsmanship";
+        dragon.Description = "The dragon is a beastly companion. The largest and most powerful pet you can own. He'll help you grow extremely quickly. He has a natural talent for Swordsmanship because of all the swordsmen he's eaten.";
+        dragon.MinLevel = 30;
+        dragon.Cost = 50;
+        dragon.Identifier = "dragon";
+        buyablePets.Add(dragon);
+        foreach (Pet p in buyablePets)
+        {
+
+            Skill[] skillArray = await Http.GetJsonAsync<Skill[]>("data/skills.json");
+            p.skills = skillArray.ToList();
+
+        }
+        GameState.buyablePets = buyablePets;
+    }
+    private async Task ConnectToPlayFab()
+    {
+        if (Program.playfabManager.IsConnected)
+        {
+            return;
+        }
+        try
+        {
+            GameState.userID = await JSRuntime.InvokeAsync<string>("kongregateFunctions.getUserID");
+            GameState.token = await JSRuntime.InvokeAsync<string>("kongregateFunctions.getToken");
+        }
+        catch
+        {
+
+            GameState.userID = "";
+            GameState.token = "";
+
+        }
+        await Program.playfabManager.TryLogin(GameState.userID, GameState.token);
+        Program.playfabManager.Save(GameState.GetSaveStringEncrypted(Program.areaManager, Program.followerManager, Program.npcManager, Program.buildingManager, false));
+        GameState.UpdateState();
+    }
+    protected override void OnInit()
+    {
+        if (buyablePets.Count == 0)
+        {
+            LoadBuyablePets(Http);
+        }
+
+        GameState.StateChanged += OnGameStateChanged;
+        this.StateHasChanged();
+    }
+    void IDisposable.Dispose()
+    {
+        GameState.StateChanged -= OnGameStateChanged;
+    }
+    void OnGameStateChanged(object sender, EventArgs e) => StateHasChanged();
+}

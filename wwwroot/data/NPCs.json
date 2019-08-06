@@ -437,7 +437,7 @@
     "id": 64,
     "spokenText": "Are you interested in sharpening a sword in my whetstone? That's fine by me, but you'll have to do something in return. Bring me 1000 teeth from baobhan siths and I'll let you sharpen a sword on it.",
     "isInteractable": true,
-    "purchaseItemIDs": [ 408, 410, 412, 413,414,415,416,417,418,419 ],
+    "purchaseItemIDs": [ 408, 410, 412, 413, 414, 415, 416, 417, 418, 419 ],
     "itemPaymentIDs": [
       [ 409, 407 ],
       [ 409, 35 ],
@@ -452,5 +452,19 @@
     ],
     "specialCosts": [ 1000, 1 ],
     "hasSpecialCosts": true
-  }
+  },
+  {
+    "name": "Mr. Doorly",
+    "id": 65,
+    "spokenText": "You look like an adventurer. Any interest in buying a pet? Come to my store anytime and we'll see if we can find you something you like.",
+    "isInteractable": true
+  },
+    {
+    "name": "Thunkirn the Dwarf",
+    "id": 66,
+    "spokenText": "Well what are you waiting for? I can smell the money on you. You know the drill, pay me a pile of gold and I'll work for you. I'm the best ore hauler you've ever met, probably.",
+    "unlockFollowerIDs": [ 20 ],
+    "isInteractable": true,
+    "hideOnFollow": true
+  },
 ]

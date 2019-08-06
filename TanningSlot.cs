@@ -23,7 +23,6 @@ public class TanningSlot
     }
     public void SetDataFromString(string data)
     {
-        Console.WriteLine(data);
         string[] lines = data.Split(',');
         int itemID = int.Parse(lines[0]);
         int itemAmount = int.Parse(lines[1]);

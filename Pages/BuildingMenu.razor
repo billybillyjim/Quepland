@@ -17,7 +17,7 @@
 @if (thisBuilding.IsSushiTrainingBuilding)
 {
     <p>
-        <input type="checkbox" @bind-value="@autoBuySupplies" @bind-value:event="onchange" />
+        <input type="checkbox" title="Rice is 250 gp, seaweed is 300 gp."@bind-value="@GameState.autoBuySushiSupplies" @bind-value:event="onchange" />
         Auto Buy Supplies
     </p>
    
@@ -40,7 +40,6 @@
     private int buyAmount;
     private string proofstring = "Not set.";
 
-    private bool autoBuySupplies = false;
     private bool showItemTanningMenu = false;
 
     public RenderFragment LoadShop()
@@ -168,20 +167,34 @@
             {
                 if (alchemyStage == 0)
                 {
+                    bool hasBars = false;
                     foreach (GameItem item in Program.itemDatabase.GetSmithingBars())
                     {
-                        builder.OpenElement(0, "button");
-                        builder.AddAttribute(1, "class", "btn btn-primary");
-                        builder.AddAttribute(2, "style", "margin:10px");
-                        if (GameState.GetPlayerInventory().HasItem(item) == false || GameState.GetPlayer().GetLevel("Alchemy") < item.RequiredLevel - 5)
+                        if (GameState.GetPlayerInventory().HasItem(item))
                         {
-                            builder.AddAttribute(3, "disabled", true);
-                            builder.AddAttribute(4, "title", "You need level " + (item.RequiredLevel - 5) + " Alchemy to perform alchemy on this bar.");
+                            hasBars = true;
+                            builder.OpenElement(0, "button");
+                            builder.AddAttribute(1, "class", "btn btn-primary");
+                            builder.AddAttribute(2, "style", "margin:10px");
+                            if (GameState.GetPlayerInventory().HasItem(item) == false || GameState.GetPlayer().GetLevel("Alchemy") < item.RequiredLevel - 5)
+                            {
+                                builder.AddAttribute(3, "disabled", true);
+                                builder.AddAttribute(4, "title", "You need level " + (item.RequiredLevel - 5) + " Alchemy to perform alchemy on this bar.");
+                            }
+                            builder.AddAttribute(5, "onclick", () => SetMetal(item));
+                            builder.AddContent(6, item.ItemName);
+                            builder.CloseElement();
+                            builder.OpenElement(7, "br");
+                            builder.CloseElement();
                         }
-                        builder.AddAttribute(5, "onclick", () => SetMetal(item));
-                        builder.AddContent(6, item.ItemName);
+
+                    }
+                    if (!hasBars)
+                    {
+                        builder.OpenElement(0, "p");
+                        builder.AddContent(1, "You don't have any bars with you to do alchemy with.");
                         builder.CloseElement();
-                        builder.OpenElement(7, "br");
+                        builder.OpenElement(2, "br");
                         builder.CloseElement();
                     }
                 }
@@ -498,7 +511,7 @@
                     builder.AddAttribute(23, "disabled", true);
                     builder.AddAttribute(24, "title", "You don't have any fish to make sushi with at your level.");
                 }
-                else if((GameState.sushiHouseRice == 0 || GameState.sushiHouseSeaweed == 0) && autoBuySupplies == false)
+                else if((GameState.sushiHouseRice == 0 || GameState.sushiHouseSeaweed == 0) && GameState.autoBuySushiSupplies == false)
                 {
                     builder.AddAttribute(23, "disabled", true);
                     builder.AddAttribute(24, "title", "You don't have enough rice or seaweed to make sushi.");
@@ -713,7 +726,7 @@
         {
             if(GameState.sushiHouseRice == 0 || GameState.sushiHouseSeaweed == 0)
             {
-                if(autoBuySupplies == false)
+                if(GameState.autoBuySushiSupplies == false)
                 {
                     GameState.StopActions();
                     this.StateHasChanged();
@@ -841,7 +854,7 @@
             {
                 GameState.GetPlayerInventory().AddMultipleOfItem(item, amount);
             }
-            
+
             MessageManager.AddMessage("You bought " + amount + " " + item.ItemName);
         }
         else

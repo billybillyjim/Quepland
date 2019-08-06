@@ -14,25 +14,50 @@
             if(GameState.GetPlayer().LastLevelledSkill != null)
             {
                 Skill skill = GameState.GetPlayer().GetSkill(GameState.GetPlayer().LastLevelledSkill);
-                long exp = Extensions.GetExperienceRequired(skill.GetSkillLevel()) - skill.SkillExperience;
+                long exp = Extensions.GetExperienceRequired(skill.GetSkillLevelUnboosted()) - skill.SkillExperience;
                 builder.OpenElement(0, "div");
-                builder.OpenElement(1, "div");
-                builder.AddAttribute(2, "style", "top:0px;position:absolute;right:10px");
-                builder.AddContent(3, GameState.GetPlayer().LastLevelledSkill + "(" + skill.GetSkillLevelUnboosted() + ")");
+                /*builder.OpenElement(1, "img");
+                builder.AddAttribute(2, "style", "top:-15px;position:relative;left:-28px;height:18px;width:18px;");
+                builder.AddAttribute(3, "src", "data/ItemIcons/FullDown.png");
+                builder.AddAttribute(4, "onclick", () => ToggleLockedSkill());
+                builder.CloseElement();*/
+                builder.OpenElement(1, "img");
+                builder.AddAttribute(2, "style", "top:-18px;position:relative;left:-10px;height:18px;width:18px;");
+                if (GameState.GetPlayer().LastLevelledSkillLocked)
+                {
+                    builder.AddAttribute(3, "src", "data/ItemIcons/Lock.png");
+                }
+                else
+                {
+                    builder.AddAttribute(3, "src", "data/ItemIcons/Unlock.png");
+                }
+                builder.AddAttribute(4, "onclick", () => ToggleLockedSkill());
                 builder.CloseElement();
-                builder.OpenElement(4, "div");
-                builder.AddAttribute(5, "style", "top:17px;position:absolute;right:10px");
-                builder.AddContent(6, "Current:" + String.Format("{0:n0}", skill.SkillExperience));
+                builder.OpenElement(5, "div");
+                builder.AddAttribute(6, "style", "top:0px;position:absolute;right:10px");
+                builder.AddContent(7, GameState.GetPlayer().LastLevelledSkill + "(" + skill.GetSkillLevelUnboosted() + ")");
                 builder.CloseElement();
-                builder.OpenElement(7, "div");
-                builder.AddAttribute(8, "style", "top:34px;position:absolute;right:10px");
-                builder.AddContent(9, "To Level:" + String.Format("{0:n0}", exp));
+                builder.OpenElement(8, "div");
+                builder.AddAttribute(9, "style", "top:17px;position:absolute;right:10px");
+                builder.AddContent(10, "Current:" + String.Format("{0:n0}", skill.SkillExperience));
+                builder.CloseElement();
+                builder.OpenElement(11, "div");
+                builder.AddAttribute(12, "style", "top:34px;position:absolute;right:10px");
+                builder.AddContent(13, "To Level:" + String.Format("{0:n0}", exp));
                 builder.CloseElement();
                 builder.CloseElement();
             }
 
 
         };
+    }
+    private void ToggleLockedSkill()
+    {
+        GameState.GetPlayer().LastLevelledSkillLocked = !GameState.GetPlayer().LastLevelledSkillLocked;
+    }
+    private void SetLastLevelledSkill(string skill)
+    {
+        GameState.GetPlayer().LastLevelledSkill = skill;
     }
     protected override void OnInit()
     {

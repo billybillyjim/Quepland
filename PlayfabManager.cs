@@ -10,7 +10,7 @@ public class PlayfabManager
     private bool _running = true;
     private string loadString = "";
     public bool IsConnected = false;
-    public async void TryLogin(string userID, string token)
+    public async Task TryLogin(string userID, string token)
     {
         PlayFabSettings.staticSettings.TitleId = "E9B77"; 
 
@@ -38,6 +38,10 @@ public class PlayfabManager
     }
     public async void Save(string data)
     {
+        if (IsConnected == false)
+        {
+            return;
+        }
         string dataPart2 = "";
         if(data.Length > 4500)
         {

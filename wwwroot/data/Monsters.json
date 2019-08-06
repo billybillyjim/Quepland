@@ -74,7 +74,13 @@
     "strength": "Knifesmanship",
     "damage": 6,
     "armor": 3,
-    "attackSpeed": 2
+    "attackSpeed": 2,
+    "dropTable": [
+      [ 71, 50 ],
+      [ 87, 100 ],
+      [ 86, 100 ],
+      [ 88, 100 ]
+    ]
   },
   {
     "name": "Ground Grupper",

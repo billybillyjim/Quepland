@@ -1,0 +1,86 @@
+@inject GameState GameState
+@using System.Globalization;
+@implements IDisposable
+
+
+@LoadStatsMenu()
+
+
+@functions{
+
+
+
+    private RenderFragment LoadStatsMenu()
+    {
+        return builder =>
+        {
+            builder.OpenElement(0, "div");
+
+            if (!GameState.isSplitView)
+            {
+
+                builder.OpenComponent<MenuButtons>(2);
+                builder.CloseComponent();
+
+            }
+            builder.OpenElement(2, "h1");
+            builder.AddContent(3, "Stats");
+            builder.CloseElement();
+            builder.OpenElement(4, "p");
+            builder.AddContent(4, "Total Level:" + GameState.GetPlayer().GetTotalLevel());
+            builder.CloseElement();
+                        builder.OpenElement(4, "p");
+            builder.AddContent(4, "Damage Boosts:" + GameState.GetPlayer().GetEquipmentBonus());
+            builder.CloseElement();
+                                    builder.OpenElement(4, "p");
+            builder.AddContent(4, "Armor:" + GameState.GetPlayerInventory().GetTotalArmor() + "(" + Extensions.CalculateArmorDamageReduction(GameState.GetPlayer()).ToString("P2",new NumberFormatInfo { PercentPositivePattern = 1, PercentNegativePattern = 1 }) + " reduction)");
+            builder.CloseElement();
+            foreach(Skill s in GameState.GetPlayer().GetSkills())
+            {
+                if(s.SkillName == "Mining" ||
+                s.SkillName == "Fishing" ||
+                s.SkillName == "Woodcutting" ||
+                s.SkillName == "Woodworking" ||
+                s.SkillName == "Culinary Arts" ||
+                s.SkillName == "Leatherworking" ||
+                s.SkillName == "Smithing")
+                {
+                    builder.OpenElement(4, "p");
+                    builder.AddAttribute(4, "style", "margin:2px;");
+                    builder.AddContent(4, s.SkillName + " Speed:" + (2 - GameState.GetPlayer().GetGatherSpeed(s.SkillName)).ToString("P2",new NumberFormatInfo { PercentPositivePattern = 1, PercentNegativePattern = 1 }));
+                    builder.CloseElement();
+                }
+            }
+                        builder.OpenElement(4, "p");
+            builder.AddContent(4, "Total Coins Earned:" + GameState.totalCoinsEarned);
+            builder.CloseElement();
+            builder.OpenElement(4, "p");
+            builder.AddContent(4, "Total Kills:" + GameState.totalKills);
+            builder.CloseElement();
+                        builder.OpenElement(4, "p");
+            builder.AddContent(4, "Total Deaths:" + GameState.totalDeaths);
+            builder.CloseElement();
+            for(int i = 0; i < GameState.killCount.Count; i++)
+            {
+                builder.OpenElement(4, "p");
+                builder.AddAttribute(4, "style", "margin:2px");
+                builder.AddContent(4, Program.battleManager.GetMonsterByID(i).Name + ":" + GameState.killCount[i]);
+                builder.CloseElement();
+            }
+
+            builder.CloseElement();
+        };
+    }
+
+    protected override void OnInit()
+    {
+        GameState.StateChanged += OnInventoryStateChanged;
+        this.StateHasChanged();
+    }
+    public void Dispose()
+    {
+        GameState.StateChanged -= OnInventoryStateChanged;
+    }
+    void OnInventoryStateChanged(object sender, EventArgs e) => StateHasChanged();
+}
+

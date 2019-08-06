@@ -15,6 +15,7 @@ namespace Quepland
         public static RoomManager roomManager = new RoomManager();
         public static FurnitureManager furnitureManager = new FurnitureManager();
         public static PlayfabManager playfabManager = new PlayfabManager();
+        public static PetManager petManager = new PetManager();
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();

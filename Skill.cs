@@ -5,6 +5,7 @@ public class Skill
     public string SkillName { get; set; }
     private int SkillLevel { get; set; }
     private long skillExperience;
+    public bool IsBlocked { get; set; }
 
     public long SkillExperience {
         get { return skillExperience; }

@@ -503,7 +503,7 @@
 
                     GameState.GetPlayerInventory().AddItem(currentSmithingBar);
                     barWithdrawn = true;
-                    MessageManager.AddMessage(GameState.GetPlayer().activeFollower.Name + " withdraws a " + currentSmithingBar + " and hands it to you.");
+                    MessageManager.AddMessage(GameState.GetPlayer().activeFollower.Name + " withdraws a " + currentSmithingBar + " and hands it to you. You don't get any experience, because you didn't do anything.");
 
                     if (justSmithBars)
                     {

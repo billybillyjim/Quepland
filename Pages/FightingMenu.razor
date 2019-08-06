@@ -1,4 +1,4 @@
-﻿@page "/FightingMenu/{thisArea}"
+﻿@page "/FightingMenu2/{thisArea}"
 @inject GameState  GameState
 @inject MessageManager  MessageManager
 @inject IJSRuntime JSRuntime
@@ -357,6 +357,7 @@
     public void WinBattle()
     {
         GameState.totalKills++;
+        GameState.IncrementKillCount(opponent.ID);
         MessageManager.AddMessage("You defeated the " + opponent.Name);
         if (opponent.AlwaysDrops != null)
         {
@@ -403,6 +404,7 @@
     {
         MessageManager.AddMessage("You died to " + opponent.Name);
         GameState.GetPlayer().CurrentHP = GameState.GetPlayer().MaxHP;
+        GameState.totalDeaths++;
         battleFound = false;
         battleStarted = false;
         autoFight = false;

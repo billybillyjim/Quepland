@@ -2,6 +2,7 @@
 @inject HttpClient Http
 @inject GameState GameState
 @inject MessageManager MessageManager
+@inject Microsoft.AspNetCore.Blazor.Services.WebAssemblyUriHelper UriHelper
 @inject IJSRuntime JSRuntime
 
 @implements IDisposable
@@ -101,8 +102,8 @@ else if (GameState.GetPlayerBank().activeTab != GameState.GetPlayerBank().tabs[0
                 {
                     //If the search string is null or empty, or the search string contains characters in the item's name.
                     @if ((((searchString == null || searchString == "") || item.Key.ItemName.ToLower().Contains(searchString.ToLower())) &&
-                //If the tab is set to all and the tab contains that item id
-                ((GameState.GetPlayerBank().activeTab.Name == "All" || GameState.GetPlayerBank().activeTab.itemIDs.Contains(item.Key.Id)) || addingItemsToTab)))
+               //If the tab is set to all and the tab contains that item id
+               ((GameState.GetPlayerBank().activeTab.Name == "All" || GameState.GetPlayerBank().activeTab.itemIDs.Contains(item.Key.Id)) || addingItemsToTab)))
                     //If the player is adding items to the tab, all items are visible.
 
                     {
@@ -114,7 +115,7 @@ else if (GameState.GetPlayerBank().activeTab != GameState.GetPlayerBank().tabs[0
                             }
                             @if (!addingItemsToTab)
                             {
-                                <td style="padding:.2rem" align="right" title="Worth @(((item.Key.Value / 2f) * item.Value) + " (" + (item.Key.Value / 2f)) each)">@String.Format("{0:n0}",item.Value)</td>
+                                <td style="padding:.2rem" align="right" title="Worth @(((item.Key.Value / 2f) * item.Value) + " (" + (item.Key.Value / 2f)) each)">@String.Format("{0:n0}", item.Value)</td>
                             }
 
                             @if (GameState.compactBankView && !addingItemsToTab)
@@ -219,6 +220,7 @@ else if (GameState.GetPlayerBank().activeTab != GameState.GetPlayerBank().tabs[0
         }
         GameState.GetPlayerBank().SetActiveTab("All");
         addingItemsToTab = false;
+        GameState.UpdateState();
     }
     private void ChangeTabName(string newName)
     {
@@ -231,24 +233,27 @@ else if (GameState.GetPlayerBank().activeTab != GameState.GetPlayerBank().tabs[0
             MessageManager.AddMessage("You already have a tab with that name.");
         }
         changingNewTabName = false;
+        GameState.UpdateState();
     }
     private void ToggleAddingItemsToTab()
     {
         addingItemsToTab = !addingItemsToTab;
+        GameState.UpdateState();
     }
     private void AddItemToTab(int id)
     {
         GameState.GetPlayerBank().activeTab.itemIDs.Add(id);
-        StateHasChanged();
+        GameState.UpdateState();
     }
     private void RemoveItemFromTab(int id)
     {
         GameState.GetPlayerBank().activeTab.itemIDs.Remove(id);
-        StateHasChanged();
+        GameState.UpdateState();
     }
     private void BeginCreatingNewTab()
     {
-        creatingNewTab = true;
+        creatingNewTab = true;       
+        GameState.UpdateState();
     }
     private void CreateNewTab(string newName)
     {
@@ -262,18 +267,21 @@ else if (GameState.GetPlayerBank().activeTab != GameState.GetPlayerBank().tabs[0
         }
 
         creatingNewTab = false;
+        GameState.UpdateState();
     }
     private void SetActiveTab(string tabName)
     {
         GameState.GetPlayerBank().SetActiveTab(tabName);
-        StateHasChanged();
+        GameState.UpdateState();
+        //Currently the only way to stop switching tabs from constantly increasing memory usage. Check if necessary on Blazor 3.1
+        GC.Collect();
+        
     }
     private void SetWithdrawAmount()
     {
         withdrawAmount = withdrawAmountModel.withdrawAmount;
         GameState.bankWithdrawAmount = withdrawAmount;
         GameState.UpdateState();
-        this.StateHasChanged();
     }
     public void SetSortStyle(int newVal)
     {
@@ -333,6 +341,7 @@ else if (GameState.GetPlayerBank().activeTab != GameState.GetPlayerBank().tabs[0
         }
         GameState.GetPlayerBank().GetInventory().RemoveItems(item.Key, amount);
         GameState.GetPlayerBank().GetInventory().AddMultipleOfItem(Program.itemDatabase.GetGold(), (int)((item.Key.Value * amount) / 2d));
+        GameState.totalCoinsEarned += (int)((item.Key.Value * amount) / 2d);
         GameState.safeToSave = true;
         GameState.UpdateState();
         return "";
@@ -344,6 +353,7 @@ else if (GameState.GetPlayerBank().activeTab != GameState.GetPlayerBank().tabs[0
         sortStyle = GameState.bankSortStyle;
         GameState.canBank = true;
         GameState.canSell = false;
+        GameState.activeView = "Inventory";
         withdrawAmount = GameState.bankWithdrawAmount;
         //Give the player an axe if they have no items.
         if (GameState.GetPlayerBank().GetInventory().GetTotalNumberOfItems() == 0 && GameState.GetPlayerInventory().GetTotalNumberOfItems() == 0)

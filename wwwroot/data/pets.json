@@ -1,0 +1,67 @@
+[
+  {
+    "name": "Chicken",
+    "description": "The Chicken is a loyal companion, or she would be if her brain weren't the size of a pea. She'll follow you around and help you grow in your skills a little bit more quickly. She has a natural affinity for Culinary Arts, on account of tasting so good.",
+    "cost": 15000,
+    "minLevel": 1,
+    "affinity": "Culinary Arts"
+  },
+  {
+    "name": "Scorpion",
+    "description": "The Scorpion is a powerful companion, or he would be if he weren't 5 inches long. He'll follow you around and help you improve your skills more quickly. He has a natural talent in Knifesmanship because he has a sharp knife attached to his rear. ",
+    "cost": 15000,
+    "minLevel": 1,
+    "affinity": "Knifesmanship"
+  },
+  {
+    "name": "Wasp",
+    "description": "The Wasp is a spiteful companion. He'll help you improve in your skills more quickly and has a natural talent for Fishing. He got it from his mother, who was a fat queen and never did anything but eat and sleep.",
+    "cost": 15000,
+    "minLevel": 1,
+    "affinity": "Fishing"
+  },
+  {
+    "name": "Snake",
+    "description": "The Snake is a slippery companion. She'll help you improve in your skills exceptionally quickly. Her natural talent is in Deftness, as her whole body is one long muscle.",
+    "cost": 250000,
+    "minLevel": 20,
+    "affinity": "Deftness"
+  },
+  {
+    "name": "Fairy",
+    "description": "The Fairy is a friendly companion. He's not afraid to let you know when you need to listen. His advice will help you improve in your skills exceptionally quickly. He is a natural at flying, which you are unable to do, but he's also good at Hammermanship because his father was a hammerman. ",
+    "cost": 250000,
+    "minLevel": 20,
+    "affinity": "Hammermanship"
+  },
+  {
+    "name": "Raven",
+    "description": "The Raven is an aloof companion. She's exceptionally wise, and her wisdom will ensure you grow in your skills exceptionally quickly. She is a natural hunter and will improve in that skill faster than any other.",
+    "cost": 250000,
+    "minLevel": 20,
+    "affinity": "Hunting"
+  },
+  {
+    "name": "Minotaur",
+    "description": "The Minotaur is a large companion. He used to be a regular weightlifter until the accident. His wisdom from years of weightlifting will help you improve in your skills extremely quickly. He's a natural at Strength and will teach you to lift with your legs, not with your back.",
+    "cost": 10000000,
+    "minLevel": 30,
+    "affinity": "Strength"
+  },
+  {
+    "name": "Ghost",
+    "description": "The Ghost is a dead companion. He used to be alive--before he died. His past life experiences will enable you to grow in your skills extremely quickly. He was a natural at Leatherworking before his untimely demise and will help you learn that skill at a faster rate. ",
+    "cost": 10000000,
+    "minLevel": 30,
+    "affinity": "Leatherworking"
+  },
+  {
+    "name": "Snow Man",
+    "description": "The Snow Man is a frosty companion. He never melts thanks to his years of experience in being cool. He will help you grow in your skills extremely quickly. He is a natural archer and will help you learn Archery at an improved rate.",
+    "cost": 10000000,
+    "minLevel": 30,
+    "affinity": "Archery"
+  }
+
+ 
+]

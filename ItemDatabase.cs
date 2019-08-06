@@ -26,7 +26,7 @@ public class ItemDatabase
         items.AddRange(newItems);
         foreach(GameItem i in items)
         {
-            if(i.ActionRequired == "Smithing")
+            if(i.ActionRequired == "Smithing" && i.ItemName != "Smithing Necklace")
             {
                 smithingBarTable.Add(i);
             }
@@ -177,5 +177,9 @@ public class ItemDatabase
     public List<GameItem> GetNails()
     {
         return nails;
+    }
+    public List<Reward> GetRewards()
+    {
+        return rewards;
     }
 }

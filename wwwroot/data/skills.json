@@ -51,7 +51,7 @@
     "skillName": "Mining",
     "skillLevel": 1,
     "skillExperience": 0,
-    "skillDescription": "Mining can be trained anywhere you can find ores in the ground. Above ground, ore veins must be found before you mine them. Each ore you aquire deplete the vein further, requiring more time to get the next ore. This does not apply to ore veins you find beneath the surface of Quepland."
+    "skillDescription": "Mining can be trained anywhere you can find ores in the ground. Above ground, ore veins must be found before you mine them. Each ore you acquire deplete the vein further, requiring more time to get the next ore. This does not apply to ore veins you find beneath the surface of Quepland."
   },
   {
     "skillName": "Smithing",
@@ -98,7 +98,7 @@
   {
     "skillName": "Leatherworking",
     "skillLevel": 1,
-    "skillDescription": "Leatherworking is working with leather. To aquire leather you need to find a tannery and tan your pelts you aquire from hunting animals. There is a mysterious traveller in the Rising Hills who can guide you closer to what you need."
+    "skillDescription": "Leatherworking is working with leather. To acquire leather you need to find a tannery and tan your pelts you acquire from hunting animals. There is a mysterious traveller in the Rising Hills who can guide you closer to what you need."
   }
 
 

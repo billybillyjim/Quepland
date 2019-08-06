@@ -1,0 +1,256 @@
+﻿@page "/{thisArea}/BaitFishing/"
+@inject HttpClient Http
+@inject GameState GameState
+@inject MessageManager  MessageManager
+@using System.Threading;
+@implements IDisposable
+
+@LoadMenu()
+
+
+@functions{
+
+    [Parameter]
+    private string thisArea { get; set; }
+    private Area area;
+    private GameItem currentBait;
+    private GameItem caughtFish;
+    private bool isAutoCollecting = false;
+
+    private RenderFragment LoadBait()
+    {
+        return builder =>
+        {
+            builder.OpenElement(0, "p");
+
+            builder.OpenElement(1, "div");
+            builder.AddAttribute(2, "class", "dropdown");
+            builder.AddAttribute(2, "style", "margin-bottom:10px");
+            builder.OpenElement(3, "button");
+
+            builder.AddAttribute(4, "class", "btn btn-primary dropdown-toggle");
+            builder.AddAttribute(5, "type", "button");
+            builder.AddAttribute(6, "id", "dropdownMenuButton");
+            builder.AddAttribute(7, "data-toggle", "dropdown");
+            builder.AddAttribute(8, "aria-haspopup", "true");
+            builder.AddAttribute(9, "aria-expanded", "false");
+            if (GameState.isGathering)
+            {
+                builder.AddAttribute(10, "disabled", true);
+            }
+
+            if (currentBait == null)
+            {
+                builder.AddContent(11, "Choose a fish for bait");
+            }
+            else
+            {
+                builder.AddContent(11, currentBait.ItemName);
+            }
+
+            builder.CloseElement();
+
+            builder.OpenElement(12, "div");
+            builder.AddAttribute(13, "class", "dropdown-menu");
+            builder.AddAttribute(14, "aria-labelledby", "dropdownMenuButton");
+
+            bool hasBait = false;
+            foreach (GameItem item in GameState.GetPlayerInventory().GetItems().Keys)
+            {
+                if (item.ExperienceGained != null && item.ExperienceGained.Contains("Fishing"))
+                {
+                    hasBait = true;
+                    builder.OpenElement(15, "a");
+                    builder.AddAttribute(16, "class", "dropdown-item");
+                    builder.AddAttribute(17, "onclick", () => SetBait(item));
+                    builder.AddContent(18, item.ItemName);
+                    builder.CloseElement();
+                }
+
+            }
+            if (hasBait == false)
+            {
+                builder.OpenElement(14, "a");
+                builder.AddAttribute(15, "class", "dropdown-item");
+                builder.AddContent(18, "You don't have anything to use as bait");
+                builder.CloseElement();
+            }
+            builder.CloseElement();
+            builder.CloseElement();
+            builder.CloseElement();
+        };
+    }
+
+    private RenderFragment LoadMenu()
+    {
+        return builder =>
+        {
+            builder.AddContent(0, LoadBait());
+            builder.OpenElement(1, "p");
+            builder.OpenElement(2, "button");
+            builder.AddAttribute(3, "class", "btn btn-primary");
+            builder.AddAttribute(4, "style", "");
+
+            if(currentBait == null)
+            {
+                builder.AddAttribute(5, "disabled", true);
+                builder.AddAttribute(6, "title", "You need to pick a bait first.");
+                builder.AddContent(7, "Fish");
+            }
+            else if(GameState.GetPlayerInventory().ActionIsEnabled("Bait Fishing", true) == false)
+            {
+                builder.AddAttribute(5, "disabled", true);
+                builder.AddAttribute(6, "title", "You need a fishing rod to fish here.");
+                builder.AddContent(7, "Fish");
+            }
+            else if (currentBait != null && GameState.isGathering == false)
+            {
+                builder.AddAttribute(5, "onclick", () => Fish());
+                builder.AddContent(6, "Fish");
+            }
+            else
+            {
+                builder.AddAttribute(5, "onclick", () => StopGathering());
+                builder.AddContent(6, "Stop Fishing");
+            }
+
+            builder.CloseElement();
+            builder.CloseElement();
+        };
+    }
+    private void Fish()
+    {
+        MessageManager.AddMessage("You cast out your line.");
+        StopGathering();
+        GameState.isGathering = true;
+        caughtFish = Program.itemDatabase.GetItemByID(Extensions.GetRandomReward(Program.itemDatabase.GetRewardByName("Bait Fishing")));
+         if (GameState.GetPlayer().activeFollower != null && Extensions.FollowerCanAutoCollect(GameState.GetPlayer().activeFollower, "Fishing", 100))
+        {
+            isAutoCollecting = true;
+            MessageManager.AddMessage(GameState.GetPlayer().activeFollower.Name + " stands ready to collect your fish.");
+            GameState.autoCollectTimer = new Timer(new TimerCallback(_ =>
+            {
+                AutoCollect();
+
+            }), null, GameState.GetPlayer().activeFollower.AutoCollectSpeed, GameState.GetPlayer().activeFollower.AutoCollectSpeed);
+        }
+        else if (GameState.GetPlayer().activeFollower != null && Extensions.FollowerCanAutoCollect(GameState.GetPlayer().activeFollower, "Fishing", 100) == false)
+        {
+            MessageManager.AddMessage(GameState.GetPlayer().activeFollower.Name + " cannot collect these high level fish for you.");
+        }
+        GameState.gatherTimer = new Timer(new TimerCallback(_ =>
+        {
+
+            if(currentBait != null && GameState.GetPlayerInventory().RemoveOneOfItem(currentBait) == false)
+            {
+                MessageManager.AddMessage("You have run out of bait.");
+                currentBait = null;
+                StopGathering();
+            }
+            CatchFish();
+            if (caughtFish.RequiredLevel <= GameState.GetPlayer().GetLevel("Fishing") && Program.gatherManager.Gather(caughtFish))
+            {
+                MessageManager.AddMessage(caughtFish.GatherString);
+                GameState.GetPlayer().GainExperience(caughtFish.ExperienceGained);
+
+                //New speed is a random int based on item gather speed multiplied by the player's gather speed bonus for that activity. Minimum of 50 ms.
+                int randSpeed = (Extensions.GetGaussianRandomInt(caughtFish.GatherSpeed, caughtFish.GatherSpeed / 2));
+                randSpeed = Math.Max(randSpeed - (currentBait.GatherSpeed / 2), 1000);
+                int speed = Math.Max((int)(randSpeed * GameState.GetPlayer().GetGatherSpeed(caughtFish.ActionRequired)), 50);
+                GameState.gatherTimer.Change(speed, speed);
+
+            }
+            else
+            {
+                StopGathering();
+            }
+            GameState.UpdateState();
+            this.StateHasChanged();
+        }), null,
+        (int)(caughtFish.GatherSpeed * GameState.GetPlayer().GetGatherSpeed(caughtFish.ActionRequired)),
+        (int)(caughtFish.GatherSpeed * GameState.GetPlayer().GetGatherSpeed(caughtFish.ActionRequired) / 2f));
+        if (caughtFish != null && GameState.GetPlayer().activeFollower != null && Extensions.FollowerCanAutoCollect(GameState.GetPlayer().activeFollower, caughtFish) == false)
+        {
+            MessageManager.AddMessage(GameState.GetPlayer().activeFollower.Name + " cannot collect " + caughtFish.ItemName + " for you.");
+        }
+        GameState.UpdateState();
+        this.StateHasChanged();
+    }
+    private void CatchFish()
+    {
+        caughtFish = Program.itemDatabase.GetItemByID(Extensions.GetRandomReward(Program.itemDatabase.GetRewardByName("Bait Fishing")));
+        if(caughtFish.RequiredLevel > GameState.GetPlayer().GetLevel("Fishing"))
+        {
+            MessageManager.AddMessage("You got something on the line, but it was too strong for you to reel in!");
+        }
+
+    }
+     public void AutoCollect()
+    {
+        int amountTaken = 0;
+        foreach(KeyValuePair<GameItem, int> pair in GameState.GetPlayerInventory().GetItems())
+        {
+            if(pair.Key.ActionRequired != null && pair.Key.ActionRequired == "Fishing" && pair.Key.IsEquipable == false)
+            {
+                GameState.GetPlayerInventory().RemoveOneOfItem(pair.Key);
+                GameState.GetPlayerBank().GetInventory().AddItem(pair.Key);
+                amountTaken++;
+            }
+            if(amountTaken >= GameState.GetPlayer().activeFollower.MaxCarry)
+            {
+                MessageManager.AddMessage(GameState.GetPlayer().activeFollower.Name + " takes as many fish as they can back to the bank.");
+                StateHasChanged();
+                GameState.UpdateState();
+                return;
+            }
+        }
+        MessageManager.AddMessage(GameState.GetPlayer().activeFollower.Name + " hauls all your fish to the bank.");
+        StateHasChanged();
+        GameState.UpdateState();
+
+    }
+    private void StopGathering()
+    {
+        if (GameState.GetPlayerInventory().GetAvailableSpaces() == 0)
+        {
+            MessageManager.AddMessage("Your inventory is full.");
+        }
+
+        if (GameState.autoCollectTimer != null)
+        {
+            GameState.autoCollectTimer.Dispose();
+        }
+        if (GameState.gatherTimer != null)
+        {
+            GameState.gatherTimer.Dispose();
+            GameState.gatherItem = "";
+            GameState.isGathering = false;
+
+        }
+
+        GameState.safeToSave = true;
+        GameState.UpdateState();
+        this.StateHasChanged();
+    }
+    private void SetBait(GameItem item)
+    {
+        currentBait = item;
+        GameState.UpdateState();
+    }
+    public void SetArea(string areaURL)
+    {
+        area = Program.areaManager.GetAreaByURL(areaURL);
+        StateHasChanged();
+        GameState.UpdateState();
+    }
+    protected override void OnInit()
+    {
+        GameState.StateChanged += OnGameStateChanged;
+        this.StateHasChanged();
+    }
+    void IDisposable.Dispose()
+    {
+        GameState.StateChanged -= OnGameStateChanged;
+    }
+    void OnGameStateChanged(object sender, EventArgs e) => StateHasChanged();
+}
