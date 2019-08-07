@@ -34,8 +34,10 @@ public class GameState
     public bool isSplitView;
     public bool inventoryIsActiveView;
     public string activeView = "Skills";
+    public List<string> activeButtons = new List<string>() { "Skills", "Inventory" };
     public bool compactBankView;
     public bool autoBuySushiSupplies;
+    public bool hideLockedItems;
 
     public bool saveDataLoaded;
     public bool gameDataLoaded;
@@ -44,7 +46,7 @@ public class GameState
     public bool safeToLoad = false;
 
     public string previousURL;
-    public string updateVersionString = "1.1a";
+    public string updateVersionString = "1.1e";
 
     public string gatherItem;
 
@@ -246,6 +248,19 @@ public class GameState
     public void ToggleSplitView()
     {
         isSplitView = !isSplitView;
+        activeButtons.Clear();
+        if (isSplitView)
+        {
+            
+            activeButtons.Add("Skills");
+            activeButtons.Add("Inventory");
+        }
+        else
+        {
+
+            activeView = "Inventory";
+            
+        }
         UpdateState();
     }
     public void ToggleActiveView()

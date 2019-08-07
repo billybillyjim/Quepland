@@ -11,7 +11,7 @@ public class Pet
     public int MinLevel { get; set; }
     public string Affinity { get; set; }
     public string Identifier { get; set; }
-    private MessageManager messageManager;
+    public MessageManager messageManager;
     public List<Skill> skills = new List<Skill>();
 
     public string GetSaveString()
@@ -70,8 +70,9 @@ public class Pet
             GainExperience(skills.Find(x => x.SkillName == skill.Split(':')[0]), multi * amount);
         }
     }
-    public void GainExperience(Skill skill, long amount)
+    private void GainExperience(Skill skill, long amount)
     {
+        Console.WriteLine(skill.SkillName);
         if (skill == null || skill.IsBlocked)
         {
             Console.WriteLine("Gained " + amount + " experience in unfound skill.");

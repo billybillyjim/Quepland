@@ -25,13 +25,14 @@ public class BattleManager
 	{
 	}
 
-    public async Task LoadMonsters(HttpClient Http, GameState state, MessageManager mm, ItemDatabase database)
+    public async Task LoadMonsters(HttpClient Http, GameState state, MessageManager mm, ItemDatabase database, IJSRuntime js)
     {
         Monster[] monsterArray = await Http.GetJsonAsync<Monster[]>("data/Monsters.json");
         monsters = monsterArray.ToList();
         gameState = state;
         messageManager = mm;
         itemDatabase = database;
+        JSRuntime = js;
     }
     public List<Monster> GetMonstersForArea(Area area)
     {

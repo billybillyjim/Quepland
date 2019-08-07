@@ -124,7 +124,7 @@
         StopGathering();
         GameState.isGathering = true;
         caughtFish = Program.itemDatabase.GetItemByID(Extensions.GetRandomReward(Program.itemDatabase.GetRewardByName("Bait Fishing")));
-         if (GameState.GetPlayer().activeFollower != null && Extensions.FollowerCanAutoCollect(GameState.GetPlayer().activeFollower, "Fishing", 100))
+        if (GameState.GetPlayer().activeFollower != null && Extensions.FollowerCanAutoCollect(GameState.GetPlayer().activeFollower, "Fishing", 100))
         {
             isAutoCollecting = true;
             MessageManager.AddMessage(GameState.GetPlayer().activeFollower.Name + " stands ready to collect your fish.");
@@ -169,10 +169,7 @@
         }), null,
         (int)(caughtFish.GatherSpeed * GameState.GetPlayer().GetGatherSpeed(caughtFish.ActionRequired)),
         (int)(caughtFish.GatherSpeed * GameState.GetPlayer().GetGatherSpeed(caughtFish.ActionRequired) / 2f));
-        if (caughtFish != null && GameState.GetPlayer().activeFollower != null && Extensions.FollowerCanAutoCollect(GameState.GetPlayer().activeFollower, caughtFish) == false)
-        {
-            MessageManager.AddMessage(GameState.GetPlayer().activeFollower.Name + " cannot collect " + caughtFish.ItemName + " for you.");
-        }
+
         GameState.UpdateState();
         this.StateHasChanged();
     }
@@ -185,26 +182,43 @@
         }
 
     }
-     public void AutoCollect()
+    public void AutoCollect()
     {
         int amountTaken = 0;
+        Dictionary<GameItem, int> items = new Dictionary<GameItem, int>();
         foreach(KeyValuePair<GameItem, int> pair in GameState.GetPlayerInventory().GetItems())
         {
-            if(pair.Key.ActionRequired != null && pair.Key.ActionRequired == "Fishing" && pair.Key.IsEquipable == false)
+            if(pair.Key.ActionRequired != null && pair.Key.ActionRequired == "Fishing" && pair.Key.IsEquipable == false && currentBait != null && pair.Key.ItemName != currentBait.ItemName)
             {
-                GameState.GetPlayerInventory().RemoveOneOfItem(pair.Key);
-                GameState.GetPlayerBank().GetInventory().AddItem(pair.Key);
-                amountTaken++;
+                int max = Math.Min(pair.Value, GameState.GetPlayer().activeFollower.MaxCarry - amountTaken);
+                items[pair.Key] = max;
+                amountTaken += pair.Value;
             }
             if(amountTaken >= GameState.GetPlayer().activeFollower.MaxCarry)
             {
-                MessageManager.AddMessage(GameState.GetPlayer().activeFollower.Name + " takes as many fish as they can back to the bank.");
                 StateHasChanged();
                 GameState.UpdateState();
-                return;
+                continue;
             }
         }
-        MessageManager.AddMessage(GameState.GetPlayer().activeFollower.Name + " hauls all your fish to the bank.");
+        foreach(KeyValuePair<GameItem, int> pair in items)
+        {
+            GameState.GetPlayerInventory().RemoveItems(pair.Key, pair.Value);
+            GameState.GetPlayerBank().GetInventory().AddMultipleOfItem(pair.Key, pair.Value);
+        }
+        if(items.Count > 0)
+        {
+            MessageManager.AddMessage(GameState.GetPlayer().activeFollower.Name + " hauls all your fish to the bank.");
+        }
+        
+        if(currentBait != null && GameState.GetPlayerBank().GetInventory().HasItem(currentBait) && GameState.GetPlayerInventory().GetAvailableSpaces() > 0)
+        {
+            int amountToWithdraw = Math.Min(GameState.GetPlayerInventory().GetAvailableSpaces(), GameState.GetPlayerBank().GetInventory().GetAmountOfItem(currentBait));
+            GameState.GetPlayerBank().GetInventory().RemoveItems(currentBait, amountToWithdraw);
+            GameState.GetPlayerInventory().AddMultipleOfItem(currentBait, amountToWithdraw);
+            MessageManager.AddMessage(GameState.GetPlayer().activeFollower.Name + " returns with more bait.");
+        }
+
         StateHasChanged();
         GameState.UpdateState();
 

@@ -23,6 +23,7 @@
     private DateTime lastGemTime;
     private bool isAutoCollecting;
     private bool GemPeakMessageSent = false;
+    private bool stopMining = false;
 
     private RenderFragment LoadMenu()
     {
@@ -32,18 +33,25 @@
             builder.OpenElement(2, "button");
             builder.AddAttribute(3, "class", "btn btn-primary");
             builder.AddAttribute(4, "style", "");
-            if(GameState.gatherTimer == null && GameState.GetPlayerInventory().ActionIsEnabled("Mining"))
+            if(GameState.gatherTimer == null && GameState.GetPlayerInventory().ActionIsEnabled("Mining") && GameState.autoCollectTimer == null)
             {
-                builder.AddAttribute(5, "onclick", () => MineGems());
-                if(currentVein == null)
+
+                if(currentVein == null || GameState.miningVeinSearchTimer != null)
                 {
                     builder.AddAttribute(6, "disabled", true);
                     builder.AddAttribute(7, "title", "You need to find a vein first.");
                     builder.AddContent(8, "Mine For Gems");
                 }
+                else if(!stopMining)
+                {
+                    builder.AddAttribute(5, "onclick", () => MineGems());
+                    builder.AddContent(8, "Mine " + currentVein.Name);
+                }
                 else
                 {
-                    builder.AddContent(8, "Mine " + currentVein.Name);
+                    builder.AddAttribute(6, "disabled", true);
+                    builder.AddAttribute(7, "title", "You need to find a new vein first.");
+                    builder.AddContent(8, "Mine For Gems");
                 }
 
             }
@@ -59,7 +67,7 @@
                 {
                     builder.AddContent(8, "Mine For Gems");
                 }
-                
+
             }
             else
             {
@@ -74,7 +82,7 @@
             builder.OpenElement(12, "button");
             builder.AddAttribute(13, "class", "btn btn-primary");
             builder.AddAttribute(14, "style", "");
-            if(GameState.miningVeinSearchTimer != null)
+            if(GameState.miningVeinSearchTimer != null || GameState.isGathering)
             {
                 builder.AddAttribute(15, "disabled", true);
             }
@@ -94,9 +102,10 @@
     }
     private void MineGems()
     {
-
+        StopGathering();
+        stopMining = false;
         GameItem firstFound = Program.itemDatabase.GetItemByID(Extensions.GetRandomReward(currentVein));
-        GameState.StopActions();
+        GameState.isGathering = true;
         if (GameState.GetPlayer().activeFollower != null && Extensions.FollowerCanAutoCollect(GameState.GetPlayer().activeFollower, "Mining", 125))
         {
             isAutoCollecting = true;
@@ -116,83 +125,96 @@
             Mine();
             GameState.UpdateState();
 
-        }), null, (int)(firstFound.GatherSpeed * GameState.GetPlayer().GetGatherSpeed("Mining")), (int)(firstFound.GatherSpeed * GameState.GetPlayer().GetGatherSpeed("Mining")));
+        }), null, (int)(10000 * GameState.GetPlayer().GetGatherSpeed("Mining")), (int)(10000 * GameState.GetPlayer().GetGatherSpeed("Mining")));
         GameState.UpdateState();
     }
     public void AutoCollect()
     {
+        if (stopMining)
+        {
+            return;
+        }
         int amountTaken = 0;
+        Dictionary<GameItem, int> items = new Dictionary<GameItem, int>();
         foreach(KeyValuePair<GameItem, int> pair in GameState.GetPlayerInventory().GetItems())
         {
             if(pair.Key.ActionRequired != null && pair.Key.ActionRequired == "Mining" && pair.Key.IsEquipable == false)
             {
-                GameState.GetPlayerInventory().RemoveOneOfItem(pair.Key);
-                GameState.GetPlayerBank().GetInventory().AddItem(pair.Key);
-                amountTaken++;
+                int max = Math.Min(pair.Value, GameState.GetPlayer().activeFollower.MaxCarry - amountTaken);
+                items[pair.Key] = max;
+                amountTaken += pair.Value;
             }
             if(amountTaken >= GameState.GetPlayer().activeFollower.MaxCarry)
             {
-                MessageManager.AddMessage(GameState.GetPlayer().activeFollower.Name + " takes as many gems as they can back to the bank.");
                 StateHasChanged();
                 GameState.UpdateState();
-                return;
+                continue;
             }
         }
-        MessageManager.AddMessage(GameState.GetPlayer().activeFollower.Name + " hauls all your gems to the bank.");
+        foreach(KeyValuePair<GameItem, int> pair in items)
+        {
+            GameState.GetPlayerInventory().RemoveItems(pair.Key, pair.Value);
+            GameState.GetPlayerBank().GetInventory().AddMultipleOfItem(pair.Key, pair.Value);
+        }
+        MessageManager.AddMessage(GameState.GetPlayer().activeFollower.Name + " takes as many gems as they can back to the bank.");
         StateHasChanged();
         GameState.UpdateState();
 
     }
     private void Mine()
     {
-        GameItem gainedItem = (Program.itemDatabase.GetItemByID(Extensions.GetRandomReward(currentVein)));
-        if(GameState.GetPlayer().GetLevel("Mining") < gainedItem.RequiredLevel)
+        if (!stopMining)
         {
-            MessageManager.AddMessage("You tried to mine a " + gainedItem.ItemName + " but accidentally smashed it to bits!");
-            GetNextItem();
-        }
-        else if (GameState.GetPlayerInventory().AddItem(gainedItem))
-        {
-            if(gainedItem.ExperienceGained != null && gainedItem.ExperienceGained.Contains("Mining"))
+            GameItem gainedItem = (Program.itemDatabase.GetItemByID(Extensions.GetRandomReward(currentVein)));
+            if(GameState.GetPlayer().GetLevel("Mining") < gainedItem.RequiredLevel)
             {
-                GameState.GetPlayer().GainExperience(gainedItem.ExperienceGained);
+                MessageManager.AddMessage("You tried to mine a " + gainedItem.ItemName + " but accidentally smashed it to bits!");
+                GetNextItem();
+            }
+            else if (GameState.GetPlayerInventory().AddItem(gainedItem))
+            {
+                if(gainedItem.ExperienceGained != null && gainedItem.ExperienceGained.Contains("Mining"))
+                {
+                    GameState.GetPlayer().GainExperience(gainedItem.ExperienceGained);
+                }
+                lastGemTime = DateTime.UtcNow;
+                MessageManager.AddMessage(gainedItem.GatherString);
+                GetNextItem();
+            }
+            else
+            {
+                MessageManager.AddMessage("You don't have any inventory space to mine anymore.");
+                GameState.StopActions();
+                GameState.UpdateState();
             }
 
-            MessageManager.AddMessage(gainedItem.GatherString);
-            GetNextItem();
         }
-        else
-        {
-            MessageManager.AddMessage("You don't have any inventory space to mine anymore.");
-            GameState.StopActions();
-            GameState.UpdateState();
-        }
-        lastGemTime = DateTime.UtcNow;
+
         GameState.UpdateState();
     }
     private void GetNextItem()
     {
-        nextItem = (Program.itemDatabase.GetItemByID(Extensions.GetRandomReward(currentVein)));
-        if(lastGemTime != null)
+        if(currentVein == null || GameState.gatherTimer == null || stopMining)
         {
-            TimeSpan timeTaken = DateTime.UtcNow.Subtract(lastGemTime);
-            timeSpentMining += (int)timeTaken.TotalSeconds;
+            StopGathering();
         }
-        int veinDepletionModifier = Math.Abs(timeToCenter - timeSpentMining);
-        int randSpeed = (Extensions.GetGaussianRandomInt(nextItem.GatherSpeed, nextItem.GatherSpeed / 2));
-        int speed = Math.Max((int)(randSpeed * GameState.GetPlayer().GetGatherSpeed("Mining")), 50);
-        if(veinDepletionModifier < 100 && GemPeakMessageSent == false)
+        else
         {
-            MessageManager.AddMessage("You've found the heart of the vein. From here on gems will begin to take longer to mine.");
-            GemPeakMessageSent = true;
+            nextItem = (Program.itemDatabase.GetItemByID(Extensions.GetRandomReward(currentVein)));
+
+            int randSpeed = (Extensions.GetGaussianRandomInt(nextItem.GatherSpeed, nextItem.GatherSpeed / 2));
+            int speed = Math.Max((int)(randSpeed * GameState.GetPlayer().GetGatherSpeed("Mining")), 50);
+
+            GameState.gatherTimer.Change(speed, speed);
+            GameState.UpdateState();
         }
-        GameState.gatherTimer.Change(speed + veinDepletionModifier, speed + veinDepletionModifier);
-        GameState.UpdateState();
+
     }
     private void SearchForNewVein()
     {
         StopGathering();
         timeRemaining = 10;
+        stopMining = false;
         MessageManager.AddMessage("You begin looking for a new vein to mine.");
         GameState.miningVeinSearchTimer = new Timer(new TimerCallback(_ =>
         {
@@ -229,24 +251,12 @@
     }
     private void StopGathering()
     {
+        stopMining = true;
         if (GameState.GetPlayerInventory().GetAvailableSpaces() == 0)
         {
             MessageManager.AddMessage("Your inventory is full.");
         }
 
-        if (GameState.autoCollectTimer != null)
-        {
-            GameState.autoCollectTimer.Dispose();
-            GameState.gatherTimer = null;
-        }
-        if (GameState.gatherTimer != null)
-        {
-            GameState.gatherTimer.Dispose();
-            GameState.gatherTimer = null;
-            GameState.gatherItem = "";
-            GameState.isGathering = false;
-
-        }
         GameState.StopActions();
         GemPeakMessageSent = false;
         GameState.safeToSave = true;

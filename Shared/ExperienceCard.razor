@@ -22,7 +22,14 @@
                 builder.AddAttribute(4, "onclick", () => ToggleLockedSkill());
                 builder.CloseElement();*/
                 builder.OpenElement(1, "img");
-                builder.AddAttribute(2, "style", "top:-18px;position:relative;left:-10px;height:18px;width:18px;");
+                if(GameState.isSplitView == false)
+                {
+                    builder.AddAttribute(2, "style", "top:-18px;position:relative;left:-10px;height:18px;width:18px;");
+                }
+                else
+                {
+                    builder.AddAttribute(2, "style", "top:-18px;position:relative;left:-95px;height:18px;width:18px;");
+                }
                 if (GameState.GetPlayer().LastLevelledSkillLocked)
                 {
                     builder.AddAttribute(3, "src", "data/ItemIcons/Lock.png");

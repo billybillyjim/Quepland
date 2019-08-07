@@ -214,7 +214,10 @@ public class Player
                 string skillString = line.Split((char)15)[1];
                 
                 newPet.SetSkills(Extensions.GetSkillsFromString(skillString));
-                Pets.Add(newPet);
+                if(Pets.Find(x => x.Name == info[0]) == null)
+                {
+                    Pets.Add(newPet);
+                }
             }
 
         }
@@ -285,10 +288,13 @@ public class Player
         {
             LastLevelledSkill = skill.SkillName;
         }
-
         
         if(activePet != null)
         {
+            if(activePet.messageManager == null)
+            {
+                activePet.messageManager = messageManager;
+            }
             activePet.GainExperience(skill.SkillName, amount / 10);
             skill.SkillExperience += (long)(amount * GetExperienceGainBonus(skill) * activePet.GetSkillBoost(skill));
         }

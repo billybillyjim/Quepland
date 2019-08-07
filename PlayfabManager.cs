@@ -38,14 +38,14 @@ public class PlayfabManager
     }
     public async void Save(string data)
     {
-        if (IsConnected == false)
+        if (IsConnected == false || data == null)
         {
             return;
         }
         string dataPart2 = "";
         if(data.Length > 4500)
         {
-            dataPart2 = data.Substring(4500, data.Length);
+            dataPart2 = data.Substring(4500, data.Length - 4500);
             data = data.Substring(0, 4500);
         }
         PlayFabResult<UpdateUserDataResult> result = await PlayFabClientAPI.UpdateUserDataAsync(new UpdateUserDataRequest()

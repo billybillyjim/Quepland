@@ -6,12 +6,15 @@
 
 @LoadInventoryMenu()
     <p>
-        <input type="checkbox" @bind-value="@hideLockedItems" @bind-value:event="onchange" />
+        <input type="checkbox" @bind-value="@GameState.hideLockedItems" @bind-value:event="onchange" />
         Hide Locked Items
     </p>
 @LoadInventory()
 
 @functions{
+
+        [Parameter]
+    private int splitViewPosition { get; set; }
 
     private GameItem currentUsedItem;
     private int confirmSellItemID;
@@ -27,11 +30,10 @@
             builder.OpenElement(0, "div");
             //builder.AddAttribute(1, "class", "table-hover");
 
-            if (!GameState.isSplitView)
-            {
                 builder.OpenComponent<MenuButtons>(2);
+            builder.AddAttribute(2, "splitViewPosition", splitViewPosition);
                 builder.CloseComponent();
-            }
+            
             builder.OpenElement(3, "h1");
             builder.AddAttribute(4, "style", "margin-bottom: .2rem;");
             builder.AddContent(5, "Inventory");
@@ -132,7 +134,7 @@
             {
                 foreach (KeyValuePair<GameItem, int> item in GameState.GetPlayerInventory().GetItemsSorted(5))
                 {
-                    if(hideLockedItems == false || item.Key.IsLocked == false)
+                    if(GameState.hideLockedItems == false || item.Key.IsLocked == false)
                     {
                         builder.AddContent(37, LoadItem(item));
                     }

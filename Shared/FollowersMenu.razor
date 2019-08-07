@@ -3,7 +3,7 @@
 @inject Microsoft.AspNetCore.Blazor.Services.WebAssemblyUriHelper UriHelper
 @implements IDisposable
 
-<p><MenuButtons></MenuButtons></p>
+<p><MenuButtons splitViewPosition="@splitViewPosition"></MenuButtons></p>
 <h1>Followers</h1>
 <br />
 <div class="table table-hover">
@@ -52,7 +52,8 @@
     </table>
 </div>
 @functions{
-
+        [Parameter]
+    private int splitViewPosition { get; set; }
 
     private void Assign(Follower follower)
     {

@@ -11,6 +11,8 @@ else
 }
 
 @functions{
+    [Parameter]
+    private int splitViewPosition { get; set; }
 
     private bool dustRecipesVisible = true;
 
@@ -127,14 +129,12 @@ else
             builder.AddAttribute(1, "class", "table-hover");
 
 
-            if (!GameState.isSplitView)
-            {
+            builder.OpenComponent<MenuButtons>(2);
+            builder.AddAttribute(2, "splitViewPosition", splitViewPosition);
+            builder.CloseComponent();
 
-                builder.OpenComponent<MenuButtons>(2);
-                builder.CloseComponent();
-            
-            }
-                        builder.OpenElement(2, "h1");
+
+            builder.OpenElement(2, "h1");
             builder.AddContent(3, "Skills");
             builder.CloseElement();
             builder.OpenElement(4, "p");

@@ -6,6 +6,13 @@
 
 
 @functions{
+    [Parameter]
+    private int splitViewPosition { get; set; }
+
+    private List<string> menuButtons = new List<string>() { "Skills", "Inventory", "Crafting", "Followers", "Pets", "Stats" };
+
+    private string activeStyle = "width:70px;height:70px;opacity:.6";
+    private string inactiveStyle = "width:70px;height:70px;";
 
     private RenderFragment LoadMenuButtons()
     {
@@ -17,15 +24,17 @@
             {
                 builder.OpenElement(2, "img");
                 builder.AddAttribute(3, "src", "data/ItemIcons/" + button + ".png");
-                if(GameState.activeView == button)
+                if((GameState.activeView == button && GameState.isSplitView == false)|| (GameState.activeButtons.Contains(button) == true && GameState.isSplitView))
                 {
                     builder.AddAttribute(4, "style", activeStyle);
+                    
                 }
                 else
                 {
                     builder.AddAttribute(4, "style", inactiveStyle);
+                    builder.AddAttribute(5, "onclick", () => SetActiveView(button));
                 }
-                builder.AddAttribute(5, "onclick", () => SetActiveView(button));
+                
                 builder.AddContent(6, "Show " + button);
                 builder.CloseElement();
             }
@@ -33,12 +42,22 @@
 
         };
     }
-    private List<string> menuButtons = new List<string>() { "Skills", "Inventory", "Crafting", "Followers", "Pets", "Stats" };
-    private string activeStyle = "width:70px;height:70px;opacity:.6";
-    private string inactiveStyle = "width:70px;height:70px;";
+
     private void SetActiveView(string view)
     {
-        GameState.activeView = view;
+        if(GameState.isSplitView == false)
+        {
+            GameState.activeView = view;
+            GameState.activeButtons.Clear();
+        }
+        else
+        {
+            if(GameState.activeButtons.Count == 2)
+            {
+                GameState.activeButtons.RemoveAt(splitViewPosition);
+            }
+            GameState.activeButtons.Insert(splitViewPosition, view);
+        }
         GameState.UpdateState();
     }
 

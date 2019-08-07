@@ -388,7 +388,7 @@ else
             GameState.LoadKC(lines[17]);
         }
         MessageManager.AddMessage("Save game loaded.");
-
+        Console.WriteLine(GameState.isHunting + ", " + GameState.CanLeave() + ", " + GameState.huntingAreaID);
         GameState.saveDataLoaded = true;
         GameState.UpdateState();
         this.StateHasChanged();
@@ -466,7 +466,7 @@ else
             await Program.buildingManager.LoadBuildings(Http);
             await Program.followerManager.LoadFollowers(Http);
             await Program.npcManager.LoadNPCs(Http);
-            await Program.battleManager.LoadMonsters(Http, GameState, MessageManager, Program.itemDatabase);
+            await Program.battleManager.LoadMonsters(Http, GameState, MessageManager, Program.itemDatabase, JSRuntime);
             await Program.roomManager.LoadRooms(Http);
             await Program.furnitureManager.LoadFurniture(Http);
             await Program.petManager.LoadPets(Http);

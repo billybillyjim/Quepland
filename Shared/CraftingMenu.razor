@@ -8,18 +8,19 @@
 
 
 @functions{
-
+        [Parameter]
+    private int splitViewPosition { get; set; }
     private bool hasItemsToShow = false;
     private GameItem currentCraftingItem;
     private RenderFragment LoadCraftingMenu()
     {
         return builder =>
         {
-            if (!GameState.isSplitView)
-            {
+
                 builder.OpenComponent<MenuButtons>(0);
+            builder.AddAttribute(2, "splitViewPosition", splitViewPosition);
                 builder.CloseComponent();
-            }
+            
             builder.OpenElement(1, "table");
             builder.AddAttribute(2, "class", "table-hover");
             builder.AddAttribute(2, "style", "width:100%");

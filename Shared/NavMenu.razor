@@ -137,10 +137,8 @@
             else if (GameState.isHunting)
             {
                 Area childArea = Program.areaManager.GetAreaByID(GameState.huntingAreaID);
-                if (childArea.IsUnlocked)
-                {
-                    builder.AddContent(17, NavButton(childArea, false));
-                }
+                builder.AddContent(17, NavButton(childArea, false));
+                
             }
             builder.CloseElement();
             builder.CloseElement();

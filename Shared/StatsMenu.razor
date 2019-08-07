@@ -8,7 +8,8 @@
 
 @functions{
 
-
+        [Parameter]
+    private int splitViewPosition { get; set; }
 
     private RenderFragment LoadStatsMenu()
     {
@@ -16,13 +17,12 @@
         {
             builder.OpenElement(0, "div");
 
-            if (!GameState.isSplitView)
-            {
 
                 builder.OpenComponent<MenuButtons>(2);
+            builder.AddAttribute(2, "splitViewPosition", splitViewPosition);
                 builder.CloseComponent();
 
-            }
+            
             builder.OpenElement(2, "h1");
             builder.AddContent(3, "Stats");
             builder.CloseElement();

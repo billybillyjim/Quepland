@@ -83,7 +83,6 @@
             MessageManager.AddMessage("Failed to load from file. ");
             return;
         }
-
         string[] lines = decryptedData.Split('#');
         Dictionary<GameItem, int> bankItems = Extensions.GetItemDicFromString(lines[0], Program.itemDatabase);
         List<Skill> skills = Extensions.GetSkillsFromString(lines[1]);

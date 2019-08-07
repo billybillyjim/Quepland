@@ -1552,7 +1552,11 @@
       [ 118, 137 ],
       [ 119, 138 ],
       [ 299, 381 ],
-      [ 375, 383 ]
+      [ 375, 383 ],
+      [ 421, 428 ],
+      [ 422, 429 ],
+      [ 423, 430 ],
+      [ 424, 431 ]
     ],
     "icon": "Roll"
   },
@@ -6926,7 +6930,7 @@
     "gatherSpeed": 16000,
     "requiredLevel": 105,
     "experienceGained": "Mining:700",
-    "gatherString": "You mine a small topaz.",
+    "gatherString": "You mine a small chrysoberyl.",
     "icon": "Ore"
   },
   {
@@ -6967,7 +6971,7 @@
   },
   {
     "itemName": "Rough Sapphire",
-    "itemDescription": "An uncut topaz.",
+    "itemDescription": "An uncut sapphire.",
     "id": 474,
     "value": 1650,
     "actionRequired": "Mining",
@@ -7080,5 +7084,18 @@
     "value": 100000000,
     "isStackable": true,
     "icon": "Gold"
-  }
+  },
+   {
+    "itemName": "Woolly Mammoth",
+    "itemDescription": "The carcass of a woolly mammoth.",
+    "id": 484,
+    "value": 5000,
+    "isUnpackable": true,
+    "unpackIDs": [ 437, 76 ],
+    "unpackString": "Gut",
+    "actionRequired": "Hunting",
+    "requiredLevel": 105,
+    "experienceGained": "Hunting:6000",
+    "icon": "Deer"
+  },
 ]
