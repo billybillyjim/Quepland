@@ -248,6 +248,7 @@
     }
     private void SetBait(GameItem item)
     {
+        StopGathering();
         currentBait = item;
         GameState.UpdateState();
     }
