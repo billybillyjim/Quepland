@@ -30,4 +30,6 @@ public class Area
     public bool IsRegion { get; set; }
     public string Region { get; set; }
     public string AccessibleRegions { get; set; }
+    public bool HasDojo { get; set; }
+    public int DojoID { get; set; }
 }

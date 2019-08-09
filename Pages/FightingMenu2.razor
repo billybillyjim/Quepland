@@ -160,6 +160,7 @@
     {
         area = Program.areaManager.GetAreaByURL(areaString);
         GameState.currentArea = area;
+        Program.battleManager.isDojoBattle = false;
         possibleMonsters = Program.battleManager.GetMonstersForArea(area);
     }
     protected override void OnInit()

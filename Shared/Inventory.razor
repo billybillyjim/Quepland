@@ -6,7 +6,7 @@
 
 @LoadInventoryMenu()
     <p>
-        <input type="checkbox" @bind-value="@GameState.hideLockedItems" @bind-value:event="onchange" />
+        <input type="checkbox" @bind="@GameState.hideLockedItems" @bind:event="onchange" />
         Hide Locked Items
     </p>
 @LoadInventory()

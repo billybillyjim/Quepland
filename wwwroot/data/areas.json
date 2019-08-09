@@ -72,7 +72,9 @@
     "unlockableAreas": [ "The Peak of Mount Queple,Climb to the summit,,", "Eastern Trail,Continue around the mountain,," ],
     "actions": [ "Chop Oak Trees:Oak Logs" ],
     "region": "Quepland",
-    "npcIDs": [65]
+    "npcIDs": [ 65 ],
+    "hasDojo": true,
+    "dojoID": 0
   },
   {
     "name": "Queple Cave Entrance",

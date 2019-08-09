@@ -1,0 +1,11 @@
+[
+  {
+    "name": "Houchou Dojo",
+    "id": 0,
+    "description": "The walls of the hall are covered in knives. Each member of the dojo stands in line, awaiting their next challenger. Defeat all of them to earn the dojo's title!",
+    "opponentIDs": [ 47, 48, 49, 50, 51, 52],
+    "itemReward": 0,
+    "itemAmount": 10000
+  }
+
+]

@@ -13,49 +13,101 @@
     [Parameter]
     private string thisArea { get; set; }
     private Area area;
-    private static Random rand = new Random();
-    private int currentWave = 0;
-    private List<int> monsters = new List<int>();
+    private Dojo dojo;
 
     private RenderFragment LoadMenu()
     {
         return builder =>
         {
             builder.OpenElement(0, "p");
-            builder.AddContent(1, LoadCurrentOpponent());
+            if(area != null && dojo != null)
+            {
+                builder.AddContent(1, LoadCurrentOpponent());
+            }          
             builder.CloseElement();
 
         };
     }
+
     private RenderFragment LoadCurrentOpponent()
     {
         return builder =>
         {
+            if (Program.battleManager.battleStarted == false)
+            {
+                builder.OpenElement(0, "p");
+                builder.AddContent(1, Program.battleManager.GetMonsterByID(dojo.OpponentIDs[Program.battleManager.currentDojoWave]).Name);
+                builder.CloseElement();
+                builder.OpenElement(2, "button");
+                builder.AddAttribute(3, "class", "btn btn-primary");
+                builder.AddAttribute(4, "style", "");
+                builder.AddAttribute(5, "onclick", () => StartBattle());
+                builder.AddContent(6, "Fight");
+                builder.CloseElement();
+            }
+            else
+            {
+                builder.OpenElement(0, "p");
+                builder.AddContent(1, Program.battleManager.GetMonsterByID(dojo.OpponentIDs[Program.battleManager.currentDojoWave]).Name);
+                builder.CloseElement();
+                builder.AddContent(2, LoadHPBars());
+            }
+        };
+    }
+    private RenderFragment LoadHPBars()
+    {
+        return builder =>
+        {
             builder.OpenElement(0, "p");
-            builder.AddContent(1, Program.battleManager.GetMonsterByID(monsters[currentWave]).Name);
+            builder.OpenElement(1, "span");
+            builder.AddAttribute(1, "style", "float:left");
+            builder.AddContent(1, Program.battleManager.opponent.CurrentHP + "/" + Program.battleManager.opponent.HP);
             builder.CloseElement();
-            builder.OpenElement(2, "button");
-            builder.AddAttribute(3, "class", "btn btn-primary");
-            builder.AddAttribute(4, "style", "");
-            builder.AddAttribute(5, "onclick", () => StartBattle());
-            builder.AddContent(6, "Start Battle");
+
+            builder.OpenElement(1, "span");
+            builder.AddAttribute(1, "style", "float:right");
+            builder.AddContent(1, GameState.GetPlayer().CurrentHP + "/" + GameState.GetPlayer().MaxHP);
+            builder.CloseElement();
+            builder.CloseElement();
+
+            builder.OpenElement(0, "div");
+            builder.AddAttribute(1, "class", "progress");
+
+            builder.OpenElement(2, "div");
+            builder.AddAttribute(3, "class", "progress-bar bg-success");
+            builder.AddAttribute(4, "style", "width:" + ((float)Program.battleManager.opponent.CurrentHP / Program.battleManager.opponent.HP) * 100 + "%");
+            builder.AddAttribute(5, "role", "progressbar");
+            builder.AddAttribute(6, "aria-valuenow", "" + ((float)Program.battleManager.opponent.CurrentHP / Program.battleManager.opponent.HP) * 100);
+            builder.AddAttribute(7, "aria-valuemin", "0");
+            builder.AddAttribute(8, "aria-valuemax", "" + Program.battleManager.opponent.HP);
+            builder.CloseElement();
             builder.CloseElement();
         };
     }
     private void StartBattle()
     {
-
+        Program.battleManager.StartDojoBattle(dojo);
     }
     public void SetArea(string areaURL)
     {
         area = Program.areaManager.GetAreaByURL(areaURL);
+        Program.battleManager.currentDojoWave = 0;
+        LoadDojo(area.DojoID);
         StateHasChanged();
         GameState.UpdateState();
+    }
+    private void LoadDojo(int id)
+    {
+        dojo = Program.battleManager.GetDojoByID(id);
     }
     protected override void OnInit()
     {
         GameState.StateChanged += OnGameStateChanged;
         this.StateHasChanged();
+    }
+    protected override void OnParametersSet()
+    {
+        SetArea(thisArea);
     }
     void IDisposable.Dispose()
     {

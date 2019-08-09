@@ -923,5 +923,71 @@
       [ 290, 20 ],
       [ 407, 10 ]
     ]
+  },
+  {
+    "name": "Tanto",
+    "id": 47,
+    "level": 12,
+    "hp": 100,
+    "weakness": "Swordsmanship",
+    "strength": "Knifesmanship",
+    "damage": 5,
+    "armor": 3,
+    "attackSpeed": 1
+  },
+  {
+    "name": "Deba",
+    "id": 48,
+    "level": 18,
+    "hp": 200,
+    "weakness": "Swordsmanship",
+    "strength": "Knifesmanship",
+    "damage": 8,
+    "armor": 5,
+    "attackSpeed": 1
+  },
+  {
+    "name": "Mes",
+    "id": 49,
+    "level": 24,
+    "hp": 300,
+    "weakness": "Swordsmanship",
+    "strength": "Knifesmanship",
+    "damage": 10,
+    "armor": 8,
+    "attackSpeed": 1
+  },
+  {
+    "name": "Dos",
+    "id": 50,
+    "level": 28,
+    "hp": 400,
+    "weakness": "Swordsmanship",
+    "strength": "Knifesmanship",
+    "damage": 14,
+    "armor": 11,
+    "attackSpeed": 1
+  },
+  {
+    "name": "Kozuka",
+    "id": 51,
+    "level": 34,
+    "hp": 500,
+    "weakness": "Swordsmanship",
+    "strength": "Knifesmanship",
+    "damage": 18,
+    "armor": 15,
+    "attackSpeed": 1
+  },
+  {
+    "name": "Kaiken",
+    "id": 52,
+    "level": 40,
+    "hp": 800,
+    "weakness": "Swordsmanship",
+    "strength": "Knifesmanship",
+    "damage": 25,
+    "armor": 20,
+    "attackSpeed": 1
   }
 ]

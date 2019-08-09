@@ -79,9 +79,32 @@
         GameState.previousURL = "/" + area.AreaURL;
         UriHelper.NavigateTo("/" + area.AreaURL + "/GemMining");
     }
+        public void EnterDojo()
+    {
+        GameState.previousURL = "/" + area.AreaURL;
+        UriHelper.NavigateTo("/" + area.AreaURL + "/Dojo");
+    }
     protected override void OnParametersSet()
     {
         SetArea(thisArea);
+    }
+    public RenderFragment LoadDojo()
+    {
+        return builder =>
+        {
+            if (area.HasDojo)
+            {
+                builder.OpenElement(0, "p");
+                builder.OpenElement(1, "button");
+                builder.AddAttribute(2, "class", "btn btn-primary");
+                builder.AddAttribute(3, "style", "");
+                builder.AddAttribute(4, "title", "");
+                builder.AddAttribute(5, "onclick", () => EnterDojo());
+                builder.AddContent(6, "Enter " + Program.battleManager.GetDojoByID(area.DojoID));
+                builder.CloseElement();
+                builder.CloseElement();
+            }
+        };
     }
     public RenderFragment LoadActions()
     {

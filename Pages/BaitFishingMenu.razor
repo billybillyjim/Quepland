@@ -216,7 +216,7 @@
             int amountToWithdraw = Math.Min(GameState.GetPlayerInventory().GetAvailableSpaces(), GameState.GetPlayerBank().GetInventory().GetAmountOfItem(currentBait));
             GameState.GetPlayerBank().GetInventory().RemoveItems(currentBait, amountToWithdraw);
             GameState.GetPlayerInventory().AddMultipleOfItem(currentBait, amountToWithdraw);
-            MessageManager.AddMessage(GameState.GetPlayer().activeFollower.Name + " returns with more bait.");
+            MessageManager.AddMessage(GameState.GetPlayer().activeFollower.Name + " returns with more bait.(" + GameState.GetPlayerBank().GetInventory().GetAmountOfItem(currentBait) + " remaining)");
         }
 
         StateHasChanged();

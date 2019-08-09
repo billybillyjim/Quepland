@@ -10,6 +10,7 @@ using System.Threading;
 public class BattleManager
 {
     private List<Monster> monsters = new List<Monster>();
+    private List<Dojo> dojos = new List<Dojo>();
     public GameState gameState;
     IJSRuntime JSRuntime;
     public MessageManager messageManager;
@@ -19,6 +20,8 @@ public class BattleManager
     public bool battleStarted;
     public Monster opponent;
     public bool autoFight;
+    public bool isDojoBattle;
+    public int currentDojoWave;
     public List<Monster> possibleMonsters = new List<Monster>();
 
     public BattleManager()
@@ -29,6 +32,8 @@ public class BattleManager
     {
         Monster[] monsterArray = await Http.GetJsonAsync<Monster[]>("data/Monsters.json");
         monsters = monsterArray.ToList();
+        Dojo[] dojoArray = await Http.GetJsonAsync<Dojo[]>("data/dojos.json");
+        dojos = dojoArray.ToList();
         gameState = state;
         messageManager = mm;
         itemDatabase = database;
@@ -89,6 +94,14 @@ public class BattleManager
         opponent.CurrentHP = opponent.HP;
         battleFound = true;
     }
+    public void StartDojoBattle(Dojo dojo)
+    {
+        opponent = GetMonsterByID(dojo.OpponentIDs[currentDojoWave]);
+        isDojoBattle = true;
+        opponent.CurrentHP = opponent.HP;
+        battleFound = true;
+       StartBattle();
+    }
     public void StartBattle()
     {
         battleStarted = true;
@@ -131,6 +144,7 @@ public class BattleManager
         gameState.UpdateState();
 
     }
+
     public void Attack()
     {
         if (battleFound)
@@ -205,6 +219,10 @@ public class BattleManager
                 gameState.GetPlayer().GainExperience("Strength", dmgDealt * 3);
                 battleString = "You punch the " + opponent.Name + " for " + dmgDealt + " damage.";
             }
+            if (isDojoBattle)
+            {
+                battleString = battleString.Replace(" the ", " ");
+            }
             messageManager.AddMessage(battleString, color);
             opponent.CurrentHP -= dmgDealt;
 
@@ -229,7 +247,15 @@ public class BattleManager
             dmg = (int)(dmg * Math.Max(1 - Extensions.CalculateArmorDamageReduction(gameState.GetPlayer()), 0.05d));
             gameState.GetPlayer().GainExperience("HP", Math.Min(gameState.GetPlayer().CurrentHP, dmg) * 8);
             gameState.GetPlayer().CurrentHP -= dmg;
-            messageManager.AddMessage("You took " + dmg + " damage from the " + opponent.Name + "'s attack.");
+            if (isDojoBattle)
+            {
+                messageManager.AddMessage("You took " + dmg + " damage from " + opponent.Name + "'s attack.");
+            }
+            else
+            {
+                messageManager.AddMessage("You took " + dmg + " damage from the " + opponent.Name + "'s attack.");
+            }
+           
 
             if (gameState.GetPlayer().CurrentHP <= 0)
             {
@@ -256,7 +282,19 @@ public class BattleManager
     {
         gameState.totalKills++;
         gameState.IncrementKillCount(opponent.ID);
-        messageManager.AddMessage("You defeated the " + opponent.Name);
+        if (isDojoBattle)
+        {
+            messageManager.AddMessage("You defeated " + opponent.Name);
+        }
+        else
+        {
+            messageManager.AddMessage("You defeated the " + opponent.Name);
+        }
+        
+        if (isDojoBattle)
+        {
+            currentDojoWave++;
+        }
         if (opponent.AlwaysDrops != null)
         {
             if (gameState.GetPlayerInventory().AddOneOfMultipleItems(itemDatabase.GetItems(opponent.AlwaysDrops)))
@@ -351,7 +389,15 @@ public class BattleManager
             {
                 int maxHPGain = gameState.GetPlayer().MaxHP - gameState.GetPlayer().CurrentHP;
                 gameState.GetPlayer().CurrentHP += Math.Min(dmgDealt / duration, maxHPGain);
-                messageManager.AddMessage("You absorbed " + Math.Min(dmgDealt / duration, maxHPGain) + " HP from the " + opponent.Name, "red");
+                if (isDojoBattle)
+                {
+                    messageManager.AddMessage("You absorbed " + Math.Min(dmgDealt / duration, maxHPGain) + " HP from " + opponent.Name, "red");
+                }
+                else
+                {
+                    messageManager.AddMessage("You absorbed " + Math.Min(dmgDealt / duration, maxHPGain) + " HP from the " + opponent.Name, "red");
+                }
+                
             }
             else
             {
@@ -372,5 +418,9 @@ public class BattleManager
 
         }
 
+    }
+    public Dojo GetDojoByID(int id)
+    {
+        return dojos[id];
     }
 }
