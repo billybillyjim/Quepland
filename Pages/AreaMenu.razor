@@ -775,7 +775,14 @@
                             builder.AddAttribute(6, "onclick", () => SpeakToAndUnlockNPCs(npc, i));
                         }
                     }
-                    builder.AddContent(7, "Speak to " + npc.Name);
+                    if(npc.ButtonText != null)
+                    {
+                        builder.AddContent(7, npc.ButtonText);
+                    }
+                    else
+                    {
+                        builder.AddContent(7, "Speak to " + npc.Name);
+                    }          
                     builder.CloseElement();
                     builder.OpenElement(8, "br");
                     builder.CloseElement();

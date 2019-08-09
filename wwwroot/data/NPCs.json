@@ -472,5 +472,12 @@
     "id": 67,
     "spokenText": "Hi, I'm the pet forgetter. I'll take care of all your pet needs. Just show me your pet and tell me what you want it to forget, and I'll take it out back and help it forget. We have two courses to choose from. Would you like your pet to forget one level, or make them forget all the way back to level 1?",
     "isInteractable": true
+  },
+  {
+    "name": "The Pet Forgetter2",
+    "id": 68,
+    "buttonText": "Ask how it works",
+    "spokenText": "The exact method is a trade secret, but I'm quite skilled in a number of fields of magic. This big stick helps a lot, too.",
+    "isInteractable": true
   }
 ]

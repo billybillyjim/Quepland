@@ -213,14 +213,14 @@
             {
                 currentPet.skills.Find(x => x.SkillName == currentSkill.SkillName).SetSkillLevel(1);
                 currentPet.skills.Find(x => x.SkillName == currentSkill.SkillName).SkillExperience = 0;
-                MessageManager.AddMessage("The pet forgetter takes your " + currentPet.Name + " to the back room of the cave. You hear a loud thwack! And the two return, your pet looking quite dazed.");
+                MessageManager.AddMessage("The pet forgetter takes your " + currentPet.Name + " to the back room of the cave. You hear a loud thwack! And the two return, your pet looking quite dazed but otherwise unharmed.");
 
             }
             else
             {
                 currentPet.skills.Find(x => x.SkillName == currentSkill.SkillName).SetSkillLevel(currentPet.skills.Find(x => x.SkillName == currentSkill.SkillName).GetSkillLevelUnboosted() - 1);
                 currentPet.skills.Find(x => x.SkillName == currentSkill.SkillName).SkillExperience = Extensions.GetExperienceRequired(currentPet.skills.Find(x => x.SkillName == currentSkill.SkillName).GetSkillLevelUnboosted() - 1) + 1;
-                MessageManager.AddMessage("The pet forgetter takes your " + currentPet.Name + " to the back room of the cave. You hear a thwack! And the two return, your pet looking somewhat dazed.");
+                MessageManager.AddMessage("The pet forgetter takes your " + currentPet.Name + " to the back room of the cave. You hear a thwack! And the two return, your pet looking somewhat dazed but otherwise unharmed.");
             }
             GameState.GetPlayerInventory().RemoveItems(Program.itemDatabase.GetGold(), costToForget);
             UpdateCost(currentPet.skills.Find(x => x.SkillName == currentSkill.SkillName));

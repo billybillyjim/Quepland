@@ -870,7 +870,7 @@
     "icon": "oi oi-badge",
     "actions": [ "Pet Forgetter" ],
     "region": "Caligin Commonwealth",
-    "npcIDs": [ 67 ]
+    "npcIDs": [ 67, 68 ]
   }
 
 

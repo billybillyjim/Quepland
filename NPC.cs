@@ -7,6 +7,7 @@ public class NPC
     public bool HideOnSpeak { get; set; }
     public string Name { get; set; }
     public string SpokenText { get; set; }
+    public string ButtonText { get; set; }
     public int[] UnlockFollowerIDs { get; set; }
     public int[] UnlockAreaIDs { get; set; }
     public int[] UnlockBuildingIDs { get; set; }
