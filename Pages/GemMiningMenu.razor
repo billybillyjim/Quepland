@@ -103,6 +103,7 @@
     private void MineGems()
     {
         StopGathering();
+        GameState.StopActions();
         stopMining = false;
         GameItem firstFound = Program.itemDatabase.GetItemByID(Extensions.GetRandomReward(currentVein));
         GameState.isGathering = true;
