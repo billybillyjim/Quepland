@@ -60,14 +60,18 @@ public class Bank
             {
                 string[] lineData = line.Split(',');
 
-                BankTab newTab = new BankTab(lineData[0]);
-                List<int> ids = new List<int>();
-                foreach (string i in lineData.Skip(1))
+                if (NameIsValid(lineData[0]))
                 {
-                    ids.Add(int.Parse(i));
+                    BankTab newTab = new BankTab(lineData[0]);
+                    List<int> ids = new List<int>();
+                    foreach (string i in lineData.Skip(1))
+                    {
+                        ids.Add(int.Parse(i));
+                    }
+                    newTab.itemIDs = ids;
+                    tabs.Add(newTab);
                 }
-                newTab.itemIDs = ids;
-                tabs.Add(newTab);
+
             }
         }
 

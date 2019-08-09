@@ -824,7 +824,7 @@
     "areaURL": "SahotaTir",
     "description": "An icy region of Caligin.",
     "icon": "oi oi-chevron-bottom",
-    "children": [ "SahotaIceFields", "SahotaCaverns", "SahotaDungeon" ],
+    "children": [ "SahotaIceFields", "SahotaCaverns", "SahotaDungeon", "SahotaPetCareCave" ],
     "region": "Caligin Commonwealth"
   },
   {
@@ -845,11 +845,12 @@
     "name": "Sahota Caverns",
     "id": 74,
     "areaURL": "SahotaCaverns",
-    "description": "A series of tunnels that weave around the walls of the ice fields. There's water beneath your feet, and here and there you find holes large enough to fish from.",
-    "icon": "oi oi-random",
+    "description": "A series of tunnels that weave around the walls of the ice fields. There's water beneath your feet, and here and there you find holes large enough to fish from. There's a door at the far end of one of the tunnels.",
+    "icon": "oi oi-compass",
     "actions": [ "Hunting", "Bait Fishing" ],
     "region": "Caligin Commonwealth",
-    "huntingIDs": [ 71, 67, 69, 436 ]
+    "huntingIDs": [ 71, 67, 69, 436 ],
+    "unlockableAreas": ["Sahota Pet Care Cave,Enter the door,,"]
   },
   {
     "name": "Sahota Dungeon",
@@ -859,8 +860,18 @@
     "icon": "oi oi-random",
     "actions": [ "Gem Mining" ],
     "region": "Caligin Commonwealth",
-    "npcIDs": [66]
-  } 
+    "npcIDs": [ 66 ]
+  },
+  {
+    "name": "Sahota Pet Care Cave",
+    "id": 76,
+    "areaURL": "SahotaPetCareCave",
+    "description": "You step through the door into another cave. A poorly painted sign on the far wall reads, \"Pet Care\" in poorly drawn letters. A man in a trench coat stands beneath the sign, wielding a large wooden club.",
+    "icon": "oi oi-badge",
+    "actions": [ "Pet Forgetter" ],
+    "region": "Caligin Commonwealth",
+    "npcIDs": [ 67 ]
+  }
 
 
 ]

@@ -253,8 +253,8 @@ public class Inventory
         //If the added item is null, the inventory is full and the item is not stackable, 
         //or the inventory is full and the item is stackable, but not already in the inventory
         if (item == null ||
-          (totalItems == maxSize && item.IsStackable == false) ||
-          (totalItems == maxSize && item.IsStackable == true && HasItem(item) == false))
+          (totalItems >= maxSize && item.IsStackable == false) ||
+          (totalItems >= maxSize && item.IsStackable == true && HasItem(item) == false))
         {
             UpdateItemCount();
             return false;
@@ -328,7 +328,7 @@ public class Inventory
     }
     public bool AddMultipleOfItem(GameItem item, int amount)
     {
-        if(totalItems == maxSize && (item.IsStackable == false || HasItem(item) == false))
+        if(totalItems >= maxSize && (item.IsStackable == false || HasItem(item) == false))
         {
             return false;
         }
@@ -355,7 +355,7 @@ public class Inventory
     }
     public bool AddItemStackable(GameItem item, int amount)
     {
-        if (totalItems == maxSize && (item.IsStackable == false || HasItem(item) == false))
+        if (totalItems >= maxSize && (item.IsStackable == false || HasItem(item) == false))
         {
             return false;
         }

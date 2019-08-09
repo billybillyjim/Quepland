@@ -1,0 +1,257 @@
+﻿@inject HttpClient Http
+@inject GameState GameState
+@inject MessageManager  MessageManager
+@using System.Threading
+@implements IDisposable
+
+<p>Cost to forget:@costToForget</p>
+<p>
+    <input type="checkbox" @bind="@forgetAllLevels" @bind:event="onchange" />
+    Forget to level 1?
+</p>
+<p>@RenderPetForgetter()</p>
+
+@functions{
+
+    private Pet currentPet;
+    private Skill currentSkill;
+    private bool forgetAllLevels;
+    private bool confirmed;
+    private int costToForget;
+
+    private RenderFragment RenderPetForgetter()
+    {
+        return builder =>
+        {
+            builder.AddContent(0, RenderPetList());
+            builder.AddContent(1, RenderSkillList());
+            builder.AddContent(2, RenderConfirmButton());
+        };
+    }
+    private RenderFragment RenderPetList()
+    {
+        return builder =>
+        {
+            builder.OpenElement(0, "p");
+
+            builder.OpenElement(1, "div");
+            builder.AddAttribute(2, "class", "dropdown");
+            builder.AddAttribute(2, "style", "margin-bottom:10px");
+            builder.OpenElement(3, "button");
+
+            builder.AddAttribute(4, "class", "btn btn-primary dropdown-toggle");
+            builder.AddAttribute(5, "type", "button");
+            builder.AddAttribute(6, "id", "dropdownMenuButton");
+            builder.AddAttribute(7, "data-toggle", "dropdown");
+            builder.AddAttribute(8, "aria-haspopup", "true");
+            builder.AddAttribute(9, "aria-expanded", "false");
+
+            if (currentPet == null)
+            {
+                builder.AddContent(10, "Select a Pet");
+            }
+            else
+            {
+                builder.AddContent(10, currentPet.Name);
+            }
+            builder.CloseElement();
+
+            builder.OpenElement(12, "div");
+            builder.AddAttribute(13, "class", "dropdown-menu");
+            builder.AddAttribute(14, "aria-labelledby", "dropdownMenuButton");
+
+
+            foreach (Pet pet in GameState.GetPlayer().Pets)
+            {
+                builder.OpenElement(15, "a");
+                builder.AddAttribute(16, "class", "dropdown-item");
+                builder.AddAttribute(17, "onclick", () => SetPet(pet));
+                builder.AddContent(18, pet.Name);
+                builder.CloseElement();
+
+            }
+
+            builder.CloseElement();
+            builder.CloseElement();
+            builder.CloseElement();
+        };
+    }
+    private RenderFragment RenderSkillList()
+    {
+        return builder =>
+        {
+            builder.OpenElement(0, "p");
+
+            builder.OpenElement(1, "div");
+            builder.AddAttribute(2, "class", "dropdown");
+            builder.AddAttribute(2, "style", "margin-bottom:10px");
+            builder.OpenElement(3, "button");
+
+            builder.AddAttribute(4, "class", "btn btn-primary dropdown-toggle");
+            builder.AddAttribute(5, "type", "button");
+            builder.AddAttribute(6, "id", "dropdownMenuButton");
+            builder.AddAttribute(7, "data-toggle", "dropdown");
+            builder.AddAttribute(8, "aria-haspopup", "true");
+            builder.AddAttribute(9, "aria-expanded", "false");
+
+            if (currentSkill == null)
+            {
+                builder.AddContent(10, "Select a Skill");
+            }
+            else
+            {
+                builder.AddContent(10, currentSkill.SkillName);
+            }
+            builder.CloseElement();
+
+            builder.OpenElement(12, "div");
+            builder.AddAttribute(13, "class", "dropdown-menu");
+            builder.AddAttribute(14, "aria-labelledby", "dropdownMenuButton");
+
+            if (currentPet == null)
+            {
+
+                builder.OpenElement(15, "a");
+                builder.AddAttribute(16, "class", "dropdown-item");
+                builder.AddContent(18, "Select a pet first.");
+                builder.CloseElement();
+
+            }
+            else
+            {
+                foreach (Skill skill in currentPet.skills)
+                {
+                    builder.OpenElement(15, "a");
+                    builder.AddAttribute(16, "class", "dropdown-item");
+                    builder.AddAttribute(17, "onclick", () => SetSkill(skill));
+                    builder.AddContent(18, skill.SkillName);
+                    builder.CloseElement();
+
+                }
+            }
+
+
+            builder.CloseElement();
+            builder.CloseElement();
+            builder.CloseElement();
+        };
+    }
+    private RenderFragment RenderConfirmButton()
+    {
+        return builder =>
+        {
+            if (currentPet != null && currentSkill != null)
+            {
+                if (confirmed == false)
+                {
+                    builder.OpenElement(0, "button");
+                    builder.AddAttribute(1, "class", "btn btn-primary");
+                    builder.AddAttribute(2, "style", "");
+
+                    if(currentPet.skills.Find(x => x.SkillName == currentSkill.SkillName).GetSkillLevelUnboosted() == 1)
+                    {
+                        builder.AddAttribute(3, "disabled", true);
+                        builder.AddAttribute(4, "title", "Your pet can't forget any more than they already have.");
+                        builder.AddContent(5, "Forget");
+                    }
+                    else if (GameState.GetPlayerInventory().GetCoins() >= costToForget)
+                    {
+                        builder.AddAttribute(3, "onclick", () => TryForget());
+                        builder.AddContent(4, "Forget");
+                    }
+                    else
+                    {
+
+                        builder.AddAttribute(3, "disabled", true);
+                        builder.AddAttribute(4, "title", "You don't have enough coins.");
+                        builder.AddContent(5, "Forget");
+                    }
+                    builder.CloseElement();
+                }
+                else
+                {
+                    builder.OpenElement(0, "button");
+                    builder.AddAttribute(1, "class", "btn btn-primary");
+                    builder.AddAttribute(2, "style", "");
+                    if (GameState.GetPlayerInventory().GetCoins() >= costToForget)
+                    {
+                        builder.AddAttribute(3, "onclick", () => Forget());
+                        builder.AddContent(4, "Confirm Forgetting " + currentSkill.SkillName + " on " + currentPet.Name + "?");
+                    }
+                    else
+                    {
+                        builder.AddAttribute(3, "disabled", true);
+                        builder.AddAttribute(4, "title", "You don't have enough coins.");
+                        builder.AddContent(5, "Confirm Forgetting " + currentSkill.SkillName + " on " + currentPet.Name + "?");
+                    }
+                    builder.CloseElement();
+                }
+            }
+            else
+            {
+                builder.OpenElement(0, "button");
+                builder.AddAttribute(1, "class", "btn btn-primary");
+                builder.AddAttribute(2, "style", "");
+                builder.AddAttribute(3, "disabled", true);
+                builder.AddAttribute(4, "title", "Select a pet and skill first.");
+                builder.AddContent(5, "Forget");
+                builder.CloseElement();
+            }
+
+        };
+    }
+    private void TryForget()
+    {
+        confirmed = true;
+        GameState.UpdateState();
+    }
+    private void Forget()
+    {
+        if (currentPet != null && currentSkill != null)
+        {
+            if (forgetAllLevels)
+            {
+                currentPet.skills.Find(x => x.SkillName == currentSkill.SkillName).SetSkillLevel(1);
+                currentPet.skills.Find(x => x.SkillName == currentSkill.SkillName).SkillExperience = 0;
+                MessageManager.AddMessage("The pet forgetter takes your " + currentPet.Name + " to the back room of the cave. You hear a loud thwack! And the two return, your pet looking quite dazed.");
+
+            }
+            else
+            {
+                currentPet.skills.Find(x => x.SkillName == currentSkill.SkillName).SetSkillLevel(currentPet.skills.Find(x => x.SkillName == currentSkill.SkillName).GetSkillLevelUnboosted() - 1);
+                currentPet.skills.Find(x => x.SkillName == currentSkill.SkillName).SkillExperience = Extensions.GetExperienceRequired(currentPet.skills.Find(x => x.SkillName == currentSkill.SkillName).GetSkillLevelUnboosted() - 1) + 1;
+                MessageManager.AddMessage("The pet forgetter takes your " + currentPet.Name + " to the back room of the cave. You hear a thwack! And the two return, your pet looking somewhat dazed.");
+            }
+            GameState.GetPlayerInventory().RemoveItems(Program.itemDatabase.GetGold(), costToForget);
+            UpdateCost(currentPet.skills.Find(x => x.SkillName == currentSkill.SkillName));
+        }
+        confirmed = false;
+        GameState.UpdateState();
+    }
+    private void SetPet(Pet pet)
+    {
+        currentPet = pet;
+        GameState.UpdateState();
+    }
+    private void SetSkill(Skill skill)
+    {
+        currentSkill = skill;
+        UpdateCost(skill);
+        GameState.UpdateState();
+    }
+    private void UpdateCost(Skill skill)
+    {
+        costToForget = (int)Math.Min((3000 * Math.Pow(skill.GetSkillLevelUnboosted(), 1.3)), 2000000000);
+    }
+    protected override void OnInit()
+    {
+        GameState.StateChanged += OnGameStateChanged;
+        costToForget = 0;
+        this.StateHasChanged();
+    }
+    void IDisposable.Dispose()
+    {
+        GameState.StateChanged -= OnGameStateChanged;
+    }
+    void OnGameStateChanged(object sender, EventArgs e) => StateHasChanged();
+}

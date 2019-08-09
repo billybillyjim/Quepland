@@ -44,7 +44,7 @@ public class NPCManager
             }
             catch
             {
-                Console.WriteLine("Failed to parse bool for " + s);
+                Console.WriteLine("Failed to parse bool for NPC " + iterator + " with value " + s);
 
 
             }

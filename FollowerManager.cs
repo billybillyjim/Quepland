@@ -55,8 +55,12 @@ public class FollowerManager
         int i = 0;
         foreach(string line in dataArray)
         {
-            followers[i].IsUnlocked = bool.Parse(line.Split(',')[1]);
-            i++;
+            if(i < followers.Count)
+            {
+                followers[i].IsUnlocked = bool.Parse(line.Split(',')[1]);
+                i++;
+            }
+
         }
     }
 }

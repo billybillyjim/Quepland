@@ -79,7 +79,7 @@
         GameState.previousURL = "/" + area.AreaURL;
         UriHelper.NavigateTo("/" + area.AreaURL + "/GemMining");
     }
-        public void EnterDojo()
+    public void EnterDojo()
     {
         GameState.previousURL = "/" + area.AreaURL;
         UriHelper.NavigateTo("/" + area.AreaURL + "/Dojo");
@@ -106,6 +106,7 @@
             }
         };
     }
+
     public RenderFragment LoadActions()
     {
         return builder =>
@@ -125,6 +126,11 @@
                     else if (actionString == "Smithing")
                     {
 
+                    }
+                    else if(actionString == "Pet Forgetter")
+                    {
+                        builder.OpenComponent<PetForgetter>(2);
+                        builder.CloseComponent();
                     }
                     else if (actionString == "Strength")
                     {

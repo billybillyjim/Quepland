@@ -13,7 +13,7 @@
 
 @functions{
 
-        [Parameter]
+    [Parameter]
     private int splitViewPosition { get; set; }
 
     private GameItem currentUsedItem;
@@ -23,6 +23,7 @@
     private int[,] usableIDs;
 
     public int sellAmount = 20;
+    public int depositAmount = 20;
     private RenderFragment LoadInventoryMenu()
     {
         return builder =>
@@ -30,10 +31,10 @@
             builder.OpenElement(0, "div");
             //builder.AddAttribute(1, "class", "table-hover");
 
-                builder.OpenComponent<MenuButtons>(2);
+            builder.OpenComponent<MenuButtons>(2);
             builder.AddAttribute(2, "splitViewPosition", splitViewPosition);
-                builder.CloseComponent();
-            
+            builder.CloseComponent();
+
             builder.OpenElement(3, "h1");
             builder.AddAttribute(4, "style", "margin-bottom: .2rem;");
             builder.AddContent(5, "Inventory");
@@ -68,6 +69,17 @@
                 builder.OpenElement(14, "input");
                 builder.AddAttribute(15, "value", Microsoft.AspNetCore.Components.BindMethods.GetValue(sellAmount));
                 builder.AddAttribute(16, "onchange", Microsoft.AspNetCore.Components.EventCallback.Factory.CreateBinder(this, __value => sellAmount = __value, sellAmount));
+                builder.CloseElement();
+                builder.CloseElement();
+            }
+            else if (GameState.canBank)
+            {
+                                builder.OpenElement(12, "p");
+                builder.AddAttribute(12, "style", "margin-bottom: .2rem;");
+                builder.AddContent(13, "Deposit X: ");
+                builder.OpenElement(14, "input");
+                builder.AddAttribute(15, "value", Microsoft.AspNetCore.Components.BindMethods.GetValue(depositAmount));
+                builder.AddAttribute(16, "onchange", Microsoft.AspNetCore.Components.EventCallback.Factory.CreateBinder(this, __value => depositAmount = __value, depositAmount));
                 builder.CloseElement();
                 builder.CloseElement();
             }
@@ -473,6 +485,18 @@
                 builder.AddAttribute(19, "title", "This item is locked. Click the lock by the name to unlock it.");
             }
             builder.AddContent(20, "5");
+            //builder.CloseElement();
+            builder.CloseElement();
+            builder.OpenElement(14, "button");
+            builder.AddAttribute(15, "class", "btn btn-primary");
+            builder.AddAttribute(16, "style", "margin:2px");
+            builder.AddAttribute(17, "onclick", () => Deposit(item, Math.Max(0,depositAmount)));
+            if (item.Key.IsLocked)
+            {
+                builder.AddAttribute(18, "disabled", true);
+                builder.AddAttribute(19, "title", "This item is locked. Click the lock by the name to unlock it.");
+            }
+            builder.AddContent(20, "" + Math.Max(0, depositAmount));
             //builder.CloseElement();
             builder.CloseElement();
             //builder.OpenElement(18, "td");
@@ -951,7 +975,7 @@
         {
             GameState.attackTimer.Change(GameState.GetPlayer().GetWeaponAttackSpeed(), GameState.GetPlayer().GetWeaponAttackSpeed());
         }
-                else
+        else
         {
             GameState.StopActions();
         }

@@ -147,6 +147,7 @@
                 currentBait = null;
                 StopGathering();
             }
+            
             CatchFish();
             if (caughtFish.RequiredLevel <= GameState.GetPlayer().GetLevel("Fishing") && Program.gatherManager.Gather(caughtFish))
             {
