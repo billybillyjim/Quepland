@@ -19,8 +19,10 @@ public class BattleManager
     public bool battleFound;
     public bool battleStarted;
     public Monster opponent;
+    public Monster autoBattleOpponent;
     public bool autoFight;
     public bool isDojoBattle;
+    public Dojo currentDojo;
     public int currentDojoWave;
     public List<Monster> possibleMonsters = new List<Monster>();
 
@@ -89,7 +91,15 @@ public class BattleManager
     }
     public void FindBattle()
     {
-        opponent = possibleMonsters[rand.Next(0, possibleMonsters.Count)];
+        if (autoBattleOpponent != null)
+        {
+            opponent = autoBattleOpponent;
+        }
+        else
+        {
+            opponent = possibleMonsters[rand.Next(0, possibleMonsters.Count)];
+        }
+        
         messageManager.AddMessage("You encounter a " + opponent.Name);
         opponent.CurrentHP = opponent.HP;
         battleFound = true;
@@ -100,6 +110,7 @@ public class BattleManager
         isDojoBattle = true;
         opponent.CurrentHP = opponent.HP;
         battleFound = true;
+        currentDojo = dojo;
        StartBattle();
     }
     public void StartBattle()
@@ -294,6 +305,15 @@ public class BattleManager
         if (isDojoBattle)
         {
             currentDojoWave++;
+            if(currentDojoWave >= currentDojo.OpponentIDs.Count)
+            {
+                messageManager.AddMessage("You've defeated everyone at the " + currentDojo.Name + "! You earned " + currentDojo.DojoTokens + " dojo tokens and " + currentDojo.AmountEarned + " " + itemDatabase.GetItemByID(currentDojo.ItemEarned).ItemName);
+                currentDojo.LastWonTime = DateTime.UtcNow;
+                currentDojoWave = 0;
+                currentDojo.BeginChallenge = false;
+                gameState.GetPlayerInventory().AddMultipleOfItem(itemDatabase.GetItemByID(currentDojo.ItemEarned), currentDojo.AmountEarned);
+                gameState.GetPlayerInventory().AddMultipleOfItem(itemDatabase.GetItemByID(485), currentDojo.DojoTokens);
+            } 
         }
         if (opponent.AlwaysDrops != null)
         {
@@ -343,6 +363,11 @@ public class BattleManager
         battleFound = false;
         battleStarted = false;
         autoFight = false;
+        if (isDojoBattle)
+        {
+            currentDojoWave = 0;
+            currentDojo.BeginChallenge = false;
+        }
         EndTimers();
         gameState.isFighting = false;
     }
@@ -422,5 +447,28 @@ public class BattleManager
     public Dojo GetDojoByID(int id)
     {
         return dojos[id];
+    }
+    public string GetDojoSaveData()
+    {
+        string data = "";
+        foreach(Dojo d in dojos)
+        {
+            data += d.LastWonTime + ",";
+        }
+        return data;
+    }
+    public void LoadDojoSaveData(string data)
+    {
+        string[] lines = data.Split(',');
+        int it = 0;
+        foreach(Dojo d in dojos)
+        {
+            if(DateTime.TryParse(lines[it], out DateTime time))
+            {
+                d.LastWonTime = time;
+
+            }
+            it++;
+        }
     }
 }

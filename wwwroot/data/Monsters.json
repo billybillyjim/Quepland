@@ -989,5 +989,82 @@
     "damage": 25,
     "armor": 20,
     "attackSpeed": 1
+  },
+  {
+    "name": "Schnai",
+    "id": 53,
+    "level": 45,
+    "hp": 1000,
+    "weakness": "Axemanship",
+    "strength": "Swordsmanship",
+    "damage": 55,
+    "armor": 22,
+    "attackSpeed": 2
+  },
+  {
+    "name": "Sodo",
+    "id": 54,
+    "level": 49,
+    "hp": 1200,
+    "weakness": "Axemanship",
+    "strength": "Swordsmanship",
+    "damage": 75,
+    "armor": 28,
+    "attackSpeed": 2
+  },
+  {
+    "name": "Sword Man Sam",
+    "id": 55,
+    "level": 53,
+    "hp": 1500,
+    "weakness": "Axemanship",
+    "strength": "Swordsmanship",
+    "damage": 85,
+    "armor": 32,
+    "attackSpeed": 2
+  },
+  {
+    "name": "One Blade Billy",
+    "id": 56,
+    "level": 58,
+    "hp": 2000,
+    "weakness": "Axemanship",
+    "strength": "Swordsmanship",
+    "damage": 95,
+    "armor": 35,
+    "attackSpeed": 2
+  },
+  {
+    "name": "Krisutay",
+    "id": 57,
+    "level": 63,
+    "hp": 2400,
+    "weakness": "Axemanship",
+    "strength": "Swordsmanship",
+    "damage": 105,
+    "armor": 38,
+    "attackSpeed": 2
+  },
+  {
+    "name": "Danbrah",
+    "id": 58,
+    "level": 70,
+    "hp": 3000,
+    "weakness": "Axemanship",
+    "strength": "Swordsmanship",
+    "damage": 125,
+    "armor": 42,
+    "attackSpeed": 2
+  },
+  {
+    "name": "Token",
+    "id": 59,
+    "level": 75,
+    "hp": 5000,
+    "weakness": "Axemanship",
+    "strength": "Swordsmanship",
+    "damage": 155,
+    "armor": 50,
+    "attackSpeed": 2
   }
 ]

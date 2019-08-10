@@ -16,6 +16,7 @@
     @LoadRoadblocks()
     @LoadSmithingButton()
     @LoadRegions()
+    @LoadDojo()
 }
 
 @functions{
@@ -100,7 +101,7 @@
                 builder.AddAttribute(3, "style", "");
                 builder.AddAttribute(4, "title", "");
                 builder.AddAttribute(5, "onclick", () => EnterDojo());
-                builder.AddContent(6, "Enter " + Program.battleManager.GetDojoByID(area.DojoID));
+                builder.AddContent(6, "Enter " + Program.battleManager.GetDojoByID(area.DojoID).Name);
                 builder.CloseElement();
                 builder.CloseElement();
             }
@@ -1503,7 +1504,7 @@
     }
     private string SaveDataEncrypted()
     {
-        localStorage.SetItem("eSave", GameState.GetSaveString(Program.areaManager, Program.followerManager, Program.npcManager, Program.buildingManager));
+        localStorage.SetItem("eSave", GameState.GetSaveString(Program.areaManager, Program.followerManager, Program.npcManager, Program.buildingManager, Program.battleManager));
         MessageManager.AddMessage("Your game has been saved.");
         return "";
     }

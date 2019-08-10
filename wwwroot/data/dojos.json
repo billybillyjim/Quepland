@@ -3,9 +3,21 @@
     "name": "Houchou Dojo",
     "id": 0,
     "description": "The walls of the hall are covered in knives. Each member of the dojo stands in line, awaiting their next challenger. Defeat all of them to earn the dojo's title!",
-    "opponentIDs": [ 47, 48, 49, 50, 51, 52],
-    "itemReward": 0,
-    "itemAmount": 10000
+    "opponentIDs": [ 47, 48, 49, 50, 51, 52 ],
+    "npcIDs": [ 69 ],
+    "itemEarned": 0,
+    "amountEarned": 10000,
+    "dojoTokens": 500
+  },
+  {
+    "name": "Ittou Dojo",
+    "id": 1,
+    "description": "A single sword sits above the back wall of the dojo. Members sit with their legs crossed, lining the sides of the hall.",
+    "opponentIDs": [ 53, 54, 55, 56, 57, 58, 59 ],
+    "npcIDs": [71 ],
+    "itemEarned": 0,
+    "amountEarned": 25000,
+    "dojoTokens": 2500
   }
 
 ]

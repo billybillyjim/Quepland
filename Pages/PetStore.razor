@@ -323,7 +323,7 @@ else
 
         }
         await Program.playfabManager.TryLogin(GameState.userID, GameState.token);
-        Program.playfabManager.Save(GameState.GetSaveStringEncrypted(Program.areaManager, Program.followerManager, Program.npcManager, Program.buildingManager, false));
+        Program.playfabManager.Save(GameState.GetSaveStringEncrypted(Program.areaManager, Program.followerManager, Program.npcManager, Program.buildingManager,Program.battleManager, false));
         GameState.UpdateState();
     }
     protected override void OnInit()

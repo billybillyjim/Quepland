@@ -72,7 +72,6 @@ public class Pet
     }
     private void GainExperience(Skill skill, long amount)
     {
-        Console.WriteLine(skill.SkillName);
         if (skill == null || skill.IsBlocked)
         {
             Console.WriteLine("Gained " + amount + " experience in unfound skill.");

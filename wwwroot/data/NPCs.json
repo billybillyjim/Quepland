@@ -479,5 +479,25 @@
     "buttonText": "Ask how it works",
     "spokenText": "The exact method is a trade secret, but I'm quite skilled in a number of fields of magic. This big stick helps a lot, too.",
     "isInteractable": true
+  },
+  {
+    "name": "Kaiken",
+    "id": 69,
+    "spokenText": "Welcome to our humble dojo. If you'd like, you may challenge us for our dojo's title. I'll warn you though, an untrained novice will not easily defeat us.",
+    "isInteractable": true
+  },
+  {
+    "name": "Anthropos en tayn Agros the Scout",
+    "id": 70,
+    "spokenText": "They call me Anthropos. I'd consider working for you, if you prove your worth. Bring me dojo tokens as evidence of your fighting abilities.",
+    "unlockFollowerIDs": [ 19 ],
+    "isInteractable": true,
+    "hideOnFollow": true
+  },
+  {
+    "name": "Token",
+    "id": 71,
+    "spokenText": "Welcome to our dojo. You will find it much more difficult to defeat us than the dojo of the knives on Mt. Queple. Prepare yourself!",
+    "isInteractable": true
   }
 ]

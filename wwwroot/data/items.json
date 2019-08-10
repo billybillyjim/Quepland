@@ -4973,7 +4973,13 @@
       [ 331, 346 ],
       [ 331, 347 ],
       [ 331, 348 ],
-      [ 331, 349 ]
+      [ 331, 349 ],
+      [ 438, 439 ],
+      [ 438, 440 ],
+      [ 438, 441 ],
+      [ 438, 442 ],
+      [ 438, 443 ]
+    
 
     ]
   },
@@ -7085,7 +7091,7 @@
     "isStackable": true,
     "icon": "Gold"
   },
-   {
+  {
     "itemName": "Woolly Mammoth",
     "itemDescription": "The carcass of a woolly mammoth.",
     "id": 484,
@@ -7097,5 +7103,13 @@
     "requiredLevel": 105,
     "experienceGained": "Hunting:6000",
     "icon": "Deer"
+  },
+  {
+    "itemName": "Dojo Token",
+    "itemDescription": "Special tokens earned by defeating local dojos.",
+    "id": 485,
+    "value": 1,
+    "icon": "Token",
+    "isStackable": true
   }
 ]

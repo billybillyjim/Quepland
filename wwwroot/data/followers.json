@@ -258,10 +258,11 @@
     "requiredLevels": [ "Strength:35" ],
     "maxCarry": 5,
     "isUnlocked": false,
-    "cost": 8000000,
-    "costItemID": 0,
+    "cost": 5000,
+    "costItemID": 485,
+    "autoCollectLevel": 100,
     "autoCollectSkill": "Fighting",
-    "autoCollectSpeed": 5000
+    "autoCollectSpeed": 7000
   },
   {
     "name": "Thunkirn the Dwarf",

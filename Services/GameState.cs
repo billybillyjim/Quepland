@@ -46,7 +46,7 @@ public class GameState
     public bool safeToLoad = false;
 
     public string previousURL;
-    public string updateVersionString = "1.11a";
+    public string updateVersionString = "1.12a";
 
     public string gatherItem;
 
@@ -277,7 +277,7 @@ public class GameState
         userID = await JSRuntime.InvokeAsync<string>("kongregateFunctions.getUserID");
         token = await JSRuntime.InvokeAsync<string>("kongregateFunctions.getToken");
     }
-    public string GetSaveStringEncrypted(AreaManager areaManager, FollowerManager followerManager, NPCManager npcManager, BuildingManager buildingManager, bool encrypt)
+    public string GetSaveStringEncrypted(AreaManager areaManager, FollowerManager followerManager, NPCManager npcManager, BuildingManager buildingManager, BattleManager battleManager, bool encrypt)
     {
 
         int pos = 0;
@@ -395,6 +395,9 @@ public class GameState
             //KC 17
             data += "#";
             data += GetKCString();
+            //Dojos 18
+            data += "#";
+            data += battleManager.GetDojoSaveData();
             if (encrypt)
             {
                 data = Encryptor.EncryptToString(data);
@@ -407,9 +410,9 @@ public class GameState
         }
         return data;
     }
-    public string GetSaveString(AreaManager areaManager, FollowerManager followerManager, NPCManager npcManager, BuildingManager buildingManager)
+    public string GetSaveString(AreaManager areaManager, FollowerManager followerManager, NPCManager npcManager, BuildingManager buildingManager, BattleManager battleManager)
     {
-        return GetSaveStringEncrypted(areaManager, followerManager, npcManager, buildingManager, true);
+        return GetSaveStringEncrypted(areaManager, followerManager, npcManager, buildingManager, battleManager, true);
     }
     private string GetKCString()
     {

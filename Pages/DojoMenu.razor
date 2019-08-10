@@ -2,9 +2,16 @@
 @inject HttpClient Http
 @inject GameState GameState
 @inject MessageManager  MessageManager
+@inject Microsoft.AspNetCore.Blazor.Services.WebAssemblyUriHelper UriHelper
 @using System.Threading;
 @implements IDisposable
 
+<button class="btn btn-primary" style="margin-bottom:10px" onclick="@(() => Return(GameState.previousURL))">Leave</button>
+
+@if (dojo != null)
+{
+    <p>@dojo.Description</p>
+}
 @LoadMenu()
 
 
@@ -20,15 +27,74 @@
         return builder =>
         {
             builder.OpenElement(0, "p");
-            if(area != null && dojo != null)
+            if (area != null && dojo != null)
             {
-                builder.AddContent(1, LoadCurrentOpponent());
-            }          
+                if (dojo.BeginChallenge)
+                {
+                    if (Program.battleManager.currentDojoWave < dojo.OpponentIDs.Count)
+                    {
+                        builder.AddContent(1, LoadCurrentOpponent());
+                    }
+                    else
+                    {
+                        builder.AddContent(1, LoadDojoHall());
+                    }
+
+                }
+                else
+                {
+                    builder.AddContent(1, LoadDojoHall());
+                }
+            }
             builder.CloseElement();
 
         };
     }
-
+    private RenderFragment LoadDojoHall()
+    {
+        return builder =>
+        {
+            if (dojo.NPCIDs != null)
+            {
+                foreach (int i in dojo.NPCIDs)
+                {
+                    NPC npc = Program.npcManager.GetNPCByID(i);
+                    builder.OpenElement(0, "button");
+                    builder.AddAttribute(1, "class", "btn btn-warning");
+                    builder.AddAttribute(2, "style", "");
+                    builder.AddAttribute(3, "onclick", () => SpeakToNPC(npc));
+                    builder.AddContent(4, "Speak to " + npc.Name);
+                    builder.CloseElement();
+                    builder.OpenElement(5, "br");
+                    builder.CloseElement();
+                }
+            }
+            builder.OpenElement(5, "br");
+            builder.CloseElement();
+            builder.OpenElement(6, "button");
+            builder.AddAttribute(7, "class", "btn btn-primary");
+            builder.AddAttribute(8, "style", "");
+            if (dojo.LastWonTime == null || DateTime.UtcNow.CompareTo(dojo.LastWonTime.Value.AddDays(1)) > 0)
+            {
+                builder.AddAttribute(9, "onclick", () => SetReadyForChallenge());
+                builder.AddContent(10, "Begin Dojo Challenge");
+            }
+            else
+            {
+                if (Math.Abs(DateTime.UtcNow.Subtract(dojo.LastWonTime.Value.AddDays(1)).TotalHours) > 1)
+                {
+                    builder.AddAttribute(11, "title", "The dojo is still recovering from their last defeat. Please return in " + Math.Round(Math.Abs(DateTime.UtcNow.Subtract(dojo.LastWonTime.Value.AddDays(1)).TotalHours)) + " hours.");
+                }
+                else
+                {
+                    builder.AddAttribute(11, "title", "The dojo is still recovering from their last defeat. Please return in " + Math.Round(Math.Abs(DateTime.UtcNow.Subtract(dojo.LastWonTime.Value.AddDays(1)).TotalMinutes)) + " minutes.");
+                }
+                builder.AddAttribute(12, "disabled", true);
+                builder.AddContent(13, "Begin Dojo Challenge");
+            }
+            builder.CloseElement();
+        };
+    }
     private RenderFragment LoadCurrentOpponent()
     {
         return builder =>
@@ -84,6 +150,10 @@
             builder.CloseElement();
         };
     }
+    private void SpeakToNPC(NPC npc)
+    {
+        MessageManager.AddMessage(npc.SpokenText);
+    }
     private void StartBattle()
     {
         Program.battleManager.StartDojoBattle(dojo);
@@ -96,9 +166,19 @@
         StateHasChanged();
         GameState.UpdateState();
     }
+    public void SetReadyForChallenge()
+    {
+        dojo.BeginChallenge = true;
+        GameState.UpdateState();
+    }
     private void LoadDojo(int id)
     {
         dojo = Program.battleManager.GetDojoByID(id);
+    }
+    private void Return(string url)
+    {
+        GameState.StopActions();
+        UriHelper.NavigateTo("/GatherMenu/" + url);
     }
     protected override void OnInit()
     {

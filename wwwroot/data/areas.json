@@ -72,7 +72,7 @@
     "unlockableAreas": [ "The Peak of Mount Queple,Climb to the summit,,", "Eastern Trail,Continue around the mountain,," ],
     "actions": [ "Chop Oak Trees:Oak Logs" ],
     "region": "Quepland",
-    "npcIDs": [ 65 ],
+    "npcIDs": [ 65, 70 ],
     "hasDojo": true,
     "dojoID": 0
   },
@@ -191,7 +191,9 @@
     "unlockableAreas": [ "The Northern Isles Dock,Charter a ship north(1000 gold),,Pay Gold:1000", "The Dark River Bridge,Try fishing on the bridge,,", "West Uragota Docks,Go to the docks,," ],
     "buildings": [ "HouseOfFish", "FishermansShack" ],
     "npcIDs": [ 40 ],
-    "region": "Quepland"
+    "region": "Quepland",
+    "hasDojo": true,
+    "dojoID": 1
   },
   {
     "name": "The Dark River Bridge",

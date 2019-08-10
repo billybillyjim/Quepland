@@ -62,7 +62,7 @@
     public string GetSaveDataString()
     {
 
-        return GameState.GetSaveString(Program.areaManager, Program.followerManager, Program.npcManager, Program.buildingManager);
+        return GameState.GetSaveString(Program.areaManager, Program.followerManager, Program.npcManager, Program.buildingManager, Program.battleManager);
 
     }
     public async void LoadDataFromCloud()
@@ -229,6 +229,10 @@
         {
             GameState.LoadKC(lines[17]);
         }
+        if (lines.Length > 18 && lines[18] != null)
+        {
+            Program.battleManager.LoadDojoSaveData(lines[18]);
+        }
         MessageManager.AddMessage("Save game loaded.");
 
         GameState.saveDataLoaded = true;
@@ -257,7 +261,7 @@
                 }
                 else if (Program.playfabManager.IsConnected)
                 {
-                    Program.playfabManager.Save(GameState.GetSaveStringEncrypted(Program.areaManager, Program.followerManager, Program.npcManager, Program.buildingManager, false));
+                    Program.playfabManager.Save(GameState.GetSaveStringEncrypted(Program.areaManager, Program.followerManager, Program.npcManager, Program.buildingManager,  Program.battleManager, false));
                 }
 
                 GameState.saveToPlayFab = 0;
@@ -270,7 +274,7 @@
     {
         await ConnectToKongregate();
         await Program.playfabManager.TryLogin(GameState.userID, GameState.token);
-        Program.playfabManager.Save(GameState.GetSaveStringEncrypted(Program.areaManager, Program.followerManager, Program.npcManager, Program.buildingManager, false));
+        Program.playfabManager.Save(GameState.GetSaveStringEncrypted(Program.areaManager, Program.followerManager, Program.npcManager, Program.buildingManager, Program.battleManager, false));
     }
         private async Task ConnectToKongregate()
     {

@@ -452,7 +452,7 @@ public class Inventory
                 items[item] = amount - 1;
                 amount -= 1;
             }
-            if (amount == 0)
+            if (amount <= 0)
             {
                 items.Remove(item);             
             }
@@ -470,7 +470,7 @@ public class Inventory
             {
                 items[item] = currentAmount - amount;
 
-                if (items[item] == 0)
+                if (items[item] <= 0)
                 {
                     items.Remove(item);
                 }
