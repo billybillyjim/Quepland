@@ -6,7 +6,11 @@
 @using System.Threading;
 @implements IDisposable
 
-<button class="btn btn-primary" style="margin-bottom:10px" onclick="@(() => Return(GameState.previousURL))">Leave</button>
+@if (Program.battleManager.battleStarted == false)
+{
+    <button class="btn btn-primary" style="margin-bottom:10px" onclick="@(() => Return(GameState.previousURL))">Leave</button>
+}
+
 
 @if (dojo != null)
 {
