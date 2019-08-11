@@ -823,15 +823,16 @@
                             builder.OpenElement(18, "button");
                             builder.AddAttribute(19, "style", "margin-bottom:10px");
                             builder.AddAttribute(20, "class", "btn btn-primary");
-                            builder.AddAttribute(21, "onclick", () => BuyItem(item, 1, Program.itemDatabase.GetGold()));
+                            builder.AddAttribute(21, "onclick", () => BuyItem(item, 1, Program.itemDatabase.GetItemByID(npc.CurrencyID)));
 
-                            if (GameState.GetPlayerInventory().GetCoins() < item.Value || GameState.GetPlayerInventory().GetAvailableSpaces() == 0)
+                            if (GameState.GetPlayerInventory().GetAmountOfItem(Program.itemDatabase.GetItemByID(npc.CurrencyID)) < item.Value 
+                            || GameState.GetPlayerInventory().GetAvailableSpaces() == 0)
                             {
                                 builder.AddAttribute(22, "disabled", true);
                                 builder.AddAttribute(23, "title", "You don't have everything you need to buy this.");
                             }
 
-                            builder.AddContent(24, "Buy " + item.ItemName + " for " + item.Value + " coins");
+                            builder.AddContent(24, "Buy " + item.ItemName + " for " + item.Value + " " + Program.itemDatabase.GetItemByID(npc.CurrencyID).ItemName + "s");
                             builder.CloseElement();
                             builder.OpenElement(25, "br");
                             builder.CloseElement();

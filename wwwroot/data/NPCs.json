@@ -499,5 +499,13 @@
     "id": 71,
     "spokenText": "Welcome to our dojo. You will find it much more difficult to defeat us than the dojo of the knives on Mt. Queple. Prepare yourself!",
     "isInteractable": true
+  },
+  {
+    "name": "Belt Man the Proud",
+    "id": 72,
+    "spokenText": "I was so close to beating the dojo! It's so frustrating. They don't even give out consolation tokens. Hey, do you have any dojo tokens? I'll trade you with some stuff I found!",
+    "isInteractable": true,
+    "purchaseItemIDs": [ 486, 487, 488, 489, 490, 491, 492, 493, 494 ],
+    "currencyID": 485
   }
 ]

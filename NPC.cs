@@ -20,4 +20,5 @@ public class NPC
     public double PriceDiscount { get; set; }
     public int UnlockAreaCost { get; set; }
     public int ID { get; set; }
+    public int CurrencyID { get; set; }
 }

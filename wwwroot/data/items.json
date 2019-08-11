@@ -4979,7 +4979,7 @@
       [ 438, 441 ],
       [ 438, 442 ],
       [ 438, 443 ]
-    
+
 
     ]
   },
@@ -6927,7 +6927,7 @@
     "gatherString": "You mine a large topaz.",
     "icon": "Ore"
   },
-    {
+  {
     "itemName": "Rough Small Chrysoberyl",
     "itemDescription": "A small uncut chrysoberyl.",
     "id": 470,
@@ -7111,5 +7111,104 @@
     "value": 1,
     "icon": "Token",
     "isStackable": true
+  },
+  {
+    "itemName": "White Belt",
+    "id": 486,
+    "value": 500,
+    "itemDescription": "A white belt that proves you don't know anything yet.",
+    "armor": 1,
+    "damage": 3,
+    "icon": "Belt",
+    "isEquipable": true,
+    "equipSlot": "Waist"
+  },
+  {
+    "itemName": "Yellow Belt",
+    "id": 487,
+    "value": 2500,
+    "itemDescription": "A yellow belt that proves you are a beginner at fighting.",
+    "armor": 1,
+    "damage": 5,
+    "icon": "Belt",
+    "isEquipable": true,
+    "equipSlot": "Waist"
+  },
+  {
+    "itemName": "Orange Belt",
+    "id": 488,
+    "value": 7000,
+    "itemDescription": "A orange belt that proves you are a novice at fighting.",
+    "armor": 1,
+    "damage": 8,
+    "icon": "Belt",
+    "isEquipable": true,
+    "equipSlot": "Waist"
+  },
+  {
+    "itemName": "Green Belt",
+    "id": 489,
+    "value": 15000,
+    "itemDescription": "A green belt that proves you are competent at fighting.",
+    "armor": 1,
+    "damage": 11,
+    "icon": "Belt",
+    "isEquipable": true,
+    "equipSlot": "Waist"
+  },
+  {
+    "itemName": "Blue Belt",
+    "id": 490,
+    "value": 25000,
+    "itemDescription": "A blue belt that proves you are knowledgeable at fighting.",
+    "armor": 1,
+    "damage": 14,
+    "icon": "Belt",
+    "isEquipable": true,
+    "equipSlot": "Waist"
+  },
+  {
+    "itemName": "Purple Belt",
+    "id": 491,
+    "value": 45000,
+    "itemDescription": "A purple belt that proves you are skilled at fighting.",
+    "armor": 1,
+    "damage": 17,
+    "icon": "Belt",
+    "isEquipable": true,
+    "equipSlot": "Waist"
+  },
+  {
+    "itemName": "Brown Belt",
+    "id": 492,
+    "value": 80000,
+    "itemDescription": "A brown belt that proves you are an expert at fighting.",
+    "armor": 1,
+    "damage": 23,
+    "icon": "Belt",
+    "isEquipable": true,
+    "equipSlot": "Waist"
+  },
+  {
+    "itemName": "Black Belt",
+    "id": 493,
+    "value": 125000,
+    "itemDescription": "A black belt that proves you are a master at fighting.",
+    "armor": 1,
+    "damage": 26,
+    "icon": "Belt",
+    "isEquipable": true,
+    "equipSlot": "Waist"
+  },
+  {
+    "itemName": "Golden Belt",
+    "id": 494,
+    "value": 250000,
+    "itemDescription": "A golden belt that proves you are a master at fighting in style.",
+    "armor": 1,
+    "damage": 35,
+    "icon": "Belt",
+    "isEquipable": true,
+    "equipSlot": "Waist"
   }
 ]

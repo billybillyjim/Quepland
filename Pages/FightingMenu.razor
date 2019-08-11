@@ -48,6 +48,16 @@
                 builder.AddAttribute(0, "disabled", true);
                 builder.AddAttribute(0, "title", "You can't do this while battling!");
             }
+            else if(BM.autoBattleOpponent != null)
+            {
+                builder.AddAttribute(0, "disabled", true);
+                builder.AddAttribute(0, "title", "You can't do this with an auto battle opponent selected.");
+            }
+            else if (BM.autoFight)
+            {
+                builder.AddAttribute(0, "disabled", true);
+                builder.AddAttribute(0, "title", "You must stop auto battling to manually battle.");
+            }
             builder.AddContent(0, "Find Battle");
             builder.CloseElement();
 
@@ -55,14 +65,15 @@
             builder.CloseElement();
 
             builder.AddContent(0, LoadOpponentList());
-            
+
 
             builder.OpenElement(0, "button");
             builder.AddAttribute(0, "class", "btn btn-primary");
             builder.AddAttribute(0, "style", "margin-bottom:10px");
             builder.AddAttribute(0, "onclick", () => BM.StartAutoFighting());
             //If there is a battle, the player has no follower, or the player's follower is not a fighter, or is already auto fighting.
-            if (BM.battleStarted ||
+            if ((BM.battleFound && BM.autoFight == false) ||
+                BM.battleStarted || 
                 (GameState.GetPlayer().activeFollower == null) ||
                 (GameState.GetPlayer().activeFollower != null && GameState.GetPlayer().activeFollower.AutoCollectSkill != "Fighting") ||
                 BM.autoFight)
@@ -122,7 +133,11 @@
                 builder.AddAttribute(13, "class", "dropdown-menu");
                 builder.AddAttribute(14, "aria-labelledby", "dropdownMenuButton");
 
-
+                builder.OpenElement(15, "a");
+                builder.AddAttribute(16, "class", "dropdown-item");
+                builder.AddAttribute(17, "onclick", () => SetOpponent(null));
+                builder.AddContent(18, "Deselect");
+                builder.CloseElement();
                 foreach (int i in area.MonsterIDs)
                 {
                     Monster monster = Program.battleManager.GetMonsterByID(i);
@@ -225,6 +240,7 @@
         area = Program.areaManager.GetAreaByURL(areaString);
         GameState.currentArea = area;
         Program.battleManager.isDojoBattle = false;
+        Program.battleManager.autoBattleOpponent = null;
         possibleMonsters = Program.battleManager.GetMonstersForArea(area);
     }
     protected override void OnInit()

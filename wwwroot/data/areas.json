@@ -204,7 +204,8 @@
     "areaURL": "DarkRiver",
     "icon": "oi oi-align-center",
     "unlockableAreas": [ "Higashi Woods Entrance,Head into the forest,," ],
-    "region": "Quepland"
+    "region": "Quepland",
+    "npcIDs": [72]
   },
   {
     "name": "Queple Cave Smithy",
