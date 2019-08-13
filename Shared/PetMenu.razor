@@ -15,9 +15,10 @@ else
 
 @functions{
 
-        [Parameter]
+    [Parameter]
     private int splitViewPosition { get; set; }
     private Pet petToShow;
+    private int sortStyle;
 
     private RenderFragment LoadPetMenu()
     {
@@ -27,14 +28,11 @@ else
             builder.OpenElement(0, "div");
             builder.AddAttribute(1, "class", "table-hover");
 
-
-
-
-                builder.OpenComponent<MenuButtons>(2);
+            builder.OpenComponent<MenuButtons>(2);
             builder.AddAttribute(2, "splitViewPosition", splitViewPosition);
-                builder.CloseComponent();
+            builder.CloseComponent();
 
-            
+
 
             builder.OpenElement(4, "table");
             builder.AddAttribute(5, "style", "width:100%");
@@ -42,38 +40,46 @@ else
             builder.OpenElement(7, "tr");
             builder.OpenElement(8, "th");
             builder.AddAttribute(9, "align", "left");
-            builder.AddContent(10, "Pet");
+            builder.OpenElement(10, "div");
+            builder.AddAttribute(11, "style", "cursor:pointer");
+           
+             builder.AddAttribute(12, "onclick", () => SetSortStyle(0));
+            builder.AddContent(13, "Pets");
+            builder.CloseElement();
             builder.CloseElement();
 
-            builder.OpenElement(11, "th");
-            builder.AddContent(12, "Total Level");
-            builder.CloseElement();
-            builder.OpenElement(11, "th");
-            builder.AddContent(12, "Affinity");
-            builder.CloseElement();
-            builder.OpenElement(11, "th");
-            builder.AddContent(12, "Highest Level");
-            builder.CloseElement();
             builder.OpenElement(13, "th");
-            builder.AddAttribute(14, "text-align", "right");
-            builder.AddContent(15, "Assign");
+            builder.AddAttribute(13, "onclick", () => SetSortStyle(1));
+            builder.AddContent(14, "Levels");
+            builder.CloseElement();
+            builder.OpenElement(15, "th");
+             builder.AddAttribute(16, "onclick", () => SetSortStyle(2));
+            builder.AddContent(17, "Affinity");
+            builder.CloseElement();
+            builder.OpenElement(18, "th");
+             builder.AddAttribute(19, "onclick", () => SetSortStyle(3));
+            builder.AddContent(20, "Highest Level");
+            builder.CloseElement();
+            builder.OpenElement(21, "th");
+            builder.AddAttribute(22, "text-align", "right");
+            builder.AddContent(23, "Assign");
             builder.CloseElement();
             builder.CloseElement();
             builder.CloseElement();
-            builder.OpenElement(16, "tbody");
+            builder.OpenElement(24, "tbody");
             if (GameState.GetPlayer() != null)
             {
-                foreach (Pet pet in GameState.GetPlayer().Pets)
+                foreach (Pet pet in GameState.GetPlayer().GetPetsSorted(sortStyle))
                 {
 
-                    builder.AddContent(17, LoadPet(pet));
+                    builder.AddContent(25, LoadPet(pet));
 
                 }
                 if(GameState.GetPlayer().Pets.Count == 0)
                 {
-                    builder.OpenElement(17, "tr");
-                    builder.OpenElement(17, "td");
-                    builder.AddContent(17, "You don't have any pets. Visit the pet store near Mount Queple to buy one.");
+                    builder.OpenElement(26, "tr");
+                    builder.OpenElement(27, "td");
+                    builder.AddContent(28, "You don't have any pets. Visit the pet store near Mount Queple to buy one.");
                     builder.CloseElement();
                     builder.CloseElement();
                 }
@@ -98,6 +104,7 @@ else
             builder.OpenElement(18, "td");
             builder.AddAttribute(18, "onclick", () => ShowPetInfo(pet));
             builder.AddAttribute(19, "title", pet.Affinity);
+
             builder.AddAttribute(20, "style", "cursor:pointer");
             builder.AddContent(21, pet.Name);
             builder.CloseElement();
@@ -121,7 +128,23 @@ else
             builder.OpenElement(18, "td");
             builder.OpenElement(18, "button");
             builder.AddAttribute(18, "class", "btn btn-primary");
-            builder.AddAttribute(18, "style", "");
+            if(pet.MinLevel == 1)
+            {
+                builder.AddAttribute(18, "style", "background-color:#8ad3e7;border-color:#8ad3e7");
+            }
+            else if(pet.MinLevel == 20)
+            {
+                builder.AddAttribute(18, "style", "background-color:#78e06d;border-color:#78e06d");
+            }
+            else if(pet.MinLevel == 30)
+            {
+                builder.AddAttribute(18, "style", "background-color:#d85247;border-color:#d85247");
+            }
+            else
+            {
+                builder.AddAttribute(18, "style", "");
+            }
+
             if (GameState.GetPlayer().activePet == null || GameState.GetPlayer().activePet.Name != pet.Name)
             {
                 builder.AddAttribute(18, "onclick", () => AssignPet(pet));
@@ -143,10 +166,10 @@ else
         return builder =>
         {
 
-                builder.OpenComponent<MenuButtons>(0);
-                builder.CloseComponent();
+            builder.OpenComponent<MenuButtons>(0);
+            builder.CloseComponent();
 
-            
+
             builder.OpenElement(0, "div");
             builder.AddAttribute(1, "class", "buddy-top");
             builder.OpenElement(2, "h1");
@@ -154,6 +177,8 @@ else
             builder.AddAttribute(4, "style", "text-align:left;font-weight:bold;line-height:40px;display:flex");
             builder.OpenElement(5, "img");
             builder.AddAttribute(6, "src", "data/ItemIcons/"+ petToShow.Name + ".png");
+
+
             builder.AddAttribute(7, "style", "width:100px;height:100px;opacity:1");
             //Close 6 img
             builder.CloseElement();
@@ -229,7 +254,7 @@ else
                 builder.AddAttribute(22, "style", "height:20px;width:20px;");
                 builder.AddAttribute(22, "onclick", () => ToggleSkillBlock(skill));
                 builder.CloseElement();
-                
+
                 builder.AddContent(23, skill.SkillName);
                 builder.CloseElement();
 
@@ -283,6 +308,12 @@ else
     private string GetValueString(Skill skill)
     {
         return "" + Extensions.GetProgressForLevel(skill.SkillExperience, skill.GetSkillLevel());
+    }
+    private void SetSortStyle(int i)
+    {
+        sortStyle = i;
+        GameState.UpdateState();
+        Console.WriteLine("Clicked");
     }
     private void AssignPet(Pet pet)
     {

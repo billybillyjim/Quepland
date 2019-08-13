@@ -33,6 +33,9 @@
             builder.AddContent(4, "Damage Boosts:" + GameState.GetPlayer().GetEquipmentBonus());
             builder.CloseElement();
                                     builder.OpenElement(4, "p");
+            builder.AddContent(4, "Attack Speed:" + (1000f / (float)GameState.GetPlayer().GetWeaponAttackSpeed()).ToString("N2") + "/s");
+            builder.CloseElement();
+                                    builder.OpenElement(4, "p");
             builder.AddContent(4, "Armor:" + GameState.GetPlayerInventory().GetTotalArmor() + "(" + Extensions.CalculateArmorDamageReduction(GameState.GetPlayer()).ToString("P2",new NumberFormatInfo { PercentPositivePattern = 1, PercentNegativePattern = 1 }) + " reduction)");
             builder.CloseElement();
             foreach(Skill s in GameState.GetPlayer().GetSkills())

@@ -277,7 +277,7 @@ public class Player
     {
         if (skill == null)
         {
-            Console.WriteLine("Gained " + amount + " experience in unfound skill.");
+            Console.WriteLine("Player gained " + amount + " experience in unfound skill.");
             return;
         }
         if(amount <= 0)
@@ -479,6 +479,37 @@ public class Player
                 }
 
             }
+
+            baseDamage = CalculateEffectiveness(opponent, action, baseDamage);
+                     
+            return Math.Max(Extensions.GetGaussianRandomInt(baseDamage + equipmentBonus, baseDamage / 3f), 1);
+        }
+        baseDamage *= 1 - (float)Extensions.CalculateArmorDamageReduction(opponent);
+        return Math.Max(Extensions.GetGaussianRandomInt(baseDamage + equipmentBonus, baseDamage / 3f), 1);
+    }
+    private float CalculateEffectiveness(Monster opponent, string action, float baseDamage)
+    {
+        if (opponent.ChangesStances)
+        {
+            string weakness = opponent.Weakness.Split(' ')[opponent.CurrentStance];
+            string strength = opponent.Strength.Split(' ')[opponent.CurrentStance];
+            if (weakness.Contains(action))
+            {
+                baseDamage *= 1.75f;
+                baseDamage *= 1 - ((float)Extensions.CalculateArmorDamageReduction(opponent) / 3f);
+            }
+            else if (strength.Contains(action))
+            {
+                baseDamage /= 1.75f;
+                baseDamage *= 1 - (float)Extensions.CalculateArmorDamageReduction(opponent);
+            }
+            else
+            {
+                baseDamage *= 1 - (float)Extensions.CalculateArmorDamageReduction(opponent);
+            }
+        }
+        else
+        {
             if (opponent.Weakness.Contains(action))
             {
                 baseDamage *= 1.75f;
@@ -493,11 +524,9 @@ public class Player
             {
                 baseDamage *= 1 - (float)Extensions.CalculateArmorDamageReduction(opponent);
             }
-            
-            return Math.Max(Extensions.GetGaussianRandomInt(baseDamage + equipmentBonus, baseDamage / 3f), 1);
         }
-        baseDamage *= 1 - (float)Extensions.CalculateArmorDamageReduction(opponent);
-        return Math.Max(Extensions.GetGaussianRandomInt(baseDamage + equipmentBonus, baseDamage / 3f), 1);
+        baseDamage -= opponent.Armor;
+        return baseDamage;
     }
     public int GetEquipmentBonus()
     {
@@ -624,5 +653,32 @@ public class Player
             total += s.GetSkillLevelUnboosted();
         }
         return total;
+    }
+    public List<Pet> GetPetsSorted(int sortStyle)
+    {
+        List<Pet> sortedPets = new List<Pet>();
+        sortedPets.AddRange(Pets);
+        if(sortStyle == 0)
+        {
+            sortedPets = sortedPets.OrderBy(x => x.Name).ToList();
+        }
+        else if(sortStyle == 1)
+        {
+            sortedPets = sortedPets.OrderBy(x => x.GetTotalLevels()).ToList();
+            
+        }
+        else if(sortStyle == 2)
+        {
+            sortedPets = sortedPets.OrderBy(x => x.Affinity).ToList();
+        }
+        else if(sortStyle == 3)
+        {
+            sortedPets = sortedPets.OrderBy(x => x.GetHighestSkill().GetSkillLevelUnboosted()).ToList();
+        }
+        else if(sortStyle == 4)
+        {
+            sortedPets = sortedPets.OrderBy(x => x.MinLevel).ToList();
+        }
+        return sortedPets;
     }
 }

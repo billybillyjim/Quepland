@@ -829,6 +829,11 @@
                 StateHasChanged();
 
             }),null, 1000, 1000);
+            GameState.sellGuard = true;
+        }
+        else if (thisBuilding.IsSushiTrainingBuilding)
+        {
+            GameState.sellGuard = true;
         }
     }
     private void BuyItem(GameItem item, int amount)
@@ -938,6 +943,7 @@
         }
         GameState.StopActions();
         GameState.canSell = false;
+        GameState.sellGuard = false;
         ResetAlchemy();
         GameState.StateChanged -= OnGameStateChanged;
     }

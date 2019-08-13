@@ -22,4 +22,8 @@ public class Monster
     public string CurrentStatusEffect { get; set; }
     public int StatusEffectTimeLeft { get; set; }
     public string ImmuneTo { get; set; }
+    public bool ChangesStances { get; set; }
+    public int CurrentStance { get; set; }
+    public int AttacksUntilChangeStance { get; set; }
+    public bool ChangingStances { get; set; }
 }

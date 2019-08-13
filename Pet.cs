@@ -74,7 +74,11 @@ public class Pet
     {
         if (skill == null || skill.IsBlocked)
         {
-            Console.WriteLine("Gained " + amount + " experience in unfound skill.");
+            if(skill == null)
+            {
+                Console.WriteLine("Pet gained " + amount + " experience in unfound skill.");
+            }
+            
             return;
         }
         if (IsInSpecialty(skill))

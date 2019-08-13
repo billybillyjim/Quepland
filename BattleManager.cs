@@ -109,6 +109,7 @@ public class BattleManager
         opponent = GetMonsterByID(dojo.OpponentIDs[currentDojoWave]);
         isDojoBattle = true;
         opponent.CurrentHP = opponent.HP;
+        opponent.ChangingStances = false;
         battleFound = true;
         currentDojo = dojo;
        StartBattle();
@@ -209,13 +210,33 @@ public class BattleManager
                 {
                     battleString = "You dealt " + dmgDealt + " damage to the " + opponent.Name + ".";
                 }
+                string weakness = opponent.Weakness;
+                string strength = opponent.Strength;
+                if (opponent.ChangesStances)
+                {
+                    weakness = opponent.Weakness.Split(' ')[opponent.CurrentStance];
 
-                if (opponent.Weakness.Contains(weapon.ActionRequired))
+                    if (weapon.ActionRequired == weakness && !opponent.ChangingStances)
+                    {
+                        opponent.AttacksUntilChangeStance = 4;
+                        messageManager.AddMessage(opponent.Name + " looks like they are about to change their stance to " + GetStyleName(GetNewStance(opponent, weapon)) + "!", "red");
+                        opponent.ChangingStances = true;
+                    }
+
+                    opponent.AttacksUntilChangeStance--;
+                        
+                    if(opponent.AttacksUntilChangeStance <= 0 && opponent.ChangingStances)
+                    {
+                        ChangeStances(opponent, weapon);
+                    }
+
+                }
+                if (weakness.Contains(weapon.ActionRequired))
                 {
                     gameState.GetPlayer().GainExperienceFromWeapon(weapon, dmgDealt * 2);
                     battleString += " It seemed to be very effective!";
                 }
-                else if (opponent.Strength.Contains(weapon.ActionRequired))
+                else if (strength.Contains(weapon.ActionRequired))
                 {
                     gameState.GetPlayer().GainExperienceFromWeapon(weapon, dmgDealt / 2);
                     battleString += " It didn't seem to be very effective...";
@@ -236,6 +257,8 @@ public class BattleManager
             }
             messageManager.AddMessage(battleString, color);
             opponent.CurrentHP -= dmgDealt;
+
+
 
             if (opponent.CurrentHP <= 0)
             {
@@ -286,6 +309,7 @@ public class BattleManager
 
                 }
             }
+
         }
 
     }
@@ -444,7 +468,81 @@ public class BattleManager
         }
 
     }
-    public Dojo GetDojoByID(int id)
+    private void ChangeStances(Monster opponent, GameItem weapon)
+    {
+        opponent.CurrentStance = GetNewStance(opponent, weapon);
+        opponent.AttackSpeed = GetAttackSpeed(opponent.CurrentStance);
+        opponent.ChangingStances = false;
+        messageManager.AddMessage(opponent.Name + " changed stances to " + GetStyleName(opponent.CurrentStance) + "!", "red");
+    }
+
+    private int GetNewStance(Monster opponent, GameItem weapon)
+    {
+        
+        string[] weaknesses = opponent.Weakness.Split(' ');
+        int i = 0;
+        foreach(string s in weaknesses)
+        {
+            if(weapon.ActionRequired != s)
+            {
+                return i;
+                
+            }
+            i++;
+        }
+        return 0;
+    }
+    public string GetStyleName(int i)
+    {
+        if(i < 0 || i > opponent.Strength.Split(' ').Length)
+        {
+            return "No style";
+        }
+        string strength = opponent.Strength.Split(' ')[i];
+        string style = "An unknown style";
+        if (strength == "Knifesmanship")
+        {
+            style = "Houchou style";
+        }
+        else if (strength == "Swordsmanship")
+        {
+            style = "Ittou style";
+        }
+        else if (strength == "Axemanship")
+        {
+            style = "Ono style";
+        }
+        else if (strength == "Hammermanship")
+        {
+            style = "Zuchi style";
+        }
+        return style;
+    }
+    private int GetAttackSpeed(int i)
+    {
+        string strength = opponent.Strength.Split(' ')[i];
+        int speed = 4;
+        if (strength == "Knifesmanship")
+        {
+            speed = 1;
+        }
+        else if (strength == "Swordsmanship")
+        {
+            speed = 2;
+        }
+        else if (strength == "Axemanship")
+        {
+            speed = 3;
+        }
+        else if (strength == "Hammermanship")
+        {
+            speed = 4;
+        }
+        return speed;
+    }
+    //
+  
+        public Dojo GetDojoByID(int id)
     {
         return dojos[id];
     }

@@ -14,10 +14,19 @@
     "id": 1,
     "description": "A single sword sits above the back wall of the dojo. Members sit with their legs crossed, lining the sides of the hall.",
     "opponentIDs": [ 53, 54, 55, 56, 57, 58, 59 ],
-    "npcIDs": [71 ],
+    "npcIDs": [ 71 ],
     "itemEarned": 0,
     "amountEarned": 25000,
     "dojoTokens": 2500
+  },
+  {
+    "name": "Ono Dojo",
+    "id": 2,
+    "description": "You find the halls of this dojo lined with weapons, most of which are axes.",
+    "opponentIDs": [ 60, 61, 62, 63, 64, 65, 66, 67 ],
+    "itemEarned": 0,
+    "amountEarned": 65000,
+    "dojoTokens": 5000
   }
 
 ]

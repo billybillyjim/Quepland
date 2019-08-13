@@ -118,7 +118,12 @@
             else
             {
                 builder.OpenElement(0, "p");
-                builder.AddContent(1, Program.battleManager.GetMonsterByID(dojo.OpponentIDs[Program.battleManager.currentDojoWave]).Name);
+                string name = Program.battleManager.GetMonsterByID(dojo.OpponentIDs[Program.battleManager.currentDojoWave]).Name;
+                if (Program.battleManager.opponent.ChangesStances)
+                {
+                    name += "(" + Program.battleManager.GetStyleName(Program.battleManager.opponent.CurrentStance) + ")";
+                }
+                builder.AddContent(1, name);
                 builder.CloseElement();
                 builder.AddContent(2, LoadHPBars());
             }

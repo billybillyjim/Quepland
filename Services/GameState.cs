@@ -19,6 +19,7 @@ public class GameState
     public bool isFighting;
     public bool canSell;
     public bool canBank;
+    public bool sellGuard;
     public bool isUsing { get; set; }
     public bool PetShopUnlocked;
 
@@ -46,7 +47,7 @@ public class GameState
     public bool safeToLoad = false;
 
     public string previousURL;
-    public string updateVersionString = "1.13a";
+    public string updateVersionString = "1.14a";
 
     public string gatherItem;
 
@@ -395,6 +396,7 @@ public class GameState
             //KC 17
             data += "#";
             data += GetKCString();
+            pos++;
             //Dojos 18
             data += "#";
             data += battleManager.GetDojoSaveData();

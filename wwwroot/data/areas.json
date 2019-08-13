@@ -308,7 +308,9 @@
     "actions": [ "Gather Cheese:Cheese", "Gather Bark:Bark" ],
     "unlockableAreas": [ "Higashi Bridge,Head down the hill,," ],
     "npcIDs": [ 39 ],
-    "region": "Quepland"
+    "region": "Quepland",
+    "hasDojo": true,
+    "dojoID": 2
   },
   {
     "name": "Higashi Bridge",

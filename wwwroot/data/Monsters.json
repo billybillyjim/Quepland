@@ -1066,5 +1066,94 @@
     "damage": 155,
     "armor": 50,
     "attackSpeed": 2
+  },
+  {
+    "name": "Fets",
+    "id": 60,
+    "level": 80,
+    "hp": 3000,
+    "weakness": "Hammermanship",
+    "strength": "Axemanship",
+    "damage": 175,
+    "armor": 50,
+    "attackSpeed": 3
+  },
+  {
+    "name": "Ro",
+    "id": 61,
+    "level": 83,
+    "hp": 5000,
+    "weakness": "Hammermanship",
+    "strength": "Axemanship",
+    "damage": 205,
+    "armor": 55,
+    "attackSpeed": 3
+  },
+  {
+    "name": "Akku",
+    "id": 62,
+    "level": 86,
+    "hp": 6000,
+    "weakness": "Hammermanship",
+    "strength": "Axemanship",
+    "damage": 225,
+    "armor": 58,
+    "attackSpeed": 3
+  },
+  {
+    "name": "Mack",
+    "id": 63,
+    "level": 90,
+    "hp": 7000,
+    "weakness": "Hammermanship",
+    "strength": "Axemanship",
+    "damage": 250,
+    "armor": 62,
+    "attackSpeed": 3
+  },
+  {
+    "name": "Wari",
+    "id": 64,
+    "level": 93,
+    "hp": 8000,
+    "weakness": "Hammermanship",
+    "strength": "Axemanship",
+    "damage": 280,
+    "armor": 64,
+    "attackSpeed": 3
+  },
+  {
+    "name": "Swings",
+    "id": 65,
+    "level": 97,
+    "hp": 12000,
+    "weakness": "Hammermanship",
+    "strength": "Axemanship",
+    "damage": 315,
+    "armor": 68,
+    "attackSpeed": 3
+  },
+  {
+    "name": "Masakar",
+    "id": 66,
+    "level": 100,
+    "hp": 14000,
+    "weakness": "Hammermanship",
+    "strength": "Axemanship",
+    "damage": 335,
+    "armor": 71,
+    "attackSpeed": 3
+  },
+  {
+    "name": "Futo",
+    "id": 67,
+    "level": 105,
+    "hp": 15000,
+    "weakness": "Hammermanship Swordsmanship",
+    "strength": "Axemanship Knifesmanship",
+    "damage": 300,
+    "armor": 80,
+    "attackSpeed": 3,
+    "changesStances": true
   }
 ]

@@ -4,6 +4,7 @@
 @inject IJSRuntime JSRuntime
 @using System.Threading
 
+@GameState.sellGuard
 @LoadInventoryMenu()
     <p>
         <input type="checkbox" @bind="@GameState.hideLockedItems" @bind:event="onchange" />
@@ -74,7 +75,7 @@
             }
             else if (GameState.canBank)
             {
-                                builder.OpenElement(12, "p");
+                builder.OpenElement(12, "p");
                 builder.AddAttribute(12, "style", "margin-bottom: .2rem;");
                 builder.AddContent(13, "Deposit X: ");
                 builder.OpenElement(14, "input");
@@ -357,6 +358,7 @@
             builder.AddAttribute(6, "style", "text-align:right");
             builder.OpenElement(7, "button");
             builder.AddAttribute(8, "class", "btn btn-primary");
+            builder.AddAttribute(8, "style", "height:2rem;line-height: initial;");
             builder.AddAttribute(9, "onclick", () => UnpackItem(item.Key));
             if (GameState.GetPlayerInventory().GetAvailableSpaces() < item.Key.UnpackIDs.Length &&
              !(item.Key.UnpackIDs.Length == 1 && item.Key.IsStackable == false))
@@ -421,6 +423,7 @@
             builder.AddAttribute(6, "style", "text-align:right");
             builder.OpenElement(7, "button");
             builder.AddAttribute(8, "class", "btn btn-primary");
+            builder.AddAttribute(8, "style", "height:2rem;line-height: initial;");
             if (item.Key.IsEquipped)
             {
                 builder.AddAttribute(9, "onclick", () => Unequip(item.Key));
@@ -463,7 +466,7 @@
             builder.AddAttribute(6, "colspan", "3");
             builder.OpenElement(7, "button");
             builder.AddAttribute(8, "class", "btn btn-primary");
-            builder.AddAttribute(9, "style", "margin:2px");
+            builder.AddAttribute(9, "style", "margin:2px;height:2rem;line-height: initial;");
             builder.AddAttribute(10, "onclick", () => Deposit(item, 1));
             if (item.Key.IsLocked)
             {
@@ -477,7 +480,7 @@
             //builder.AddAttribute(12, "style", "text-align:right");
             builder.OpenElement(14, "button");
             builder.AddAttribute(15, "class", "btn btn-primary");
-            builder.AddAttribute(16, "style", "margin:2px");
+            builder.AddAttribute(16, "style", "margin:2px;height:2rem;line-height: initial;");
             builder.AddAttribute(17, "onclick", () => Deposit(item, 5));
             if (item.Key.IsLocked)
             {
@@ -489,7 +492,7 @@
             builder.CloseElement();
             builder.OpenElement(14, "button");
             builder.AddAttribute(15, "class", "btn btn-primary");
-            builder.AddAttribute(16, "style", "margin:2px");
+            builder.AddAttribute(16, "style", "margin:2px;height:2rem;line-height: initial;");
             builder.AddAttribute(17, "onclick", () => Deposit(item, Math.Max(0,depositAmount)));
             if (item.Key.IsLocked)
             {
@@ -503,7 +506,7 @@
             // builder.AddAttribute(18, "style", "text-align:right");
             builder.OpenElement(21, "button");
             builder.AddAttribute(22, "class", "btn btn-primary");
-            builder.AddAttribute(23, "style", "margin:2px");
+            builder.AddAttribute(23, "style", "margin:2px;height:2rem;line-height: initial;");
             builder.AddAttribute(24, "onclick", () => Deposit(item, int.MaxValue));
             if (item.Key.IsLocked)
             {
@@ -546,10 +549,12 @@
             builder.AddAttribute(8, "style", "text-align:right");
             builder.OpenElement(9, "button");
             builder.AddAttribute(10, "class", "btn btn-primary");
-            builder.AddAttribute(11, "style", "margin:3px");
-            if (item.Key.Value < GameState.expensiveItemThreshold || trySellingExpensiveItem == true)
+            builder.AddAttribute(11, "style", "margin:2px;height:2rem;line-height: initial;");
+            if ((item.Key.Value < GameState.expensiveItemThreshold && GameState.sellGuard == false) || trySellingExpensiveItem == true)
             {
+
                 builder.AddAttribute(12, "onclick", () => Sell(item, 1));
+
             }
             else
             {
@@ -570,7 +575,7 @@
             builder.CloseElement();
             builder.OpenElement(16, "button");
             builder.AddAttribute(17, "class", "btn btn-primary");
-            builder.AddAttribute(18, "style", "margin:3px");
+            builder.AddAttribute(18, "style", "margin:2px;height:2rem;line-height: initial;");
             if (item.Key.Value < GameState.expensiveItemThreshold || trySellingExpensiveItem == true)
             {
                 builder.AddAttribute(19, "onclick", () => Sell(item, 5));
@@ -594,7 +599,7 @@
             builder.CloseElement();
             builder.OpenElement(23, "button");
             builder.AddAttribute(24, "class", "btn btn-primary");
-            builder.AddAttribute(25, "style", "margin:3px");
+            builder.AddAttribute(25, "style", "margin:2px;height:2rem;line-height: initial;");
             if (item.Key.Value < GameState.expensiveItemThreshold || trySellingExpensiveItem == true)
             {
                 builder.AddAttribute(26, "onclick", () => Sell(item, sellAmount));
@@ -627,7 +632,7 @@
             builder.CloseElement();
             builder.OpenElement(31, "button");
             builder.AddAttribute(32, "class", "btn btn-primary");
-            builder.AddAttribute(33, "style", "margin:3px");
+            builder.AddAttribute(33, "style", "margin:2px;height:2rem;line-height: initial;");
             if (item.Key.Value < GameState.expensiveItemThreshold || trySellingExpensiveItem == true)
             {
                 builder.AddAttribute(34, "onclick", () => Sell(item, int.MaxValue));
@@ -669,6 +674,7 @@
             builder.AddAttribute(3, "align", "right");
             builder.OpenElement(4, "button");
             builder.AddAttribute(5, "class", "btn btn-primary");
+            builder.AddAttribute(5, "style", "height:2rem;line-height: initial;");
             builder.AddAttribute(6, "onclick", () => Create(item, i));
             if (GameState.GetPlayer().HasRequiredLevel(itemToMake) == false)
             {
@@ -718,6 +724,7 @@
             builder.AddAttribute(6, "colspan", "3");
             builder.AddAttribute(7, "align", "right");
             builder.OpenElement(8, "button");
+            builder.AddAttribute(8, "style", "height:2rem;line-height: initial;");
             builder.AddAttribute(9, "class", "btn btn-primary");
             builder.AddAttribute(10, "onclick", () => Eat(item));
             if (item.IsLocked)
