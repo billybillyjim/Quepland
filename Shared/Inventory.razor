@@ -4,7 +4,6 @@
 @inject IJSRuntime JSRuntime
 @using System.Threading
 
-@GameState.sellGuard
 @LoadInventoryMenu()
     <p>
         <input type="checkbox" @bind="@GameState.hideLockedItems" @bind:event="onchange" />
