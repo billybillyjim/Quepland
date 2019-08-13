@@ -664,7 +664,7 @@ public class Player
         }
         else if(sortStyle == 1)
         {
-            sortedPets = sortedPets.OrderBy(x => x.GetTotalLevels()).ToList();
+            sortedPets = sortedPets.OrderBy(x => x.GetTotalLevels()).Reverse().ToList();
             
         }
         else if(sortStyle == 2)
@@ -673,11 +673,11 @@ public class Player
         }
         else if(sortStyle == 3)
         {
-            sortedPets = sortedPets.OrderBy(x => x.GetHighestSkill().GetSkillLevelUnboosted()).ToList();
+            sortedPets = sortedPets.OrderBy(x => x.GetHighestSkillLevel()).Reverse().ToList();
         }
         else if(sortStyle == 4)
         {
-            sortedPets = sortedPets.OrderBy(x => x.MinLevel).ToList();
+            sortedPets = sortedPets.OrderBy(x => x.MinLevel).Reverse().ToList();
         }
         return sortedPets;
     }

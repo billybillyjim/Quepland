@@ -128,6 +128,14 @@ public class Pet
         }
         return skills.Aggregate((i, j) => i.GetSkillLevelUnboosted() > j.GetSkillLevelUnboosted() ? i : j);    
     }
+    public int GetHighestSkillLevel()
+    {
+        if (GetTotalLevels() == skills.Count)
+        {
+            return 1;
+        }
+        return skills.Aggregate((i, j) => i.GetSkillLevelUnboosted() > j.GetSkillLevelUnboosted() ? i : j).GetSkillLevelUnboosted();
+    }
     public float GetSkillBoost(Skill skill)
     {
         float extraBoost = 1;
