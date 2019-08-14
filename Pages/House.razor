@@ -48,7 +48,7 @@ else
             builder.OpenElement(11, "div");
             builder.AddAttribute(12, "class", "dropdown-menu");
             builder.AddAttribute(13, "aria-labelledby", "dropdownMenuButton");
-            foreach (Room room in GameState.GetPlayer().house.GetRooms())
+            foreach (Room room in GameState.GetPlayer().house.Rooms)
             {
 
                 builder.OpenElement(14, "a");
@@ -92,7 +92,7 @@ else
             builder.OpenElement(11, "div");
             builder.AddAttribute(12, "class", "dropdown-menu");
             builder.AddAttribute(13, "aria-labelledby", "dropdownMenuButton");
-            foreach (Room room in Program.roomManager.GetRooms())
+            foreach (Room room in Program.roomManager.Rooms)
             {
 
                 builder.OpenElement(14, "a");
@@ -170,7 +170,7 @@ else
         {
             if (string.IsNullOrEmpty(newRoomName) == false)
             {
-                Room room = Program.roomManager.GetRoomByName(newRoomName);
+                Room room = Program.roomManager.GetByName(newRoomName);
                 builder.OpenElement(0, "p");
                 builder.AddContent(1, room.Name);
                 builder.CloseElement();
@@ -199,22 +199,22 @@ else
     }
     private void BeginBuildingNewRoom()
     {
-        Room newRoom = Program.roomManager.GetRoomByName(newRoomName);
+        Room newRoom = Program.roomManager.GetByName(newRoomName);
         currentRoom = newRoom;
         newRoom.WorkRemaining = (newRoom.PlanksRequired * 4 * (newRoom.MinimumPlankLevel + 1)) + (newRoom.BarsRequired * 10 * (newRoom.MinimumBarLevel + 1));
         StateHasChanged();
     }
     private void BuildNewRoom()
     {
-        Room newRoom = Program.roomManager.GetRoomByName(newRoomName);
-        GameState.GetPlayer().house.AddRoom(newRoom);
+        Room newRoom = Program.roomManager.GetByName(newRoomName);
+        GameState.GetPlayer().house.Rooms.Add(newRoom);
         currentRoom = newRoom;
         StateHasChanged();
     }
     private void CompleteNewRoom()
     {
         currentRoom.IsComplete = true;
-        GameState.GetPlayer().house.AddRoom(currentRoom);
+        GameState.GetPlayer().house.Rooms.Add(currentRoom);
         StateHasChanged();
     }
 
