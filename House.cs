@@ -1,22 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 public class House
 {
-    private List<Room> rooms = new List<Room>();
-    public int curentPlanks;
-    public int currentBars;
+    public List<Room> Rooms { get; }
+
+    public int CurentPlanks { get; set; }
+    public int CurrentBars { get; set; }
 
     public House()
     {
-
-    }
-    public void AddRoom(Room room)
-    {
-        rooms.Add(room);
-    }
-    public List<Room> GetRooms()
-    {
-        return rooms;
+        Rooms = new List<Room>();
     }
 }
