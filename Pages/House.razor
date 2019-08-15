@@ -28,6 +28,10 @@ else
 
     private string newRoomName;
     private Room currentRoom;
+    private int loadedPlanks;
+    private int loadedBars;
+    private bool isConstructing = false;
+
     private RenderFragment LoadHouse()
     {
         return builder =>
@@ -135,6 +139,20 @@ else
         };
 
     }
+    private RenderFragment LoadPlanksButton()
+    {
+        return builder =>
+        {
+
+        };
+    }
+    private RenderFragment LoadBarsButton()
+    {
+        return builder =>
+        {
+
+        };
+    }
     private RenderFragment WorkOnRoomButton()
     {
         return builder =>
@@ -142,7 +160,7 @@ else
             builder.OpenElement(1, "button");
             builder.AddAttribute(2, "class", "btn btn-primary");
             builder.AddAttribute(3, "style", "margin:10px");
-            if (GameState.isGathering == false)
+            if (GameState.isGathering == false && isConstructing == false)
             {
                 if (GameState.GetPlayerInventory().GetBestNails() == null)
                 {
@@ -168,23 +186,22 @@ else
     {
         return builder =>
         {
-            if (string.IsNullOrEmpty(newRoomName) == false)
+            if (GameState.currentRoom != null)
             {
-                Room room = Program.roomManager.GetRoomByName(newRoomName);
                 builder.OpenElement(0, "p");
-                builder.AddContent(1, room.Name);
+                builder.AddContent(1, GameState.currentRoom.Name);
                 builder.CloseElement();
                 builder.OpenElement(2, "p");
-                builder.AddContent(3, "Level Required:" + room.ConstructionLevelRequired);
+                builder.AddContent(3, "Level Required:" + GameState.currentRoom.ConstructionLevelRequired);
                 builder.CloseElement();
                 builder.OpenElement(4, "p");
-                builder.AddContent(5, "Planks:" + room.PlanksRequired + " " + GetPlankString(room.MinimumPlankLevel) + " or better.");
+                builder.AddContent(5, "Planks:" + GameState.currentRoom.PlanksRequired + " " + GetPlankString(GameState.currentRoom.MinimumPlankLevel) + " or better.");
                 builder.CloseElement();
                 builder.OpenElement(6, "p");
-                builder.AddContent(7, "Bars:" + room.BarsRequired + " " + GetBarString(room.MinimumBarLevel) + "s or better.");
+                builder.AddContent(7, "Bars:" + GameState.currentRoom.BarsRequired + " " + GetBarString(GameState.currentRoom.MinimumBarLevel) + "s or better.");
                 builder.CloseElement();
                 builder.OpenElement(8, "p");
-                builder.AddContent(9, "Work Remaining:" + room.WorkRemaining);
+                builder.AddContent(9, "Work Remaining:" + GameState.currentRoom.WorkRemaining);
                 builder.CloseElement();
             }
         };
@@ -202,6 +219,7 @@ else
         Room newRoom = Program.roomManager.GetRoomByName(newRoomName);
         currentRoom = newRoom;
         newRoom.WorkRemaining = (newRoom.PlanksRequired * 4 * (newRoom.MinimumPlankLevel + 1)) + (newRoom.BarsRequired * 10 * (newRoom.MinimumBarLevel + 1));
+        GameState.currentRoom = newRoom;
         StateHasChanged();
     }
     private void BuildNewRoom()
@@ -217,9 +235,19 @@ else
         GameState.GetPlayer().house.AddRoom(currentRoom);
         StateHasChanged();
     }
-
+    private void LoadBars()
+    {
+        GameState.currentRoom.BarsRequired -= 1;
+    }
+    private void LoadPlanks()
+    {
+        GameState.currentRoom.PlanksRequired -= 1;
+    }
     private void Construct()
     {
+        isConstructing = true;
+        GameState.isGathering = true;
+
         GameState.gatherTimer = new Timer(new TimerCallback(_ =>
         {
             if (currentRoom.IsComplete == false)
@@ -249,6 +277,7 @@ else
             GameState.gatherTimer.Dispose();
             GameState.gatherTimer = null;
         }
+        isConstructing = false;
         GameState.isGathering = false;
         StateHasChanged();
         GameState.UpdateState();
@@ -265,6 +294,10 @@ else
     protected override void OnInit()
     {
         GameState.StateChanged += OnGameStateChanged;
+        if(GameState.currentRoom != null)
+        {
+            currentRoom = GameState.currentRoom;
+        }
         this.StateHasChanged();
     }
     void IDisposable.Dispose()

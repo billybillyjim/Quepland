@@ -69,7 +69,7 @@ public class PlayfabManager
         loadString = "";
         PlayFabResult<GetUserDataResult> result = await PlayFabClientAPI.GetUserDataAsync(new GetUserDataRequest());
         loadString += result.Result.Data["Save Data"].Value;
-        if(result.Result.Data.TryGetValue("Save Data 2", out UserDataRecord extraData))
+        if(result.Result.Data.TryGetValue("Save Data2", out UserDataRecord extraData))
         {
             loadString += extraData.Value;
         }

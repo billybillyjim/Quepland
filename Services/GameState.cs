@@ -108,6 +108,8 @@ public class GameState
     public Pet petToBuy;
     public List<Pet> buyablePets = new List<Pet>();
 
+    public Room currentRoom;
+
     private static SimpleAES Encryptor = new SimpleAES();
 
     private void StateHasChanged()

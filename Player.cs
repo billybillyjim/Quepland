@@ -440,9 +440,9 @@ public class Player
     {
         int str = GetSkill("Strength").GetSkillLevel();
         int deft = GetSkill("Deftness").GetSkillLevel();
-        float baseDamage = 1 + (str / 4);
-
-        int equipmentBonus = GetEquipmentBonus();
+        float baseDamage = 1 + (str / 4);      
+        float armorReduction = 1 - (float)Extensions.CalculateArmorDamageReduction(opponent);
+        int equipmentBonus = (int)(GetEquipmentBonus() * armorReduction);
 
         if (GetWeapon() != null)
         {
@@ -484,7 +484,7 @@ public class Player
                      
             return Math.Max(Extensions.GetGaussianRandomInt(baseDamage + equipmentBonus, baseDamage / 3f), 1);
         }
-        baseDamage *= 1 - (float)Extensions.CalculateArmorDamageReduction(opponent);
+        baseDamage *= armorReduction;
         return Math.Max(Extensions.GetGaussianRandomInt(baseDamage + equipmentBonus, baseDamage / 3f), 1);
     }
     private float CalculateEffectiveness(Monster opponent, string action, float baseDamage)
@@ -664,8 +664,7 @@ public class Player
         }
         else if(sortStyle == 1)
         {
-            sortedPets = sortedPets.OrderBy(x => x.GetTotalLevels()).Reverse().ToList();
-            
+            sortedPets = sortedPets.OrderBy(x => x.GetTotalLevels()).Reverse().ToList();          
         }
         else if(sortStyle == 2)
         {

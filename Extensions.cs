@@ -279,7 +279,7 @@ public static class Extensions
     }
     public static double CalculateArmorDamageReduction(Monster monster)
     {
-        return ((monster.Armor * 0.07d) / (1 + (monster.Armor * 0.07d)));
+        return ((monster.Armor * 0.07d) / (1 + (monster.Armor * 0.07d))) / 2;
 
     }
 }

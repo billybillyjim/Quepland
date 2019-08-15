@@ -40,32 +40,23 @@ else
             builder.OpenElement(7, "tr");
             builder.OpenElement(8, "th");
             builder.AddAttribute(9, "align", "left");
-            builder.OpenElement(10, "div");
             builder.AddAttribute(11, "style", "cursor:pointer");
-           
-             builder.AddAttribute(12, "onclick", () => SetSortStyle(0));
+            builder.AddAttribute(12, "onclick", () => SetSortStyle(0));
             builder.AddContent(13, "Pets");
             builder.CloseElement();
-            builder.CloseElement();
-
-            builder.OpenElement(13, "th");
-            builder.AddAttribute(13, "onclick", () => SetSortStyle(1));
-            builder.AddAttribute(13, "style", "cursor:pointer");
-            builder.AddContent(14, "Levels");
-            builder.CloseElement();
             builder.OpenElement(15, "th");
-             builder.AddAttribute(16, "onclick", () => SetSortStyle(2));
+            builder.AddAttribute(16, "onclick", () => SetSortStyle(2));
             builder.AddAttribute(16, "style", "cursor:pointer");
             builder.AddContent(17, "Affinity");
             builder.CloseElement();
             builder.OpenElement(18, "th");
-             builder.AddAttribute(19, "onclick", () => SetSortStyle(3));
+            builder.AddAttribute(19, "onclick", () => SetSortStyle(3));
             builder.AddAttribute(19, "style", "cursor:pointer");
             builder.AddContent(20, "Highest Level");
             builder.CloseElement();
             builder.OpenElement(21, "th");
             builder.AddAttribute(22, "text-align", "right");
-                         builder.AddAttribute(22, "onclick", () => SetSortStyle(4));
+            builder.AddAttribute(22, "onclick", () => SetSortStyle(4));
             builder.AddAttribute(22, "style", "cursor:pointer");
             builder.AddContent(23, "Assign");
             builder.CloseElement();
@@ -112,9 +103,6 @@ else
 
             builder.AddAttribute(20, "style", "cursor:pointer");
             builder.AddContent(21, pet.Name);
-            builder.CloseElement();
-            builder.OpenElement(18, "td");
-            builder.AddContent(19, pet.GetTotalLevels());
             builder.CloseElement();
             builder.OpenElement(18, "td");
             builder.AddContent(19, pet.Affinity);
