@@ -569,4 +569,31 @@ public class BattleManager
             it++;
         }
     }
+    public void TestLoadDojoSaveData(string data)
+    {
+        string[] lines = data.Split(',');
+        int it = 0;
+        foreach (Dojo d in dojos)
+        {
+            if (DateTime.TryParse(lines[it], out DateTime time))
+            {
+               
+
+            }
+            else
+            {
+                if(lines.Length > it && lines[it] != "")
+                {
+                    messageManager.AddMessage("Dojo Data:Failed to parse:" + lines[it]);
+                    Console.WriteLine("Dojo Data:Failed to parse:" + lines[it]);
+                }
+
+            }
+            it++;
+        }
+    }
+    public List<Dojo> GetDojos()
+    {
+        return dojos;
+    }
 }

@@ -112,10 +112,19 @@ public byte[] StrToByteArray(string str)
     int j = 0;
     do
     {
-        val = byte.Parse(str.Substring(i, 3));
-        byteArr[j++] = val;
-        i += 3;
-    }
+            try
+            {
+                val = byte.Parse(str.Substring(i, 3));
+
+            }
+            catch
+            {
+                val = new byte();
+                Console.WriteLine("Failed to parse " + str.Substring(i, 3) + " at " + i);
+            }
+            byteArr[j++] = val;
+            i += 3;
+        }
     while (i < str.Length);
     return byteArr;
 }

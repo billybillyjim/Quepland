@@ -100,6 +100,7 @@ public static class Extensions
         }
         return skills;
     }
+
     public static bool FollowerCanAutoCollect(Follower follower, GameItem item)
     {
         if(follower.AutoCollectSkill != item.ActionRequired)

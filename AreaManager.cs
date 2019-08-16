@@ -47,6 +47,27 @@ public class AreaManager
         }
         areas[0].IsUnlocked = true;
     }
+    public void TestLoadSaveData(string data)
+    {
+        string[] dataLines = data.Split('/');
+        foreach (string line in dataLines)
+        {
+            if (line.Length > 1)
+            {
+                int areaID = int.Parse(line.Split(',')[0]);
+                bool unlocked = bool.Parse(line.Split(',')[1]);
+                try
+                {
+                    bool test = GetAreaByID(areaID).IsUnlocked;
+                }
+                catch
+                {                   
+                    Console.WriteLine("Failed to load area ID:" + areaID);
+                }
+            }
+        }
+        
+    }
     public Area GetAreaByID(int id)
     {
         return areas[id];
