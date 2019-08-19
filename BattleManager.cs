@@ -255,6 +255,15 @@ public class BattleManager
             {
                 battleString = battleString.Replace(" the ", " ");
             }
+            if(opponent.StatusEffect != null && opponent.StatusEffect == "Dodge")
+            {
+                if(rand.Next(0, 10) > 7)
+                {
+                    dmgDealt = 0;
+                    battleString = opponent.Name + " dodged your attack!";
+                    color = "red";
+                }
+            }
             messageManager.AddMessage(battleString, color);
             opponent.CurrentHP -= dmgDealt;
 
@@ -272,44 +281,67 @@ public class BattleManager
         if (battleFound)
         {
             opponent.StatusEffectTimeLeft--;
+            string color = "black";
             if (opponent.CurrentStatusEffect == "Freeze" && opponent.StatusEffectTimeLeft > 0)
             {
                 messageManager.AddMessage(opponent.Name + " is frozen and could not attack.");
                 return;
             }
+
             int dmg = Math.Max(1, Extensions.GetGaussianRandomInt(opponent.Damage, opponent.Damage / 2d));
             dmg = (int)(dmg * Math.Max(1 - Extensions.CalculateArmorDamageReduction(gameState.GetPlayer()), 0.05d));
-            gameState.GetPlayer().GainExperience("HP", Math.Min(gameState.GetPlayer().CurrentHP, dmg) * 8);
-            gameState.GetPlayer().CurrentHP -= dmg;
-            if (isDojoBattle)
-            {
-                messageManager.AddMessage("You took " + dmg + " damage from " + opponent.Name + "'s attack.");
-            }
-            else
-            {
-                messageManager.AddMessage("You took " + dmg + " damage from the " + opponent.Name + "'s attack.");
-            }
-           
-
-            if (gameState.GetPlayer().CurrentHP <= 0)
-            {
-                LoseBattle();
-            }
+                    
             if (opponent.StatusEffect != null && battleFound)
             {
                 if (opponent.StatusEffect == "Drain")
                 {
-
                     int maxHP = opponent.HP - opponent.CurrentHP;
                     opponent.CurrentHP += Math.Min(maxHP, dmg);
                     if (Math.Min(maxHP, dmg) > 0)
                     {
-                        messageManager.AddMessage(opponent.Name + " absorbed " + Math.Min(maxHP, dmg) + " HP!");
+                        messageManager.AddMessage(opponent.Name + " absorbed " + Math.Min(maxHP, dmg) + " HP!", "red");
                     }
 
                 }
-            }
+                else if(opponent.StatusEffect == "Cleave")
+                {
+                    if(rand.Next(0,10) > 5)
+                    {
+                        dmg = (int)(dmg * (1 + Extensions.CalculateArmorDamageReduction(gameState.GetPlayer())));
+                        messageManager.AddMessage(opponent.Name + " cleaved through your armor!", "red");
+                        color = "red";
+                    }
+                    
+                }
+                else if(opponent.StatusEffect == "Empty")
+                {
+                    if(rand.Next(0,10) > 8)
+                    {
+                        if(gameState.buffSecondsLeft > 0)
+                        {
+                            gameState.buffSecondsLeft = 1;
+                            messageManager.AddMessage(opponent.Name + " hit you in the gut! You feel emptied, somehow", "red");
+                            color = "red";
+                        }
 
+                    }
+                }
+                
+            }
+            gameState.GetPlayer().GainExperience("HP", Math.Min(gameState.GetPlayer().CurrentHP, dmg) * 8);
+            gameState.GetPlayer().CurrentHP -= dmg;
+            if (isDojoBattle)
+            {
+                messageManager.AddMessage("You took " + dmg + " damage from " + opponent.Name + "'s attack.", color);
+            }
+            else
+            {
+                messageManager.AddMessage("You took " + dmg + " damage from the " + opponent.Name + "'s attack.", color);
+            }
+            if (gameState.GetPlayer().CurrentHP <= 0)
+            {
+                LoseBattle();
+            }
         }
 
     }
@@ -561,12 +593,43 @@ public class BattleManager
         int it = 0;
         foreach(Dojo d in dojos)
         {
-            if(DateTime.TryParse(lines[it], out DateTime time))
+            if(lines.Length > it && lines[it] != "")
             {
-                d.LastWonTime = time;
+                if (DateTime.TryParse(lines[it], out DateTime time))
+                {
+                    d.LastWonTime = time;
+
+                }
+            }
+
+            it++;
+        }
+    }
+    public void TestLoadDojoSaveData(string data)
+    {
+        string[] lines = data.Split(',');
+        int it = 0;
+        foreach (Dojo d in dojos)
+        {
+            if (DateTime.TryParse(lines[it], out DateTime time))
+            {
+               
+
+            }
+            else
+            {
+                if(lines.Length > it && lines[it] != "")
+                {
+                    messageManager.AddMessage("Dojo Data:Failed to parse:" + lines[it]);
+                    Console.WriteLine("Dojo Data:Failed to parse:" + lines[it]);
+                }
 
             }
             it++;
         }
+    }
+    public List<Dojo> GetDojos()
+    {
+        return dojos;
     }
 }

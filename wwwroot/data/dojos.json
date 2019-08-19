@@ -27,6 +27,24 @@
     "itemEarned": 0,
     "amountEarned": 65000,
     "dojoTokens": 5000
+  },
+  {
+    "name": "Zuchi Dojo",
+    "id": 3,
+    "description": "The floor of the hall is covered in various hammers. The largest one sits in the center, and looks like it would take 10 men to lift.",
+    "opponentIDs": [ 72, 73, 74, 75, 76, 77, 78, 79 ],
+    "itemEarned": 163,
+    "amountEarned": 1000,
+    "dojoTokens": 7000
+  },
+  {
+    "name": "Tsuyo Dojo",
+    "id": 4,
+    "description": "The walls of the hall are lined with weight-lifting equipment. A very large man stands in the center of the room lifting weights.",
+    "opponentIDs": [ 80, 81, 82, 83, 84, 85, 86, 87 ],
+    "itemEarned": 554,
+    "amountEarned": 50,
+    "dojoTokens": 9000
   }
 
 ]

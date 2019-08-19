@@ -242,7 +242,7 @@
     "buttonText": "Enter",
     "description": "The halls of the building surround a central courtyard. At the very center of which is a column of air gushing out of a vent in the ground.",
     "buildings": [ "WindHallCourtyard" ],
-    "npcIDs": [58]
+    "npcIDs": [ 58 ]
   },
   {
     "name": "Wind Hall Courtyard",
@@ -260,7 +260,7 @@
     "items": [ 62, 63, 64, 65 ],
     "description": "You can buy all four base elements here.",
     "isShop": true,
-    "npcIDs": [34,35]
+    "npcIDs": [ 34, 35 ]
   },
   {
     "name": "Rocky Shores House of Fish And Rods",
@@ -382,7 +382,7 @@
     "description": "You enter the shop and are greeted by a short man who sells camels.",
     "isShop": true,
     "items": [ 162 ],
-    "npcIDs": [46]
+    "npcIDs": [ 46 ]
   },
   {
     "name": "Archery Shop",
@@ -493,7 +493,7 @@
     "npcIDs": [ 54, 55 ],
     "isShop": true,
     "isExpensive": true,
-    "items": [136,137,138]
+    "items": [ 136, 137, 138 ]
   },
   {
     "name": "Soul Goods",
@@ -533,5 +533,32 @@
     "id": 64,
     "url": "SettledSeaHorse",
     "description": "You enter a noisy barroom. A very tall man sits at the nearest table, staring at you as you walk through the door."
+  },
+  {
+    "name": "Jason's Jewelery",
+    "id": 65,
+    "url": "JasonsJewelery",
+    "description": "You find this shop isn't set up yet. It looks like they are still moving things in.",
+    "npcIDs": [ 77 ]
+  },
+  {
+    "name": "Koncave Alchemicellanea",
+    "id": 66,
+    "url": "Alchemicellanea",
+    "description": "Inside you find two old men arguing about something. You can probably just leave your money on the counter if you want to buy something...",
+    "isShop": true,
+    "items": [ 575, 576, 577, 578 ],
+    "isExpensive": true,
+    "npcIDs": [ 78, 79 ]
+  },
+  {
+    "name": "Don't Die Inc",
+    "id": 67,
+    "url": "DontDieInc",
+    "description": "The walls of the shop are lined with things made to keep people from dying:Shields, sushi rolls, and top hats.",
+    "isShop": true,
+    "items": [ 513, 516, 519, 522, 525, 528, 531, 133, 135, 346, 351, 356 ],
+    "isExpensive": true,
+    "npcIDs": [ 80 ]
   }
 ]

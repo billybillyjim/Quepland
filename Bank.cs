@@ -76,6 +76,37 @@ public class Bank
         }
 
     }
+    public void TestLoadTabsFromString(string data)
+    {
+        string[] lines = data.Split((char)14);
+        foreach (string line in lines)
+        {
+            if (line.Length > 0)
+            {
+                try
+                {
+                    string[] lineData = line.Split(',');
+
+                    if (NameIsValid(lineData[0]))
+                    {
+                        BankTab newTab = new BankTab(lineData[0]);
+                        List<int> ids = new List<int>();
+                        foreach (string i in lineData.Skip(1))
+                        {
+                            ids.Add(int.Parse(i));
+                        }
+                        newTab.itemIDs = ids;
+
+                    }
+                }
+                catch
+                {
+                    Console.WriteLine("Bank Tab:Failed to load properly:" + line);
+                }
+
+            }
+        }
+    }
     public bool NameIsValid(string name)
     {
         foreach(BankTab t in tabs)

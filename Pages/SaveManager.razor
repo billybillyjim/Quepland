@@ -1,0 +1,405 @@
+﻿@page "/SaveManager"
+@inject HttpClient Http
+@inject GameState GameState
+@inject MessageManager MessageManager
+@inject IJSRuntime JSRuntime
+@inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
+@inject Blazored.LocalStorage.ILocalStorageService asyncLocalStorage
+@using System.Threading;
+@implements IDisposable
+
+<h1>Save Manager</h1>
+
+<EditForm Model="@saveModel">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+
+    <InputTextArea id="name" @bind-Value="@saveModel.saveFile" />
+
+</EditForm>
+<p><button class="btn btn-primary" onclick="@(() => AnalyzeSaveFile())">Analyze Save File</button></p>
+
+<p><button class="btn btn-primary" onclick="@(() => AnalyzeThisSaveFile())">Analyze Current Save File</button></p>
+
+
+@functions{
+
+    private SaveModel saveModel = new SaveModel();
+    private SimpleAES Encryptor = new SimpleAES();
+
+    private void AnalyzeThisSaveFile()
+    {
+        saveModel.saveFile = localStorage.GetItem<string>("eSave");
+        AnalyzeSaveFile();
+    }
+    private void AnalyzeSaveFile()
+    {
+        string decryptedData = "";
+        if(CheckIfGameHasLoadedProperly() == false)
+        {
+            MessageManager.AddMessage("Game has failed to properly load.", "red");
+        }
+        try
+        {
+            decryptedData = Encryptor.DecryptString(saveModel.saveFile);
+        }
+        catch
+        {
+            MessageManager.AddMessage("Failed to decrypt file.");
+            return;
+        }
+        string[] lines = decryptedData.Split('#');
+        try
+        {
+            Extensions.GetItemDicFromString(lines[0], Program.itemDatabase);
+        }
+        catch
+        {
+            MessageManager.AddMessage("Save failed to load bank items.");
+            Console.Write("Bank items failed to load:" + lines[0]);
+        }
+
+
+        try
+        {
+            Extensions.GetSkillsFromString(lines[1]);
+        }
+        catch
+        {
+            MessageManager.AddMessage("Save failed to load skills", "red");
+            Console.WriteLine("Skills failed to load:" + lines[1]);
+        }
+
+        try
+        {
+            Extensions.GetItemDicFromString(lines[2], Program.itemDatabase);
+        }
+        catch
+        {
+            MessageManager.AddMessage("Save failed to load inventory items.", "red");
+            Console.Write("Inventory items failed to load:" + lines[2]);
+        }
+
+        Program.areaManager.TestLoadSaveData(lines[3]);
+        Program.followerManager.TestLoadSaveData(lines[4]);
+
+        if (int.TryParse(lines[5], out int hp))
+        {
+
+        }
+        else
+        {
+            MessageManager.AddMessage("No HP value found.", "red");
+        }
+
+        if (int.TryParse(lines[6], out int activeFollower))
+        {
+            try { Program.followerManager.GetFollowerByID(activeFollower); }
+            catch { MessageManager.AddMessage("Saved active follower not found in list of followers.", "red"); }
+        }
+
+
+        foreach (string s in lines[8].Split('/') ?? Enumerable.Empty<string>())
+        {
+            if (int.TryParse(s, out int id))
+            {
+
+            }
+            else
+            {
+                if(s != "")
+                {
+                    MessageManager.AddMessage("Saved equipped Items failed to parse:" + s, "red");
+                }
+            }
+        }
+
+        if (lines.Length > 9 && lines[9] != null)
+        {
+            string[] settings = lines[9].Split(',');
+            try
+            {
+                bool.Parse(settings[0]);
+            }
+            catch
+            {
+                MessageManager.AddMessage("Failed to parse setting 0", "red");
+            }
+            try
+            {
+                bool.Parse(settings[1]);
+            }
+            catch
+            {
+                MessageManager.AddMessage("Failed to parse setting 1", "red");
+            }
+            if (settings.Length > 2 && settings[2] != null)
+            {
+                try
+                {
+                    int.Parse(settings[2]);
+                }
+                catch
+                {
+                    MessageManager.AddMessage("Failed to parse setting 2", "red");
+                }
+            }
+            if (settings.Length > 3 && settings[3] != null)
+            {
+                try
+                {
+                    int.Parse(settings[3]);
+                }
+                catch
+                {
+                    MessageManager.AddMessage("Failed to parse setting 3", "red");
+                }
+            }
+            if (settings.Length > 4 && settings[4] != null)
+            {
+                try
+                {
+                    bool.Parse(settings[4]);
+                }
+                catch
+                {
+                    MessageManager.AddMessage("Failed to parse setting 4", "red");
+                }
+            }
+            if (settings.Length > 5 && settings[5] != null)
+            {
+                try
+                {
+                    bool.Parse(settings[5]);
+                }
+                catch
+                {
+                    MessageManager.AddMessage("Failed to parse setting 5", "red");
+                }
+            }
+            if (settings.Length > 6 && settings[6] != null)
+            {
+                try
+                {
+                    long.Parse(settings[6]);
+                }
+                catch
+                {
+                    MessageManager.AddMessage("Failed to parse setting 6", "red");
+                }
+            }
+            if (settings.Length > 7 && settings[7] != null)
+            {
+                try
+                {
+                    int.Parse(settings[7]);
+                }
+                catch
+                {
+                    MessageManager.AddMessage("Failed to parse setting 7", "red");
+                }
+            }
+        }
+        if (lines.Length > 10 && lines[10] != null)
+        {
+            Program.npcManager.TestLoadNPCData(lines[10]);
+        }
+        if (lines.Length > 11 && lines[11] != null)
+        {
+            try
+            {
+                int.Parse(lines[11].Split(',')[0]);
+            }
+            catch
+            {
+                MessageManager.AddMessage("Sushi house rice invalid value:" + lines[11], "red");
+            }
+            try
+            {
+                int.Parse(lines[11].Split(',')[1]);
+            }
+            catch
+            {
+                MessageManager.AddMessage("Sushi house seaweed invalid value:" + lines[11], "red");
+            }
+
+        }
+        if (lines.Length > 12 && lines[12] != null)
+        {
+            string[] salts = lines[12].Split('/');
+            foreach (string salt in salts)
+            {
+                if (salt.Length > 0)
+                {
+                    try
+                    {
+                        int id = int.Parse(salt.Split(',')[0]);
+                        int amount = int.Parse(salt.Split(',')[1]);
+                    }
+                    catch
+                    {
+                        MessageManager.AddMessage("Tannery salt invalid value:" + lines[12], "red");
+                    }
+                }
+            }
+        }
+        if (lines.Length > 13 && lines[13] != null)
+        {
+            string[] tanneries = lines[13].Split('@');
+
+            foreach (string tannery in tanneries)
+            {
+                if (tannery.Length > 0)
+                {
+                    try
+                    {
+                        Building t = Program.buildingManager.GetBuildingByID(int.Parse(tannery.Split('>')[0]));
+                    }
+                    catch
+                    {
+                        MessageManager.AddMessage("Failed to find tannery:" + tannery, "red");
+                    }
+                    string[] tanneryData = tannery.Split('>')[1].Split('_');
+
+                    foreach (string s in tanneryData)
+                    {
+                        if (s.Length > 0)
+                        {
+
+                            TanningSlot slot = new TanningSlot();
+                            slot.TestSetDataFromString(s);
+
+                        }
+
+                    }
+                }
+            }
+        }
+        if (lines.Length > 14 && lines[14] != null)
+        {
+            if (bool.TryParse(lines[14].Split(',')[0], out bool isHunting))
+            {
+                if (isHunting)
+                {
+                    GameState.isHunting = true;
+                    GameState.huntingAreaID = int.Parse(lines[14].Split(',')[1]);
+                    GameState.huntingEndTime = DateTime.Parse(lines[14].Split(',')[2]);
+
+                }
+            }
+            else
+            {
+                MessageManager.AddMessage("No hunting data found:" + lines[14], "red");
+            }
+        }
+        if (lines.Length > 15 && lines[15] != null)
+        {
+            GameState.GetPlayerBank().TestLoadTabsFromString(lines[15]);
+        }
+        if (lines.Length > 16 && lines[16] != null)
+        {
+            GameState.GetPlayer().TestLoadPetsFromString(lines[16]);
+        }
+        if (lines.Length > 17 && lines[17] != null)
+        {
+
+            GameState.TestLoadKC(lines[17]);
+
+        }
+        if (lines.Length > 18 && lines[18] != null)
+        {
+            Program.battleManager.TestLoadDojoSaveData(lines[18]);
+        }
+        MessageManager.AddMessage("Save file test complete. If you have no errors here or in your browser console, your save file and game are loaded properly.");
+
+        GameState.UpdateState();
+        this.StateHasChanged();
+    }
+    private bool CheckIfGameHasLoadedProperly()
+    {
+        string message = "";
+        if (Program.areaManager == null ||
+            Program.battleManager == null ||
+            Program.buildingManager == null ||
+            Program.followerManager == null ||
+            Program.gatherManager == null ||
+            Program.huntingManager == null ||
+            Program.itemDatabase == null ||
+            Program.npcManager == null ||
+            Program.petManager == null ||
+            Program.playfabManager == null)
+        {
+            return false;
+        }
+        if(Program.areaManager.GetAreas().Count == 0 ||
+            Program.areaManager.GetAreaByID(76).Name != "Sahota Pet Care Cave")
+        {
+            message = "Areas failed to load. Total Areas Loaded:" + Program.areaManager.GetAreas().Count;
+            Console.WriteLine(message);
+            MessageManager.AddMessage(message, "red");
+        }
+        if(Program.battleManager.GetAllMonsters().Count == 0 ||
+            Program.battleManager.GetMonsterByID(67).Name != "Futo")
+        {
+            message = "Monsters failed to load. Total Monsters Loaded:" + Program.battleManager.GetAllMonsters().Count;
+            Console.WriteLine(message);
+            MessageManager.AddMessage(message, "red");
+        }
+        if(Program.battleManager.GetDojos().Count == 0 ||
+            Program.battleManager.GetDojoByID(2).Name != "Ono Dojo")
+        {
+            message = "Dojos failed to load. Total Dojos Loaded:" + Program.battleManager.GetDojos().Count;
+            Console.WriteLine(message);
+            MessageManager.AddMessage(message, "red");
+        }
+        if(Program.buildingManager.GetBuildings().Count == 0 ||
+            Program.buildingManager.GetBuildingByID(64).Name != "Settled Sea Horse")
+        {
+            message = "Buildings failed to load. Total Buildings Loaded:" + Program.buildingManager.GetBuildings().Count;
+            Console.WriteLine(message);
+            MessageManager.AddMessage(message, "red");
+        }
+        if(Program.followerManager.GetFollowers().Count == 0 ||
+            Program.followerManager.GetFollowerByID(21).Name != "Threnden the Dwarf")
+        {
+            message = "Followers failed to load. Total Followers Loaded:" + Program.followerManager.GetFollowers().Count;
+            Console.WriteLine(message);
+            MessageManager.AddMessage(message, "red");
+        }
+        if(Program.itemDatabase.GetAllItems().Count == 0 ||
+            Program.itemDatabase.GetItemByID(494).ItemName != "Golden Belt")
+        {
+            message = "Item database failed to load.";
+            Console.WriteLine(message);
+            MessageManager.AddMessage(message, "red");
+        }
+        if(Program.npcManager.GetNPCs().Count == 0 ||
+            Program.npcManager.GetNPCByID(72).Name != "Belt Man the Proud")
+        {
+            message = ("NPCs failed to load.");
+            Console.WriteLine(message);
+            MessageManager.AddMessage(message, "red");
+        }
+        if(Program.petManager.GetPets().Count == 0)
+        {
+            message = ("Pets failed to load.");
+            Console.WriteLine(message);
+            MessageManager.AddMessage(message, "red");
+        }
+        if(message == "")
+        {
+            MessageManager.AddMessage("No issues were found with loaded data.");
+        }
+        return true;
+    }
+    protected override void OnInit()
+    {
+        GameState.StateChanged += OnGameStateChanged;
+        this.StateHasChanged();
+    }
+    void IDisposable.Dispose()
+    {
+        GameState.StateChanged -= OnGameStateChanged;
+    }
+    void OnGameStateChanged(object sender, EventArgs e) => StateHasChanged();
+}

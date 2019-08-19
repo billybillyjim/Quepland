@@ -232,6 +232,64 @@ public class Player
         
         
     }
+    public void TestLoadPetsFromString(string data)
+    {
+        string[] lines = data.Split((char)17)[0].Split((char)16);
+        foreach (string line in lines)
+        {
+            if (line.Length > 1)
+            {
+                string[] info = new string[10];
+                try
+                {
+                    info = line.Split((char)15)[0].Split((char)14);
+                }
+                catch
+                {
+                    messageManager.AddMessage("Saved pet data failed:" + line, "red");
+                    Console.WriteLine("Pet Data:Failed to load pet info:" + line);
+                }
+                try
+                {
+                    Pet newPet = new Pet();
+
+                    newPet.Name = info[0];
+                    newPet.Description = info[1];
+                    newPet.Nickname = info[2];
+
+                    newPet.MinLevel = int.Parse(info[3]);
+
+                    newPet.Affinity = info[4];
+
+                    newPet.Identifier = info[5];
+                    string skillString = line.Split((char)15)[1];
+
+                    newPet.SetSkills(Extensions.GetSkillsFromString(skillString));
+                }
+                catch
+                {
+                    messageManager.AddMessage("Pet data failed on setting:" + line, "red");
+                    Console.WriteLine("Pet Data:Failed to set pet info:" + line);
+                }
+
+            }
+
+        }
+        if (data.Split((char)17).Length > 1)
+        {
+            try
+            {
+                if (data.Split((char)17)[1] == "None")
+                {
+                    return;
+                }
+            }
+            catch
+            {
+                Console.WriteLine("Assigned Pet:Failed to load data:" + data.Split((char)17)[1]);
+            }
+        }
+    }
     public int GetLevel(string skillName)
     {
         foreach(Skill skill in skills)
@@ -436,13 +494,14 @@ public class Player
         }
         return true;
     }
+
     public int GetDamageDealt(Monster opponent)
     {
         int str = GetSkill("Strength").GetSkillLevel();
         int deft = GetSkill("Deftness").GetSkillLevel();
-        float baseDamage = 1 + (str / 4);
-
-        int equipmentBonus = GetEquipmentBonus();
+        float baseDamage = 1 + (str / 4);      
+        float armorReduction = 1 - (float)Extensions.CalculateArmorDamageReduction(opponent);
+        int equipmentBonus = (int)(GetEquipmentBonus() * armorReduction);
 
         if (GetWeapon() != null)
         {
@@ -484,7 +543,7 @@ public class Player
                      
             return Math.Max(Extensions.GetGaussianRandomInt(baseDamage + equipmentBonus, baseDamage / 3f), 1);
         }
-        baseDamage *= 1 - (float)Extensions.CalculateArmorDamageReduction(opponent);
+        baseDamage *= armorReduction;
         return Math.Max(Extensions.GetGaussianRandomInt(baseDamage + equipmentBonus, baseDamage / 3f), 1);
     }
     private float CalculateEffectiveness(Monster opponent, string action, float baseDamage)
@@ -664,8 +723,7 @@ public class Player
         }
         else if(sortStyle == 1)
         {
-            sortedPets = sortedPets.OrderBy(x => x.GetTotalLevels()).Reverse().ToList();
-            
+            sortedPets = sortedPets.OrderBy(x => x.GetTotalLevels()).Reverse().ToList();          
         }
         else if(sortStyle == 2)
         {

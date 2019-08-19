@@ -5,6 +5,7 @@
 @inject IJSRuntime JSRuntime
 @inject Blazored.LocalStorage.ISyncLocalStorageService localStorage
 @inject Blazored.LocalStorage.ILocalStorageService asyncLocalStorage
+@inject Microsoft.AspNetCore.Blazor.Services.WebAssemblyUriHelper UriHelper
 @using System.Threading;
 @implements IDisposable
 
@@ -28,10 +29,10 @@
 @if (Program.playfabManager.IsConnected)
 {
     <p>
-        Experimental(Don't rely on this yet!):
         <button class="btn btn-primary" onclick="@(() => LoadDataFromCloud())">Load Game From Cloud Save</button>
     </p>
 }
+<p><button class="btn btn-primary" onclick="@(() => GoToSaveManager())">Save Tester</button></p>
 
 
 @functions{
@@ -51,6 +52,10 @@
         {
             GameState.expensiveItemThreshold = Math.Max(value, 0);
         }
+    }
+    private void GoToSaveManager()
+    {
+        UriHelper.NavigateTo("/SaveManager/");
     }
     private bool GenerateSaveFile()
     {
@@ -189,15 +194,15 @@
                 {
                     Building t = Program.buildingManager.GetBuildingByID(int.Parse(tannery.Split('>')[0]));
                     string[] tanneryData = tannery.Split('>')[1].Split('_');
-
+                    int i = 0;
                     foreach (string s in tanneryData)
                     {
-                        if (s.Length > 0)
+                        if (s.Length > 0 && i < t.TannerySlots)
                         {
                             TanningSlot slot = new TanningSlot();
                             slot.SetDataFromString(s);
                             t.TanneryItems.Add(slot);
-
+                            i++;
                         }
 
                     }
@@ -261,7 +266,7 @@
                 }
                 else if (Program.playfabManager.IsConnected)
                 {
-                    Program.playfabManager.Save(GameState.GetSaveStringEncrypted(Program.areaManager, Program.followerManager, Program.npcManager, Program.buildingManager,  Program.battleManager, false));
+                    Program.playfabManager.Save(GameState.GetSaveStringEncrypted(Program.areaManager, Program.followerManager, Program.npcManager, Program.buildingManager, Program.battleManager, false));
                 }
 
                 GameState.saveToPlayFab = 0;
@@ -270,13 +275,13 @@
         GameState.UpdateState();
         this.StateHasChanged();
     }
-        private async Task ConnectToCloudAndSave()
+    private async Task ConnectToCloudAndSave()
     {
         await ConnectToKongregate();
         await Program.playfabManager.TryLogin(GameState.userID, GameState.token);
         Program.playfabManager.Save(GameState.GetSaveStringEncrypted(Program.areaManager, Program.followerManager, Program.npcManager, Program.buildingManager, Program.battleManager, false));
     }
-        private async Task ConnectToKongregate()
+    private async Task ConnectToKongregate()
     {
         try
         {
@@ -303,7 +308,7 @@
         MessageManager.AddMessage("Your game has been saved.");
         GameState.saveDataLoaded = true;
         GameState.saveGameExists = true;
-        
+
     }
     private async void UpdateHighScores()
     {

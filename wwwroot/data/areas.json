@@ -205,7 +205,7 @@
     "icon": "oi oi-align-center",
     "unlockableAreas": [ "Higashi Woods Entrance,Head into the forest,," ],
     "region": "Quepland",
-    "npcIDs": [72]
+    "npcIDs": [ 72 ]
   },
   {
     "name": "Queple Cave Smithy",
@@ -661,7 +661,9 @@
     "icon": "oi oi-credit-card",
     "unlockableAreas": [ "Central Tsu City,Go to the heart of the city,," ],
     "npcIDs": [ 27, 28 ],
-    "region": "Quepland"
+    "region": "Quepland",
+    "hasDojo": true,
+    "dojoID": 3
   },
   {
     "name": "Central Tsu City",
@@ -829,7 +831,7 @@
     "areaURL": "SahotaTir",
     "description": "An icy region of Caligin.",
     "icon": "oi oi-chevron-bottom",
-    "children": [ "SahotaIceFields", "SahotaCaverns", "SahotaDungeon", "SahotaPetCareCave" ],
+    "children": [ "SahotaIceFields", "SahotaCaverns", "SahotaDungeon", "SahotaPetCareCave", "SahotaClearing" ],
     "region": "Caligin Commonwealth"
   },
   {
@@ -855,7 +857,7 @@
     "actions": [ "Hunting", "Bait Fishing" ],
     "region": "Caligin Commonwealth",
     "huntingIDs": [ 71, 67, 69, 436 ],
-    "unlockableAreas": ["Sahota Pet Care Cave,Enter the door,,"]
+    "unlockableAreas": [ "Sahota Pet Care Cave,Enter the door,,", "Sahota Clearing, Continue further into the caves,," ]
   },
   {
     "name": "Sahota Dungeon",
@@ -876,7 +878,69 @@
     "actions": [ "Pet Forgetter" ],
     "region": "Caligin Commonwealth",
     "npcIDs": [ 67, 68 ]
-  }
+  },
+  {
+    "name": "Sahota Clearing",
+    "id": 77,
+    "areaURL": "SahotaClearing",
+    "description": "The cave opens up into a large cavern. In the distance you can see large wooden gates blocking the road ahead. The path also branches to the right, where a large root system has penetrated the roof of the cave.",
+    "icon": "oi oi-badge",
+    "region": "Caligin Commonwealth",
+    "npcIDs": [ 73 ],
+    "unlockableAreas": [ "Koncave City Gate,Head towards the gate,,", "Koncave Falls,Take the branching path,," ]
 
+  },
+  {
+    "name": "Koncave City Gate",
+    "id": 78,
+    "areaURL": "KoncaveGate",
+    "description": "You arrive at the large city gate to find two guards standing watch.",
+    "icon": "oi oi-badge",
+    "region": "Caligin Commonwealth",
+    "npcIDs": [ 75 ],
+    "unlockableAreas": [ "Koncave City Square,Show your passport,,Koncave City Passport", "Koncave Falls,Head back to the branching path,," ],
+    "areaToUnlockOnArrival": "Koncave City"
+  },
+  {
+    "name": "Koncave City Square",
+    "id": 79,
+    "areaURL": "KoncaveCitySquare",
+    "description": "You enter the city's main square. A waterfall fountain stands in the center, and a number of shops surround it.",
+    "icon": "oi oi-badge",
+    "region": "Caligin Commonwealth",
+    "buildings": [ "JasonsJewelry", "DontDieInc", "Alchemicellanea" ],
+    "hasDojo": true,
+    "dojoID": 3
+  },
+  {
+    "name": "Koncave Falls",
+    "id": 80,
+    "areaURL": "KoncaveFalls",
+    "description": "You can hear the sound of rushing water among the roots. Strange creatures dart out of sight at the sound of your footsteps. Above your head you can see a number of sparking ores jutting out from the walls of the cave.",
+    "icon": "oi oi-badge",
+    "region": "Caligin Commonwealth",
+    "actions": [ "Battle", "Chop Roots:Great Tree Logs" ],
+    "unlockableAreas": [ "Koncave Falls Mine,Climb the vines to the ore veins,Deftness:85," ],
+    "monsterIDs": [ 68, 69, 70, 71 ],
+    "areaToUnlockOnArrival": "Koncave City"
+  },
+  {
+    "name": "Koncave City",
+    "id": 81,
+    "areaURL": "KoncaveCity",
+    "description": "An underground city of roots.",
+    "icon": "oi oi-chevron-bottom",
+    "children": [ "KoncaveGate", "KoncaveCitySquare", "KoncaveFalls", "KoncaveFallsMine" ],
+    "region": "Caligin Commonwealth"
+  },
+  {
+    "name": "Koncave Falls Mine",
+    "id": 82,
+    "areaURL": "KoncaveFallsMine",
+    "description": "You climb the roots to reach a few ore veins.",
+    "icon": "oi oi-badge",
+    "region": "Caligin Commonwealth",
+    "actions": [ "Mine Platinum:Platinum Ore", "Mine Strongtium:Strongtium Ore", "Mine Sahotite Ore:Sahotite Ore" ],
+  }
 
 ]

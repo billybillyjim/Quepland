@@ -78,7 +78,7 @@
             builder.OpenElement(6, "button");
             builder.AddAttribute(7, "class", "btn btn-primary");
             builder.AddAttribute(8, "style", "");
-            if (dojo.LastWonTime == null || DateTime.UtcNow.CompareTo(dojo.LastWonTime.Value.AddDays(1)) > 0)
+            if (dojo.LastWonTime == null || DateTime.UtcNow.CompareTo(dojo.LastWonTime.Value.AddHours(23)) > 0)
             {
                 builder.AddAttribute(9, "onclick", () => SetReadyForChallenge());
                 builder.AddContent(10, "Begin Dojo Challenge");
@@ -87,7 +87,7 @@
             {
                 if (Math.Abs(DateTime.UtcNow.Subtract(dojo.LastWonTime.Value.AddDays(1)).TotalHours) > 1)
                 {
-                    builder.AddAttribute(11, "title", "The dojo is still recovering from their last defeat. Please return in " + Math.Round(Math.Abs(DateTime.UtcNow.Subtract(dojo.LastWonTime.Value.AddDays(1)).TotalHours)) + " hours.");
+                    builder.AddAttribute(11, "title", "The dojo is still recovering from their last defeat. Please return in " + Math.Round(Math.Abs(DateTime.UtcNow.Subtract(dojo.LastWonTime.Value.AddHours(23)).TotalHours)) + " hours.");
                 }
                 else
                 {

@@ -8,7 +8,7 @@ using Microsoft.JSInterop;
 
 public class GameState
 {
-	public event EventHandler StateChanged;
+    public event EventHandler StateChanged;
     public IJSRuntime JSRuntime;
 
     public bool isGathering;
@@ -47,7 +47,7 @@ public class GameState
     public bool safeToLoad = false;
 
     public string previousURL;
-    public string updateVersionString = "1.14a";
+    public string updateVersionString = "1.17b";
 
     public string gatherItem;
 
@@ -108,6 +108,8 @@ public class GameState
     public Pet petToBuy;
     public List<Pet> buyablePets = new List<Pet>();
 
+    public Room currentRoom;
+
     private static SimpleAES Encryptor = new SimpleAES();
 
     private void StateHasChanged()
@@ -126,9 +128,9 @@ public class GameState
 
     public void RestorePet(string petID)
     {
-        foreach(Pet pet in buyablePets)
+        foreach (Pet pet in buyablePets)
         {
-            if(pet.Identifier == petID && GetPlayer().HasPet(pet) == false)
+            if (pet.Identifier == petID && GetPlayer().HasPet(pet) == false)
             {
                 GetPlayer().Pets.Add(pet);
             }
@@ -156,7 +158,7 @@ public class GameState
     }
     public void LoadMonsters(List<Monster> monsters)
     {
-        foreach(Monster m in monsters)
+        foreach (Monster m in monsters)
         {
             killCount.Add(0);
         }
@@ -168,7 +170,7 @@ public class GameState
     }
     public bool CanLeave()
     {
-        if(!isGathering && !isHunting && !isWorkingOut && !isSmithing && !isRunning && !isFighting)
+        if (!isGathering && !isHunting && !isWorkingOut && !isSmithing && !isRunning && !isFighting)
         {
             return true;
         }
@@ -184,7 +186,7 @@ public class GameState
         isSmithing = false;
         isFighting = false;
 
-        if(attackTimer != null)
+        if (attackTimer != null)
         {
             attackTimer.Dispose();
             attackTimer = null;
@@ -239,7 +241,7 @@ public class GameState
             autoSmithingTimer.Dispose();
             autoSmithingTimer = null;
         }
-        if(UIRefreshTimer != null)
+        if (UIRefreshTimer != null)
         {
             UIRefreshTimer.Dispose();
             UIRefreshTimer = null;
@@ -252,7 +254,7 @@ public class GameState
         activeButtons.Clear();
         if (isSplitView)
         {
-            
+
             activeButtons.Add("Skills");
             activeButtons.Add("Inventory");
         }
@@ -260,7 +262,7 @@ public class GameState
         {
 
             activeView = "Inventory";
-            
+
         }
         UpdateState();
     }
@@ -283,133 +285,128 @@ public class GameState
 
         int pos = 0;
         string data = "";
-        try
+
+        //Bank 0
+        data += "" + GetPlayerBank().GetInventory().ToString();
+        pos++;
+        //Skills 1
+        data += "#" + GetPlayer().GetSkillString();
+        pos++;
+        //Inventory 2
+        data += "#" + GetPlayerInventory().ToStringSorted();
+        pos++;
+        //Areas 3
+        data += "#" + areaManager.SaveAreas();
+        pos++;
+        //Followers 4
+        data += "#" + followerManager.ToString();
+        pos++;
+        //HP 5
+        data += "#" + GetPlayer().CurrentHP.ToString();
+        pos++;
+        //ActiveFollower 6
+        if (GetPlayer().activeFollower != null)
         {
-            //Bank 0
-            data += "" + GetPlayerBank().GetInventory().ToString();
-            pos++;
-            //Skills 1
-            data += "#" + GetPlayer().GetSkillString();
-            pos++;
-            //Inventory 2
-            data += "#" + GetPlayerInventory().ToStringSorted();
-            pos++;
-            //Areas 3
-            data += "#" + areaManager.SaveAreas();
-            pos++;
-            //Followers 4
-            data += "#" + followerManager.ToString();
-            pos++;
-            //HP 5
-            data += "#" + GetPlayer().CurrentHP.ToString();
-            pos++;
-            //ActiveFollower 6
-            if (GetPlayer().activeFollower != null)
-            {
-                data += "#" + GetPlayer().activeFollower.id;
-            }
-            else
-            {
-                data += "#";
-            }
-            pos++;
-            //Recipes 7
-            data += "#";
-            /*foreach (string s in GetPlayer().GetRecipes())
-            {
-                data += s + "/";
-            }*/
-            pos++;
-            //EquippedItems 8
-            data += "#";
-            foreach (KeyValuePair<GameItem, int> pair in GetPlayerInventory().GetEquippedItems())
-            {
-                data += pair.Key.Id + "/";
-            }
-            pos++;
-            //Settings 9
-            data += "#";
-            data += isSplitView.ToString();
-            data += ",";
-            data += compactBankView.ToString();
-            data += ",";
-            data += expensiveItemThreshold;
-            data += ",";
-            data += totalKills;
-            data += ",";
-            data += PetShopUnlocked.ToString();
-            data += ",";
-            data += autoBuySushiSupplies.ToString();
-            data += ",";
-            data += totalCoinsEarned;
-            data += ",";
-            data += totalDeaths;
-            pos++;
-            //NPC data 10
-            data += "#";
-            data += npcManager.GetNPCData();
-            pos++;
-            //Sushi House Data 11
-            data += "#";
-            data += sushiHouseRice + "," + sushiHouseSeaweed;
-            pos++;
-            //Tannery Data 12
-            data += "#";
-            foreach (Building b in buildingManager.GetBuildings())
-            {
-                if (b.Salt > 0)
-                {
-                    data += "" + b.ID + "," + b.Salt + "/";
-                }
-            }
-            pos++;
-            //Tannery Slot Data 13
-            data += "#";
-            foreach (Building b in buildingManager.GetBuildings())
-            {
-                if (b.IsTannery)
-                {
-                    data += b.ID + ">";
-                    foreach (TanningSlot slot in b.TanneryItems)
-                    {
-                        data += slot.GetString() + "_";
-                    }
-                    data += "@";
-                }
-            }
-            pos++;
-            //GameState.isHunting 14
-            data += "#";
-            data += isHunting.ToString() + ",";
-            data += huntingAreaID + ",";
-            data += huntingStartTime.ToString() + ",";
-            data += huntingEndTime.ToString();
-            pos++;
-            //Bank Tabs 15
-            data += "#";
-            data += GetPlayerBank().GetTabsString();
-            pos++;
-            //Pets 16
-            data += "#";
-            data += GetPlayer().GetPetString();
-            pos++;
-            //KC 17
-            data += "#";
-            data += GetKCString();
-            pos++;
-            //Dojos 18
-            data += "#";
-            data += battleManager.GetDojoSaveData();
-            if (encrypt)
-            {
-                data = Encryptor.EncryptToString(data);
-            }
-            pos++;
+            data += "#" + GetPlayer().activeFollower.id;
         }
-        catch
+        else
         {
-            data = "Failed to generate save file. Please contact the developer to let him know he messed up. (Error line:" + pos + ")";
+            data += "#";
         }
+        pos++;
+        //Recipes 7
+        data += "#";
+        /*foreach (string s in GetPlayer().GetRecipes())
+        {
+            data += s + "/";
+        }*/
+        pos++;
+        //EquippedItems 8
+        data += "#";
+        foreach (KeyValuePair<GameItem, int> pair in GetPlayerInventory().GetEquippedItems())
+        {
+            data += pair.Key.Id + "/";
+        }
+        pos++;
+        //Settings 9
+        data += "#";
+        data += isSplitView.ToString();
+        data += ",";
+        data += compactBankView.ToString();
+        data += ",";
+        data += expensiveItemThreshold;
+        data += ",";
+        data += totalKills;
+        data += ",";
+        data += PetShopUnlocked.ToString();
+        data += ",";
+        data += autoBuySushiSupplies.ToString();
+        data += ",";
+        data += totalCoinsEarned;
+        data += ",";
+        data += totalDeaths;
+        pos++;
+        //NPC data 10
+        data += "#";
+        data += npcManager.GetNPCData();
+        pos++;
+        //Sushi House Data 11
+        data += "#";
+        data += sushiHouseRice + "," + sushiHouseSeaweed;
+        pos++;
+        //Tannery Data 12
+        data += "#";
+        foreach (Building b in buildingManager.GetBuildings())
+        {
+            if (b.Salt > 0)
+            {
+                data += "" + b.ID + "," + b.Salt + "/";
+            }
+        }
+        pos++;
+        //Tannery Slot Data 13
+        data += "#";
+        foreach (Building b in buildingManager.GetBuildings())
+        {
+            if (b.IsTannery)
+            {
+                data += b.ID + ">";
+                foreach (TanningSlot slot in b.TanneryItems)
+                {
+                    data += slot.GetString() + "_";
+                }
+                data += "@";
+            }
+        }
+        pos++;
+        //GameState.isHunting 14
+        data += "#";
+        data += isHunting.ToString() + ",";
+        data += huntingAreaID + ",";
+        data += huntingStartTime.ToString() + ",";
+        data += huntingEndTime.ToString();
+        pos++;
+        //Bank Tabs 15
+        data += "#";
+        data += GetPlayerBank().GetTabsString();
+        pos++;
+        //Pets 16
+        data += "#";
+        data += GetPlayer().GetPetString();
+        pos++;
+        //KC 17
+        data += "#";
+        data += GetKCString();
+        pos++;
+        //Dojos 18
+        data += "#";
+        data += battleManager.GetDojoSaveData();
+        pos++;
+        if (encrypt)
+        {
+            data = Encryptor.EncryptToString(data);
+        }
+         
         return data;
     }
     public string GetSaveString(AreaManager areaManager, FollowerManager followerManager, NPCManager npcManager, BuildingManager buildingManager, BattleManager battleManager)
@@ -434,6 +431,26 @@ public class GameState
             if(line.Length > 0)
             {
                 killCount[i] = int.Parse(line);
+                i++;
+            }
+        }
+    }
+    public void TestLoadKC(string kcString)
+    {
+        string[] data = kcString.Split(',');
+        int i = 0;
+        foreach (string line in data)
+        {
+            if (line.Length > 0)
+            {
+                try
+                {
+                    int.Parse(line);
+                }
+                catch
+                {
+                    Console.WriteLine("Kill Count:Failed to parse kill count for:" + line + ", " + i);
+                }
                 i++;
             }
         }

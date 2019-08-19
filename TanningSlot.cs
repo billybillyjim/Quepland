@@ -23,11 +23,29 @@ public class TanningSlot
     }
     public void SetDataFromString(string data)
     {
+       
         string[] lines = data.Split(',');
         int itemID = int.Parse(lines[0]);
         int itemAmount = int.Parse(lines[1]);
         DateTime endTime = DateTime.Parse(lines[2]);
         Item = new KeyValuePair<int, int>(itemID, itemAmount);
         EndTime = endTime;
+    }
+    public void TestSetDataFromString(string data)
+    {
+        try
+        {
+            
+            string[] lines = data.Split(',');
+            Console.WriteLine(int.Parse(lines[1]));
+            int.Parse(lines[0]);
+            int.Parse(lines[1]);
+            DateTime.Parse(lines[2]);
+
+        }
+        catch
+        {
+            Console.WriteLine("Tanning Slot:Failed to load data:" + data);
+        }
     }
 }

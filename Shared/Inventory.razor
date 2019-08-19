@@ -455,6 +455,7 @@
             {
                 builder.AddAttribute(2, "style", "background-color:aquamarine");
             }
+
             builder.OpenElement(3, "td");
             builder.AddContent(4, "Deposit");
             builder.CloseElement();
@@ -575,7 +576,7 @@
             builder.OpenElement(16, "button");
             builder.AddAttribute(17, "class", "btn btn-primary");
             builder.AddAttribute(18, "style", "margin:2px;height:2rem;line-height: initial;");
-            if (item.Key.Value < GameState.expensiveItemThreshold || trySellingExpensiveItem == true)
+            if ((item.Key.Value < GameState.expensiveItemThreshold && GameState.sellGuard == false) || trySellingExpensiveItem == true)
             {
                 builder.AddAttribute(19, "onclick", () => Sell(item, 5));
             }
@@ -599,7 +600,7 @@
             builder.OpenElement(23, "button");
             builder.AddAttribute(24, "class", "btn btn-primary");
             builder.AddAttribute(25, "style", "margin:2px;height:2rem;line-height: initial;");
-            if (item.Key.Value < GameState.expensiveItemThreshold || trySellingExpensiveItem == true)
+            if ((item.Key.Value < GameState.expensiveItemThreshold && GameState.sellGuard == false) || trySellingExpensiveItem == true)
             {
                 builder.AddAttribute(26, "onclick", () => Sell(item, sellAmount));
             }
@@ -632,7 +633,7 @@
             builder.OpenElement(31, "button");
             builder.AddAttribute(32, "class", "btn btn-primary");
             builder.AddAttribute(33, "style", "margin:2px;height:2rem;line-height: initial;");
-            if (item.Key.Value < GameState.expensiveItemThreshold || trySellingExpensiveItem == true)
+            if ((item.Key.Value < GameState.expensiveItemThreshold && GameState.sellGuard == false) || trySellingExpensiveItem == true)
             {
                 builder.AddAttribute(34, "onclick", () => Sell(item, int.MaxValue));
             }
@@ -694,6 +695,12 @@
             {
                 builder.AddAttribute(9, "disabled", true);
                 builder.AddAttribute(10, "title", "You don't have enough " + Program.itemDatabase.GetItemByID(itemToMake.IngredientIDs[0]).ItemName + ".(" + itemToMake.AmountOfIngredientsToCreate + ")");
+            }
+            else if(itemToMake.IngredientIDs == null && itemToMake.AmountOfIngredientsToCreate > GameState.GetPlayerInventory().GetAmountOfItem(item))
+            {
+                builder.AddAttribute(9, "disabled", true);
+                builder.AddAttribute(10, "title", "You don't have enough " + Program.itemDatabase.GetItemByID(item.Id).ItemName + ".(" + itemToMake.AmountOfIngredientsToCreate + ")");
+         
             }
             else if (GameState.GetPlayerInventory().GetAvailableSpaces() < spacesRequired)
             {
