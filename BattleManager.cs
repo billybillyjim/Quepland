@@ -319,8 +319,7 @@ public class BattleManager
                     {
                         if(gameState.buffSecondsLeft > 0)
                         {
-                            gameState.buffSecondsLeft = 0;
-                            gameState.currentBuffItem = null;
+                            gameState.buffSecondsLeft = 1;
                             messageManager.AddMessage(opponent.Name + " hit you in the gut! You feel emptied, somehow", "red");
                             color = "red";
                         }

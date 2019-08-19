@@ -7973,7 +7973,7 @@
     "id": 547,
     "value": 350,
     "requiredLevel": 0,
-    "ingredientIDs": [ 26 ],
+    "ingredientIDs": [ 28 ],
     "isSmithable": true,
     "isUsable": true,
     "destroyOnUse": true,
