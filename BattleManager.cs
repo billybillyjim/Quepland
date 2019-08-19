@@ -594,11 +594,15 @@ public class BattleManager
         int it = 0;
         foreach(Dojo d in dojos)
         {
-            if(DateTime.TryParse(lines[it], out DateTime time))
+            if(lines.Length > it && lines[it] != "")
             {
-                d.LastWonTime = time;
+                if (DateTime.TryParse(lines[it], out DateTime time))
+                {
+                    d.LastWonTime = time;
 
+                }
             }
+
             it++;
         }
     }
