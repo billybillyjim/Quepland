@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 public class BankTab
 {
-	public string Name { get; set; }
-    public List<int> itemIDs = new List<int>();
+    public string Name { get; set; }
+    public List<int> ItemIDs { get; }
 
     public BankTab(string name)
     {
-        Name = name;
+	Name = name;
+        ItemIDs = new List<int>();
     }
 }

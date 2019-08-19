@@ -242,12 +242,12 @@ else if (GameState.GetPlayerBank().activeTab != GameState.GetPlayerBank().tabs[0
     }
     private void AddItemToTab(int id)
     {
-        GameState.GetPlayerBank().activeTab.itemIDs.Add(id);
+        GameState.GetPlayerBank().activeTab.ItemIDs.Add(id);
         GameState.UpdateState();
     }
     private void RemoveItemFromTab(int id)
     {
-        GameState.GetPlayerBank().activeTab.itemIDs.Remove(id);
+        GameState.GetPlayerBank().activeTab.ItemIDs.Remove(id);
         GameState.UpdateState();
     }
     private void BeginCreatingNewTab()
