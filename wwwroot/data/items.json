@@ -81,40 +81,55 @@
       [ 1, 8 ],
       [ 1, 9 ],
       [ 1, 222 ],
+      [ 1, 495 ],
       [ 2, 10 ],
       [ 2, 11 ],
       [ 2, 223 ],
+      [ 2, 496 ],
       [ 94, 142 ],
       [ 94, 143 ],
       [ 94, 165 ],
+      [ 94, 497 ],
       [ 95, 144 ],
       [ 95, 145 ],
       [ 95, 166 ],
+      [ 95, 498 ],
       [ 96, 146 ],
       [ 96, 147 ],
       [ 96, 167 ],
+      [ 96, 499 ],
       [ 97, 148 ],
       [ 97, 149 ],
       [ 97, 168 ],
+      [ 97, 500 ],
       [ 98, 150 ],
       [ 98, 151 ],
       [ 98, 169 ],
+      [ 98, 501 ],
       [ 99, 152 ],
       [ 99, 153 ],
       [ 99, 170 ],
+      [ 99, 502 ],
       [ 100, 154 ],
       [ 100, 155 ],
       [ 100, 171 ],
+      [ 100, 503 ],
       [ 101, 156 ],
       [ 101, 157 ],
       [ 101, 172 ],
+      [ 101, 504 ],
       [ 102, 158 ],
       [ 102, 159 ],
       [ 102, 173 ],
+      [ 102, 505 ],
       [ 103, 160 ],
       [ 103, 161 ],
       [ 103, 174 ],
-      [ 402, 403 ]
+      [ 103, 506 ],
+      [ 402, 403 ],
+      [ 574, 581 ],
+      [ 574, 582 ],
+      [ 574, 586 ]
 
     ],
     "icon": "Knife"
@@ -4755,7 +4770,7 @@
     "ingredientIDs": [ 82 ]
   },
   {
-    "itemName": "Deer Leather Gloves",
+    "itemName": "Deer Gloves",
     "id": 333,
     "value": 500,
     "itemDescription": "A pair of decent leather gloves.",
@@ -4772,7 +4787,7 @@
     "gatherSpeed": 1300
   },
   {
-    "itemName": "Deer Leather Hat",
+    "itemName": "Deer Hat",
     "id": 334,
     "value": 700,
     "itemDescription": "A decent leather hat.",
@@ -4789,7 +4804,7 @@
     "gatherSpeed": 1400
   },
   {
-    "itemName": "Deer Leather Boots",
+    "itemName": "Deer Boots",
     "id": 335,
     "value": 600,
     "itemDescription": "A pair of decent leather boots.",
@@ -4806,7 +4821,7 @@
     "gatherSpeed": 1500
   },
   {
-    "itemName": "Deer Leather Pants",
+    "itemName": "Deer Pants",
     "id": 336,
     "value": 1000,
     "itemDescription": "A pair of decent leather pants.",
@@ -4823,7 +4838,7 @@
     "gatherSpeed": 1700
   },
   {
-    "itemName": "Deer Leather Shirt",
+    "itemName": "Deer Shirt",
     "id": 337,
     "value": 1200,
     "itemDescription": "A pair of decent leather shirts.",
@@ -4840,7 +4855,7 @@
     "gatherSpeed": 2000
   },
   {
-    "itemName": "Rabbit Leather Gloves",
+    "itemName": "Rabbit Gloves",
     "id": 338,
     "value": 250,
     "itemDescription": "A cheap pair of leather gloves.",
@@ -4857,7 +4872,7 @@
     "gatherSpeed": 1200
   },
   {
-    "itemName": "Rabbit Leather Hat",
+    "itemName": "Rabbit Hat",
     "id": 339,
     "value": 300,
     "itemDescription": "A cheap leather hat.",
@@ -4874,7 +4889,7 @@
     "gatherSpeed": 1300
   },
   {
-    "itemName": "Rabbit Leather Boots",
+    "itemName": "Rabbit Boots",
     "id": 340,
     "value": 350,
     "itemDescription": "A pair of cheap leather boots.",
@@ -4891,7 +4906,7 @@
     "gatherSpeed": 1400
   },
   {
-    "itemName": "Rabbit Leather Pants",
+    "itemName": "Rabbit Pants",
     "id": 341,
     "value": 400,
     "itemDescription": "A pair of cheap leather pants.",
@@ -4908,7 +4923,7 @@
     "gatherSpeed": 1500
   },
   {
-    "itemName": "Rabbit Leather Shirt",
+    "itemName": "Rabbit Shirt",
     "id": 342,
     "value": 450,
     "itemDescription": "A cheap leather shirt.",
@@ -4978,7 +4993,16 @@
       [ 438, 440 ],
       [ 438, 441 ],
       [ 438, 442 ],
-      [ 438, 443 ]
+      [ 438, 443 ],
+      [ 325, 507 ],
+      [ 324, 507 ],
+      [ 331, 507 ],
+      [ 330, 508 ],
+      [ 326, 508 ],
+      [ 327, 508 ],
+      [ 328, 509 ],
+      [ 329, 509 ],
+      [ 438, 509 ]
 
 
     ]
@@ -4997,7 +5021,7 @@
     "requiredLevel": 1
   },
   {
-    "itemName": "Caiman Leather Gloves",
+    "itemName": "Caiman Gloves",
     "id": 345,
     "value": 750,
     "itemDescription": "A pair of gloves made from caiman leather. They make you look cool.",
@@ -5015,7 +5039,7 @@
     "gatherSpeed": 2000
   },
   {
-    "itemName": "Caiman Leather Hat",
+    "itemName": "Caiman Hat",
     "id": 346,
     "value": 1000,
     "itemDescription": "A hat with a caiman's face sticking off the front. You can wear it backwards if you'd like.",
@@ -5033,7 +5057,7 @@
     "gatherSpeed": 2200
   },
   {
-    "itemName": "Caiman Leather Boots",
+    "itemName": "Caiman Boots",
     "id": 347,
     "value": 1350,
     "itemDescription": "A pair boots that make your feet look like little caiman. Neat.",
@@ -5051,7 +5075,7 @@
     "gatherSpeed": 2300
   },
   {
-    "itemName": "Caiman Leather Pants",
+    "itemName": "Caiman Pants",
     "id": 348,
     "value": 1500,
     "itemDescription": "These pants will defend you and make you cool.",
@@ -5069,7 +5093,7 @@
     "gatherSpeed": 2500
   },
   {
-    "itemName": "Caiman Leather Shirt",
+    "itemName": "Caiman Shirt",
     "id": 349,
     "value": 1750,
     "itemDescription": "A decently strong leather shirt.",
@@ -5087,7 +5111,7 @@
     "gatherSpeed": 2800
   },
   {
-    "itemName": "Wild Boar Leather Gloves",
+    "itemName": "Wild Boar Gloves",
     "id": 350,
     "value": 1000,
     "itemDescription": "A pair of gloves made from a wild boar.",
@@ -5105,7 +5129,7 @@
     "gatherSpeed": 2500
   },
   {
-    "itemName": "Wild Boar Leather Hat",
+    "itemName": "Wild Boar Hat",
     "id": 351,
     "value": 1500,
     "itemDescription": "A hat made from wild boar leather.",
@@ -5123,7 +5147,7 @@
     "gatherSpeed": 2600
   },
   {
-    "itemName": "Wild Boar Leather Boots",
+    "itemName": "Wild Boar Boots",
     "id": 352,
     "value": 2350,
     "itemDescription": "A pair boots made from wild boar leather.",
@@ -5141,7 +5165,7 @@
     "gatherSpeed": 2800
   },
   {
-    "itemName": "Wild Boar Leather Pants",
+    "itemName": "Wild Boar Pants",
     "id": 353,
     "value": 3000,
     "itemDescription": "Tough pants that make you stronger.",
@@ -5159,7 +5183,7 @@
     "gatherSpeed": 3000
   },
   {
-    "itemName": "Wild Boar Leather Shirt",
+    "itemName": "Wild Boar Shirt",
     "id": 354,
     "value": 3750,
     "itemDescription": "A quite strong leather shirt.",
@@ -5177,7 +5201,7 @@
     "gatherSpeed": 3200
   },
   {
-    "itemName": "Black Bear Leather Gloves",
+    "itemName": "Black Bear Gloves",
     "id": 355,
     "value": 1500,
     "itemDescription": "A pair of gloves made from a black bear.",
@@ -5195,7 +5219,7 @@
     "gatherSpeed": 3000
   },
   {
-    "itemName": "Black Bear Leather Hat",
+    "itemName": "Black Bear Hat",
     "id": 356,
     "value": 2500,
     "itemDescription": "A hat made from black bear leather.",
@@ -5213,7 +5237,7 @@
     "gatherSpeed": 3200
   },
   {
-    "itemName": "Black Bear Leather Boots",
+    "itemName": "Black Bear Boots",
     "id": 357,
     "value": 3350,
     "itemDescription": "Boots created from black bear leather.",
@@ -5231,7 +5255,7 @@
     "gatherSpeed": 3500
   },
   {
-    "itemName": "Black Bear Leather Pants",
+    "itemName": "Black Bear Pants",
     "id": 358,
     "value": 4000,
     "itemDescription": "Some of the most fearsome pants ever created.",
@@ -5249,7 +5273,7 @@
     "gatherSpeed": 3700
   },
   {
-    "itemName": "Black Bear Leather Shirt",
+    "itemName": "Black Bear Shirt",
     "id": 359,
     "value": 4750,
     "itemDescription": "A powerful leather shirt.",
@@ -5267,7 +5291,7 @@
     "gatherSpeed": 3900
   },
   {
-    "itemName": "Moose Leather Gloves",
+    "itemName": "Moose Gloves",
     "id": 360,
     "value": 2200,
     "itemDescription": "A pair of gloves made from a moose.",
@@ -5285,7 +5309,7 @@
     "gatherSpeed": 3000
   },
   {
-    "itemName": "Moose Leather Hat",
+    "itemName": "Moose Hat",
     "id": 361,
     "value": 2800,
     "itemDescription": "A hat made from moose leather. It would be cooler with antlers.",
@@ -5303,7 +5327,7 @@
     "gatherSpeed": 3500
   },
   {
-    "itemName": "Moose Leather Boots",
+    "itemName": "Moose Boots",
     "id": 362,
     "value": 3700,
     "itemDescription": "Boots created from moose leather.",
@@ -5321,7 +5345,7 @@
     "gatherSpeed": 3800
   },
   {
-    "itemName": "Moose Leather Pants",
+    "itemName": "Moose Pants",
     "id": 363,
     "value": 5000,
     "itemDescription": "A very protective pair of pants.",
@@ -5339,7 +5363,7 @@
     "gatherSpeed": 4000
   },
   {
-    "itemName": "Moose Leather Shirt",
+    "itemName": "Moose Shirt",
     "id": 364,
     "value": 6000,
     "itemDescription": "A shirt made from a thick leather.",
@@ -5357,7 +5381,7 @@
     "gatherSpeed": 4500
   },
   {
-    "itemName": "Grizzly Bear Leather Gloves",
+    "itemName": "Grizzly Bear Gloves",
     "id": 365,
     "value": 2550,
     "itemDescription": "A pair of gloves made from a grizzly bear.",
@@ -5375,7 +5399,7 @@
     "gatherSpeed": 4000
   },
   {
-    "itemName": "Grizzly Bear Leather Hat",
+    "itemName": "Grizzly Bear Hat",
     "id": 366,
     "value": 3200,
     "itemDescription": "A hat made from grizzly bear leather.",
@@ -5393,7 +5417,7 @@
     "gatherSpeed": 4300
   },
   {
-    "itemName": "Grizzly Bear Leather Boots",
+    "itemName": "Grizzly Bear Boots",
     "id": 367,
     "value": 3800,
     "itemDescription": "Boots created from grizzly bear leather.",
@@ -5411,7 +5435,7 @@
     "gatherSpeed": 4600
   },
   {
-    "itemName": "Grizzly Bear Leather Pants",
+    "itemName": "Grizzly Bear Pants",
     "id": 368,
     "value": 5500,
     "itemDescription": "An incredibly dangerous pair of pants.",
@@ -5429,7 +5453,7 @@
     "gatherSpeed": 4800
   },
   {
-    "itemName": "Grizzly Bear Leather Shirt",
+    "itemName": "Grizzly Bear Shirt",
     "id": 369,
     "value": 6550,
     "gatherString": "You make a shirt.",
@@ -5447,7 +5471,7 @@
     "gatherSpeed": 5300
   },
   {
-    "itemName": "Bison Leather Gloves",
+    "itemName": "Bison Gloves",
     "id": 370,
     "value": 3500,
     "itemDescription": "A pair of the toughest gloves in Quepland.",
@@ -5465,7 +5489,7 @@
     "gatherSpeed": 5000
   },
   {
-    "itemName": "Bison Leather Hat",
+    "itemName": "Bison Hat",
     "id": 371,
     "value": 4200,
     "itemDescription": "A hat made from bison leather.",
@@ -5483,7 +5507,7 @@
     "gatherSpeed": 5500
   },
   {
-    "itemName": "Bison Leather Boots",
+    "itemName": "Bison Boots",
     "id": 372,
     "value": 5500,
     "itemDescription": "Extremely strong boots made from bison leather.",
@@ -5501,7 +5525,7 @@
     "gatherSpeed": 5800
   },
   {
-    "itemName": "Bison Leather Pants",
+    "itemName": "Bison Pants",
     "id": 373,
     "value": 8200,
     "itemDescription": "A pair of pants made from bison leather.",
@@ -5519,7 +5543,7 @@
     "gatherSpeed": 6000
   },
   {
-    "itemName": "Bison Leather Shirt",
+    "itemName": "Bison Shirt",
     "id": 374,
     "value": 9000,
     "gatherString": "You make a shirt.",
@@ -5595,7 +5619,7 @@
     ]
   },
   {
-    "itemName": "Moose Leather Hat (Antlered)",
+    "itemName": "Moose Hat (Antlered)",
     "id": 379,
     "value": 4000,
     "itemDescription": "A hat made from moose leather. It's got cool antlers on either side.",
@@ -6475,7 +6499,7 @@
     "ingredientIDs": [ 437 ]
   },
   {
-    "itemName": "Polar Bear Leather Gloves",
+    "itemName": "Polar Bear Gloves",
     "id": 439,
     "value": 5500,
     "itemDescription": "A pair of gloves made from a polar bear. You could add claws to the fingers to make them even stronger.",
@@ -6493,7 +6517,7 @@
     "gatherSpeed": 4500
   },
   {
-    "itemName": "Polar Bear Leather Hat",
+    "itemName": "Polar Bear Hat",
     "id": 440,
     "value": 6000,
     "itemDescription": "A hat made from polar bear leather.",
@@ -6511,7 +6535,7 @@
     "gatherSpeed": 4700
   },
   {
-    "itemName": "Polar Bear Leather Boots",
+    "itemName": "Polar Bear Boots",
     "id": 441,
     "value": 6500,
     "itemDescription": "Boots created from polar bear leather.",
@@ -6529,7 +6553,7 @@
     "gatherSpeed": 4900
   },
   {
-    "itemName": "Polar Bear Leather Pants",
+    "itemName": "Polar Bear Pants",
     "id": 442,
     "value": 8000,
     "itemDescription": "An incredibly dangerous pair of pants. Stains easily.",
@@ -6547,7 +6571,7 @@
     "gatherSpeed": 5100
   },
   {
-    "itemName": "Polar Bear Leather Shirt",
+    "itemName": "Polar Bear Shirt",
     "id": 443,
     "value": 10000,
     "gatherString": "You make a shirt.",
@@ -7210,5 +7234,1367 @@
     "icon": "Belt",
     "isEquipable": true,
     "equipSlot": "Waist"
+  },
+  {
+    "itemName": "White Pine Shield Frame",
+    "itemDescription": "A thin and flimsy frame you could insert a shield into.",
+    "gatherString": "You make a frame from the white pine wood.",
+    "id": 495,
+    "value": 3,
+    "requiredLevel": 1,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:8",
+    "icon": "ShieldFrame"
+  },
+  {
+    "itemName": "Poplar Shield Frame",
+    "itemDescription": "A frame which you can insert a shield into.",
+    "gatherString": "You make a frame from the poplar wood.",
+    "id": 496,
+    "value": 12,
+    "requiredLevel": 8,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:12",
+    "icon": "ShieldFrame"
+  },
+  {
+    "itemName": "Balsa Shield Frame",
+    "itemDescription": "A frame which you can insert a shield into.",
+    "gatherString": "You make a carving from the balsa wood.",
+    "id": 497,
+    "value": 3,
+    "requiredLevel": 1,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:7",
+    "GatherSpeed": -150,
+    "icon": "ShieldFrame"
+  },
+  {
+    "itemName": "Oak Shield Frame",
+    "itemDescription": "A frame which you can insert a shield into.",
+    "gatherString": "You make a carving from the oak wood.",
+    "id": 498,
+    "value": 19,
+    "requiredLevel": 15,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:25",
+    "GatherSpeed": 80,
+    "icon": "ShieldFrame"
+  },
+  {
+    "itemName": "Sugar Maple Shield Frame",
+    "itemDescription": "A frame which you can insert a shield into.",
+    "gatherString": "You make a carving from the sugar maple wood.",
+    "id": 499,
+    "value": 25,
+    "requiredLevel": 25,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:35",
+    "GatherSpeed": 250,
+    "icon": "ShieldFrame"
+  },
+  {
+    "itemName": "Birch Shield Frame",
+    "itemDescription": "A frame which you can insert a shield into.",
+    "gatherString": "You make a carving from the birch wood.",
+    "id": 500,
+    "value": 40,
+    "requiredLevel": 32,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:45",
+    "GatherSpeed": 350,
+    "icon": "ShieldFrame"
+  },
+  {
+    "itemName": "Mesquite Shield Frame",
+    "itemDescription": "A frame which you can insert a shield into.",
+    "gatherString": "You make a carving from the mesquite wood.",
+    "id": 501,
+    "value": 65,
+    "requiredLevel": 40,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:60",
+    "GatherSpeed": 450,
+    "icon": "ShieldFrame"
+  },
+  {
+    "itemName": "Mahogany Shield Frame",
+    "itemDescription": "A frame which you can insert a shield into.",
+    "gatherString": "You make a carving from the mahogany wood.",
+    "id": 502,
+    "value": 105,
+    "requiredLevel": 50,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:80",
+    "GatherSpeed": 500,
+    "icon": "ShieldFrame"
+  },
+  {
+    "itemName": "Ironwood Shield Frame",
+    "itemDescription": "A very hard frame which you can insert a shield into.",
+    "gatherString": "You make a carving from the ironwood logs.",
+    "id": 503,
+    "value": 75,
+    "requiredLevel": 60,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:110",
+    "GatherSpeed": 700,
+    "icon": "ShieldFrame"
+
+  },
+  {
+    "itemName": "Snakewood Shield Frame",
+    "itemDescription": "A frame which you can insert a shield into.",
+    "gatherString": "You make a carving from the snakewood logs.",
+    "id": 504,
+    "value": 115,
+    "requiredLevel": 70,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:170",
+    "GatherSpeed": 900,
+    "icon": "ShieldFrame"
+  },
+  {
+    "itemName": "Lignum Vitae Shield Frame",
+    "itemDescription": "A frame which you can insert a shield into.",
+    "gatherString": "You make a carving from the lignum vitae wood.",
+    "id": 505,
+    "value": 250,
+    "requiredLevel": 80,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:200",
+    "GatherSpeed": 1100,
+    "icon": "ShieldFrame"
+
+  },
+  {
+    "itemName": "Buloke Shield Frame",
+    "itemDescription": "A frame which you can insert a shield into.",
+    "gatherString": "You make a carving from the buloke wood.",
+    "id": 506,
+    "value": 700,
+    "requiredLevel": 90,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:250",
+    "GatherSpeed": 1200,
+    "icon": "ShieldFrame"
+  },
+  {
+    "itemName": "Flimsy Enarmes",
+    "itemDescription": "This enarmes helps you hold your shield well. Or it would, if it weren't so flimsy.",
+    "id": 507,
+    "value": 50,
+    "requiredLevel": 1,
+    "actionRequired": "Leatherworking",
+    "experienceGained": "Leatherworking:20",
+    "gatherSpeed": 1000,
+    "gatherString": "You make a flimsy shield handle.",
+    "amountOfIngredientsToCreate": 1,
+    "icon": "Enarmes"
+  },
+  {
+    "itemName": "Regular Enarmes",
+    "itemDescription": "This enarmes helps you hold your shield well.",
+    "id": 508,
+    "value": 250,
+    "requiredLevel": 43,
+    "actionRequired": "Leatherworking",
+    "experienceGained": "Leatherworking:100",
+    "gatherSpeed": 2800,
+    "gatherString": "You make a shield handle.",
+    "amountOfIngredientsToCreate": 3,
+    "icon": "Enarmes"
+  },
+  {
+    "itemName": "Sturdy Enarmes",
+    "itemDescription": "This enarmes helps you hold your shield very well.",
+    "id": 509,
+    "value": 600,
+    "requiredLevel": 80,
+    "actionRequired": "Leatherworking",
+    "experienceGained": "Leatherworking:180",
+    "gatherSpeed": 3500,
+    "gatherString": "You make a sturdy shield handle.",
+    "amountOfIngredientsToCreate": 5,
+    "icon": "Enarmes"
+  },
+  {
+    "itemName": "Robust Enarmes",
+    "itemDescription": "Any extremely tough handle for the strongest shields.",
+    "id": 510,
+    "value": 1250,
+    "requiredLevel": 80,
+    "actionRequired": "Leatherworking",
+    "experienceGained": "Leatherworking:380",
+    "gatherSpeed": 6000,
+    "gatherString": "You make a shield handle.",
+    "amountOfIngredientsToCreate": 8,
+    "icon": "Enarmes"
+  },
+  {
+    "itemName": "Copper Shield(Unfinished)",
+    "itemDescription": "A copper shield that needs a frame.",
+    "id": 511,
+    "value": 50,
+    "requiredLevel": 0,
+    "ingredientIDs": [ 26 ],
+    "isSmithable": true,
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 495, 512 ],
+      [ 497, 512 ],
+      [ 496, 512 ],
+      [ 498, 512 ],
+      [ 499, 512 ],
+      [ 500, 512 ],
+      [ 501, 512 ],
+      [ 503, 512 ],
+      [ 504, 512 ],
+      [ 505, 512 ],
+      [ 506, 512 ]
+    ],
+    "icon": "ShieldUnfinished"
+  },
+  {
+    "itemName": "Copper Shield(Handleless)",
+    "itemDescription": "A copper shield that needs a handle.",
+    "id": 512,
+    "value": 80,
+    "requiredLevel": 0,
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 507, 513 ],
+      [ 508, 513 ],
+      [ 509, 513 ],
+      [ 510, 513 ]
+    ],
+    "icon": "ShieldUnfinished"
+  },
+  {
+    "itemName": "Copper Shield",
+    "itemDescription": "A copper shield. It provides a small amount of protection.",
+    "id": 513,
+    "value": 100,
+    "requiredLevel": 0,
+    "actionRequired": "Strength",
+    "isEquipable": true,
+    "equipSlot": "Left Hand",
+    "armor": 3,
+    "icon": "Shield"
+  },
+  {
+    "itemName": "Tin Shield(Unfinished)",
+    "itemDescription": "A tin shield that needs a frame.",
+    "id": 514,
+    "value": 70,
+    "ingredientIDs": [ 27 ],
+    "isSmithable": true,
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 496, 515 ],
+      [ 498, 515 ],
+      [ 499, 515 ],
+      [ 500, 515 ],
+      [ 501, 515 ],
+      [ 503, 515 ],
+      [ 504, 515 ],
+      [ 505, 515 ],
+      [ 506, 515 ]
+    ],
+    "icon": "ShieldUnfinished"
+  },
+  {
+    "itemName": "Tin Shield(Handleless)",
+    "itemDescription": "A tin shield that needs a handle.",
+    "id": 515,
+    "value": 90,
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 507, 516 ],
+      [ 508, 516 ],
+      [ 509, 516 ],
+      [ 510, 516 ]
+    ],
+    "icon": "ShieldUnfinished"
+  },
+  {
+    "itemName": "Tin Shield",
+    "itemDescription": "A tin shield. It provides a small amount of protection.",
+    "id": 516,
+    "value": 130,
+    "requiredLevel": 3,
+    "actionRequired": "Strength",
+    "isEquipable": true,
+    "equipSlot": "Left Hand",
+    "armor": 5,
+    "icon": "Shield"
+  },
+  {
+    "itemName": "Brass Shield(Unfinished)",
+    "itemDescription": "A brass shield that needs a frame.",
+    "id": 517,
+    "value": 110,
+    "requiredLevel": 0,
+    "ingredientIDs": [ 30 ],
+    "isSmithable": true,
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 498, 518 ],
+      [ 499, 518 ],
+      [ 500, 518 ],
+      [ 501, 518 ],
+      [ 503, 518 ],
+      [ 504, 518 ],
+      [ 505, 518 ],
+      [ 506, 518 ]
+    ],
+    "icon": "ShieldUnfinished"
+  },
+  {
+    "itemName": "Brass Shield(Handleless)",
+    "itemDescription": "A brass shield that needs a handle.",
+    "id": 518,
+    "value": 130,
+    "requiredLevel": 0,
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 507, 519 ],
+      [ 508, 519 ],
+      [ 509, 519 ],
+      [ 510, 519 ]
+    ],
+    "icon": "ShieldUnfinished"
+  },
+  {
+    "itemName": "Brass Shield",
+    "itemDescription": "A brass shield. It provides a little protection.",
+    "id": 519,
+    "value": 180,
+    "requiredLevel": 20,
+    "actionRequired": "Strength",
+    "isEquipable": true,
+    "equipSlot": "Left Hand",
+    "armor": 8,
+    "icon": "Shield"
+  },
+  {
+    "itemName": "Bronze Shield(Unfinished)",
+    "itemDescription": "A bronze shield that needs a frame.",
+    "id": 520,
+    "value": 130,
+    "requiredLevel": 0,
+    "ingredientIDs": [ 31 ],
+    "isSmithable": true,
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 499, 521 ],
+      [ 500, 521 ],
+      [ 501, 521 ],
+      [ 503, 521 ],
+      [ 504, 521 ],
+      [ 505, 521 ],
+      [ 506, 521 ]
+    ],
+    "icon": "ShieldUnfinished"
+  },
+  {
+    "itemName": "Bronze Shield(Handleless)",
+    "itemDescription": "A bronze shield that needs a handle.",
+    "id": 521,
+    "value": 160,
+    "requiredLevel": 0,
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 508, 522 ],
+      [ 509, 522 ],
+      [ 510, 522 ]
+    ],
+    "icon": "ShieldUnfinished"
+  },
+  {
+    "itemName": "Bronze Shield",
+    "itemDescription": "A bronze shield. It provides a decent amount of protection.",
+    "id": 522,
+    "value": 200,
+    "requiredLevel": 30,
+    "actionRequired": "Strength",
+    "isEquipable": true,
+    "equipSlot": "Left Hand",
+    "armor": 12,
+    "icon": "Shield"
+  },
+  {
+    "itemName": "Nickel Shield(Unfinished)",
+    "itemDescription": "A nickel shield that needs a frame.",
+    "id": 523,
+    "value": 130,
+    "requiredLevel": 0,
+    "ingredientIDs": [ 55 ],
+    "isSmithable": true,
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 500, 524 ],
+      [ 501, 524 ],
+      [ 503, 524 ],
+      [ 504, 524 ],
+      [ 505, 524 ],
+      [ 506, 524 ]
+    ],
+    "icon": "ShieldUnfinished"
+  },
+  {
+    "itemName": "Nickel Shield(Handleless)",
+    "itemDescription": "A nickel shield that needs a handle.",
+    "id": 524,
+    "value": 180,
+    "requiredLevel": 0,
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 508, 525 ],
+      [ 509, 525 ],
+      [ 510, 525 ]
+    ],
+    "icon": "ShieldUnfinished"
+  },
+  {
+    "itemName": "Nickel Shield",
+    "itemDescription": "A nickel shield. It provides a some amount of protection.",
+    "id": 525,
+    "value": 220,
+    "requiredLevel": 40,
+    "actionRequired": "Strength",
+    "isEquipable": true,
+    "equipSlot": "Left Hand",
+    "armor": 14,
+    "icon": "Shield"
+  },
+  {
+    "itemName": "Lead Shield(Unfinished)",
+    "itemDescription": "A lead shield that needs a frame.",
+    "id": 526,
+    "value": 250,
+    "requiredLevel": 0,
+    "ingredientIDs": [ 56 ],
+    "isSmithable": true,
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 503, 527 ],
+      [ 504, 527 ],
+      [ 506, 527 ]
+    ],
+    "icon": "ShieldUnfinished"
+  },
+  {
+    "itemName": "Lead Shield(Handleless)",
+    "itemDescription": "A lead shield that needs a handle.",
+    "id": 527,
+    "value": 290,
+    "requiredLevel": 0,
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 509, 528 ],
+      [ 510, 528 ]
+    ],
+    "icon": "ShieldUnfinished"
+  },
+  {
+    "itemName": "Lead Shield",
+    "itemDescription": "A lead shield. It provides a heavyweight level of protection.",
+    "id": 528,
+    "value": 310,
+    "requiredLevel": 55,
+    "actionRequired": "Strength",
+    "isEquipable": true,
+    "equipSlot": "Left Hand",
+    "armor": 18,
+    "icon": "Shield"
+  },
+  {
+    "itemName": "Steel Shield(Unfinished)",
+    "itemDescription": "A steel shield that needs a frame.",
+    "id": 529,
+    "value": 1000,
+    "requiredLevel": 0,
+    "ingredientIDs": [ 210 ],
+    "isSmithable": true,
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 504, 530 ],
+      [ 505, 530 ],
+      [ 506, 530 ]
+    ],
+    "icon": "ShieldUnfinished"
+  },
+  {
+    "itemName": "Steel Shield(Handleless)",
+    "itemDescription": "A steel shield that needs a handle.",
+    "id": 530,
+    "value": 1100,
+    "requiredLevel": 0,
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 509, 531 ],
+      [ 510, 531 ]
+    ],
+    "icon": "ShieldUnfinished"
+  },
+  {
+    "itemName": "Steel Shield",
+    "itemDescription": "A steel shield. It provides a great amount of protection.",
+    "id": 531,
+    "value": 1400,
+    "requiredLevel": 70,
+    "actionRequired": "Strength",
+    "isEquipable": true,
+    "equipSlot": "Left Hand",
+    "armor": 19,
+    "icon": "Shield"
+  },
+  {
+    "itemName": "Aluminum Shield(Unfinished)",
+    "itemDescription": "An aluminum shield that needs a frame.",
+    "id": 532,
+    "value": 1200,
+    "requiredLevel": 0,
+    "ingredientIDs": [ 58 ],
+    "isSmithable": true,
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 505, 533 ],
+      [ 506, 533 ]
+    ],
+    "icon": "ShieldUnfinished"
+  },
+  {
+    "itemName": "Aluminum Shield(Handleless)",
+    "itemDescription": "An aluminum shield that needs a handle.",
+    "id": 533,
+    "value": 1400,
+    "requiredLevel": 0,
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 509, 534 ],
+      [ 510, 534 ]
+    ],
+    "icon": "ShieldUnfinished"
+  },
+  {
+    "itemName": "Aluminum Shield",
+    "itemDescription": "An aluminum shield. It provides lightweight protection.",
+    "id": 534,
+    "value": 1800,
+    "requiredLevel": 83,
+    "actionRequired": "Strength",
+    "isEquipable": true,
+    "equipSlot": "Left Hand",
+    "armor": 22,
+    "icon": "Shield"
+  },
+  {
+    "itemName": "Golden Shield(Unfinished)",
+    "itemDescription": "A golden shield that needs a frame.",
+    "id": 535,
+    "value": 600,
+    "requiredLevel": 0,
+    "ingredientIDs": [ 59 ],
+    "isSmithable": true,
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 502, 536 ]
+    ],
+    "icon": "ShieldUnfinished"
+  },
+  {
+    "itemName": "Golden Shield(Handleless)",
+    "itemDescription": "A golden shield that needs a handle.",
+    "id": 536,
+    "value": 860,
+    "requiredLevel": 0,
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 509, 537 ],
+      [ 510, 537 ]
+    ],
+    "icon": "ShieldUnfinished"
+  },
+  {
+    "itemName": "Golden Shield",
+    "itemDescription": "A golden shield. It provides a luxurious amount of protection.",
+    "id": 537,
+    "value": 1500,
+    "requiredLevel": 65,
+    "actionRequired": "Strength",
+    "isEquipable": true,
+    "equipSlot": "Left Hand",
+    "armor": 13,
+    "icon": "Shield"
+  },
+  {
+    "itemName": "Strongtium Shield(Unfinished)",
+    "itemDescription": "A strongtium shield that needs a frame.",
+    "id": 538,
+    "value": 2000,
+    "requiredLevel": 0,
+    "ingredientIDs": [ 554 ],
+    "isSmithable": true,
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 586, 539 ]
+    ],
+    "icon": "ShieldUnfinished"
+  },
+  {
+    "itemName": "Strongtium Shield(Handleless)",
+    "itemDescription": "A strongtium shield that needs a handle.",
+    "id": 539,
+    "value": 2500,
+    "requiredLevel": 0,
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 510, 540 ]
+    ],
+    "icon": "ShieldUnfinished"
+  },
+  {
+    "itemName": "Strongtium Shield",
+    "itemDescription": "A strongtium shield. It provides a huge amount of protection.",
+    "id": 540,
+    "value": 3200,
+    "requiredLevel": 96,
+    "actionRequired": "Strength",
+    "isEquipable": true,
+    "equipSlot": "Left Hand",
+    "armor": 26,
+    "icon": "Shield"
+  },
+  {
+    "itemName": "Sahotite Shield(Unfinished)",
+    "itemDescription": "A sahotite shield that needs a frame.",
+    "id": 541,
+    "value": 4200,
+    "requiredLevel": 0,
+    "ingredientIDs": [ 555 ],
+    "isSmithable": true,
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 586, 542 ]
+    ],
+    "icon": "ShieldUnfinished"
+  },
+  {
+    "itemName": "Sahotite Shield(Handleless)",
+    "itemDescription": "A sahotite shield that needs a handle.",
+    "id": 542,
+    "value": 5000,
+    "requiredLevel": 0,
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 510, 543 ]
+    ],
+    "icon": "ShieldUnfinished"
+  },
+  {
+    "itemName": "Sahotite Shield",
+    "itemDescription": "A sahotite shield. It provides a great amount of protection.",
+    "id": 543,
+    "value": 5200,
+    "requiredLevel": 115,
+    "actionRequired": "Strength",
+    "isEquipable": true,
+    "equipSlot": "Left Hand",
+    "armor": 40,
+    "icon": "Shield"
+  },
+  {
+    "itemName": "Queplinium Shield(Unfinished)",
+    "itemDescription": "A queplinium shield that needs a frame.",
+    "id": 544,
+    "value": 8000,
+    "requiredLevel": 0,
+    "ingredientIDs": [ 557 ],
+    "isSmithable": true,
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 586, 548 ]
+    ],
+    "icon": "ShieldUnfinished"
+  },
+  {
+    "itemName": "Queplinium Shield(Handleless)",
+    "itemDescription": "A copper shield that needs a handle.",
+    "id": 545,
+    "value": 9500,
+    "requiredLevel": 0,
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 510, 546 ]
+    ],
+    "icon": "ShieldUnfinished"
+  },
+  {
+    "itemName": "Queplinium Shield",
+    "itemDescription": "A copper shield. It provides a small amount of protection.",
+    "id": 546,
+    "value": 11000,
+    "requiredLevel": 150,
+    "actionRequired": "Strength",
+    "isEquipable": true,
+    "equipSlot": "Left Hand",
+    "armor": 55,
+    "icon": "Shield"
+  },
+  {
+    "itemName": "Iron Shield(Unfinished)",
+    "itemDescription": "An iron shield that needs a frame.",
+    "id": 547,
+    "value": 350,
+    "requiredLevel": 0,
+    "ingredientIDs": [ 26 ],
+    "isSmithable": true,
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 501, 548 ],
+      [ 503, 548 ],
+      [ 504, 548 ],
+      [ 505, 548 ],
+      [ 506, 548 ],
+      [ 586, 548 ]
+    ],
+    "icon": "ShieldUnfinished"
+  },
+  {
+    "itemName": "Iron Shield(Handleless)",
+    "itemDescription": "An iron shield that needs a handle.",
+    "id": 548,
+    "value": 460,
+    "requiredLevel": 0,
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 509, 549 ],
+      [ 510, 549 ]
+    ],
+    "icon": "ShieldUnfinished"
+  },
+  {
+    "itemName": "Iron Shield",
+    "itemDescription": "An iron shield. It provides a small amount of protection.",
+    "id": 549,
+    "value": 550,
+    "requiredLevel": 45,
+    "actionRequired": "Strength",
+    "isEquipable": true,
+    "equipSlot": "Left Hand",
+    "armor": 18,
+    "icon": "Shield"
+  },
+  {
+    "itemName": "Strongtium Ore",
+    "itemDescription": "An ore containing strongtium, a very strong material.",
+    "id": 550,
+    "value": 700,
+    "actionRequired": "Mining",
+    "gatherSpeed": 40000,
+    "requiredLevel": 103,
+    "experienceGained": "Mining:350",
+    "gatherString": "You mine some strongtium ore.",
+    "icon": "Ore"
+  },
+  {
+    "itemName": "Sahotite Ore",
+    "itemDescription": "An ore containing sahotite, a powerful metal.",
+    "id": 551,
+    "value": 900,
+    "actionRequired": "Mining",
+    "gatherSpeed": 60000,
+    "requiredLevel": 122,
+    "experienceGained": "Mining:450",
+    "gatherString": "You mine some sahotite ore.",
+    "icon": "Ore"
+  },
+  {
+    "itemName": "Plastinium Ore",
+    "itemDescription": "An ore containing plastinium, a lightweight but sturdy material.",
+    "id": 552,
+    "value": 1100,
+    "actionRequired": "Mining",
+    "gatherSpeed": 80000,
+    "requiredLevel": 135,
+    "experienceGained": "Mining:650",
+    "gatherString": "You mine some plastinium ore.",
+    "icon": "Ore"
+  },
+  {
+    "itemName": "Queplinium Ore",
+    "itemDescription": "An ore containing queplinium, the strongest naturally occuring ore known.",
+    "id": 553,
+    "value": 1600,
+    "actionRequired": "Mining",
+    "gatherSpeed": 100000,
+    "requiredLevel": 150,
+    "experienceGained": "Mining:950",
+    "gatherString": "You mine some queplinium ore.",
+    "icon": "Ore"
+  },
+  {
+    "itemName": "Strongtium Bar",
+    "itemDescription": "An extremely strong metal bar.",
+    "id": 554,
+    "value": 1250,
+    "actionRequired": "Smithing",
+    "requiredLevel": 95,
+    "experienceGained": "Smithing:155",
+    "gatherSpeed": 25000,
+    "ingredientIDs": [ 550, 185 ],
+    "icon": "Bar",
+    "queplarValue": 400
+  },
+  {
+    "itemName": "Sahotite Bar",
+    "itemDescription": "An extremely hard metal bar.",
+    "id": 555,
+    "value": 1650,
+    "actionRequired": "Smithing",
+    "requiredLevel": 115,
+    "experienceGained": "Smithing:205",
+    "gatherSpeed": 35000,
+    "ingredientIDs": [ 551, 185 ],
+    "icon": "Bar",
+    "queplarValue": 550
+  },
+  {
+    "itemName": "Plastinium Bar",
+    "itemDescription": "An versitile metal that is both durable and lightweight.",
+    "id": 556,
+    "value": 2250,
+    "actionRequired": "Smithing",
+    "requiredLevel": 135,
+    "experienceGained": "Smithing:305",
+    "gatherSpeed": 45000,
+    "ingredientIDs": [ 552, 185 ],
+    "icon": "Bar",
+    "queplarValue": 700
+  },
+  {
+    "itemName": "Queplinium Bar",
+    "itemDescription": "A bar of the hardest naturally occuring metal in Quepland.",
+    "id": 557,
+    "value": 3250,
+    "actionRequired": "Smithing",
+    "requiredLevel": 150,
+    "experienceGained": "Smithing:500",
+    "gatherSpeed": 55000,
+    "ingredientIDs": [ 553, 185 ],
+    "icon": "Bar",
+    "queplarValue": 900
+  },
+  {
+    "itemName": "Strongtium Knife",
+    "itemDescription": "Maybe the strongest knife you've ever seen.",
+    "id": 558,
+    "value": 3000,
+    "actionRequired": "Knifesmanship",
+    "actionsEnabled": "Knifesmanship",
+    "requiredLevel": 95,
+    "ingredientIDs": [ 554 ],
+    "isSmithable": true,
+    "isEquipable": true,
+    "equipSlot": "Right Hand",
+    "damage": 60,
+    "armor": 2,
+    "attackSpeed": 1000,
+    "icon": "Knife"
+  },
+  {
+    "itemName": "Strongtium Sword",
+    "itemDescription": "Maybe the strongest sword you've ever seen.",
+    "id": 559,
+    "value": 3500,
+    "actionRequired": "Swordsmanship",
+    "actionsEnabled": "Swordsmanship",
+    "requiredLevel": 95,
+    "ingredientIDs": [ 554 ],
+    "isSmithable": true,
+    "isEquipable": true,
+    "equipSlot": "Right Hand",
+    "damage": 120,
+    "armor": 4,
+    "attackSpeed": 2000,
+    "icon": "Sword"
+  },
+  {
+    "itemName": "Strongtium Axe",
+    "itemDescription": "Maybe the strongest axe you've ever seen.",
+    "id": 560,
+    "value": 4000,
+    "actionRequired": "Axemanship",
+    "requiredLevel": 95,
+    "ingredientIDs": [ 554 ],
+    "isSmithable": true,
+    "isEquipable": true,
+    "equipSlot": "Right Hand",
+    "damage": 170,
+    "armor": 6,
+    "attackSpeed": 3000,
+    "actionsEnabled": "Axemanship Woodcutting",
+    "gatherSpeedBonus": 0.85,
+    "icon": "Axe"
+  },
+  {
+    "itemName": "Strongtium Hammer",
+    "itemDescription": "A strong hammer to hit things with.",
+    "id": 561,
+    "value": 4500,
+    "actionRequired": "Hammermanship",
+    "actionsEnabled": "Hammermanship",
+    "requiredLevel": 95,
+    "ingredientIDs": [ 554 ],
+    "isSmithable": true,
+    "isEquipable": true,
+    "equipSlot": "Right Hand",
+    "damage": 235,
+    "armor": 8,
+    "attackSpeed": 4000,
+    "icon": "Hammer"
+  },
+  {
+    "itemName": "Sahotite Knife",
+    "itemDescription": "A knife forged from sahotite metal.",
+    "id": 562,
+    "value": 5000,
+    "actionRequired": "Knifesmanship",
+    "actionsEnabled": "Knifesmanship",
+    "requiredLevel": 110,
+    "ingredientIDs": [ 555 ],
+    "isSmithable": true,
+    "isEquipable": true,
+    "equipSlot": "Right Hand",
+    "damage": 75,
+    "attackSpeed": 1000,
+    "icon": "Knife",
+    "statusEffect": "Freeze",
+    "effectDuration": 2,
+    "effectOdds": 0.05
+  },
+  {
+    "itemName": "Sahotite Sword",
+    "itemDescription": "A sword forged from sahotite metal.",
+    "id": 563,
+    "value": 5500,
+    "actionRequired": "Swordsmanship",
+    "actionsEnabled": "Swordsmanship",
+    "requiredLevel": 110,
+    "ingredientIDs": [ 555 ],
+    "isSmithable": true,
+    "isEquipable": true,
+    "equipSlot": "Right Hand",
+    "damage": 140,
+    "attackSpeed": 2000,
+    "icon": "Sword",
+    "statusEffect": "Freeze",
+    "effectDuration": 3,
+    "effectOdds": 0.05
+  },
+  {
+    "itemName": "Sahotite Axe",
+    "itemDescription": "An axe forged from sahotite metal.",
+    "id": 564,
+    "value": 6000,
+    "actionRequired": "Axemanship",
+    "requiredLevel": 110,
+    "ingredientIDs": [ 555 ],
+    "isSmithable": true,
+    "isEquipable": true,
+    "equipSlot": "Right Hand",
+    "damage": 190,
+    "attackSpeed": 3000,
+    "actionsEnabled": "Axemanship Woodcutting",
+    "gatherSpeedBonus": 0.87,
+    "icon": "Axe",
+    "statusEffect": "Freeze",
+    "effectDuration": 4,
+    "effectOdds": 0.05
+  },
+  {
+    "itemName": "Sahotite Hammer",
+    "itemDescription": "A strong hammer to hit things with.",
+    "id": 565,
+    "value": 7000,
+    "actionRequired": "Hammermanship",
+    "actionsEnabled": "Hammermanship",
+    "requiredLevel": 110,
+    "ingredientIDs": [ 555 ],
+    "isSmithable": true,
+    "isEquipable": true,
+    "equipSlot": "Right Hand",
+    "damage": 265,
+    "attackSpeed": 4000,
+    "icon": "Hammer",
+    "statusEffect": "Freeze",
+    "effectDuration": 5,
+    "effectOdds": 0.05
+  },
+  {
+    "itemName": "Plastinium Knife",
+    "itemDescription": "A lightweight and durable knife. You can stab things with it.",
+    "id": 566,
+    "value": 8000,
+    "actionRequired": "Knifesmanship",
+    "actionsEnabled": "Knifesmanship",
+    "requiredLevel": 132,
+    "ingredientIDs": [ 556 ],
+    "isSmithable": true,
+    "isEquipable": true,
+    "equipSlot": "Right Hand",
+    "damage": 80,
+    "attackSpeed": 800,
+    "icon": "Knife"
+  },
+  {
+    "itemName": "Plastinium Sword",
+    "itemDescription": "A sword made from plastinium metal. You can slash things with it.",
+    "id": 567,
+    "value": 9000,
+    "actionRequired": "Swordsmanship",
+    "actionsEnabled": "Swordsmanship",
+    "requiredLevel": 132,
+    "ingredientIDs": [ 556 ],
+    "isSmithable": true,
+    "isEquipable": true,
+    "equipSlot": "Right Hand",
+    "damage": 160,
+    "attackSpeed": 1800,
+    "icon": "Sword"
+  },
+  {
+    "itemName": "Plastinium Axe",
+    "itemDescription": "An axe made from plastinium metal. You can chop things with it.",
+    "id": 568,
+    "value": 10000,
+    "actionRequired": "Axemanship",
+    "requiredLevel": 132,
+    "ingredientIDs": [ 556 ],
+    "isSmithable": true,
+    "isEquipable": true,
+    "equipSlot": "Right Hand",
+    "damage": 200,
+    "attackSpeed": 2600,
+    "actionsEnabled": "Axemanship Woodcutting",
+    "gatherSpeedBonus": 0.91,
+    "icon": "Axe"
+  },
+  {
+    "itemName": "Plastinium Hammer",
+    "itemDescription": "A hammer forged from plastinium metal. You can smash things with it.",
+    "id": 569,
+    "value": 11000,
+    "actionRequired": "Hammermanship",
+    "actionsEnabled": "Hammermanship",
+    "requiredLevel": 132,
+    "ingredientIDs": [ 556 ],
+    "isSmithable": true,
+    "isEquipable": true,
+    "equipSlot": "Right Hand",
+    "damage": 280,
+    "attackSpeed": 3200,
+    "icon": "Hammer"
+  },
+  {
+    "itemName": "Queplinium Knife",
+    "itemDescription": "A knife made from the strongest natural metal in Quepland. It's very sharp.",
+    "id": 570,
+    "value": 12000,
+    "actionRequired": "Knifesmanship",
+    "actionsEnabled": "Knifesmanship",
+    "requiredLevel": 150,
+    "ingredientIDs": [ 557 ],
+    "isSmithable": true,
+    "isEquipable": true,
+    "equipSlot": "Right Hand",
+    "damage": 105,
+    "attackSpeed": 1000,
+    "icon": "Knife"
+  },
+  {
+    "itemName": "Queplinium Sword",
+    "itemDescription": "A sword made from the strongest natural metal in Quepland. It has a deep purple shine to it.",
+    "id": 571,
+    "value": 13000,
+    "actionRequired": "Swordsmanship",
+    "actionsEnabled": "Swordsmanship",
+    "requiredLevel": 150,
+    "ingredientIDs": [ 557 ],
+    "isSmithable": true,
+    "isEquipable": true,
+    "equipSlot": "Right Hand",
+    "damage": 200,
+    "attackSpeed": 2000,
+    "icon": "Sword"
+  },
+  {
+    "itemName": "Queplinium Axe",
+    "itemDescription": "An axe made from the strongest natural metal in Quepland. It slices through trees like butter.",
+    "id": 572,
+    "value": 14000,
+    "actionRequired": "Axemanship",
+    "requiredLevel": 150,
+    "ingredientIDs": [ 557 ],
+    "isSmithable": true,
+    "isEquipable": true,
+    "equipSlot": "Right Hand",
+    "damage": 345,
+    "attackSpeed": 3000,
+    "actionsEnabled": "Axemanship Woodcutting",
+    "gatherSpeedBonus": 0.95,
+    "icon": "Axe"
+  },
+  {
+    "itemName": "Queplinium Hammer",
+    "itemDescription": "A hammer made from the strongest natural metal in Quepland. It will smash almost anything.",
+    "id": 573,
+    "value": 15000,
+    "actionRequired": "Hammermanship",
+    "actionsEnabled": "Hammermanship",
+    "requiredLevel": 150,
+    "ingredientIDs": [ 557 ],
+    "isSmithable": true,
+    "isEquipable": true,
+    "equipSlot": "Right Hand",
+    "damage": 500,
+    "attackSpeed": 4000,
+    "icon": "Hammer"
+  },
+  {
+    "itemName": "Great Tree Logs",
+    "itemDescription": "Logs from the Great Tree.",
+    "gatherString": "You chop some Great Tree logs.",
+    "id": 574,
+    "value": 900,
+    "gatherSpeed": 50000,
+    "requiredLevel": 105,
+    "experienceGained": "Woodcutting:850",
+    "actionRequired": "Woodcutting",
+    "icon": "Wood"
+  },
+  {
+    "itemName": "Siliquen",
+    "itemDescription": "A pile of pure siliquen.",
+    "id": 575,
+    "queplarValue": 80,
+    "value": 800,
+    "isStackable": true,
+    "icon": "Element"
+  },
+  {
+    "itemName": "Quephorus",
+    "itemDescription": "A pile of pure quephorus.",
+    "id": 576,
+    "queplarValue": 100,
+    "value": 1200,
+    "isStackable": true,
+    "icon": "Element"
+  },
+  {
+    "itemName": "Quelfur",
+    "itemDescription": "A pile of pure quelfur.",
+    "id": 577,
+    "queplarValue": 120,
+    "value": 1500,
+    "icon": "Element",
+    "isStackable": true
+  },
+  {
+    "itemName": "Bariquem",
+    "itemDescription": "A pile of pure bariquem.",
+    "id": 578,
+    "queplarValue": 140,
+    "value": 1800,
+    "isStackable": true,
+    "icon": "Element"
+  },
+  {
+    "itemName": "Great Tree Seeds",
+    "itemDescription": "Seeds from the Great Tree.",
+    "gatherString": "You find some Great Tree seeds.",
+    "id": 579,
+    "value": 15000,
+    "isStackable": true,
+    "icon": "Seed"
+  },
+  {
+    "itemName": "Koncave City Passport",
+    "itemDescription": "An entirely legitimate passport allowing access to koncave city.",
+    "id": 580,
+    "value": 10000000,
+    "icon": "Card",
+    "actionsEnabled": "Koncave City Passport"
+  },
+  {
+    "itemName": "Great Tree Wood Art Carving",
+    "itemDescription": "Art made from the Great Tree.",
+    "gatherString": "You make a carving from the Great Tree wood.",
+    "id": 581,
+    "value": 1200,
+    "requiredLevel": 110,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:600",
+    "GatherSpeed": 2500,
+    "icon": "Carving"
+  },
+  {
+    "itemName": "Great Tree Arrow Shafts",
+    "itemDescription": "Arrow shafts made from logs from the Great Tree. Feathers can be attached to the end.",
+    "gatherString": "You make some arrow shafts from the Great Tree wood.",
+    "id": 582,
+    "value": 180,
+    "requiredLevel": 112,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:500",
+    "isStackable": true,
+    "GatherSpeed": 2700,
+    "madeOnCreation": 2,
+    "icon": "ArrowShaft"
+  },
+  {
+    "itemName": "Great Tree Arrows (Unfinished)",
+    "itemDescription": "Arrow shafts made from logs from the Great Tree with feathers attached at the end. Requires extremely hard metal tips.",
+    "gatherString": "You attach a feather to the back of the arrow.",
+    "id": 583,
+    "value": 190,
+    "requiredLevel": 112,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:500",
+    "isStackable": true,
+    "GatherSpeed": 2400,
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 221, 209 ]
+    ],
+    "icon": "ArrowHeadless"
+  },
+  {
+    "itemName": "Strongtium Arrowtips",
+    "itemDescription": "The tip of an arrow.",
+    "id": 584,
+    "value": 55,
+    "gatherString": "You forge some strongtium arrowtips.",
+    "ingredientIDs": [ 554 ],
+    "gatherSpeed": 1500,
+    "requiredLevel": 95,
+    "experienceGained": "Woodworking:190",
+    "actionRequired": "Woodworking",
+    "isStackable": true,
+    "isSmithable": true,
+    "madeOnCreation": 4,
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 188, 200 ],
+      [ 186, 198 ],
+      [ 187, 199 ],
+      [ 189, 201 ],
+      [ 190, 202 ],
+      [ 191, 203 ],
+      [ 192, 204 ],
+      [ 194, 206 ],
+      [ 195, 207 ],
+      [ 196, 208 ],
+      [ 197, 209 ],
+      [ 583, 585 ]
+    ],
+    "icon": "ArrowTips"
+  },
+  {
+    "itemName": "Great Tree Arrows",
+    "itemDescription": "Arrows made from wood harvested from the Great Tree.",
+    "gatherString": "You attach a head to the tip of the arrow.",
+    "id": 585,
+    "value": 250,
+    "requiredLevel": 112,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:500",
+    "isStackable": true,
+    "GatherSpeed": 2250,
+    "isArrow": true,
+    "damage": 110,
+    "icon": "Arrow"
+  },
+  {
+    "itemName": "Great Tree Shield Frame",
+    "itemDescription": "A frame which you can insert a shield into.",
+    "gatherString": "You make a frame from the Great Tree wood.",
+    "id": 586,
+    "value": 900,
+    "requiredLevel": 112,
+    "actionRequired": "Woodworking",
+    "experienceGained": "Woodworking:450",
+    "GatherSpeed": 2200,
+    "icon": "ShieldFrame"
+  },
+  {
+    "itemName": "Plastinium Shield(Unfinished)",
+    "itemDescription": "A plastinium shield that needs a frame.",
+    "id": 587,
+    "value": 4700,
+    "requiredLevel": 0,
+    "ingredientIDs": [ 556 ],
+    "isSmithable": true,
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 586, 542 ]
+    ],
+    "icon": "ShieldUnfinished"
+  },
+  {
+    "itemName": "Plastinium Shield(Handleless)",
+    "itemDescription": "A plastinium shield that needs a handle.",
+    "id": 588,
+    "value": 5500,
+    "requiredLevel": 0,
+    "isUsable": true,
+    "destroyOnUse": true,
+    "usableIDs": [
+      [ 510, 543 ]
+    ],
+    "icon": "ShieldUnfinished"
+  },
+  {
+    "itemName": "Plastinium Shield",
+    "itemDescription": "A plastinium shield. It provides a great amount of protection.",
+    "id": 589,
+    "value": 6000,
+    "requiredLevel": 130,
+    "actionRequired": "Strength",
+    "isEquipable": true,
+    "equipSlot": "Left Hand",
+    "armor": 50,
+    "icon": "Shield"
   }
 ]

@@ -78,6 +78,16 @@ public static class Extensions
         }
         return items;
     }
+    public static string ReplaceLastOccurrence(string Source, string Find, string Replace)
+    {
+        int place = Source.LastIndexOf(Find);
+
+        if (place == -1)
+            return Source;
+
+        string result = Source.Remove(place, Find.Length).Insert(place, Replace);
+        return result;
+    }
     public static List<Skill> GetSkillsFromString(string data)
     {
         List<Skill> skills = new List<Skill>();

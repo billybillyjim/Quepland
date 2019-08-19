@@ -494,6 +494,7 @@ public class Player
         }
         return true;
     }
+
     public int GetDamageDealt(Monster opponent)
     {
         int str = GetSkill("Strength").GetSkillLevel();

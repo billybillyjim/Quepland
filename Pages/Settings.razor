@@ -194,15 +194,15 @@
                 {
                     Building t = Program.buildingManager.GetBuildingByID(int.Parse(tannery.Split('>')[0]));
                     string[] tanneryData = tannery.Split('>')[1].Split('_');
-
+                    int i = 0;
                     foreach (string s in tanneryData)
                     {
-                        if (s.Length > 0)
+                        if (s.Length > 0 && i < t.TannerySlots)
                         {
                             TanningSlot slot = new TanningSlot();
                             slot.SetDataFromString(s);
                             t.TanneryItems.Add(slot);
-
+                            i++;
                         }
 
                     }

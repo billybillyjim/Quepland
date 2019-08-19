@@ -35,7 +35,9 @@ public class TanningSlot
     {
         try
         {
+            
             string[] lines = data.Split(',');
+            Console.WriteLine(int.Parse(lines[1]));
             int.Parse(lines[0]);
             int.Parse(lines[1]);
             DateTime.Parse(lines[2]);

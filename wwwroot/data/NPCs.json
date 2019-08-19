@@ -507,5 +507,62 @@
     "isInteractable": true,
     "purchaseItemIDs": [ 486, 487, 488, 489, 490, 491, 492, 493, 494 ],
     "currencyID": 485
+  },
+  {
+    "name": "Betty May",
+    "id": 73,
+    "spokenText": "Are you interested in entering Koncave city? Maybe we can strike a deal. I'm looking for some seeds from the Great Tree, but the best place to find them is crawling with strange creatures.",
+    "isInteractable": true,
+    "purchaseItemIDs": [ 580 ],
+    "itemPaymentIDs": [
+      [ 579, 0 ]
+    ],
+    "specialCosts": [ 10, 1000000 ],
+    "hasSpecialCosts": true
+  },
+  {
+    "name": "Hitty May",
+    "id": 74,
+    "spokenText": "Wanna buy a passport to Koncave city? I'll sell you mine, I don't need it anymore.",
+    "purchaseItemIDs": [ 580 ],
+    "isInteractable": true
+  },
+  {
+    "name": "City Guard",
+    "id": 75,
+    "spokenText": "Only citizens of Koncave city are allowed to enter. I don't recognize you, where's your passport?",
+    "isInteractable": true
+  },
+  {
+    "name": "Smokey",
+    "id": 76,
+    "spokenText": "Welcome to our dojo. We're pretty chill as far as dojos go, but that doesn't mean we'll go easy on you!",
+    "isInteractable": true
+  },
+  {
+    "name": "Jason",
+    "id": 77,
+    "spokenText": "Hi! We aren't quite open for business yet, please come back in a few days.",
+    "isInteractable": true
+  },
+  {
+    "name": "Alphonse",
+    "id": 78,
+    "spokenText": "That's what I've been saying this whole time! There's no point to it, none at all!",
+    "buttonText": "Listen to the younger man",
+    "isInteractable": true
+  },
+  {
+    "name": "Edward",
+    "id": 79,
+    "spokenText": "You just need to be patient! In a short while we'll figure this all out, preparation is a necessity!",
+    "buttonText": "Listen to the older man",
+    "isInteractable": true
+  },
+  {
+    "name": "Not Dead Jed",
+    "id": 80,
+    "spokenText": "Hello, welcome to Don't Die Inc. How can I help you survive today?",
+    "isInteractable": true
   }
 ]

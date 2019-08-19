@@ -95,7 +95,7 @@
             else
             {
                 int ingredientCost = Math.Max(item.AmountOfIngredientsToCreate, 1);
-                int maxToMake = Math.Min(GameState.GetPlayerInventory().GetAmountOfItem(sourceItem), GameState.GetPlayerInventory().GetAmountOfItem(item) / ingredientCost);
+                int maxToMake = Math.Min(GameState.GetPlayerInventory().GetAmountOfItem(sourceItem), GameState.GetPlayerInventory().GetAmountOfItem(itemUsed) / ingredientCost);
                 if (itemUsed.DestroyOnUse)
                 {
                     maxToMake = Math.Min(GameState.GetPlayerInventory().GetAmountOfItem(itemUsed), maxToMake);
@@ -121,7 +121,7 @@
                     builder.AddAttribute(19, "disabled", true);
                     builder.AddAttribute(20, "title", "Finish what you're doing first.");
                 }
-                else if(item.IngredientIDs != null && item.AmountOfIngredientsToCreate > GameState.GetPlayerInventory().GetAmountOfItem(sourceItem))
+                else if(item.AmountOfIngredientsToCreate > GameState.GetPlayerInventory().GetAmountOfItem(sourceItem))
                 {
                     builder.AddAttribute(19, "disabled", true);
                     builder.AddAttribute(20, "title", "You don't have enough materials to make this.(" + item.AmountOfIngredientsToCreate + ")");
@@ -155,7 +155,7 @@
                     builder.AddAttribute(19, "disabled", true);
                     builder.AddAttribute(20, "title", "Finish what you're doing first.");
                 }
-                else if(item.IngredientIDs != null && item.AmountOfIngredientsToCreate > GameState.GetPlayerInventory().GetAmountOfItem(sourceItem))
+                else if(item.AmountOfIngredientsToCreate > GameState.GetPlayerInventory().GetAmountOfItem(sourceItem))
                 {
                     builder.AddAttribute(19, "disabled", true);
                     builder.AddAttribute(20, "title", "You don't have enough materials to make this.(" + item.AmountOfIngredientsToCreate + ")");
