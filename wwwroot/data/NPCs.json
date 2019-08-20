@@ -564,5 +564,13 @@
     "id": 80,
     "spokenText": "Hello, welcome to Don't Die Inc. How can I help you survive today?",
     "isInteractable": true
+  },
+  {
+    "name": "Pumpy the Gnome",
+    "id": 81,
+    "spokenText": "Hey. You look pretty ENERGIZED to me! I would love to haul logs for you. Just give me some money first, okay? I'm pumped up! Yeah!",
+    "unlockFollowerIDs": [ 22 ],
+    "isInteractable": true,
+    "hideOnFollow": true
   }
 ]

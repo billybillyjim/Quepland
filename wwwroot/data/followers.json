@@ -278,7 +278,7 @@
     "cost": 4000000,
     "costItemID": 0
   },
-    {
+  {
     "name": "Threnden the Dwarf",
     "id": 21,
     "description": "Threnden's wife named him so. Not that he's complaining. They used to call him Pickles. He's quite possibly the greatest mining hauler below Quepland's surface.",
@@ -291,5 +291,18 @@
     "isUnlocked": false,
     "cost": 10000000,
     "costItemID": 0
-  }
+  },
+    {
+    "name": "Pumpy the Gnome",
+    "id": 22,
+    "description": "Pumpy is ENERGIZED to do what you want, when you want it!",
+    "autoCollectMessage": "Pumpy dashes off with $ logs to the bank and returns shortly after. He's ready for more!",
+    "RequiredLevels": [ "Woodcutting:95" ],
+    "autoCollectSkill": "Woodcutting",
+    "autoCollectLevel": 125,
+    "maxCarry": 70,
+    "autoCollectSpeed": 1800,
+    "isUnlocked": false,
+    "cost": 10000000
+  },
 ]

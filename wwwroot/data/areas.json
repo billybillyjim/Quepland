@@ -910,7 +910,8 @@
     "region": "Caligin Commonwealth",
     "buildings": [ "JasonsJewelry", "DontDieInc", "Alchemicellanea" ],
     "hasDojo": true,
-    "dojoID": 3
+    "dojoID": 3,
+    "npcIDs": [ 81 ]
   },
   {
     "name": "Koncave Falls",

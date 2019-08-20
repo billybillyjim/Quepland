@@ -103,7 +103,7 @@ else if (GameState.GetPlayerBank().activeTab != GameState.GetPlayerBank().tabs[0
                     //If the search string is null or empty, or the search string contains characters in the item's name.
                     @if ((((searchString == null || searchString == "") || item.Key.ItemName.ToLower().Contains(searchString.ToLower())) &&
                //If the tab is set to all and the tab contains that item id
-               ((GameState.GetPlayerBank().activeTab.Name == "All" || GameState.GetPlayerBank().activeTab.itemIDs.Contains(item.Key.Id)) || addingItemsToTab)))
+               ((GameState.GetPlayerBank().activeTab.Name == "All" || GameState.GetPlayerBank().activeTab.ItemIDs.Contains(item.Key.Id)) || addingItemsToTab)))
                     //If the player is adding items to the tab, all items are visible.
 
                     {
@@ -129,7 +129,7 @@ else if (GameState.GetPlayerBank().activeTab != GameState.GetPlayerBank().tabs[0
                             }
                             @if (addingItemsToTab)
                             {
-                                @if (!GameState.GetPlayerBank().activeTab.itemIDs.Contains(item.Key.Id))
+                                @if (!GameState.GetPlayerBank().activeTab.ItemIDs.Contains(item.Key.Id))
                                 {
                                     <td></td>
                                     <td></td>

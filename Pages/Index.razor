@@ -110,7 +110,7 @@ else
 
     public void AddRoomToHouse()
     {
-        GameState.GetPlayer().house.AddRoom(Program.roomManager.GetRoomByID(0));
+        GameState.GetPlayer().house.Rooms.Add(Program.roomManager.GetByID(0));
     }
     public void GetItem()
     {
