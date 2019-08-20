@@ -228,6 +228,10 @@ else if (GameState.GetPlayerBank().activeTab != GameState.GetPlayerBank().tabs[0
         {
             GameState.GetPlayerBank().activeTab.Name = newName;
         }
+        else if(newName.Contains("#") || newName.Contains(","))
+        {
+            MessageManager.AddMessage("Tab name contains invalid characters.");
+        }
         else
         {
             MessageManager.AddMessage("You already have a tab with that name.");
@@ -252,7 +256,7 @@ else if (GameState.GetPlayerBank().activeTab != GameState.GetPlayerBank().tabs[0
     }
     private void BeginCreatingNewTab()
     {
-        creatingNewTab = true;       
+        creatingNewTab = true;
         GameState.UpdateState();
     }
     private void CreateNewTab(string newName)
@@ -260,6 +264,10 @@ else if (GameState.GetPlayerBank().activeTab != GameState.GetPlayerBank().tabs[0
         if (GameState.GetPlayerBank().NameIsValid(newName))
         {
             GameState.GetPlayerBank().tabs.Add(new BankTab(newName));
+        }
+        else if(newName.Contains("#") || newName.Contains(","))
+        {
+            MessageManager.AddMessage("Tab name contains invalid characters.");
         }
         else
         {
@@ -275,7 +283,7 @@ else if (GameState.GetPlayerBank().activeTab != GameState.GetPlayerBank().tabs[0
         GameState.UpdateState();
         //Currently the only way to stop switching tabs from constantly increasing memory usage. Check if necessary on Blazor 3.1
         GC.Collect();
-        
+
     }
     private void SetWithdrawAmount()
     {
