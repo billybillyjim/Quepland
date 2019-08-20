@@ -1,4 +1,4 @@
-﻿@page "/"
+@page "/"
 @inject HttpClient Http
 @inject GameState GameState
 @inject MessageManager MessageManager
@@ -118,17 +118,18 @@ else
     }
     private async void UpdateHighScores()
     {
-        if (Program.playfabManager.IsConnected == false && (GameState.userID == null || GameState.userID == ""))
+        if (GameState.submitHighScores)
         {
-            ConnectToKongregate();
+            if (Program.playfabManager.IsConnected == false && (GameState.userID == null || GameState.userID == ""))
+            {
+                ConnectToKongregate();
+            }
+            else
+            {
+                await JSRuntime.InvokeAsync<object>("kongregateFunctions.updateTotalLevelScore", GameState.GetPlayer().GetTotalLevel());
+                await JSRuntime.InvokeAsync<object>("kongregateFunctions.updateTotalKills", GameState.totalKills);
+            }
         }
-        else
-        {
-            await JSRuntime.InvokeAsync<object>("kongregateFunctions.updateTotalLevelScore", GameState.GetPlayer().GetTotalLevel());
-            await JSRuntime.InvokeAsync<object>("kongregateFunctions.updateTotalKills", GameState.totalKills);
-        }
-
-
     }
     public void GoToDebugArea()
     {
@@ -312,6 +313,7 @@ else
             {
                 GameState.totalDeaths = int.Parse(settings[7]);
             }
+            GameState.submitHighScores = bool.Parse(settings[8]);
         }
         if (lines.Length > 10 && lines[10] != null)
         {
