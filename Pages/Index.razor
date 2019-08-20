@@ -313,7 +313,11 @@ else
             {
                 GameState.totalDeaths = int.Parse(settings[7]);
             }
-            GameState.submitHighScores = bool.Parse(settings[8]);
+            if (settings.Length > 8 && settings[8] != null)
+            {
+                GameState.submitHighScores = bool.Parse(settings[8]);
+            }
+            
         }
         if (lines.Length > 10 && lines[10] != null)
         {
