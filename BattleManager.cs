@@ -110,6 +110,7 @@ public class BattleManager
         isDojoBattle = true;
         opponent.CurrentHP = opponent.HP;
         opponent.ChangingStances = false;
+        opponent.CurrentStance = 0;
         battleFound = true;
         currentDojo = dojo;
        StartBattle();

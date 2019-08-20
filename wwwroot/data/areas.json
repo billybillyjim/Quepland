@@ -910,7 +910,7 @@
     "region": "Caligin Commonwealth",
     "buildings": [ "JasonsJewelry", "DontDieInc", "Alchemicellanea" ],
     "hasDojo": true,
-    "dojoID": 3,
+    "dojoID": 4,
     "npcIDs": [ 81 ]
   },
   {
