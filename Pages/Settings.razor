@@ -1,4 +1,4 @@
-﻿@page "/Settings"
+@page "/Settings"
 @inject HttpClient Http
 @inject GameState GameState
 @inject MessageManager MessageManager
@@ -13,6 +13,7 @@
 
 <p><button class="btn btn-primary" onclick="@(() => GameState.ToggleSplitView())">Toggle Split View</button> @GetOnOrOff(GameState.isSplitView)</p>
 <p><button class="btn btn-primary" onclick="@(() => GameState.ToggleBankStyle())">Toggle Compact Bank View</button>@GetOnOrOff(GameState.compactBankView)</p>
+<p><button class="btn btn-primary" onclick="@(() => GameState.ToggleSubmitHighScores())">Toggle Submit High Scores</button>@GetOnOrOff(GameState.submitHighScores)</p>
 
 <p>Set limit for selling confirmation:<input type="number" @bind-value="@Limit" @bind-value:event="onchange" /> Current:@GameState.expensiveItemThreshold</p>
 
@@ -161,6 +162,7 @@
             {
                 GameState.totalDeaths = int.Parse(settings[7]);
             }
+            GameState.submitHighScores = bool.Parse(settings[8]);
         }
         if (lines.Length > 10 && lines[10] != null)
         {
@@ -312,8 +314,11 @@
     }
     private async void UpdateHighScores()
     {
-        await JSRuntime.InvokeAsync<object>("kongregateFunctions.updateTotalLevelScore", GameState.GetPlayer().GetTotalLevel());
-        await JSRuntime.InvokeAsync<object>("kongregateFunctions.updateTotalKills", GameState.totalKills);
+        if (GameState.submitHighScores)
+        {
+            await JSRuntime.InvokeAsync<object>("kongregateFunctions.updateTotalLevelScore", GameState.GetPlayer().GetTotalLevel());
+            await JSRuntime.InvokeAsync<object>("kongregateFunctions.updateTotalKills", GameState.totalKills);
+        }
     }
     private string SaveDataEncrypted()
     {

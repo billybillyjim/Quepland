@@ -39,6 +39,7 @@ public class GameState
     public bool compactBankView;
     public bool autoBuySushiSupplies;
     public bool hideLockedItems;
+    public bool submitHighScores = true;
 
     public bool saveDataLoaded;
     public bool gameDataLoaded;
@@ -271,6 +272,10 @@ public class GameState
         inventoryIsActiveView = !inventoryIsActiveView;
         UpdateState();
     }
+    public void ToggleSubmitHighScores()
+    {
+        submitHighScores = !submitHighScores;
+    }
     public void IncrementKillCount(int monsterID)
     {
         killCount[monsterID] += 1;
@@ -345,6 +350,8 @@ public class GameState
         data += totalCoinsEarned;
         data += ",";
         data += totalDeaths;
+        data += ",";
+        data += submitHighScores.ToString();
         pos++;
         //NPC data 10
         data += "#";
